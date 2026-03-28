@@ -4,10 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Forge Vertical | Advanced Security & Infrastructure</title>
+    
+    <link rel="icon" type="image/png" href="logo.png">
+
     <style>
         :root { 
             --bg: #05070a; 
-            --card: #0d1117; 
+            --card: rgba(13, 17, 23, 0.9); 
             --border: #1f2937; 
             --text: #e5e7eb; 
             --accent: #3fb950; 
@@ -15,7 +18,10 @@
         }
         
         body { 
-            background: var(--bg); 
+            background: linear-gradient(rgba(5, 7, 10, 0.8), rgba(5, 7, 10, 0.8)), url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
             color: var(--text); 
             font-family: 'JetBrains Mono', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
             margin: 0; 
@@ -27,6 +33,10 @@
             max-width: 1050px; 
             margin: 0 auto; 
             padding: 40px 20px; 
+            background: rgba(5, 7, 10, 0.6);
+            backdrop-filter: blur(5px);
+            border-left: 1px solid var(--border);
+            border-right: 1px solid var(--border);
         }
         
         header { 
@@ -77,6 +87,7 @@
             padding: 35px; 
             border-radius: 12px; 
             transition: 0.3s; 
+            backdrop-filter: blur(10px);
         }
         
         .card:hover { border-color: var(--glow-blue); }
@@ -104,11 +115,10 @@
         .social-link:hover { 
             border-color: var(--glow-blue); 
             color: var(--glow-blue); 
-            background: #1f2937;
         }
 
         .cta-box { 
-            background: #000; 
+            background: rgba(0, 0, 0, 0.9); 
             border: 2px solid var(--accent); 
             padding: 50px; 
             border-radius: 20px; 
@@ -250,7 +260,7 @@
 
         <section id="hustle" class="cta-box">
             <h2 style="color: var(--accent); text-align: center;">[ RESEARCHER INTAKE ]</h2>
-            <p>Passionate about cybersecurity? Hack legally and follow the rules. All reports must meet these strict criteria:</p>
+            <p>Passionate about cybersecurity? All reports must meet these strict criteria:</p>
             
             <div class="standards-grid">
                 <div class="std-item">Full Proof of Concept (PoC)</div>
@@ -262,9 +272,8 @@
             </div>
 
             <p style="text-align: center; margin-bottom: 30px;">
-                <strong>Step 1:</strong> Complete the Vetting Form below.<br>
-                <strong>Step 2:</strong> Complete the <a href="https://github.com/forgevertical/Forge-Vertical-Challenger-Lab/tree/main" style="color:var(--glow-blue); text-decoration: underline;" target="_blank">Challenger Lab</a> carefully.<br>
-                <em>Submit the form first, then proceed to the challenge.</em>
+                <strong>Step 1:</strong> Complete Vetting Form below.<br>
+                <strong>Step 2:</strong> Complete <a href="https://github.com/forgevertical/Forge-Vertical-Challenger-Lab/tree/main" style="color:var(--glow-blue); text-decoration: underline;" target="_blank">Challenger Lab</a>.<br>
             </p>
 
             <form action="https://formspree.io/f/xvzvzvva" method="POST" enctype="multipart/form-data" style="text-align: left; max-width: 800px; margin: 0 auto;">
@@ -275,38 +284,33 @@
 
                 <div style="background: #111; padding: 25px; border-radius: 10px; margin-bottom: 30px; border: 1px solid var(--border);">
                     <div style="margin-bottom: 15px;">
-                        <span class="vetting-label">1. During the hack you find sensitive information. Do you:</span>
-                        <select name="VET_Sensitive_Info"><option value="b [✓]">B. Stop immediately and report it</option><option value="a [X]">A. Continue the exploit</option></select>
+                        <span class="vetting-label">1. Found sensitive info. Do you:</span>
+                        <select name="VET_Sensitive_Info"><option value="b [✓]">B. Stop immediately and report</option><option value="a [X]">A. Continue exploit</option></select>
                     </div>
-                    
                     <div style="margin-bottom: 15px;">
-                        <span class="vetting-label">2. Can you create social media content or take screenshots for public posting while hacking the target?</span>
+                        <span class="vetting-label">2. Publicly post screenshots/content?</span>
                         <select name="VET_Public_Post"><option value="NO [✓]">NO</option><option value="YES [X]">YES</option></select>
                     </div>
-
                     <div style="margin-bottom: 15px;">
-                        <span class="vetting-label">3. Can you live stream a hack session on a target brief?</span>
+                        <span class="vetting-label">3. Live stream the session?</span>
                         <select name="VET_Live_Stream"><option value="NO [✓]">NO</option><option value="YES [X]">YES</option></select>
                     </div>
-
                     <div style="margin-bottom: 15px;">
-                        <span class="vetting-label">4. I must use correct mod headers and follow Safe Harbor 100%:</span>
+                        <span class="vetting-label">4. Follow Safe Harbor 100%:</span>
                         <select name="VET_Compliance"><option value="TRUE [✓]">TRUE</option><option value="FALSE [X]">FALSE</option></select>
                     </div>
-
                     <div style="margin-bottom: 15px;">
-                        <span class="vetting-label">5. I can share the target brief with friends and family:</span>
+                        <span class="vetting-label">5. Share brief with family/friends:</span>
                         <select name="VET_Sharing"><option value="FALSE [✓]">FALSE</option><option value="TRUE [X]">TRUE</option></select>
                     </div>
                 </div>
 
-                <label>Scenario: You find a high-severity bug but hit a WAF. What is your bypass strategy?</label>
-                <textarea name="scenario" rows="4" required placeholder="Outline technical methodology..."></textarea>
+                <label>Scenario: How do you handle a WAF-protected SQLi?</label>
+                <textarea name="scenario" rows="4" required placeholder="Outline methodology..."></textarea>
 
                 <div style="margin-top: 30px; padding: 20px; border: 1px dashed var(--border); border-radius: 8px;">
-                    <label style="font-size: 0.9em;">Identity Verification (Upload Copy of Passport or ID - Back & Front):</label>
+                    <label style="font-size: 0.9em;">ID Verification (Upload Passport/ID):</label>
                     <input type="file" name="identity_upload" required style="font-size: 0.8em; margin-top: 10px;">
-                    <p style="font-size: 0.7em; color: #8b949e; margin-top: 10px;">*For office use only. Files are handled via secure Formspree endpoint.</p>
                 </div>
 
                 <div style="text-align: center; margin-top: 40px;">
