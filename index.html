@@ -9,31 +9,35 @@
         body { background: var(--bg); color: var(--text); font-family: 'JetBrains Mono', -apple-system, sans-serif; margin: 0; line-height: 1.8; font-size: 1.2em; }
         .container { max-width: 1050px; margin: 0 auto; padding: 40px 20px; }
         header { border-bottom: 1px solid var(--border); padding-bottom: 25px; margin-bottom: 40px; display: flex; justify-content: space-between; align-items: center; }
-        .logo-container img { height: 70px; width: auto; display: block; }
+        .logo-container img { height: 75px; width: auto; display: block; }
+        
         .hero { background: linear-gradient(rgba(5,7,10,0.85), rgba(5,7,10,0.85)), url('hero.png'); background-size: cover; background-position: center; padding: 80px 40px; border-radius: 16px; border: 1px solid var(--glow-blue); text-align: center; margin-bottom: 60px; box-shadow: 0 0 20px rgba(0, 242, 255, 0.15); }
         .hero h1 { font-size: 2.8em; color: #fff; margin-bottom: 20px; text-shadow: 0 0 10px var(--glow-blue); }
+
+        /* Tech Badges Reintegrated */
+        .tech-wrap { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 30px; }
+        .badge { padding: 5px 15px; border-radius: 4px; font-size: 0.7em; font-weight: bold; text-transform: uppercase; border: 1px solid var(--border); }
+        .b-docker { background: #2496ed; color: #fff; } .b-python { background: #3776ab; color: #fff; }
+        .b-gcp { background: #4285f4; color: #fff; } .b-node { background: #339933; color: #fff; }
+        .b-cf { background: #f38020; color: #fff; } .b-vscode { background: #264de4; color: #fff; }
+        .b-git { background: #f1502f; color: #fff; }
+
         .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 60px; }
         .card { background: var(--card); border: 1px solid var(--border); padding: 35px; border-radius: 12px; transition: 0.3s; }
-        .card:hover { border-color: var(--glow-blue); }
         .card h3 { margin-top: 0; color: var(--glow-blue); font-size: 1.3em; }
         
-        /* The Hustle Box */
-        .cta-box { background: #000; border: 2px solid var(--accent); padding: 50px; border-radius: 20px; box-shadow: 0 0 30px rgba(63, 185, 80, 0.15); }
-        .cta-box h2 { color: var(--accent); font-size: 2.2em; margin-bottom: 15px; text-align: center; }
-        
-        /* Reporting Standards Grid */
-        .standards-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 25px 0; font-size: 0.9em; border-bottom: 1px solid var(--border); padding-bottom: 25px; }
-        .std-item { display: flex; align-items: center; gap: 10px; color: #8b949e; }
-        .std-item:before { content: "»"; color: var(--accent); font-weight: bold; }
+        .social-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; }
+        .social-link { font-size: 0.8em; color: var(--text); text-decoration: none; padding: 5px 10px; background: #161b22; border: 1px solid var(--border); border-radius: 4px; text-align: center; }
+        .social-link:hover { border-color: var(--glow-blue); color: var(--glow-blue); }
 
-        .toggle-row { display:flex; justify-content:space-between; align-items: center; margin-bottom: 15px; padding: 10px; border-bottom: 1px solid #111; }
-        .btn { display: inline-block; background: var(--accent); color: #000; padding: 18px 45px; border-radius: 8px; text-decoration: none; font-weight: bold; transition: 0.3s; font-size: 1.1em; cursor: pointer; border: none; width: 100%; }
+        .cta-box { background: #000; border: 2px solid var(--accent); padding: 50px; border-radius: 20px; box-shadow: 0 0 30px rgba(63, 185, 80, 0.15); }
+        .standards-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 25px 0; font-size: 0.9em; border-bottom: 1px solid var(--border); padding-bottom: 25px; }
+        .std-item:before { content: "»"; color: var(--accent); font-weight: bold; margin-right: 10px;}
+
+        .btn { display: inline-block; background: var(--accent); color: #000; padding: 18px 45px; border-radius: 8px; text-decoration: none; font-weight: bold; transition: 0.3s; font-size: 1.1em; cursor: pointer; border: none; width: 100%; text-align: center;}
         .btn:hover { transform: scale(1.02); background: #4ceb61; box-shadow: 0 0 20px var(--accent); }
         
         input, select, textarea { width: 100%; background: #161b22; border: 1px solid var(--border); color: #fff; padding: 12px; border-radius: 6px; margin-top: 5px; box-sizing: border-box; font-family: inherit; }
-        .arsenal { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; margin: 40px 0; }
-        .tool { background: var(--card); padding: 15px; border-radius: 8px; border: 1px solid var(--border); font-size: 0.8em; text-align: center; color: var(--text); text-decoration: none; }
-        .tool:hover { border-color: var(--glow-blue); color: var(--glow-blue); }
         
         footer { margin-top: 100px; padding: 40px 0; border-top: 1px solid var(--border); color: #8b949e; text-align: center; }
         @media (max-width: 768px) { .grid, .standards-grid { grid-template-columns: 1fr; } }
@@ -43,16 +47,21 @@
     <div class="container">
         <header>
             <div class="logo-container"><img src="logo.png" alt="Forge Vertical Logo"></div>
-            <div style="font-size: 0.7em; letter-spacing: 2px; color: var(--accent);">// STATUS: RESEARCHING</div>
+            <div style="font-size: 0.7em; letter-spacing: 2px; color: var(--accent);">// SESSION: AUTHORIZED</div>
         </header>
 
         <section class="hero">
-            <h1>Specialized Infrastructure Security</h1>
-            <p>Targeting the logic flaws automation cannot see. White-hat research. Legal exploits. Real payouts.</p>
-            <a href="#hustle" class="btn" style="width: auto;">INITIALIZE INTAKE</a>
+            <h1>Execute Logic. Forge Wealth.</h1>
+            <div class="tech-wrap">
+                <span class="badge b-docker">Docker</span> <span class="badge b-python">Python</span> 
+                <span class="badge b-gcp">GCP</span> <span class="badge b-node">Node.js</span> 
+                <span class="badge b-cf">Cloudflare</span> <span class="badge b-vscode">VS Code</span>
+                <span class="badge b-git">Git</span> <span class="badge" style="background:#555">C++</span>
+            </div>
+            <p>Targeting the logic flaws automation misses. Specialized in infrastructure, CI/CD, and decentralized systems.</p>
+            <a href="#hustle" class="btn" style="width: auto;">START VETTING</a>
         </section>
 
-        <h2>Capabilities & Operations</h2>
         <div class="grid">
             <div class="card">
                 <h3>0x01 // Infrastructure</h3>
@@ -60,44 +69,39 @@
             </div>
             <div class="card">
                 <h3>0x02 // Decentralized</h3>
-                <p>Web3 stack analysis and Smart Contract authentication logic. Built for high-stakes DeFi.</p>
+                <p>Web3 stack analysis and Smart Contract logic. Built for high-stakes DeFi infrastructure.</p>
             </div>
             <div class="card">
                 <h3>0x03 // Mobile Ops</h3>
-                <p>Architects of <a href="https://play.google.com/store/apps/details?id=com.aurora.repair" target="_blank" style="color:var(--glow-blue)">Aurora AI</a>. Powered by <a href="https://fairdiscovery.org/" target="_blank" style="color:var(--glow-blue)">Fair Discovery</a> infrastructure.</p>
+                <p>Principal architect for <a href="https://play.google.com/store/apps/details?id=com.aurora.repair" target="_blank" style="color:var(--glow-blue)">Aurora AI</a>. Integrated with <a href="https://fairdiscovery.org/" target="_blank" style="color:var(--glow-blue)">Fair Discovery</a>.</p>
             </div>
             <div class="card">
                 <h3>0x04 // Network</h3>
-                <div style="font-size: 0.85em;">
-                    <a href="https://x.com/AgAnubisKr" target="_blank">X / Twitter</a><br>
-                    <a href="https://github.com/Jotto1988" target="_blank">GitHub Lab</a><br>
-                    <a href="https://signal.me/#p/+27661180036" style="color:var(--accent)">Signal (Direct)</a>
+                <div class="social-grid">
+                    <a href="https://x.com/AgAnubisKr" class="social-link" target="_blank">X / Twitter</a>
+                    <a href="https://github.com/Jotto1988" class="social-link" target="_blank">GitHub Lab</a>
+                    <a href="https://linkedin.com/in/jarrit-hosking-44243a332/" class="social-link" target="_blank">LinkedIn</a>
+                    <a href="https://medium.com/@jarrithosking" class="social-link" target="_blank">Medium</a>
+                    <a href="https://www.facebook.com/profile.php?id=61577414999517" class="social-link" target="_blank">Facebook</a>
+                    <a href="https://signal.me/#p/+27661180036" class="social-link" target="_blank" style="color:var(--accent)">Signal (Direct)</a>
                 </div>
             </div>
         </div>
 
-        <h2>Resource Arsenal</h2>
-        <div class="arsenal">
-            <a href="https://www.hackthebox.com" class="tool" target="_blank">HackTheBox</a>
-            <a href="https://portswigger.net/burp" class="tool" target="_blank">Burp Suite</a>
-            <a href="https://www.kali.org" class="tool" target="_blank">Kali Linux</a>
-            <a href="https://surfshark.com" class="tool" target="_blank">Surfshark VPN</a>
-        </div>
-
         <section id="hustle" class="cta-box">
-            <h2>[ JOIN THE HUSTLE ]</h2>
-            <p>Passionate about cybersecurity? Hack legally and earn. To be eligible for the <strong>70% Researcher Split</strong>, your reports must meet these standards:</p>
+            <h2 style="color: var(--accent); text-align: center;">[ JOIN THE HUSTLE ]</h2>
+            <p>If you are passionate about cybersecurity, white hat hacking, and legal research, you are in the right place. To earn as a side hustle, your reports must meet these criteria:</p>
             
             <div class="standards-grid">
                 <div class="std-item">Full Proof of Concept (PoC)</div>
                 <div class="std-item">Steps to Reproduce</div>
                 <div class="std-item">Evidence (Pics & Video)</div>
-                <div class="std-item">Patch Suggestions (Optional)</div>
+                <div class="std-item">Patch Suggestions</div>
                 <div class="std-item">Links to Affected Areas</div>
-                <div class="std-item">Comprehensive Documentation</div>
+                <div class="std-item">Detailed Documentation</div>
             </div>
 
-            <p style="color:var(--accent); font-weight:bold; text-align: center; margin-bottom: 30px;">Don't be vague. Must be a full report. Have fun!</p>
+            <p style="color:var(--accent); font-weight:bold; text-align: center; margin-bottom: 30px;">70/30 Split. Must be a full report. Have fun!</p>
 
             <form action="https://formspree.io/f/xvzvzvva" method="POST" style="text-align: left; max-width: 800px; margin: 0 auto;">
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 25px;">
@@ -106,27 +110,27 @@
                 </div>
 
                 <div style="background: #111; padding: 20px; border-radius: 10px; margin-bottom: 30px;">
-                    <div class="toggle-row">
-                        <span>Can you produce full video evidence?</span>
-                        <select name="Video_Evidence" style="width: auto;"><option value="YES [✓]">YES</option><option value="NO [X]">NO</option></select>
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                        <span>Produce video evidence?</span>
+                        <select name="Video" style="width:auto;"><option value="YES [✓]">YES</option><option value="NO [X]">NO</option></select>
                     </div>
-                    <div class="toggle-row">
-                        <span>Will you stay strictly within scope?</span>
-                        <select name="Compliance" style="width: auto;"><option value="YES [✓]">YES</option><option value="NO [X]">NO</option></select>
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <span>Stay strictly in scope?</span>
+                        <select name="Scope" style="width:auto;"><option value="YES [✓]">YES</option><option value="NO [X]">NO</option></select>
                     </div>
                 </div>
 
-                <label>Scenario: You find an exploit but the target has a strict WAF. What is your bypass methodology?</label>
-                <textarea name="scenario_logic" rows="4" required placeholder="Outline your technical approach..."></textarea>
+                <label>Scenario: You find a high-severity bug but hit a WAF. What is your bypass strategy?</label>
+                <textarea name="scenario" rows="4" required></textarea>
 
                 <div style="text-align: center; margin-top: 30px;">
-                    <button type="submit" class="btn">SUBMIT VETTING REPORT</button>
+                    <button type="submit" class="btn">SUBMIT REPORT</button>
                 </div>
             </form>
         </section>
 
         <footer>
-            &copy; 2026 Forge Vertical &nbsp; | &nbsp; <a href="https://linkedin.com/company/forge-vertical" target="_blank">LinkedIn</a>
+            &copy; 2026 Forge Vertical // <a href="https://linkedin.com/company/forge-vertical" target="_blank" style="color:var(--glow-blue)">LinkedIn Company</a>
         </footer>
     </div>
 </body>
