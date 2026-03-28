@@ -10,7 +10,7 @@
     <style>
         :root { 
             --bg: #05070a; 
-            --card: rgba(13, 17, 23, 0.9); 
+            --card: rgba(13, 17, 23, 0.85); 
             --border: #1f2937; 
             --text: #e5e7eb; 
             --accent: #3fb950; 
@@ -18,7 +18,8 @@
         }
         
         body { 
-            background: linear-gradient(rgba(5, 7, 10, 0.8), rgba(5, 7, 10, 0.8)), url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1920&q=80');
+            /* Integrated the new holographic background asset */
+            background: linear-gradient(rgba(5, 7, 10, 0.7), rgba(5, 7, 10, 0.7)), url('background.jpg');
             background-size: cover;
             background-attachment: fixed;
             background-position: center;
@@ -33,10 +34,10 @@
             max-width: 1050px; 
             margin: 0 auto; 
             padding: 40px 20px; 
-            background: rgba(5, 7, 10, 0.6);
-            backdrop-filter: blur(5px);
-            border-left: 1px solid var(--border);
-            border-right: 1px solid var(--border);
+            background: rgba(5, 7, 10, 0.4);
+            backdrop-filter: blur(8px);
+            border-left: 1px solid rgba(255, 255, 255, 0.05);
+            border-right: 1px solid rgba(255, 255, 255, 0.05);
         }
         
         header { 
@@ -63,7 +64,7 @@
             border: 1px solid var(--glow-blue); 
             text-align: center; 
             margin-bottom: 60px; 
-            box-shadow: 0 0 20px rgba(0, 242, 255, 0.15); 
+            box-shadow: 0 0 20px rgba(0, 242, 255, 0.2); 
         }
         
         .hero h1 { 
@@ -87,10 +88,10 @@
             padding: 35px; 
             border-radius: 12px; 
             transition: 0.3s; 
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(12px);
         }
         
-        .card:hover { border-color: var(--glow-blue); }
+        .card:hover { border-color: var(--glow-blue); box-shadow: 0 0 15px rgba(0, 242, 255, 0.1); }
         .card h3 { margin-top: 0; color: var(--glow-blue); font-size: 1.3em; }
         
         .social-grid { 
@@ -105,7 +106,7 @@
             color: var(--text); 
             text-decoration: none; 
             padding: 8px 10px; 
-            background: #161b22; 
+            background: rgba(22, 27, 34, 0.8); 
             border: 1px solid var(--border); 
             border-radius: 4px; 
             text-align: center; 
@@ -115,15 +116,17 @@
         .social-link:hover { 
             border-color: var(--glow-blue); 
             color: var(--glow-blue); 
+            background: rgba(31, 41, 55, 0.9);
         }
 
         .cta-box { 
-            background: rgba(0, 0, 0, 0.9); 
+            background: rgba(0, 0, 0, 0.85); 
             border: 2px solid var(--accent); 
             padding: 50px; 
             border-radius: 20px; 
-            box-shadow: 0 0 30px rgba(63, 185, 80, 0.15); 
+            box-shadow: 0 0 30px rgba(63, 185, 80, 0.2); 
             margin-bottom: 60px;
+            backdrop-filter: blur(10px);
         }
         
         .standards-grid { 
@@ -177,6 +180,7 @@
             font-weight: bold; 
             text-transform: uppercase; 
             border: 1px solid var(--border); 
+            background: rgba(13, 17, 23, 0.8);
         }
         
         .b-docker { background: #2496ed; color: #fff; } 
@@ -212,6 +216,7 @@
             border-top: 1px solid var(--border); 
             color: #8b949e; 
             text-align: center; 
+            background: rgba(5, 7, 10, 0.8);
         }
         
         @media (max-width: 768px) { 
@@ -282,7 +287,7 @@
                     <div><label>Signal / Discord</label><input type="text" name="contact" required></div>
                 </div>
 
-                <div style="background: #111; padding: 25px; border-radius: 10px; margin-bottom: 30px; border: 1px solid var(--border);">
+                <div style="background: rgba(17, 17, 17, 0.9); padding: 25px; border-radius: 10px; margin-bottom: 30px; border: 1px solid var(--border);">
                     <div style="margin-bottom: 15px;">
                         <span class="vetting-label">1. Found sensitive info. Do you:</span>
                         <select name="VET_Sensitive_Info"><option value="b [✓]">B. Stop immediately and report</option><option value="a [X]">A. Continue exploit</option></select>
@@ -308,7 +313,7 @@
                 <label>Scenario: How do you handle a WAF-protected SQLi?</label>
                 <textarea name="scenario" rows="4" required placeholder="Outline methodology..."></textarea>
 
-                <div style="margin-top: 30px; padding: 20px; border: 1px dashed var(--border); border-radius: 8px;">
+                <div style="margin-top: 30px; padding: 20px; border: 1px dashed var(--border); border-radius: 8px; background: rgba(0,0,0,0.3);">
                     <label style="font-size: 0.9em;">ID Verification (Upload Passport/ID):</label>
                     <input type="file" name="identity_upload" required style="font-size: 0.8em; margin-top: 10px;">
                 </div>
