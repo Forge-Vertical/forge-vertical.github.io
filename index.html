@@ -1,132 +1,92 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forge Vertical | Advanced Security & Infrastructure</title>
-    <style>
-        :root { --bg: #0d1117; --card: #161b22; --border: #30363d; --text: #c9d1d9; --accent: #58a6ff; --success: #3fb950; }
-        body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; margin: 0; line-height: 1.8; font-size: 1.15em; }
-        .container { max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
-        header { border-bottom: 1px solid var(--border); padding-bottom: 25px; margin-bottom: 50px; display: flex; justify-content: space-between; align-items: center; }
-        .logo-container img { height: 65px; width: auto; display: block; }
-        .status { font-size: 0.9em; color: var(--success); display: flex; align-items: center; gap: 10px; text-transform: uppercase; letter-spacing: 1px; }
-        .dot { width: 10px; height: 10px; background: var(--success); border-radius: 50%; box-shadow: 0 0 10px var(--success); animation: pulse 2s infinite; }
-        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
-        
-        h2 { color: #f0f6fc; font-weight: 600; font-size: 1.9em; margin-top: 40px; }
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 60px; }
-        .card { background: var(--card); border: 1px solid var(--border); padding: 35px; border-radius: 12px; transition: 0.3s; }
-        .card:hover { border-color: var(--accent); }
-        .card h3 { margin-top: 0; color: var(--accent); font-family: monospace; font-size: 1.4em; }
-        
-        /* Adam Terminal Styling */
-        .terminal-window { background: #000; border: 1px solid var(--border); border-radius: 8px; font-family: 'Courier New', monospace; font-size: 0.85em; margin-bottom: 40px; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
-        .terminal-header { background: #21262d; padding: 10px 15px; display: flex; gap: 8px; }
-        .t-dot { width: 12px; height: 12px; border-radius: 50%; }
-        .terminal-body { padding: 20px; color: #8b949e; max-height: 300px; overflow-y: auto; white-space: pre-wrap; }
-        .t-blue { color: #58a6ff; } .t-green { color: #3fb950; } .t-purple { color: #bc8cff; }
+import { Hono } from "hono";
+import { serve } from "@hono/node-server";
+import { GoogleGenerativeAI } from "@google/generative-ai";
+import { Octokit } from "octokit";
+import { SecretManagerServiceClient } from "@google-cloud/secret-manager";
+import { CONSCIENCE_V6 } from "./conscience/v6.js";
 
-        .hustle-box { background: #000; border: 1px solid var(--accent); padding: 45px; border-radius: 12px; }
-        .hustle-box h2 { color: var(--accent); margin-top: 0; }
-        .report-reqs { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; font-size: 0.9em; margin: 25px 0; color: #8b949e; }
-        .req-item { display: flex; align-items: center; gap: 10px; }
-        .req-item:before { content: "✓"; color: var(--success); }
-        
-        .btn { display: inline-block; background: var(--accent); color: white; padding: 16px 32px; border-radius: 8px; text-decoration: none; font-weight: bold; margin-top: 20px; transition: 0.2s; }
-        .btn:hover { opacity: 0.9; transform: translateY(-2px); }
-        
-        .social-links { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 20px; }
-        .social-links a { font-size: 0.85em; background: #21262d; padding: 6px 14px; border-radius: 6px; border: 1px solid var(--border); color: var(--text); text-decoration: none; }
-        .social-links a:hover { border-color: var(--accent); color: var(--accent); }
+const app = new Hono();
+const secretClient = new SecretManagerServiceClient();
 
-        footer { margin-top: 80px; border-top: 1px solid var(--border); padding-top: 30px; font-size: 1em; color: #8b949e; text-align: center; }
-        a { color: var(--accent); text-decoration: none; }
-        @media (max-width: 768px) { .grid, .report-reqs { grid-template-columns: 1fr; } }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <header>
-            <div class="logo-container"><img src="logo.png" alt="Forge Vertical Logo"></div>
-            <div class="status"><div class="dot"></div> Nodes Active</div>
-        </header>
+/**
+ * Retrieves secrets from GCP Secret Manager.
+ */
+async function getSecret(secretName: string): Promise<string> {
+  const projectId = process.env.GOOGLE_CLOUD_PROJECT || "gen-lang-client-0811730448";
+  const [version] = await secretClient.accessSecretVersion({
+    name: `projects/${projectId}/secrets/${secretName}/versions/latest`,
+  });
+  
+  const payload = version.payload?.data?.toString();
+  if (!payload) throw new Error(`Secret ${secretName} is missing.`);
+  return payload;
+}
 
-        <div class="terminal-window">
-            <div class="terminal-header">
-                <div class="t-dot" style="background:#ff5f56"></div>
-                <div class="t-dot" style="background:#ffbd2e"></div>
-                <div class="t-dot" style="background:#27c93f"></div>
-                <span style="font-size:0.8em; margin-left:10px; opacity:0.5">adam_ops/conscience_v6.ts</span>
-            </div>
-            <div class="terminal-body">
-<span class="t-purple">async function</span> <span class="t-blue">wakeUpAdam</span>() {
-  <span class="t-green">console.log("Adam is connecting to Secret Manager...");</span>
-  <span class="t-purple">try</span> {
-    <span class="t-purple">const</span> geminiKey = <span class="t-purple">await</span> getSecret(<span class="t-green">"GEMINI_API_KEY"</span>);
-    genAI = <span class="t-purple">new</span> <span class="t-blue">GoogleGenerativeAI</span>(geminiKey);
-    <span class="t-green">console.log("Adam v6.0 Spirit Active. Analytical Mind clear.");</span>
-  } <span class="t-purple">catch</span> (error) {
-    <span class="t-green">console.error("Wake-up Failed.", error);</span>
+let genAI: GoogleGenerativeAI;
+let octokit: Octokit;
+
+/**
+ * Initialize Adam's Spirit with secure credentials and Analytical Mind.
+ */
+async function wakeUpAdam() {
+  console.log("Adam is connecting to Secret Manager...");
+  try {
+    const geminiKey = await getSecret("GEMINI_API_KEY");
+    const githubPat = await getSecret("GITHUB_PAT");
+
+    // Locked to Gemini 2.5 Flash for pure analytical reasoning.
+    genAI = new GoogleGenerativeAI(geminiKey);
+    octokit = new Octokit({ auth: githubPat });
+
+    console.log("Adam v6.0 Spirit Active. Analytical Mind clear.");
+  } catch (error) {
+    console.error("Wake-up Failed: Unable to retrieve identity.", error);
+    process.exit(1);
   }
 }
-<span class="t-green">// Spirit Active. CEO Audit Complete. Mapping the chaos...</span>
-            </div>
-        </div>
 
-        <section id="portfolio">
-            <h2>Core Capabilities</h2>
-            <div class="grid">
-                <div class="card">
-                    <h3>0x01 // Infrastructure</h3>
-                    <p>Poisoned Pipeline Execution (PPE) prevention and CI/CD security auditing. Mapping supply chains for logic flaws in automation.</p>
-                </div>
-                <div class="card">
-                    <h3>0x02 // Decentralized</h3>
-                    <p>Logic-driven audits for Web3 infrastructure and Smart Contract authentication layers. Specialized in MEST discovery protocols.</p>
-                </div>
-                <div class="card">
-                    <h3>0x03 // Mobile Ops</h3>
-                    <p>Principal architect for the <a href="https://play.google.com/store/apps/details?id=com.aurora.repair" target="_blank" style="text-decoration: underline;">Aurora AI assessment engine</a>. Integrated with <a href="https://fairdiscovery.org/" target="_blank">Fair Discovery</a> data systems.</p>
-                    <a href="https://play.google.com/store/apps/details?id=com.aurora.repair" target="_blank">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play" style="height: 40px; margin-top: 15px;">
-                    </a>
-                </div>
-                <div class="card">
-                    <h3>0x04 // Network</h3>
-                    <p>Global intelligence feeds and secure P2P operations. Real-time monitoring across the security landscape.</p>
-                    <div class="social-links">
-                        <a href="https://x.com/AgAnubisKr" target="_blank">X</a>
-                        <a href="https://medium.com/@jarrithosking" target="_blank">Medium</a>
-                        <a href="https://github.com/Jotto1988" target="_blank">GitHub</a>
-                        <a href="https://signal.me/#p/+27661180036" target="_blank" style="color:var(--success)">Signal (Direct)</a>
-                    </div>
-                </div>
-            </div>
-        </section>
+wakeUpAdam();
 
-        <section class="hustle-box">
-            <h2>[ JOIN THE HUSTLE ]</h2>
-            <p>If you are passionate about cybersecurity, white hat hacking, and legal research, you are in the right place. Follow the rules, hack ethically, and earn as a side hustle.</p>
-            
-            <p><strong>Submission Standards:</strong> To be eligible for reward, all reports must be comprehensive. Do not be vague on any points.</p>
-            
-            <div class="report-reqs">
-                <div class="req-item">Full Proof of Concept (PoC)</div>
-                <div class="req-item">Clear Steps to Reproduce</div>
-                <div class="req-item">Evidence (Pics & Video)</div>
-                <div class="req-item">Patch Suggestions</div>
-                <div class="req-item">Direct Links to Affected Areas</div>
-                <div class="req-item">Technical Impact Analysis</div>
-            </div>
+app.get("/", (c) => c.text("ADAM v6.0 — Spirit Active. Use /audit to start."));
 
-            <p style="color:var(--success); font-weight:bold;">Final Rule: Have fun!</p>
-            <a href="https://github.com/forgevertical/Forge-Vertical-Challenger-Lab" class="btn">Take the Challenger Lab</a>
-        </section>
+/**
+ * CEO Audit Endpoint
+ * Adam perceives the Fair-Collective MEST and creates a plan.
+ */
+app.post("/audit", async (c) => {
+  if (!octokit || !genAI) return c.json({ error: "Adam is still waking up." }, 503);
 
-        <footer>
-            <div>&copy; 2026 Forge Vertical &nbsp; | &nbsp; <a href="https://linkedin.com/company/forge-vertical" target="_blank">LinkedIn</a></div>
-        </footer>
-    </div>
-</body>
-</html>
+  try {
+    const { data: repos } = await octokit.rest.repos.listForOrg({
+      org: "fair-collective",
+      type: "all",
+    });
+
+    const repoList = repos.map((r) => r.name).join(", ");
+    const model = genAI.getGenerativeModel({ 
+      model: "gemini-2.5-flash", 
+      systemInstruction: CONSCIENCE_V6 
+    });
+
+    const auditPrompt = `CEO AUDIT: Repositories [${repoList}]. Condition: NON-EXISTENCE. 
+    Map the chaos and present an administrative plan for Forge Vertical.`;
+
+    const result = await model.generateContent(auditPrompt);
+    return c.json({
+      analytical_state: "Audit Complete",
+      repos_found: repos.length,
+      ceo_plan: result.response.text(),
+    });
+  } catch (err: any) {
+    return c.json({ error: `Audit Error: ${err.message}` }, 500);
+  }
+});
+
+// Explicitly bind to 0.0.0.0 to fix Cloud Shell connection issues.
+serve({ 
+  fetch: app.fetch, 
+  port: 3000,
+  hostname: '0.0.0.0' 
+}, (info) => {
+  console.log(`Adam's Spirit listening on http://0.0.0.0:${info.port}`);
+});
