@@ -1,7 +1,6 @@
 import { serve } from '@hono/node-server';
 import { Hono } from 'hono';
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'fs';
-import mime from 'mime-types'; 
 import 'dotenv/config';
 
 import { ingestSite } from './ingestor';
@@ -11,39 +10,43 @@ const app = new Hono();
 const enginePath = './forge-engine';
 const projectsRoot = './vertical-projects';
 
-// Initialize Infrastructure
+// Initialize Folders
 [enginePath, projectsRoot].forEach(path => {
     if (!existsSync(path)) mkdirSync(path, { recursive: true });
 });
 
 /**
- * MANUAL INDUSTRIAL FILE SERVER
- * Serves index.html, CSS, and MP4 videos directly from the cloud.
+ * SOVEREIGN FILE SERVER (No external libraries required)
  */
 app.get('*', (c) => {
     const url = new URL(c.req.url);
     let path = url.pathname === '/' ? './index.html' : `.${url.pathname}`;
     
-    // Auth for the Engine Preview
+    // Auth Check
     if (path.includes('forge-engine')) {
         const auth = c.req.query('auth');
-        if (auth !== 'success' && auth !== 'VFKNMJUBYQQG6') {
-            return c.redirect('/build?error=unauthorized');
-        }
+        if (auth !== 'success' && auth !== 'VFKNMJUBYQQG6') return c.redirect('/build?error=unauthorized');
     }
 
     if (existsSync(path)) {
         const content = readFileSync(path);
-        const contentType = mime.lookup(path) || 'application/octet-stream';
-        return c.body(content, 200, { 'Content-Type': contentType });
+        const ext = path.split('.').pop()?.toLowerCase();
+        
+        // Manual Map (Out-of-the-box support for your specific assets)
+        const mimeMap: Record<string, string> = {
+            'html': 'text/html',
+            'css': 'text/css',
+            'js': 'application/javascript',
+            'mp4': 'video/mp4',
+            'png': 'image/png',
+            'jpg': 'image/jpeg'
+        };
+
+        return c.body(content, 200, { 'Content-Type': mimeMap[ext || 'html'] || 'text/plain' });
     }
-    
-    return c.text("404: Forge Asset Missing", 404);
+    return c.text("404: Asset Missing", 404);
 });
 
-/**
- * API: FORGE SIGNAL
- */
 app.post('/api/forge', async (c) => {
     try {
         const { url } = await c.req.json();
@@ -57,5 +60,5 @@ app.post('/api/forge', async (c) => {
 });
 
 const port = Number(process.env.PORT) || 7777;
-console.log(`ULTRALIGHT ENGINE LIVE: Port ${port}`);
+console.log(`FORGE OPERATIONAL ON PORT ${port}`);
 serve({ fetch: app.fetch, port });
