@@ -10,58 +10,71 @@
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;500;800&display=swap');
         body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #ffffff; color: #1e293b; }
         .vibrant-gradient { background: linear-gradient(90deg, #10b981 0%, #84cc16 100%); }
+        .iceberg-container { position: relative; width: 100%; height: 500px; border-radius: 3rem; overflow: hidden; background: #0f172a; }
+        /* The "Waterline" effect */
+        .waterline { position: absolute; top: 35%; left: 0; width: 100%; height: 2px; background: rgba(132, 204, 22, 0.3); z-index: 10; }
     </style>
 </head>
 <body class="antialiased">
     <div id="global-nav"></div>
 
-    <main class="min-h-[80vh] flex items-center justify-center py-20 px-6">
-        <div class="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+    <main class="min-h-screen py-20 px-6 max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             
-            <div class="hidden lg:block space-y-8">
-                <span class="bg-lime-100 text-lime-700 px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">Diagnostic Utility</span>
-                <h1 class="text-6xl font-extrabold tracking-tighter text-slate-900 leading-none">
-                    Stop the <span class="vibrant-gradient bg-clip-text text-transparent italic">Silent Leak.</span>
-                </h1>
-                <p class="text-xl text-slate-500 font-light leading-relaxed max-w-lg">
-                    Most SME infrastructure loses 7-12% of annual revenue to "friction"—slow load times, broken UX, and unoptimized conversion paths.
-                </p>
-                <div class="p-8 bg-slate-50 rounded-[2rem] border border-slate-100 space-y-4">
-                    <h4 class="font-bold text-slate-900 uppercase text-xs tracking-widest">Forge Insights</h4>
-                    <p class="text-sm text-slate-600 leading-relaxed">
-                        This tool analyzes your current traffic against industry standard leakage rates. If your site isn't built on <strong>High-Performance JAMstack Nodes</strong>, you are likely leaving money on the table every month.
+            <div class="hidden lg:block space-y-10">
+                <div class="iceberg-container shadow-2xl border border-slate-100">
+                    <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover opacity-40">
+                        <source src="/assets/ROI_calculator_page.mp4" type="video/mp4">
+                    </video>
+                    
+                    <div class="waterline"></div>
+                    
+                    <div class="absolute top-[15%] left-10 z-20">
+                        <p class="text-[10px] font-black text-white uppercase tracking-[0.3em] mb-2">Visible Tip</p>
+                        <h3 class="text-white text-2xl font-extrabold uppercase italic">Current Sales</h3>
+                    </div>
+
+                    <div class="absolute bottom-[20%] left-10 z-20">
+                        <p class="text-[10px] font-black text-lime-400 uppercase tracking-[0.3em] mb-2">The Hidden Mass</p>
+                        <h3 class="text-white text-4xl font-black uppercase italic leading-none">Revenue Leakage</h3>
+                        <p class="text-slate-400 text-sm mt-4 max-w-xs font-medium">90% of your performance bottlenecks happen below the surface in your site's architecture.</p>
+                    </div>
+                </div>
+
+                <div class="space-y-4">
+                    <h2 class="text-4xl font-extrabold text-slate-900 tracking-tighter uppercase italic">Out-of-the-Box Vision.</h2>
+                    <p class="text-slate-500 leading-relaxed font-light">
+                        We don't just build websites; we audit the hidden infrastructure. This calculator exposes the capital you're losing to legacy tech and friction.
                     </p>
                 </div>
             </div>
 
-            <div class="w-full max-w-xl mx-auto bg-white p-10 lg:p-16 rounded-[3rem] shadow-2xl border border-slate-100 relative overflow-hidden">
-                <div class="absolute top-0 right-0 w-32 h-32 bg-lime-500/5 rounded-full -mr-16 -mt-16"></div>
-                
-                <h2 class="text-3xl font-extrabold text-slate-900 mb-2">Revenue <span class="text-lime-500">Leakage</span></h2>
-                <p class="text-slate-400 text-[10px] mb-10 uppercase tracking-widest font-black">Industrial Grade Audit Tool</p>
-                
-                <div class="space-y-6">
-                    <div>
-                        <label class="block text-[10px] font-black uppercase text-slate-400 mb-2 ml-1">Monthly Traffic (Visitors)</label>
-                        <input type="number" id="traffic" value="5000" class="w-full bg-slate-50 border-2 border-transparent focus:border-lime-500 rounded-2xl p-5 outline-none font-bold text-slate-900 transition-all">
-                    </div>
-                    <div>
-                        <label class="block text-[10px] font-black uppercase text-slate-400 mb-2 ml-1">Avg. Order Value ($)</label>
-                        <input type="number" id="value" value="100" class="w-full bg-slate-50 border-2 border-transparent focus:border-lime-500 rounded-2xl p-5 outline-none font-bold text-slate-900 transition-all">
-                    </div>
-                    <button onclick="calculateLeakage()" class="w-full bg-slate-900 text-white p-6 rounded-2xl font-black uppercase tracking-widest text-xs shadow-xl hover:bg-lime-500 transition-all">
-                        Analyze Infrastructure
-                    </button>
+            <div class="bg-white p-10 lg:p-16 rounded-[4rem] shadow-soft border border-slate-50 relative">
+                <div class="mb-10">
+                    <span class="bg-lime-100 text-lime-700 px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest mb-4 inline-block">Audit v1.0</span>
+                    <h2 class="text-4xl font-extrabold text-slate-900 tracking-tighter">Diagnostic <span class="vibrant-gradient bg-clip-text text-transparent italic">Audit</span></h2>
                 </div>
                 
-                <div id="result-box" class="mt-10 p-8 bg-slate-900 rounded-[2rem] text-white hidden transform scale-95 transition-all">
-                    <p class="text-slate-400 text-[10px] uppercase font-black tracking-widest mb-2">Estimated Annual Leakage</p>
-                    <span id="leakage-amount" class="text-5xl font-black text-lime-400">$0</span>
-                    <p class="mt-6 text-xs text-slate-400 leading-relaxed italic">
-                        "This represents capital lost to infrastructure friction. We can recover this."
-                    </p>
-                    <a href="https://wa.me/27661180036" class="mt-8 flex items-center justify-center bg-lime-500 text-white p-4 rounded-xl font-black uppercase text-[10px] tracking-widest hover:bg-white hover:text-slate-900 transition-all">
-                        Fix My Infrastructure
+                <div class="space-y-8">
+                    <div class="group">
+                        <label class="text-[10px] font-black uppercase text-slate-400 tracking-widest ml-1">Monthly Traffic</label>
+                        <input type="number" id="traffic" value="5000" class="w-full bg-slate-50 border-none rounded-2xl p-6 mt-2 font-bold text-xl outline-none focus:ring-4 focus:ring-lime-500/10 transition-all">
+                    </div>
+                    <div class="group">
+                        <label class="text-[10px] font-black uppercase text-slate-400 tracking-widest ml-1">Avg. Order Value ($)</label>
+                        <input type="number" id="orderValue" value="100" class="w-full bg-slate-50 border-none rounded-2xl p-6 mt-2 font-bold text-xl outline-none focus:ring-4 focus:ring-lime-500/10 transition-all">
+                    </div>
+                    <button onclick="runAudit()" class="w-full bg-slate-900 text-white p-6 rounded-2xl font-black uppercase tracking-widest text-xs shadow-xl shadow-slate-200 hover:bg-lime-500 transition-all transform hover:-translate-y-1">
+                        Analyze My Data
+                    </button>
+                </div>
+
+                <div id="results" class="mt-12 p-10 bg-slate-900 rounded-[3rem] text-white hidden scale-95 opacity-0 transition-all duration-500">
+                    <p class="text-slate-400 text-[10px] uppercase font-black tracking-widest mb-2">Annual Recovery Potential</p>
+                    <span id="lossValue" class="text-5xl font-black text-lime-400">$0</span>
+                    <hr class="border-slate-800 my-8">
+                    <a href="https://wa.me/27661180036" class="flex items-center justify-center bg-white text-slate-900 p-5 rounded-2xl font-black uppercase text-[10px] tracking-widest hover:bg-lime-500 hover:text-white transition-all">
+                        Secure My Revenue ↗
                     </a>
                 </div>
             </div>
@@ -71,23 +84,22 @@
     <div id="global-footer"></div>
 
     <script>
-        function calculateLeakage() {
-            const traffic = parseFloat(document.getElementById('traffic').value);
-            const value = parseFloat(document.getElementById('value').value);
+        function runAudit() {
+            const t = parseFloat(document.getElementById('traffic').value);
+            const v = parseFloat(document.getElementById('orderValue').value);
+            // Calculating 10% average leakage
+            const leakage = (t * 0.10) * v * 12;
             
-            if(isNaN(traffic) || isNaN(value)) return;
-
-            // Industry standard leakage calculation (approx 10% friction loss)
-            const annualLeakage = (traffic * 0.10) * value * 12;
+            const results = document.getElementById('results');
+            document.getElementById('lossValue').innerText = '$' + Math.floor(leakage).toLocaleString();
             
-            document.getElementById('leakage-amount').innerText = '$' + Math.floor(annualLeakage).toLocaleString();
-            
-            const resultBox = document.getElementById('result-box');
-            resultBox.classList.remove('hidden');
-            setTimeout(() => { resultBox.classList.add('scale-100'); }, 10);
+            results.classList.remove('hidden');
+            setTimeout(() => {
+                results.classList.remove('scale-95', 'opacity-0');
+                results.classList.add('scale-100', 'opacity-100');
+            }, 10);
         }
 
-        // Global Nav/Footer Injection
         async function injectGlobals() {
             const nav = await fetch('/nav.html');
             if(nav.ok) document.getElementById('global-nav').innerHTML = await nav.text();
