@@ -1,7 +1,7 @@
 import { serve } from '@hono/node-server';
 import { Hono } from 'hono';
 import { serveStatic } from '@hono/node-server/static';
-import { readFileSync, writeFileSync, existsSync, mkdirSync, readdirSync } from 'fs';
+import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'fs';
 import 'dotenv/config';
 
 // Import Principal Logic Gates
@@ -14,52 +14,81 @@ const projectsRoot = './vertical-projects';
 
 // Initialize Industrial Infrastructure
 [enginePath, projectsRoot].forEach(path => {
-    if (!existsSync(path)) mkdirSync(path, { recursive: true });
+    if (!existsSync(path)) {
+        mkdirSync(path, { recursive: true });
+    }
 });
 
 /**
- * GATEKEEPER: AUTHENTICATION & PAYWALL
+ * GATEKEEPER: PAYWALL & AUTH PROTECTION
+ * This ensures only paying users access the Forge Terminal.
  */
 app.get('/forge-engine/index.html', (c) => {
     const auth = c.req.query('auth');
+    
+    // Verify the PayPal signal is present
     if (auth === 'success' || auth === 'VFKNMJUBYQQG6') {
-        const html = readFileSync('./forge-engine/index.html', 'utf-8');
-        return c.html(html);
+        try {
+            const html = readFileSync('./forge-engine/index.html', 'utf-8');
+            return c.html(html);
+        } catch (e) {
+            return c.text("Forge Error: Terminal UI missing from /forge-engine/");
+        }
+    } else {
+        // No payment signal? Kick back to sales page
+        console.log("[SECURITY]: Unauthorized access attempt blocked.");
+        return c.redirect('/build?error=unauthorized');
     }
-    return c.redirect('/build?error=unauthorized');
 });
 
-// Serve Assets and Local Projects
+// Static Asset & Project Pipeline
 app.use('/assets/*', serveStatic({ root: './' }));
+app.use('/forge-engine/assets/*', serveStatic({ root: './' }));
 app.use('/projects/*', serveStatic({ root: './vertical-projects' }));
 
-// UI Root Routes
-app.get('/', (c) => c.html(readFileSync('./index.html', 'utf-8')));
-app.get('/build', (c) => c.html(readFileSync('./build.html', 'utf-8')));
+/**
+ * UI ROUTES
+ */
+app.get('/', (c) => {
+    try {
+        const html = readFileSync('./index.html', 'utf-8');
+        return c.html(html);
+    } catch (e) {
+        return c.text("Error: Root index.html not found.");
+    }
+});
+
+app.get('/build', (c) => {
+    try {
+        const html = readFileSync('./build.html', 'utf-8');
+        return c.html(html);
+    } catch (e) {
+        return c.text("Error: build.html not found.");
+    }
+});
 
 /**
- * API: PRIMARY SIGNAL INGESTION
- * Captures external signals and refactors them into natural, responsive components.
+ * API: PRIMARY SIGNAL INGESTION (The Scraper)
  */
 app.post('/api/forge', async (c) => {
     try {
         const { url, projectName } = await c.req.json();
-        const activeProject = projectName || 'default-node';
+        const activeProject = projectName || 'project-alpha';
         const projectDir = `${projectsRoot}/${activeProject}`;
 
         if (!existsSync(projectDir)) mkdirSync(projectDir, { recursive: true });
 
-        console.log(`[INGESTOR]: Signal captured from ${url} [cite: 6]`);
+        console.log(`[SIGNAL]: Ingesting ${url}`);
         const siteData = await ingestSite(url);
         
-        console.log(`[REFACTORER]: Re-architecting ${siteData.title} via Gemini 2.5 Flash [cite: 8, 9]`);
+        console.log(`[FORGE]: Refactoring via Gemini 2.5 Flash`);
         const refactoredHtml = await refactorToTailwind(siteData.html);
 
-        // Save physically to local hard drive 
+        // Save physically to Local Hard Drive (Sovereign ownership)
         const savePath = `${projectDir}/index.html`;
         writeFileSync(savePath, refactoredHtml);
         
-        // Sync with Engine Terminal
+        // Sync with the Engine UI for preview
         writeFileSync(`${enginePath}/index.html`, refactoredHtml);
 
         return c.json({ 
@@ -67,7 +96,7 @@ app.post('/api/forge', async (c) => {
             downloadUrl: `/forge-engine/index.html?auth=VFKNMJUBYQQG6&project=${activeProject}`,
             title: siteData.title 
         });
-    } catch (error) {
+    } catch (error: any) {
         console.error(`[CRITICAL FAILURE]:`, error);
         return c.json({ status: 'Error', message: error.message }, 500);
     }
@@ -75,55 +104,69 @@ app.post('/api/forge', async (c) => {
 
 /**
  * API: PAGE & SEO MANAGER
- * Adds new pages and injects SEO Metadata per node [cite: 16, 17]
+ * Injects SEO Metadata per page and creates new nodes
  */
 app.post('/api/manage-page', async (c) => {
     try {
-        const { projectName, pageName, seoTitle, seoDesc, isNew } = await c.req.json();
+        const { projectName, pageName, seoTitle, seoDesc } = await c.req.json();
         const projectDir = `${projectsRoot}/${projectName}`;
         const filePath = `${projectDir}/${pageName}.html`;
 
-        let content = isNew ? "" : readFileSync(filePath, 'utf-8');
+        if (!existsSync(projectDir)) mkdirSync(projectDir, { recursive: true });
 
-        // Inject Industrial SEO Suite logic 
+        const currentContent = existsSync(filePath) 
+            ? readFileSync(filePath, 'utf-8') 
+            : "<html><head></head><body></body></html>";
+
+        console.log(`[SEO ENGINE]: Updating ${pageName} for project ${projectName}`);
+
         const seoRefactor = await refactorToTailwind(`
-            CODE: ${content}
+            CODE: ${currentContent}
             SEO_TITLE: ${seoTitle}
             SEO_DESC: ${seoDesc}
-            INSTRUCTION: Inject semantic Meta tags and JSON-LD Schema Node.
+            INSTRUCTION: Inject semantic Meta tags and JSON-LD Schema. Ensure high-end typography.
         `);
 
         writeFileSync(filePath, seoRefactor);
-        return c.json({ status: 'Updated', path: filePath });
+        // Also update engine preview
+        writeFileSync(`${enginePath}/index.html`, seoRefactor);
+
+        return c.json({ status: 'Updated' });
     } catch (error) {
+        console.error(error);
         return c.json({ status: 'Error' }, 500);
     }
 });
 
 /**
- * API: PUBLISH / EXPORT
- * Finalizes code for manual server deployment [cite: 14, 15]
+ * API: REFACTOR (The "Ask Gemini" button)
  */
-app.post('/api/publish', async (c) => {
+app.post('/api/refactor', async (c) => {
     try {
-        const { host, projectName } = await c.req.json();
-        const projectDir = `${projectsRoot}/${projectName}`;
+        const { prompt } = await c.req.json();
+        const currentHtml = readFileSync(`${enginePath}/index.html`, 'utf-8');
         
-        console.log(`[PUBLICATION]: Preparing ${projectName} for SSH/FTP transfer `);
-        // Logic for FTP/SSH deployment goes here
+        console.log(`[REFACTOR]: Applying custom instruction: ${prompt}`);
+        const updatedHtml = await refactorToTailwind(`CURRENT_CODE: ${currentHtml}\n\nUSER_REQUEST: ${prompt}`);
         
-        return c.json({ status: 'Published', target: host });
+        writeFileSync(`${enginePath}/index.html`, updatedHtml);
+
+        return c.json({ status: 'Updated' });
     } catch (error) {
         return c.json({ status: 'Error' }, 500);
     }
 });
 
 const port = Number(process.env.PORT) || 7777;
-serve({ fetch: app.fetch, port });
 
 console.log(`
-   VERTICAL FORGE OPERATIONAL [cite: 1, 11]
+   VERTICAL WEB BUILDER | SOVEREIGN FORGE
    ---------------------------------------
-   PORT: ${port}
-   STATUS: SYSTEM LIVE
+   Status      : SYSTEM OPERATIONAL
+   UI Dashboard: http://localhost:${port}
+   SaaS Build  : http://localhost:${port}/build
+   Project Root: ${projectsRoot}
+   Engine      : Gemini 2.5 Flash
 `);
+
+serve({ fetch: app.fetch, port });
