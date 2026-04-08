@@ -24,14 +24,32 @@ def forge_vertical_asset():
     selected = random.choice(assets)
     intel_filename = selected['title'].lower().replace(" ", "-").replace(":", "") + ".html"
     intel_path = f"intel/{intel_filename}"
-    
-    html_template = """
+
+    # THE SHARED CONTACT STACK (Vibrant White/Lime Theme)
+    contact_stack = """
+            <section class="mt-20 border-t border-slate-100 pt-10">
+                <h4 class="text-sm font-black uppercase tracking-widest text-slate-900 mb-6">Discuss Your Infrastructure</h4>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <a href="https://wa.me/27661180036" class="flex items-center justify-center bg-[#25D366] text-white px-6 py-4 rounded-xl font-bold uppercase text-[10px] tracking-widest hover:opacity-90 transition-all">
+                        WhatsApp Direct
+                    </a>
+                    <a href="https://fiverr.com/YOUR_PROFILE" class="flex items-center justify-center bg-[#1dbf73] text-white px-6 py-4 rounded-xl font-bold uppercase text-[10px] tracking-widest hover:opacity-90 transition-all">
+                        Hire on Fiverr
+                    </a>
+                    <a href="mailto:jarrit@forgevertical.com" class="flex items-center justify-center bg-slate-900 text-white px-6 py-4 rounded-xl font-bold uppercase text-[10px] tracking-widest hover:bg-lime-600 transition-all">
+                        Official Email
+                    </a>
+                </div>
+            </section>
+    """
+
+    html_template = f"""
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{title} // ForgeVertical</title>
+    <title>{{title}} // ForgeVertical</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;500;800&display=swap');
@@ -45,39 +63,38 @@ def forge_vertical_asset():
             <a href="../index.html" class="text-[10px] font-extrabold uppercase tracking-[0.4em] text-lime-600 hover:text-slate-900 transition-all">← Back to Forge</a>
         </nav>
         <header class="mb-12">
-            <span class="bg-lime-100 text-lime-700 px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest mb-6 inline-block">{tag}</span>
-            <h1 class="text-5xl md:text-6xl font-extrabold tracking-tighter text-slate-900 leading-tight">{title}</h1>
+            <span class="bg-lime-100 text-lime-700 px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest mb-6 inline-block">{{tag}}</span>
+            <h1 class="text-5xl md:text-6xl font-extrabold tracking-tighter text-slate-900 leading-tight">{{title}}</h1>
         </header>
         <article class="text-lg text-slate-600 font-light leading-relaxed">
-            <h2 class="text-slate-900 font-extrabold text-2xl mb-6">{headline}</h2>
-            <p class="mb-8">{content}</p>
+            <h2 class="text-slate-900 font-extrabold text-2xl mb-6">{{headline}}</h2>
+            <p class="mb-8">{{content}}</p>
             <div class="vibrant-border bg-slate-50 p-8 rounded-2xl my-12 italic shadow-sm">
-                <p class="text-slate-900 font-medium">"Forge Insight: {insight}"</p>
+                <p class="text-slate-900 font-medium">"Forge Insight: {{insight}}"</p>
             </div>
-            <section class="mt-20 border-t border-slate-100 pt-10">
-                <h4 class="text-sm font-black uppercase tracking-widest text-slate-900 mb-6">Need this infrastructure?</h4>
-                <a href="https://fiverr.com/YOUR_PROFILE" class="inline-block bg-slate-900 text-white px-8 py-4 rounded-xl font-bold uppercase text-[10px] tracking-widest shadow-lg hover:bg-lime-600 transition-all">Initialize Project on Fiverr</a>
-            </section>
+            {contact_stack}
         </article>
         <footer class="mt-32 pt-8 border-t border-slate-100 opacity-40 text-[9px] font-bold uppercase tracking-[0.3em]">ForgeVertical // Built for SMEs & Enterprises</footer>
     </div>
 </body>
 </html>
 """
-    final_html = html_template.replace("{title}", selected['title'])\
-                              .replace("{tag}", selected['tag'])\
-                              .replace("{headline}", selected['headline'])\
-                              .replace("{content}", selected['content'])\
-                              .replace("{insight}", selected['insight'])
+    final_html = html_template.format(
+        title=selected['title'],
+        tag=selected['tag'],
+        headline=selected['headline'],
+        content=selected['content'],
+        insight=selected['insight']
+    )
 
     with open(intel_path, 'w') as f:
         f.write(final_html)
 
-    # --- PART 2: INTERACTIVE TOOL FORGE (The ROI Calculator) ---
+    # --- PART 2: INTERACTIVE TOOL FORGE ---
     os.makedirs("tools", exist_ok=True)
     tool_path = "tools/roi-calculator.html"
     
-    roi_template = """
+    roi_template = f"""
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -87,7 +104,7 @@ def forge_vertical_asset():
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;500;800&display=swap');
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        body {{ font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; color: #1e293b; }}
     </style>
 </head>
 <body class="min-h-screen py-20 px-6">
@@ -111,17 +128,21 @@ def forge_vertical_asset():
             <p class="text-slate-400 text-[10px] uppercase font-black tracking-widest mb-2">Annual Revenue at Risk</p>
             <span id="loss" class="text-4xl font-black text-lime-400">$0</span>
             <p class="mt-6 text-xs text-slate-400 leading-relaxed italic">"Slow load times and poor UX typically leak 7-12% of annual revenue. We plug those holes."</p>
-            <a href="https://fiverr.com/YOUR_PROFILE" class="mt-8 block text-center bg-white text-slate-900 p-4 rounded-xl font-black uppercase text-[10px] tracking-widest">Fix My Infrastructure</a>
+            
+            <div class="mt-8 grid grid-cols-1 gap-3">
+                <a href="https://wa.me/27661180036" class="flex items-center justify-center bg-[#25D366] text-white p-4 rounded-xl font-black uppercase text-[10px] tracking-widest">Chat on WhatsApp</a>
+                <a href="mailto:jarrit@forgevertical.com" class="flex items-center justify-center bg-white text-slate-900 p-4 rounded-xl font-black uppercase text-[10px] tracking-widest">Email Principal Architect</a>
+            </div>
         </div>
     </div>
     <script>
-        function calc() {
+        function calc() {{
             const t = document.getElementById('traffic').value;
             const v = document.getElementById('value').value;
-            const leakage = (t * 0.10) * v * 12; // 10% leakage model
+            const leakage = (t * 0.10) * v * 12;
             document.getElementById('loss').innerText = '$' + Math.floor(leakage).toLocaleString();
             document.getElementById('result').classList.remove('hidden');
-        }
+        }}
     </script>
 </body>
 </html>
