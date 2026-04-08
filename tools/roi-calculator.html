@@ -8,98 +8,102 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;500;800&display=swap');
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #0f172a; color: #f8fafc; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #ffffff; color: #1e293b; }
         .vibrant-gradient { background: linear-gradient(90deg, #10b981 0%, #84cc16 100%); }
-        /* Darkened Glassmorphism for better focus */
+        
+        /* Darkened Glassmorphism: This stays dark to make the calculator feel like a professional terminal */
         .glass-panel { 
-            background: rgba(15, 23, 42, 0.85); 
-            backdrop-filter: blur(12px); 
+            background: rgba(15, 23, 42, 0.95); 
+            backdrop-filter: blur(20px); 
             border: 1px solid rgba(255, 255, 255, 0.1); 
         }
-        .iceberg-container { position: relative; width: 100%; height: 650px; border-radius: 3rem; overflow: hidden; }
-        .waterline { position: absolute; top: 35%; left: 0; width: 100%; height: 2px; background: rgba(132, 204, 22, 0.4); z-index: 10; }
+        
+        .iceberg-container { position: relative; width: 100%; height: 650px; border-radius: 3rem; overflow: hidden; background: #0f172a; }
+        .waterline { position: absolute; top: 35%; left: 0; width: 100%; height: 2px; background: rgba(132, 204, 22, 0.6); z-index: 10; }
+        
+        /* Input styling for comfort */
         input::-webkit-outer-spin-button, input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
     </style>
 </head>
 <body class="antialiased overflow-x-hidden">
     <div id="global-nav"></div>
 
-    <main class="min-h-screen py-20 px-6 max-w-7xl mx-auto">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+    <main class="min-h-screen py-24 px-6 max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
             
-            <div class="hidden lg:block sticky top-32 space-y-10">
-                <div class="iceberg-container shadow-2xl border border-slate-800">
-                    <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover opacity-30">
+            <div class="hidden lg:block sticky top-32 space-y-12">
+                <div class="iceberg-container shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)]">
+                    <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover opacity-40">
                         <source src="/assets/ROI_calculator_page.mp4" type="video/mp4">
                     </video>
                     
                     <div class="waterline"></div>
                     
                     <div class="absolute top-[12%] left-10 z-20">
-                        <p class="text-[12px] font-black text-lime-500 uppercase tracking-[0.4em] mb-4">Phase 01: Visible Surface</p>
-                        <h3 class="text-white text-4xl font-extrabold uppercase italic tracking-tighter">Current Traffic</h3>
+                        <p class="text-[13px] font-black text-lime-400 uppercase tracking-[0.4em] mb-4">Phase 01: Surface Level</p>
+                        <h3 class="text-white text-5xl font-extrabold uppercase italic tracking-tighter">Current Sales</h3>
                     </div>
 
-                    <div class="absolute bottom-[15%] left-10 z-20 p-8 glass-panel rounded-3xl mr-10">
-                        <p class="text-[12px] font-black text-lime-400 uppercase tracking-[0.4em] mb-4">Phase 02: Hidden Extraction</p>
+                    <div class="absolute bottom-[10%] left-10 z-20 p-10 glass-panel rounded-[2.5rem] mr-10 shadow-2xl">
+                        <p class="text-[13px] font-black text-lime-400 uppercase tracking-[0.4em] mb-4">Phase 02: Infrastructure Leak</p>
                         <h3 class="text-white text-5xl font-black uppercase italic leading-none mb-6">Income Loss.</h3>
-                        <p class="text-slate-300 text-lg leading-relaxed font-medium">
-                            The "Out-of-the-Box" Audit identifies capital currently trapped in legacy architecture. 
-                            <strong>We don't build sites; we recover revenue.</strong>
+                        <p class="text-slate-200 text-xl leading-relaxed font-light">
+                            Most "hidden" loss is buried in poor architecture. We uncover the mass below the waterline.
                         </p>
                     </div>
                 </div>
             </div>
 
-            <div class="glass-panel p-10 lg:p-16 rounded-[4rem] shadow-2xl relative">
-                <div class="mb-12">
-                    <span class="bg-lime-500/10 text-lime-400 px-4 py-2 rounded-full text-[11px] font-black uppercase tracking-widest mb-6 inline-block">Enterprise Audit v1.2</span>
-                    <h2 class="text-5xl font-extrabold text-white tracking-tighter leading-tight">
-                        Income Loss <br><span class="vibrant-gradient bg-clip-text text-transparent italic underline decoration-lime-500/30">Infrastructure Audit</span>
+            <div class="glass-panel p-12 lg:p-20 rounded-[4rem] shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)] relative">
+                <div class="mb-14">
+                    <span class="bg-lime-500/20 text-lime-400 px-5 py-2 rounded-full text-[12px] font-black uppercase tracking-widest mb-8 inline-block">Enterprise Audit v1.2</span>
+                    <h2 class="text-6xl font-extrabold text-white tracking-tighter leading-[0.9] mb-4">
+                        Income Loss <br><span class="vibrant-gradient bg-clip-text text-transparent italic">Audit Hub</span>
                     </h2>
+                    <p class="text-slate-400 text-lg font-light">Calculate your out-of-the-box recovery potential.</p>
                 </div>
                 
-                <div class="space-y-10">
+                <div class="space-y-12">
                     <div>
-                        <label class="text-[12px] font-black uppercase text-slate-400 tracking-widest ml-1">Select Your Region</label>
-                        <select id="currency" class="w-full bg-slate-800/50 border-2 border-slate-700 rounded-2xl p-5 mt-3 font-bold text-lg text-white outline-none focus:border-lime-500 transition-all cursor-pointer">
-                            <option value="$">United States (USD - $)</option>
-                            <option value="R">South Africa (ZAR - R)</option>
-                            <option value="£">United Kingdom (GBP - £)</option>
-                            <option value="€">Europe (EUR - €)</option>
-                            <option value="A$">Australia (AUD - A$)</option>
-                            <option value="₹">India (INR - ₹)</option>
+                        <label class="text-[13px] font-black uppercase text-slate-400 tracking-[0.2em] ml-1">Select Local Currency</label>
+                        <select id="currency" class="w-full bg-slate-800 border-2 border-slate-700 rounded-3xl p-6 mt-4 font-bold text-xl text-white outline-none focus:border-lime-500 transition-all cursor-pointer">
+                            <option value="$">USD - United States ($)</option>
+                            <option value="R">ZAR - South Africa (R)</option>
+                            <option value="£">GBP - United Kingdom (£)</option>
+                            <option value="€">EUR - Europe (€)</option>
+                            <option value="A$">AUD - Australia (A$)</option>
                         </select>
                     </div>
 
                     <div>
-                        <label class="text-[12px] font-black uppercase text-slate-400 tracking-widest ml-1">Monthly Traffic (Average Visitors)</label>
-                        <input type="number" id="traffic" placeholder="e.g. 5000" class="w-full bg-slate-800/50 border-2 border-slate-700 rounded-2xl p-6 mt-3 font-bold text-2xl text-white outline-none focus:border-lime-500 transition-all">
+                        <label class="text-[13px] font-black uppercase text-slate-400 tracking-[0.2em] ml-1">Monthly Traffic (Visitors)</label>
+                        <input type="number" id="traffic" placeholder="e.g. 5000" class="w-full bg-slate-800 border-2 border-slate-700 rounded-3xl p-7 mt-4 font-extrabold text-3xl text-white outline-none focus:border-lime-500 transition-all">
                     </div>
 
                     <div>
-                        <label class="text-[12px] font-black uppercase text-slate-400 tracking-widest ml-1">Avg. Order Value (Customer Spend)</label>
-                        <input type="number" id="orderValue" placeholder="e.g. 150" class="w-full bg-slate-800/50 border-2 border-slate-700 rounded-2xl p-6 mt-3 font-bold text-2xl text-white outline-none focus:border-lime-500 transition-all">
+                        <label class="text-[13px] font-black uppercase text-slate-400 tracking-[0.2em] ml-1">Average Customer Spend</label>
+                        <input type="number" id="orderValue" placeholder="e.g. 150" class="w-full bg-slate-800 border-2 border-slate-700 rounded-3xl p-7 mt-4 font-extrabold text-3xl text-white outline-none focus:border-lime-500 transition-all">
                     </div>
 
-                    <button onclick="runAudit()" class="w-full vibrant-gradient text-slate-900 p-7 rounded-2xl font-black uppercase tracking-widest text-sm shadow-2xl shadow-lime-500/20 hover:scale-[1.02] transition-all transform">
+                    <button onclick="runAudit()" class="w-full vibrant-gradient text-slate-900 p-8 rounded-3xl font-black uppercase tracking-[0.2em] text-sm shadow-2xl hover:scale-[1.02] transition-all">
                         Analyze Revenue Gaps ↗
                     </button>
                 </div>
 
-                <div id="results" class="mt-12 p-12 bg-white rounded-[3rem] text-slate-900 hidden scale-95 opacity-0 transition-all duration-700 shadow-[0_0_50px_rgba(132,204,22,0.2)]">
-                    <p class="text-slate-400 text-[11px] uppercase font-black tracking-[0.2em] mb-4">Total Annual Revenue Recovery</p>
+                <div id="results" class="mt-16 p-12 bg-white rounded-[3.5rem] text-slate-900 hidden scale-95 opacity-0 transition-all duration-700 shadow-2xl">
+                    <p class="text-slate-400 text-[12px] font-black uppercase tracking-[0.3em] mb-4">Total Annual Income Leakage</p>
                     <div class="flex items-baseline gap-2">
-                        <span id="currencySymbol" class="text-4xl font-extrabold text-slate-400"></span>
-                        <span id="lossValue" class="text-7xl font-black tracking-tighter leading-none">0</span>
+                        <span id="currencySymbol" class="text-5xl font-extrabold text-slate-300"></span>
+                        <span id="lossValue" class="text-8xl font-black tracking-tighter leading-none">0</span>
                     </div>
-                    <p class="mt-8 text-lg text-slate-600 leading-relaxed">
-                        This capital is lost to <strong>Friction Leakage</strong>. Our Out-of-the-Box vision replaces these leaks with high-conversion infrastructure.
+                    <p class="mt-10 text-xl text-slate-600 leading-relaxed font-light">
+                        This is the estimated capital currently lost to <span class="font-bold text-slate-900">Infrastructure Friction</span>. 
                     </p>
-                    <hr class="border-slate-100 my-10">
-                    <a href="https://wa.me/27661180036" class="flex items-center justify-center bg-slate-900 text-white p-6 rounded-2xl font-black uppercase text-xs tracking-widest hover:bg-lime-500 transition-all">
-                        Consult Principal Architect
-                    </a>
+                    <div class="mt-12 pt-10 border-t border-slate-100">
+                        <a href="https://wa.me/27661180036" class="flex items-center justify-center bg-slate-900 text-white p-7 rounded-2xl font-black uppercase text-[11px] tracking-widest hover:bg-lime-500 transition-all">
+                            Consult Principal Architect
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -115,8 +119,8 @@
             
             if (!t || !v) return;
 
-            // Audit Logic: 12% Leakage for unoptimized architecture
-            const leakage = (t * 0.12) * v * 12;
+            // Audit Logic: 12.5% leakage for unoptimized systems
+            const leakage = (t * 0.125) * v * 12;
             
             const results = document.getElementById('results');
             document.getElementById('currencySymbol').innerText = symbol;
@@ -128,7 +132,6 @@
                 results.classList.add('scale-100', 'opacity-100');
             }, 50);
 
-            // Auto-scroll to results for mobile
             if(window.innerWidth < 1024) {
                 results.scrollIntoView({ behavior: 'smooth' });
             }
