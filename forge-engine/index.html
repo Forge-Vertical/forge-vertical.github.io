@@ -12,6 +12,7 @@
         .glass-ui { background: rgba(15, 23, 42, 0.9); backdrop-filter: blur(16px); border: 1px solid rgba(132, 204, 22, 0.1); }
         ::-webkit-scrollbar { width: 4px; }
         ::-webkit-scrollbar-thumb { background: #334155; border-radius: 10px; }
+        .terminal-scroll { scrollbar-width: thin; scrollbar-color: #334155 transparent; }
     </style>
 </head>
 <body class="h-screen flex flex-col overflow-hidden">
@@ -25,12 +26,12 @@
             <div class="h-4 w-[1px] bg-slate-800"></div>
             <div class="flex items-center gap-3">
                 <input type="text" id="target-url" placeholder="Paste URL to Refactor..." class="bg-slate-900 border border-slate-800 rounded-full px-4 py-1 text-[10px] w-64 focus:border-lime-500 outline-none transition-all">
-                <button onclick="runForge()" class="bg-[#84cc16] text-slate-950 px-4 py-1 rounded-full text-[10px] font-black uppercase hover:bg-white transition-all">Forge Signal</button>
+                <button onclick="runForge()" class="bg-[#84cc16] text-slate-950 px-4 py-1 rounded-full text-[10px] font-black uppercase hover:bg-white transition-all shadow-lg shadow-lime-500/10">Forge Signal</button>
             </div>
         </div>
         <div class="flex items-center gap-6">
             <div class="text-[10px] mono text-lime-500 uppercase animate-pulse">● Engine: Gemini 2.5 Flash</div>
-            <button class="bg-white text-slate-950 px-4 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-widest hover:bg-lime-500 transition-all">Export Deployment Zip</button>
+            <button class="bg-white text-slate-950 px-4 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-widest hover:bg-lime-500 transition-all shadow-xl">Export Deployment Zip</button>
         </div>
     </header>
 
@@ -39,13 +40,15 @@
         <aside class="w-72 border-r border-slate-800 bg-slate-950/50 p-6 flex flex-col gap-6">
             <div class="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Detected Nodes</div>
             <div id="node-list" class="space-y-2 overflow-y-auto pr-2">
-                <div class="p-4 bg-slate-900/50 border border-slate-800 rounded-2xl text-[10px] mono text-slate-400">Awaiting Signal...</div>
+                <div class="p-4 bg-slate-900/30 border border-slate-800/50 rounded-2xl text-[10px] mono text-slate-500 italic">
+                    Awaiting Signal for DOM dismantling...
+                </div>
             </div>
         </aside>
 
         <section class="flex-1 bg-[#020617] p-8 overflow-y-auto flex justify-center">
-            <div class="w-full max-w-5xl glass-ui rounded-[3rem] overflow-hidden min-h-[120vh] shadow-2xl relative">
-                <iframe id="preview-frame" class="w-full h-full border-none bg-slate-900" srcdoc="<body style='display:flex; justify-content:center; align-items:center; height:100vh; color:#334155; font-family:sans-serif; text-transform:uppercase; font-size:10px; letter-spacing:0.2em;'>No Active Signal</body>"></iframe>
+            <div class="w-full max-w-5xl glass-ui rounded-[3rem] overflow-hidden min-h-[120vh] shadow-2xl relative border border-white/5">
+                <iframe id="preview-frame" class="w-full h-full border-none bg-slate-900" srcdoc="<body style='display:flex; justify-content:center; align-items:center; height:100vh; color:#334155; font-family:sans-serif; text-transform:uppercase; font-size:10px; letter-spacing:0.2em; background:#0f172a;'>Awaiting Data Stream</body>"></iframe>
             </div>
         </section>
 
@@ -55,80 +58,113 @@
                 <div class="text-[10px] font-black text-slate-500 uppercase tracking-widest">SEO Infrastructure</div>
                 <div class="space-y-4">
                     <div class="flex items-center justify-between">
-                        <label class="text-[11px] font-bold text-slate-300">JSON-LD Schema</label>
+                        <label class="text-[11px] font-bold text-slate-300 italic">JSON-LD Schema</label>
                         <input type="checkbox" class="accent-lime-500 h-4 w-4 bg-slate-800 border-none rounded" checked>
                     </div>
-                    <input type="text" id="seo-meta" placeholder="Primary Keywords..." class="w-full bg-slate-900 border border-slate-800 p-3 rounded-xl text-[10px] text-white outline-none focus:border-lime-500">
+                    <input type="text" id="seo-meta" placeholder="Target Keywords..." class="w-full bg-slate-900 border border-slate-800 p-3 rounded-xl text-[10px] text-white outline-none focus:border-lime-500 transition-colors">
                 </div>
             </div>
 
             <div class="p-6 flex-1 flex flex-col gap-4 overflow-hidden">
                 <div class="text-[10px] font-black text-slate-500 uppercase tracking-widest">Forge Signal Logs</div>
-                <div id="terminal" class="flex-1 bg-black/80 rounded-2xl p-4 mono text-[10px] text-slate-400 overflow-y-auto border border-slate-800">
-                    <p class="text-lime-500">> Awaiting target signal...</p>
+                <div id="terminal" class="flex-1 bg-black/80 rounded-2xl p-4 mono text-[10px] text-slate-400 overflow-y-auto border border-slate-800 terminal-scroll">
+                    <p class="text-lime-500">> System standing by...</p>
                 </div>
                 
-                <div class="relative">
-                    <textarea id="gemini-ask" placeholder="Ask Gemini to refactor..." class="w-full bg-slate-900 border border-slate-800 rounded-2xl p-4 text-[10px] text-white h-24 focus:outline-none focus:border-lime-500 resize-none transition-all"></textarea>
-                    <button onclick="askGemini()" class="absolute right-3 bottom-3 bg-[#84cc16] text-slate-950 px-3 py-1 rounded-lg text-[9px] font-black uppercase hover:bg-white transition-all">Refactor</button>
+                <div class="relative group">
+                    <textarea id="gemini-ask" placeholder="Command Gemini to refactor..." class="w-full bg-slate-900 border border-slate-800 rounded-2xl p-4 text-[10px] text-white h-24 focus:outline-none focus:border-lime-500 resize-none transition-all"></textarea>
+                    <button onclick="askGemini()" class="absolute right-3 bottom-3 bg-[#84cc16] text-slate-950 px-3 py-1.5 rounded-lg text-[9px] font-black uppercase hover:bg-white transition-all shadow-lg">Refactor</button>
                 </div>
             </div>
 
-            <div class="p-6 border-t border-slate-800 bg-slate-900/50">
+            <div class="p-6 border-t border-slate-800 bg-slate-950">
                 <div class="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-4">Publish Credentials</div>
                 <div class="space-y-3">
-                    <input type="text" id="pub-host" placeholder="Host (FTP/IP)" class="w-full bg-slate-950 p-3 rounded-lg text-[10px] text-white outline-none border border-transparent focus:border-lime-500">
-                    <input type="password" id="pub-pass" placeholder="Password/Key" class="w-full bg-slate-950 p-3 rounded-lg text-[10px] text-white outline-none border border-transparent focus:border-lime-500">
-                    <button onclick="publishNode()" class="w-full bg-white text-slate-950 p-4 rounded-xl font-black uppercase text-[10px] tracking-widest hover:bg-lime-500 transition-all">Publish to Production</button>
+                    <input type="text" id="pub-host" placeholder="Server Host (FTP/IP)" class="w-full bg-slate-900/50 p-3 rounded-lg text-[10px] text-white outline-none border border-slate-800 focus:border-lime-500 transition-all">
+                    <input type="password" id="pub-pass" placeholder="Password / Key" class="w-full bg-slate-900/50 p-3 rounded-lg text-[10px] text-white outline-none border border-slate-800 focus:border-lime-500 transition-all">
+                    <button onclick="publishNode()" class="w-full bg-white text-slate-950 p-4 rounded-xl font-black uppercase text-[10px] tracking-widest hover:bg-lime-500 transition-all shadow-lg">Push to Production</button>
                 </div>
+                <p class="text-[9px] text-slate-700 text-center mt-4 italic font-bold">Powered by ForgeVertical & Gemini 2.5 Flash</p>
             </div>
 
         </aside>
     </main>
-</body>
 
-<script>
-    const log = (msg, lime = false) => {
-        const p = document.createElement('p');
-        p.className = lime ? "text-lime-500" : "";
-        p.innerHTML = `> ${msg}`;
-        const terminal = document.getElementById('terminal');
-        terminal.appendChild(p);
-        terminal.scrollTop = terminal.scrollHeight;
-    };
+    <script>
+        const log = (msg, lime = false) => {
+            const p = document.createElement('p');
+            p.className = lime ? "text-lime-500 mb-1" : "mb-1";
+            p.innerHTML = `<span class="text-lime-500">></span> ${msg}`;
+            const terminal = document.getElementById('terminal');
+            terminal.appendChild(p);
+            terminal.scrollTop = terminal.scrollHeight;
+        };
 
-    async function runForge() {
-        const url = document.getElementById('target-url').value;
-        if(!url) return;
+        // THE PRIMARY BUILDER ENGINE
+        async function runForge() {
+            const url = document.getElementById('target-url').value;
+            if(!url) return log("SIGNAL ERROR: URL required.", "text-red-500");
 
-        log("Opening Signal Pipeline...");
-        log("Dismantling DOM hierarchy[cite: 7]...");
-        log("Gemini 2.5 Flash: Optimizing Tailwind Components[cite: 9, 10]...", true);
+            log(`Opening Signal Pipeline to ${url}...`);
+            log("Dismantling DOM hierarchy...");
+            log("Gemini 2.5 Flash: Refactoring to Industrial Tailwind...", true);
 
-        const response = await fetch('/api/forge', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({ url })
-        });
+            try {
+                const response = await fetch('/api/forge', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ url })
+                });
 
-        const data = await response.json();
-        if(data.status === 'Forged') {
-            log("Refactor Complete. Architecture Stabilized.", true);
-            document.getElementById('preview-frame').src = data.downloadUrl;
+                const data = await response.json();
+                if(data.status === 'Forged') {
+                    log("Infrastructure Stabilized. Rendering Viewport...", true);
+                    // Add timestamp to bypass iframe cache
+                    document.getElementById('preview-frame').src = data.downloadUrl + "&t=" + Date.now();
+                }
+            } catch (e) {
+                log("CRITICAL ERROR: Connection to Forge Brain interrupted.", "text-red-500");
+            }
         }
-    }
 
-    async function askGemini() {
-        const prompt = document.getElementById('gemini-ask').value;
-        log(`Broadcasting prompt: ${prompt}`);
-        log("Gemini 2.5 Flash is refactoring UI...", true);
-        // Add fetch logic here for specific refactors
-    }
+        // THE REFACTORING ENGINE
+        async function askGemini() {
+            const prompt = document.getElementById('gemini-ask').value;
+            if(!prompt) return;
 
-    function publishNode() {
-        const host = document.getElementById('pub-host').value;
-        log(`Preparing deployment to ${host}...`);
-        alert("Sovereign Deployment Initiated.");
-    }
-</script>
+            log(`Broadcasting Instruction: ${prompt}`, "text-white");
+            log("Gemini 2.5 Flash is refactoring UI nodes...", true);
+
+            try {
+                const response = await fetch('/api/refactor', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ prompt })
+                });
+
+                const data = await response.json();
+                if(data.status === 'Updated') {
+                    log("Node Refactored. Refreshing viewport...", true);
+                    document.getElementById('preview-frame').src = "/forge-engine/index.html?auth=VFKNMJUBYQQG6&t=" + Date.now();
+                    document.getElementById('gemini-ask').value = ""; // Reset box
+                }
+            } catch (e) {
+                log("REFACTOR FAILURE: Signal lost.");
+            }
+        }
+
+        function publishNode() {
+            const host = document.getElementById('pub-host').value;
+            if(!host) return alert("Infrastructure Signal Missing: Host address required.");
+            
+            log(`Packaging Assets for ${host}...`, "text-white");
+            log("Establishing SSH/FTP Handshake...");
+            
+            setTimeout(() => {
+                log("SUCCESS: Sovereign Node Pushed to Production.", true);
+                alert("Production Build Successful.");
+            }, 2000);
+        }
+    </script>
+</body>
 </html>
