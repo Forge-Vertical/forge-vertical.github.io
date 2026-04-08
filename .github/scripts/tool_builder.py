@@ -2,8 +2,7 @@ import os
 import random
 
 def forge_vertical_asset():
-    # THE TOOL & INTEL LIBRARY
-    # This is where we define what the bot "builds"
+    # --- PART 1: INTEL GENERATION ---
     assets = [
         {
             "title": "The SME Growth Protocol",
@@ -23,11 +22,9 @@ def forge_vertical_asset():
 
     os.makedirs("intel", exist_ok=True)
     selected = random.choice(assets)
-    filename = selected['title'].lower().replace(" ", "-").replace(":", "") + ".html"
-    path = f"intel/{filename}"
+    intel_filename = selected['title'].lower().replace(" ", "-").replace(":", "") + ".html"
+    intel_path = f"intel/{intel_filename}"
     
-    # THE HIGH-CONTRAST "VERTICAL" TEMPLATE
-    # White background, Lime accents, Sharp Slate text
     html_template = """
 <!DOCTYPE html>
 <html lang="en">
@@ -47,47 +44,90 @@ def forge_vertical_asset():
         <nav class="mb-20">
             <a href="../index.html" class="text-[10px] font-extrabold uppercase tracking-[0.4em] text-lime-600 hover:text-slate-900 transition-all">← Back to Forge</a>
         </nav>
-
         <header class="mb-12">
             <span class="bg-lime-100 text-lime-700 px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest mb-6 inline-block">{tag}</span>
-            <h1 class="text-5xl md:text-6xl font-extrabold tracking-tighter text-slate-900 leading-tight">
-                {title}
-            </h1>
+            <h1 class="text-5xl md:text-6xl font-extrabold tracking-tighter text-slate-900 leading-tight">{title}</h1>
         </header>
-
         <article class="text-lg text-slate-600 font-light leading-relaxed">
             <h2 class="text-slate-900 font-extrabold text-2xl mb-6">{headline}</h2>
             <p class="mb-8">{content}</p>
-
             <div class="vibrant-border bg-slate-50 p-8 rounded-2xl my-12 italic shadow-sm">
                 <p class="text-slate-900 font-medium">"Forge Insight: {insight}"</p>
             </div>
-            
             <section class="mt-20 border-t border-slate-100 pt-10">
                 <h4 class="text-sm font-black uppercase tracking-widest text-slate-900 mb-6">Need this infrastructure?</h4>
-                <a href="https://fiverr.com/YOUR_PROFILE" class="inline-block bg-slate-900 text-white px-8 py-4 rounded-xl font-bold uppercase text-[10px] tracking-widest shadow-lg hover:bg-lime-600 transition-all">
-                    Initialize Project on Fiverr
-                </a>
+                <a href="https://fiverr.com/YOUR_PROFILE" class="inline-block bg-slate-900 text-white px-8 py-4 rounded-xl font-bold uppercase text-[10px] tracking-widest shadow-lg hover:bg-lime-600 transition-all">Initialize Project on Fiverr</a>
             </section>
         </article>
-
-        <footer class="mt-32 pt-8 border-t border-slate-100 opacity-40 text-[9px] font-bold uppercase tracking-[0.3em]">
-            ForgeVertical // Built for SMEs & Enterprises
-        </footer>
+        <footer class="mt-32 pt-8 border-t border-slate-100 opacity-40 text-[9px] font-bold uppercase tracking-[0.3em]">ForgeVertical // Built for SMEs & Enterprises</footer>
     </div>
 </body>
 </html>
 """
-    
-    # Injecting data
     final_html = html_template.replace("{title}", selected['title'])\
                               .replace("{tag}", selected['tag'])\
                               .replace("{headline}", selected['headline'])\
                               .replace("{content}", selected['content'])\
                               .replace("{insight}", selected['insight'])
 
-    with open(path, 'w') as f:
+    with open(intel_path, 'w') as f:
         f.write(final_html)
+
+    # --- PART 2: INTERACTIVE TOOL FORGE (The ROI Calculator) ---
+    os.makedirs("tools", exist_ok=True)
+    tool_path = "tools/roi-calculator.html"
+    
+    roi_template = """
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revenue Leakage Calculator // ForgeVertical</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;500;800&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; color: #1e293b; }
+    </style>
+</head>
+<body class="min-h-screen py-20 px-6">
+    <div class="max-w-xl mx-auto bg-white p-10 rounded-[3rem] shadow-2xl border border-slate-100">
+        <h2 class="text-3xl font-extrabold text-slate-900 mb-2">Revenue <span class="text-lime-500">Leakage</span></h2>
+        <p class="text-slate-500 text-[10px] mb-8 uppercase tracking-widest font-black">Neil Patel Grade SEO Utility</p>
+        
+        <div class="space-y-6">
+            <div>
+                <label class="block text-[10px] font-black uppercase text-slate-400 mb-2">Monthly Traffic</label>
+                <input type="number" id="traffic" value="5000" class="w-full bg-slate-50 border-none rounded-xl p-4 focus:ring-2 focus:ring-lime-500 outline-none font-bold">
+            </div>
+            <div>
+                <label class="block text-[10px] font-black uppercase text-slate-400 mb-2">Avg. Order Value ($)</label>
+                <input type="number" id="value" value="100" class="w-full bg-slate-50 border-none rounded-xl p-4 focus:ring-2 focus:ring-lime-500 outline-none font-bold">
+            </div>
+            <button onclick="calc()" class="w-full bg-lime-500 text-white p-5 rounded-2xl font-black uppercase tracking-widest text-xs shadow-lg shadow-lime-500/30 hover:bg-slate-900 transition-all">Analyze My Data</button>
+        </div>
+        
+        <div id="result" class="mt-10 p-8 bg-slate-900 rounded-[2rem] text-white hidden">
+            <p class="text-slate-400 text-[10px] uppercase font-black tracking-widest mb-2">Annual Revenue at Risk</p>
+            <span id="loss" class="text-4xl font-black text-lime-400">$0</span>
+            <p class="mt-6 text-xs text-slate-400 leading-relaxed italic">"Slow load times and poor UX typically leak 7-12% of annual revenue. We plug those holes."</p>
+            <a href="https://fiverr.com/YOUR_PROFILE" class="mt-8 block text-center bg-white text-slate-900 p-4 rounded-xl font-black uppercase text-[10px] tracking-widest">Fix My Infrastructure</a>
+        </div>
+    </div>
+    <script>
+        function calc() {
+            const t = document.getElementById('traffic').value;
+            const v = document.getElementById('value').value;
+            const leakage = (t * 0.10) * v * 12; // 10% leakage model
+            document.getElementById('loss').innerText = '$' + Math.floor(leakage).toLocaleString();
+            document.getElementById('result').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
+"""
+    with open(tool_path, 'w') as f:
+        f.write(roi_template)
 
 if __name__ == "__main__":
     forge_vertical_asset()
