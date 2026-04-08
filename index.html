@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Forge-Vertical // Enterprise Web & SaaS Architecture</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;500;800&display=swap');
@@ -18,7 +19,7 @@
         <span class="font-extrabold text-2xl tracking-tighter text-slate-900">FORGE<span class="text-lime-500">VERTICAL</span></span>
         <div class="hidden md:flex gap-10 text-sm font-bold uppercase tracking-widest">
             <a href="#services" class="hover:text-lime-600 transition-colors">Services</a>
-            <a href="#portfolio" class="hover:text-lime-600 transition-colors">Portfolio</a>
+            <a href="portfolio.html" class="hover:text-lime-600 transition-colors">Portfolio</a>
             <a href="#tools" class="hover:text-lime-600 transition-colors">Tools</a>
             <a href="https://fiverr.com/YOUR_PROFILE" class="text-lime-600">Hire on Fiverr</a>
         </div>
@@ -34,7 +35,7 @@
         </p>
         <div class="flex flex-col md:flex-row gap-4 justify-center">
             <a href="#contact" class="btn-vibrant text-white px-10 py-5 rounded-2xl font-extrabold uppercase text-xs tracking-widest shadow-lg">Start Your Forge</a>
-            <a href="#portfolio" class="bg-slate-900 text-white px-10 py-5 rounded-2xl font-extrabold uppercase text-xs tracking-widest shadow-lg">View Our Work</a>
+            <a href="portfolio.html" class="bg-slate-900 text-white px-10 py-5 rounded-2xl font-extrabold uppercase text-xs tracking-widest shadow-lg">View Our Work</a>
         </div>
     </header>
 
@@ -60,33 +61,35 @@
     </section>
 
     <section id="portfolio" class="py-32 max-w-7xl mx-auto px-6">
-        <h2 class="text-5xl font-extrabold text-slate-900 mb-16 text-center">Featured <span class="text-lime-500">Deployments</span></h2>
+        <h2 class="text-5xl font-extrabold text-slate-900 mb-16 text-center">Featured <span class="text-lime-500 italic">Deployments</span></h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-            <div class="group cursor-pointer">
-                <div class="bg-slate-900 rounded-[2.5rem] p-10 aspect-video mb-6 relative overflow-hidden">
+            <div class="group cursor-pointer" onclick="window.location.href='portfolio.html'">
+                <div class="bg-slate-900 rounded-[2.5rem] p-10 aspect-video mb-6 relative overflow-hidden flex flex-col justify-end">
                     <div class="absolute inset-0 bg-blue-600 opacity-20 group-hover:opacity-40 transition-opacity"></div>
-                    <span class="relative z-10 text-blue-400 font-bold uppercase text-[10px]">Case Study: Forensic Data</span>
-                    <h3 class="relative z-10 text-white text-3xl font-black mt-4 italic uppercase">Fair Discovery</h3>
+                    <div class="relative z-10">
+                        <span class="text-blue-400 font-bold uppercase text-[10px] tracking-widest">Case Study: Forensic Data</span>
+                        <h3 class="text-white text-4xl font-black mt-2 italic uppercase leading-none">Fair Discovery</h3>
+                    </div>
                 </div>
-                <h4 class="text-xl font-bold text-slate-900">Sovereign Intel Infrastructure</h4>
+                <h4 class="text-xl font-bold text-slate-900 uppercase italic">Intel Infrastructure</h4>
                 <p class="text-slate-500">Automated OSINT node with real-time SEO indexing.</p>
             </div>
-            <div class="group cursor-pointer">
-                <div class="bg-lime-500 rounded-[2.5rem] p-10 aspect-video mb-6 relative overflow-hidden flex items-end">
-                    <h3 class="text-white text-5xl font-black italic uppercase opacity-20">NEXT GEN</h3>
+            <div class="group cursor-pointer" onclick="window.location.href='portfolio.html'">
+                <div class="bg-lime-500 rounded-[2.5rem] p-10 aspect-video mb-6 relative overflow-hidden flex items-center justify-center">
+                    <h3 class="text-white text-6xl font-black italic uppercase drop-shadow-md">NEXT GEN</h3>
                 </div>
-                <h4 class="text-xl font-bold text-slate-900">Your Business Name</h4>
-                <p class="text-slate-500">Coming soon to the Forge.</p>
+                <h4 class="text-xl font-bold text-slate-900 uppercase italic">Scalable SME Nodes</h4>
+                <p class="text-slate-500">High-performance deployments for emerging businesses.</p>
             </div>
         </div>
     </section>
 
     <footer id="contact" class="bg-slate-900 py-32 text-center text-white rounded-t-[4rem]">
         <h2 class="text-5xl font-extrabold mb-10">Ready to <span class="text-lime-400">Scale?</span></h2>
-        <div class="flex flex-wrap justify-center gap-6 opacity-50 mb-20 text-xs font-bold uppercase tracking-widest">
-            <a href="https://fiverr.com/YOUR_PROFILE">Fiverr</a>
-            <a href="https://twitter.com/YOUR_X">Twitter/X</a>
-            <a href="https://linkedin.com/in/YOUR_LINKEDIN">LinkedIn</a>
+        <div class="flex flex-wrap justify-center gap-6 mb-20">
+            <a href="https://wa.me/27661180036" class="text-xs font-bold uppercase tracking-widest bg-white/10 hover:bg-lime-500 px-6 py-3 rounded-xl transition-all">WhatsApp Direct</a>
+            <a href="mailto:jarrit@forgevertical.com" class="text-xs font-bold uppercase tracking-widest bg-white/10 hover:bg-lime-500 px-6 py-3 rounded-xl transition-all">Official Email</a>
+            <a href="https://fiverr.com/YOUR_PROFILE" class="text-xs font-bold uppercase tracking-widest bg-white/10 hover:bg-lime-500 px-6 py-3 rounded-xl transition-all">Fiverr</a>
         </div>
         <p class="opacity-20 text-[10px] font-black uppercase tracking-[0.5em]">ForgeVertical.com // Alpha Unit 2026</p>
     </footer>
