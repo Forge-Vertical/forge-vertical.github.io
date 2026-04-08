@@ -1,4 +1,5 @@
 name: FORGE_ARCHITECT
+
 on:
   schedule:
     - cron: '0 */12 * * *' # Every 12 hours
@@ -13,18 +14,34 @@ jobs:
           token: ${{ secrets.FORGE_VERTICAL_DEPLOY_KEY }}
           fetch-depth: 0
 
+      # 1. SETUP ENVIRONMENTS
       - name: Setup Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.10'
 
-      - name: Install Dependencies
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # 2. INSTALL INDUSTRIAL TOOLS
+      - name: Install Python Deps
         run: pip install requests feedparser
 
-      - name: Run Tool Builder
+      - name: Install Node Deps & Playwright
+        run: |
+          npm install
+          npx playwright install --with-deps
+
+      # 3. EXECUTE THE FORGE
+      - name: Run Tool Builder (Intel Forge)
         run: python .github/scripts/tool_builder.py
 
+      # 4. PUSH NEW ASSETS
       - name: Push New Assets
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
           git config user.name "Forge-Vertical-Bot"
           git config user.email "bot@forgevertical.com"
