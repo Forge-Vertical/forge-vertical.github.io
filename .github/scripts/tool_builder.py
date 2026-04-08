@@ -26,7 +26,7 @@ def forge_vertical_asset():
     intel_filename = selected['title'].lower().replace(" ", "-").replace(":", "") + ".html"
     intel_path = f"intel/{intel_filename}"
 
-    # THE SHARED CONTACT STACK
+    # THE SHARED CONTACT STACK (WhatsApp +27661180036)
     contact_stack = """
             <section class="mt-20 border-t border-slate-100 pt-10">
                 <h4 class="text-sm font-black uppercase tracking-widest text-slate-900 mb-6">Discuss Your Infrastructure</h4>
@@ -60,7 +60,7 @@ def forge_vertical_asset():
 </head>
 <body class="antialiased py-20 px-6">
     <div class="max-w-3xl mx-auto">
-        <nav class="mb-20">
+        <nav class="mb-20 text-center md:text-left">
             <a href="../index.html" class="text-[10px] font-extrabold uppercase tracking-[0.4em] text-lime-600 hover:text-slate-900 transition-all">← Back to Forge</a>
         </nav>
         <header class="mb-12">
@@ -129,7 +129,6 @@ def forge_vertical_asset():
             <p class="text-slate-400 text-[10px] uppercase font-black tracking-widest mb-2">Annual Revenue at Risk</p>
             <span id="loss" class="text-4xl font-black text-lime-400">$0</span>
             <p class="mt-6 text-xs text-slate-400 leading-relaxed italic">"Slow load times and poor UX typically leak 7-12% of annual revenue. We plug those holes."</p>
-            
             <div class="mt-8 grid grid-cols-1 gap-3">
                 <a href="https://wa.me/27661180036" class="flex items-center justify-center bg-[#25D366] text-white p-4 rounded-xl font-black uppercase text-[10px] tracking-widest">Chat on WhatsApp</a>
                 <a href="mailto:jarrit@forgevertical.com" class="flex items-center justify-center bg-white text-slate-900 p-4 rounded-xl font-black uppercase text-[10px] tracking-widest">Email Principal Architect</a>
@@ -152,29 +151,30 @@ def forge_vertical_asset():
         f.write(roi_template)
 
     # --- PART 3: SEO AUTOMATION (Robots & Sitemap) ---
+    # Create robots.txt
     with open("robots.txt", "w") as f:
         f.write("User-agent: *\nAllow: /\n\nSitemap: https://forgevertical.com/sitemap.xml")
 
-    sitemap_header = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
-    sitemap_footer = '</urlset>'
+    # Build sitemap.xml
+    now = datetime.now().strftime("%Y-%m-%d")
+    sitemap_content = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
     
-    # Building sitemap lines for static pages and dynamic intel
-    entries = [
-        "https://forgevertical.com/",
-        "https://forgevertical.com/tools/roi-calculator.html"
-    ]
+    # Static & Tool pages
+    pages = ["https://forgevertical.com/", "https://forgevertical.com/tools/roi-calculator.html"]
     
-    # Scan intel directory for forged pages
+    # Scan for all forged intel pages
     if os.path.exists("intel"):
-        for f in os.listdir("intel"):
-            if f.endswith(".html"):
-                entries.append(f"https://forgevertical.com/intel/{f}")
+        for file in os.listdir("intel"):
+            if file.endswith(".html"):
+                pages.append(f"https://forgevertical.com/intel/{file}")
 
+    for page in pages:
+        sitemap_content += f'  <url>\n    <loc>{page}</loc>\n    <lastmod>{now}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>0.8</priority>\n  </url>\n'
+    
+    sitemap_content += '</urlset>'
+    
     with open("sitemap.xml", "w") as f:
-        f.write(sitemap_header)
-        for loc in entries:
-            f.write(f'  <url>\n    <loc>{loc}</loc>\n    <lastmod>{datetime.now().strftime("%Y-%m-%d")}</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>0.8</priority>\n  </url>\n')
-        f.write(sitemap_footer)
+        f.write(sitemap_content)
 
 if __name__ == "__main__":
     forge_vertical_asset()
