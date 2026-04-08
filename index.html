@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forge-Vertical // Enterprise Web & SaaS Architecture</title>
+    <title>Forge-Vertical // Enterprise Web & AI Architecture</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -12,102 +12,101 @@
         .vibrant-gradient { background: linear-gradient(90deg, #10b981 0%, #84cc16 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .btn-vibrant { background: linear-gradient(90deg, #10b981 0%, #84cc16 100%); }
         .shadow-soft { box-shadow: 0 20px 50px rgba(0,0,0,0.05); }
+        video { filter: brightness(0.9); }
     </style>
 </head>
 <body class="antialiased">
-    <div id="global-nav">
-        <nav class="max-w-7xl mx-auto px-6 py-8 flex justify-between items-center">
-            <a href="index.html" class="flex items-center">
-                <svg width="220" height="40" viewBox="0 0 220 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <text x="0" y="30" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="28" letter-spacing="-0.05em" fill="#0f172a">FORGE</text>
-                    <text x="96" y="30" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="28" letter-spacing="-0.05em" fill="#84cc16">VERTICAL</text>
-                </svg>
-            </a>
-            <div class="hidden md:flex gap-10 text-sm font-bold uppercase tracking-widest text-slate-900">
-                <a href="#services" class="hover:text-lime-600 transition-colors">Services</a>
-                <a href="portfolio.html" class="hover:text-lime-600 transition-colors">Portfolio</a>
-                <a href="#tools" class="hover:text-lime-600 transition-colors">Tools</a>
-                <a href="https://fiverr.com/YOUR_PROFILE" class="text-lime-600">Hire on Fiverr</a>
-            </div>
-        </nav>
-    </div>
+
+    <nav class="max-w-7xl mx-auto px-6 py-8 flex justify-between items-center relative z-50">
+        <a href="index.html" class="flex items-center">
+            <svg width="220" height="40" viewBox="0 0 220 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <text x="0" y="30" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="28" letter-spacing="-0.05em" fill="#0f172a">FORGE</text>
+                <text x="96" y="30" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="28" letter-spacing="-0.05em" fill="#84cc16">VERTICAL</text>
+            </svg>
+        </a>
+        <div class="hidden md:flex gap-10 text-sm font-bold uppercase tracking-widest text-slate-900">
+            <a href="#services" class="hover:text-lime-600 transition-colors">Services</a>
+            <a href="portfolio.html" class="hover:text-lime-600 transition-colors">Portfolio</a>
+            <a href="build.html" class="hover:text-lime-600 transition-colors underline decoration-lime-500 decoration-2">Forge Engine</a>
+            <a href="https://wa.me/27661180036" class="text-lime-600">Contact</a>
+        </div>
+    </nav>
 
     <header class="max-w-7xl mx-auto px-6 pt-20 pb-32 text-center">
-        <span class="bg-lime-100 text-lime-700 px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest mb-6 inline-block">SME to Enterprise Scale</span>
-        <h1 class="text-6xl md:text-8xl font-extrabold tracking-tighter leading-[0.9] text-slate-900 mb-8">
-            We build the web<br><span class="vibrant-gradient">your competitors fear.</span>
+        <span class="bg-lime-100 text-lime-700 px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest mb-8 inline-block">Sovereign Web Infrastructure</span>
+        <h1 class="text-6xl md:text-8xl font-extrabold tracking-tighter leading-[0.9] text-slate-900 mb-10">
+            We build Websites<br><span class="vibrant-gradient italic">with out-of-the-box-vision.</span>
         </h1>
-        <p class="text-xl text-slate-500 max-w-2xl mx-auto font-light leading-relaxed mb-10">
-            High-performance Web Design, SaaS Architecture, and SEO-First Infrastructure. From small business nodes to global data forge.
+        <p class="text-xl text-slate-500 max-w-2xl mx-auto font-light leading-relaxed mb-12">
+            High-performance Web Design and SEO-First Infrastructure. From small business nodes to enterprise AI-driven deployments.
         </p>
+        
+        <div class="w-full max-w-5xl mx-auto aspect-video rounded-[3rem] overflow-hidden shadow-2xl border border-slate-100 mb-16">
+            <video autoplay muted loop playsinline class="w-full h-full object-cover">
+                <source src="Forge Fair Future.mp4" type="video/mp4">
+            </video>
+        </div>
+
         <div class="flex flex-col md:flex-row gap-4 justify-center">
-            <a href="#contact" class="btn-vibrant text-white px-10 py-5 rounded-2xl font-extrabold uppercase text-xs tracking-widest shadow-lg">Start Your Forge</a>
-            <a href="portfolio.html" class="bg-slate-900 text-white px-10 py-5 rounded-2xl font-extrabold uppercase text-xs tracking-widest shadow-lg">View Our Work</a>
+            <a href="build.html" class="btn-vibrant text-white px-10 py-5 rounded-2xl font-extrabold uppercase text-xs tracking-widest shadow-lg hover:scale-105 transition-transform">Unlock The Forge</a>
+            <a href="portfolio.html" class="bg-slate-900 text-white px-10 py-5 rounded-2xl font-extrabold uppercase text-xs tracking-widest shadow-lg hover:bg-slate-800 transition-colors">View Deployments</a>
         </div>
     </header>
 
-    <section id="services" class="bg-slate-50 py-32">
+    <section id="services" class="bg-slate-950 py-32 rounded-[4rem] mx-4">
         <div class="max-w-7xl mx-auto px-6">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
-                <div>
-                    <h2 class="text-4xl font-extrabold text-slate-900 mb-6 italic uppercase">Why Quality SEO Matters</h2>
-                    <p class="text-slate-600 text-lg leading-relaxed mb-6">
-                        SEO isn't just about keywords; it's about **Industrial Relevance**. Most agencies build "pretty" sites that stay invisible. We build **Speed-First Architectures** that Google's crawlers can't ignore.
+                <div class="text-white">
+                    <h2 class="text-4xl md:text-5xl font-extrabold mb-8 italic uppercase tracking-tighter">
+                        Why <span class="text-lime-400">SEO & GEO/AI</span> Matters
+                    </h2>
+                    <p class="text-slate-400 text-lg leading-relaxed mb-8">
+                        The web is evolving. We don't just optimize for Google; we forge **Generative Engine Optimization (GEO)** nodes. We build site architectures that AI agents and search crawlers prioritize instantly.
                     </p>
-                    <ul class="space-y-4 font-bold text-slate-800">
-                        <li class="flex items-center gap-3"><span class="text-lime-500">✓</span> Automated Segmented Sitemaps</li>
-                        <li class="flex items-center gap-3"><span class="text-lime-500">✓</span> JAMstack Architecture (Zero Server Lag)</li>
-                        <li class="flex items-center gap-3"><span class="text-lime-500">✓</span> High-Authority Content Nodes</li>
+                    <ul class="space-y-4 font-bold text-slate-200">
+                        <li class="flex items-center gap-3"><span class="text-lime-500">✓</span> Semantic AI Reference Indexing</li>
+                        <li class="flex items-center gap-3"><span class="text-lime-500">✓</span> JAMstack Speed (Near-Zero Latency)</li>
+                        <li class="flex items-center gap-3"><span class="text-lime-500">✓</span> Automated Real-Time Sitemap Nodes</li>
                     </ul>
                 </div>
-                <div class="bg-white p-4 rounded-[2rem] shadow-soft border border-slate-100">
-                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=2426" class="rounded-2xl" alt="Digital Analytics Dashboard">
+                <div class="p-2 bg-white/5 rounded-[2.5rem] border border-white/10 overflow-hidden shadow-2xl">
+                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=2426" class="rounded-3xl opacity-80" alt="SEO Analysis Dashboard">
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="portfolio" class="py-32 max-w-7xl mx-auto px-6">
-        <h2 class="text-5xl font-extrabold text-slate-900 mb-16 text-center">Featured <span class="text-lime-500 italic uppercase">Deployments</span></h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-            <div class="group cursor-pointer" onclick="window.location.href='portfolio.html'">
-                <div class="bg-slate-900 rounded-[2.5rem] p-10 aspect-video mb-6 relative overflow-hidden flex flex-col justify-end">
-                    <div class="absolute inset-0 bg-blue-600 opacity-20 group-hover:opacity-40 transition-opacity"></div>
-                    <div class="relative z-10">
-                        <span class="text-blue-400 font-bold uppercase text-[10px] tracking-widest">Case Study: Forensic Data</span>
-                        <h3 class="text-white text-4xl font-black mt-2 italic uppercase leading-none">Fair Discovery</h3>
-                    </div>
-                </div>
-                <h4 class="text-xl font-bold text-slate-900 uppercase italic">Intel Infrastructure</h4>
-                <p class="text-slate-500">Automated OSINT node with real-time SEO indexing.</p>
+    <section class="py-32 max-w-7xl mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
+            <div class="rounded-[3rem] overflow-hidden shadow-2xl border border-slate-100 aspect-square md:aspect-video">
+                <video autoplay muted loop playsinline class="w-full h-full object-cover">
+                    <source src="SEO team   making analysis Presentation.mp4" type="video/mp4">
+                </video>
             </div>
-            <div class="group cursor-pointer" onclick="window.location.href='portfolio.html'">
-                <div class="bg-lime-500 rounded-[2.5rem] p-10 aspect-video mb-6 relative overflow-hidden flex items-center justify-center">
-                    <h3 class="text-white text-6xl md:text-7xl font-black italic uppercase drop-shadow-xl">NEXT GEN</h3>
+            <div>
+                <h2 class="text-5xl font-extrabold text-slate-900 mb-8 tracking-tighter">
+                    AI Integration & <br><span class="vibrant-gradient italic">Workflow Automation</span>
+                </h2>
+                <p class="text-slate-600 text-lg leading-relaxed mb-8">
+                    Stop wasting human hours on manual data entry and content cycles. We integrate custom AI bridges that automate your workflow, improve accuracy, and turn your web presence into a self-evolving asset.
+                </p>
+                <div class="flex items-center gap-6 p-6 bg-slate-50 rounded-3xl border border-slate-100">
+                    <div class="w-12 h-12 bg-lime-500 rounded-full flex items-center justify-center font-black text-white italic">AI</div>
+                    <p class="text-sm font-bold text-slate-900 uppercase tracking-widest">Bridging Human Creativity & Machine Precision</p>
                 </div>
-                <h4 class="text-xl font-bold text-slate-900 uppercase italic">Scalable SME Nodes</h4>
-                <p class="text-slate-500">High-performance deployments for emerging businesses.</p>
             </div>
         </div>
     </section>
 
-    <div id="global-footer">
-        <footer id="contact" class="bg-slate-900 py-32 text-center text-white rounded-t-[4rem]">
-            <h2 class="text-5xl font-extrabold mb-10">Ready to <span class="text-lime-400 italic">Scale?</span></h2>
-            <div class="flex flex-wrap justify-center gap-6 mb-20">
-                <a href="https://wa.me/27661180036" class="text-xs font-bold uppercase tracking-widest bg-white/10 hover:bg-lime-500 px-6 py-3 rounded-xl transition-all">WhatsApp Direct</a>
-                <a href="mailto:jarrit@forgevertical.com" class="text-xs font-bold uppercase tracking-widest bg-white/10 hover:bg-lime-500 px-6 py-3 rounded-xl transition-all">Official Email</a>
-                <a href="https://fiverr.com/YOUR_PROFILE" class="text-xs font-bold uppercase tracking-widest bg-white/10 hover:bg-lime-500 px-6 py-3 rounded-xl transition-all">Fiverr Profile</a>
-            </div>
-            <p class="opacity-20 text-[10px] font-black uppercase tracking-[0.5em]">ForgeVertical.com // Principal Architecture 2026</p>
-        </footer>
-    </div>
+    <footer id="contact" class="bg-slate-900 py-32 text-center text-white rounded-t-[4rem]">
+        <h2 class="text-5xl font-extrabold mb-10 tracking-tighter italic uppercase">Ready to <span class="text-lime-400">Scale?</span></h2>
+        <div class="flex flex-wrap justify-center gap-6 mb-20">
+            <a href="https://wa.me/27661180036" class="text-xs font-bold uppercase tracking-widest bg-white/10 hover:bg-lime-500 px-8 py-4 rounded-xl transition-all">WhatsApp Direct</a>
+            <a href="mailto:jarrit@forgevertical.com" class="text-xs font-bold uppercase tracking-widest bg-white/10 hover:bg-lime-500 px-8 py-4 rounded-xl transition-all">Official Email</a>
+            <a href="build.html" class="text-xs font-bold uppercase tracking-widest bg-lime-500 text-slate-900 px-8 py-4 rounded-xl transition-all">Launch Forge Engine</a>
+        </div>
+        <p class="opacity-20 text-[10px] font-black uppercase tracking-[0.5em]">ForgeVertical.com // Sovereign Architecture 2026</p>
+    </footer>
 
-    <script>
-        async function loadGlobals() {
-            // This script is used on sub-pages to fetch the nav/footer from separate files
-            // For index.html, they are currently hardcoded above for immediate load
-        }
-    </script>
 </body>
 </html>
