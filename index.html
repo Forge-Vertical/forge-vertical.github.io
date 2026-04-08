@@ -13,7 +13,9 @@
 </head>
 <body class="bg-white text-zinc-900 antialiased">
 
-    <section class="min-h-[80vh] flex flex-col items-center justify-center text-center px-6">
+    <div id="global-nav"></div>
+
+    <section class="min-h-[90vh] flex flex-col items-center justify-center text-center px-6">
         <span class="bg-zinc-100 text-zinc-500 px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest mb-8">Industrial SaaS Forge</span>
         <h1 class="text-6xl md:text-8xl font-extrabold tracking-tighter leading-[0.85] mb-8 text-black">
             We build Websites<br>
@@ -24,6 +26,7 @@
         </p>
         <div class="flex gap-4">
             <a href="/build" class="bg-black text-white px-8 py-4 rounded-2xl font-black uppercase tracking-widest text-[10px] hover:bg-[#84cc16] hover:text-black transition-all">Start Forge</a>
+            <a href="/build" class="border border-zinc-200 text-black px-8 py-4 rounded-2xl font-black uppercase tracking-widest text-[10px] hover:bg-zinc-50 transition-all">View Tools</a>
         </div>
     </section>
 
@@ -68,7 +71,7 @@
             <p class="text-zinc-500 text-lg mb-8 leading-relaxed">
                 Using AI to speed up workflows isn't just a trend—it's industrial necessity. We integrate custom AI automation to improve delivery speeds, reduce overhead, and scale human creativity at the speed of silicon.
             </p>
-            <div class="space-y-4">
+            <div class="space-y-4 text-zinc-900">
                 <div class="flex items-center gap-4 p-4 bg-zinc-50 rounded-2xl border border-zinc-100">
                     <div class="w-2 h-2 bg-[#84cc16] rounded-full"></div>
                     <span class="text-[10px] font-black uppercase tracking-widest">Accelerated Content Pipelines</span>
@@ -86,5 +89,22 @@
         <a href="/build" class="vibrant-gradient text-white px-12 py-6 rounded-2xl font-black uppercase tracking-widest text-xs hover:scale-105 transition-all inline-block">Commence Build</a>
     </section>
 
+    <div id="global-footer"></div>
+
+    <script>
+        // GLOBAL COMPONENT INJECTOR
+        async function injectGlobals() {
+            try {
+                const nav = await fetch('/nav.html');
+                if(nav.ok) document.getElementById('global-nav').innerHTML = await nav.text();
+                
+                const footer = await fetch('/footer.html');
+                if(footer.ok) document.getElementById('global-footer').innerHTML = await footer.text();
+            } catch (e) {
+                console.error("Global Component Injection Failed:", e);
+            }
+        }
+        injectGlobals();
+    </script>
 </body>
 </html>
