@@ -128,7 +128,8 @@ app.post('/api/manage-page', async (c) => {
         `);
 
         writeFileSync(filePath, seoRefactor);
-        // Also update engine preview
+        
+        // Also update engine preview so user sees the change immediately
         writeFileSync(`${enginePath}/index.html`, seoRefactor);
 
         return c.json({ status: 'Updated' });
@@ -153,6 +154,23 @@ app.post('/api/refactor', async (c) => {
 
         return c.json({ status: 'Updated' });
     } catch (error) {
+        console.error(error);
+        return c.json({ status: 'Error' }, 500);
+    }
+});
+
+/**
+ * API: PUBLISH (The Production Push)
+ */
+app.post('/api/publish', async (c) => {
+    try {
+        const { projectName, host } = await c.req.json();
+        console.log(`[PUBLISH]: Packaging project ${projectName} for deployment to ${host}`);
+        
+        // This is where you trigger your SSH/FTP logic
+        return c.json({ status: 'Published' });
+    } catch (error) {
+        console.error(error);
         return c.json({ status: 'Error' }, 500);
     }
 });
@@ -160,13 +178,13 @@ app.post('/api/refactor', async (c) => {
 const port = Number(process.env.PORT) || 7777;
 
 console.log(`
-   VERTICAL WEB BUILDER | SOVEREIGN FORGE
-   ---------------------------------------
-   Status      : SYSTEM OPERATIONAL
-   UI Dashboard: http://localhost:${port}
-   SaaS Build  : http://localhost:${port}/build
-   Project Root: ${projectsRoot}
-   Engine      : Gemini 2.5 Flash
+    VERTICAL WEB BUILDER | SOVEREIGN FORGE
+    ---------------------------------------
+    Status      : SYSTEM OPERATIONAL
+    UI Dashboard: http://localhost:${port}
+    SaaS Build  : http://localhost:${port}/build
+    Project Root: ${projectsRoot}
+    Engine      : Gemini 2.5 Flash
 `);
 
 serve({ fetch: app.fetch, port });
