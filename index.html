@@ -3,110 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forge-Vertical // Enterprise Web & AI Architecture</title>
-    <link rel="icon" type="image/png" href="/favicon.png">
+    <title>Forge Vertical | Out-Of-The-Box Architecture</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;800&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;500;800&display=swap');
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #ffffff; color: #1e293b; }
-        .vibrant-gradient { background: linear-gradient(90deg, #10b981 0%, #84cc16 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .btn-vibrant { background: linear-gradient(90deg, #10b981 0%, #84cc16 100%); }
-        .shadow-soft { box-shadow: 0 20px 50px rgba(0,0,0,0.05); }
-        video { filter: brightness(0.9); }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .vibrant-gradient { background: linear-gradient(90deg, #10b981 0%, #84cc16 100%); }
     </style>
 </head>
-<body class="antialiased">
+<body class="bg-white text-zinc-900 antialiased">
 
-    <nav class="max-w-7xl mx-auto px-6 py-8 flex justify-between items-center relative z-50">
-        <a href="index.html" class="flex items-center">
-            <svg width="220" height="40" viewBox="0 0 220 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <text x="0" y="30" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="28" letter-spacing="-0.05em" fill="#0f172a">FORGE</text>
-                <text x="96" y="30" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="28" letter-spacing="-0.05em" fill="#84cc16">VERTICAL</text>
-            </svg>
-        </a>
-        <div class="hidden md:flex gap-10 text-sm font-bold uppercase tracking-widest text-slate-900">
-            <a href="#services" class="hover:text-lime-600 transition-colors">Services</a>
-            <a href="portfolio.html" class="hover:text-lime-600 transition-colors">Portfolio</a>
-            <a href="build.html" class="hover:text-lime-600 transition-colors underline decoration-lime-500 decoration-2">Forge Engine</a>
-            <a href="https://wa.me/27661180036" class="text-lime-600">Contact</a>
-        </div>
-    </nav>
-
-    <header class="max-w-7xl mx-auto px-6 pt-20 pb-32 text-center">
-        <span class="bg-lime-100 text-lime-700 px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest mb-8 inline-block">Sovereign Web Infrastructure</span>
-        <h1 class="text-6xl md:text-8xl font-extrabold tracking-tighter leading-[0.9] text-slate-900 mb-10">
-            We build Websites<br><span class="vibrant-gradient italic">with out-of-the-box-vision.</span>
+    <section class="min-h-[80vh] flex flex-col items-center justify-center text-center px-6">
+        <span class="bg-zinc-100 text-zinc-500 px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest mb-8">Industrial SaaS Forge</span>
+        <h1 class="text-6xl md:text-8xl font-extrabold tracking-tighter leading-[0.85] mb-8 text-black">
+            We build Websites<br>
+            <span class="vibrant-gradient bg-clip-text text-transparent italic">with out-of-the-box-vision.</span>
         </h1>
-        <p class="text-xl text-slate-500 max-w-2xl mx-auto font-light leading-relaxed mb-12">
-            High-performance Web Design and SEO-First Infrastructure. From small business nodes to enterprise AI-driven deployments.
+        <p class="max-w-xl text-xl text-zinc-500 font-light mb-12">
+            High-performance, SEO-first architectures built for the next generation of search.
         </p>
-        
-        <div class="w-full max-w-5xl mx-auto aspect-video rounded-[3rem] overflow-hidden shadow-2xl border border-slate-100 mb-16">
+        <div class="flex gap-4">
+            <a href="/build" class="bg-black text-white px-8 py-4 rounded-2xl font-black uppercase tracking-widest text-[10px] hover:bg-[#84cc16] hover:text-black transition-all">Start Forge</a>
+        </div>
+    </section>
+
+    <section class="py-32 bg-zinc-950 text-white rounded-[4rem] mx-4">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
+            <div>
+                <h2 class="text-5xl font-black italic uppercase tracking-tighter mb-8 leading-none">
+                    Next-Gen <span class="text-[#bef264]">SEO & GEO</span>
+                </h2>
+                <p class="text-zinc-400 text-lg mb-8 leading-relaxed">
+                    We don't just optimize for traditional search. We forge architectures designed for **GEO (Generative Engine Optimization)**—ensuring your brand is the primary reference for AI models like Gemini and ChatGPT.
+                </p>
+                <div class="grid grid-cols-2 gap-6">
+                    <div class="border-l border-zinc-800 pl-4">
+                        <h4 class="text-[#bef264] text-xs font-black uppercase mb-2">AI Referencing</h4>
+                        <p class="text-zinc-500 text-xs italic">Structured data nodes for LLM ingestion.</p>
+                    </div>
+                    <div class="border-l border-zinc-800 pl-4">
+                        <h4 class="text-[#bef264] text-xs font-black uppercase mb-2">GEO Authority</h4>
+                        <p class="text-zinc-500 text-xs italic">Semantic mapping for AI search engines.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="rounded-[2rem] overflow-hidden shadow-2xl border border-white/10 aspect-square bg-zinc-900">
+                <video autoplay muted loop playsinline class="w-full h-full object-cover opacity-80">
+                    <source src="SEO team   making analysis Presentation.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-32 max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
+        <div class="rounded-[2rem] overflow-hidden shadow-2xl border border-zinc-200 aspect-square">
             <video autoplay muted loop playsinline class="w-full h-full object-cover">
                 <source src="Forge Fair Future.mp4" type="video/mp4">
             </video>
         </div>
-
-        <div class="flex flex-col md:flex-row gap-4 justify-center">
-            <a href="build.html" class="btn-vibrant text-white px-10 py-5 rounded-2xl font-extrabold uppercase text-xs tracking-widest shadow-lg hover:scale-105 transition-transform">Unlock The Forge</a>
-            <a href="portfolio.html" class="bg-slate-900 text-white px-10 py-5 rounded-2xl font-extrabold uppercase text-xs tracking-widest shadow-lg hover:bg-slate-800 transition-colors">View Deployments</a>
-        </div>
-    </header>
-
-    <section id="services" class="bg-slate-950 py-32 rounded-[4rem] mx-4">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
-                <div class="text-white">
-                    <h2 class="text-4xl md:text-5xl font-extrabold mb-8 italic uppercase tracking-tighter">
-                        Why <span class="text-lime-400">SEO & GEO/AI</span> Matters
-                    </h2>
-                    <p class="text-slate-400 text-lg leading-relaxed mb-8">
-                        The web is evolving. We don't just optimize for Google; we forge **Generative Engine Optimization (GEO)** nodes. We build site architectures that AI agents and search crawlers prioritize instantly.
-                    </p>
-                    <ul class="space-y-4 font-bold text-slate-200">
-                        <li class="flex items-center gap-3"><span class="text-lime-500">✓</span> Semantic AI Reference Indexing</li>
-                        <li class="flex items-center gap-3"><span class="text-lime-500">✓</span> JAMstack Speed (Near-Zero Latency)</li>
-                        <li class="flex items-center gap-3"><span class="text-lime-500">✓</span> Automated Real-Time Sitemap Nodes</li>
-                    </ul>
+        <div>
+            <h2 class="text-5xl font-black tracking-tighter mb-8 leading-none">
+                AI Integration & <br><span class="vibrant-gradient bg-clip-text text-transparent italic text-4xl">Workflow Automation</span>
+            </h2>
+            <p class="text-zinc-500 text-lg mb-8 leading-relaxed">
+                Using AI to speed up workflows isn't just a trend—it's industrial necessity. We integrate custom AI automation to improve delivery speeds, reduce overhead, and scale human creativity at the speed of silicon.
+            </p>
+            <div class="space-y-4">
+                <div class="flex items-center gap-4 p-4 bg-zinc-50 rounded-2xl border border-zinc-100">
+                    <div class="w-2 h-2 bg-[#84cc16] rounded-full"></div>
+                    <span class="text-[10px] font-black uppercase tracking-widest">Accelerated Content Pipelines</span>
                 </div>
-                <div class="p-2 bg-white/5 rounded-[2.5rem] border border-white/10 overflow-hidden shadow-2xl">
-                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=2426" class="rounded-3xl opacity-80" alt="SEO Analysis Dashboard">
+                <div class="flex items-center gap-4 p-4 bg-zinc-50 rounded-2xl border border-zinc-100">
+                    <div class="w-2 h-2 bg-[#84cc16] rounded-full"></div>
+                    <span class="text-[10px] font-black uppercase tracking-widest">Automated Lead Intelligence</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="py-32 max-w-7xl mx-auto px-6">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
-            <div class="rounded-[3rem] overflow-hidden shadow-2xl border border-slate-100 aspect-square md:aspect-video">
-                <video autoplay muted loop playsinline class="w-full h-full object-cover">
-                    <source src="SEO team   making analysis Presentation.mp4" type="video/mp4">
-                </video>
-            </div>
-            <div>
-                <h2 class="text-5xl font-extrabold text-slate-900 mb-8 tracking-tighter">
-                    AI Integration & <br><span class="vibrant-gradient italic">Workflow Automation</span>
-                </h2>
-                <p class="text-slate-600 text-lg leading-relaxed mb-8">
-                    Stop wasting human hours on manual data entry and content cycles. We integrate custom AI bridges that automate your workflow, improve accuracy, and turn your web presence into a self-evolving asset.
-                </p>
-                <div class="flex items-center gap-6 p-6 bg-slate-50 rounded-3xl border border-slate-100">
-                    <div class="w-12 h-12 bg-lime-500 rounded-full flex items-center justify-center font-black text-white italic">AI</div>
-                    <p class="text-sm font-bold text-slate-900 uppercase tracking-widest">Bridging Human Creativity & Machine Precision</p>
-                </div>
-            </div>
-        </div>
+    <section class="py-24 text-center border-t border-zinc-100">
+        <h3 class="text-2xl font-black uppercase tracking-tighter mb-8">Ready to out-build the competition?</h3>
+        <a href="/build" class="vibrant-gradient text-white px-12 py-6 rounded-2xl font-black uppercase tracking-widest text-xs hover:scale-105 transition-all inline-block">Commence Build</a>
     </section>
-
-    <footer id="contact" class="bg-slate-900 py-32 text-center text-white rounded-t-[4rem]">
-        <h2 class="text-5xl font-extrabold mb-10 tracking-tighter italic uppercase">Ready to <span class="text-lime-400">Scale?</span></h2>
-        <div class="flex flex-wrap justify-center gap-6 mb-20">
-            <a href="https://wa.me/27661180036" class="text-xs font-bold uppercase tracking-widest bg-white/10 hover:bg-lime-500 px-8 py-4 rounded-xl transition-all">WhatsApp Direct</a>
-            <a href="mailto:jarrit@forgevertical.com" class="text-xs font-bold uppercase tracking-widest bg-white/10 hover:bg-lime-500 px-8 py-4 rounded-xl transition-all">Official Email</a>
-            <a href="build.html" class="text-xs font-bold uppercase tracking-widest bg-lime-500 text-slate-900 px-8 py-4 rounded-xl transition-all">Launch Forge Engine</a>
-        </div>
-        <p class="opacity-20 text-[10px] font-black uppercase tracking-[0.5em]">ForgeVertical.com // Sovereign Architecture 2026</p>
-    </footer>
 
 </body>
 </html>
