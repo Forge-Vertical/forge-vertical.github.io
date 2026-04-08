@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio // Forge-Vertical Architectures</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;500;800&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #ffffff; color: #1e293b; }
+        .vibrant-gradient { background: linear-gradient(90deg, #10b981 0%, #84cc16 100%); }
+        .card-shadow { box-shadow: 0 10px 30px rgba(0,0,0,0.04); }
+        .iframe-container { position: relative; width: 100%; padding-top: 56.25%; overflow: hidden; border-radius: 1.5rem; }
+        .iframe-container iframe { position: absolute; top: 0; left: 0; bottom: 0; right: 0; width: 100%; height: 100%; border: none; zoom: 0.75; }
+    </style>
+</head>
+<body class="antialiased">
+    <nav class="max-w-7xl mx-auto px-6 py-8 flex justify-between items-center">
+        <a href="index.html" class="font-extrabold text-2xl tracking-tighter text-slate-900">FORGE<span class="text-lime-500">VERTICAL</span></a>
+        <a href="index.html" class="text-xs font-black uppercase tracking-widest text-slate-500 hover:text-lime-500">← Back Home</a>
+    </nav>
+
+    <header class="max-w-7xl mx-auto px-6 py-20">
+        <h1 class="text-5xl md:text-7xl font-extrabold tracking-tighter text-slate-900 mb-6">Live <span class="text-lime-500 italic">Deployments.</span></h1>
+        <p class="text-slate-500 text-xl max-w-2xl font-light">A visual catalog of infrastructure forged for performance, security, and industrial scale.</p>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-6 pb-40">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+            
+            <div class="space-y-4">
+                <div class="iframe-container card-shadow border border-slate-100 group">
+                    <iframe src="https://www.aurora-repair.com/" scrolling="no"></iframe>
+                    <div class="absolute inset-0 bg-slate-900/0 group-hover:bg-slate-900/10 transition-all cursor-pointer" onclick="window.open('https://www.aurora-repair.com/')"></div>
+                </div>
+                <div class="flex justify-between items-center px-2">
+                    <h3 class="font-extrabold text-slate-900 uppercase italic">Aurora Repair</h3>
+                    <a href="https://www.aurora-repair.com/" class="text-[10px] font-black uppercase tracking-widest bg-slate-100 px-4 py-2 rounded-lg">Live Node</a>
+                </div>
+            </div>
+            
+            <div class="space-y-4">
+                <div class="iframe-container card-shadow border border-slate-100 group">
+                    <iframe src="https://fairdiscovery.org/" scrolling="no"></iframe>
+                    <div class="absolute inset-0 bg-slate-900/0 group-hover:bg-slate-900/10 transition-all cursor-pointer" onclick="window.open('https://fairdiscovery.org/')"></div>
+                </div>
+                <div class="flex justify-between items-center px-2">
+                    <h3 class="font-extrabold text-slate-900 uppercase italic">Fair Discovery</h3>
+                    <a href="https://fairdiscovery.org/" class="text-[10px] font-black uppercase tracking-widest bg-slate-100 px-4 py-2 rounded-lg">Intel Infrastructure</a>
+                </div>
+            </div>
+
+            </div>
+    </main>
+</body>
+</html>
