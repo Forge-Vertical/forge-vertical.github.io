@@ -1,27 +1,69 @@
 import { serve } from '@hono/node-server';
 import { Hono } from 'hono';
-import { serveStatic } from '@hono/node-server/static';
-import { readFileSync, writeFileSync, mkdirSync } from 'fs';
+import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'fs';
 import 'dotenv/config';
+
+// Import our Logic Gates
+import { ingestSite } from './ingestor';
+import { refactorToTailwind } from './forge';
 
 const app = new Hono();
 
-// Serve the UI you stored as vertical-ui.html
+// Ensure the Product folder exists
+if (!existsSync('./forge-engine')) {
+    mkdirSync('./forge-engine');
+}
+
+// 1. Serve the Sovereign UI
 app.get('/', (c) => {
   const html = readFileSync('./vertical-ui.html', 'utf-8');
   return c.html(html);
 });
 
-// The Forge API: This is where the magic will eventually sit
+// 2. Serve the Build UI (The $50 Storefront)
+app.get('/build', (c) => {
+    const html = readFileSync('./build.html', 'utf-8');
+    return c.html(html);
+  });
+
+// 3. THE FORGE API: Ingest -> Refactor -> Write to Engine
 app.post('/api/forge', async (c) => {
-  const { url } = await c.req.json();
-  console.log(`Ingesting Signal from: ${url}`);
-  
-  // Logic for Playwright and Gemini 2.5 Flash goes here
-  return c.json({ status: 'Ingested', project: 'project-alpha' });
+  try {
+    const { url } = await c.req.json();
+    console.log(`[SIGNAL RECEIVED]: Ingesting ${url}`);
+
+    // GATE 1: Ingest via Playwright
+    const siteData = await ingestSite(url);
+    console.log(`[INGESTION COMPLETE]: ${siteData.title}`);
+
+    // GATE 2: Refactor via Gemini 2.5 Flash
+    console.log(`[FORGE START]: Refactoring to Industrial Tailwind...`);
+    const refactoredHtml = await refactorToTailwind(siteData.html);
+
+    // GATE 3: Write to the Sovereign Engine Folder
+    const outputPath = './forge-engine/index.html';
+    writeFileSync(outputPath, refactoredHtml);
+    console.log(`[DEPLOIMENT READY]: Written to ${outputPath}`);
+
+    return c.json({ 
+      status: 'Forged', 
+      project: siteData.title,
+      downloadUrl: '/forge-engine/index.html'
+    });
+
+  } catch (error) {
+    console.error(`[FORGE FAILURE]:`, error);
+    return c.json({ status: 'Error', message: 'Infrastructure collapse during refactor.' }, 500);
+  }
 });
 
 const port = Number(process.env.PORT) || 7777;
-console.log(`Vertical Web Builder live at http://localhost:${port}`);
+console.log(`
+  FORGE VERTICAL ENGINE ACTIVE
+  ----------------------------
+  UI Terminal: http://localhost:${port}
+  Build Store: http://localhost:${port}/build
+  API Status: Standing By
+`);
 
 serve({ fetch: app.fetch, port });
