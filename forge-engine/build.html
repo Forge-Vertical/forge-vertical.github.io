@@ -1,1 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forge Your Node // Vertical Architecture</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;500;800&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #ffffff; color: #1e293b; }
+        .vibrant-gradient { background: linear-gradient(90deg, #10b981 0%, #84cc16 100%); }
+        .glass-panel { background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.1); }
+    </style>
+</head>
+<body class="antialiased">
+    <div id="global-nav"></div>
 
+    <main class="min-h-screen py-24 px-6 max-w-7xl mx-auto flex flex-col lg:flex-row gap-16 items-center">
+        
+        <div class="lg:w-1/2 space-y-8">
+            <span class="bg-lime-100 text-lime-700 px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">Sovereign Deployment</span>
+            <h1 class="text-6xl font-extrabold tracking-tighter text-slate-900 leading-[0.9]">
+                Own your code.<br><span class="vibrant-gradient bg-clip-text text-transparent italic">Forge your future.</span>
+            </h1>
+            <p class="text-xl text-slate-500 font-light leading-relaxed">
+                Vertical Web Builder decompiles existing architecture, refactors it via AI, and outputs a 100% portable project[cite: 3, 4]. No monthly bloat. Just pure infrastructure.
+            </p>
+            
+            <ul class="space-y-4 text-slate-700 font-bold">
+                <li class="flex items-center gap-3"><span class="text-lime-500">✓</span> Automated Tailwind Refactoring [cite: 9]</li>
+                <li class="flex items-center gap-3"><span class="text-lime-500">✓</span> Industrial Dark-Mode Defaults [cite: 10]</li>
+                <li class="flex items-center gap-3"><span class="text-lime-500">✓</span> Real-time Local File Export [cite: 13, 15]</li>
+            </ul>
+        </div>
+
+        <div class="lg:w-1/2 w-full glass-panel p-10 lg:p-16 rounded-[4rem] shadow-2xl text-white">
+            <h3 class="text-3xl font-black italic mb-8 uppercase tracking-tighter">Forge Engine <span class="text-lime-500">v1.0</span></h3>
+            
+            <div class="space-y-8">
+                <div>
+                    <label class="text-[10px] font-black uppercase text-slate-400 tracking-[0.2em] mb-3 block">Select Licensing Region</label>
+                    <select id="pricing-tier" onchange="updatePrice()" class="w-full bg-slate-800 border-2 border-slate-700 p-5 rounded-2xl outline-none focus:border-lime-500 font-bold text-lg cursor-pointer transition-all">
+                        <option value="USD" data-p="50">United States ($50.00)</option>
+                        <option value="ZAR" data-p="950">South Africa (R950.00)</option>
+                        <option value="EUR" data-p="45">Europe (€45.00)</option>
+                        <option value="GBP" data-p="40">United Kingdom (£40.00)</option>
+                    </select>
+                </div>
+
+                <div class="space-y-4">
+                    <label class="text-[10px] font-black uppercase text-slate-400 tracking-[0.2em] mb-1 block">Deployment Target</label>
+                    <input type="text" placeholder="Hosting Server (FTP/SSH)" class="w-full bg-slate-800 border-2 border-slate-700 p-5 rounded-2xl outline-none focus:border-lime-500 font-bold text-white placeholder-slate-500">
+                    <input type="password" placeholder="Deployment Credentials" class="w-full bg-slate-800 border-2 border-slate-700 p-5 rounded-2xl outline-none focus:border-lime-500 font-bold text-white placeholder-slate-500">
+                </div>
+
+                <div class="pt-6">
+                    <button class="w-full vibrant-gradient text-slate-900 p-8 rounded-[2rem] font-black uppercase tracking-widest text-sm shadow-2xl hover:scale-[1.02] transition-all">
+                        Build & Publish: <span id="display-price">$50.00</span>
+                    </button>
+                    <p class="text-center text-[9px] text-slate-500 mt-6 uppercase tracking-widest">Single License // Perpetual Ownership [cite: 4]</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="global-footer"></div>
+
+    <script>
+        function updatePrice() {
+            const select = document.getElementById('pricing-tier');
+            const price = select.options[select.selectedIndex].getAttribute('data-p');
+            const currency = select.value;
+            let symbol = "$";
+            if(currency === "ZAR") symbol = "R";
+            if(currency === "GBP") symbol = "£";
+            if(currency === "EUR") symbol = "€";
+            document.getElementById('display-price').innerText = symbol + price + ".00";
+        }
+
+        async function injectGlobals() {
+            const nav = await fetch('/nav.html');
+            if(nav.ok) document.getElementById('global-nav').innerHTML = await nav.text();
+            const foot = await fetch('/footer.html');
+            if(foot.ok) document.getElementById('global-footer').innerHTML = await foot.text();
+        }
+        injectGlobals();
+    </script>
+</body>
+</html>
