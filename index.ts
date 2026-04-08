@@ -1,6 +1,8 @@
 import { serve } from '@hono/node-server';
 import { Hono } from 'hono';
-// FIXED: Using the direct export path to satisfy Node/GitHub environments
+/** * FIXED IMPORT: 
+ * We use the direct file path to bypass the 'subpath not defined' error in GitHub Actions.
+ */
 import { serveStatic } from '@hono/node-server/serve-static'; 
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'fs';
 import 'dotenv/config';
