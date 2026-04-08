@@ -1,51 +1,100 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Revenue Leakage Calculator // ForgeVertical</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;500;800&display=swap');
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #ffffff; color: #1e293b; }
+        .vibrant-gradient { background: linear-gradient(90deg, #10b981 0%, #84cc16 100%); }
     </style>
 </head>
-<body class="min-h-screen py-20 px-6">
-    <div class="max-w-xl mx-auto bg-white p-10 rounded-[3rem] shadow-2xl border border-slate-100">
-        <h2 class="text-3xl font-extrabold text-slate-900 mb-2">Revenue <span class="text-lime-500">Leakage</span></h2>
-        <p class="text-slate-500 text-[10px] mb-8 uppercase tracking-widest font-black">Neil Patel Grade SEO Utility</p>
-        
-        <div class="space-y-6">
-            <div>
-                <label class="block text-[10px] font-black uppercase text-slate-400 mb-2">Monthly Traffic</label>
-                <input type="number" id="traffic" value="5000" class="w-full bg-slate-50 border-none rounded-xl p-4 focus:ring-2 focus:ring-lime-500 outline-none font-bold">
+<body class="antialiased">
+    <div id="global-nav"></div>
+
+    <main class="min-h-[80vh] flex items-center justify-center py-20 px-6">
+        <div class="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+            
+            <div class="hidden lg:block space-y-8">
+                <span class="bg-lime-100 text-lime-700 px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">Diagnostic Utility</span>
+                <h1 class="text-6xl font-extrabold tracking-tighter text-slate-900 leading-none">
+                    Stop the <span class="vibrant-gradient bg-clip-text text-transparent italic">Silent Leak.</span>
+                </h1>
+                <p class="text-xl text-slate-500 font-light leading-relaxed max-w-lg">
+                    Most SME infrastructure loses 7-12% of annual revenue to "friction"—slow load times, broken UX, and unoptimized conversion paths.
+                </p>
+                <div class="p-8 bg-slate-50 rounded-[2rem] border border-slate-100 space-y-4">
+                    <h4 class="font-bold text-slate-900 uppercase text-xs tracking-widest">Forge Insights</h4>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        This tool analyzes your current traffic against industry standard leakage rates. If your site isn't built on <strong>High-Performance JAMstack Nodes</strong>, you are likely leaving money on the table every month.
+                    </p>
+                </div>
             </div>
-            <div>
-                <label class="block text-[10px] font-black uppercase text-slate-400 mb-2">Avg. Order Value ($)</label>
-                <input type="number" id="value" value="100" class="w-full bg-slate-50 border-none rounded-xl p-4 focus:ring-2 focus:ring-lime-500 outline-none font-bold">
+
+            <div class="w-full max-w-xl mx-auto bg-white p-10 lg:p-16 rounded-[3rem] shadow-2xl border border-slate-100 relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-lime-500/5 rounded-full -mr-16 -mt-16"></div>
+                
+                <h2 class="text-3xl font-extrabold text-slate-900 mb-2">Revenue <span class="text-lime-500">Leakage</span></h2>
+                <p class="text-slate-400 text-[10px] mb-10 uppercase tracking-widest font-black">Industrial Grade Audit Tool</p>
+                
+                <div class="space-y-6">
+                    <div>
+                        <label class="block text-[10px] font-black uppercase text-slate-400 mb-2 ml-1">Monthly Traffic (Visitors)</label>
+                        <input type="number" id="traffic" value="5000" class="w-full bg-slate-50 border-2 border-transparent focus:border-lime-500 rounded-2xl p-5 outline-none font-bold text-slate-900 transition-all">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-black uppercase text-slate-400 mb-2 ml-1">Avg. Order Value ($)</label>
+                        <input type="number" id="value" value="100" class="w-full bg-slate-50 border-2 border-transparent focus:border-lime-500 rounded-2xl p-5 outline-none font-bold text-slate-900 transition-all">
+                    </div>
+                    <button onclick="calculateLeakage()" class="w-full bg-slate-900 text-white p-6 rounded-2xl font-black uppercase tracking-widest text-xs shadow-xl hover:bg-lime-500 transition-all">
+                        Analyze Infrastructure
+                    </button>
+                </div>
+                
+                <div id="result-box" class="mt-10 p-8 bg-slate-900 rounded-[2rem] text-white hidden transform scale-95 transition-all">
+                    <p class="text-slate-400 text-[10px] uppercase font-black tracking-widest mb-2">Estimated Annual Leakage</p>
+                    <span id="leakage-amount" class="text-5xl font-black text-lime-400">$0</span>
+                    <p class="mt-6 text-xs text-slate-400 leading-relaxed italic">
+                        "This represents capital lost to infrastructure friction. We can recover this."
+                    </p>
+                    <a href="https://wa.me/27661180036" class="mt-8 flex items-center justify-center bg-lime-500 text-white p-4 rounded-xl font-black uppercase text-[10px] tracking-widest hover:bg-white hover:text-slate-900 transition-all">
+                        Fix My Infrastructure
+                    </a>
+                </div>
             </div>
-            <button onclick="calc()" class="w-full bg-lime-500 text-white p-5 rounded-2xl font-black uppercase tracking-widest text-xs shadow-lg shadow-lime-500/30 hover:bg-slate-900 transition-all">Analyze My Data</button>
         </div>
-        
-        <div id="result" class="mt-10 p-8 bg-slate-900 rounded-[2rem] text-white hidden">
-            <p class="text-slate-400 text-[10px] uppercase font-black tracking-widest mb-2">Annual Revenue at Risk</p>
-            <span id="loss" class="text-4xl font-black text-lime-400">$0</span>
-            <p class="mt-6 text-xs text-slate-400 leading-relaxed italic">"Slow load times and poor UX typically leak 7-12% of annual revenue. We plug those holes."</p>
-            <div class="mt-8 grid grid-cols-1 gap-3">
-                <a href="https://wa.me/27661180036" class="flex items-center justify-center bg-[#25D366] text-white p-4 rounded-xl font-black uppercase text-[10px] tracking-widest">Chat on WhatsApp</a>
-                <a href="mailto:jarrit@forgevertical.com" class="flex items-center justify-center bg-white text-slate-900 p-4 rounded-xl font-black uppercase text-[10px] tracking-widest">Email Principal Architect</a>
-            </div>
-        </div>
-    </div>
+    </main>
+
+    <div id="global-footer"></div>
+
     <script>
-        function calc() {
-            const t = document.getElementById('traffic').value;
-            const v = document.getElementById('orderValue').value || document.getElementById('value').value;
-            const leakage = (t * 0.10) * v * 12;
-            document.getElementById('loss').innerText = '$' + Math.floor(leakage).toLocaleString();
-            document.getElementById('result').classList.remove('hidden');
+        function calculateLeakage() {
+            const traffic = parseFloat(document.getElementById('traffic').value);
+            const value = parseFloat(document.getElementById('value').value);
+            
+            if(isNaN(traffic) || isNaN(value)) return;
+
+            // Industry standard leakage calculation (approx 10% friction loss)
+            const annualLeakage = (traffic * 0.10) * value * 12;
+            
+            document.getElementById('leakage-amount').innerText = '$' + Math.floor(annualLeakage).toLocaleString();
+            
+            const resultBox = document.getElementById('result-box');
+            resultBox.classList.remove('hidden');
+            setTimeout(() => { resultBox.classList.add('scale-100'); }, 10);
         }
+
+        // Global Nav/Footer Injection
+        async function injectGlobals() {
+            const nav = await fetch('/nav.html');
+            if(nav.ok) document.getElementById('global-nav').innerHTML = await nav.text();
+            const foot = await fetch('/footer.html');
+            if(foot.ok) document.getElementById('global-footer').innerHTML = await foot.text();
+        }
+        injectGlobals();
     </script>
 </body>
 </html>
