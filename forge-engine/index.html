@@ -21,7 +21,7 @@
         <div class="flex items-center gap-6">
             <div class="flex items-center gap-2">
                 <div class="bg-[#84cc16] text-slate-950 px-2 py-1 rounded font-black text-sm">FV</div>
-                <h1 class="text-[10px] font-black tracking-[0.3em] uppercase text-slate-400">Forge <span class="text-white text-xs text-xs">Terminal</span></h1>
+                <h1 class="text-[10px] font-black tracking-[0.3em] uppercase text-slate-400">Forge <span class="text-white text-xs">Terminal</span></h1>
             </div>
             <div class="h-4 w-[1px] bg-slate-800"></div>
             <div class="flex items-center gap-3">
@@ -44,7 +44,7 @@
             </div>
             
             <div id="page-list" class="space-y-2">
-                <div class="p-3 bg-slate-900 border border-lime-500/50 rounded-xl text-[10px] font-bold flex justify-between items-center">
+                <div class="p-3 bg-slate-900 border border-lime-500/50 rounded-xl text-[10px] font-bold flex justify-between items-center cursor-pointer">
                     <span>index.html</span>
                     <span class="w-1.5 h-1.5 bg-lime-500 rounded-full"></span>
                 </div>
@@ -99,6 +99,9 @@
     </main>
 
     <script>
+        const AUTH_TOKEN = "VFKNMJUBYQQG6";
+        const PROJECT_ID = "project-alpha";
+
         const log = (msg, lime = false) => {
             const p = document.createElement('p');
             p.className = lime ? "text-lime-500 mb-1" : "mb-1";
@@ -110,7 +113,7 @@
 
         async function runForge() {
             const url = document.getElementById('target-url').value;
-            if(!url) return;
+            if(!url) return log("SIGNAL ERROR: URL missing.", "text-red-500");
 
             log(`Opening Signal Pipeline to ${url}...`);
             log("Dismantling DOM hierarchy...");
@@ -119,12 +122,14 @@
                 const response = await fetch('/api/forge', {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({ url })
+                    body: JSON.stringify({ url, projectName: PROJECT_ID })
                 });
                 const data = await response.json();
                 if(data.status === 'Forged') {
                     log("Gemini 2.5 Flash: Architecture Refactored.", true);
                     document.getElementById('preview-frame').src = data.downloadUrl + "&t=" + Date.now();
+                } else {
+                    log(`ERROR: ${data.message}`, "text-red-500");
                 }
             } catch (e) {
                 log("CRITICAL ERROR: Connection to Forge Brain interrupted.", "text-red-500");
@@ -144,7 +149,7 @@
                 const data = await response.json();
                 if(data.status === 'Updated') {
                     log("Refactor Merged Successfully.", true);
-                    document.getElementById('preview-frame').src = "/forge-engine/index.html?auth=VFKNMJUBYQQG6&t=" + Date.now();
+                    document.getElementById('preview-frame').src = `/forge-engine/index.html?auth=${AUTH_TOKEN}&t=${Date.now()}`;
                 }
             } catch (e) { log("REFACTOR ERROR: Signal interrupted."); }
         }
@@ -153,17 +158,22 @@
             const seoTitle = document.getElementById('seo-title').value;
             const seoDesc = document.getElementById('seo-desc').value;
             log(`Updating SEO Infrastructure...`);
-            const response = await fetch('/api/manage-page', {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({ 
-                    projectName: 'project-alpha', 
-                    pageName: 'index',
-                    seoTitle, 
-                    seoDesc 
-                })
-            });
-            if(response.ok) log("SEO Schema Injected.", true);
+            try {
+                const response = await fetch('/api/manage-page', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ 
+                        projectName: PROJECT_ID, 
+                        pageName: 'index',
+                        seoTitle, 
+                        seoDesc 
+                    })
+                });
+                if(response.ok) {
+                    log("SEO Schema Injected.", true);
+                    document.getElementById('preview-frame').src = `/forge-engine/index.html?auth=${AUTH_TOKEN}&t=${Date.now()}`;
+                }
+            } catch(e) { log("SEO ERROR: Pipeline failed."); }
         }
 
         function addPage() {
@@ -176,6 +186,19 @@
                 list.appendChild(div);
                 log(`New Node created: ${name}.html`, true);
             }
+        }
+
+        async function publishProject() {
+            const host = document.getElementById('pub-host').value || 'Local-Drive';
+            log(`Preparing Publication Node to ${host}...`);
+            try {
+                const response = await fetch('/api/publish', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ projectName: PROJECT_ID, host })
+                });
+                if(response.ok) log("PUBLICATION SUCCESS: Project Forged & Saved.", true);
+            } catch(e) { log("PUBLISH ERROR: Deployment failed."); }
         }
     </script>
 </body>
