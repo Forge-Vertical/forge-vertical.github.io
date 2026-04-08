@@ -1,6 +1,7 @@
 import { serve } from '@hono/node-server';
 import { Hono } from 'hono';
-import { serveStatic } from '@hono/node-server/static';
+// FIXED: Using the direct export path to satisfy Node/GitHub environments
+import { serveStatic } from '@hono/node-server/serve-static'; 
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'fs';
 import 'dotenv/config';
 
