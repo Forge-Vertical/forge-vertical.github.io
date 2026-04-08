@@ -10,15 +10,12 @@
         body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #ffffff; color: #1e293b; }
         .vibrant-gradient { background: linear-gradient(90deg, #10b981 0%, #84cc16 100%); }
         .card-shadow { box-shadow: 0 10px 30px rgba(0,0,0,0.04); }
-        .iframe-container { position: relative; width: 100%; padding-top: 56.25%; overflow: hidden; border-radius: 1.5rem; }
+        .iframe-container { position: relative; width: 100%; padding-top: 56.25%; overflow: hidden; border-radius: 1.5rem; background-color: #f8fafc; }
         .iframe-container iframe { position: absolute; top: 0; left: 0; bottom: 0; right: 0; width: 100%; height: 100%; border: none; zoom: 0.75; }
     </style>
 </head>
 <body class="antialiased">
-    <nav class="max-w-7xl mx-auto px-6 py-8 flex justify-between items-center">
-        <a href="index.html" class="font-extrabold text-2xl tracking-tighter text-slate-900">FORGE<span class="text-lime-500">VERTICAL</span></a>
-        <a href="index.html" class="text-xs font-black uppercase tracking-widest text-slate-500 hover:text-lime-500">← Back Home</a>
-    </nav>
+    <div id="global-nav"></div>
 
     <header class="max-w-7xl mx-auto px-6 py-20">
         <h1 class="text-5xl md:text-7xl font-extrabold tracking-tighter text-slate-900 mb-6">Live <span class="text-lime-500 italic">Deployments.</span></h1>
@@ -31,26 +28,120 @@
             <div class="space-y-4">
                 <div class="iframe-container card-shadow border border-slate-100 group">
                     <iframe src="https://www.aurora-repair.com/" scrolling="no"></iframe>
-                    <div class="absolute inset-0 bg-slate-900/0 group-hover:bg-slate-900/10 transition-all cursor-pointer" onclick="window.open('https://www.aurora-repair.com/')"></div>
+                    <div class="absolute inset-0 bg-slate-900/0 group-hover:bg-slate-900/5 transition-all cursor-pointer" onclick="window.open('https://www.aurora-repair.com/')"></div>
                 </div>
                 <div class="flex justify-between items-center px-2">
                     <h3 class="font-extrabold text-slate-900 uppercase italic">Aurora Repair</h3>
-                    <a href="https://www.aurora-repair.com/" class="text-[10px] font-black uppercase tracking-widest bg-slate-100 px-4 py-2 rounded-lg">Live Node</a>
-                </div>
-            </div>
-            
-            <div class="space-y-4">
-                <div class="iframe-container card-shadow border border-slate-100 group">
-                    <iframe src="https://fairdiscovery.org/" scrolling="no"></iframe>
-                    <div class="absolute inset-0 bg-slate-900/0 group-hover:bg-slate-900/10 transition-all cursor-pointer" onclick="window.open('https://fairdiscovery.org/')"></div>
-                </div>
-                <div class="flex justify-between items-center px-2">
-                    <h3 class="font-extrabold text-slate-900 uppercase italic">Fair Discovery</h3>
-                    <a href="https://fairdiscovery.org/" class="text-[10px] font-black uppercase tracking-widest bg-slate-100 px-4 py-2 rounded-lg">Intel Infrastructure</a>
+                    <span class="text-[9px] font-black uppercase tracking-widest bg-lime-100 text-lime-700 px-3 py-1 rounded-full">SME Node</span>
                 </div>
             </div>
 
+            <div class="space-y-4">
+                <div class="iframe-container card-shadow border border-slate-100 group">
+                    <iframe src="https://fairdiscovery.org/" scrolling="no"></iframe>
+                    <div class="absolute inset-0 bg-slate-900/0 group-hover:bg-slate-900/5 transition-all cursor-pointer" onclick="window.open('https://fairdiscovery.org/')"></div>
+                </div>
+                <div class="flex justify-between items-center px-2">
+                    <h3 class="font-extrabold text-slate-900 uppercase italic">Fair Discovery</h3>
+                    <span class="text-[9px] font-black uppercase tracking-widest bg-blue-100 text-blue-700 px-3 py-1 rounded-full">Intel Infrastructure</span>
+                </div>
             </div>
+
+            <div class="space-y-4">
+                <div class="iframe-container card-shadow border border-slate-100 group">
+                    <iframe src="https://forge-vertical-projects.github.io/ship-chandlers-sa/" scrolling="no"></iframe>
+                    <div class="absolute inset-0 bg-slate-900/0 group-hover:bg-slate-900/5 transition-all cursor-pointer" onclick="window.open('https://forge-vertical-projects.github.io/ship-chandlers-sa/')"></div>
+                </div>
+                <div class="flex justify-between items-center px-2">
+                    <h3 class="font-extrabold text-slate-900 uppercase italic">Ship Chandlers SA</h3>
+                    <span class="text-[9px] font-black uppercase tracking-widest bg-slate-100 text-slate-600 px-3 py-1 rounded-full">Logistics Node</span>
+                </div>
+            </div>
+
+            <div class="space-y-4">
+                <div class="iframe-container card-shadow border border-slate-100 group">
+                    <iframe src="https://project-builds.github.io/handyman-ct/" scrolling="no"></iframe>
+                    <div class="absolute inset-0 bg-slate-900/0 group-hover:bg-slate-900/5 transition-all cursor-pointer" onclick="window.open('https://project-builds.github.io/handyman-ct/')"></div>
+                </div>
+                <div class="flex justify-between items-center px-2">
+                    <h3 class="font-extrabold text-slate-900 uppercase italic">Handyman CT</h3>
+                    <span class="text-[9px] font-black uppercase tracking-widest bg-lime-100 text-lime-700 px-3 py-1 rounded-full">SME Node</span>
+                </div>
+            </div>
+
+            <div class="space-y-4">
+                <div class="iframe-container card-shadow border border-slate-100 group">
+                    <iframe src="https://www.seritipbo.org/" scrolling="no"></iframe>
+                    <div class="absolute inset-0 bg-slate-900/0 group-hover:bg-slate-900/5 transition-all cursor-pointer" onclick="window.open('https://www.seritipbo.org/')"></div>
+                </div>
+                <div class="flex justify-between items-center px-2">
+                    <h3 class="font-extrabold text-slate-900 uppercase italic">Seriti PBO</h3>
+                    <span class="text-[9px] font-black uppercase tracking-widest bg-slate-100 text-slate-600 px-3 py-1 rounded-full">Organization Site</span>
+                </div>
+            </div>
+
+            <div class="space-y-4">
+                <div class="iframe-container card-shadow border border-slate-100 group">
+                    <iframe src="https://www.intpanelshop.co.za/" scrolling="no"></iframe>
+                    <div class="absolute inset-0 bg-slate-900/0 group-hover:bg-slate-900/5 transition-all cursor-pointer" onclick="window.open('https://www.intpanelshop.co.za/')"></div>
+                </div>
+                <div class="flex justify-between items-center px-2">
+                    <h3 class="font-extrabold text-slate-900 uppercase italic">Int Panelshop</h3>
+                    <span class="text-[9px] font-black uppercase tracking-widest bg-lime-100 text-lime-700 px-3 py-1 rounded-full">SME Node</span>
+                </div>
+            </div>
+
+            <div class="space-y-4">
+                <div class="iframe-container card-shadow border border-slate-100 group">
+                    <iframe src="https://sure-drive-9a8c9.web.app/" scrolling="no"></iframe>
+                    <div class="absolute inset-0 bg-slate-900/0 group-hover:bg-slate-900/5 transition-all cursor-pointer" onclick="window.open('https://sure-drive-9a8c9.web.app/')"></div>
+                </div>
+                <div class="flex justify-between items-center px-2">
+                    <h3 class="font-extrabold text-slate-900 uppercase italic">Sure Drive</h3>
+                    <span class="text-[9px] font-black uppercase tracking-widest bg-slate-900 text-white px-3 py-1 rounded-full">SaaS Utility</span>
+                </div>
+            </div>
+
+            <div class="space-y-4">
+                <div class="iframe-container card-shadow border border-slate-100 group">
+                    <iframe src="https://www.secureurphone.com/" scrolling="no"></iframe>
+                    <div class="absolute inset-0 bg-slate-900/0 group-hover:bg-slate-900/5 transition-all cursor-pointer" onclick="window.open('https://www.secureurphone.com/')"></div>
+                </div>
+                <div class="flex justify-between items-center px-2">
+                    <h3 class="font-extrabold text-slate-900 uppercase italic">Secure Ur Phone</h3>
+                    <span class="text-[9px] font-black uppercase tracking-widest bg-blue-100 text-blue-700 px-3 py-1 rounded-full">SaaS Node</span>
+                </div>
+            </div>
+
+            <div class="space-y-4">
+                <div class="iframe-container card-shadow border border-slate-100 group">
+                    <iframe src="https://skyropespecialist.co.za/" scrolling="no"></iframe>
+                    <div class="absolute inset-0 bg-slate-900/0 group-hover:bg-slate-900/5 transition-all cursor-pointer" onclick="window.open('https://skyropespecialist.co.za/')"></div>
+                </div>
+                <div class="flex justify-between items-center px-2">
+                    <h3 class="font-extrabold text-slate-900 uppercase italic">Skyrope Specialist</h3>
+                    <span class="text-[9px] font-black uppercase tracking-widest bg-lime-100 text-lime-700 px-3 py-1 rounded-full">SME Node</span>
+                </div>
+            </div>
+
+        </div>
     </main>
+
+    <div id="global-footer"></div>
+
+    <script>
+        async function injectGlobals() {
+            try {
+                const navRes = await fetch('/nav.html');
+                if (navRes.ok) document.getElementById('global-nav').innerHTML = await navRes.text();
+                
+                const footRes = await fetch('/footer.html');
+                if (footRes.ok) document.getElementById('global-footer').innerHTML = await footRes.text();
+            } catch (err) {
+                console.error("Global inject failed", err);
+            }
+        }
+        injectGlobals();
+    </script>
 </body>
 </html>
