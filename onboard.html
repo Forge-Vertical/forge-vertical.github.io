@@ -7,18 +7,48 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;800&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #ffffff; color: #09090b; }
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background-color: #ffffff; 
+            color: #09090b;
+            background-image: radial-gradient(circle at 2px 2px, #f1f1f4 1px, transparent 0);
+            background-size: 40px 40px;
+        }
         
-        /* Interactive Elements & Accents */
         .lime-accent { color: #84cc16 !important; }
         .lime-bg { background-color: #84cc16 !important; }
-        .lime-border:focus-within { border-color: #84cc16 !important; }
         
-        /* Component styling */
-        .card-container { background-color: #ffffff; border: 1px solid #f1f1f4; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05); }
-        .form-card { background-color: rgba(39, 39, 42, 0.02); border: 1px solid #e4e4e7; }
-        input, textarea { background-color: #ffffff !important; color: #09090b !important; }
-        ::placeholder { color: #a1a1aa !important; }
+        /* Glassmorphic Slate-Blue Card */
+        .form-card { 
+            background: rgba(15, 23, 42, 0.95); /* Deep Slate Blue */
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Inputs customized for Dark Card */
+        input, textarea { 
+            background-color: rgba(255, 255, 255, 0.05) !important; 
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+            color: #ffffff !important; 
+            transition: all 0.3s ease;
+        }
+        
+        input:focus, textarea:focus {
+            border-color: #84cc16 !important;
+            background-color: rgba(255, 255, 255, 0.1) !important;
+            outline: none;
+        }
+
+        ::placeholder { color: rgba(255, 255, 255, 0.4) !important; }
+
+        .section-label {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.7rem;
+            font-weight: 800;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
     </style>
 </head>
 <body class="antialiased p-6 md:p-12">
@@ -34,74 +64,68 @@
 
         <form action="https://formspree.io/f/xvzvzvva" method="POST" class="space-y-8">
             
-            <div class="card-container p-8 rounded-[2rem]">
-                <div class="flex justify-center mb-8">
-                    <img src="path/to/form_onboard.png" alt="Branding Vector" class="h-24 w-auto opacity-80">
+            <div class="form-card p-10 rounded-[2.5rem]">
+                <div class="flex flex-col items-center mb-10 border-b border-white/10 pb-8">
+                    <img src="form_onboard.gif" alt="Forge Onboarding" class="h-32 w-auto mb-4">
+                    <h3 class="section-label lime-accent">01. Contact Details</h3>
                 </div>
                 
-                <div class="form-card p-8 rounded-3xl">
-                    <h3 class="text-xs font-black uppercase tracking-widest text-zinc-400 mb-6 lime-accent">01. Contact Details</h3>
-                    <div class="grid md:grid-cols-2 gap-4">
-                        <div class="lime-border"><input type="text" name="First Name" placeholder="First Name" required class="w-full border border-zinc-200 rounded-xl p-4 text-sm focus:border-[#84cc16] outline-none"></div>
-                        <div class="lime-border"><input type="text" name="Surname" placeholder="Surname" required class="w-full border border-zinc-200 rounded-xl p-4 text-sm focus:border-[#84cc16] outline-none"></div>
-                        <div class="lime-border"><input type="email" name="Email" placeholder="Email Address" required class="w-full border border-zinc-200 rounded-xl p-4 text-sm focus:border-[#84cc16] outline-none"></div>
-                        <div class="lime-border"><input type="tel" name="Phone" placeholder="Phone Number" class="w-full border border-zinc-200 rounded-xl p-4 text-sm focus:border-[#84cc16] outline-none"></div>
-                        <div class="lime-border md:col-span-2"><input type="text" name="Company" placeholder="Company Name" class="w-full border border-zinc-200 rounded-xl p-4 text-sm focus:border-[#84cc16] outline-none"></div>
-                        <div class="lime-border md:col-span-2"><textarea name="Address" placeholder="Physical/Business Address" rows="2" class="w-full border border-zinc-200 rounded-xl p-4 text-sm focus:border-[#84cc16] outline-none"></textarea></div>
-                    </div>
+                <div class="grid md:grid-cols-2 gap-5">
+                    <input type="text" name="First Name" placeholder="First Name" required class="w-full rounded-xl p-4 text-sm">
+                    <input type="text" name="Surname" placeholder="Surname" required class="w-full rounded-xl p-4 text-sm">
+                    <input type="email" name="Email" placeholder="Email Address" required class="w-full rounded-xl p-4 text-sm">
+                    <input type="tel" name="Phone" placeholder="Phone Number" class="w-full rounded-xl p-4 text-sm">
+                    <input type="text" name="Company" placeholder="Company Name" class="w-full rounded-xl p-4 text-sm md:col-span-2">
+                    <textarea name="Address" placeholder="Physical/Business Address" rows="2" class="w-full rounded-xl p-4 text-sm md:col-span-2"></textarea>
                 </div>
             </div>
 
-            <div class="card-container p-8 rounded-[2rem]">
-                <div class="form-card p-8 rounded-3xl">
-                    <h3 class="text-xs font-black uppercase tracking-widest text-zinc-400 mb-6 lime-accent">02. Project Description</h3>
-                    <div class="space-y-4">
-                        <div class="lime-border"><textarea name="Project Vision" placeholder="Describe exactly what we are building and your goals..." rows="5" required class="w-full border border-zinc-200 rounded-xl p-4 text-sm focus:border-[#84cc16] outline-none"></textarea></div>
-                        
-                        <div class="pt-4 border-t border-zinc-100">
-                            <p class="text-[10px] uppercase text-zinc-400 font-bold mb-4">Inspiration Benchmarks (Optional)</p>
-                            <div class="lime-border"><input type="url" name="Inspiration 1" placeholder="Inspiration URL #1 (Primary Layout)" class="w-full border border-zinc-200 rounded-xl p-4 text-sm mb-3 focus:border-[#84cc16] outline-none"></div>
-                            <div class="lime-border"><input type="url" name="Inspiration 2" placeholder="Inspiration URL #2 (Vibe/Style)" class="w-full border border-zinc-200 rounded-xl p-4 text-sm focus:border-[#84cc16] outline-none"></div>
+            <div class="form-card p-10 rounded-[2.5rem]">
+                <h3 class="section-label mb-6 lime-accent">02. Project Description</h3>
+                <div class="space-y-5">
+                    <textarea name="Project Vision" placeholder="Describe exactly what we are building and your goals..." rows="5" required class="w-full rounded-xl p-4 text-sm"></textarea>
+                    
+                    <div class="pt-6 border-t border-white/10">
+                        <p class="text-[10px] uppercase text-white/40 font-bold mb-4">Inspiration Benchmarks (Optional)</p>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <input type="url" name="Inspiration 1" placeholder="URL #1 (Layout)" class="w-full rounded-xl p-4 text-sm">
+                            <input type="url" name="Inspiration 2" placeholder="URL #2 (Vibe)" class="w-full rounded-xl p-4 text-sm">
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="grid md:grid-cols-2 gap-8">
-                <div class="card-container p-8 rounded-[2rem]">
-                    <div class="form-card p-8 rounded-3xl">
-                        <h3 class="text-xs font-black uppercase tracking-widest text-zinc-400 mb-6 lime-accent">03. Deployment Needs</h3>
-                        <div class="space-y-6">
-                            <div>
-                                <p class="text-[11px] font-bold text-zinc-600 mb-3">Need a Domain Name?</p>
-                                <div class="flex gap-6">
-                                    <label class="flex items-center gap-2 text-sm cursor-pointer"><input type="radio" name="Need Domain" value="Yes" class="accent-[#84cc16]"> Yes</label>
-                                    <label class="flex items-center gap-2 text-sm cursor-pointer"><input type="radio" name="Need Domain" value="No" checked class="accent-[#84cc16]"> No</label>
-                                }
-                                </div>
+                <div class="form-card p-10 rounded-[2.5rem]">
+                    <h3 class="section-label mb-6 lime-accent">03. Deployment Needs</h3>
+                    <div class="space-y-8">
+                        <div>
+                            <p class="text-[11px] font-bold text-white/70 mb-4">Need a Domain Name?</p>
+                            <div class="flex gap-8">
+                                <label class="flex items-center gap-2 text-sm text-white/80 cursor-pointer hover:text-[#84cc16] transition-colors"><input type="radio" name="Need Domain" value="Yes" class="accent-[#84cc16] h-4 w-4"> Yes</label>
+                                <label class="flex items-center gap-2 text-sm text-white/80 cursor-pointer hover:text-[#84cc16] transition-colors"><input type="radio" name="Need Domain" value="No" checked class="accent-[#84cc16] h-4 w-4"> No</label>
                             </div>
-                            <div>
-                                <p class="text-[11px] font-bold text-zinc-600 mb-3">Need Managed Hosting?</p>
-                                <div class="flex gap-6">
-                                    <label class="flex items-center gap-2 text-sm cursor-pointer"><input type="radio" name="Need Hosting" value="Yes" class="accent-[#84cc16]"> Yes</label>
-                                    <label class="flex items-center gap-2 text-sm cursor-pointer"><input type="radio" name="Need Hosting" value="No" checked class="accent-[#84cc16]"> No</label>
-                                }
-                                </div>
+                        </div>
+                        <div>
+                            <p class="text-[11px] font-bold text-white/70 mb-4">Need Managed Hosting?</p>
+                            <div class="flex gap-8">
+                                <label class="flex items-center gap-2 text-sm text-white/80 cursor-pointer hover:text-[#84cc16] transition-colors"><input type="radio" name="Need Hosting" value="Yes" class="accent-[#84cc16] h-4 w-4"> Yes</label>
+                                <label class="flex items-center gap-2 text-sm text-white/80 cursor-pointer hover:text-[#84cc16] transition-colors"><input type="radio" name="Need Hosting" value="No" checked class="accent-[#84cc16] h-4 w-4"> No</label>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="card-container p-8 rounded-[2rem]">
-                    <div class="form-card p-8 rounded-3xl h-full">
-                        <h3 class="text-xs font-black uppercase tracking-widest text-zinc-400 mb-6 lime-accent">04. Brand Assets</h3>
-                        <div class="lime-border"><input type="url" name="Asset Link" placeholder="Link to Logo/Brand Assets (Dropbox/Drive)" class="w-full border border-zinc-200 rounded-xl p-4 text-sm mb-4 focus:border-[#84cc16] outline-none"></div>
-                        <p class="text-[10px] text-zinc-400 leading-relaxed uppercase font-medium">The Forge analyzes these assets to maintain architectural consistency across the build.</p>
+                <div class="form-card p-10 rounded-[2.5rem] flex flex-col justify-between">
+                    <div>
+                        <h3 class="section-label mb-6 lime-accent">04. Brand Assets</h3>
+                        <input type="url" name="Asset Link" placeholder="Link to Assets (Drive/Dropbox)" class="w-full rounded-xl p-4 text-sm mb-4">
                     </div>
+                    <p class="text-[10px] text-white/30 leading-relaxed uppercase font-medium">The Forge analyzes your existing identity to ensure architectural consistency.</p>
                 </div>
             </div>
 
-            <button type="submit" class="w-full lime-bg text-black py-6 rounded-2xl font-black uppercase tracking-[0.3em] text-xs hover:scale-[1.01] transition-transform duration-300 shadow-lg shadow-lime-500/20">
+            <button type="submit" class="w-full lime-bg text-black py-8 rounded-3xl font-black uppercase tracking-[0.4em] text-sm hover:scale-[1.02] transition-all duration-300 shadow-2xl shadow-lime-500/40">
                 Commence Build Sequence
             </button>
         </form>
@@ -110,7 +134,6 @@
     <div id="global-footer"></div>
 
     <script>
-        // Component Loader
         async function injectGlobals() {
             try {
                 const nav = await fetch('/nav.html');
