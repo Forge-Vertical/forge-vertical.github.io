@@ -1,7 +1,7 @@
 import { serve } from '@hono/node-server';
 import { Hono } from 'hono';
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'fs';
-import { mime } from 'mimetypes'; // Simple helper for file types
+import mime from 'mime-types'; // FIXED: Matches the new library name
 import 'dotenv/config';
 
 import { ingestSite } from './ingestor';
