@@ -1,5 +1,6 @@
 import os
 import random
+from datetime import datetime
 
 def forge_vertical_asset():
     # --- PART 1: INTEL GENERATION ---
@@ -25,7 +26,7 @@ def forge_vertical_asset():
     intel_filename = selected['title'].lower().replace(" ", "-").replace(":", "") + ".html"
     intel_path = f"intel/{intel_filename}"
 
-    # THE SHARED CONTACT STACK (Vibrant White/Lime Theme)
+    # THE SHARED CONTACT STACK
     contact_stack = """
             <section class="mt-20 border-t border-slate-100 pt-10">
                 <h4 class="text-sm font-black uppercase tracking-widest text-slate-900 mb-6">Discuss Your Infrastructure</h4>
@@ -149,6 +150,31 @@ def forge_vertical_asset():
 """
     with open(tool_path, 'w') as f:
         f.write(roi_template)
+
+    # --- PART 3: SEO AUTOMATION (Robots & Sitemap) ---
+    with open("robots.txt", "w") as f:
+        f.write("User-agent: *\nAllow: /\n\nSitemap: https://forgevertical.com/sitemap.xml")
+
+    sitemap_header = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+    sitemap_footer = '</urlset>'
+    
+    # Building sitemap lines for static pages and dynamic intel
+    entries = [
+        "https://forgevertical.com/",
+        "https://forgevertical.com/tools/roi-calculator.html"
+    ]
+    
+    # Scan intel directory for forged pages
+    if os.path.exists("intel"):
+        for f in os.listdir("intel"):
+            if f.endswith(".html"):
+                entries.append(f"https://forgevertical.com/intel/{f}")
+
+    with open("sitemap.xml", "w") as f:
+        f.write(sitemap_header)
+        for loc in entries:
+            f.write(f'  <url>\n    <loc>{loc}</loc>\n    <lastmod>{datetime.now().strftime("%Y-%m-%d")}</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>0.8</priority>\n  </url>\n')
+        f.write(sitemap_footer)
 
 if __name__ == "__main__":
     forge_vertical_asset()
