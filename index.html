@@ -3,61 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forge-Vertical // Principal Web & Tool Architecture</title>
+    <title>Forge-Vertical // Enterprise Web & SaaS Architecture</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Geist:wght@300;600;900&display=swap');
-        body { font-family: 'Geist', sans-serif; background-color: #020617; color: #f1f5f9; }
-        .glow-border { border: 1px solid rgba(56, 189, 248, 0.2); }
-        .hero-gradient { background: linear-gradient(135deg, #fff 0%, #38bdf8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;500;800&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #ffffff; color: #1e293b; }
+        .vibrant-gradient { background: linear-gradient(90deg, #10b981 0%, #84cc16 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .btn-vibrant { background: linear-gradient(90deg, #10b981 0%, #84cc16 100%); }
+        .shadow-soft { box-shadow: 0 20px 50px rgba(0,0,0,0.05); }
     </style>
 </head>
-<body class="min-h-screen">
-    <main class="max-w-6xl mx-auto px-6 py-20">
-        <nav class="flex justify-between items-center mb-32">
-            <span class="font-black italic uppercase tracking-[0.3em] text-sky-400">Forge-Vertical</span>
-            <div class="flex gap-8 text-[10px] font-bold uppercase tracking-widest text-slate-500">
-                <a href="#tools" class="hover:text-white transition-colors">Tools</a>
-                <a href="#intel" class="hover:text-white transition-colors">Intel</a>
-                <a href="#contact" class="hover:text-white transition-colors">Direct</a>
-            </div>
-        </nav>
+<body class="antialiased">
+    <nav class="max-w-7xl mx-auto px-6 py-8 flex justify-between items-center">
+        <span class="font-extrabold text-2xl tracking-tighter text-slate-900">FORGE<span class="text-lime-500">VERTICAL</span></span>
+        <div class="hidden md:flex gap-10 text-sm font-bold uppercase tracking-widest">
+            <a href="#services" class="hover:text-lime-600 transition-colors">Services</a>
+            <a href="#portfolio" class="hover:text-lime-600 transition-colors">Portfolio</a>
+            <a href="#tools" class="hover:text-lime-600 transition-colors">Tools</a>
+            <a href="https://fiverr.com/YOUR_PROFILE" class="text-lime-600">Hire on Fiverr</a>
+        </div>
+    </nav>
 
-        <section class="mb-40">
-            <h1 class="text-7xl md:text-9xl font-black italic uppercase tracking-tighter leading-[0.8] hero-gradient mb-12">
-                We Build<br>The Infrastructure.
-            </h1>
-            <p class="text-xl md:text-2xl text-slate-400 font-light max-w-2xl leading-relaxed">
-                Managed Vulnerability Research & Principal Auditing for Decentralized Infrastructure. Entry is earned. Precision is the payout.
-            </p>
-        </section>
+    <header class="max-w-7xl mx-auto px-6 pt-20 pb-32 text-center">
+        <span class="bg-lime-100 text-lime-700 px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest mb-6 inline-block">SME to Enterprise Scale</span>
+        <h1 class="text-6xl md:text-8xl font-extrabold tracking-tighter leading-[0.9] text-slate-900 mb-8">
+            We build the web<br><span class="vibrant-gradient">your competitors fear.</span>
+        </h1>
+        <p class="text-xl text-slate-500 max-w-2xl mx-auto font-light leading-relaxed mb-10">
+            High-performance Web Design, SaaS Architecture, and SEO-First Infrastructure. From small business nodes to global data forge.
+        </p>
+        <div class="flex flex-col md:flex-row gap-4 justify-center">
+            <a href="#contact" class="btn-vibrant text-white px-10 py-5 rounded-2xl font-extrabold uppercase text-xs tracking-widest shadow-lg">Start Your Forge</a>
+            <a href="#portfolio" class="bg-slate-900 text-white px-10 py-5 rounded-2xl font-extrabold uppercase text-xs tracking-widest shadow-lg">View Our Work</a>
+        </div>
+    </header>
 
-        <section id="tools" class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="glow-border bg-slate-900/50 p-10 rounded-[2.5rem] hover:bg-slate-900 transition-all group">
-                <span class="text-sky-500 font-black text-[10px] tracking-widest uppercase">Utility 01</span>
-                <h3 class="text-3xl font-black italic uppercase mt-4 mb-6 group-hover:text-sky-400">SaaS Forge</h3>
-                <p class="text-slate-400 font-light text-sm mb-8">Rapid deployment of high-performance tool nodes with baked-in SEO authority.</p>
-                <a href="#" class="inline-block text-[10px] font-black uppercase tracking-widest border-b-2 border-sky-500 pb-1">View Node</a>
+    <section id="services" class="bg-slate-50 py-32">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
+                <div>
+                    <h2 class="text-4xl font-extrabold text-slate-900 mb-6 italic uppercase">Why Quality SEO Matters</h2>
+                    <p class="text-slate-600 text-lg leading-relaxed mb-6">
+                        SEO isn't just about keywords; it's about **Industrial Relevance**. Most agencies build "pretty" sites that stay invisible. We build **Speed-First Architectures** that Google's crawlers can't ignore.
+                    </p>
+                    <ul class="space-y-4 font-bold text-slate-800">
+                        <li class="flex items-center gap-3"><span class="text-lime-500">✓</span> Automated Segmented Sitemaps</li>
+                        <li class="flex items-center gap-3"><span class="text-lime-500">✓</span> JAMstack Architecture (Zero Server Lag)</li>
+                        <li class="flex items-center gap-3"><span class="text-lime-500">✓</span> High-Authority Content Nodes</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-4 rounded-[2rem] shadow-soft border border-slate-100">
+                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=2426" class="rounded-2xl" alt="Digital Analytics Dashboard">
+                </div>
             </div>
-            
-            <div class="glow-border bg-slate-900/50 p-10 rounded-[2.5rem] hover:bg-slate-900 transition-all group border-sky-500/40">
-                <span class="text-sky-500 font-black text-[10px] tracking-widest uppercase">Utility 02</span>
-                <h3 class="text-3xl font-black italic uppercase mt-4 mb-6 group-hover:text-sky-400">SEO Sentinel</h3>
-                <p class="text-slate-400 font-light text-sm mb-8">Segmented sitemap architecture designed for aggressive indexing and ranking.</p>
-                <a href="#" class="inline-block text-[10px] font-black uppercase tracking-widest border-b-2 border-sky-500 pb-1">View Node</a>
-            </div>
+        </div>
+    </section>
 
-            <div class="glow-border bg-slate-900/50 p-10 rounded-[2.5rem] hover:bg-slate-900 transition-all group">
-                <span class="text-sky-500 font-black text-[10px] tracking-widest uppercase">Utility 03</span>
-                <h3 class="text-3xl font-black italic uppercase mt-4 mb-6 group-hover:text-sky-400">Neural Sync</h3>
-                <p class="text-slate-400 font-light text-sm mb-8">Automated lead synchronization and real-time mission logging.</p>
-                <a href="#" class="inline-block text-[10px] font-black uppercase tracking-widest border-b-2 border-sky-500 pb-1">View Node</a>
+    <section id="portfolio" class="py-32 max-w-7xl mx-auto px-6">
+        <h2 class="text-5xl font-extrabold text-slate-900 mb-16 text-center">Featured <span class="text-lime-500">Deployments</span></h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+            <div class="group cursor-pointer">
+                <div class="bg-slate-900 rounded-[2.5rem] p-10 aspect-video mb-6 relative overflow-hidden">
+                    <div class="absolute inset-0 bg-blue-600 opacity-20 group-hover:opacity-40 transition-opacity"></div>
+                    <span class="relative z-10 text-blue-400 font-bold uppercase text-[10px]">Case Study: Forensic Data</span>
+                    <h3 class="relative z-10 text-white text-3xl font-black mt-4 italic uppercase">Fair Discovery</h3>
+                </div>
+                <h4 class="text-xl font-bold text-slate-900">Sovereign Intel Infrastructure</h4>
+                <p class="text-slate-500">Automated OSINT node with real-time SEO indexing.</p>
             </div>
-        </section>
-    </main>
+            <div class="group cursor-pointer">
+                <div class="bg-lime-500 rounded-[2.5rem] p-10 aspect-video mb-6 relative overflow-hidden flex items-end">
+                    <h3 class="text-white text-5xl font-black italic uppercase opacity-20">NEXT GEN</h3>
+                </div>
+                <h4 class="text-xl font-bold text-slate-900">Your Business Name</h4>
+                <p class="text-slate-500">Coming soon to the Forge.</p>
+            </div>
+        </div>
+    </section>
 
-    <footer class="py-20 text-center opacity-20 text-[10px] font-black uppercase tracking-[0.5em]">
-        ForgeVertical.com // 2026 // Alpha Node
+    <footer id="contact" class="bg-slate-900 py-32 text-center text-white rounded-t-[4rem]">
+        <h2 class="text-5xl font-extrabold mb-10">Ready to <span class="text-lime-400">Scale?</span></h2>
+        <div class="flex flex-wrap justify-center gap-6 opacity-50 mb-20 text-xs font-bold uppercase tracking-widest">
+            <a href="https://fiverr.com/YOUR_PROFILE">Fiverr</a>
+            <a href="https://twitter.com/YOUR_X">Twitter/X</a>
+            <a href="https://linkedin.com/in/YOUR_LINKEDIN">LinkedIn</a>
+        </div>
+        <p class="opacity-20 text-[10px] font-black uppercase tracking-[0.5em]">ForgeVertical.com // Alpha Unit 2026</p>
     </footer>
 </body>
 </html>
