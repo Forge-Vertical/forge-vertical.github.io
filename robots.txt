@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
 
-# Pointing to the main map
 Sitemap: https://forgevertical.com/sitemap.xml

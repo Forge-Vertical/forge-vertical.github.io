@@ -4,26 +4,18 @@
     <loc>https://forgevertical.com/</loc>
     <lastmod>2026-04-08</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-  </url>
-
-  <url>
-    <loc>https://forgevertical.com/tools/roi-calculator.html</loc>
-    <lastmod>2026-04-08</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://forgevertical.com/intel/the-sme-growth-protocol.html</loc>
-    <lastmod>2026-04-08</lastmod>
-    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://forgevertical.com/intel/why-jamstack-wins.html</loc>
+    <loc>https://forgevertical.com/tools/roi-calculator.html</loc>
     <lastmod>2026-04-08</lastmod>
-    <changefreq>monthly</changefreq>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://forgevertical.com/intel/the-sme-growth-protocol.html</loc>
+    <lastmod>2026-04-08</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 </urlset>
