@@ -3,355 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forge Vertical | Advanced Security & Infrastructure</title>
-    
-    <link rel="icon" type="image/png" href="logo.png">
-
+    <title>Forge-Vertical // Principal Web & Tool Architecture</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        :root { 
-            --bg: #05070a; 
-            --card: rgba(13, 17, 23, 0.85); 
-            --border: #1f2937; 
-            --text: #e5e7eb; 
-            --accent: #3fb950; 
-            --glow-blue: #00f2ff; 
-            --code-purple: #bc8cff;
-        }
-        
-        body { 
-            background: linear-gradient(rgba(5, 7, 10, 0.7), rgba(5, 7, 10, 0.7)), url('background.jpg');
-            background-size: cover;
-            background-attachment: fixed;
-            background-position: center;
-            color: var(--text); 
-            font-family: 'JetBrains Mono', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
-            margin: 0; 
-            line-height: 1.8; 
-            font-size: 1.2em; 
-        }
-        
-        .container { 
-            max-width: 1050px; 
-            margin: 0 auto; 
-            padding: 40px 20px; 
-            background: rgba(5, 7, 10, 0.4);
-            backdrop-filter: blur(8px);
-            border-left: 1px solid rgba(255, 255, 255, 0.05);
-            border-right: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        
-        header { 
-            border-bottom: 1px solid var(--border); 
-            padding-bottom: 25px; 
-            margin-bottom: 40px; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-        }
-        
-        .logo-container img { 
-            height: 75px; 
-            width: auto; 
-            display: block; 
-        }
-        
-        .hero { 
-            background: rgba(13, 17, 23, 0.8);
-            padding: 60px 40px; 
-            border-radius: 16px; 
-            border: 1px solid var(--glow-blue); 
-            text-align: center; 
-            margin-bottom: 60px; 
-            box-shadow: 0 0 25px rgba(0, 242, 255, 0.2); 
-            backdrop-filter: blur(15px);
-        }
-        
-        /* Catchphrase as Code */
-        .code-hero {
-            display: inline-block;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 1.6em;
-            background: #000;
-            padding: 20px 40px;
-            border-radius: 8px;
-            border: 1px solid var(--border);
-            margin-bottom: 25px;
-            box-shadow: inset 0 0 10px rgba(0, 242, 255, 0.1);
-            text-align: left;
-        }
-        .code-keyword { color: var(--code-purple); }
-        .code-func { color: var(--glow-blue); }
-        .code-string { color: var(--accent); }
-
-        .hero p {
-            color: #8b949e;
-            font-size: 1.1em;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .grid { 
-            display: grid; 
-            grid-template-columns: 1fr 1fr; 
-            gap: 30px; 
-            margin-bottom: 60px; 
-        }
-        
-        .card { 
-            background: var(--card); 
-            border: 1px solid var(--border); 
-            padding: 35px; 
-            border-radius: 12px; 
-            transition: 0.3s; 
-            backdrop-filter: blur(12px);
-        }
-        
-        .card:hover { border-color: var(--glow-blue); box-shadow: 0 0 15px rgba(0, 242, 255, 0.1); }
-        .card h3 { margin-top: 0; color: var(--glow-blue); font-size: 1.3em; }
-        
-        .social-grid { 
-            display: grid; 
-            grid-template-columns: 1fr 1fr; 
-            gap: 10px; 
-            margin-top: 15px; 
-        }
-        
-        .social-link { 
-            font-size: 0.8em; 
-            color: var(--text); 
-            text-decoration: none; 
-            padding: 8px 10px; 
-            background: rgba(22, 27, 34, 0.8); 
-            border: 1px solid var(--border); 
-            border-radius: 4px; 
-            text-align: center; 
-            transition: 0.2s;
-        }
-        
-        .social-link:hover { 
-            border-color: var(--glow-blue); 
-            color: var(--glow-blue); 
-        }
-
-        .cta-box { 
-            background: rgba(0, 0, 0, 0.9); 
-            border: 2px solid var(--accent); 
-            padding: 50px; 
-            border-radius: 20px; 
-            box-shadow: 0 0 30px rgba(63, 185, 80, 0.2); 
-            margin-bottom: 60px;
-            backdrop-filter: blur(10px);
-        }
-        
-        .standards-grid { 
-            display: grid; 
-            grid-template-columns: 1fr 1fr; 
-            gap: 15px; 
-            margin: 25px 0; 
-            font-size: 0.9em; 
-            border-bottom: 1px solid var(--border); 
-            padding-bottom: 25px; 
-            text-align: left;
-        }
-        
-        .std-item { display: flex; align-items: center; gap: 10px; color: #8b949e; }
-        .std-item:before { content: "»"; color: var(--accent); font-weight: bold; }
-
-        .btn { 
-            display: inline-block; 
-            background: var(--accent); 
-            color: #000; 
-            padding: 18px 45px; 
-            border-radius: 8px; 
-            text-decoration: none; 
-            font-weight: bold; 
-            transition: 0.3s; 
-            font-size: 1.1em; 
-            cursor: pointer; 
-            border: none; 
-            width: 100%; 
-            text-align: center;
-        }
-        
-        .btn:hover { 
-            transform: scale(1.02); 
-            background: #4ceb61; 
-            box-shadow: 0 0 20px var(--accent); 
-        }
-
-        .tech-wrap { 
-            display: flex; 
-            flex-wrap: wrap; 
-            gap: 10px; 
-            justify-content: center; 
-            margin: 40px 0; 
-        }
-        
-        .badge { 
-            padding: 5px 15px; 
-            border-radius: 4px; 
-            font-size: 0.7em; 
-            font-weight: bold; 
-            text-transform: uppercase; 
-            border: 1px solid var(--border); 
-            background: rgba(13, 17, 23, 0.8);
-        }
-        
-        .b-docker { background: #2496ed; color: #fff; } 
-        .b-python { background: #3776ab; color: #fff; }
-        .b-gcp { background: #4285f4; color: #fff; } 
-        .b-node { background: #339933; color: #fff; }
-        .b-cf { background: #f38020; color: #fff; } 
-        .b-vscode { background: #264de4; color: #fff; }
-        .b-git { background: #f1502f; color: #fff; }
-        
-        input, select, textarea { 
-            width: 100%; 
-            background: #161b22; 
-            border: 1px solid var(--border); 
-            color: #fff; 
-            padding: 12px; 
-            border-radius: 6px; 
-            margin-top: 5px; 
-            box-sizing: border-box; 
-            font-family: inherit; 
-        }
-
-        .vetting-label {
-            font-size: 0.9em;
-            color: var(--accent);
-            margin-top: 20px;
-            display: block;
-        }
-        
-        footer { 
-            margin-top: 40px; 
-            padding: 40px 0; 
-            border-top: 1px solid var(--border); 
-            color: #8b949e; 
-            text-align: center; 
-            background: rgba(5, 7, 10, 0.8);
-        }
-        
-        @media (max-width: 768px) { 
-            .grid, .standards-grid { grid-template-columns: 1fr; } 
-            .code-hero { font-size: 1.1em; padding: 15px; }
-        }
+        @import url('https://fonts.googleapis.com/css2?family=Geist:wght@300;600;900&display=swap');
+        body { font-family: 'Geist', sans-serif; background-color: #020617; color: #f1f5f9; }
+        .glow-border { border: 1px solid rgba(56, 189, 248, 0.2); }
+        .hero-gradient { background: linear-gradient(135deg, #fff 0%, #38bdf8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
     </style>
 </head>
-<body>
-    <div class="container">
-        <header>
-            <div class="logo-container"><img src="logo.png" alt="Forge Vertical Logo"></div>
-            <div style="font-size: 0.7em; letter-spacing: 2px; color: var(--accent);">// ETHICAL HACKING</div>
-        </header>
+<body class="min-h-screen">
+    <main class="max-w-6xl mx-auto px-6 py-20">
+        <nav class="flex justify-between items-center mb-32">
+            <span class="font-black italic uppercase tracking-[0.3em] text-sky-400">Forge-Vertical</span>
+            <div class="flex gap-8 text-[10px] font-bold uppercase tracking-widest text-slate-500">
+                <a href="#tools" class="hover:text-white transition-colors">Tools</a>
+                <a href="#intel" class="hover:text-white transition-colors">Intel</a>
+                <a href="#contact" class="hover:text-white transition-colors">Direct</a>
+            </div>
+        </nav>
 
-        <section class="hero">
-            <div class="code-hero">
-                <span class="code-keyword">await</span> <span class="code-func">exploit</span>(<span class="code-string">"Architecture"</span>);<br>
-                <span class="code-keyword">await</span> <span class="code-func">master</span>(<span class="code-string">"TheFlow"</span>);
-            </div>
-            <p>Targeting the logic flaws automation misses. Specialized in infrastructure, CI/CD, and decentralized systems.</p>
-        </section>
-
-        <div class="grid">
-            <div class="card">
-                <h3>0x01 // Infrastructure</h3>
-                <p>CI/CD auditing and Poisoned Pipeline Execution (PPE) prevention. Mapping architectural flaws in automated supply chains.</p>
-            </div>
-            <div class="card">
-                <h3>0x02 // Decentralized</h3>
-                <p>Web3 stack analysis and Smart Contract logic. Built for high-stakes DeFi infrastructure.</p>
-            </div>
-            <div class="card">
-                <h3>0x03 // Mobile Ops</h3>
-                <p>Principal architect for <a href="https://play.google.com/store/apps/details?id=com.aurora.repair" target="_blank" style="color:var(--glow-blue)">Aurora AI</a>. Integrated with <a href="https://fairdiscovery.org/" target="_blank" style="color:var(--glow-blue)">Fair Discovery</a> data systems.</p>
-            </div>
-            <div class="card">
-                <h3>0x04 // Network</h3>
-                <div class="social-grid">
-                    <a href="https://x.com/AgAnubisKr" class="social-link" target="_blank">X / Twitter</a>
-                    <a href="https://github.com/Jotto1988" class="social-link" target="_blank">GitHub Lab</a>
-                    <a href="https://linkedin.com/in/jarrit-hosking-44243a332/" class="social-link" target="_blank">LinkedIn</a>
-                    <a href="https://medium.com/@jarrithosking" class="social-link" target="_blank">Medium</a>
-                    <a href="https://www.facebook.com/profile.php?id=61577414999517" class="social-link" target="_blank">Facebook</a>
-                    <a href="https://signal.me/#p/+27661180036" class="social-link" target="_blank" style="color:var(--accent)">Signal (Direct)</a>
-                </div>
-            </div>
-        </div>
-
-        <section id="hustle" class="cta-box">
-            <h2 style="color: var(--accent); text-align: center;">[ RESEARCHER INTAKE ]</h2>
-            <p>Passionate about cybersecurity? All reports must meet these strict criteria:</p>
-            
-            <div class="standards-grid">
-                <div class="std-item">Full Proof of Concept (PoC)</div>
-                <div class="std-item">Steps to Reproduce</div>
-                <div class="std-item">Evidence (Pics & Video)</div>
-                <div class="std-item">Patch Suggestions</div>
-                <div class="std-item">Links to Affected Areas</div>
-                <div class="std-item">Detailed Documentation</div>
-            </div>
-
-            <p style="text-align: center; margin-bottom: 30px;">
-                <strong>Step 1:</strong> Complete Vetting Form below.<br>
-                <strong>Step 2:</strong> Complete <a href="https://github.com/forgevertical/Forge-Vertical-Challenger-Lab/tree/main" style="color:var(--glow-blue); text-decoration: underline;" target="_blank">Challenger Lab</a>.<br>
+        <section class="mb-40">
+            <h1 class="text-7xl md:text-9xl font-black italic uppercase tracking-tighter leading-[0.8] hero-gradient mb-12">
+                We Build<br>The Infrastructure.
+            </h1>
+            <p class="text-xl md:text-2xl text-slate-400 font-light max-w-2xl leading-relaxed">
+                Managed Vulnerability Research & Principal Auditing for Decentralized Infrastructure. Entry is earned. Precision is the payout.
             </p>
-
-            <form action="https://formspree.io/f/xvzvzvva" method="POST" enctype="multipart/form-data" style="text-align: left; max-width: 800px; margin: 0 auto;">
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 25px;">
-                    <div><label>Handle / Alias</label><input type="text" name="alias" required></div>
-                    <div><label>Signal / Discord</label><input type="text" name="contact" required></div>
-                </div>
-
-                <div style="background: rgba(17, 17, 17, 0.9); padding: 25px; border-radius: 10px; margin-bottom: 30px; border: 1px solid var(--border);">
-                    <div style="margin-bottom: 15px;">
-                        <span class="vetting-label">1. Found sensitive info. Do you:</span>
-                        <select name="VET_Sensitive_Info"><option value="b [✓]">B. Stop immediately and report</option><option value="a [X]">A. Continue exploit</option></select>
-                    </div>
-                    <div style="margin-bottom: 15px;">
-                        <span class="vetting-label">2. Publicly post screenshots/content?</span>
-                        <select name="VET_Public_Post"><option value="NO [✓]">NO</option><option value="YES [X]">YES</option></select>
-                    </div>
-                    <div style="margin-bottom: 15px;">
-                        <span class="vetting-label">3. Live stream the session?</span>
-                        <select name="VET_Live_Stream"><option value="NO [✓]">NO</option><option value="YES [X]">YES</option></select>
-                    </div>
-                    <div style="margin-bottom: 15px;">
-                        <span class="vetting-label">4. Follow Safe Harbor 100%:</span>
-                        <select name="VET_Compliance"><option value="TRUE [✓]">TRUE</option><option value="FALSE [X]">FALSE</option></select>
-                    </div>
-                    <div style="margin-bottom: 15px;">
-                        <span class="vetting-label">5. Share brief with family/friends:</span>
-                        <select name="VET_Sharing"><option value="FALSE [✓]">FALSE</option><option value="TRUE [X]">TRUE</option></select>
-                    </div>
-                </div>
-
-                <label>Scenario: How do you handle a WAF-protected SQLi?</label>
-                <textarea name="scenario" rows="4" required placeholder="Outline methodology..."></textarea>
-
-                <div style="margin-top: 30px; padding: 20px; border: 1px dashed var(--border); border-radius: 8px; background: rgba(0,0,0,0.3);">
-                    <label style="font-size: 0.9em;">ID Verification (Upload Passport/ID):</label>
-                    <input type="file" name="identity_upload" required style="font-size: 0.8em; margin-top: 10px;">
-                </div>
-
-                <div style="text-align: center; margin-top: 40px;">
-                    <button type="submit" class="btn">SUBMIT REPORT</button>
-                    <p style="font-size: 0.8em; color: var(--accent); margin-top: 15px;">Have fun!</p>
-                </div>
-            </form>
         </section>
 
-        <div class="tech-wrap">
-            <span class="badge b-docker">Docker</span> <span class="badge b-python">Python</span> 
-            <span class="badge b-gcp">GCP</span> <span class="badge b-node">Node.js</span> 
-            <span class="badge b-cf">Cloudflare</span> <span class="badge b-vscode">VS Code</span>
-            <span class="badge b-git">Git</span> <span class="badge" style="background:#555">C++</span>
-        </div>
+        <section id="tools" class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="glow-border bg-slate-900/50 p-10 rounded-[2.5rem] hover:bg-slate-900 transition-all group">
+                <span class="text-sky-500 font-black text-[10px] tracking-widest uppercase">Utility 01</span>
+                <h3 class="text-3xl font-black italic uppercase mt-4 mb-6 group-hover:text-sky-400">SaaS Forge</h3>
+                <p class="text-slate-400 font-light text-sm mb-8">Rapid deployment of high-performance tool nodes with baked-in SEO authority.</p>
+                <a href="#" class="inline-block text-[10px] font-black uppercase tracking-widest border-b-2 border-sky-500 pb-1">View Node</a>
+            </div>
+            
+            <div class="glow-border bg-slate-900/50 p-10 rounded-[2.5rem] hover:bg-slate-900 transition-all group border-sky-500/40">
+                <span class="text-sky-500 font-black text-[10px] tracking-widest uppercase">Utility 02</span>
+                <h3 class="text-3xl font-black italic uppercase mt-4 mb-6 group-hover:text-sky-400">SEO Sentinel</h3>
+                <p class="text-slate-400 font-light text-sm mb-8">Segmented sitemap architecture designed for aggressive indexing and ranking.</p>
+                <a href="#" class="inline-block text-[10px] font-black uppercase tracking-widest border-b-2 border-sky-500 pb-1">View Node</a>
+            </div>
 
-        <footer>
-            &copy; 2026 Forge Vertical // <a href="https://linkedin.com/company/forge-vertical" target="_blank" style="color:var(--glow-blue)">LinkedIn Company</a>
-        </footer>
-    </div>
+            <div class="glow-border bg-slate-900/50 p-10 rounded-[2.5rem] hover:bg-slate-900 transition-all group">
+                <span class="text-sky-500 font-black text-[10px] tracking-widest uppercase">Utility 03</span>
+                <h3 class="text-3xl font-black italic uppercase mt-4 mb-6 group-hover:text-sky-400">Neural Sync</h3>
+                <p class="text-slate-400 font-light text-sm mb-8">Automated lead synchronization and real-time mission logging.</p>
+                <a href="#" class="inline-block text-[10px] font-black uppercase tracking-widest border-b-2 border-sky-500 pb-1">View Node</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="py-20 text-center opacity-20 text-[10px] font-black uppercase tracking-[0.5em]">
+        ForgeVertical.com // 2026 // Alpha Node
+    </footer>
 </body>
 </html>
