@@ -7,9 +7,12 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;800&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #09090b; color: #fafafa; }
-        .vibrant-border { border: 1px solid #3f3f46; transition: border-color 0.3s; }
-        .vibrant-border:focus-within { border-color: #84cc16; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #ffffff; color: #09090b; }
+        .vibrant-border { border: 1px solid #e4e4e7; transition: all 0.3s ease; }
+        .vibrant-border:focus { border-color: #84cc16; outline: none; box-shadow: 0 0 0 2px rgba(132, 204, 22, 0.1); }
+        input, textarea { background-color: #f8f8f8 !important; color: #09090b !important; }
+        ::placeholder { color: #a1a1aa !important; }
+        .card-bg { background-color: #ffffff; border: 1px solid #f4f4f5; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); }
     </style>
 </head>
 <body class="antialiased p-6 md:p-12">
@@ -19,41 +22,66 @@
     <main class="max-w-4xl mx-auto py-12">
         <header class="mb-12">
             <span class="text-[#84cc16] text-[10px] font-bold uppercase tracking-[0.2em]">Project Initialization</span>
-            <h1 class="text-5xl font-black tracking-tighter mt-2">Forge Your <span class="italic text-zinc-500">Vertical.</span></h1>
-            <p class="text-zinc-500 mt-4 text-lg">Define the architectural DNA of your new digital asset.</p>
+            <h1 class="text-5xl font-black tracking-tighter mt-2 text-zinc-900">Forge Your <span class="italic text-zinc-400">Vertical.</span></h1>
+            <p class="text-zinc-500 mt-4 text-lg font-light">Define your architectural DNA. We will review your requirements and provide a custom quote.</p>
         </header>
 
-        <form id="onboardForm" class="space-y-8">
-            <div class="bg-zinc-900/50 p-8 rounded-[2rem] border border-zinc-800">
-                <h3 class="text-xs font-black uppercase tracking-widest text-zinc-400 mb-6">01. Architectural Benchmarks</h3>
+        <form action="https://formspree.io/f/xvzvzvva" method="POST" class="space-y-8">
+            
+            <div class="card-bg p-8 rounded-[2rem]">
+                <h3 class="text-xs font-black uppercase tracking-widest text-zinc-400 mb-6">01. Contact Details</h3>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <input type="text" name="First Name" placeholder="First Name" required class="w-full vibrant-border rounded-xl p-4 text-sm">
+                    <input type="text" name="Surname" placeholder="Surname" required class="w-full vibrant-border rounded-xl p-4 text-sm">
+                    <input type="email" name="Email" placeholder="Email Address" required class="w-full vibrant-border rounded-xl p-4 text-sm">
+                    <input type="tel" name="Phone" placeholder="Phone Number" class="w-full vibrant-border rounded-xl p-4 text-sm">
+                    <input type="text" name="Company" placeholder="Company Name" class="w-full vibrant-border rounded-xl p-4 text-sm md:col-span-2">
+                    <textarea name="Address" placeholder="Physical/Business Address" rows="2" class="w-full vibrant-border rounded-xl p-4 text-sm md:col-span-2"></textarea>
+                </div>
+            </div>
+
+            <div class="card-bg p-8 rounded-[2rem]">
+                <h3 class="text-xs font-black uppercase tracking-widest text-zinc-400 mb-6">02. Project Description</h3>
                 <div class="space-y-4">
-                    <input type="url" name="url1" placeholder="Inspiration URL #1 (Primary Layout)" class="w-full bg-zinc-950 vibrant-border rounded-xl p-4 outline-none text-sm">
-                    <input type="url" name="url2" placeholder="Inspiration URL #2 (Typography/Vibe)" class="w-full bg-zinc-950 vibrant-border rounded-xl p-4 outline-none text-sm">
-                    <input type="url" name="url3" placeholder="Inspiration URL #3 (Interaction Style)" class="w-full bg-zinc-950 vibrant-border rounded-xl p-4 outline-none text-sm">
+                    <textarea name="Project Vision" placeholder="What are we building? Describe the core functionality and goals..." rows="5" required class="w-full vibrant-border rounded-xl p-4 text-sm"></textarea>
+                    
+                    <div class="pt-4 border-t border-zinc-100">
+                        <p class="text-[10px] uppercase text-zinc-400 font-bold mb-4">Architectural Benchmarks (Optional)</p>
+                        <input type="url" name="Inspiration 1" placeholder="Inspiration URL #1 (Primary Layout)" class="w-full vibrant-border rounded-xl p-4 text-sm mb-3">
+                        <input type="url" name="Inspiration 2" placeholder="Inspiration URL #2 (Vibe/Style)" class="w-full vibrant-border rounded-xl p-4 text-sm">
+                    </div>
                 </div>
             </div>
 
             <div class="grid md:grid-cols-2 gap-8">
-                <div class="bg-zinc-900/50 p-8 rounded-[2rem] border border-zinc-800">
-                    <h3 class="text-xs font-black uppercase tracking-widest text-zinc-400 mb-6">02. Color Palette</h3>
-                    <div class="flex gap-4">
-                        <div class="flex-1">
-                            <label class="text-[10px] uppercase text-zinc-500 block mb-2 font-bold">Primary</label>
-                            <input type="color" name="primaryColor" value="#84cc16" class="w-full h-12 bg-zinc-950 border border-zinc-800 rounded-lg cursor-pointer">
+                <div class="card-bg p-8 rounded-[2rem]">
+                    <h3 class="text-xs font-black uppercase tracking-widest text-zinc-400 mb-6">03. Deployment Needs</h3>
+                    <div class="space-y-6">
+                        <div>
+                            <p class="text-[11px] font-bold text-zinc-600 mb-3">Need a Domain Name?</p>
+                            <div class="flex gap-6">
+                                <label class="flex items-center gap-2 text-sm cursor-pointer"><input type="radio" name="Need Domain" value="Yes" class="accent-[#84cc16]"> Yes</label>
+                                <label class="flex items-center gap-2 text-sm cursor-pointer"><input type="radio" name="Need Domain" value="No" checked class="accent-[#84cc16]"> No</label>
+                            </div>
                         </div>
-                        <div class="flex-1">
-                            <label class="text-[10px] uppercase text-zinc-500 block mb-2 font-bold">Accent</label>
-                            <input type="color" name="accentColor" value="#000000" class="w-full h-12 bg-zinc-950 border border-zinc-800 rounded-lg cursor-pointer">
+                        <div>
+                            <p class="text-[11px] font-bold text-zinc-600 mb-3">Need Managed Hosting?</p>
+                            <div class="flex gap-6">
+                                <label class="flex items-center gap-2 text-sm cursor-pointer"><input type="radio" name="Need Hosting" value="Yes" class="accent-[#84cc16]"> Yes</label>
+                                <label class="flex items-center gap-2 text-sm cursor-pointer"><input type="radio" name="Need Hosting" value="No" checked class="accent-[#84cc16]"> No</label>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="bg-zinc-900/50 p-8 rounded-[2rem] border border-zinc-800">
-                    <h3 class="text-xs font-black uppercase tracking-widest text-zinc-400 mb-6">03. Assets & Content</h3>
-                    <input type="url" name="assetLink" placeholder="Link to images/logo (Drive/Dropbox)" class="w-full bg-zinc-950 vibrant-border rounded-xl p-4 outline-none text-sm mb-4">
+
+                <div class="card-bg p-8 rounded-[2rem]">
+                    <h3 class="text-xs font-black uppercase tracking-widest text-zinc-400 mb-6">04. Brand Assets</h3>
+                    <input type="url" name="Asset Link" placeholder="Link to Logo/Brand Assets (Drive/Dropbox)" class="w-full vibrant-border rounded-xl p-4 text-sm mb-4">
+                    <p class="text-[10px] text-zinc-400 leading-relaxed uppercase font-medium">The Forge analyzes these assets to maintain architectural consistency.</p>
                 </div>
             </div>
 
-            <button type="submit" class="w-full bg-[#84cc16] text-black py-6 rounded-2xl font-black uppercase tracking-[0.3em] text-xs hover:scale-[1.02] transition-transform">
+            <button type="submit" class="w-full bg-[#84cc16] text-black py-6 rounded-2xl font-black uppercase tracking-[0.3em] text-xs hover:bg-black hover:text-white transition-all duration-500 shadow-lg shadow-lime-500/20">
                 Commence Build Sequence
             </button>
         </form>
@@ -62,17 +90,6 @@
     <div id="global-footer"></div>
 
     <script>
-        // Form Logic
-        document.getElementById('onboardForm').onsubmit = async (e) => {
-            e.preventDefault();
-            const formData = new FormData(e.target);
-            const data = Object.fromEntries(formData.entries());
-            
-            // Logic to send to your API /api/forge
-            console.log("Initializing Forge with DNA:", data);
-            alert("Signal Received. Check GitHub Actions logs for build status.");
-        };
-
         // Component Loader
         async function injectGlobals() {
             try {
