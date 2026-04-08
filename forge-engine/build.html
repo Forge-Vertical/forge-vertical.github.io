@@ -29,6 +29,20 @@
             <p class="text-xl text-slate-500 font-light leading-relaxed">
                 Vertical Web Builder refactors architecture via AI and outputs a 100% portable node. No monthly rental fees. No platform lock-in.
             </p>
+
+            <div class="p-8 bg-zinc-900 rounded-[2.5rem] border border-zinc-800 text-white">
+                <h4 class="text-[10px] font-black uppercase text-[#bef264] tracking-[0.3em] mb-4 italic">Infrastructure Setup</h4>
+                <p class="text-[11px] text-zinc-400 mb-6 leading-relaxed">
+                    Run this command in your local terminal to prevent <span class="text-white">Pathspec errors</span> and initialize the project directory.
+                </p>
+                <div class="bg-black rounded-xl p-4 font-mono text-[10px] text-zinc-300 border border-zinc-800 mb-6">
+                    mkdir -p vertical-projects && touch vertical-projects/.gitkeep && git add . && git commit -m "init forge" && git push
+                </div>
+                <button onclick="navigator.clipboard.writeText('mkdir -p vertical-projects && touch vertical-projects/.gitkeep && git add . && git commit -m \'init forge\' && git push')" class="w-full bg-zinc-800 hover:bg-[#bef264] hover:text-black py-3 rounded-xl font-black uppercase tracking-widest transition-all text-[9px]">
+                    Copy Setup Command
+                </button>
+            </div>
+
             <div class="p-8 bg-slate-50 rounded-[2.5rem] border border-slate-100">
                 <p class="text-xs text-slate-400 font-black uppercase tracking-widest mb-3">License Protocol</p>
                 <p class="text-sm text-slate-600 leading-relaxed italic">
@@ -52,7 +66,7 @@
                         </select>
                     </div>
                     <a href="https://www.paypal.com/ncp/payment/VFKNMJUBYQQG6" class="w-full vibrant-gradient text-slate-900 p-8 rounded-[2rem] font-black uppercase tracking-widest text-sm shadow-2xl hover:scale-[1.02] transition-all flex items-center justify-center gap-4">
-                        Unlock Engine (10 Pushes) ↗
+                        <span id="pay-btn-text">Unlock Engine ($50.00)</span> ↗
                     </a>
                 </div>
             </div>
@@ -66,7 +80,7 @@
                 <div class="space-y-6">
                     <div class="relative group">
                         <label class="text-[11px] font-black uppercase text-slate-400 tracking-[0.2em] mb-3 flex items-center gap-2">Target URL</label>
-                        <input type="url" id="targetUrl" placeholder="https://competitor.com" class="w-full bg-slate-800/50 border-2 border-slate-700 p-6 rounded-2xl outline-none focus:border-lime-500 font-bold text-white">
+                        <input type="url" id="targetUrl" placeholder="https://source-site.com" class="w-full bg-slate-800/50 border-2 border-slate-700 p-6 rounded-2xl outline-none focus:border-lime-500 font-bold text-white">
                     </div>
 
                     <div class="grid grid-cols-2 gap-4">
@@ -95,20 +109,23 @@
     <div id="global-footer"></div>
 
     <script>
+        // 1. Check for Auth Redirect
         const urlParams = new URLSearchParams(window.location.search);
         if (urlParams.get('auth') === 'success' || urlParams.get('auth') === 'VFKNMJUBYQQG6') {
             document.getElementById('payment-gate').classList.add('hidden');
             document.getElementById('forge-terminal').classList.remove('hidden');
         }
 
+        // 2. Pricing Logic
         function updatePrice() {
             const select = document.getElementById('pricing-tier');
             const price = select.options[select.selectedIndex].getAttribute('data-p');
             const currency = select.value;
             let symbol = currency === "ZAR" ? "R" : (currency === "GBP" ? "£" : (currency === "EUR" ? "€" : "$"));
-            document.getElementById('pay-btn-text').innerText = "Unlock Engine (" + symbol + price + ")";
+            document.getElementById('pay-btn-text').innerText = "Unlock Engine (" + symbol + price + ".00)";
         }
 
+        // 3. Forge Signal Logic
         async function startForge() {
             const url = document.getElementById('targetUrl').value;
             const consoleBox = document.getElementById('console');
@@ -129,14 +146,18 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ url })
                 });
+                
                 log("Dismantling DOM. Signal funneled to Gemini 2.5 Flash...", "text-lime-400");
                 const data = await response.json();
+                
                 if(data.status === 'Forged') {
                     log("SUCCESS: Architecture Refactored.", "text-white font-bold");
                     log("Pushing assets to Sovereign Engine...", "text-lime-500");
+                    // Redirect to the actual live editor
+                    window.location.href = data.downloadUrl;
                 }
             } catch (e) {
-                log("ERROR: Infrastructure Failure.", "text-red-500");
+                log("ERROR: Connection Interrupted.", "text-red-500");
             }
         }
 
