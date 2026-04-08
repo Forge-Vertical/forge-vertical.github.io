@@ -11,20 +11,20 @@ const app = new Hono();
 const enginePath = './forge-engine';
 const projectsRoot = './vertical-projects';
 
-// Initialize Folders
+// Initialize Infrastructure
 [enginePath, projectsRoot].forEach(path => {
     if (!existsSync(path)) mkdirSync(path, { recursive: true });
 });
 
 /**
- * INDUSTRIAL FILE SERVER
- * Manual implementation to bypass Hono's restricted cloud exports.
+ * MANUAL INDUSTRIAL FILE SERVER
+ * Serves index.html, CSS, and MP4 videos directly from the cloud.
  */
 app.get('*', (c) => {
     const url = new URL(c.req.url);
     let path = url.pathname === '/' ? './index.html' : `.${url.pathname}`;
     
-    // Authorization Logic
+    // Auth for the Engine Preview
     if (path.includes('forge-engine')) {
         const auth = c.req.query('auth');
         if (auth !== 'success' && auth !== 'VFKNMJUBYQQG6') {
@@ -34,7 +34,6 @@ app.get('*', (c) => {
 
     if (existsSync(path)) {
         const content = readFileSync(path);
-        // Look up the correct type (video/mp4, text/html, etc)
         const contentType = mime.lookup(path) || 'application/octet-stream';
         return c.body(content, 200, { 'Content-Type': contentType });
     }
@@ -58,5 +57,5 @@ app.post('/api/forge', async (c) => {
 });
 
 const port = Number(process.env.PORT) || 7777;
-console.log(`SOVEREIGN FORGE ULTRALIGHT LIVE: Port ${port}`);
+console.log(`ULTRALIGHT ENGINE LIVE: Port ${port}`);
 serve({ fetch: app.fetch, port });
