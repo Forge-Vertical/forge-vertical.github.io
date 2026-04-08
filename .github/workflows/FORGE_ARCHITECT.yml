@@ -1,0 +1,33 @@
+name: FORGE_ARCHITECT
+on:
+  schedule:
+    - cron: '0 */12 * * *' # Every 12 hours
+  workflow_dispatch:
+
+jobs:
+  forge-utility:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.BOT_DEPLOY_TOKEN }}
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install Dependencies
+        run: pip install requests feedparser
+
+      - name: Run Tool Builder
+        run: python .github/scripts/tool_builder.py
+
+      - name: Push New Assets
+        run: |
+          git config user.name "Forge-Vertical-Bot"
+          git config user.email "bot@forgevertical.com"
+          git add .
+          git commit -m "forge: deployment of new industrial assets [v1.0]" || echo "Stable"
+          git push origin main
