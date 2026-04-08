@@ -1,29 +1,19 @@
 name: FORGE_SYNC_PROTOCOL
-
 on:
   push:
     paths:
       - 'vertical-projects/**'
-      - 'forge-engine/**'
-  workflow_dispatch: # Allows you to manually trigger a save
-
+  workflow_dispatch:
 jobs:
   sync-assets:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           token: ${{ secrets.FORGE_VERTICAL_DEPLOY_KEY }}
-          fetch-depth: 0
-
-      - name: Configure Git
-        run: |
-          git config --global user.name "Forge-Vertical-Bot"
+      - run: |
+          git config --global user.name "Forge-Bot"
           git config --global user.email "bot@forgevertical.com"
-
-      - name: Commit Sovereign Nodes
-        run: |
-          git add vertical-projects/ forge-engine/
-          git commit -m "forge: updated sovereign nodes and SEO metadata" || echo "No changes to sync"
+          git add .
+          git commit -m "forge: sync sovereign nodes" || exit 0
           git push origin main
