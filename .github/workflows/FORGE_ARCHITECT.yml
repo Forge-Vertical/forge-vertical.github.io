@@ -10,7 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          token: ${{ secrets.BOT_DEPLOY_TOKEN }}
+          token: ${{ secrets.FORGE_VERTICAL_DEPLOY }}
           fetch-depth: 0
 
       - name: Setup Python
