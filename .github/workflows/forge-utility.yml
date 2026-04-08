@@ -12,7 +12,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'npm'
+          # We remove the cache: 'npm' line to prevent the lock-file error
 
       - name: Install Dependencies
         run: npm install
@@ -21,6 +21,6 @@ jobs:
         run: npx playwright install chromium --with-deps
 
       - name: Run Build Utility
-        run: npm run start
+        run: npx tsx index.ts
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
