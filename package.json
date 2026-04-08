@@ -9,6 +9,7 @@
     "@hono/node-server": "^1.10.1",
     "@google/generative-ai": "^0.3.0",
     "hono": "^4.2.4",
+    "mimetypes": "^0.0.3",
     "dotenv": "^16.4.5",
     "playwright": "^1.42.1",
     "tsx": "^4.7.2",
