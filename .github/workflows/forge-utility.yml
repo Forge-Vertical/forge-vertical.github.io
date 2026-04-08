@@ -12,10 +12,11 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          # We remove the cache: 'npm' line to prevent the lock-file error
 
       - name: Install Dependencies
-        run: npm install
+        # THIS IS THE KILL-SWITCH: 
+        # It forces npm to ignore any cached "mimetypes" garbage.
+        run: npm install --no-package-lock
 
       - name: Install Playwright Browsers
         run: npx playwright install chromium --with-deps
