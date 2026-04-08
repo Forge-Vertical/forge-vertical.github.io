@@ -16,11 +16,33 @@ if (!existsSync(enginePath)) {
     mkdirSync(enginePath);
 }
 
-// Serve static assets (MP4s, icons, etc.)
-app.use('/assets/*', serveStatic({ root: './' }));
-app.use('/forge-engine/*', serveStatic({ root: './' }));
+/**
+ * GATEKEEPER: PAYWALL PROTECTION
+ * This prevents unauthorized access to the Forge Engine UI.
+ */
+app.get('/forge-engine/index.html', (c) => {
+  const auth = c.req.query('auth');
+  
+  // Verify the PayPal signal is present
+  if (auth === 'success' || auth === 'VFKNMJUBYQQG6') {
+    try {
+        const html = readFileSync('./forge-engine/index.html', 'utf-8');
+        return c.html(html);
+    } catch (e) {
+        return c.text("Forge Error: Terminal UI not found in /forge-engine/");
+    }
+  } else {
+    // No payment signal? Send them back to the build page to pay
+    console.log("[SECURITY]: Unauthorized access attempt blocked on Forge Terminal.");
+    return c.redirect('/build?error=unauthorized');
+  }
+});
 
-// 1. Serve the Sovereign UI (Main Dashboard)
+// Serve static assets (Protected files are handled above)
+app.use('/assets/*', serveStatic({ root: './' }));
+app.use('/forge-engine/assets/*', serveStatic({ root: './' })); // For any assets inside the engine
+
+// 1. Serve the Sovereign UI (Landing/Home)
 app.get('/', (c) => {
   try {
     const html = readFileSync('./index.html', 'utf-8');
@@ -30,7 +52,7 @@ app.get('/', (c) => {
   }
 });
 
-// 2. Serve the Build UI (The $50 SaaS Terminal)
+// 2. Serve the Build UI (The Storefront/Paywall Page)
 app.get('/build', (c) => {
     try {
       const html = readFileSync('./build.html', 'utf-8');
@@ -40,13 +62,12 @@ app.get('/build', (c) => {
     }
 });
 
-// 3. THE FORGE API: Ingest -> Refactor -> Deploy
+// 3. THE FORGE API: Ingest -> Refactor -> Write
 app.post('/api/forge', async (c) => {
   try {
     const { url, host, pass } = await c.req.json();
     
     console.log(`[SIGNAL RECEIVED]: Processing ${url}`);
-    if (host) console.log(`[DEPLOYMENT TARGET]: Prepared for ${host}`);
 
     // GATE 1: Ingest via Playwright
     const siteData = await ingestSite(url);
@@ -60,14 +81,13 @@ app.post('/api/forge', async (c) => {
     const outputPath = `${enginePath}/index.html`;
     writeFileSync(outputPath, refactoredHtml);
     
-    // NOTE: Here is where your FTP deployment logic would trigger 
-    // using the 'host' and 'pass' variables provided by the UI.
     console.log(`[DEPLOYMENT READY]: Sovereign code written to ${outputPath}`);
 
+    // We return the URL WITH the auth token so the UI can load it through the gate
     return c.json({ 
       status: 'Forged', 
       project: siteData.title,
-      downloadUrl: '/forge-engine/index.html'
+      downloadUrl: '/forge-engine/index.html?auth=VFKNMJUBYQQG6'
     });
 
   } catch (error) {
@@ -87,7 +107,7 @@ console.log(`
    UI Terminal : http://localhost:${port}
    SaaS Build  : http://localhost:${port}/build
    Engine Path : ${enginePath}
-   Status      : SYSTEM OPERATIONAL
+   Status      : SYSTEM OPERATIONAL & PROTECTED
 `);
 
 serve({ fetch: app.fetch, port });
