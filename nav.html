@@ -1,31 +1,49 @@
-<nav class="max-w-7xl mx-auto px-6 py-8 flex justify-between items-center">
-    <a href="/index.html" class="flex items-center">
+<nav class="max-w-7xl mx-auto px-6 py-8 flex justify-between items-center relative">
+    <a href="/index.html" class="flex items-center z-50">
         <svg width="220" height="40" viewBox="0 0 220 40" fill="none" xmlns="http://www.w3.org/2000/svg">
             <text x="0" y="30" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="28" letter-spacing="-0.05em" fill="#0f172a">FORGE</text>
             <text x="96" y="30" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="28" letter-spacing="-0.05em" fill="#84cc16">VERTICAL</text>
         </svg>
     </a>
+
     <div class="hidden md:flex gap-8 text-[11px] font-black uppercase tracking-widest items-center">
         <a href="/index.html#services" class="text-slate-900 hover:text-lime-600 transition-colors">Services</a>
-        
         <a href="/portfolio.html" class="text-slate-900 hover:text-lime-600 transition-colors">Portfolio</a>
-        
         <a href="/onboard.html" class="text-slate-900 hover:text-lime-600 transition-colors">Start Project</a>
-
         <a href="/tools/roi-calculator.html" class="text-slate-900 hover:text-lime-600 transition-colors flex items-center gap-2">
             Audit Tool
             <span class="bg-lime-500 w-1.5 h-1.5 rounded-full animate-pulse"></span>
         </a>
-
         <a href="javascript:void(0)" onclick="showBuildModal()" class="text-slate-900 hover:text-lime-600 transition-colors border-l border-slate-200 pl-8">
             Build Your Own
         </a>
-
         <a href="https://www.fiverr.com/s/gDb4YqE" class="text-white bg-slate-900 px-5 py-2.5 rounded-full hover:bg-lime-500 transition-all ml-2">Hire on Fiverr</a>
+    </div>
+
+    <button onclick="toggleMobileMenu()" class="md:hidden z-50 p-2 flex flex-col gap-1.5 items-end group focus:outline-none">
+        <span class="w-8 h-1 bg-slate-900 rounded-full transition-all group-hover:bg-lime-500"></span>
+        <span class="w-6 h-1 bg-[#84cc16] rounded-full transition-all"></span>
+        <span class="w-8 h-1 bg-slate-900 rounded-full transition-all group-hover:bg-lime-500"></span>
+    </button>
+
+    <div id="mobile-menu" class="fixed inset-0 bg-white z-40 translate-x-full transition-transform duration-300 ease-in-out md:hidden flex flex-col items-center justify-center gap-8 text-center">
+        <a href="/index.html#services" onclick="toggleMobileMenu()" class="text-2xl font-black uppercase tracking-tighter text-slate-900">Services</a>
+        <a href="/portfolio.html" onclick="toggleMobileMenu()" class="text-2xl font-black uppercase tracking-tighter text-slate-900">Portfolio</a>
+        <a href="/onboard.html" onclick="toggleMobileMenu()" class="text-2xl font-black uppercase tracking-tighter text-slate-900">Start Project</a>
+        <a href="/tools/roi-calculator.html" onclick="toggleMobileMenu()" class="text-2xl font-black uppercase tracking-tighter text-lime-600">Audit Tool</a>
+        <a href="javascript:void(0)" onclick="showBuildModal(); toggleMobileMenu();" class="text-2xl font-black uppercase tracking-tighter text-slate-400">Build Your Own</a>
+        <a href="https://www.fiverr.com/s/gDb4YqE" class="mt-4 text-white bg-slate-900 px-8 py-4 rounded-full font-black uppercase tracking-widest hover:bg-lime-500 transition-all">Hire on Fiverr</a>
     </div>
 </nav>
 
 <script>
+// Toggle for Mobile Hamburger Menu
+function toggleMobileMenu() {
+    const menu = document.getElementById('mobile-menu');
+    menu.classList.toggle('translate-x-full');
+}
+
+// "Build Your Own" Modal Alert
 function showBuildModal() {
     alert("Industrial-Grade Build Tool: We are currently finalizing the 'Build Your Own' sandbox for public beta. Sign up for our newsletter or contact us directly for early access.");
 }
