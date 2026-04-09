@@ -7,12 +7,22 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;800&display=swap" rel="stylesheet">
     <style>
+        /* Fix the white gap: Ensure body fills the screen and matches the background */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+        }
+
         body { 
             font-family: 'Plus Jakarta Sans', sans-serif; 
-            background-color: #ffffff; 
             color: #09090b;
             background-image: radial-gradient(circle at 2px 2px, #f1f1f4 1px, transparent 0);
             background-size: 40px 40px;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
         
         .lime-accent { color: #84cc16 !important; }
@@ -26,13 +36,17 @@
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
         }
 
-        /* High-Visibility Inputs */
+        /* High-Visibility Inputs - Responsive Font Size */
         input, textarea { 
             background-color: rgba(255, 255, 255, 0.05) !important; 
             border: 1px solid rgba(255, 255, 255, 0.2) !important;
             color: #ffffff !important; 
-            font-size: 1.125rem !important; /* Increased to 18px */
+            font-size: 1rem !important; /* Default 16px to prevent iOS zoom */
             transition: all 0.3s ease;
+        }
+        
+        @media (min-width: 768px) {
+            input, textarea { font-size: 1.125rem !important; }
         }
         
         input:focus, textarea:focus {
@@ -42,46 +56,37 @@
             transform: translateY(-1px);
         }
 
-        /* Higher contrast placeholders */
         ::placeholder { color: rgba(255, 255, 255, 0.5) !important; }
 
         .section-label {
-            color: rgba(255, 255, 255, 0.7); /* Boosted contrast */
-            font-size: 0.85rem; /* Increased size */
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.85rem;
             font-weight: 800;
             letter-spacing: 0.2em;
             text-transform: uppercase;
         }
-
-        .input-group label {
-            color: #ffffff;
-            font-weight: 600;
-            font-size: 1rem;
-            margin-bottom: 0.5rem;
-            display: block;
-        }
     </style>
 </head>
-<body class="antialiased p-6 md:p-12">
+<body class="antialiased">
 
     <div id="global-nav"></div>
 
-    <main class="max-w-4xl mx-auto py-12">
+    <main class="max-w-4xl mx-auto py-12 px-6 flex-grow">
         <header class="mb-12">
             <span class="lime-accent text-xs font-bold uppercase tracking-[0.2em]">Manual Lead Entry</span>
-            <h1 class="text-6xl font-black tracking-tighter mt-2 text-zinc-900">Forge Your <span class="italic lime-accent">Vertical.</span></h1>
-            <p class="text-zinc-600 mt-6 text-xl font-light">Define your architectural DNA. We will provide a custom quote.</p>
+            <h1 class="text-4xl md:text-6xl font-black tracking-tighter mt-2 text-zinc-900">Forge Your <span class="italic lime-accent">Vertical.</span></h1>
+            <p class="text-zinc-600 mt-6 text-lg md:text-xl font-light">Define your architectural DNA. We will provide a custom quote.</p>
         </header>
 
-        <form action="https://formspree.io/f/xvzvzvva" method="POST" class="space-y-12">
+        <form action="https://formspree.io/f/xvzvzvva" method="POST" class="space-y-8 md:space-y-12">
             
-            <div class="form-card p-12 rounded-[3rem]">
-                <div class="flex flex-col items-center mb-12 border-b border-white/10 pb-10">
-                    <img src="assets/form_onboard.gif" alt="Forge Onboarding" class="w-80 h-auto mb-8 rounded-2xl">
+            <div class="form-card p-8 md:p-12 rounded-[2rem] md:rounded-[3rem]">
+                <div class="flex flex-col items-center mb-8 md:mb-12 border-b border-white/10 pb-10 text-center">
+                    <img src="assets/form_onboard.gif" alt="Forge Onboarding" class="w-64 md:w-80 h-auto mb-8 rounded-2xl">
                     <h3 class="section-label lime-accent underline decoration-2 underline-offset-8">01. Contact Details</h3>
                 </div>
                 
-                <div class="grid md:grid-cols-2 gap-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
                     <input type="text" name="First Name" placeholder="First Name" required class="w-full rounded-2xl p-5">
                     <input type="text" name="Surname" placeholder="Surname" required class="w-full rounded-2xl p-5">
                     <input type="email" name="Email" placeholder="Email Address" required class="w-full rounded-2xl p-5">
@@ -91,14 +96,14 @@
                 </div>
             </div>
 
-            <div class="form-card p-12 rounded-[3rem]">
+            <div class="form-card p-8 md:p-12 rounded-[2rem] md:rounded-[3rem]">
                 <h3 class="section-label mb-8 lime-accent">02. Project Description</h3>
                 <div class="space-y-8">
                     <textarea name="Project Vision" placeholder="What are we building? Describe your goals..." rows="6" required class="w-full rounded-2xl p-5"></textarea>
                     
                     <div class="pt-8 border-t border-white/10">
                         <p class="section-label mb-6">Inspiration Benchmarks</p>
-                        <div class="grid md:grid-cols-2 gap-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <input type="url" name="Inspiration 1" placeholder="URL #1 (Layout)" class="w-full rounded-2xl p-5">
                             <input type="url" name="Inspiration 2" placeholder="URL #2 (Vibe)" class="w-full rounded-2xl p-5">
                         </div>
@@ -106,20 +111,20 @@
                 </div>
             </div>
 
-            <div class="grid md:grid-cols-2 gap-10">
-                <div class="form-card p-12 rounded-[3rem]">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
+                <div class="form-card p-8 md:p-12 rounded-[2rem] md:rounded-[3rem]">
                     <h3 class="section-label mb-8 lime-accent">03. Infrastructure</h3>
                     <div class="space-y-10">
                         <div>
                             <p class="text-lg font-bold text-white mb-6">Need a Domain Name?</p>
-                            <div class="flex gap-12">
+                            <div class="flex gap-8 md:gap-12">
                                 <label class="flex items-center gap-3 text-lg text-white/90 cursor-pointer hover:text-[#84cc16] transition-colors"><input type="radio" name="Need Domain" value="Yes" class="accent-[#84cc16] h-5 w-5"> Yes</label>
                                 <label class="flex items-center gap-3 text-lg text-white/90 cursor-pointer hover:text-[#84cc16] transition-colors"><input type="radio" name="Need Domain" value="No" checked class="accent-[#84cc16] h-5 w-5"> No</label>
                             </div>
                         </div>
                         <div>
                             <p class="text-lg font-bold text-white mb-6">Need Hosting?</p>
-                            <div class="flex gap-12">
+                            <div class="flex gap-8 md:gap-12">
                                 <label class="flex items-center gap-3 text-lg text-white/90 cursor-pointer hover:text-[#84cc16] transition-colors"><input type="radio" name="Need Hosting" value="Yes" class="accent-[#84cc16] h-5 w-5"> Yes</label>
                                 <label class="flex items-center gap-3 text-lg text-white/90 cursor-pointer hover:text-[#84cc16] transition-colors"><input type="radio" name="Need Hosting" value="No" checked class="accent-[#84cc16] h-5 w-5"> No</label>
                             </div>
@@ -127,7 +132,7 @@
                     </div>
                 </div>
 
-                <div class="form-card p-12 rounded-[3rem] flex flex-col justify-between">
+                <div class="form-card p-8 md:p-12 rounded-[2rem] md:rounded-[3rem] flex flex-col justify-between">
                     <div>
                         <h3 class="section-label mb-8 lime-accent">04. Brand Assets</h3>
                         <input type="url" name="Asset Link" placeholder="Drive/Dropbox Link" class="w-full rounded-2xl p-5 mb-6">
@@ -136,7 +141,7 @@
                 </div>
             </div>
 
-            <button type="submit" class="w-full lime-bg text-black py-10 rounded-[2.5rem] font-black uppercase tracking-[0.4em] text-lg hover:scale-[1.02] hover:brightness-110 active:scale-95 transition-all duration-300 shadow-2xl shadow-lime-500/30">
+            <button type="submit" class="w-full lime-bg text-black py-8 md:py-10 rounded-[1.5rem] md:rounded-[2.5rem] font-black uppercase tracking-[0.2em] md:tracking-[0.4em] text-md md:text-lg hover:scale-[1.01] hover:brightness-110 active:scale-95 transition-all duration-300 shadow-2xl shadow-lime-500/30 mb-8">
                 Commence Build Sequence
             </button>
         </form>
