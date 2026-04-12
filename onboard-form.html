@@ -11,13 +11,13 @@
         .vibrant-text { background: linear-gradient(90deg, #10b981 0%, #a3e635 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .glass { background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.05); }
         
-        /* Precision Text Alignment Fixes */
+        /* Fixed Padding and Precision Alignment */
         input, select, textarea { 
             background: #0f172a !important; 
             border: 1px solid #1e293b !important; 
             color: white !important; 
             width: 100%; 
-            padding: 1.25rem; /* Increased padding for better vertical centering */
+            padding: 1rem 1.5rem !important; /* Fixed padding for better internal spacing */
             border-radius: 0.75rem;
             line-height: 1.5;
             transition: all 0.2s ease;
@@ -25,19 +25,24 @@
         
         input::placeholder, textarea::placeholder {
             color: #475569;
-            vertical-align: middle;
         }
 
         input:focus, textarea:focus { 
             border-color: #a3e635 !important; 
             outline: none; 
             background: #111b2e !important;
+            box-shadow: 0 0 15px rgba(163, 230, 53, 0.1);
         }
 
         .checkbox-custom { width: 1.25rem; height: 1.25rem; accent-color: #a3e635; cursor: pointer; }
         
-        /* Auto-expanding textarea logic */
-        .expandable { min-height: 3rem; resize: vertical; }
+        /* MSA Scrollbox Styling */
+        .terms-box {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255,255,255,0.1);
+            scrollbar-width: thin;
+            scrollbar-color: #1e293b #020617;
+        }
     </style>
 </head>
 <body class="antialiased p-6 md:p-12">
@@ -45,15 +50,14 @@
     <div class="max-w-4xl mx-auto">
         <header class="mb-16 flex flex-col md:flex-row justify-between items-center gap-6 border-b border-zinc-800 pb-10">
             <div class="flex items-center gap-4">
-                <img src="assets/fvlogo.png" class="h-10" alt="FV">
                 <div class="text-2xl font-black tracking-tighter uppercase">Forge <span class="vibrant-text italic">Vertical</span></div>
             </div>
-            <div class="text-zinc-500 text-[10px] font-black uppercase tracking-[0.3em]">Project Initialization // V2.py</div>
+            <div class="text-zinc-500 text-[10px] font-black uppercase tracking-[0.3em]">Infrastructure Initializer // V3.0</div>
         </header>
 
         <section class="mb-12">
-            <h2 class="text-4xl font-extrabold tracking-tighter mb-4">Onboarding <span class="text-[#a3e635]">Form</span></h2>
-            <p class="text-zinc-400 font-light text-lg">Define your infrastructure parameters. Upon submission, a formal Zoho Invoice will be generated based on the details provided below.</p>
+            <h2 class="text-4xl font-extrabold tracking-tighter mb-4">Project <span class="text-[#a3e635]">Onboarding</span></h2>
+            <p class="text-zinc-400 font-light text-lg italic">Provisioning the Satellite Authority Network for ASUS Global Assets.</p>
         </section>
 
         <form action="https://formspree.io/f/xvzvzvva" method="POST" class="space-y-12">
@@ -70,63 +74,51 @@
             </div>
 
             <div class="glass p-8 md:p-10 rounded-[2.5rem] space-y-6">
-                <h3 class="text-[#a3e635] font-black uppercase text-xs tracking-widest">02. Domain Infrastructure</h3>
-                <p class="text-sm text-zinc-500 font-light">List 10 preferred domains (one per line) or authorize Forge Vertical selection.</p>
-                <textarea name="requested_domains" rows="4" placeholder="1. asus-technical-za.com&#10;2. rog-pro-reports.uk&#10;3. mobile-strike-force.eu..." class="expandable"></textarea>
-                <div class="flex items-center gap-4 p-5 bg-black/40 rounded-2xl border border-white/5">
-                    <input type="checkbox" name="auto_provision" class="checkbox-custom">
-                    <label class="text-sm font-bold uppercase tracking-widest text-zinc-300">Authorize Forge Vertical to select optimal domains on our behalf</label>
-                </div>
-                <p class="text-[10px] text-zinc-600 italic tracking-wider uppercase font-black">
-                    Verification Tool: <a href="https://www.whois.com/whois/" target="_blank" class="underline text-[#a3e635] hover:text-white transition-colors">Check Domain Availability via WhoIs</a>
-                </p>
-            </div>
-
-            <div class="glass p-8 md:p-10 rounded-[2.5rem] space-y-6">
-                <h3 class="text-[#a3e635] font-black uppercase text-xs tracking-widest">03. Target Devices & Assets</h3>
-                <div class="space-y-4">
-                    <label class="text-xs font-black uppercase tracking-widest text-zinc-500">Hardware / Handheld Focus List (Expandable)</label>
-                    <textarea name="target_devices" rows="3" placeholder="e.g. ROG Ally, Maximus Z790 Hero, ProArt Studiobook, Zenbook S 13 OLED..." class="expandable"></textarea>
-                </div>
+                <h3 class="text-[#a3e635] font-black uppercase text-xs tracking-widest">02. Network Parameters</h3>
+                <p class="text-sm text-zinc-500 font-light">Specify target product lines for the first 1,000 unique nodes.</p>
+                <textarea name="target_devices" rows="3" placeholder="e.g. ROG Ally, Maximus Z790, ProArt Studiobook..." required></textarea>
+                
                 <div class="space-y-4 pt-4">
-                    <label class="text-xs font-black uppercase tracking-widest text-zinc-500">Asset Repository Link</label>
-                    <input type="url" name="asset_repository" placeholder="https://dropbox.com/share-link-here" required>
-                    <p class="text-[10px] text-zinc-600 italic leading-relaxed">
-                        Precision Compliance: Forge Vertical provides technical infrastructure only. All graphic, video, and creative assets must be supplied via the repository above.
-                    </p>
+                    <label class="text-xs font-black uppercase tracking-widest text-zinc-500">Asset Repository Link (Dropbox/Drive)</label>
+                    <input type="url" name="asset_repository" placeholder="https://share-link-here.com" required>
                 </div>
             </div>
 
             <div class="glass p-8 md:p-10 rounded-[2.5rem] space-y-6 border-l-4 border-[#a3e635]">
-                <h3 class="text-[#a3e635] font-black uppercase text-xs tracking-widest">04. Scope of Service & Technical Consent</h3>
-                <div class="bg-black/40 p-6 rounded-2xl text-xs text-zinc-400 leading-relaxed space-y-4 h-40 overflow-y-scroll border border-white/5 scrollbar-thin scrollbar-thumb-zinc-800">
-                    <p><strong>IN-SCOPE:</strong> Provisioning of 10x independent satellite TLDs; Generation of 1,000+ localized technical nodes via .py engine; Asset mapping for UK, EU, and ZA markets; GA4 Event tracking; Deployment via private GitHub infrastructure.</p>
-                    <p><strong>DATA CONSENT & GIT COMPLIANCE:</strong> By submitting this form, the Client acknowledges and agrees that all supplied brand assets (videos, images, logos) will be hosted within a private GitHub repository for the duration of the engagement to facilitate automated deployment and version control.</p>
-                    <p><strong>LIMITATIONS:</strong> Forge Vertical does not provide graphic design or content creation services. Site availability is dependent on third-party registrar uptime.</p>
+                <h3 class="text-[#a3e635] font-black uppercase text-xs tracking-widest">03. Master Service Agreement (MSA)</h3>
+                
+                <div class="terms-box p-6 rounded-2xl text-[11px] text-zinc-400 leading-relaxed space-y-4 h-64 overflow-y-scroll border border-white/5">
+                    <p class="text-white font-bold uppercase tracking-wider">Scope & Deployment Infrastructure</p>
+                    <ul class="list-decimal pl-4 space-y-3">
+                        <li><strong>Provisioning:</strong> Forge Vertical will deploy ten (10) independent domains and ten (10) corresponding GitHub repositories dedicated exclusively to the Client’s project.</li>
+                        <li><strong>Content Density:</strong> Each repository will host one hundred (100) unique technical nodes (pages) optimized for the agreed product lines. Forge Vertical utilizes proprietary AI-driven content diversification to maintain search relevance.</li>
+                        <li><strong>Satellite Nature:</strong> This service is a "Satellite Authority Network." We provide organic search volume and lead acquisition infrastructure; we do not manage paid advertising or social media marketing.</li>
+                        <li><strong>The Engine:</strong> The .py generation engine is the exclusive Intellectual Property of Forge Vertical. It is not for sale or license; it is utilized as a managed service tool only.</li>
+                        <li><strong>Payment Milestones:</strong> A non-refundable 50% "Initial Forge" deposit ($7,500) is required to commence. The final balance ($7,500) is due upon evidence of the 10-domain grid completion.</li>
+                        <li><strong>Monthly Maintenance:</strong> A recurring monthly retainer of $1,500 is mandatory for exclusivity, technical updates, and infrastructure maintenance.</li>
+                        <li><strong>No Refund Policy:</strong> As digital assets are provisioned and intellectual resources are deployed upon activation, no refunds are permitted once the build sequence commences.</li>
+                        <li><strong>Termination:</strong> Upon contract cessation, Forge Vertical will deactivate all domains/repos unless the Client requests a free transfer of the assets to their own management.</li>
+                        <li><strong>Reporting:</strong> Forge Vertical will provide a monthly PDF brief including Search Analytics and Project Summary to the authorized email on record.</li>
+                    </ul>
                 </div>
+
                 <div class="flex items-start gap-4 pt-4">
-                    <input type="checkbox" name="accept_scope" class="checkbox-custom" required>
-                    <label class="text-sm text-zinc-300 leading-tight">I authorize the commencement of the Forge Vertical build sequence and accept the Technical Consent requirements regarding GitHub asset hosting.</label>
+                    <input type="checkbox" name="accept_terms" class="checkbox-custom" required>
+                    <label class="text-sm text-zinc-300 leading-tight">I have read, understood, and agree to the 10-point Master Service Agreement above.</label>
                 </div>
             </div>
 
             <div class="space-y-8 text-center">
-                <textarea name="additional_notes" rows="4" placeholder="Additional instructions or technical requirements..." class="expandable"></textarea>
-                
                 <button type="submit" class="w-full bg-[#a3e635] text-black font-black uppercase tracking-[0.25em] py-8 rounded-[2rem] hover:bg-white transition-all transform hover:scale-[1.02] text-xl shadow-2xl">
-                    Authorize Build Sequence
+                    Authorize Initial Forge ($7,500)
                 </button>
-                
-                <div class="flex flex-col items-center gap-2 opacity-40">
-                    <p class="text-[10px] uppercase tracking-widest">Financing: Zoho Invoicing generated upon submission</p>
-                    <p class="text-[9px] italic font-light tracking-tighter">Forge Vertical // Architecture V2.py // Cape Town, RSA</p>
-                </div>
+                <p class="text-[10px] uppercase tracking-[0.2em] text-zinc-500 font-bold">Invoicing via Zoho Finance // Secured Infrastructure</p>
             </div>
         </form>
     </div>
 
     <footer class="py-20 text-center opacity-20">
-        <div class="text-[10px] font-black uppercase tracking-[0.5em]">Forge Vertical Architecture</div>
+        <div class="text-[10px] font-black uppercase tracking-[0.5em]">Forge Vertical Architecture // Cape Town, RSA</div>
     </footer>
 
 </body>
