@@ -8,7 +8,7 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-C6Z3VMB0ND"></script>
     <script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments);}}gtag('js',new Date());gtag('config','G-C6Z3VMB0ND');</script>
 
-    <meta name="description" content="Independent Logic Audit & Threat Intelligence. Uncovering CSRF bleeding, Auth-bypass, and RSA Private Key exposure for global corporate ecosystems.">
+    <meta name="description" content="Independent Logic Audit. Uncovering CSRF bleeding, Auth-bypass, and RSA Private Key exposure for global corporate ecosystems.">
     
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -27,6 +27,13 @@
         .package-card { border: 1px solid #eeeeee; transition: 0.3s; }
         .package-card:hover { border-color: #00d18a; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
     </style>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            fetch('/nav.html').then(r => r.text()).then(d => document.getElementById('nav-placeholder').innerHTML = d);
+            fetch('/footer.html').then(r => r.text()).then(d => document.getElementById('footer-placeholder').innerHTML = d);
+        });
+    </script>
 </head>
 <body class="antialiased">
 
@@ -38,40 +45,40 @@
             <h1 class="text-6xl md:text-8xl font-black uppercase leading-[0.85] mb-8">
                 Logic <span class="accent-text">Audit</span> <br>& Intelligence
             </h1>
-            <p class="text-2xl text-zinc-600 max-w-3xl leading-snug">
-                Automated scanners miss structural flaws. We operate where the <span class="text-black font-bold">SDLC</span> bleeds—uncovering <span class="text-black font-bold">RSA Private Key leaks</span> and the <span class="accent-text font-bold">LVMH CSRF Protocol</span> flaws that scanners ignore.
+            <p class="text-2xl text-zinc-600 max-w-3xl leading-snug mb-10">
+                The digital landscape is in a state of constant infiltration. Automated scanners miss the structural rot. We specialize in identifying <span class="text-black font-bold">Logic Flaws</span> where the <span class="text-black font-bold">SDLC</span> bleeds—from <span class="text-black font-bold">RSA Private Key exposure</span> to <span class="accent-text font-bold">CSRF Protocol</span> flaws uncovered across multi-site global clusters.
             </p>
-            <div class="mt-12 p-6 bg-zinc-50 rounded-xl border border-zinc-100 italic text-zinc-500 text-sm">
-                <strong>Peace of Mind:</strong> Our independent audit provides proof of secure horizontal authentication. We hunt the issues; your team patches the leak.
+            <div class="p-8 bg-zinc-50 rounded-xl border border-zinc-100 italic text-zinc-500 text-lg">
+                <strong>Peace of Mind:</strong> Our independent researcher-led checks provide the certainty that dev teams and bots overlook. We hunt the issues; your team patches the leak.
             </div>
         </header>
 
         <section class="grid md:grid-cols-3 gap-10 mb-32">
             <div class="package-card p-10 rounded-2xl">
-                <h3 class="text-zinc-400 uppercase text-xs font-bold tracking-widest mb-2">Tier 01 // Solo Node</h3>
-                <div class="text-5xl font-black mb-6 italic">$100 - $2k</div>
-                <p class="text-sm text-zinc-500 mb-8">Single site target. Vulnerability mapping and surface-level credential leak check.</p>
-                <div class="p-3 bg-zinc-50 rounded text-[10px] uppercase font-bold text-zinc-600">50% Startup Deposit Required</div>
+                <h3 class="text-zinc-400 uppercase text-xs font-bold tracking-widest mb-2">Standard Audit</h3>
+                <div class="text-4xl font-black mb-6 italic">$100 - $2,000</div>
+                <p class="text-sm text-zinc-500 mb-8">Single Site. Surface-level vulnerability mapping and credential leak check.</p>
+                <div class="p-3 bg-zinc-50 rounded text-[10px] uppercase font-bold text-zinc-600">50% Non-Refundable Deposit</div>
             </div>
             
             <div class="package-card p-10 rounded-2xl border-accent bg-[#00d18a]/5 shadow-xl">
-                <h3 class="accent-text uppercase text-xs font-bold tracking-widest mb-2">Tier 02 // Regional Cluster</h3>
-                <div class="text-5xl font-black mb-6 italic">$2k - $5k</div>
-                <p class="text-sm text-zinc-600 mb-8 font-bold">2 Site Audit. Deep Logic Analysis. We verify if Site A vulnerabilities are replicated across Site B (LVMH Protocol).</p>
-                <div class="p-3 bg-accent/20 rounded text-[10px] uppercase font-bold accent-text">Multi-Domain Security</div>
+                <h3 class="accent-text uppercase text-xs font-bold tracking-widest mb-2">Multi-Site Strike</h3>
+                <div class="text-4xl font-black mb-6 italic">$2,000 - $5,000</div>
+                <p class="text-sm text-zinc-600 mb-8 font-bold">2 Sites. Deep Logic Analysis. Verifying horizontal vulnerability replication across connected domains.</p>
+                <div class="p-3 bg-accent/20 rounded text-[10px] uppercase font-bold accent-text">Multi-Domain Logic Protocol</div>
             </div>
 
             <div class="package-card p-10 rounded-2xl">
-                <h3 class="text-zinc-400 uppercase text-xs font-bold tracking-widest mb-2">Tier 03 // Ecosystem</h3>
-                <div class="text-5xl font-black mb-6 italic">$5k - $10k+</div>
-                <p class="text-sm text-zinc-500 mb-8">Up to 5 Sites. RSA Private Key hunts, deep SDLC audit, and bulk auth-bypass testing.</p>
-                <div class="p-3 bg-zinc-50 rounded text-[10px] uppercase font-bold text-zinc-600">Full Evidence Vault</div>
+                <h3 class="text-zinc-400 uppercase text-xs font-bold tracking-widest mb-2">Ecosystem Audit</h3>
+                <div class="text-4xl font-black mb-6 italic">$5,000 - $10,000+</div>
+                <p class="text-sm text-zinc-500 mb-8">Up to 5 Sites. Full RSA/SDLC Deep Dive and authentication bypass testing.</p>
+                <div class="p-3 bg-zinc-50 rounded text-[10px] uppercase font-bold text-zinc-600">Full Evidence Vault Included</div>
             </div>
         </section>
 
         <div class="grid lg:grid-cols-12 gap-16">
             <div id="initiate-audit" class="lg:col-span-7 p-10 md:p-16 rounded-[2rem] border-4 border-accent shadow-2xl bg-white">
-                <h2 class="text-4xl font-bold mb-12 tracking-tighter uppercase">Initiate <span class="accent-text">Audit</span></h2>
+                <h2 class="text-4xl font-bold mb-12 tracking-tighter uppercase leading-none">Initiate <span class="accent-text">Audit</span></h2>
                 <form action="https://formspree.io/f/xvzvzvva" method="POST" class="space-y-6 text-sm">
                     <div class="grid md:grid-cols-2 gap-6">
                         <input type="text" name="FullName" placeholder="Name & Surname" class="form-input" required>
@@ -81,13 +88,15 @@
                         <input type="email" name="Email" placeholder="Corporate Email" class="form-input" required>
                         <input type="text" name="Company" placeholder="Organization" class="form-input" required>
                     </div>
-                    <textarea name="Scope" placeholder="Scope (Specific URLs or IPs)" class="form-input h-32" required></textarea>
-                    <textarea name="OutOfScope" placeholder="Out of Scope Assets" class="form-input h-20"></textarea>
-                    <textarea name="Reasoning" placeholder="Suspected Logic Concerns (e.g. CSRF leakage)" class="form-input h-32"></textarea>
+                    <textarea name="Scope" placeholder="Scope (List of Specific URLs or IPs)" class="form-input h-32" required></textarea>
+                    <textarea name="OutOfScope" placeholder="Excluded Targets" class="form-input h-20"></textarea>
+                    <textarea name="Reasoning" placeholder="Headers Required / Suspected Logic Concerns (e.g. CSRF leakage)" class="form-input h-32"></textarea>
+                    <textarea name="Expectations" placeholder="Summary and Expectations" class="form-input h-32"></textarea>
                     
-                    <div class="bg-zinc-50 p-8 rounded-xl border border-zinc-100 text-xs text-zinc-500 leading-relaxed space-y-3">
+                    <div class="bg-zinc-50 p-8 rounded-xl border border-zinc-100 text-xs text-zinc-500 leading-relaxed italic space-y-3">
                         <p class="text-black font-bold uppercase text-[10px]">Confidentiality Agreement & Terms</p>
-                        <p>1. Agreement to a 50% non-refundable deposit to start. 2. A find summary is supplied before final 50% payment for full PoC evidence. 3. <strong>Forge Vertical guarantees 100% confidentiality.</strong> Your company name will never be disclosed in our methodology articles. This form serves as a binding mutual electronic signature.</p>
+                        <p>1. By submitting, you agree to a 50% non-refundable start-up deposit. (2) Upon a successful find, a technical summary will be provided. (3) The remaining 50% balance is required for the full Proof of Concept (PoC) evidence. (4) Agreement to these terms serves as a binding electronic signature for both Forge Vertical and your organization.</p>
+                        <p>2. NDA: <strong>Forge Vertical guarantees that all data and findings are strictly confidential.</strong> While we publish methodology articles, client names and identifying brand data will never be disclosed. Should external leaks occur outside the control of either party, neither side holds the other responsible. A confirmation email with your data and this agreement will be sent to the email provided.</p>
                     </div>
 
                     <button type="submit" class="w-full py-6 rounded-2xl accent-bg text-white font-black hover:scale-105 transition-all uppercase tracking-widest text-lg">Send Request & Sign Agreement</button>
@@ -96,12 +105,12 @@
 
             <div class="lg:col-span-5 space-y-12 py-10">
                 <div class="border-l-4 border-accent pl-8">
-                    <h4 class="accent-text font-bold uppercase text-xs tracking-widest mb-4">Independent Hunt</h4>
-                    <p class="text-zinc-700 text-xl leading-snug">We hunt the flaws that allow a site to declare a user balance or force a session hijack. Unedited PoC evidence provided.</p>
+                    <h4 class="accent-text font-bold uppercase text-xs tracking-widest mb-4">Independent Intelligence</h4>
+                    <p class="text-zinc-700 text-xl leading-snug">Scanners chase CVEs. We chase <span class="text-black font-bold">Logic</span>. We hunt for the flaws that allow a site to declare a user balance or force a session hijack. Unedited PoC evidence provided.</p>
                 </div>
                 <div class="p-8 border-l-2 border-zinc-100 opacity-60">
-                    <h4 class="text-zinc-600 font-bold uppercase text-xs tracking-widest mb-4">Insulated Reputation</h4>
-                    <p class="text-zinc-500 text-sm leading-relaxed">Discreet, once-off security audits. We provide a downloadable PDF of your submission data and this agreement upon request.</p>
+                    <h4 class="text-zinc-600 font-bold uppercase text-xs tracking-widest mb-4">The Forge Network Insulator</h4>
+                    <p class="text-zinc-500 text-sm leading-relaxed">Discreet, once-off security audits. We operate outside public disclosure platforms to insulate your reputation. We provide a downloadable record of your submission upon request.</p>
                 </div>
                 <div class="opacity-10 text-[10rem] font-black tracking-tighter select-none">FV</div>
             </div>
@@ -109,21 +118,5 @@
     </main>
 
     <div id="footer-placeholder"></div>
-
-    <script>
-        // ASYNC INJECTION SCRIPT
-        function injectHTML(url, placeholderId) {
-            fetch(url)
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById(placeholderId).innerHTML = data;
-                })
-                .catch(err => console.error('Error loading ' + url, err));
-        }
-
-        // Call your root files
-        injectHTML('/nav.html', 'nav-placeholder');
-        injectHTML('/footer.html', 'footer-placeholder');
-    </script>
 </body>
 </html>
