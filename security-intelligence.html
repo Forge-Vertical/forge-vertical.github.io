@@ -1,24 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta name="title" content="Security Intelligence & Logic Audit | Forge Vertical">
+    <meta name="description" content="Independent Security Researcher providing unedited PoC evidence for CSRF leaks, RSA Private Key exposure, and SDLC logic flaws. Corporate ecosystem audits available globally.">
+    <meta name="keywords" content="Logic Audit, CSRF Leakage, SDLC Security, RSA Private Key Exposure, Enterprise Security Research, Independent Vulnerability Report, Cape Town Cyber Security, Forge Vertical">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="English">
+    <meta name="author" content="Forge Vertical">
 
-<meta name="title" content="Security Intelligence & Logic Audit | Forge Vertical">
-<meta name="description" content="Independent Security Researcher providing unedited PoC evidence for CSRF leaks, RSA Private Key exposure, and SDLC logic flaws. Corporate ecosystem audits available globally.">
-<meta name="keywords" content="Logic Audit, CSRF Leakage, SDLC Security, RSA Private Key Exposure, Enterprise Security Research, Independent Vulnerability Report, Cape Town Cyber Security, Forge Vertical">
-<meta name="robots" content="index, follow">
-<meta name="language" content="English">
-<meta name="author" content="Forge Vertical">
+    <meta name="geo.region" content="ZA-WC">
+    <meta name="geo.placename" content="Cape Town">
+    <meta name="geo.position" content="-33.9249;18.4241">
+    <meta name="ICBM" content="-33.9249, 18.4241">
 
-<meta name="geo.region" content="ZA-WC">
-<meta name="geo.placename" content="Cape Town">
-<meta name="geo.position" content="-33.9249;18.4241">
-<meta name="ICBM" content="-33.9249, 18.4241">
-
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://forgevertical.com/security-intelligence.html">
-<meta property="og:title" content="Security Intelligence: Uncovering the SDLC Bleed">
-<meta property="og:description" content="Moving beyond automated scanners. We hunt logic flaws in billion-dollar clusters. Independent PoC evidence and remediation.">
-<meta property="og:image" content="https://forgevertical.com/assets/security-og-image.png">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://forgevertical.com/security-intelligence.html">
+    <meta property="og:title" content="Security Intelligence: Uncovering the SDLC Bleed">
+    <meta property="og:description" content="Moving beyond automated scanners. We hunt logic flaws in billion-dollar clusters. Independent PoC evidence and remediation.">
+    <meta property="og:image" content="https://forgevertical.com/assets/security-og-image.png">
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -26,10 +25,8 @@
     
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-C6Z3VMB0ND"></script>
     <script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments);}}gtag('js',new Date());gtag('config','G-C6Z3VMB0ND');</script>
-
-    <meta name="description" content="Independent Logic Audit. We specialize where the SDLC bleeds: uncovering CSRF bleeding and RSA Private Key exposure for global corporate ecosystems.">
-    
     <script src="https://cdn.tailwindcss.com"></script>
+    
     <style>
         @import url('https://fonts.cdnfonts.com/css/georgia');
         
@@ -38,36 +35,35 @@
         
         .accent-text { color: #00d18a; }
         .accent-bg { background-color: #00d18a; }
-        
-        /* THE OFFICIAL GREEN #00d18a */
         .border-accent { border-color: #00d18a; }
 
         /* TACTICAL CARBON GREY GLASSMORPHISM (Form Intake) */
         .glass-panel {
-            background: rgba(10, 10, 10, 0.98); /* Deep Carbon Grey */
+            background: rgba(10, 10, 10, 0.98); 
             backdrop-filter: blur(8px);
-            border: 2px solid #00d18a; /* Bold Brand Border */
+            border: 2px solid #00d18a; 
             box-shadow: 0 20px 60px rgba(0, 209, 138, 0.15);
-            color: #d1d5db; /* Lighter text for dark bg */
+            color: #d1d5db; 
         }
-        .glass-panel h2 { color: #ffffff; } /* Bright white header */
+        .glass-panel h2 { color: #ffffff; }
 
         /* Carbon Fibre Texture (Peace of Mind / Evidence) */
         .carbon-glass {
-            background: rgba(24, 24, 24, 0.95) url('assets/carbon-fibre.png'); /* Add your texture link here */
+            background: rgba(24, 24, 24, 0.95) url('assets/carbon-fibre.png'); 
             backdrop-filter: blur(5px);
             border: 1px solid rgba(255, 255, 255, 0.1);
             color: #d1d5db;
         }
         
-        /* High-Intent Form Fields */
         .form-input { background: #1a1a1a; border: 1px solid #333; padding: 16px; border-radius: 4px; width: 100%; color: #fff; transition: 0.3s; }
         .form-input:focus { border-color: #00d18a; outline: none; background: #222; }
         .form-input::placeholder { color: #71717a; }
         
-        /* Tiered Cards */
         .package-card { border: 1px solid #f3f4f6; transition: 0.3s; height: 100%; }
         .package-card:hover { border-color: #00d18a; box-shadow: 0 10px 40px rgba(0,0,0,0.05); }
+
+        /* Fix for Logo Clipping */
+        .logo-box { min-width: 350px; }
     </style>
     
     <script>
@@ -84,6 +80,9 @@
     <main class="max-w-7xl mx-auto px-6 py-24">
         
         <header class="max-w-4xl mb-32 border-l-8 border-[#00d18a] pl-10">
+            <div class="logo-box mb-8">
+                 <span class="text-4xl font-black tracking-tighter uppercase">FORGE <span class="accent-text">VERTICAL</span></span>
+            </div>
             <h1 class="text-6xl md:text-8xl font-black uppercase leading-[0.85] mb-8">
                 Logic <span class="accent-text">Audit</span> <br>& Intelligence
             </h1>
@@ -91,7 +90,7 @@
                 Automated scanners chase CVEs. We chase <span class="text-black font-bold">Logic</span>. We specialize where the <span class="text-black font-bold">SDLC</span> bleeds—from <span class="text-black font-bold">RSA Private Key exposure</span> to the <span class="accent-text font-bold">CSRF Protocol</span> flaws uncovered across billion-dollar global clusters.
             </p>
             
-            <div class="carbon-glass p-12 rounded-2xl italic text-lg leading-snug">
+            <div class="carbon-glass p-12 rounded-2xl italic text-lg leading-snug shadow-2xl">
                 <p><strong>Independent Certainty:</strong> Our researcher-led checks provide the assurance that dev teams and automated bots miss. We hunt the issues; your team patches the leak.</p>
             </div>
         </header>
@@ -141,8 +140,8 @@
                     
                     <div class="bg-[#1a1a1a] p-8 rounded-xl border border-zinc-800 text-xs text-zinc-400 leading-relaxed italic space-y-3">
                         <p class="text-white font-bold uppercase text-[10px]">Confidentiality & Liability Agreement (Click-wrap)</p>
-                        <p>1. By submitting this request, you agree to a 50% non-refundable start-up deposit. (2) Upon a successful find, a technical summary will be provided. (3) The final 50% balance is required for the full Proof of Concept (PoC) evidence vault (images and video). (4) Agreement to these terms serves as a binding electronic signature for both Forge Vertical and your organization. We will fist supply a summary of what was found, which will be enough for you to decide to pay the final balance or not.</p>
-                        <p>2. NDA: <strong>Forge Vertical guarantees that all data and findings are strictly confidential.</strong> While we publish methodology articles about our research, we will never disclose your company name. Should external leaks occur outside the control of either party, neither side holds the other responsible. A confirmation email with your data and this agreement will be sent to the email provided.</p>
+                        <p>1. By submitting this request, you agree to a 50% non-refundable start-up deposit. (2) Upon a successful find, a technical summary will be provided. (3) The final 50% balance is required for the full Proof of Concept (PoC) evidence vault. (4) Agreement to these terms serves as a binding electronic signature for both Forge Vertical and your organization. We will fist supply a summary of what was found.</p>
+                        <p>2. NDA: <strong>Forge Vertical guarantees that all data and findings are strictly confidential.</strong> While we publish methodology articles, we will never disclose your company name. Should external leaks occur outside the control of either party, neither side holds the other responsible.</p>
                     </div>
 
                     <button type="submit" class="w-full py-6 rounded-2xl accent-bg text-white font-black hover:scale-105 hover:shadow-2xl transition-all uppercase tracking-widest text-lg">Send Request & Sign Agreement</button>
@@ -162,8 +161,8 @@
                     </p>
                 </div>
 
-                <div class="opacity-15 font-black text-[10rem] tracking-tighter select-none leading-none font-sans flex items-baseline">
-                    <span>F</span>
+                <div class="opacity-20 font-black text-[10rem] tracking-tighter select-none leading-none font-sans flex items-baseline">
+                    <span style="color: #000000;">F</span>
                     <span class="accent-text ml-[-0.5rem]">V</span>
                 </div>
             </div>
