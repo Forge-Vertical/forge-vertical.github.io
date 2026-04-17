@@ -43,12 +43,12 @@
             color: #000000; 
         }
        
-        /* THE CORRECT BRAND GREEN */
+        /* Brand Green */
         .accent-text { color: #82c91e; }
         .accent-bg { background-color: #82c91e; }
         .border-accent { border-color: #82c91e; }
 
-        /* IMPROVED NAV PLACEHOLDER - prevents clipping */
+        /* STRONG NAV FIX - matches homepage behavior */
         #nav-placeholder { 
             display: block; 
             width: 100%; 
@@ -57,11 +57,12 @@
             overflow: visible;
         }
 
-        /* Extra protection for the logo text inside nav.html */
+        /* Force logo to never clip or shrink (this is the key fix) */
         #nav-placeholder .font-black,
-        #nav-placeholder [class*="text-"] {
+        #nav-placeholder [class*="tracking"] {
             white-space: nowrap !important;
             flex-shrink: 0 !important;
+            flex-basis: auto !important;
         }
 
         /* CARBON GREY GLASSMORPHISM */
@@ -74,7 +75,6 @@
         }
         .glass-panel h2 { color: #ffffff; }
 
-        /* Carbon Fibre */
         .carbon-glass {
             background: #181818 url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -119,9 +119,10 @@
     </script>
 </head>
 <body class="antialiased">
+
     <div id="nav-placeholder"></div>
     
-    <!-- Increased top padding to prevent fixed nav overlap + better breathing room -->
+    <!-- Main content - matches homepage container style + extra top padding -->
     <main class="max-w-7xl mx-auto px-6 lg:px-8 pt-20 pb-24">
        
         <header class="max-w-4xl mb-32 border-l-8 border-[#82c91e] pl-10">
@@ -137,8 +138,9 @@
             </div>
         </header>
 
-        <!-- Rest of your content remains exactly the same -->
+        <!-- Your existing sections remain unchanged -->
         <section class="grid md:grid-cols-3 gap-10 mb-32">
+            <!-- Standard, Multi-Site, Ecosystem cards -->
             <div class="package-card p-10 rounded-2xl">
                 <h3 class="text-zinc-400 uppercase text-xs font-bold tracking-widest mb-2">Standard Audit</h3>
                 <div class="text-5xl font-black mb-6 italic">$100 - $2k</div>
@@ -165,6 +167,7 @@
                 <h2 class="text-4xl font-bold mb-12 tracking-tighter uppercase leading-none">Initiate <span class="accent-text">Audit</span></h2>
                
                 <form action="https://formspree.io/f/xvzvzvva" method="POST" class="space-y-6 text-sm">
+                    <!-- Your form fields stay exactly the same -->
                     <div class="grid md:grid-cols-2 gap-6">
                         <input type="text" name="FullName" placeholder="Name & Surname" class="form-input" required>
                         <input type="text" name="Phone" placeholder="Contact Number" class="form-input" required>
@@ -186,7 +189,9 @@
                     <button type="submit" class="w-full py-6 rounded-2xl accent-bg text-white font-black hover:scale-105 hover:shadow-2xl transition-all uppercase tracking-widest text-lg">Send Request & Sign Agreement</button>
                 </form>
             </div>
+            
             <div class="lg:col-span-5 space-y-12 py-10">
+                <!-- Your sidebar content -->
                 <div class="border-l-4 border-accent pl-8">
                     <h4 class="accent-text font-bold uppercase text-xs tracking-widest mb-4">Independent Intelligence</h4>
                     <p class="text-zinc-700 text-xl leading-snug mb-10">Generic reports are noise. We demonstrate risk. We find the issues; your team patches the leak.</p>
