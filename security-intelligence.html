@@ -8,7 +8,7 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-C6Z3VMB0ND"></script>
     <script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments);}}gtag('js',new Date());gtag('config','G-C6Z3VMB0ND');</script>
 
-    <meta name="description" content="Independent Logic Audit. Uncovering CSRF bleeding, Auth-bypass, and RSA Private Key exposure for global corporate ecosystems.">
+    <meta name="description" content="Independent Logic Audit. We specialize where the SDLC bleeds: uncovering CSRF bleeding and RSA Private Key exposure for global corporate ecosystems.">
     
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -19,13 +19,30 @@
         
         .accent-text { color: #00d18a; }
         .accent-bg { background-color: #00d18a; }
-        .border-accent { border-color: #00d18a; }
         
-        .form-input { background: #f9f9f9; border: 1px solid #e1e1e1; padding: 16px; border-radius: 4px; width: 100%; color: #333; transition: 0.3s; }
+        /* Tactical Glassmorphism (Form Intake) */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+        }
+        
+        /* Tactical Glassmorphism (Peace of Mind / Evidence) */
+        .carbon-glass {
+            background: rgba(24, 24, 24, 0.95) url('assets/carbon-fibre.png'); /* Add your carbon texture */
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #d1d5db; /* Lighter text for dark bg */
+        }
+        
+        /* High-Intent Form Fields */
+        .form-input { background: #fcfcfc; border: 1px solid #e1e1e1; padding: 16px; border-radius: 4px; width: 100%; color: #333; transition: 0.3s; }
         .form-input:focus { border-color: #00d18a; outline: none; background: #ffffff; }
         
-        .package-card { border: 1px solid #eeeeee; transition: 0.3s; }
-        .package-card:hover { border-color: #00d18a; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        /* Tiered Cards */
+        .package-card { border: 1px solid #f3f4f6; transition: 0.3s; height: 100%; }
+        .package-card:hover { border-color: #00d18a; box-shadow: 0 10px 40px rgba(0,0,0,0.05); }
     </style>
     
     <script>
@@ -41,44 +58,47 @@
 
     <main class="max-w-7xl mx-auto px-6 py-24">
         
-        <header class="max-w-4xl mb-32 border-l-8 border-accent pl-10">
+        <header class="max-w-4xl mb-32 border-l-8 border-[#00d18a] pl-10">
             <h1 class="text-6xl md:text-8xl font-black uppercase leading-[0.85] mb-8">
                 Logic <span class="accent-text">Audit</span> <br>& Intelligence
             </h1>
             <p class="text-2xl text-zinc-600 max-w-3xl leading-snug mb-10">
-                The digital landscape is in a state of constant infiltration. Automated scanners miss the structural rot. We specialize in identifying <span class="text-black font-bold">Logic Flaws</span> where the <span class="text-black font-bold">SDLC</span> bleeds—from <span class="text-black font-bold">RSA Private Key exposure</span> to <span class="accent-text font-bold">CSRF Protocol</span> flaws uncovered across multi-site global clusters.
+                Automated scanners chase CVEs. We chase <span class="text-black font-bold">Logic</span>. We specialize where the <span class="text-black font-bold">SDLC</span> bleeds—from <span class="text-black font-bold">RSA Private Key exposure</span> to the <span class="accent-text font-bold">CSRF Protocol</span> flaws that scanners ignore.
             </p>
-            <div class="p-8 bg-zinc-50 rounded-xl border border-zinc-100 italic text-zinc-500 text-lg">
-                <strong>Peace of Mind:</strong> Our independent researcher-led checks provide the certainty that dev teams and bots overlook. We hunt the issues; your team patches the leak.
+            
+            <div class="carbon-glass p-12 rounded-2xl italic text-lg leading-snug">
+                <p><strong>Independent Certainty:</strong> Our researcher-led checks provide the assurance that dev teams and automated bots miss. We hunt the issues; your team patches the leak.</p>
             </div>
         </header>
 
         <section class="grid md:grid-cols-3 gap-10 mb-32">
             <div class="package-card p-10 rounded-2xl">
-                <h3 class="text-zinc-400 uppercase text-xs font-bold tracking-widest mb-2">Standard Audit</h3>
-                <div class="text-4xl font-black mb-6 italic">$100 - $2,000</div>
-                <p class="text-sm text-zinc-500 mb-8">Single Site. Surface-level vulnerability mapping and credential leak check.</p>
-                <div class="p-3 bg-zinc-50 rounded text-[10px] uppercase font-bold text-zinc-600">50% Non-Refundable Deposit</div>
+                <h3 class="text-zinc-400 uppercase text-xs font-bold tracking-widest mb-2">Tier 01 // Solo Site Audit</h3>
+                <div class="text-5xl font-black mb-6 italic">$100 - $2k</div>
+                <p class="text-sm text-zinc-500 mb-8 leading-relaxed">Single site target. Vulnerability mapping and surface-level credential leak check.</p>
+                <div class="p-3 bg-zinc-50 rounded text-[10px] uppercase font-bold text-zinc-600">50% Deposit Required // 1 Domain</div>
             </div>
             
-            <div class="package-card p-10 rounded-2xl border-accent bg-[#00d18a]/5 shadow-xl">
-                <h3 class="accent-text uppercase text-xs font-bold tracking-widest mb-2">Multi-Site Strike</h3>
-                <div class="text-4xl font-black mb-6 italic">$2,000 - $5,000</div>
-                <p class="text-sm text-zinc-600 mb-8 font-bold">2 Sites. Deep Logic Analysis. Verifying horizontal vulnerability replication across connected domains.</p>
-                <div class="p-3 bg-accent/20 rounded text-[10px] uppercase font-bold accent-text">Multi-Domain Logic Protocol</div>
+            <div class="package-card p-10 rounded-2xl border-[#00d18a] bg-[#00d18a]/5 shadow-xl">
+                <h3 class="accent-text uppercase text-xs font-bold tracking-widest mb-2">Tier 02 // Multi-Site Strike</h3>
+                <div class="text-5xl font-black mb-6 italic">$2k - $5k</div>
+                <p class="text-sm text-zinc-600 mb-8 font-bold">2 Sites. Deep Logic Analysis. We verify if vulnerabilities found on Site A are replicated across Site B (The horizontal logic protocol).</p>
+                <div class="p-3 bg-accent/20 rounded text-[10px] uppercase font-bold accent-text">Corporate Cluster // 2 Domains</div>
             </div>
 
             <div class="package-card p-10 rounded-2xl">
-                <h3 class="text-zinc-400 uppercase text-xs font-bold tracking-widest mb-2">Ecosystem Audit</h3>
-                <div class="text-4xl font-black mb-6 italic">$5,000 - $10,000+</div>
-                <p class="text-sm text-zinc-500 mb-8">Up to 5 Sites. Full RSA/SDLC Deep Dive and authentication bypass testing.</p>
-                <div class="p-3 bg-zinc-50 rounded text-[10px] uppercase font-bold text-zinc-600">Full Evidence Vault Included</div>
+                <h3 class="text-zinc-400 uppercase text-xs font-bold tracking-widest mb-2">Tier 03 // Ecosystem Audit</h3>
+                <div class="text-5xl font-black mb-6 italic">$5k - $10k+</div>
+                <p class="text-sm text-zinc-500 mb-8 leading-relaxed">Up to 5 Sites. RSA/SDLC Deep Dive, cross-domain auth bypass testing, and full remediation vault access.</p>
+                <div class="p-3 bg-zinc-50 rounded text-[10px] uppercase font-bold text-zinc-600">Global Coverage // 5 Domains</div>
             </div>
         </section>
 
         <div class="grid lg:grid-cols-12 gap-16">
-            <div id="initiate-audit" class="lg:col-span-7 p-10 md:p-16 rounded-[2rem] border-4 border-accent shadow-2xl bg-white">
+            
+            <div id="initiate-audit" class="lg:col-span-7 p-10 md:p-16 rounded-[2.5rem] glass-panel shadow-2xl bg-white border border-zinc-100">
                 <h2 class="text-4xl font-bold mb-12 tracking-tighter uppercase leading-none">Initiate <span class="accent-text">Audit</span></h2>
+                
                 <form action="https://formspree.io/f/xvzvzvva" method="POST" class="space-y-6 text-sm">
                     <div class="grid md:grid-cols-2 gap-6">
                         <input type="text" name="FullName" placeholder="Name & Surname" class="form-input" required>
@@ -86,33 +106,40 @@
                     </div>
                     <div class="grid md:grid-cols-2 gap-6">
                         <input type="email" name="Email" placeholder="Corporate Email" class="form-input" required>
-                        <input type="text" name="Company" placeholder="Organization" class="form-input" required>
+                        <input type="text" name="Company" placeholder="Organization (Client or Agency)" class="form-input" required>
                     </div>
-                    <textarea name="Scope" placeholder="Scope (List of Specific URLs or IPs)" class="form-input h-32" required></textarea>
-                    <textarea name="OutOfScope" placeholder="Excluded Targets" class="form-input h-20"></textarea>
-                    <textarea name="Reasoning" placeholder="Headers Required / Suspected Logic Concerns (e.g. CSRF leakage)" class="form-input h-32"></textarea>
-                    <textarea name="Expectations" placeholder="Summary and Expectations" class="form-input h-32"></textarea>
+                    
+                    <textarea name="Scope" placeholder="Scope (List of Specific URLs, IP Ranges, or Application Names)" class="form-input h-32" required></textarea>
+                    <textarea name="OutOfScope" placeholder="Excluded Targets / Off-Limits Assets (If any)" class="form-input h-20"></textarea>
+                    <textarea name="Reasoning" placeholder="Suspected Logic Concerns (e.g., suspicions of Auth bypass or CSRF leakage)" class="form-input h-32"></textarea>
                     
                     <div class="bg-zinc-50 p-8 rounded-xl border border-zinc-100 text-xs text-zinc-500 leading-relaxed italic space-y-3">
-                        <p class="text-black font-bold uppercase text-[10px]">Confidentiality Agreement & Terms</p>
-                        <p>1. By submitting, you agree to a 50% non-refundable start-up deposit. (2) Upon a successful find, a technical summary will be provided. (3) The remaining 50% balance is required for the full Proof of Concept (PoC) evidence. (4) Agreement to these terms serves as a binding electronic signature for both Forge Vertical and your organization.</p>
-                        <p>2. NDA: <strong>Forge Vertical guarantees that all data and findings are strictly confidential.</strong> While we publish methodology articles, client names and identifying brand data will never be disclosed. Should external leaks occur outside the control of either party, neither side holds the other responsible. A confirmation email with your data and this agreement will be sent to the email provided.</p>
+                        <p class="text-black font-bold uppercase text-[10px]">Confidentiality & Liability Agreement (Click-wrap)</p>
+                        <p>1. By submitting this request, you agree to a 50% non-refundable start-up deposit. (2) Upon a successful find, a technical summary will be provided. (3) The final 50% balance is required for the full Proof of Concept (PoC) evidence vault (images and video). (4) Agreement to these terms serves as a binding electronic signature for both Forge Vertical and your organization. We will first supply a summary of what was found, which will be enough for you to decide to pay the final balance or not.</p>
+                        <p>2. NDA: Forge Vertical guarantees that all data and findings are strictly confidential. While we publish methodology articles about our research, we will never disclose your company name. Should external leaks occur outside the control of either party, neither side holds the other responsible. A confirmation email with your data and this agreement will be sent to the email provided.</p>
                     </div>
 
-                    <button type="submit" class="w-full py-6 rounded-2xl accent-bg text-white font-black hover:scale-105 transition-all uppercase tracking-widest text-lg">Send Request & Sign Agreement</button>
+                    <button type="submit" class="w-full py-6 rounded-2xl accent-bg text-white font-black hover:scale-105 hover:shadow-2xl transition-all uppercase tracking-widest text-lg">Send Request & Sign Agreement</button>
                 </form>
             </div>
 
             <div class="lg:col-span-5 space-y-12 py-10">
                 <div class="border-l-4 border-accent pl-8">
-                    <h4 class="accent-text font-bold uppercase text-xs tracking-widest mb-4">Independent Intelligence</h4>
-                    <p class="text-zinc-700 text-xl leading-snug">Scanners chase CVEs. We chase <span class="text-black font-bold">Logic</span>. We hunt for the flaws that allow a site to declare a user balance or force a session hijack. Unedited PoC evidence provided.</p>
+                    <h4 class="accent-text font-bold uppercase text-xs tracking-widest mb-4">Unedited Proof of Concept</h4>
+                    <p class="text-zinc-700 text-xl leading-snug mb-10">Generic reports are noise. We demonstrate risk. We provide unedited video and image evidence of exactly how your logical architecture declares a balance or leaks tokens. We find the issues; your team patches the leak.</p>
                 </div>
-                <div class="p-8 border-l-2 border-zinc-100 opacity-60">
-                    <h4 class="text-zinc-600 font-bold uppercase text-xs tracking-widest mb-4">The Forge Network Insulator</h4>
-                    <p class="text-zinc-500 text-sm leading-relaxed">Discreet, once-off security audits. We operate outside public disclosure platforms to insulate your reputation. We provide a downloadable record of your submission upon request.</p>
+
+                <div class="carbon-glass p-10 rounded-2xl opacity-90 shadow-2xl">
+                    <h4 class="text-[#f3f4f6] font-bold uppercase text-xs tracking-widest mb-4">Insulated Authority Networks</h4>
+                    <p class="text-sm text-[#d1d5db] leading-relaxed">
+                        Forge Vertical operates discreetly, insulating your primary brand from public disclosure. This once-off audit provides the direct intelligence needed to force remediation, following a direct, unedited PoC system to protect your assets.
+                    </p>
                 </div>
-                <div class="opacity-10 text-[10rem] font-black tracking-tighter select-none">FV</div>
+
+                <div class="opacity-15 font-black text-[10rem] tracking-tighter select-none leading-none font-sans flex items-baseline">
+                    <span>F</span>
+                    <span class="accent-text ml-[-0.5rem]">V</span>
+                </div>
             </div>
         </div>
     </main>
