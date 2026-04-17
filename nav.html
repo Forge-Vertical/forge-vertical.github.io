@@ -9,15 +9,16 @@
     <div class="hidden md:flex gap-8 text-[11px] font-black uppercase tracking-widest items-center">
         <a href="/index.html#services" class="text-slate-900 hover:text-lime-600 transition-colors">Services</a>
         <a href="/portfolio.html" class="text-slate-900 hover:text-lime-600 transition-colors">Portfolio</a>
-        <a href="/onboard.html" class="text-slate-900 hover:text-lime-600 transition-colors">Start Project</a>
+        <a href="/security-intelligence.html" class="text-slate-900 hover:text-lime-600 transition-colors">Security Intelligence</a>
+        
         <a href="/tools/roi-calculator.html" class="text-slate-900 hover:text-lime-600 transition-colors flex items-center gap-2">
             Audit Tool
             <span class="bg-lime-500 w-1.5 h-1.5 rounded-full animate-pulse"></span>
         </a>
-        <a href="javascript:void(0)" onclick="showBuildModal()" class="text-slate-900 hover:text-lime-600 transition-colors border-l border-slate-200 pl-8">
+        
+        <a href="javascript:void(0)" onclick="showBuildModal()" class="text-white bg-slate-900 px-6 py-2.5 rounded-full hover:bg-lime-500 transition-all ml-4 uppercase">
             Build Your Own
         </a>
-        <a href="https://www.fiverr.com/s/gDb4YqE" class="text-white bg-slate-900 px-5 py-2.5 rounded-full hover:bg-lime-500 transition-all ml-2">Hire on Fiverr</a>
     </div>
 
     <button onclick="toggleMobileMenu()" class="md:hidden z-50 p-2 flex flex-col gap-1.5 items-end group focus:outline-none">
@@ -29,9 +30,20 @@
     <div id="mobile-menu" class="fixed inset-0 bg-white z-40 translate-x-full transition-transform duration-300 ease-in-out md:hidden flex flex-col items-center justify-center gap-8 text-center">
         <a href="/index.html#services" onclick="toggleMobileMenu()" class="text-2xl font-black uppercase tracking-tighter text-slate-900">Services</a>
         <a href="/portfolio.html" onclick="toggleMobileMenu()" class="text-2xl font-black uppercase tracking-tighter text-slate-900">Portfolio</a>
-        <a href="/onboard.html" onclick="toggleMobileMenu()" class="text-2xl font-black uppercase tracking-tighter text-slate-900">Start Project</a>
+        <a href="/security-intelligence.html" onclick="toggleMobileMenu()" class="text-2xl font-black uppercase tracking-tighter text-slate-900">Security Intelligence</a>
         <a href="/tools/roi-calculator.html" onclick="toggleMobileMenu()" class="text-2xl font-black uppercase tracking-tighter text-lime-600">Audit Tool</a>
-        <a href="javascript:void(0)" onclick="showBuildModal(); toggleMobileMenu();" class="text-2xl font-black uppercase tracking-tighter text-slate-400">Build Your Own</a>
-        <a href="https://www.fiverr.com/s/gDb4YqE" class="mt-4 text-white bg-slate-900 px-8 py-4 rounded-full font-black uppercase tracking-widest hover:bg-lime-500 transition-all">Hire on Fiverr</a>
+        
+        <a href="javascript:void(0)" onclick="showBuildModal(); toggleMobileMenu();" class="mt-4 text-white bg-slate-900 px-8 py-4 rounded-full font-black uppercase tracking-widest hover:bg-lime-500 transition-all">Build Your Own</a>
     </div>
 </nav>
+
+<script>
+function toggleMobileMenu() {
+    const menu = document.getElementById('mobile-menu');
+    menu.classList.toggle('translate-x-full');
+}
+
+function showBuildModal() {
+    alert("Industrial-Grade Build Tool: We are currently finalizing the 'Build Your Own' sandbox for public beta. Sign up for our newsletter or contact us directly for early access.");
+}
+</script>
