@@ -16,53 +16,97 @@
     <meta property="og:title" content="Security Intelligence: Uncovering the SDLC Bleed">
     <meta property="og:description" content="Moving beyond automated scanners. We hunt logic flaws in billion-dollar clusters. Independent PoC evidence and remediation.">
     <meta property="og:image" content="https://forgevertical.com/assets/security-og-image.png">
-    
+   
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Security Intelligence & Logic Audit | Forge Vertical</title>
-    
+   
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-C6Z3VMB0ND"></script>
-    <script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments);}}gtag('js',new Date());gtag('config','G-C6Z3VMB0ND');</script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-C6Z3VMB0ND');</script>
     <script src="https://cdn.tailwindcss.com"></script>
-    
+   
     <style>
         @import url('https://fonts.cdnfonts.com/css/georgia');
+       
+        body { 
+            font-family: 'Georgia', serif; 
+            background: #ffffff; 
+            color: #111111; 
+            line-height: 1.8; 
+            margin: 0; 
+            padding: 0; 
+        }
         
-        body { font-family: 'Georgia', serif; background: #ffffff; color: #111111; line-height: 1.8; margin: 0; padding: 0; }
-        h1, h2, h3, h4 { font-family: 'Georgia', serif; font-weight: 700; color: #000000; tracking-tighter; }
-        
-        /* THE CORRECT BRAND GREEN #82c91e */
+        h1, h2, h3, h4 { 
+            font-family: 'Georgia', serif; 
+            font-weight: 700; 
+            color: #000000; 
+        }
+       
+        /* THE CORRECT BRAND GREEN */
         .accent-text { color: #82c91e; }
         .accent-bg { background-color: #82c91e; }
         .border-accent { border-color: #82c91e; }
 
-        /* THE FIX: Naked placeholder to prevent logo clipping */
-        #nav-placeholder { display: block; width: 100%; position: relative; }
+        /* IMPROVED NAV PLACEHOLDER - prevents clipping */
+        #nav-placeholder { 
+            display: block; 
+            width: 100%; 
+            position: relative; 
+            z-index: 50; 
+            overflow: visible;
+        }
 
-        /* CARBON GREY GLASSMORPHISM FOR FORM */
+        /* Extra protection for the logo text inside nav.html */
+        #nav-placeholder .font-black,
+        #nav-placeholder [class*="text-"] {
+            white-space: nowrap !important;
+            flex-shrink: 0 !important;
+        }
+
+        /* CARBON GREY GLASSMORPHISM */
         .glass-panel {
-            background: rgba(10, 10, 10, 0.98); 
+            background: rgba(10, 10, 10, 0.98);
             backdrop-filter: blur(8px);
-            border: 2px solid #82c91e; 
+            border: 2px solid #82c91e;
             box-shadow: 0 20px 60px rgba(130, 201, 30, 0.2);
-            color: #d1d5db; 
+            color: #d1d5db;
         }
         .glass-panel h2 { color: #ffffff; }
 
-        /* Carbon Fibre Breakout */
+        /* Carbon Fibre */
         .carbon-glass {
-            background: #181818 url('https://www.transparenttextures.com/patterns/carbon-fibre.png'); 
+            background: #181818 url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
             border: 1px solid rgba(255, 255, 255, 0.1);
             color: #d1d5db;
         }
-        
-        .form-input { background: #1a1a1a; border: 1px solid #333; padding: 16px; border-radius: 4px; width: 100%; color: #fff; transition: 0.3s; }
-        .form-input:focus { border-color: #82c91e; outline: none; background: #222; }
-        
-        .package-card { border: 1px solid #f3f4f6; transition: 0.3s; background: white; }
-        .package-card:hover { border-color: #82c91e; box-shadow: 0 10px 40px rgba(0,0,0,0.05); }
+       
+        .form-input { 
+            background: #1a1a1a; 
+            border: 1px solid #333; 
+            padding: 16px; 
+            border-radius: 4px; 
+            width: 100%; 
+            color: #fff; 
+            transition: 0.3s; 
+        }
+        .form-input:focus { 
+            border-color: #82c91e; 
+            outline: none; 
+            background: #222; 
+        }
+       
+        .package-card { 
+            border: 1px solid #f3f4f6; 
+            transition: 0.3s; 
+            background: white; 
+        }
+        .package-card:hover { 
+            border-color: #82c91e; 
+            box-shadow: 0 10px 40px rgba(0,0,0,0.05); 
+        }
     </style>
-    
+   
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             fetch('/nav.html').then(r => r.text()).then(d => {
@@ -75,11 +119,11 @@
     </script>
 </head>
 <body class="antialiased">
-
     <div id="nav-placeholder"></div>
-
-    <main class="max-w-7xl mx-auto px-6 py-24">
-        
+    
+    <!-- Increased top padding to prevent fixed nav overlap + better breathing room -->
+    <main class="max-w-7xl mx-auto px-6 lg:px-8 pt-20 pb-24">
+       
         <header class="max-w-4xl mb-32 border-l-8 border-[#82c91e] pl-10">
             <h1 class="text-6xl md:text-8xl font-black uppercase leading-[0.85] mb-8">
                 Logic <span class="accent-text">Audit</span> <br>& Intelligence
@@ -87,12 +131,13 @@
             <p class="text-2xl text-zinc-600 max-w-3xl leading-snug mb-10">
                 Automated scanners chase CVEs. We chase <span class="text-black font-bold">Logic</span>. We specialize where the <span class="text-black font-bold">SDLC</span> bleeds—from <span class="text-black font-bold">RSA Private Key exposure</span> to the <span class="accent-text font-bold">CSRF Protocol</span> flaws uncovered across billion-dollar global clusters.
             </p>
-            
+           
             <div class="carbon-glass p-12 rounded-3xl italic text-lg shadow-2xl">
                 <p><strong>Independent Certainty:</strong> Our researcher-led checks provide the assurance that dev teams and automated bots miss. We hunt the issues; your team patches the leak.</p>
             </div>
         </header>
 
+        <!-- Rest of your content remains exactly the same -->
         <section class="grid md:grid-cols-3 gap-10 mb-32">
             <div class="package-card p-10 rounded-2xl">
                 <h3 class="text-zinc-400 uppercase text-xs font-bold tracking-widest mb-2">Standard Audit</h3>
@@ -100,14 +145,13 @@
                 <p class="text-sm text-zinc-500 mb-8 leading-relaxed">Single site target. Vulnerability mapping and surface-level credential leak check.</p>
                 <div class="p-3 bg-zinc-50 rounded text-[10px] uppercase font-bold text-zinc-600">50% Deposit Required</div>
             </div>
-            
+           
             <div class="package-card p-10 rounded-2xl border-[#82c91e] bg-[#82c91e]/5 shadow-xl">
                 <h3 class="accent-text uppercase text-xs font-bold tracking-widest mb-2">Multi-Site Strike</h3>
                 <div class="text-5xl font-black mb-6 italic">$2k - $5k</div>
                 <p class="text-sm text-zinc-600 mb-8 font-bold">2 Sites. Deep Logic Analysis. Verifying horizontal vulnerability replication across conglomerate clusters.</p>
                 <div class="p-3 bg-accent/20 rounded text-[10px] uppercase font-bold accent-text">Multi-Domain Security</div>
             </div>
-
             <div class="package-card p-10 rounded-2xl">
                 <h3 class="text-zinc-400 uppercase text-xs font-bold tracking-widest mb-2">Ecosystem Audit</h3>
                 <div class="text-5xl font-black mb-6 italic">$5k - $10k+</div>
@@ -117,10 +161,9 @@
         </section>
 
         <div class="grid lg:grid-cols-12 gap-16">
-            
             <div id="initiate-audit" class="lg:col-span-7 p-10 md:p-16 rounded-[2.5rem] glass-panel shadow-2xl">
                 <h2 class="text-4xl font-bold mb-12 tracking-tighter uppercase leading-none">Initiate <span class="accent-text">Audit</span></h2>
-                
+               
                 <form action="https://formspree.io/f/xvzvzvva" method="POST" class="space-y-6 text-sm">
                     <div class="grid md:grid-cols-2 gap-6">
                         <input type="text" name="FullName" placeholder="Name & Surname" class="form-input" required>
@@ -130,32 +173,28 @@
                         <input type="email" name="Email" placeholder="Corporate Email" class="form-input" required>
                         <input type="text" name="Company" placeholder="Organization" class="form-input" required>
                     </div>
-                    
+                   
                     <textarea name="Scope" placeholder="Scope (URLs or IPs)" class="form-input h-32" required></textarea>
                     <textarea name="OutOfScope" placeholder="Excluded Targets" class="form-input h-20"></textarea>
                     <textarea name="Reasoning" placeholder="Headers Required / Suspected Logic Concerns" class="form-input h-32"></textarea>
                     <textarea name="Expectations" placeholder="Summary and Expectations" class="form-input h-32"></textarea>
-                    
+                   
                     <div class="bg-[#1a1a1a] p-8 rounded-xl border border-zinc-800 text-xs text-zinc-400 leading-relaxed italic space-y-3">
                         <p class="text-white font-bold uppercase text-[10px]">Confidentiality & Liability Agreement</p>
                         <p>1. 50% non-refundable deposit to start. (2) Summary of findings provided before final 50% balance. (3) <strong>Forge Vertical guarantees 100% confidentiality.</strong> Client names are never disclosed. This form serves as a binding electronic signature.</p>
                     </div>
-
                     <button type="submit" class="w-full py-6 rounded-2xl accent-bg text-white font-black hover:scale-105 hover:shadow-2xl transition-all uppercase tracking-widest text-lg">Send Request & Sign Agreement</button>
                 </form>
             </div>
-
             <div class="lg:col-span-5 space-y-12 py-10">
                 <div class="border-l-4 border-accent pl-8">
                     <h4 class="accent-text font-bold uppercase text-xs tracking-widest mb-4">Independent Intelligence</h4>
                     <p class="text-zinc-700 text-xl leading-snug mb-10">Generic reports are noise. We demonstrate risk. We find the issues; your team patches the leak.</p>
                 </div>
-
                 <div class="carbon-glass p-10 rounded-2xl opacity-90 shadow-2xl">
                     <h4 class="text-[#f3f4f6] font-bold uppercase text-xs tracking-widest mb-4">Insulated Authority</h4>
                     <p class="text-sm text-[#d1d5db] leading-relaxed">Forge Vertical operates discreetly, insulating your brand from public disclosure.</p>
                 </div>
-
                 <div class="opacity-20 font-black text-[12rem] tracking-tighter select-none leading-none flex items-baseline">
                     <span style="color: #000000;">F</span>
                     <span style="color: #82c91e;" class="ml-[-0.5rem]">V</span>
@@ -163,7 +202,7 @@
             </div>
         </div>
     </main>
-
+    
     <div id="footer-placeholder"></div>
 </body>
 </html>
