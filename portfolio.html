@@ -11,8 +11,27 @@
         body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #ffffff; color: #1e293b; }
         .vibrant-gradient { background: linear-gradient(90deg, #10b981 0%, #84cc16 100%); }
         .card-shadow { box-shadow: 0 10px 30px rgba(0,0,0,0.04); }
-        .iframe-container { position: relative; width: 100%; padding-top: 56.25%; overflow: hidden; border-radius: 1.5rem; background-color: #f8fafc; }
-        .iframe-container iframe { position: absolute; top: 0; left: 0; bottom: 0; right: 0; width: 100%; height: 100%; border: none; zoom: 0.75; }
+        
+        /* THE DESKTOP-SCALE IFRAME FIX */
+        .iframe-container { 
+            position: relative; 
+            width: 100%; 
+            padding-top: 56.25%; 
+            overflow: hidden; 
+            border-radius: 1.5rem; 
+            background-color: #f8fafc; 
+        }
+        .iframe-container iframe { 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 400%; 
+            height: 400%; 
+            transform: scale(0.25); 
+            transform-origin: 0 0; 
+            border: none; 
+            pointer-events: none; /* Prevents accidental scrolling inside the iframe */
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -150,6 +169,22 @@
                     </div>
                     <p class="text-sm text-slate-500 font-light leading-relaxed">
                         A mobile security and data protection SaaS architecture. Designed with a brutalist, conversion-first UI to educate users and distribute high-level device security solutions.
+                    </p>
+                </div>
+            </div>
+
+            <div class="space-y-4">
+                <div class="iframe-container card-shadow border border-slate-100 group">
+                    <iframe src="https://autods.co.za/" scrolling="no"></iframe>
+                    <div class="absolute inset-0 bg-slate-900/0 group-hover:bg-slate-900/5 transition-all cursor-pointer" onclick="window.open('https://autods.co.za/')"></div>
+                </div>
+                <div class="px-2">
+                    <div class="flex justify-between items-center mb-2">
+                        <h3 class="font-extrabold text-slate-900 uppercase italic">Auto DS</h3>
+                        <span class="text-[9px] font-black uppercase tracking-widest bg-lime-100 text-lime-700 px-3 py-1 rounded-full">SME Node</span>
+                    </div>
+                    <p class="text-sm text-slate-500 font-light leading-relaxed">
+                        A specialized digital architecture engineered for the automotive services sector. Built with a focus on high-speed performance, local search visibility, and seamless customer intake flows.
                     </p>
                 </div>
             </div>
