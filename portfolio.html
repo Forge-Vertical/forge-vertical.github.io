@@ -12,23 +12,22 @@
         .vibrant-gradient { background: linear-gradient(90deg, #10b981 0%, #84cc16 100%); }
         .card-shadow { box-shadow: 0 10px 30px rgba(0,0,0,0.04); }
         
-        /* THE PERFECTED DESKTOP-SCALE IFRAME FIX (Using Container Queries) */
+        /* THE BULLETPROOF 250% SCALING FIX */
         .iframe-container { 
             position: relative; 
             width: 100%; 
-            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+            padding-top: 56.25%; /* Locks in a perfect 16:9 Aspect Ratio */
             overflow: hidden; 
             border-radius: 1.5rem; 
             background-color: #f8fafc; 
-            container-type: inline-size; /* Tells CSS to measure this specific container's width */
         }
         .iframe-container iframe { 
             position: absolute; 
             top: 0; 
             left: 0; 
-            width: 1280px; /* Forces a perfect, standard desktop resolution */
-            height: 720px; 
-            transform: scale(calc(100cqw / 1280)); /* Math: Shrinks the 1280px frame to fit perfectly inside the container */
+            width: 250%; /* Forces a standard Desktop/Tablet viewport */
+            height: 250%; 
+            transform: scale(0.4); /* Shrinks it perfectly into the container */
             transform-origin: 0 0; 
             border: none; 
             pointer-events: none; /* Prevents accidental scrolling inside the iframe */
