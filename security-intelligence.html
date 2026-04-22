@@ -166,7 +166,8 @@
             </div>
         </section>
 
-        <div class="grid lg:grid-cols-12 gap-16">
+        <div class="grid lg:grid-cols-12 gap-16 items-start">
+            
             <div id="initiate-audit" class="lg:col-span-7 p-10 md:p-16 rounded-[3rem] carbon-glass shadow-2xl border-t-4 border-[#82c91e]">
                 <h2 class="text-4xl font-black mb-12 tracking-tighter uppercase leading-none text-white">Initiate <span class="accent-text">Engagement</span></h2>
                 
@@ -190,10 +191,10 @@
                         <div class="h-64 overflow-y-auto pr-4 space-y-3 custom-scrollbar">
                             <p><strong>1. Authorization:</strong> By submitting this request, the Client grants Forge Vertical (the "Researcher") express permission to conduct non-destructive security research on the provided Scope assets.</p>
                             <p><strong>2. Engagement Fee:</strong> A 50% non-refundable Initiation Deposit is required to allocate researcher time. No audit will commence prior to deposit clearance.</p>
-                            <p><strong>3. Performance & Findings:</strong> Logic audits are a manual exploration. The Client acknowledges that security is a snapshot in time and a "Zero-Finding" result is a potential outcome.</p>
-                            <p><strong>4. The "Zero-Discovery" Discount:</strong> If a deep-dive audit results in no verified vulnerabilities, the final balance will be reduced from 50% to 25%. This covers technical labor while providing a verified "clean bill of health."</p>
-                            <p><strong>5. Confidentiality:</strong> All findings are classified. Forge Vertical will not disclose details to any third party (including bug bounty platforms) without written authorization.</p>
-                            <p><strong>6. Liability:</strong> The Researcher is not responsible for service disruptions. The Client confirms they have legal right to authorize testing on all listed assets.</p>
+                            <p><strong>3. Performance & Findings:</strong> Logic audits are a manual exploration. The Client acknowledges that security is a snapshot in time and a "Zero-Finding" result is a potential outcome of any audit engagement.</p>
+                            <p><strong>4. The "Zero-Discovery" Discount:</strong> In the event that a deep-dive audit results in no verified vulnerabilities or logic leaks, the final "Evidence Release Balance" will be reduced from 50% to 25%. This covers technical labor while providing the Client with a verified "clean bill of health."</p>
+                            <p><strong>5. Confidentiality:</strong> All findings are classified. Forge Vertical will not disclose details of the engagement, the Client's identity, or specific vulnerabilities to any third party (including bug bounty platforms) without written authorization.</p>
+                            <p><strong>6. Liability:</strong> The Researcher is not responsible for unforeseen service disruptions. The Client confirms they possess the legal right to authorize testing on all listed assets.</p>
                         </div>
                     </div>
 
@@ -206,15 +207,32 @@
                 </form>
             </div>
             
-            <div class="lg:col-span-5 space-y-12 py-10">
+            <div class="lg:col-span-5 space-y-12 py-10 sticky top-24">
+                
+                <div class="rounded-[2.5rem] bg-zinc-50 border border-zinc-200 overflow-hidden shadow-inner flex items-center justify-center p-6 mb-8">
+                    <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script> 
+                    <dotlottie-player 
+                        src="/assets/Cyber Security.lottie" 
+                        background="transparent" 
+                        speed="1" 
+                        style="width: 100%; height: 400px;" 
+                        loop 
+                        autoplay>
+                    </dotlottie-player>
+                </div>
+
                 <div class="border-l-4 border-accent pl-8">
                     <h4 class="accent-text font-black uppercase text-xs tracking-widest mb-4">Insulated Authority</h4>
                     <p class="text-zinc-800 text-2xl leading-tight font-bold">Generic reports are just noise. We demonstrate actual risk to your bottom line.</p>
                 </div>
-                <div class="bg-zinc-50 p-10 rounded-3xl border border-zinc-100 italic">
-                    <p class="text-sm text-zinc-500 leading-relaxed">"Forge Vertical operates as a private intelligence bridge. We identify the bleed and provide the patch roadmap before the automated bots ever realize the window is open."</p>
+
+                <div class="bg-[#111] p-10 rounded-3xl border border-zinc-800 italic shadow-xl">
+                    <p class="text-sm text-zinc-400 leading-relaxed">
+                        "Forge Vertical operates as a private intelligence bridge. We identify the bleed and provide the patch roadmap before the automated bots ever realize the window is open."
+                    </p>
                 </div>
-                <div class="opacity-10 font-black text-[12rem] tracking-tighter select-none leading-none flex items-baseline pt-20">
+
+                <div class="opacity-10 font-black text-[12rem] tracking-tighter select-none leading-none flex items-baseline pt-10">
                     <span style="color: #000000;">F</span>
                     <span style="color: #82c91e;" class="ml-[-0.5rem]">V</span>
                 </div>
