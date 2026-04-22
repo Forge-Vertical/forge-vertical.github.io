@@ -1,213 +1,175 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta name="title" content="Security Intelligence & Logic Audit | Forge Vertical">
-    <meta name="description" content="Independent Security Researcher providing unedited PoC evidence for CSRF leaks, RSA Private Key exposure, and SDLC logic flaws. Corporate ecosystem audits available globally.">
-    <meta name="keywords" content="Logic Audit, CSRF Leakage, SDLC Security, RSA Private Key Exposure, Enterprise Security Research, Independent Vulnerability Report, Cape Town Cyber Security, Forge Vertical">
-    <meta name="robots" content="index, follow">
-    <meta name="language" content="English">
-    <meta name="author" content="Forge Vertical">
-    <meta name="geo.region" content="ZA-WC">
-    <meta name="geo.placename" content="Cape Town">
-    <meta name="geo.position" content="-33.9249;18.4241">
-    <meta name="ICBM" content="-33.9249, 18.4241">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://forgevertical.com/security-intelligence.html">
-    <meta property="og:title" content="Security Intelligence: Uncovering the SDLC Bleed">
-    <meta property="og:description" content="Moving beyond automated scanners. We hunt logic flaws in billion-dollar clusters. Independent PoC evidence and remediation.">
-    <meta property="og:image" content="https://forgevertical.com/assets/security-og-image.png">
-   
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Security Intelligence & Logic Audit | Forge Vertical</title>
-   
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-C6Z3VMB0ND"></script>
-    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-C6Z3VMB0ND');</script>
+    <meta name="description" content="Researcher-led logic audits for global clusters. Moving beyond automated CVE scans to uncover SDLC logic failures and protocol leaks.">
+    
     <script src="https://cdn.tailwindcss.com"></script>
-   
     <style>
         @import url('https://fonts.cdnfonts.com/css/georgia');
-       
-        body { 
-            font-family: 'Georgia', serif; 
-            background: #ffffff; 
-            color: #111111; 
-            line-height: 1.8; 
-            margin: 0; 
-            padding: 0; 
-        }
-        
-        h1, h2, h3, h4 { 
-            font-family: 'Georgia', serif; 
-            font-weight: 700; 
-            color: #000000; 
-        }
-       
-        /* Brand Green */
+        body { font-family: 'Georgia', serif; background: #ffffff; color: #111111; line-height: 1.8; }
+        h1, h2, h3, h4 { font-family: 'Georgia', serif; font-weight: 900; color: #000000; }
         .accent-text { color: #82c91e; }
         .accent-bg { background-color: #82c91e; }
-        .border-accent { border-color: #82c91e; }
-
-        /* STRONG NAV FIX - matches homepage behavior */
-        #nav-placeholder { 
-            display: block; 
-            width: 100%; 
-            position: relative; 
-            z-index: 50; 
-            overflow: visible;
-        }
-
-        /* Force logo to never clip or shrink (this is the key fix) */
-        #nav-placeholder .font-black,
-        #nav-placeholder [class*="tracking"] {
-            white-space: nowrap !important;
-            flex-shrink: 0 !important;
-            flex-basis: auto !important;
-        }
-
-        /* CARBON GREY GLASSMORPHISM */
-        .glass-panel {
-            background: rgba(10, 10, 10, 0.98);
-            backdrop-filter: blur(8px);
-            border: 2px solid #82c91e;
-            box-shadow: 0 20px 60px rgba(130, 201, 30, 0.2);
-            color: #d1d5db;
-        }
-        .glass-panel h2 { color: #ffffff; }
-
+        
+        /* Glass Panels */
         .carbon-glass {
-            background: #181818 url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
+            background: #0a0a0a url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
             border: 1px solid rgba(255, 255, 255, 0.1);
             color: #d1d5db;
         }
-       
         .form-input { 
-            background: #1a1a1a; 
-            border: 1px solid #333; 
-            padding: 16px; 
-            border-radius: 4px; 
-            width: 100%; 
-            color: #fff; 
-            transition: 0.3s; 
+            background: #111; border: 1px solid #333; padding: 16px; border-radius: 8px; width: 100%; color: #fff; transition: 0.3s; 
         }
-        .form-input:focus { 
-            border-color: #82c91e; 
-            outline: none; 
-            background: #222; 
-        }
-       
-        .package-card { 
-            border: 1px solid #f3f4f6; 
-            transition: 0.3s; 
-            background: white; 
-        }
-        .package-card:hover { 
-            border-color: #82c91e; 
-            box-shadow: 0 10px 40px rgba(0,0,0,0.05); 
-        }
+        .form-input:focus { border-color: #82c91e; outline: none; background: #1a1a1a; }
+        
+        .package-card { border: 1px solid #f3f4f6; transition: 0.3s; background: white; }
+        .package-card:hover { border-color: #82c91e; box-shadow: 0 20px 40px rgba(0,0,0,0.05); }
+
+        #nav-placeholder { position: sticky; top: 0; z-index: 100; }
     </style>
-   
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            fetch('/nav.html').then(r => r.text()).then(d => {
-                document.getElementById('nav-placeholder').innerHTML = d;
-            });
-            fetch('/footer.html').then(r => r.text()).then(d => {
-                document.getElementById('footer-placeholder').innerHTML = d;
-            });
-        });
-    </script>
 </head>
 <body class="antialiased">
 
     <div id="nav-placeholder"></div>
     
-    <!-- Main content - matches homepage container style + extra top padding -->
-    <main class="max-w-7xl mx-auto px-6 lg:px-8 pt-20 pb-24">
-       
-        <header class="max-w-4xl mb-32 border-l-8 border-[#82c91e] pl-10">
-            <h1 class="text-6xl md:text-8xl font-black uppercase leading-[0.85] mb-8">
-                Logic <span class="accent-text">Audit</span> <br>& Intelligence
+    <main class="max-w-7xl mx-auto px-6 lg:px-8 pt-16 pb-24">
+        
+        <header class="max-w-5xl mb-24 border-l-8 border-[#82c91e] pl-10">
+            <h1 class="text-6xl md:text-8xl font-black uppercase leading-[0.85] mb-8 tracking-tighter">
+                Not every <br><span class="accent-text">vulnerability</span> matters.
             </h1>
-            <p class="text-2xl text-zinc-600 max-w-3xl leading-snug mb-10">
-                Automated scanners chase CVEs. We chase <span class="text-black font-bold">Logic</span>. We specialize where the <span class="text-black font-bold">SDLC</span> bleeds—from <span class="text-black font-bold">RSA Private Key exposure</span> to the <span class="accent-text font-bold">CSRF Protocol</span> flaws uncovered across billion-dollar global clusters.
+            <p class="text-3xl text-zinc-800 max-w-3xl leading-tight mb-8 font-bold">
+                We hunt the ones that do.
             </p>
-           
-            <div class="carbon-glass p-12 rounded-3xl italic text-lg shadow-2xl">
-                <p><strong>Independent Certainty:</strong> Our researcher-led checks provide the assurance that dev teams and automated bots miss. We hunt the issues; your team patches the leak.</p>
-            </div>
+            <p class="text-xl text-zinc-600 max-w-2xl leading-relaxed">
+                Automated scanners chase low-hanging CVEs. **Forge Vertical** targets the logic. We specialize in identifying **SDLC bleeding points**—from WAF bypass protocols to unauthorized production data injection—across billion-dollar global clusters.
+            </p>
         </header>
 
-        <!-- Your existing sections remain unchanged -->
-        <section class="grid md:grid-cols-3 gap-10 mb-32">
-            <!-- Standard, Multi-Site, Ecosystem cards -->
-            <div class="package-card p-10 rounded-2xl">
-                <h3 class="text-zinc-400 uppercase text-xs font-bold tracking-widest mb-2">Standard Audit</h3>
-                <div class="text-5xl font-black mb-6 italic">$100 - $2k</div>
-                <p class="text-sm text-zinc-500 mb-8 leading-relaxed">Single site target. Vulnerability mapping and surface-level credential leak check.</p>
-                <div class="p-3 bg-zinc-50 rounded text-[10px] uppercase font-bold text-zinc-600">50% Deposit Required</div>
+        <section class="mb-32 grid md:grid-cols-2 gap-12 items-center">
+            <div class="space-y-6">
+                <h2 class="text-4xl uppercase italic">The Methodology</h2>
+                <p class="text-lg text-zinc-700">Generic reports are noise. Forge Vertical delivers **Security Intelligence**. Our process bypasses the behavioral "walls" designed to stop bots, reaching the core logic of your application.</p>
+                <ul class="space-y-4">
+                    <li class="flex gap-4 items-start">
+                        <span class="accent-bg text-white p-1 rounded-full text-xs font-bold px-2">01</span>
+                        <div><strong>Manual Logic Probing:</strong> We test your application's state-machine, not just its version numbers.</div>
+                    </li>
+                    <li class="flex gap-4 items-start">
+                        <span class="accent-bg text-white p-1 rounded-full text-xs font-bold px-2">02</span>
+                        <div><strong>Edge-to-Origin Evasion:</strong> Testing the resilience of your WAF and CDN against advanced padding and hex-bypass techniques.</div>
+                    </li>
+                    <li class="flex gap-4 items-start">
+                        <span class="accent-bg text-white p-1 rounded-full text-xs font-bold px-2">03</span>
+                        <div><strong>Evidence Vault:</strong> Every finding is delivered with a docker-ready `curl-impersonate` PoC for instant internal verification.</div>
+                    </li>
+                </ul>
             </div>
-           
-            <div class="package-card p-10 rounded-2xl border-[#82c91e] bg-[#82c91e]/5 shadow-xl">
-                <h3 class="accent-text uppercase text-xs font-bold tracking-widest mb-2">Multi-Site Strike</h3>
-                <div class="text-5xl font-black mb-6 italic">$2k - $5k</div>
-                <p class="text-sm text-zinc-600 mb-8 font-bold">2 Sites. Deep Logic Analysis. Verifying horizontal vulnerability replication across conglomerate clusters.</p>
-                <div class="p-3 bg-accent/20 rounded text-[10px] uppercase font-bold accent-text">Multi-Domain Security</div>
+            <div class="carbon-glass p-12 rounded-[3rem] shadow-2xl rotate-1">
+                <h3 class="text-[#82c91e] font-black text-2xl mb-4">"THE HAND IN THE JAR"</h3>
+                <p class="italic text-lg">"A report that says 'I found a key' is informative. A report that says 'I used this key to bypass your KYC wall and inject fraudulent data' is a payout. We deliver the latter."</p>
+                <div class="mt-8 pt-8 border-t border-white/10 text-sm opacity-60 uppercase tracking-widest">Forge Vertical Engagement Motto</div>
             </div>
-            <div class="package-card p-10 rounded-2xl">
-                <h3 class="text-zinc-400 uppercase text-xs font-bold tracking-widest mb-2">Ecosystem Audit</h3>
-                <div class="text-5xl font-black mb-6 italic">$5k - $10k+</div>
-                <p class="text-sm text-zinc-500 mb-8 leading-relaxed">Up to 5 Sites. RSA/SDLC Deep Dive and bulk authentication bypass testing.</p>
-                <div class="p-3 bg-zinc-50 rounded text-[10px] uppercase font-bold text-zinc-600">Full Evidence Vault Included</div>
+        </section>
+
+        <section class="grid md:grid-cols-3 gap-8 mb-32">
+            <div class="package-card p-10 rounded-3xl">
+                <h3 class="text-zinc-400 uppercase text-xs font-black tracking-widest mb-2 font-sans">Single Strike</h3>
+                <div class="text-5xl font-black mb-6 italic tracking-tighter">$2,500</div>
+                <p class="text-sm text-zinc-500 mb-8 leading-relaxed">Single site/domain target. Surface-level credential mapping and unauthenticated path disclosure.</p>
+                <ul class="text-xs space-y-2 mb-8 text-zinc-400 font-sans uppercase font-bold">
+                    <li>✓ 72h Deep Scan</li>
+                    <li>✓ WAF Resilience Test</li>
+                    <li>✓ Evidence PoC</li>
+                </ul>
+                <a href="#initiate-audit" class="block text-center py-4 border-2 border-black font-black uppercase text-xs hover:bg-black hover:text-white transition-all">Select Tier</a>
+            </div>
+            
+            <div class="package-card p-10 rounded-3xl border-[#82c91e] border-2 shadow-2xl relative overflow-hidden">
+                <div class="absolute top-4 right-[-35px] bg-[#82c91e] text-white text-[10px] px-10 py-1 rotate-45 font-black uppercase">Standard</div>
+                <h3 class="accent-text uppercase text-xs font-black tracking-widest mb-2 font-sans">Cluster Strike</h3>
+                <div class="text-5xl font-black mb-6 italic tracking-tighter">$5,500</div>
+                <p class="text-sm text-zinc-600 mb-8 font-bold">Multi-domain target. Deep logic analysis verifying horizontal vulnerability replication across conglomerate clusters.</p>
+                <ul class="text-xs space-y-2 mb-8 accent-text font-sans uppercase font-bold">
+                    <li>✓ Cross-site Logic Mapping</li>
+                    <li>✓ SDLC Pipeline Review</li>
+                    <li>✓ Remediation Roadmap</li>
+                </ul>
+                <a href="#initiate-audit" class="block text-center py-4 accent-bg text-white font-black uppercase text-xs hover:scale-105 transition-all">Select Tier</a>
+            </div>
+
+            <div class="package-card p-10 rounded-3xl">
+                <h3 class="text-zinc-400 uppercase text-xs font-black tracking-widest mb-2 font-sans">Ecosystem Audit</h3>
+                <div class="text-5xl font-black mb-6 italic tracking-tighter">$10k+</div>
+                <p class="text-sm text-zinc-500 mb-8 leading-relaxed">Full infrastructure deep-dive. RSA/Auth Deep Dive and bulk authentication bypass testing.</p>
+                <ul class="text-xs space-y-2 mb-8 text-zinc-400 font-sans uppercase font-bold">
+                    <li>✓ Full Environment Access Test</li>
+                    <li>✓ Telemetry Poisoning PoC</li>
+                    <li>✓ Executive Risk Summary</li>
+                </ul>
+                <a href="#initiate-audit" class="block text-center py-4 border-2 border-black font-black uppercase text-xs hover:bg-black hover:text-white transition-all">Custom Quote</a>
             </div>
         </section>
 
         <div class="grid lg:grid-cols-12 gap-16">
-            <div id="initiate-audit" class="lg:col-span-7 p-10 md:p-16 rounded-[2.5rem] glass-panel shadow-2xl">
-                <h2 class="text-4xl font-bold mb-12 tracking-tighter uppercase leading-none">Initiate <span class="accent-text">Audit</span></h2>
-               
+            <div id="initiate-audit" class="lg:col-span-7 p-10 md:p-16 rounded-[3rem] carbon-glass shadow-2xl border-t-4 border-[#82c91e]">
+                <h2 class="text-4xl font-black mb-12 tracking-tighter uppercase leading-none text-white">Initiate <span class="accent-text">Audit Engagement</span></h2>
+                
                 <form action="https://formspree.io/f/xvzvzvva" method="POST" class="space-y-6 text-sm">
-                    <!-- Your form fields stay exactly the same -->
                     <div class="grid md:grid-cols-2 gap-6">
-                        <input type="text" name="FullName" placeholder="Name & Surname" class="form-input" required>
-                        <input type="text" name="Phone" placeholder="Contact Number" class="form-input" required>
+                        <input type="text" name="FullName" placeholder="Appointed Officer Name" class="form-input" required>
+                        <input type="text" name="Company" placeholder="Authorized Organization" class="form-input" required>
                     </div>
-                    <div class="grid md:grid-cols-2 gap-6">
-                        <input type="email" name="Email" placeholder="Corporate Email" class="form-input" required>
-                        <input type="text" name="Company" placeholder="Organization" class="form-input" required>
+                    
+                    <textarea name="Scope" placeholder="Research Scope (URLs / CIDR Ranges)" class="form-input h-32" required></textarea>
+                    
+                    <div class="bg-black/50 p-8 rounded-2xl border border-zinc-800 text-[11px] text-zinc-400 leading-relaxed space-y-4">
+                        <h4 class="text-white font-black uppercase text-[10px] tracking-widest">Standard Engagement Protocol & Terms of Service</h4>
+                        <div class="h-48 overflow-y-auto pr-4 space-y-3 custom-scrollbar">
+                            <p><strong>1. Authorization of Research:</strong> By submitting this form, the Client authorizes Forge Vertical (the "Researcher") to perform non-destructive security testing on the defined Scope. This engagement is conducted for the purpose of vulnerability identification and risk mitigation.</p>
+                            <p><strong>2. Standard Operating Procedure:</strong> The Researcher agrees to follow the "Hand in the Jar" methodology, prioritizing the demonstration of high-impact logic failures over high-volume automated traffic.</p>
+                            <p><strong>3. Confidentiality (The Forge Vow):</strong> Forge Vertical guarantees 100% data insulation. All findings, logs, and client identities are kept in encrypted offline storage. No public disclosure (HackerOne, Bugcrowd, or Social Media) will occur without explicit written consent.</p>
+                            <p><strong>4. Fee Structure:</strong> A 50% non-refundable "Initiation Deposit" is required to begin the audit. The final 50% "Evidence Release Balance" is due upon the delivery of the vulnerability summary. Full PoC scripts are released only after final payment.</p>
+                            <p><strong>5. Limitation of Liability:</strong> Testing is performed on a "best-effort" basis. While the Researcher strives for non-disruption, the Client acknowledges that testing live ecosystems carries inherent risks. The Client represents they have the legal authority to authorize testing on the defined scope.</p>
+                        </div>
                     </div>
-                   
-                    <textarea name="Scope" placeholder="Scope (URLs or IPs)" class="form-input h-32" required></textarea>
-                    <textarea name="OutOfScope" placeholder="Excluded Targets" class="form-input h-20"></textarea>
-                    <textarea name="Reasoning" placeholder="Headers Required / Suspected Logic Concerns" class="form-input h-32"></textarea>
-                    <textarea name="Expectations" placeholder="Summary and Expectations" class="form-input h-32"></textarea>
-                   
-                    <div class="bg-[#1a1a1a] p-8 rounded-xl border border-zinc-800 text-xs text-zinc-400 leading-relaxed italic space-y-3">
-                        <p class="text-white font-bold uppercase text-[10px]">Confidentiality & Liability Agreement</p>
-                        <p>1. 50% non-refundable deposit to start. (2) Summary of findings provided before final 50% balance. (3) <strong>Forge Vertical guarantees 100% confidentiality.</strong> Client names are never disclosed. This form serves as a binding electronic signature.</p>
+
+                    <div class="flex items-start gap-4 text-zinc-400 italic">
+                        <input type="checkbox" required class="mt-1 accent-[#82c91e]">
+                        <label>I represent that I am an authorized officer of the organization and agree to the Standard Engagement Protocol and 50% initiation deposit.</label>
                     </div>
-                    <button type="submit" class="w-full py-6 rounded-2xl accent-bg text-white font-black hover:scale-105 hover:shadow-2xl transition-all uppercase tracking-widest text-lg">Send Request & Sign Agreement</button>
+
+                    <button type="submit" class="w-full py-8 rounded-3xl accent-bg text-white font-black hover:bg-[#94e622] hover:shadow-[0_0_50px_rgba(130,201,30,0.4)] transition-all uppercase tracking-[0.2em] text-xl">Sign & Initiate Strike</button>
                 </form>
             </div>
             
             <div class="lg:col-span-5 space-y-12 py-10">
-                <!-- Your sidebar content -->
                 <div class="border-l-4 border-accent pl-8">
-                    <h4 class="accent-text font-bold uppercase text-xs tracking-widest mb-4">Independent Intelligence</h4>
-                    <p class="text-zinc-700 text-xl leading-snug mb-10">Generic reports are noise. We demonstrate risk. We find the issues; your team patches the leak.</p>
+                    <h4 class="accent-text font-black uppercase text-xs tracking-widest mb-4">Insulated Authority</h4>
+                    <p class="text-zinc-800 text-2xl leading-tight font-bold">Generic reports are just noise. We demonstrate actual risk to your bottom line.</p>
                 </div>
-                <div class="carbon-glass p-10 rounded-2xl opacity-90 shadow-2xl">
-                    <h4 class="text-[#f3f4f6] font-bold uppercase text-xs tracking-widest mb-4">Insulated Authority</h4>
-                    <p class="text-sm text-[#d1d5db] leading-relaxed">Forge Vertical operates discreetly, insulating your brand from public disclosure.</p>
+                <div class="bg-zinc-50 p-10 rounded-3xl shadow-sm border border-zinc-100">
+                    <h4 class="text-zinc-900 font-black uppercase text-xs tracking-widest mb-4 italic">Security as a Shield</h4>
+                    <p class="text-sm text-zinc-500 leading-relaxed italic">"Forge Vertical operates as a private intelligence bridge. We identify the bleed, we document the logic, and we provide the patch roadmap before the public or automated bots ever realize the window is open."</p>
                 </div>
-                <div class="opacity-20 font-black text-[12rem] tracking-tighter select-none leading-none flex items-baseline">
+                <div class="opacity-10 font-black text-[12rem] tracking-tighter select-none leading-none flex items-baseline pt-20">
                     <span style="color: #000000;">F</span>
                     <span style="color: #82c91e;" class="ml-[-0.5rem]">V</span>
                 </div>
             </div>
         </div>
     </main>
-    
+
     <div id="footer-placeholder"></div>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            fetch('/nav.html').then(r => r.text()).then(d => { document.getElementById('nav-placeholder').innerHTML = d; });
+            fetch('/footer.html').then(r => r.text()).then(d => { document.getElementById('footer-placeholder').innerHTML = d; });
+        });
+    </script>
 </body>
 </html>
