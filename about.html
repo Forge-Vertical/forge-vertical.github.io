@@ -8,7 +8,7 @@
     <style>
         :root {
             --neon-green: #39ff14;
-            --dark-bg: #000; /* Deep black for stealth vibe */
+            --dark-bg: #000;
             --card-bg: #0a0a0a;
             --text-gray: #a0a0a0;
             --border-color: #222;
@@ -29,7 +29,6 @@
             padding: 60px 20px;
         }
 
-        /* Hero Section */
         .hero-section {
             border-left: 3px solid var(--neon-green);
             padding-left: 30px;
@@ -40,15 +39,10 @@
         .accent { color: var(--neon-green); }
         .sub-head { color: var(--text-gray); text-transform: uppercase; letter-spacing: 3px; font-size: 0.75rem; font-weight: 700; margin-bottom: 10px; display: block; }
 
-        /* Media Container */
-        .media-stack {
-            margin-top: 40px;
-        }
-
         .terminal-image-container {
             width: 100%;
             border: 1px solid var(--border-color);
-            margin-top: 20px;
+            margin-top: 40px;
             overflow: hidden;
             background: #050505;
         }
@@ -61,11 +55,8 @@
             transition: 0.4s ease;
         }
 
-        .terminal-image-container:hover img {
-            filter: grayscale(0);
-        }
+        .terminal-image-container:hover img { filter: grayscale(0); }
 
-        /* Vulnerability Grid */
         .vulnerability-list {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
@@ -85,7 +76,6 @@
             background: var(--card-bg);
         }
 
-        /* Performance Cards */
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -105,7 +95,6 @@
         .card:hover { border-color: var(--neon-green); transform: translateY(-5px); }
         .metric { font-size: 3rem; font-weight: 900; color: white; display: block; }
 
-        /* Ethics Banner */
         .ethics-banner {
             background: var(--neon-green);
             color: black;
@@ -116,27 +105,23 @@
 
         .ethics-banner h2 { margin: 0 0 10px 0; text-transform: uppercase; font-weight: 900; font-size: 2.5rem; }
 
-        @media (max-width: 768px) {
-            h1 { font-size: 2.5rem; }
-        }
+        @media (max-width: 768px) { h1 { font-size: 2.5rem; } }
     </style>
 </head>
 <body>
 
-    <?php include 'nav.html'; ?>
+    <div id="nav-placeholder"></div>
 
     <main class="container">
-        
         <section class="hero-section">
             <span class="sub-head">Identity: Jarrit Hosking</span>
             <h1>Forge <span class="accent">Vertical</span></h1>
-            
             <p style="font-size: 1.25rem; margin-top: 30px; max-width: 800px; font-weight: 300;">
                 Jarrit Hosking does not "vibe code." He operates side-by-side with AI to architect security tools and solve high-consequence problems. His happy place: deep in a <span class="accent">Kali terminal</span> with a cup of coffee.
             </p>
 
             <div class="terminal-image-container">
-                <img src="assets/image_name.png" alt="Jarrit Hosking Kali Linux Terminal Environment">
+                <img src="assets/image_6f2b24.png" alt="Jarrit Hosking Kali Linux Terminal Environment">
             </div>
         </section>
 
@@ -172,10 +157,25 @@
             <h2>The Code of Silence</h2>
             <p>Forge Vertical maintains absolute confidentiality. We never expose findings to the public for advertising or clout. The security of the domain, the company, and the users always comes first.</p>
         </section>
-
     </main>
 
-    <?php include 'footer.html'; ?>
+    <div id="footer-placeholder"></div>
 
+    <script>
+        function loadElement(id, url) {
+            fetch(url)
+                .then(response => {
+                    if (!response.ok) throw new Error('Failed to load ' + url);
+                    return response.text();
+                })
+                .then(data => {
+                    document.getElementById(id).innerHTML = data;
+                })
+                .catch(err => console.error(err));
+        }
+
+        loadElement('nav-placeholder', 'nav.html');
+        loadElement('footer-placeholder', 'footer.html');
+    </script>
 </body>
 </html>
