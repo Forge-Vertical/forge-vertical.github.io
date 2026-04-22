@@ -6,6 +6,7 @@
     <meta name="description" content="Jarrit Hosking | Principal Architect at Forge Vertical. AI-augmented security research and industrial web infrastructure.">
     <title>About | Forge Vertical Architecture</title>
     
+    <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;800&display=swap" rel="stylesheet">
     <style>
@@ -21,7 +22,7 @@
     <section class="pt-32 pb-20 px-6 max-w-7xl mx-auto">
         <span class="bg-zinc-100 text-zinc-500 px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest mb-8 inline-block">Principal Architect Identity</span>
         
-        <div class="grid lg:grid-cols-2 gap-16 items-start">
+        <div class="grid lg:grid-cols-2 gap-16 items-center">
             <div>
                 <h1 class="text-5xl md:text-8xl font-extrabold tracking-tighter leading-[0.85] mb-8 text-black">
                     Jarrit <br>
@@ -43,13 +44,9 @@
                 </div>
             </div>
 
-            <div class="relative">
-                <div class="rounded-[2.5rem] overflow-hidden border border-zinc-200 shadow-2xl aspect-[4/5] bg-zinc-100">
-                    <img src="/assets/image_6f2b24.png" alt="Jarrit Hosking Terminal Environment" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700">
-                </div>
-                <div class="absolute -bottom-6 -left-6 bg-black text-white p-8 rounded-3xl shadow-2xl hidden md:block">
-                    <p class="font-mono text-xs text-[#84cc16] mb-2">>> Current Status</p>
-                    <p class="font-black uppercase tracking-widest text-sm">Hardening Infrastructure</p>
+            <div class="relative flex justify-center items-center">
+                <div class="rounded-[2.5rem] overflow-hidden border border-zinc-200 shadow-2xl bg-zinc-50 w-full">
+                    <dotlottie-player src="/assets/Developer.lottie" background="transparent" speed="1" style="width: 100%; height: auto;" loop autoplay></dotlottie-player>
                 </div>
             </div>
         </div>
@@ -59,49 +56,25 @@
         <div class="max-w-7xl mx-auto px-6">
             <h2 class="text-xs font-black uppercase tracking-[0.3em] text-zinc-400 mb-12 text-center">Technical Vulnerability Specialization</h2>
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-                <div class="bg-white p-6 rounded-2xl border border-zinc-200 text-center shadow-sm hover:border-[#84cc16] transition-all">
+                <div class="bg-white p-6 rounded-2xl border border-zinc-200 text-center shadow-sm">
                     <span class="font-black text-xl tracking-tighter">CI/CD</span>
                 </div>
-                <div class="bg-white p-6 rounded-2xl border border-zinc-200 text-center shadow-sm hover:border-[#84cc16] transition-all">
+                <div class="bg-white p-6 rounded-2xl border border-zinc-200 text-center shadow-sm">
                     <span class="font-black text-xl tracking-tighter">PPE</span>
                 </div>
-                <div class="bg-white p-6 rounded-2xl border border-zinc-200 text-center shadow-sm hover:border-[#84cc16] transition-all">
+                <div class="bg-white p-6 rounded-2xl border border-zinc-200 text-center shadow-sm">
                     <span class="font-black text-xl tracking-tighter text-[#84cc16]">RCE</span>
                 </div>
-                <div class="bg-white p-6 rounded-2xl border border-zinc-200 text-center shadow-sm hover:border-[#84cc16] transition-all">
+                <div class="bg-white p-6 rounded-2xl border border-zinc-200 text-center shadow-sm">
                     <span class="font-black text-xl tracking-tighter">ATO</span>
                 </div>
-                <div class="bg-white p-6 rounded-2xl border border-zinc-200 text-center shadow-sm hover:border-[#84cc16] transition-all">
+                <div class="bg-white p-6 rounded-2xl border border-zinc-200 text-center shadow-sm">
                     <span class="font-black text-xl tracking-tighter">IDOR</span>
                 </div>
-                <div class="bg-white p-6 rounded-2xl border border-zinc-200 text-center shadow-sm hover:border-[#84cc16] transition-all">
+                <div class="bg-white p-6 rounded-2xl border border-zinc-200 text-center shadow-sm">
                     <span class="font-black text-xl tracking-tighter">WAF</span>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <section class="py-20 max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-8">
-        <div class="p-10 bg-zinc-950 rounded-[2.5rem] text-white">
-            <h3 class="text-[#84cc16] font-black uppercase text-[10px] tracking-widest mb-4">Reporting Velocity</h3>
-            <span class="text-7xl font-extrabold tracking-tighter mb-4 block">36</span>
-            <p class="text-zinc-400 font-light">Technical reports delivered within a 60-day high-intensity operational sprint. We prioritize depth over volume.</p>
-        </div>
-        <div class="p-10 bg-zinc-50 rounded-[2.5rem] border border-zinc-100">
-            <h3 class="text-zinc-400 font-black uppercase text-[10px] tracking-widest mb-4">Private Program Trust</h3>
-            <span class="text-7xl font-extrabold tracking-tighter mb-4 block text-black">04</span>
-            <p class="text-zinc-500 font-light">Direct invitations to private non-public security engagements based on consistent report quality and discretion.</p>
-        </div>
-    </section>
-
-    <section class="py-20 px-6">
-        <div class="max-w-4xl mx-auto bg-zinc-50 rounded-[3rem] p-12 border border-zinc-100 text-center">
-            <h2 class="text-3xl md:text-5xl font-black tracking-tighter mb-6 text-black">
-                The Code of <span class="italic font-light text-zinc-400">Silence_</span>
-            </h2>
-            <p class="text-zinc-500 text-lg leading-relaxed">
-                Even when given permission, we never expose what we find to the public for advertising or clout. The security of the domains, companies, and users we protect always comes first. <strong>Confidentiality is our primary deployment.</strong>
-            </p>
         </div>
     </section>
 
