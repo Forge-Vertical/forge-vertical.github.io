@@ -41,11 +41,30 @@
         .accent { color: var(--neon-green); }
         .sub-head { color: var(--text-gray); text-transform: uppercase; letter-spacing: 3px; font-size: 0.75rem; font-weight: 700; }
 
-        /* General Layout */
+        /* Content Blocks */
         .content-block { margin-bottom: 70px; }
         p { font-size: 1.1rem; color: #e0e0e0; max-width: 850px; }
 
-        /* Project & Link Grids */
+        /* List Styling */
+        .vulnerability-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            list-style: none;
+            padding: 0;
+            margin: 30px 0;
+        }
+
+        .vulnerability-list li {
+            background: #1a1a1a;
+            border-left: 2px solid var(--neon-green);
+            padding: 10px 20px;
+            font-weight: 700;
+            font-family: 'Courier New', monospace;
+            color: var(--neon-green);
+        }
+
+        /* Grids & Cards */
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -53,32 +72,21 @@
             margin-top: 30px;
         }
 
-        .link-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin-top: 30px;
-        }
-
-        /* Cards */
         .card {
             background: var(--card-bg);
             padding: 30px;
             border: 1px solid var(--border-color);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.3s ease;
             text-decoration: none;
             color: inherit;
-            display: block;
         }
 
         .card:hover {
             border-color: var(--neon-green);
             transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(57, 255, 20, 0.05);
         }
 
-        .small-card { padding: 20px; text-align: center; }
-        .small-card span { display: block; font-weight: 800; text-transform: uppercase; font-size: 0.9rem; margin-bottom: 5px; }
+        .metric-value { font-size: 2.2rem; font-weight: 900; margin: 5px 0; display: block; }
         .stealth-text { color: var(--text-gray); font-size: 0.85rem; margin: 0; }
 
         /* Ethics Banner */
@@ -87,16 +95,21 @@
             color: black;
             padding: 60px;
             margin-top: 80px;
-            border-radius: 0;
         }
 
-        .ethics-banner h2 { margin: 0 0 15px 0; font-size: 2.5rem; text-transform: uppercase; font-weight: 900; letter-spacing: -1px; }
-        .ethics-banner p { color: black; font-size: 1.2rem; font-weight: 700; line-height: 1.4; margin: 0; }
+        .ethics-banner h2 { margin: 0 0 15px 0; font-size: 2.5rem; text-transform: uppercase; font-weight: 900; }
+        .ethics-banner p { color: black; font-size: 1.2rem; font-weight: 700; margin: 0; }
 
-        @media (max-width: 768px) {
-            h1 { font-size: 2.5rem; }
-            .ethics-banner { padding: 40px 20px; }
+        /* Terminal Image Placeholder */
+        .terminal-box {
+            background: #000;
+            border: 1px solid #333;
+            padding: 20px;
+            margin-top: 30px;
+            text-align: center;
         }
+
+        .terminal-box img { max-width: 100%; height: auto; opacity: 0.8; }
     </style>
 </head>
 <body>
@@ -104,16 +117,47 @@
     <main class="container">
         
         <section class="hero-section">
-            <p class="sub-head">Intelligence Status: Augmented</p>
+            <p class="sub-head">Operator: Jarrit Hosking</p>
             <h1>Forge <span class="accent">Vertical</span></h1>
             <p style="font-size: 1.3rem; margin-top: 25px; font-weight: 300;">
-                Jarrit Hosking does not "vibe code." He operates at the bleeding edge of AI-human collaboration, building bespoke tools to solve high-consequence security problems for the modern web.
+                Jarrit Hosking does not "vibe code." He operates side-by-side with AI to architect security tools and solve high-consequence problems. His happy place: deep in a <span class="accent">Kali terminal</span> with a cup of coffee.
             </p>
+            
+            <div class="terminal-box">
+                <p class="stealth-text">[ Terminal Visual: Jarrit Hosking @ Kali_Linux ~ $ ]</p>
+                <img src="path_to_your_kali_image.jpg" alt="Jarrit Hosking Kali Terminal Infrastructure">
+            </div>
         </section>
 
         <div class="content-block">
-            <h3>Industrial AI Augmentation</h3>
-            <p>We work side-by-side with advanced neural networks to identify threats, locate bugs, and harden infrastructure across <span class="accent">FinTech, Crypto, and Enterprise Commerce</span>. We build our own solutions to secure the companies and customers that power global trade.</p>
+            <h3>Specialized Technical Focus</h3>
+            <p>Identifying critical architectural flaws in FinTech, Crypto, and Enterprise Commerce. Specialized in deep-stack exploitation and detection across:</p>
+            <ul class="vulnerability-list">
+                <li>CI/CD</li>
+                <li>PPE</li>
+                <li>RCE</li>
+                <li>ATO</li>
+                <li>IDOR</li>
+                <li>WAF</li>
+            </ul>
+        </div>
+
+        <div class="content-block">
+            <h3>Audit Performance Metrics</h3>
+            <div class="grid">
+                <div class="card">
+                    <h4 class="accent">Technical Velocity</h4>
+                    <span class="metric-value">36</span>
+                    <p class="sub-head">Validated Reports</p>
+                    <p class="stealth-text">High-intensity security research delivered within a 60-day operational sprint.</p>
+                </div>
+                <div class="card">
+                    <h4 class="accent">Vetted Trust</h4>
+                    <span class="metric-value">04</span>
+                    <p class="sub-head">Private Invites</p>
+                    <p class="stealth-text">Selected for exclusive, non-public engagements based on reporting depth and discretion.</p>
+                </div>
+            </div>
         </div>
 
         <div class="content-block">
@@ -121,40 +165,33 @@
             <div class="grid">
                 <a href="https://www.aurora-repair.com" class="card">
                     <h4 class="accent">Aurora-Repair.com</h4>
-                    <p class="stealth-text">A masterclass in automated infrastructure and advanced logical deployment developed via deep AI partnership.</p>
+                    <p class="stealth-text">Automated infrastructure deployment engineered through AI-Human synergy.</p>
                 </a>
                 <a href="https://www.fairdiscovery.org" class="card">
                     <h4 class="accent">FairDiscovery.org</h4>
-                    <p class="stealth-text">A specialized repository of custom discovery tools engineered to neutralize threats before they materialize.</p>
+                    <p class="stealth-text">A repository of custom discovery tools for proactive threat neutralization.</p>
                 </a>
             </div>
         </div>
 
         <div class="content-block">
             <h3>Digital Footprint</h3>
-            <div class="link-grid">
-                <a href="https://app.daily.dev/jarrithosking" target="_blank" class="card small-card">
-                    <span class="accent">daily.dev</span>
-                    <p class="stealth-text">Tech Intelligence</p>
+            <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+                <a href="https://app.daily.dev/jarrithosking" class="card" style="padding: 20px; text-align: center;">
+                    <span class="accent" style="display: block; font-weight: 800;">daily.dev</span>
                 </a>
-                <a href="https://medium.com/@jarrithosking" target="_blank" class="card small-card">
-                    <span class="accent">Medium</span>
-                    <p class="stealth-text">Security Research</p>
+                <a href="https://medium.com/@jarrithosking" class="card" style="padding: 20px; text-align: center;">
+                    <span class="accent" style="display: block; font-weight: 800;">Medium</span>
                 </a>
-                <a href="https://www.linkedin.com/in/jarrit-hosking-44243a332/" target="_blank" class="card small-card">
-                    <span class="accent">LinkedIn</span>
-                    <p class="stealth-text">Professional Network</p>
-                </a>
-                <a href="https://www.facebook.com/profile.php?id=61577414999517" target="_blank" class="card small-card">
-                    <span class="accent">Facebook</span>
-                    <p class="stealth-text">Public Updates</p>
+                <a href="https://www.linkedin.com/in/jarrit-hosking-44243a332/" class="card" style="padding: 20px; text-align: center;">
+                    <span class="accent" style="display: block; font-weight: 800;">LinkedIn</span>
                 </a>
             </div>
         </div>
 
         <section class="ethics-banner">
             <h2>The Code of Silence</h2>
-            <p>Forge Vertical maintains a strict policy of absolute confidentiality. Even with explicit permission, we never expose findings to the public for advertising, image, or clout. The security of the domain, the company, and the users always comes first.</p>
+            <p>Forge Vertical maintains absolute confidentiality. We never expose findings to the public for advertising or clout. The security of the domain, the company, and the users always comes first.</p>
         </section>
 
     </main>
