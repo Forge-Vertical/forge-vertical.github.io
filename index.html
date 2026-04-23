@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Forge Vertical architects high-performance websites, premium domains, SEO-first infrastructure, and AI integrations for startups and SMBs. Deploy your custom web project today.">
     <title>Forge Vertical | Out-Of-The-Box Architecture</title>
+
+    <script src="/global.js"></script>
     
     <script type="application/ld+json">
     {
@@ -231,18 +233,5 @@
 
     <div id="global-footer"></div>
 
-    <script>
-        async function injectGlobals() {
-            try {
-                const nav = await fetch('/nav.html');
-                if(nav.ok) document.getElementById('global-nav').innerHTML = await nav.text();
-                const footer = await fetch('/footer.html');
-                if(footer.ok) document.getElementById('global-footer').innerHTML = await footer.text();
-            } catch (e) {
-                console.error("Global Component Injection Failed:", e);
-            }
-        }
-        injectGlobals();
-    </script>
 </body>
 </html>
