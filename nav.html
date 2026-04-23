@@ -1,4 +1,4 @@
-<nav class="max-w-7xl mx-auto px-6 py-8 flex justify-between items-center relative">
+<nav class="max-w-7xl mx-auto px-6 py-8 flex justify-between items-center relative overflow-visible">
     <a href="/index.html" class="flex items-center z-50">
         <svg width="260" height="40" viewBox="0 0 260 40" fill="none" xmlns="http://www.w3.org/2000/svg">
             <text x="0" y="30" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="28" letter-spacing="-0.05em" fill="#0f172a">FORGE</text>
@@ -6,7 +6,8 @@
         </svg>
     </a>
 
-    <div class="hidden md:flex gap-8 text-[11px] font-black uppercase tracking-widest items-center">
+    <div class="hidden md:flex gap-6 text-[11px] font-black uppercase tracking-widest items-center">
+        <a href="/about.html" class="text-slate-900 hover:text-lime-600 transition-colors">About</a>
         <a href="/index.html#services" class="text-slate-900 hover:text-lime-600 transition-colors">Services</a>
         <a href="/portfolio.html" class="text-slate-900 hover:text-lime-600 transition-colors">Portfolio</a>
         <a href="/security-intelligence.html" class="text-slate-900 hover:text-lime-600 transition-colors">Security Intelligence</a>
@@ -21,16 +22,17 @@
         </a>
     </div>
 
-    <button onclick="toggleMobileMenu()" class="md:hidden z-50 p-2 flex flex-col gap-1.5 items-end group focus:outline-none">
-        <span class="w-8 h-1 bg-slate-900 rounded-full transition-all group-hover:bg-lime-500"></span>
-        <span class="w-6 h-1 bg-[#84cc16] rounded-full transition-all"></span>
-        <span class="w-8 h-1 bg-slate-900 rounded-full transition-all group-hover:bg-lime-500"></span>
+    <button onclick="toggleMobileMenu()" id="menu-toggle" class="md:hidden z-50 p-2 flex flex-col gap-1.5 items-end group focus:outline-none">
+        <span id="bar-1" class="w-8 h-1 bg-slate-900 rounded-full transition-all duration-300"></span>
+        <span id="bar-2" class="w-6 h-1 bg-[#84cc16] rounded-full transition-all duration-300"></span>
+        <span id="bar-3" class="w-8 h-1 bg-slate-900 rounded-full transition-all duration-300"></span>
     </button>
 
-    <div id="mobile-menu" class="fixed inset-0 bg-white z-40 translate-x-full transition-transform duration-300 ease-in-out md:hidden flex flex-col items-center justify-center gap-8 text-center">
+    <div id="mobile-menu" class="fixed inset-0 bg-white z-40 translate-x-full transition-transform duration-500 ease-in-out md:hidden flex flex-col items-center justify-center gap-6 text-center">
+        <a href="/about.html" onclick="toggleMobileMenu()" class="text-2xl font-black uppercase tracking-tighter text-slate-900">About</a>
         <a href="/index.html#services" onclick="toggleMobileMenu()" class="text-2xl font-black uppercase tracking-tighter text-slate-900">Services</a>
         <a href="/portfolio.html" onclick="toggleMobileMenu()" class="text-2xl font-black uppercase tracking-tighter text-slate-900">Portfolio</a>
-        <a href="/security-intelligence.html" onclick="toggleMobileMenu()" class="text-2xl font-black uppercase tracking-tighter text-slate-900">Security Intelligence</a>
+        <a href="/security-intelligence.html" onclick="toggleMobileMenu()" class="text-2xl font-black uppercase tracking-tighter text-slate-900">Intelligence</a>
         <a href="/tools/roi-calculator.html" onclick="toggleMobileMenu()" class="text-2xl font-black uppercase tracking-tighter text-lime-600">Audit Tool</a>
         
         <a href="javascript:void(0)" onclick="showBuildModal(); toggleMobileMenu();" class="mt-4 text-white bg-slate-900 px-8 py-4 rounded-full font-black uppercase tracking-widest hover:bg-lime-500 transition-all">Build Your Own</a>
@@ -38,11 +40,33 @@
 </nav>
 
 <script>
+/**
+ * Toggles the mobile menu visibility and handles the "X" animation
+ */
 function toggleMobileMenu() {
     const menu = document.getElementById('mobile-menu');
+    const bar1 = document.getElementById('bar-1');
+    const bar2 = document.getElementById('bar-2');
+    const bar3 = document.getElementById('bar-3');
+
+    // Slide menu
     menu.classList.toggle('translate-x-full');
+
+    // Hamburger to X animation
+    if (!menu.classList.contains('translate-x-full')) {
+        bar1.style.transform = 'translateY(10px) rotate(45deg)';
+        bar2.style.opacity = '0';
+        bar3.style.transform = 'translateY(-10px) rotate(-45deg)';
+    } else {
+        bar1.style.transform = 'none';
+        bar2.style.opacity = '1';
+        bar3.style.transform = 'none';
+    }
 }
 
+/**
+ * Beta Tool Modal Placeholder
+ */
 function showBuildModal() {
     alert("Industrial-Grade Build Tool: We are currently finalizing the 'Build Your Own' sandbox for public beta. Sign up for our newsletter or contact us directly for early access.");
 }
