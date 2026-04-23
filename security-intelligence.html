@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script src="/global.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Security Intelligence & Logic Audit | Forge Vertical</title>
@@ -240,13 +241,5 @@
         </div>
     </main>
 
-    <div id="footer-placeholder"></div>
-    
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            fetch('/nav.html').then(r => r.text()).then(d => { document.getElementById('nav-placeholder').innerHTML = d; });
-            fetch('/footer.html').then(r => r.text()).then(d => { document.getElementById('footer-placeholder').innerHTML = d; });
-        });
-    </script>
 </body>
 </html>
