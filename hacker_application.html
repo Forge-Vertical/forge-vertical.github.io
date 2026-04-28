@@ -6,57 +6,26 @@
     <title>Hacker Foundry Application | Forge Vertical</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-C6Z3VMB0ND"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-C6Z3VMB0ND');
-    </script>
-
     <style>
         @import url('https://fonts.cdnfonts.com/css/georgia');
-        
-        body { 
-            font-family: 'Georgia', serif; 
-            background: #ffffff; 
-            color: #111111; 
-            line-height: 1.8; 
-        }
-        
-        h1, h2, h3, h4 { 
-            font-weight: 900; 
-            color: #000000; 
-        }
-        
+        body { font-family: 'Georgia', serif; background: #ffffff; color: #111; line-height: 1.8; }
+        h1, h2, h3, h4 { font-weight: 900; color: #000; }
         .accent-text { color: #82c91e; }
         .accent-bg { background-color: #82c91e; }
-        .border-accent { border-color: #82c91e; }
-
         .carbon-glass {
             background: #0a0a0a url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
             border: 1px solid rgba(255, 255, 255, 0.1);
             color: #d1d5db;
         }
+        .form-input { background: #111; border: 1px solid #333; padding: 16px; border-radius: 8px; width: 100%; color: #fff; transition: 0.3s; }
+        .form-input:focus { border-color: #82c91e; outline: none; background: #1a1a1a; }
         
-        .form-input { 
-            background: #111111; 
-            border: 1px solid #333; 
-            padding: 16px; 
-            border-radius: 8px; 
-            width: 100%; 
-            color: #fff; 
-            transition: 0.3s; 
+        .check-container {
+            display: flex; align-items: flex-start; gap: 12px; cursor: pointer; padding: 12px;
+            background: #1a1a1a; border-radius: 8px; transition: 0.2s; border: 1px solid transparent;
         }
-        .form-input:focus { 
-            border-color: #82c91e; 
-            outline: none; 
-            background: #1a1a1a; 
-        }
-
-        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
-        .custom-scrollbar::-webkit-scrollbar-track { background: #111; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: #82c91e; border-radius: 10px; }
+        .check-container:hover { background: #222; border-color: #82c91e; }
+        input[type="checkbox"] { accent-color: #82c91e; transform: scale(1.2); }
     </style>
 </head>
 <body class="antialiased">
@@ -65,25 +34,21 @@
     
     <main class="max-w-7xl mx-auto px-6 lg:px-8 pt-20 pb-24">
         
-        <header class="max-w-5xl mb-24 border-l-8 border-[#82c91e] pl-10">
+        <header class="max-w-5xl mb-16 border-l-8 border-[#82c91e] pl-10">
             <h1 class="text-6xl md:text-8xl font-black uppercase leading-[0.85] mb-8 tracking-tighter">
                 Join the <br><span class="accent-text">Foundry.</span>
             </h1>
             <p class="text-3xl text-zinc-800 max-w-3xl leading-tight mb-8 font-bold italic">
-                Vetting elite signal for the next generation of managed strikes.
-            </p>
-            <p class="text-xl text-zinc-600 max-w-2xl leading-relaxed">
-                Forge Vertical is building a private network for researchers who think beyond the scanner. Apply to join the waitlist for our upcoming 2026 managed ecosystem.
+                Strategic Co-existence. We aren't replacing the giants; we're forging a new path.
             </p>
         </header>
 
         <div class="grid lg:grid-cols-12 gap-16 items-start">
             
-            <div id="apply-foundry" class="lg:col-span-7 p-10 md:p-16 rounded-[3rem] carbon-glass shadow-2xl border-t-4 border-[#82c91e]">
-                <h2 class="text-4xl font-black mb-12 tracking-tighter uppercase leading-none text-white">Foundry <span class="accent-text">Waitlist</span></h2>
+            <div class="lg:col-span-7 p-10 md:p-16 rounded-[3rem] carbon-glass shadow-2xl border-t-4 border-[#82c91e]">
+                <h2 class="text-4xl font-black mb-12 tracking-tighter uppercase leading-none text-white">Vetting <span class="accent-text">Protocol</span></h2>
                 
                 <form action="https://formspree.io/f/xvzvzvva" method="POST" class="space-y-6 text-sm">
-                    
                     <input type="text" name="_gotcha" style="display:none">
 
                     <div class="grid md:grid-cols-2 gap-6">
@@ -91,59 +56,58 @@
                         <input type="email" name="Email" placeholder="Secure Email" class="form-input" required>
                     </div>
 
-                    <input type="url" name="Profile" placeholder="Platform Profile URL (H1 / Bugcrowd / Intigriti)" class="form-input">
-
-                    <div class="space-y-2">
-                        <label class="text-zinc-500 uppercase text-[10px] font-black tracking-widest ml-2">Primary Specialization</label>
-                        <select name="Specialty" class="form-input custom-scrollbar">
-                            <option value="Logic">Business Logic & SDLC Bleed</option>
-                            <option value="Cloud">Cloud Infrastructure (GCP/AWS)</option>
-                            <option value="Auth">Auth & RSA Deep Dives</option>
-                            <option value="API">API & Mobile Protocol Evasion</option>
-                        </select>
+                    <div class="space-y-4">
+                        <label class="text-zinc-500 uppercase text-[10px] font-black tracking-widest ml-2">Verification Handles (H1 / Bugcrowd / Intigriti / YWH)</label>
+                        <input type="text" name="PlatformHandles" placeholder="e.g. H1: @username, BC: @username" class="form-input" required title="Required for future vetting and invitation priority.">
                     </div>
 
-                    <textarea name="Creds" placeholder="Briefly describe your technical creds or most significant bypass..." class="form-input h-32"></textarea>
-
-                    <div class="bg-black/50 p-8 rounded-2xl border border-zinc-800">
-                        <div class="flex items-start gap-4 text-zinc-400 italic text-xs leading-relaxed">
-                            <input type="checkbox" name="IntegrityPledge" required class="mt-1 accent-[#82c91e] h-5 w-5 rounded border-zinc-700 bg-zinc-900">
-                            <label>I commit to the Forge Vertical Integrity Code: No data-brokering, adult content, or ethically compromised sectors. Signal over noise.</label>
+                    <div class="space-y-4">
+                        <label class="text-zinc-500 uppercase text-[10px] font-black tracking-widest ml-2">Logic Domains (Select All That Apply)</label>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <label class="check-container"><input type="checkbox" name="Spec_SSRF" value="1"> <div><strong>SSRF:</strong> Metadata & Cloud Evasion.</div></label>
+                            <label class="check-container"><input type="checkbox" name="Spec_CSRF" value="1"> <div><strong>CSRF:</strong> Complex Action Forgery.</div></label>
+                            <label class="check-container"><input type="checkbox" name="Spec_Logic" value="1"> <div><strong>SDLC Logic:</strong> BFT & Protocol Bleed.</div></label>
+                            <label class="check-container"><input type="checkbox" name="Spec_Auth" value="1"> <div><strong>Auth:</strong> MFA & Session Hijacking.</div></label>
                         </div>
                     </div>
 
-                    <button type="submit" class="w-full py-8 rounded-3xl accent-bg text-white font-black hover:bg-[#94e622] transition-all uppercase tracking-[0.2em] text-xl">Request Access</button>
+                    <textarea name="TechnicalProof" placeholder="Briefly describe your most significant 'Manual Logic' bypass..." class="form-input h-32" required></textarea>
+
+                    <button type="submit" class="w-full py-8 rounded-3xl accent-bg text-white font-black hover:bg-[#94e622] transition-all uppercase tracking-[0.2em] text-xl">Submit to Foundry</button>
                     
-                    <p class="text-center text-[10px] text-zinc-500 uppercase tracking-widest pt-4">Vetting is manual. No rewards guaranteed during foundational phase.</p>
+                    <p class="text-center text-[10px] text-zinc-500 uppercase tracking-widest pt-4 italic">Vetting is manual. We will utilize KYC verification during the invitation phase.</p>
                 </form>
             </div>
             
             <div class="lg:col-span-5 space-y-12 py-10 sticky top-24">
                 <div class="border-l-4 border-accent pl-8">
-                    <h4 class="accent-text font-black uppercase text-xs tracking-widest mb-4">The Repute Meritocracy</h4>
-                    <p class="text-zinc-800 text-2xl leading-tight font-bold">We reward depth, not volume.</p>
+                    <h4 class="accent-text font-black uppercase text-xs tracking-widest mb-4">The Forge Ecosystem</h4>
+                    <p class="text-zinc-800 text-2xl leading-tight font-bold">Why hack with us?</p>
+                    <p class="mt-4 text-zinc-600">We don't intend to compete with HackerOne or Bugcrowd. They are the giants; we are the <strong>Specialized Forge</strong>.</p>
                 </div>
 
-                <div class="p-8 rounded-[2rem] bg-zinc-900 text-zinc-400 text-sm font-mono border border-zinc-800 space-y-4">
-                    <div class="text-[#82c91e] font-black">// Entry Requirements:</div>
-                    <ul class="space-y-2 opacity-80">
-                        <li>> Proven P1/P2 Track Record</li>
-                        <li>> Manual Logic Focus</li>
-                        <li>> Zero Automated Spam Tolerance</li>
-                        <li>> Clean Ethical Standing</li>
-                    </ul>
+                <div class="p-8 rounded-[2rem] bg-zinc-900 text-zinc-400 text-sm border border-zinc-800 space-y-6">
+                    <div>
+                        <h5 class="text-white font-black uppercase text-xs mb-2 tracking-widest underline decoration-[#82c91e]">The Repute System</h5>
+                        <ul class="space-y-2 opacity-80 font-mono text-[11px]">
+                            <li>> TRIAGED: High Bounty + Signal</li>
+                            <li>> DUPLICATE: 5 Repute Points</li>
+                            <li>> INFORMATIVE: 1 Repute Point</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h5 class="text-white font-black uppercase text-xs mb-2 tracking-widest underline decoration-[#82c91e]">Bulk Opportunity</h5>
+                        <p class="italic text-[12px]">"Why hack on one platform when you can increase your chances with many?"</p>
+                        <p class="mt-2 leading-relaxed">Diversify your income. Forge Vertical focuses on industrial logic and high-integrity targets that legacy platforms often overlook.</p>
+                    </div>
                 </div>
 
-                <div class="opacity-10 font-black text-[10rem] tracking-tighter select-none leading-none flex items-baseline pt-10">
-                    <span style="color: #000000;">F</span>
-                    <span style="color: #82c91e;" class="ml-[-0.5rem]">V</span>
-                </div>
+                <div class="opacity-10 font-black text-[10rem] tracking-tighter select-none leading-none pt-10">FV</div>
             </div>
         </div>
     </main>
 
     <div id="global-footer"></div>
-
     <script>
         async function injectGlobals() {
             try {
@@ -151,9 +115,7 @@
                 if(nav.ok) document.getElementById('global-nav').innerHTML = await nav.text();
                 const foot = await fetch('/footer.html');
                 if(foot.ok) document.getElementById('global-footer').innerHTML = await foot.text();
-            } catch (e) {
-                console.error("Global injection failed", e);
-            }
+            } catch (e) {}
         }
         injectGlobals();
     </script>
