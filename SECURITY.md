@@ -23,7 +23,7 @@ We take security seriously. If you find a vulnerability, we promise to:
 **Do not open a public issue.** Please use one of the following secure channels:
 
 1. **GitHub Private Reporting**: Click the "Security" tab and select "Report a vulnerability" (Recommended).
-2. **Email**: Send your findings to **security@forgevertical.com**.
+2. **Email**: Send your findings to **jarrit@forgevertical.com**.
 
 ### What to Include
 To help us triage and reward (if applicable) faster, please include:
