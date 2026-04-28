@@ -1,1 +1,88 @@
+<main class="max-w-7xl mx-auto px-6 lg:px-8 pt-20 pb-24">
+    
+    <header class="max-w-5xl mb-16 border-l-8 border-[#82c91e] pl-10">
+        <h1 class="text-6xl md:text-8xl font-black uppercase leading-[0.85] mb-8 tracking-tighter">
+            Join the <br><span class="accent-text">Foundry.</span>
+        </h1>
+        <p class="text-3xl text-zinc-800 max-w-3xl leading-tight mb-8 font-bold italic">
+            Vetting elite signal for the next generation of managed strikes.
+        </p>
+    </header>
 
+    <div class="grid lg:grid-cols-12 gap-16 items-start">
+        
+        <div class="lg:col-span-7 p-10 md:p-16 rounded-[3rem] carbon-glass shadow-2xl border-t-4 border-[#82c91e]">
+            <h2 class="text-4xl font-black mb-12 tracking-tighter uppercase leading-none text-white">Hacker <span class="accent-text">Waitlist</span></h2>
+            
+            <form action="https://formspree.io/f/xvzvzvva" method="POST" class="space-y-6 text-sm">
+                
+                <input type="text" name="_gotcha" style="display:none">
+
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="space-y-2">
+                        <label class="text-zinc-400 uppercase text-[10px] tracking-widest font-black">Full Name / Alias</label>
+                        <input type="text" name="HackerName" placeholder="Ghost / John Doe" class="form-input" required>
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-zinc-400 uppercase text-[10px] tracking-widest font-black">Secure Email</label>
+                        <input type="email" name="Email" placeholder="ops@protonmail.com" class="form-input" required>
+                    </div>
+                </div>
+
+                <div class="space-y-2">
+                    <label class="text-zinc-400 uppercase text-[10px] tracking-widest font-black">Platform Profile URL (H1 / Bugcrowd / Intigriti)</label>
+                    <input type="url" name="ProfileURL" placeholder="https://hackerone.com/yourname" class="form-input">
+                </div>
+
+                <div class="space-y-2">
+                    <label class="text-zinc-400 uppercase text-[10px] tracking-widest font-black">Primary Specialization</label>
+                    <select name="Specialty" class="form-input custom-scrollbar">
+                        <option value="Logic">Business Logic & SDLC Bleed</option>
+                        <option value="Infrastructure">Cloud & Infrastructure (GCP/AWS)</option>
+                        <option value="Auth">Authentication & RSA Deep Dives</option>
+                        <option value="API">API & Mobile Protocol Evasion</option>
+                    </select>
+                </div>
+
+                <div class="space-y-2">
+                    <label class="text-zinc-400 uppercase text-[10px] tracking-widest font-black">Motivation & Technical Creds</label>
+                    <textarea name="Motivation" placeholder="Briefly describe your most significant unauthenticated bypass..." class="form-input h-32"></textarea>
+                </div>
+
+                <div class="bg-black/50 p-6 rounded-2xl border border-zinc-800">
+                    <div class="flex items-start gap-4 text-zinc-400 italic text-xs leading-relaxed">
+                        <input type="checkbox" name="IntegrityPledge" required class="mt-1 accent-[#82c91e] h-5 w-5 rounded border-zinc-700 bg-zinc-900">
+                        <label>I commit to the Forge Vertical Integrity Code: No data-brokering, adult content, or ethically compromised targets. Signal over noise.</label>
+                    </div>
+                </div>
+
+                <button type="submit" class="w-full py-6 rounded-3xl accent-bg text-white font-black hover:bg-[#94e622] transition-all uppercase tracking-[0.2em] text-lg">
+                    Request Foundry Access
+                </button>
+
+                <p class="text-[10px] text-zinc-500 text-center uppercase tracking-widest">
+                    Submission does not guarantee entry. Vetting is manual.
+                </p>
+            </form>
+        </div>
+
+        <div class="lg:col-span-5 space-y-12 py-10 sticky top-24">
+            <div class="border-l-4 border-accent pl-8">
+                <h4 class="accent-text font-black uppercase text-xs tracking-widest mb-4">The Repute Meritocracy</h4>
+                <p class="text-zinc-800 text-2xl leading-tight font-bold">We don't reward volume. We reward depth.</p>
+                <p class="mt-4 text-zinc-600 text-lg">Forge Vertical is building a private network for researchers who think beyond the scanner. Apply to join the waitlist for our upcoming 2026 managed ecosystem.</p>
+            </div>
+            
+            <div class="p-8 rounded-[2rem] bg-zinc-900 text-zinc-400 text-sm font-mono border border-zinc-800">
+                <div class="text-[#82c91e] mb-2">// Current Requirements:</div>
+                <ul class="space-y-2">
+                    <li>> Proven P1/P2 Track Record</li>
+                    <li>> Manual Logic Focus</li>
+                    <li>> Zero Automated Spam Tolerance</li>
+                    <li>> Clean Ethical Standing</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</main>
