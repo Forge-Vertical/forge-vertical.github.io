@@ -1,1 +1,34 @@
-You’re right. In security, clarity is speed. If it looks like a legal contract, researchers will skim right past the important parts. Let’s break it down into a scannable, high-impact layout that puts the action front and center.## 🛡️ Forge Vertical Security PolicyForge Vertical is built on a foundation of integrity. We believe in proactive research and the collective intelligence of the security community.### 🚀 Status: Foundational PhaseForge Vertical is currently hardening its infrastructure. While we do not offer monetary rewards or "Repute" points at this immediate moment, we are building a high-integrity ecosystem for the world's most critical infrastructure.Apply for the Forge Vertical Hacker WaitlistRegister your interest to be the first to receive invites to our future managed programs.### 🎯 Supported VersionsWe only provide security updates for current production infrastructure.VersionStatus1.x✅ Supported< 1.0❌ Deprecated### 🤝 Our CommitmentIf you find a vulnerability, we promise to:Acknowledge: Response within 24 hours.Update: Continuous timeline for resolution.Safe Harbor: No legal action against researchers acting in good faith.### 📩 How to ReportDo not open a public issue. Use the following secure channels:GitHub Private Reporting: Select "Report a vulnerability" under the Security tab. (Recommended)Direct Email: jarrit@forgevertical.comWhat to include:A clear description of the flaw.Proof of Concept (PoC) or steps to reproduce.Impact assessment (e.g., Logic Flaw, Auth Bypass).### 🚦 Rules of EngagementNo PII/Data Destruction: Avoid privacy violations or interruption of service.Authorized Access Only: Only interact with accounts you own.No DoS: Do not perform Denial of Service attacks.No Rewards: You acknowledge that no payouts are currently available.Thank you for helping us forge the next generation of secure infrastructure.### Why this works better:
+Forge Vertical Security Policy
+Forge Vertical is built on integrity. We believe in proactive research and the collective intelligence of the security community.
+
+Status: Foundational Phase
+Forge Vertical is currently hardening its infrastructure. We do not offer monetary rewards at this stage, but we are building a high-integrity ecosystem for critical infrastructure security.
+Apply for the Forge Vertical Hacker Waitlist to be among the first invited to future managed programs.
+
+Apply Here: https://www.forgevertical.com/hacker_application.html
+
+Supported Versions
+VersionStatus1.xSupported< 1.0Deprecated
+
+Our Commitment
+If you discover a vulnerability, we will:
+
+Acknowledge your report within 24 hours
+Provide continuous timeline updates through resolution
+Extend full safe harbor to researchers acting in good faith — no legal action, no exceptions
+
+
+How to Report
+Do not open a public issue. Use secure channels only:
+
+GitHub Private Reporting — Select "Report a vulnerability" under the Security tab (recommended)
+Direct Email — jarrit@forgevertical.com
+
+Include a clear description of the vulnerability, proof of concept or steps to reproduce, and your impact assessment.
+
+Rules of Engagement
+
+Only interact with accounts and systems you own or have explicit permission to test
+Do not access, modify or destroy user data
+Do not perform denial of service attacks
+No monetary rewards are currently available — submission constitutes acknowledgement of this
