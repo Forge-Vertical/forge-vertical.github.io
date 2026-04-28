@@ -59,35 +59,6 @@
             z-index: 0;
         }
 
-        /* Nav */
-        nav {
-            position: fixed;
-            top: 0; left: 0; right: 0;
-            z-index: 100;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 20px 48px;
-            background: rgba(6,6,6,0.85);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border);
-        }
-
-        .nav-logo {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 1.5rem;
-            letter-spacing: 0.15em;
-            color: var(--acid);
-            text-decoration: none;
-        }
-
-        .nav-tag {
-            font-family: 'Space Mono', monospace;
-            font-size: 0.65rem;
-            color: var(--text-dim);
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-        }
 
         /* Main layout */
         main {
@@ -517,7 +488,6 @@
         }
 
         @media (max-width: 600px) {
-            nav { padding: 16px 20px; }
             .grid-2 { grid-template-columns: 1fr; }
             .spec-grid { grid-template-columns: 1fr; }
             .stats { flex-wrap: wrap; }
@@ -533,10 +503,7 @@
 
 <div class="page-bg"></div>
 
-<nav>
-    <a href="/" class="nav-logo">Forge Vertical</a>
-    <span class="nav-tag">Hacker Foundry // Vetting Protocol</span>
-</nav>
+<div id="global-nav"></div>
 
 <main>
     <!-- LEFT COLUMN -->
@@ -723,5 +690,17 @@
     </div>
 </main>
 
+<div id="global-footer"></div>
+<script>
+    async function injectGlobals() {
+        try {
+            const nav = await fetch('/nav.html');
+            if(nav.ok) document.getElementById('global-nav').innerHTML = await nav.text();
+            const foot = await fetch('/footer.html');
+            if(foot.ok) document.getElementById('global-footer').innerHTML = await foot.text();
+        } catch (e) {}
+    }
+    injectGlobals();
+</script>
 </body>
 </html>
