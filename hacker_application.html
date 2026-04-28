@@ -3,120 +3,725 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hacker Foundry Application | Forge Vertical</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Hacker Foundry | Forge Vertical</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.cdnfonts.com/css/georgia');
-        body { font-family: 'Georgia', serif; background: #ffffff; color: #111; line-height: 1.8; }
-        h1, h2, h3, h4 { font-weight: 900; color: #000; }
-        .accent-text { color: #82c91e; }
-        .accent-bg { background-color: #82c91e; }
-        .carbon-glass {
-            background: #0a0a0a url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #d1d5db;
+        :root {
+            --acid: #82c91e;
+            --acid-dim: #5a8e10;
+            --black: #060606;
+            --surface: #0d0d0d;
+            --surface-2: #141414;
+            --surface-3: #1c1c1c;
+            --border: rgba(130, 201, 30, 0.15);
+            --border-strong: rgba(130, 201, 30, 0.4);
+            --text: #e8e8e8;
+            --text-dim: #666;
+            --text-muted: #3a3a3a;
         }
-        .form-input { background: #111; border: 1px solid #333; padding: 16px; border-radius: 8px; width: 100%; color: #fff; transition: 0.3s; }
-        .form-input:focus { border-color: #82c91e; outline: none; background: #1a1a1a; }
-        
-        /* Checkbox Specialization Styling */
-        .check-container {
-            display: flex; align-items: flex-start; gap: 12px; cursor: pointer; padding: 12px;
-            background: #1a1a1a; border-radius: 8px; transition: 0.2s; border: 1px solid transparent;
-        }
-        .check-container:hover { background: #222; border-color: #82c91e; }
-        input[type="checkbox"] { margin-top: 5px; accent-color: #82c91e; transform: scale(1.3); }
 
-        @media (max-width: 1024px) { .hacker-video-sidebar { display: none; } }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--black);
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Scanlines overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(0,0,0,0.03) 2px,
+                rgba(0,0,0,0.03) 4px
+            );
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        /* Grid background */
+        .page-bg {
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(130,201,30,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(130,201,30,0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Nav */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 48px;
+            background: rgba(6,6,6,0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            letter-spacing: 0.15em;
+            color: var(--acid);
+            text-decoration: none;
+        }
+
+        .nav-tag {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.65rem;
+            color: var(--text-dim);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+
+        /* Main layout */
+        main {
+            position: relative;
+            z-index: 1;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 140px 48px 80px;
+            display: grid;
+            grid-template-columns: 1fr 480px;
+            gap: 80px;
+            align-items: start;
+        }
+
+        /* Left column */
+        .left-col {}
+
+        /* Hero text */
+        .hero-eyebrow {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--acid);
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .hero-eyebrow::before {
+            content: '';
+            display: block;
+            width: 32px;
+            height: 1px;
+            background: var(--acid);
+        }
+
+        h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(5rem, 10vw, 9rem);
+            line-height: 0.88;
+            letter-spacing: 0.02em;
+            color: #fff;
+            margin-bottom: 32px;
+        }
+
+        h1 span { color: var(--acid); }
+
+        .hero-sub {
+            font-size: 1.05rem;
+            color: var(--text-dim);
+            line-height: 1.8;
+            max-width: 520px;
+            margin-bottom: 56px;
+            font-weight: 300;
+        }
+
+        /* Stats row */
+        .stats {
+            display: flex;
+            gap: 0;
+            margin-bottom: 64px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            max-width: 560px;
+        }
+
+        .stat {
+            flex: 1;
+            padding: 20px 24px;
+            border-right: 1px solid var(--border);
+        }
+
+        .stat:last-child { border-right: none; }
+
+        .stat-val {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            color: var(--acid);
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.6rem;
+            color: var(--text-dim);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        /* Repute system */
+        .repute-block {
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 28px 32px;
+            max-width: 560px;
+            margin-bottom: 40px;
+        }
+
+        .repute-title {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.65rem;
+            color: var(--acid);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .repute-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border);
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+        }
+
+        .repute-item:last-child { border-bottom: none; }
+
+        .repute-item .label { color: var(--text-dim); }
+
+        .repute-badge {
+            font-size: 0.65rem;
+            padding: 3px 10px;
+            border-radius: 4px;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+        }
+
+        .badge-paid { background: rgba(130,201,30,0.15); color: var(--acid); }
+        .badge-dup { background: rgba(59,130,246,0.15); color: #60a5fa; }
+        .badge-info { background: rgba(107,114,128,0.2); color: #9ca3af; }
+
+        /* Video sidebar */
+        .video-block {
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--border-strong);
+            background: #000;
+            box-shadow: 0 0 60px rgba(130,201,30,0.08);
+            margin-bottom: 32px;
+        }
+
+        .video-block video {
+            width: 100%;
+            height: auto;
+            display: block;
+            max-height: 280px;
+            object-fit: cover;
+        }
+
+        /* Right column — form */
+        .right-col {
+            position: sticky;
+            top: 100px;
+        }
+
+        .form-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-top: 3px solid var(--acid);
+            border-radius: 20px;
+            padding: 40px;
+        }
+
+        .form-header {
+            margin-bottom: 32px;
+        }
+
+        .form-header h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.2rem;
+            color: #fff;
+            letter-spacing: 0.05em;
+            margin-bottom: 6px;
+        }
+
+        .form-header p {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.65rem;
+            color: var(--text-dim);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        /* Form elements */
+        .field-group {
+            margin-bottom: 20px;
+        }
+
+        .field-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.6rem;
+            color: var(--text-dim);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .field-label span {
+            color: var(--acid);
+            margin-left: 4px;
+        }
+
+        .form-input {
+            width: 100%;
+            background: var(--surface-2);
+            border: 1px solid var(--surface-3);
+            border-radius: 8px;
+            padding: 14px 16px;
+            color: var(--text);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .form-input::placeholder { color: var(--text-muted); }
+
+        .form-input:focus {
+            border-color: var(--acid);
+            background: var(--surface-3);
+            box-shadow: 0 0 0 3px rgba(130,201,30,0.08);
+        }
+
+        textarea.form-input {
+            resize: vertical;
+            min-height: 100px;
+            line-height: 1.6;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+
+        /* Platform handles */
+        .handles-row {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .handle-input-wrap {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--surface-2);
+            border: 1px solid var(--surface-3);
+            border-radius: 8px;
+            padding: 10px 14px;
+            transition: all 0.2s;
+        }
+
+        .handle-input-wrap:focus-within {
+            border-color: var(--acid);
+            box-shadow: 0 0 0 3px rgba(130,201,30,0.08);
+        }
+
+        .handle-platform {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.65rem;
+            color: var(--acid);
+            min-width: 36px;
+            letter-spacing: 0.05em;
+        }
+
+        .handle-input {
+            flex: 1;
+            background: none;
+            border: none;
+            outline: none;
+            color: var(--text);
+            font-family: 'Space Mono', monospace;
+            font-size: 0.8rem;
+        }
+
+        .handle-input::placeholder { color: var(--text-muted); }
+
+        /* Specializations */
+        .spec-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .spec-item {
+            position: relative;
+        }
+
+        .spec-item input[type="checkbox"] {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .spec-item label {
+            display: flex;
+            flex-direction: column;
+            padding: 12px 14px;
+            background: var(--surface-2);
+            border: 1px solid var(--surface-3);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            gap: 2px;
+        }
+
+        .spec-item input:checked + label {
+            border-color: var(--acid);
+            background: rgba(130,201,30,0.07);
+        }
+
+        .spec-item label:hover {
+            border-color: rgba(130,201,30,0.3);
+        }
+
+        .spec-name {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.65rem;
+            color: var(--acid);
+            font-weight: 700;
+            letter-spacing: 0.05em;
+        }
+
+        .spec-desc {
+            font-size: 0.7rem;
+            color: var(--text-dim);
+            line-height: 1.4;
+        }
+
+        /* Divider */
+        .form-divider {
+            height: 1px;
+            background: var(--border);
+            margin: 24px 0;
+        }
+
+        /* Pledge */
+        .pledge-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 16px;
+            background: rgba(130,201,30,0.04);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            margin-bottom: 24px;
+            cursor: pointer;
+        }
+
+        .pledge-row input[type="checkbox"] {
+            margin-top: 2px;
+            accent-color: var(--acid);
+            transform: scale(1.2);
+            flex-shrink: 0;
+        }
+
+        .pledge-text {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.65rem;
+            color: var(--text-dim);
+            line-height: 1.7;
+            letter-spacing: 0.02em;
+        }
+
+        /* Submit */
+        .submit-btn {
+            width: 100%;
+            padding: 18px;
+            background: var(--acid);
+            color: #000;
+            border: none;
+            border-radius: 10px;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.3rem;
+            letter-spacing: 0.2em;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .submit-btn:hover {
+            background: #94e01f;
+            transform: translateY(-1px);
+            box-shadow: 0 8px 32px rgba(130,201,30,0.25);
+        }
+
+        .submit-btn:active { transform: translateY(0); }
+
+        /* Terminal blink cursor */
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1em;
+            background: var(--acid);
+            margin-left: 4px;
+            vertical-align: middle;
+            animation: blink 1s step-end infinite;
+        }
+
+        /* Responsive */
+        @media (max-width: 1100px) {
+            main {
+                grid-template-columns: 1fr;
+                padding: 120px 24px 60px;
+                gap: 48px;
+            }
+
+            .right-col { position: static; }
+            h1 { font-size: clamp(4rem, 12vw, 7rem); }
+        }
+
+        @media (max-width: 600px) {
+            nav { padding: 16px 20px; }
+            .grid-2 { grid-template-columns: 1fr; }
+            .spec-grid { grid-template-columns: 1fr; }
+            .stats { flex-wrap: wrap; }
+            .stat { border-right: none; border-bottom: 1px solid var(--border); }
+            .stat:last-child { border-bottom: none; }
+        }
+
+        /* Honeypot */
+        .hp { display: none !important; }
     </style>
 </head>
-<body class="antialiased">
+<body>
 
-    <div id="global-nav"></div>
-    
-    <main class="max-w-7xl mx-auto px-6 lg:px-8 pt-20 pb-24">
-        <header class="max-w-5xl mb-20 border-l-8 border-[#82c91e] pl-10">
-            <h1 class="text-6xl md:text-8xl font-black uppercase leading-[0.85] mb-8 tracking-tighter">
-                Join the <br><span class="accent-text">Foundry.</span>
-            </h1>
-            <p class="text-2xl text-zinc-800 font-bold italic mb-4">Strategic Co-existence. Diversify your targets.</p>
-            <p class="text-lg text-zinc-600 max-w-2xl">
-                We don't compete with the giants; we provide the specialized logic strikes they miss. Why hack on one platform when you can increase your chances with many?
-            </p>
-        </header>
+<div class="page-bg"></div>
 
-        <div class="grid lg:grid-cols-12 gap-16 items-start">
-            <div class="lg:col-span-7 p-10 md:p-16 rounded-[3rem] carbon-glass shadow-2xl border-t-4 border-[#82c91e]">
-                <h2 class="text-4xl font-black mb-12 tracking-tighter uppercase text-white">Vetting <span class="accent-text">Protocol</span></h2>
-                
-                <form action="https://formspree.io/f/xvzvzvva" method="POST" class="space-y-6 text-sm">
-                    <input type="text" name="_gotcha" style="display:none">
+<nav>
+    <a href="/" class="nav-logo">Forge Vertical</a>
+    <span class="nav-tag">Hacker Foundry // Vetting Protocol</span>
+</nav>
 
-                    <div class="grid md:grid-cols-2 gap-6">
-                        <input type="text" name="HackerAlias" placeholder="Full Name / Alias" class="form-input" required>
-                        <input type="email" name="Email" placeholder="Secure Email" class="form-input" required>
-                    </div>
+<main>
+    <!-- LEFT COLUMN -->
+    <div class="left-col">
+        <div class="hero-eyebrow">Restricted Access Program</div>
 
-                    <input type="text" name="PlatformHandles" placeholder="Verification Handles (H1: @user, BC: @user, etc.)" class="form-input" required>
+        <h1>JOIN<br>THE <span>FOUNDRY.</span></h1>
 
-                    <div class="space-y-4">
-                        <label class="text-zinc-500 uppercase text-[10px] font-black tracking-widest ml-2">Core Specializations (Select All That Apply)</label>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <label class="check-container"><input type="checkbox" name="Spec_SSRF" value="1"> <div><strong>SSRF:</strong> Metadata & Cloud Evasion.</div></label>
-                            <label class="check-container"><input type="checkbox" name="Spec_CSRF" value="1"> <div><strong>CSRF:</strong> Complex Action Forgery.</div></label>
-                            <label class="check-container"><input type="checkbox" name="Spec_Logic" value="1"> <div><strong>SDLC Logic:</strong> Protocol Bleed & Bypasses.</div></label>
-                            <label class="check-container"><input type="checkbox" name="Spec_Auth" value="1"> <div><strong>Auth/RSA:</strong> JWT & Session Hijacking.</div></label>
-                            <label class="check-container"><input type="checkbox" name="Spec_Database" value="1"> <div><strong>DB Sec:</strong> SQLi / NoSQLi.</div></label>
-                            <label class="check-container"><input type="checkbox" name="Spec_XSS" value="1"> <div><strong>XSS:</strong> Stored / DOM Injections.</div></label>
-                            <label class="check-container"><input type="checkbox" name="Spec_API" value="1"> <div><strong>API:</strong> GraphQL & Mobile Evasion.</div></label>
-                            <label class="check-container"><input type="checkbox" name="Spec_Cloud" value="1"> <div><strong>Cloud:</strong> IAM & Permission Escalation.</div></label>
-                        </div>
-                    </div>
+        <p class="hero-sub">
+            We don't compete with the giants — we find what they miss.
+            Forge Vertical is building a curated network of ethical researchers
+            who operate with signal over noise. Every finding matters.
+            Every researcher is accountable.
+        </p>
 
-                    <textarea name="TechnicalProof" placeholder="Describe your most significant 'Manual Logic' bypass (Required)..." class="form-input h-32" required></textarea>
-
-                    <div class="bg-black/50 p-6 rounded-2xl border border-zinc-800 flex items-start gap-4 italic text-zinc-400 text-xs">
-                        <input type="checkbox" name="IntegrityPledge" required class="mt-1">
-                        <label>I commit to the Forge Vertical Integrity Code: No adult content, gambling, or shady targets. Signal over noise.</label>
-                    </div>
-
-                    <button type="submit" class="w-full py-8 rounded-3xl accent-bg text-white font-black hover:bg-[#94e622] transition-all uppercase tracking-[0.2em] text-xl">Request Access</button>
-                </form>
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-val">24H</div>
+                <div class="stat-label">First Response</div>
             </div>
-            
-            <div class="lg:col-span-5 space-y-8 sticky top-24">
-                <div class="hacker-video-sidebar rounded-[2.5rem] bg-black overflow-hidden border-2 border-[#82c91e] shadow-2xl">
-                    <video width="100%" height="auto" autoplay loop muted playsinline class="block">
-                        <source src="/assets/hacker_safe.mp4" type="video/mp4">
-                    </video>
-                </div>
-
-                <div class="border-l-4 border-accent pl-8">
-                    <h4 class="accent-text font-black uppercase text-xs tracking-widest mb-2">The Forge Ecosystem</h4>
-                    <p class="text-zinc-800 text-2xl font-bold">The Repute System</p>
-                    <ul class="mt-4 space-y-2 opacity-80 font-mono text-[11px] text-zinc-600">
-                        <li>> TRIAGED: High Bounty + Signal</li>
-                        <li>> DUPLICATE: 5 Repute Points</li>
-                        <li>> INFORMATIVE: 1 Point</li>
-                    </ul>
-                </div>
-
-                <div class="opacity-10 font-black text-[10rem] tracking-tighter select-none leading-none pt-10">FV</div>
+            <div class="stat">
+                <div class="stat-val">3</div>
+                <div class="stat-label">Severity Tiers</div>
+            </div>
+            <div class="stat">
+                <div class="stat-val">100%</div>
+                <div class="stat-label">Safe Harbor</div>
+            </div>
+            <div class="stat">
+                <div class="stat-val">0</div>
+                <div class="stat-label">Noise Tolerated</div>
             </div>
         </div>
-    </main>
 
-    <div id="global-footer"></div>
-    <script>
-        async function injectGlobals() {
-            try {
-                const nav = await fetch('/nav.html');
-                if(nav.ok) document.getElementById('global-nav').innerHTML = await nav.text();
-                const foot = await fetch('/footer.html');
-                if(foot.ok) document.getElementById('global-footer').innerHTML = await foot.text();
-            } catch (e) {}
-        }
-        injectGlobals();
-    </script>
+        <!-- Video -->
+        <div class="video-block">
+            <video autoplay loop muted playsinline>
+                <source src="/assets/hack_safe.mp4" type="video/mp4">
+            </video>
+        </div>
+
+        <!-- Repute system -->
+        <div class="repute-block">
+            <div class="repute-title">// The Repute System</div>
+            <div class="repute-item">
+                <span class="label">Triaged finding — paid bounty</span>
+                <span class="repute-badge badge-paid">Signal + Bounty</span>
+            </div>
+            <div class="repute-item">
+                <span class="label">Duplicate submission</span>
+                <span class="repute-badge badge-dup">5 Repute Pts</span>
+            </div>
+            <div class="repute-item">
+                <span class="label">Informative / Low severity</span>
+                <span class="repute-badge badge-info">1 Repute Pt</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- RIGHT COLUMN — FORM -->
+    <div class="right-col">
+        <div class="form-card">
+            <div class="form-header">
+                <h2>Vetting Protocol<span class="cursor"></span></h2>
+                <p>// Apply for researcher access — reviewed manually</p>
+            </div>
+
+            <form action="https://formspree.io/f/xvzvzvva" method="POST">
+                <!-- Honeypot -->
+                <input type="text" name="_gotcha" class="hp" tabindex="-1" autocomplete="off">
+
+                <!-- Identity -->
+                <div class="grid-2">
+                    <div class="field-group">
+                        <label class="field-label">Full Name<span>*</span></label>
+                        <input type="text" name="FullName" placeholder="Your legal name" class="form-input" required>
+                    </div>
+                    <div class="field-group">
+                        <label class="field-label">Hacker Alias<span>*</span></label>
+                        <input type="text" name="HackerAlias" placeholder="e.g. forgevertical" class="form-input" required>
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">Secure Email<span>*</span></label>
+                    <input type="email" name="Email" placeholder="Preferably ProtonMail or similar" class="form-input" required>
+                </div>
+
+                <!-- Platform handles -->
+                <div class="field-group">
+                    <label class="field-label">Platform Handles<span>*</span></label>
+                    <div class="handles-row">
+                        <div class="handle-input-wrap">
+                            <span class="handle-platform">H1</span>
+                            <input type="text" name="Handle_H1" placeholder="@username" class="handle-input">
+                        </div>
+                        <div class="handle-input-wrap">
+                            <span class="handle-platform">YWH</span>
+                            <input type="text" name="Handle_YWH" placeholder="@username" class="handle-input">
+                        </div>
+                        <div class="handle-input-wrap">
+                            <span class="handle-platform">BC</span>
+                            <input type="text" name="Handle_BC" placeholder="@username" class="handle-input">
+                        </div>
+                        <div class="handle-input-wrap">
+                            <span class="handle-platform">INT</span>
+                            <input type="text" name="Handle_Intigriti" placeholder="@username" class="handle-input">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-divider"></div>
+
+                <!-- Specializations -->
+                <div class="field-group">
+                    <label class="field-label">Core Specializations<span>*</span></label>
+                    <div class="spec-grid">
+                        <div class="spec-item">
+                            <input type="checkbox" id="s_ssrf" name="Spec_SSRF" value="1">
+                            <label for="s_ssrf"><span class="spec-name">SSRF</span><span class="spec-desc">Metadata & cloud evasion</span></label>
+                        </div>
+                        <div class="spec-item">
+                            <input type="checkbox" id="s_csrf" name="Spec_CSRF" value="1">
+                            <label for="s_csrf"><span class="spec-name">CSRF</span><span class="spec-desc">Complex action forgery</span></label>
+                        </div>
+                        <div class="spec-item">
+                            <input type="checkbox" id="s_logic" name="Spec_Logic" value="1">
+                            <label for="s_logic"><span class="spec-name">Logic</span><span class="spec-desc">Protocol bleed & bypasses</span></label>
+                        </div>
+                        <div class="spec-item">
+                            <input type="checkbox" id="s_auth" name="Spec_Auth" value="1">
+                            <label for="s_auth"><span class="spec-name">Auth</span><span class="spec-desc">JWT & session hijacking</span></label>
+                        </div>
+                        <div class="spec-item">
+                            <input type="checkbox" id="s_sqli" name="Spec_SQLi" value="1">
+                            <label for="s_sqli"><span class="spec-name">DB Sec</span><span class="spec-desc">SQLi / NoSQLi injection</span></label>
+                        </div>
+                        <div class="spec-item">
+                            <input type="checkbox" id="s_xss" name="Spec_XSS" value="1">
+                            <label for="s_xss"><span class="spec-name">XSS</span><span class="spec-desc">Stored / DOM injection</span></label>
+                        </div>
+                        <div class="spec-item">
+                            <input type="checkbox" id="s_api" name="Spec_API" value="1">
+                            <label for="s_api"><span class="spec-name">API</span><span class="spec-desc">GraphQL & mobile evasion</span></label>
+                        </div>
+                        <div class="spec-item">
+                            <input type="checkbox" id="s_cloud" name="Spec_Cloud" value="1">
+                            <label for="s_cloud"><span class="spec-name">Cloud</span><span class="spec-desc">IAM & permission escalation</span></label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-divider"></div>
+
+                <!-- The real question -->
+                <div class="field-group">
+                    <label class="field-label">Your Best Find<span>*</span></label>
+                    <textarea name="BestFind" class="form-input" style="min-height:120px;" placeholder="Describe your most significant finding — severity, what you bypassed, how you got in. No need to name the company. We want to understand how you think." required></textarea>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">Highest Bounty Received</label>
+                    <input type="text" name="HighestBounty" placeholder="Approximate amount + severity (e.g. $2,500 High)" class="form-input">
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">Anything Else</label>
+                    <textarea name="AdditionalNotes" class="form-input" style="min-height:72px;" placeholder="CVEs, private program history, tools you build — optional but noted."></textarea>
+                </div>
+
+                <!-- Pledge -->
+                <div class="pledge-row">
+                    <input type="checkbox" name="IntegrityPledge" id="pledge" required>
+                    <label for="pledge" class="pledge-text">
+                        I operate under the Forge Vertical Integrity Code. No adult, gambling, or harmful targets.
+                        I submit signal — not noise. I accept that no monetary rewards are currently active
+                        and that Repute points govern standing until the program launches fully.
+                    </label>
+                </div>
+
+                <button type="submit" class="submit-btn">Request Access</button>
+            </form>
+        </div>
+    </div>
+</main>
+
 </body>
 </html>
