@@ -1,454 +1,50 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Revenue Leak Audit // Forge Vertical</title>
+    <title>Revenue Leakage Calculator // ForgeVertical</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="/global.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;500;700;800&family=Bebas+Neue&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --acid: #84cc16;
-            --acid-glow: rgba(132,204,22,0.15);
-        }
-        body { font-family: 'Plus Jakarta Sans', sans-serif; }
-
-        .vibrant-gradient { background: linear-gradient(90deg, #10b981 0%, #84cc16 100%); }
-
-        /* Scanline texture */
-        .scanlines {
-            background-image: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.015) 2px, rgba(0,0,0,0.015) 4px);
-        }
-
-        /* Range slider */
-        input[type=range] { -webkit-appearance: none; appearance: none; height: 4px; border-radius: 2px; background: #1e293b; outline: none; }
-        input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 20px; height: 20px; border-radius: 50%; background: var(--acid); cursor: pointer; box-shadow: 0 0 0 4px rgba(132,204,22,0.2); transition: box-shadow 0.2s; }
-        input[type=range]::-webkit-slider-thumb:hover { box-shadow: 0 0 0 8px rgba(132,204,22,0.2); }
-
-        /* Number input */
-        input[type=number]::-webkit-inner-spin-button,
-        input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
-
-        /* Animations */
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(24px); }
-            to   { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes countUp {
-            from { opacity: 0; transform: scale(0.8); }
-            to   { opacity: 1; transform: scale(1); }
-        }
-        @keyframes pulse-glow {
-            0%, 100% { box-shadow: 0 0 0 0 rgba(132,204,22,0.4); }
-            50% { box-shadow: 0 0 32px 8px rgba(132,204,22,0.15); }
-        }
-        @keyframes barFill {
-            from { width: 0%; }
-            to   { width: var(--w); }
-        }
-        .fade-up { animation: fadeUp 0.5s ease forwards; }
-        .fade-up-d1 { animation: fadeUp 0.5s 0.1s ease both; }
-        .fade-up-d2 { animation: fadeUp 0.5s 0.2s ease both; }
-        .fade-up-d3 { animation: fadeUp 0.5s 0.3s ease both; }
-        .fade-up-d4 { animation: fadeUp 0.5s 0.4s ease both; }
-        .fade-up-d5 { animation: fadeUp 0.5s 0.5s ease both; }
-        .count-up { animation: countUp 0.6s 0.2s ease both; }
-        .glow-pulse { animation: pulse-glow 2s ease-in-out infinite; }
-        .bar-fill { animation: barFill 1s ease forwards; }
-
-        /* Step dots */
-        .step-dot { transition: all 0.3s; }
-        .step-dot.active { background: var(--acid); transform: scale(1.25); }
-        .step-dot.done { background: var(--acid); opacity: 0.4; }
-
-        /* Leakage bar */
-        .leak-bar { height: 6px; border-radius: 3px; background: #1e293b; overflow: hidden; }
-        .leak-bar-fill { height: 100%; border-radius: 3px; background: linear-gradient(90deg, #10b981, #84cc16); }
-
-        /* Severity pill */
-        .severity-critical { background: rgba(239,68,68,0.15); color: #f87171; border: 1px solid rgba(239,68,68,0.3); }
-        .severity-high     { background: rgba(249,115,22,0.15); color: #fb923c; border: 1px solid rgba(249,115,22,0.3); }
-        .severity-medium   { background: rgba(234,179,8,0.15); color: #facc15; border: 1px solid rgba(234,179,8,0.3); }
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;500;800&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; color: #1e293b; }
     </style>
 </head>
-<body class="bg-zinc-950 text-white min-h-screen scanlines" data-nav-theme="light">
-
-    <div id="global-nav"></div>
-
-    <!-- Hero band -->
-    <div class="pt-28 pb-12 px-6 text-center">
-        <span class="inline-block bg-zinc-900 border border-zinc-800 text-[#84cc16] text-[10px] font-black uppercase tracking-[0.3em] px-4 py-2 rounded-full mb-6">Free Diagnostic Tool</span>
-        <h1 style="font-family:'Bebas Neue',sans-serif;" class="text-5xl md:text-7xl tracking-tight mb-4">
-            How Much Revenue<br>Are You <span class="text-[#84cc16]">Bleeding?</span>
-        </h1>
-        <p class="text-zinc-400 text-base md:text-lg max-w-xl mx-auto font-light">
-            Answer 4 questions. We'll show you exactly what a weak digital presence is costing you — and what fixing it could unlock.
-        </p>
-    </div>
-
-    <!-- Main card -->
-    <div class="max-w-2xl mx-auto px-4 pb-32">
-        <div class="bg-zinc-900 border border-zinc-800 rounded-[2rem] overflow-hidden shadow-2xl">
-
-            <!-- Progress bar -->
-            <div class="h-1 bg-zinc-800">
-                <div id="progress-bar" class="h-full bg-gradient-to-r from-emerald-500 to-lime-400 transition-all duration-500" style="width:0%"></div>
+<body class="min-h-screen py-20 px-6">
+    <div class="max-w-xl mx-auto bg-white p-10 rounded-[3rem] shadow-2xl border border-slate-100">
+        <h2 class="text-3xl font-extrabold text-slate-900 mb-2">Revenue <span class="text-lime-500">Leakage</span></h2>
+        <p class="text-slate-500 text-[10px] mb-8 uppercase tracking-widest font-black">Neil Patel Grade SEO Utility</p>
+        
+        <div class="space-y-6">
+            <div>
+                <label class="block text-[10px] font-black uppercase text-slate-400 mb-2">Monthly Traffic</label>
+                <input type="number" id="traffic" value="5000" class="w-full bg-slate-50 border-none rounded-xl p-4 focus:ring-2 focus:ring-lime-500 outline-none font-bold">
             </div>
-
-            <!-- Step indicators -->
-            <div class="flex items-center justify-center gap-3 pt-6 px-8">
-                <div id="dot-1" class="step-dot w-2 h-2 rounded-full bg-zinc-700 active"></div>
-                <div class="w-8 h-px bg-zinc-800"></div>
-                <div id="dot-2" class="step-dot w-2 h-2 rounded-full bg-zinc-700"></div>
-                <div class="w-8 h-px bg-zinc-800"></div>
-                <div id="dot-3" class="step-dot w-2 h-2 rounded-full bg-zinc-700"></div>
-                <div class="w-8 h-px bg-zinc-800"></div>
-                <div id="dot-4" class="step-dot w-2 h-2 rounded-full bg-zinc-700"></div>
+            <div>
+                <label class="block text-[10px] font-black uppercase text-slate-400 mb-2">Avg. Order Value ($)</label>
+                <input type="number" id="value" value="100" class="w-full bg-slate-50 border-none rounded-xl p-4 focus:ring-2 focus:ring-lime-500 outline-none font-bold">
             </div>
-
-            <!-- Steps container -->
-            <div class="p-8 md:p-10">
-
-                <!-- STEP 1 -->
-                <div id="step-1" class="fade-up">
-                    <p class="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-500 mb-2">Step 1 of 4</p>
-                    <h2 class="text-2xl font-black mb-1">What's your industry?</h2>
-                    <p class="text-zinc-500 text-sm mb-8">Industry average conversion rates vary wildly. This calibrates your audit.</p>
-                    <div class="grid grid-cols-2 gap-3" id="industry-grid">
-                        <button onclick="selectIndustry(this, 0.024)" class="industry-btn text-left p-4 rounded-xl border border-zinc-800 hover:border-[#84cc16] transition-all group">
-                            <span class="text-xl mb-2 block">🛒</span>
-                            <p class="font-black text-sm">E-Commerce</p>
-                            <p class="text-zinc-500 text-[10px]">2.4% avg. conversion</p>
-                        </button>
-                        <button onclick="selectIndustry(this, 0.055)" class="industry-btn text-left p-4 rounded-xl border border-zinc-800 hover:border-[#84cc16] transition-all group">
-                            <span class="text-xl mb-2 block">⚖️</span>
-                            <p class="font-black text-sm">Legal / Finance</p>
-                            <p class="text-zinc-500 text-[10px]">5.5% avg. conversion</p>
-                        </button>
-                        <button onclick="selectIndustry(this, 0.038)" class="industry-btn text-left p-4 rounded-xl border border-zinc-800 hover:border-[#84cc16] transition-all group">
-                            <span class="text-xl mb-2 block">🏠</span>
-                            <p class="font-black text-sm">Home Services</p>
-                            <p class="text-zinc-500 text-[10px]">3.8% avg. conversion</p>
-                        </button>
-                        <button onclick="selectIndustry(this, 0.031)" class="industry-btn text-left p-4 rounded-xl border border-zinc-800 hover:border-[#84cc16] transition-all group">
-                            <span class="text-xl mb-2 block">💻</span>
-                            <p class="font-black text-sm">SaaS / Tech</p>
-                            <p class="text-zinc-500 text-[10px]">3.1% avg. conversion</p>
-                        </button>
-                        <button onclick="selectIndustry(this, 0.042)" class="industry-btn text-left p-4 rounded-xl border border-zinc-800 hover:border-[#84cc16] transition-all group">
-                            <span class="text-xl mb-2 block">🏥</span>
-                            <p class="font-black text-sm">Health / Wellness</p>
-                            <p class="text-zinc-500 text-[10px]">4.2% avg. conversion</p>
-                        </button>
-                        <button onclick="selectIndustry(this, 0.030)" class="industry-btn text-left p-4 rounded-xl border border-zinc-800 hover:border-[#84cc16] transition-all group">
-                            <span class="text-xl mb-2 block">🌍</span>
-                            <p class="font-black text-sm">Other</p>
-                            <p class="text-zinc-500 text-[10px]">3.0% avg. conversion</p>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- STEP 2 -->
-                <div id="step-2" class="hidden">
-                    <p class="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-500 mb-2">Step 2 of 4</p>
-                    <h2 class="text-2xl font-black mb-1">Monthly website visitors?</h2>
-                    <p class="text-zinc-500 text-sm mb-8">No website? Enter your estimated footfall or social reach instead.</p>
-                    <div class="mb-6">
-                        <div class="flex justify-between items-center mb-3">
-                            <span class="text-zinc-400 text-sm">Visitors / month</span>
-                            <span id="traffic-display" class="text-[#84cc16] font-black text-xl">5,000</span>
-                        </div>
-                        <input type="range" id="traffic" min="100" max="100000" step="100" value="5000" oninput="updateTraffic(this.value)" class="w-full">
-                        <div class="flex justify-between text-zinc-600 text-[10px] mt-2">
-                            <span>100</span><span>100,000+</span>
-                        </div>
-                    </div>
-                    <div class="bg-zinc-800/50 rounded-xl p-4 border border-zinc-800 mb-8">
-                        <p class="text-zinc-400 text-xs">Not sure? The average SME website in South Africa gets <span class="text-white font-bold">800–3,000</span> visits/month before optimisation.</p>
-                    </div>
-                    <button onclick="goStep(3)" class="w-full vibrant-gradient text-black py-4 rounded-xl font-black uppercase tracking-widest text-xs hover:opacity-90 transition-all">Continue →</button>
-                </div>
-
-                <!-- STEP 3 -->
-                <div id="step-3" class="hidden">
-                    <p class="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-500 mb-2">Step 3 of 4</p>
-                    <h2 class="text-2xl font-black mb-1">Average transaction value?</h2>
-                    <p class="text-zinc-500 text-sm mb-8">Think per-sale, per-lead, or per-client — whatever a single win is worth to you.</p>
-                    <div class="relative mb-4">
-                        <span class="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500 font-black text-lg">$</span>
-                        <input type="number" id="order-value" value="500" min="1"
-                            class="w-full bg-zinc-800 border border-zinc-700 focus:border-[#84cc16] rounded-xl pl-10 pr-4 py-4 text-white font-black text-xl outline-none transition-all">
-                    </div>
-                    <div class="grid grid-cols-3 gap-2 mb-8">
-                        <button onclick="setVal(150)"  class="val-preset bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 hover:border-[#84cc16] text-zinc-300 text-xs font-black py-2 rounded-lg transition-all">$150</button>
-                        <button onclick="setVal(500)"  class="val-preset bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 hover:border-[#84cc16] text-zinc-300 text-xs font-black py-2 rounded-lg transition-all">$500</button>
-                        <button onclick="setVal(2000)" class="val-preset bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 hover:border-[#84cc16] text-zinc-300 text-xs font-black py-2 rounded-lg transition-all">$2,000</button>
-                    </div>
-                    <button onclick="goStep(4)" class="w-full vibrant-gradient text-black py-4 rounded-xl font-black uppercase tracking-widest text-xs hover:opacity-90 transition-all">Continue →</button>
-                </div>
-
-                <!-- STEP 4 -->
-                <div id="step-4" class="hidden">
-                    <p class="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-500 mb-2">Step 4 of 4 — Final Question</p>
-                    <h2 class="text-2xl font-black mb-1">Rate your current digital presence.</h2>
-                    <p class="text-zinc-500 text-sm mb-8">Be honest — this is confidential and only improves your audit accuracy.</p>
-                    <div class="space-y-3 mb-8" id="presence-grid">
-                        <button onclick="selectPresence(this, 0.60)" class="presence-btn w-full text-left p-4 rounded-xl border border-zinc-800 hover:border-[#84cc16] transition-all flex items-start gap-4">
-                            <span class="text-2xl">🚫</span>
-                            <div>
-                                <p class="font-black text-sm">No website / social only</p>
-                                <p class="text-zinc-500 text-xs">You're invisible to 90% of buyers who search before buying.</p>
-                            </div>
-                        </button>
-                        <button onclick="selectPresence(this, 0.40)" class="presence-btn w-full text-left p-4 rounded-xl border border-zinc-800 hover:border-[#84cc16] transition-all flex items-start gap-4">
-                            <span class="text-2xl">⚠️</span>
-                            <div>
-                                <p class="font-black text-sm">Basic site, no SEO</p>
-                                <p class="text-zinc-500 text-xs">You exist online, but Google doesn't know it.</p>
-                            </div>
-                        </button>
-                        <button onclick="selectPresence(this, 0.20)" class="presence-btn w-full text-left p-4 rounded-xl border border-zinc-800 hover:border-[#84cc16] transition-all flex items-start gap-4">
-                            <span class="text-2xl">📈</span>
-                            <div>
-                                <p class="font-black text-sm">Site + some SEO, but slow/dated</p>
-                                <p class="text-zinc-500 text-xs">You're on the map but leaking at the seams.</p>
-                            </div>
-                        </button>
-                        <button onclick="selectPresence(this, 0.08)" class="presence-btn w-full text-left p-4 rounded-xl border border-zinc-800 hover:border-[#84cc16] transition-all flex items-start gap-4">
-                            <span class="text-2xl">✅</span>
-                            <div>
-                                <p class="font-black text-sm">Solid site, actively optimised</p>
-                                <p class="text-zinc-500 text-xs">Good foundation — but there's always more edge to gain.</p>
-                            </div>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- RESULTS -->
-                <div id="step-results" class="hidden">
-                    <!-- Big loss number -->
-                    <div class="text-center mb-8 fade-up">
-                        <p class="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-500 mb-3">Your Estimated Annual Revenue Leakage</p>
-                        <div class="count-up">
-                            <span id="loss-display" style="font-family:'Bebas Neue',sans-serif;" class="text-6xl md:text-8xl text-[#84cc16] glow-pulse inline-block"></span>
-                        </div>
-                        <div id="severity-pill" class="mt-3 inline-block px-4 py-1 rounded-full text-xs font-black uppercase tracking-widest"></div>
-                    </div>
-
-                    <!-- Breakdown bars -->
-                    <div class="bg-zinc-800/60 border border-zinc-800 rounded-2xl p-6 mb-6 fade-up-d1">
-                        <p class="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-500 mb-5">Where You're Bleeding</p>
-                        <div class="space-y-4" id="breakdown-bars"></div>
-                    </div>
-
-                    <!-- What Forge can recover -->
-                    <div class="bg-zinc-900 border border-[#84cc16]/20 rounded-2xl p-6 mb-6 fade-up-d2">
-                        <p class="text-[10px] font-black uppercase tracking-[0.3em] text-[#84cc16] mb-4">What Forge Vertical Can Recover</p>
-                        <div class="grid grid-cols-3 gap-4 text-center">
-                            <div>
-                                <p id="recover-conservative" style="font-family:'Bebas Neue',sans-serif;" class="text-2xl text-white"></p>
-                                <p class="text-zinc-500 text-[10px] uppercase font-bold tracking-wider mt-1">Conservative</p>
-                            </div>
-                            <div class="border-x border-zinc-800">
-                                <p id="recover-likely" style="font-family:'Bebas Neue',sans-serif;" class="text-2xl text-[#84cc16]"></p>
-                                <p class="text-zinc-500 text-[10px] uppercase font-bold tracking-wider mt-1">Likely</p>
-                            </div>
-                            <div>
-                                <p id="recover-optimistic" style="font-family:'Bebas Neue',sans-serif;" class="text-2xl text-white"></p>
-                                <p class="text-zinc-500 text-[10px] uppercase font-bold tracking-wider mt-1">Full Forge</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Quote -->
-                    <div class="fade-up-d3 border-l-2 border-[#84cc16] pl-4 mb-8">
-                        <p class="text-zinc-400 text-sm italic leading-relaxed" id="dynamic-quote"></p>
-                    </div>
-
-                    <!-- CTAs -->
-                    <div class="space-y-3 fade-up-d4">
-                        <a href="/onboard.html" class="flex items-center justify-center gap-3 vibrant-gradient text-black py-5 rounded-2xl font-black uppercase tracking-widest text-xs hover:opacity-90 transition-all">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-                            Stop the Leak — Start My Build
-                        </a>
-                        <div class="grid grid-cols-2 gap-3">
-                            <a href="https://wa.me/27661180036" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 bg-zinc-800 border border-zinc-700 hover:border-[#25D366] hover:text-[#25D366] text-white py-4 rounded-xl font-black uppercase text-[10px] tracking-widest transition-all">
-                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
-                                WhatsApp
-                            </a>
-                            <a href="mailto:jarrit@forgevertical.com" class="flex items-center justify-center gap-2 bg-zinc-800 border border-zinc-700 hover:border-[#84cc16] hover:text-[#84cc16] text-white py-4 rounded-xl font-black uppercase text-[10px] tracking-widest transition-all">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-                                Email Jarrit
-                            </a>
-                        </div>
-                        <button onclick="resetAudit()" class="w-full text-zinc-600 text-[10px] font-bold uppercase tracking-widest py-3 hover:text-zinc-400 transition-colors">↩ Run audit again</button>
-                    </div>
-                </div>
-
+            <button onclick="calc()" class="w-full bg-lime-500 text-white p-5 rounded-2xl font-black uppercase tracking-widest text-xs shadow-lg shadow-lime-500/30 hover:bg-slate-900 transition-all">Analyze My Data</button>
+        </div>
+        
+        <div id="result" class="mt-10 p-8 bg-slate-900 rounded-[2rem] text-white hidden">
+            <p class="text-slate-400 text-[10px] uppercase font-black tracking-widest mb-2">Annual Revenue at Risk</p>
+            <span id="loss" class="text-4xl font-black text-lime-400">$0</span>
+            <p class="mt-6 text-xs text-slate-400 leading-relaxed italic">"Slow load times and poor UX typically leak 7-12% of annual revenue. We plug those holes."</p>
+            <div class="mt-8 grid grid-cols-1 gap-3">
+                <a href="https://wa.me/27661180036" class="flex items-center justify-center bg-[#25D366] text-white p-4 rounded-xl font-black uppercase text-[10px] tracking-widest">Chat on WhatsApp</a>
+                <a href="mailto:jarrit@forgevertical.com" class="flex items-center justify-center bg-white text-slate-900 p-4 rounded-xl font-black uppercase text-[10px] tracking-widest">Email Principal Architect</a>
             </div>
         </div>
     </div>
-
-    <div id="global-footer"></div>
-
     <script>
-        // State
-        let state = { industry: null, convRate: 0.03, traffic: 5000, orderValue: 500, presenceLeak: 0.40 };
-
-        // Nav/footer injection
-        async function injectGlobals() {
-            try {
-                const nav = await fetch('/nav.html');
-                if (nav.ok) document.getElementById('global-nav').innerHTML = await nav.text();
-                const foot = await fetch('/footer.html');
-                if (foot.ok) document.getElementById('global-footer').innerHTML = await foot.text();
-            } catch(e) {}
-        }
-        injectGlobals();
-
-        // Step navigation
-        function goStep(n) {
-            document.querySelectorAll('[id^="step-"]').forEach(el => {
-                el.classList.add('hidden');
-                el.classList.remove('fade-up');
-            });
-            const target = document.getElementById(n === 'results' ? 'step-results' : `step-${n}`);
-            target.classList.remove('hidden');
-            void target.offsetWidth; // reflow
-            target.classList.add('fade-up');
-
-            // Progress
-            const progress = { 1: 0, 2: 25, 3: 50, 4: 75, results: 100 };
-            document.getElementById('progress-bar').style.width = (progress[n] || 0) + '%';
-
-            // Dots
-            const dotMap = { 1:1, 2:2, 3:3, 4:4, results:4 };
-            for (let i = 1; i <= 4; i++) {
-                const dot = document.getElementById(`dot-${i}`);
-                dot.classList.remove('active','done');
-                if (i < (dotMap[n] || 1)) dot.classList.add('done');
-                else if (i === (dotMap[n] || 1)) dot.classList.add('active');
-            }
-        }
-
-        // Step 1 — industry
-        function selectIndustry(btn, rate) {
-            document.querySelectorAll('.industry-btn').forEach(b => {
-                b.classList.remove('border-[#84cc16]','bg-zinc-800/50');
-            });
-            btn.classList.add('border-[#84cc16]','bg-zinc-800/50');
-            state.convRate = rate;
-            setTimeout(() => goStep(2), 300);
-        }
-
-        // Step 2 — traffic
-        function updateTraffic(val) {
-            state.traffic = parseInt(val);
-            document.getElementById('traffic-display').textContent = parseInt(val).toLocaleString();
-        }
-
-        // Step 3 — order value
-        function setVal(v) {
-            document.getElementById('order-value').value = v;
-        }
-
-        // Step 4 — presence
-        function selectPresence(btn, leak) {
-            document.querySelectorAll('.presence-btn').forEach(b => {
-                b.classList.remove('border-[#84cc16]','bg-zinc-800/50');
-            });
-            btn.classList.add('border-[#84cc16]','bg-zinc-800/50');
-            state.presenceLeak = leak;
-            state.orderValue = parseFloat(document.getElementById('order-value').value) || 500;
-            setTimeout(() => showResults(), 400);
-        }
-
-        // Results
-        function showResults() {
-            const { traffic, convRate, orderValue, presenceLeak } = state;
-
-            // Core calc
-            const potentialRevenue   = traffic * convRate * orderValue * 12;
-            const totalLeak          = potentialRevenue * presenceLeak;
-            const speedLeak          = totalLeak * 0.30;
-            const seoLeak            = totalLeak * 0.40;
-            const uxLeak             = totalLeak * 0.20;
-            const trustLeak          = totalLeak * 0.10;
-
-            // Recovery scenarios
-            const conservative = totalLeak * 0.30;
-            const likely       = totalLeak * 0.60;
-            const optimistic   = totalLeak * 0.85;
-
-            // Populate
-            animateCount('loss-display', totalLeak);
-            document.getElementById('recover-conservative').textContent = '$' + Math.round(conservative).toLocaleString();
-            document.getElementById('recover-likely').textContent       = '$' + Math.round(likely).toLocaleString();
-            document.getElementById('recover-optimistic').textContent   = '$' + Math.round(optimistic).toLocaleString();
-
-            // Severity
-            const pill = document.getElementById('severity-pill');
-            if (totalLeak > 200000) {
-                pill.textContent = '🔴 Critical Leakage'; pill.className = pill.className.replace(/severity-\w+/g,'') + ' severity-critical';
-            } else if (totalLeak > 50000) {
-                pill.textContent = '🟠 High Leakage'; pill.className = pill.className.replace(/severity-\w+/g,'') + ' severity-high';
-            } else {
-                pill.textContent = '🟡 Moderate Leakage'; pill.className = pill.className.replace(/severity-\w+/g,'') + ' severity-medium';
-            }
-            pill.classList.add('px-4','py-1','rounded-full','text-xs','font-black','uppercase','tracking-widest');
-
-            // Breakdown bars
-            const bars = document.getElementById('breakdown-bars');
-            bars.innerHTML = '';
-            const items = [
-                { label: 'SEO & Discoverability', val: seoLeak, pct: 40 },
-                { label: 'Page Speed & Core Web Vitals', val: speedLeak, pct: 30 },
-                { label: 'UX & Conversion Friction', val: uxLeak, pct: 20 },
-                { label: 'Trust Signals & Social Proof', val: trustLeak, pct: 10 },
-            ];
-            items.forEach((item, i) => {
-                bars.innerHTML += `
-                    <div style="animation-delay:${i*0.15}s" class="fade-up">
-                        <div class="flex justify-between mb-1">
-                            <span class="text-zinc-400 text-xs font-medium">${item.label}</span>
-                            <span class="text-white text-xs font-black">$${Math.round(item.val).toLocaleString()}</span>
-                        </div>
-                        <div class="leak-bar">
-                            <div class="leak-bar-fill bar-fill" style="--w:${item.pct}%;"></div>
-                        </div>
-                    </div>`;
-            });
-
-            // Dynamic quote
-            const quotes = [
-                `"At ${traffic.toLocaleString()} visitors/month, you're generating every lead opportunity — but your current setup is handing ${Math.round(presenceLeak*100)}% of them to competitors."`,
-                `"Every $${orderValue} sale you miss is a compounding loss. At scale, that's not a rounding error — it's a strategy problem."`,
-                `"The brands winning search in 2026 aren't louder. They're faster, more trusted, and structurally built to capture intent. That's what Forge Vertical builds."`,
-            ];
-            document.getElementById('dynamic-quote').textContent = quotes[Math.floor(Math.random() * quotes.length)];
-
-            goStep('results');
-        }
-
-        // Animated counter
-        function animateCount(id, target) {
-            const el = document.getElementById(id);
-            const duration = 1200;
-            const start = performance.now();
-            function step(now) {
-                const p = Math.min((now - start) / duration, 1);
-                const eased = 1 - Math.pow(1 - p, 3);
-                el.textContent = '$' + Math.round(eased * target).toLocaleString();
-                if (p < 1) requestAnimationFrame(step);
-            }
-            requestAnimationFrame(step);
-        }
-
-        function resetAudit() {
-            state = { industry: null, convRate: 0.03, traffic: 5000, orderValue: 500, presenceLeak: 0.40 };
-            document.querySelectorAll('.industry-btn,.presence-btn').forEach(b => b.classList.remove('border-[#84cc16]','bg-zinc-800/50'));
-            goStep(1);
+        function calc() {
+            const t = document.getElementById('traffic').value;
+            const v = document.getElementById('orderValue').value || document.getElementById('value').value;
+            const leakage = (t * 0.10) * v * 12;
+            document.getElementById('loss').innerText = '$' + Math.floor(leakage).toLocaleString();
+            document.getElementById('result').classList.remove('hidden');
         }
     </script>
 </body>
