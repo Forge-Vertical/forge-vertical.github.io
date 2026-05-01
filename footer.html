@@ -1,49 +1,120 @@
-<footer id="contact" class="bg-black py-24 md:py-32 text-white rounded-t-2xl md:rounded-t-[3rem] px-6 border-t border-zinc-900 relative z-50">
-    <div class="max-w-7xl mx-auto">
-        
-        <div class="grid lg:grid-cols-2 gap-12 items-center mb-24">
-            <div class="flex justify-center lg:justify-start">
-                <img src="/assets/fvlogo.png" alt="Forge Vertical Principal Architecture" class="h-32 md:h-48 w-auto object-contain">
+<footer id="contact" class="bg-black text-white rounded-t-2xl md:rounded-t-[3rem] mx-4 border-t border-zinc-900 relative z-50 overflow-hidden">
+
+    <!-- Top accent line -->
+    <div class="h-1 w-full vibrant-gradient"></div>
+
+    <div class="max-w-7xl mx-auto px-6 pt-20 pb-12">
+
+        <!-- Main grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-20">
+
+            <!-- Col 1: Brand -->
+            <div class="lg:col-span-1">
+                <img src="/assets/fvlogo.png" alt="Forge Vertical" class="h-20 w-auto object-contain mb-6">
+                <p class="text-zinc-500 text-xs leading-relaxed mb-6">
+                    Sovereign web architecture for the next generation of search. We build digital assets that convert, rank, and scale.
+                </p>
+                <div class="flex gap-3">
+                    <a href="mailto:jarrit@forgevertical.com" class="w-9 h-9 rounded-full border border-zinc-800 flex items-center justify-center hover:border-[#84cc16] hover:text-[#84cc16] transition-all text-zinc-500" aria-label="Email">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                    </a>
+                    <a href="https://wa.me/27661180036" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-full border border-zinc-800 flex items-center justify-center hover:border-[#25D366] hover:text-[#25D366] transition-all text-zinc-500" aria-label="WhatsApp">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+                    </a>
+                </div>
             </div>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-end">
-                <a href="mailto:jarrit@forgevertical.com" class="vibrant-gradient text-black px-10 py-5 rounded-2xl font-black uppercase tracking-widest text-[10px] hover:scale-105 transition-all text-center">
+
+            <!-- Col 2: Services -->
+            <div>
+                <p class="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-600 mb-6">Services</p>
+                <ul class="space-y-3">
+                    <li><a href="/index.html#services" class="text-zinc-400 text-xs hover:text-[#84cc16] transition-colors font-medium">Domain & Hosting</a></li>
+                    <li><a href="/index.html#services" class="text-zinc-400 text-xs hover:text-[#84cc16] transition-colors font-medium">Custom Web Architecture</a></li>
+                    <li><a href="/index.html#services" class="text-zinc-400 text-xs hover:text-[#84cc16] transition-colors font-medium">Performance UI/UX</a></li>
+                    <li><a href="/index.html#services" class="text-zinc-400 text-xs hover:text-[#84cc16] transition-colors font-medium">SEO & GEO Optimization</a></li>
+                    <li><a href="/index.html#services" class="text-zinc-400 text-xs hover:text-[#84cc16] transition-colors font-medium">AI Workflow Automation</a></li>
+                    <li><a href="/index.html#services" class="text-zinc-400 text-xs hover:text-[#84cc16] transition-colors font-medium">PWA & TWA Builds</a></li>
+                    <li><a href="/index.html#services" class="text-zinc-400 text-xs hover:text-[#84cc16] transition-colors font-medium">SaaS & Custom Tools</a></li>
+                    <li>
+                        <a href="mailto:jarrit@forgevertical.com?subject=Inquiry: Satellite Authority Networks" class="text-[#84cc16] text-xs hover:text-white transition-colors font-black uppercase tracking-wider flex items-center gap-2">
+                            <span class="w-1.5 h-1.5 bg-[#84cc16] rounded-full animate-pulse"></span>
+                            Satellite Networks
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Col 3: Company -->
+            <div>
+                <p class="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-600 mb-6">Company</p>
+                <ul class="space-y-3">
+                    <li><a href="/about.html" class="text-zinc-400 text-xs hover:text-[#84cc16] transition-colors font-medium">About</a></li>
+                    <li><a href="/portfolio.html" class="text-zinc-400 text-xs hover:text-[#84cc16] transition-colors font-medium">Portfolio</a></li>
+                    <li><a href="/security-intelligence.html" class="text-zinc-400 text-xs hover:text-[#84cc16] transition-colors font-medium">Security Intelligence</a></li>
+                    <li><a href="/hacker-foundry.html" class="text-zinc-400 text-xs hover:text-[#84cc16] transition-colors font-medium">Hacker Foundry</a></li>
+                    <li><a href="/tools/roi-calculator.html" class="text-zinc-400 text-xs hover:text-[#84cc16] transition-colors font-medium flex items-center gap-2">
+                        Audit Tool
+                        <span class="w-1.5 h-1.5 bg-lime-500 rounded-full animate-pulse"></span>
+                    </a></li>
+                    <li><a href="/onboard.html" class="text-zinc-400 text-xs hover:text-[#84cc16] transition-colors font-medium">Start a Project</a></li>
+                </ul>
+            </div>
+
+            <!-- Col 4: CTA -->
+            <div>
+                <p class="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-600 mb-6">Deploy Now</p>
+                <p class="text-zinc-500 text-xs leading-relaxed mb-6">Ready to out-build the competition? Let's architect something that lasts.</p>
+                <a href="/onboard.html" class="block w-full text-center vibrant-gradient text-black py-4 rounded-xl font-black uppercase tracking-widest text-[10px] hover:opacity-90 transition-all mb-3">
+                    Commence Build Sequence
+                </a>
+                <a href="mailto:jarrit@forgevertical.com" class="block w-full text-center border border-zinc-800 text-white py-4 rounded-xl font-black uppercase tracking-widest text-[10px] hover:border-[#84cc16] hover:text-[#84cc16] transition-all">
                     Secure Official Email
                 </a>
-                <a href="https://wa.me/27661180036" class="border border-zinc-800 text-white px-10 py-5 rounded-2xl font-black uppercase tracking-widest text-[10px] hover:bg-white hover:text-black transition-all text-center">
-                    WhatsApp Operator
+            </div>
+        </div>
+
+        <!-- Partner Network -->
+        <div class="border-t border-zinc-900 pt-12 mb-12">
+            <p class="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-600 mb-8">Global Partner Network & Affiliates</p>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <a href="https://go.nordvpn.net/aff_c?offer_id=15&aff_id=145959&url_id=902" target="_blank" rel="noopener noreferrer" class="group flex items-center gap-4 border border-zinc-900 p-5 rounded-2xl hover:border-[#84cc16] transition-all bg-zinc-950/50">
+                    <img src="/assets/Logo-NordVPN.png" alt="NordVPN" class="h-5 grayscale group-hover:grayscale-0 transition-all object-contain flex-shrink-0">
+                    <div>
+                        <p class="text-[10px] font-bold text-zinc-500 group-hover:text-[#84cc16] uppercase tracking-widest">VPN Infrastructure</p>
+                        <p class="text-[10px] text-zinc-600">Enterprise-grade encryption</p>
+                    </div>
+                </a>
+                <a href="https://go.nordpass.io/aff_c?offer_id=488&aff_id=145959&url_id=9356" target="_blank" rel="noopener noreferrer" class="group flex items-center gap-4 border border-zinc-900 p-5 rounded-2xl hover:border-[#84cc16] transition-all bg-zinc-950/50">
+                    <img src="/assets/Nordpass.png" alt="NordPass" class="h-5 grayscale group-hover:grayscale-0 transition-all object-contain flex-shrink-0">
+                    <div>
+                        <p class="text-[10px] font-bold text-zinc-500 group-hover:text-[#84cc16] uppercase tracking-widest">Credential Vault</p>
+                        <p class="text-[10px] text-zinc-600">Zero-knowledge password vaulting</p>
+                    </div>
+                </a>
+                <a href="https://get.surfshark.net/aff_c?offer_id=6&aff_id=4160" target="_blank" rel="noopener noreferrer" class="group flex items-center gap-4 border border-zinc-900 p-5 rounded-2xl hover:border-[#84cc16] transition-all bg-zinc-950/50">
+                    <img src="/assets/surfshark.png" alt="Surfshark" class="h-5 grayscale group-hover:grayscale-0 transition-all object-contain flex-shrink-0">
+                    <div>
+                        <p class="text-[10px] font-bold text-zinc-500 group-hover:text-[#84cc16] uppercase tracking-widest">Data Privacy</p>
+                        <p class="text-[10px] text-zinc-600">Advanced threat protection</p>
+                    </div>
                 </a>
             </div>
         </div>
 
-        <div class="border-t border-zinc-900 pt-16 mb-24">
-            <p class="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-600 mb-10">Global Partner Network & Affiliates</p>
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
-                <a href="https://go.nordvpn.net/aff_c?offer_id=15&aff_id=145959&url_id=902" target="_blank" class="group border border-zinc-900 p-8 rounded-2xl hover:border-[#84cc16] transition-all bg-zinc-950/50">
-                    <img src="/assets/Logo-NordVPN.png" alt="NordVPN" class="h-6 mb-6 grayscale group-hover:grayscale-0 transition-all object-contain">
-                    <p class="text-[10px] font-bold text-zinc-500 group-hover:text-[#84cc16] mb-1 uppercase tracking-widest">VPN Infrastructure</p>
-                    <p class="text-[10px] text-zinc-600 leading-relaxed">Enterprise-grade encryption and obfuscated networking.</p>
-                </a>
-                <a href="https://go.nordpass.io/aff_c?offer_id=488&aff_id=145959&url_id=9356" target="_blank" class="group border border-zinc-900 p-8 rounded-2xl hover:border-[#84cc16] transition-all bg-zinc-950/50">
-                    <img src="/assets/Nordpass.png" alt="NordPass" class="h-6 mb-6 grayscale group-hover:grayscale-0 transition-all object-contain">
-                    <p class="text-[10px] font-bold text-zinc-500 group-hover:text-[#84cc16] mb-1 uppercase tracking-widest">Credential Vault</p>
-                    <p class="text-[10px] text-zinc-600 leading-relaxed">Zero-knowledge password vaulting designed for teams.</p>
-                </a>
-                <a href="https://get.surfshark.net/aff_c?offer_id=6&aff_id=4160" target="_blank" class="group border border-zinc-900 p-8 rounded-2xl hover:border-[#84cc16] transition-all bg-zinc-950/50">
-                    <img src="/assets/surfshark.png" alt="Surfshark" class="h-6 mb-6 grayscale group-hover:grayscale-0 transition-all object-contain">
-                    <p class="text-[10px] font-bold text-zinc-500 group-hover:text-[#84cc16] mb-1 uppercase tracking-widest">Data Privacy</p>
-                    <p class="text-[10px] text-zinc-600 leading-relaxed">Advanced threat protection and sovereign browsing.</p>
-                </a>
+        <!-- Bottom bar -->
+        <div class="border-t border-zinc-900 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div>
+                <p class="text-white font-black tracking-tighter text-lg">Forge <span class="text-[#84cc16]">Vertical_</span></p>
+                <p class="text-zinc-600 text-[10px] uppercase font-bold tracking-[0.2em] mt-0.5">Sovereign Web Architecture · Cape Town, ZA</p>
             </div>
+            <div class="flex flex-wrap gap-x-6 gap-y-2 justify-center">
+                <a href="/about.html" class="text-zinc-600 text-[10px] uppercase font-bold tracking-widest hover:text-zinc-400 transition-colors">About</a>
+                <a href="/portfolio.html" class="text-zinc-600 text-[10px] uppercase font-bold tracking-widest hover:text-zinc-400 transition-colors">Portfolio</a>
+                <a href="/security-intelligence.html" class="text-zinc-600 text-[10px] uppercase font-bold tracking-widest hover:text-zinc-400 transition-colors">Intelligence</a>
+                <a href="/onboard.html" class="text-zinc-600 text-[10px] uppercase font-bold tracking-widest hover:text-zinc-400 transition-colors">Onboard</a>
+            </div>
+            <p class="text-zinc-700 text-[10px] font-bold uppercase tracking-[0.3em]">© 2026 // Forge Vertical</p>
         </div>
 
-        <div class="border-t border-zinc-900 pt-12 flex flex-col md:flex-row justify-between items-center gap-8">
-            <div class="text-left">
-                <p class="text-white font-black tracking-tighter text-xl">Forge <span class="text-[#84cc16]">Vertical_</span></p>
-                <p class="text-zinc-600 text-[10px] uppercase font-bold tracking-[0.2em] mt-1">Sovereign Web Architecture</p>
-            </div>
-            <p class="text-zinc-500 text-[10px] font-black uppercase tracking-[0.4em] leading-loose">
-                Principal Architecture 2026 // <span class="text-zinc-300">Fair Discovery</span>
-            </p>
-        </div>
     </div>
 </footer>
