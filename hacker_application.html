@@ -9,7 +9,6 @@
     <style>
         :root {
             --acid: #82c91e;
-            --acid-dim: #5a8e10;
             --black: #060606;
             --surface: #0d0d0d;
             --surface-2: #141414;
@@ -21,12 +20,11 @@
             --text-muted: #3a3a3a;
         }
 
-        /* Essential resets to match onboard.html logic */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
         html, body {
             height: 100%;
-            margin: 0;
-            padding: 0;
-            background-color: var(--black);
+            background: var(--black);
         }
 
         body {
@@ -66,21 +64,22 @@
             z-index: 0;
         }
 
-        /* Main layout - Flex grow ensures footer is pushed down */
+        /* Main layout - Flex grow pushes footer down */
         main {
             position: relative;
             z-index: 1;
             max-width: 1400px;
+            width: 100%;
             margin: 0 auto;
-            padding: 48px 24px 80px; /* Reduced top padding as Nav is now external */
+            padding: 60px 48px 80px; 
             display: grid;
             grid-template-columns: 1fr 480px;
             gap: 80px;
             align-items: start;
-            flex-grow: 1;
+            flex: 1 0 auto;
         }
 
-        /* Typography & Components */
+        /* Hero UI Elements */
         .hero-eyebrow {
             font-family: 'Space Mono', monospace;
             font-size: 0.7rem;
@@ -103,7 +102,7 @@
 
         h1 {
             font-family: 'Bebas Neue', sans-serif;
-            font-size: clamp(4rem, 8vw, 7rem);
+            font-size: clamp(5rem, 10vw, 9rem);
             line-height: 0.88;
             letter-spacing: 0.02em;
             color: #fff;
@@ -121,10 +120,33 @@
             font-weight: 300;
         }
 
-        /* Stats Component */
+        /* Image Placeholder Block (Replacing Video) */
+        .image-placeholder {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background: var(--surface-2);
+            border: 1px solid var(--border-strong);
+            border-radius: 16px;
+            margin-bottom: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 60px rgba(130,201,30,0.05);
+        }
+
+        .image-placeholder::after {
+            content: 'DNA_ARCH_IMG_01';
+            font-family: 'Space Mono', monospace;
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            letter-spacing: 0.2em;
+        }
+
+        /* Stats Row */
         .stats {
             display: flex;
-            gap: 0;
             margin-bottom: 64px;
             border: 1px solid var(--border);
             border-radius: 12px;
@@ -152,11 +174,10 @@
             font-family: 'Space Mono', monospace;
             font-size: 0.6rem;
             color: var(--text-dim);
-            letter-spacing: 0.1em;
             text-transform: uppercase;
         }
 
-        /* Repute System Component */
+        /* Repute UI */
         .repute-block {
             background: var(--surface-2);
             border: 1px solid var(--border);
@@ -170,7 +191,6 @@
             font-family: 'Space Mono', monospace;
             font-size: 0.65rem;
             color: var(--acid);
-            letter-spacing: 0.2em;
             text-transform: uppercase;
             margin-bottom: 20px;
         }
@@ -186,44 +206,16 @@
         }
 
         .repute-item:last-child { border-bottom: none; }
-        .repute-item .label { color: var(--text-dim); }
-
         .repute-badge {
             font-size: 0.65rem;
             padding: 3px 10px;
             border-radius: 4px;
             font-weight: 700;
-            letter-spacing: 0.05em;
         }
-
         .badge-paid { background: rgba(130,201,30,0.15); color: var(--acid); }
-        .badge-dup { background: rgba(59,130,246,0.15); color: #60a5fa; }
-        .badge-info { background: rgba(107,114,128,0.2); color: #9ca3af; }
 
-        /* Sidebar Video */
-        .video-block {
-            border-radius: 16px;
-            overflow: hidden;
-            border: 1px solid var(--border-strong);
-            background: #000;
-            box-shadow: 0 0 60px rgba(130,201,30,0.08);
-            margin-bottom: 32px;
-        }
-
-        .video-block video {
-            width: 100%;
-            height: auto;
-            display: block;
-            max-height: 280px;
-            object-fit: cover;
-        }
-
-        /* Sidebar Sticky Form */
-        .right-col {
-            position: sticky;
-            top: 40px;
-        }
-
+        /* Form Sidebar */
+        .right-col { position: sticky; top: 100px; }
         .form-card {
             background: var(--surface);
             border: 1px solid var(--border);
@@ -232,36 +224,8 @@
             padding: 40px;
         }
 
-        .form-header { margin-bottom: 32px; }
-        .form-header h2 {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 2.2rem;
-            color: #fff;
-            letter-spacing: 0.05em;
-            margin-bottom: 6px;
-        }
-
-        .form-header p {
-            font-family: 'Space Mono', monospace;
-            font-size: 0.65rem;
-            color: var(--text-dim);
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-        }
-
-        /* Form Inputs */
-        .field-group { margin-bottom: 20px; }
-        .field-label {
-            font-family: 'Space Mono', monospace;
-            font-size: 0.6rem;
-            color: var(--text-dim);
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            margin-bottom: 8px;
-            display: block;
-        }
-
-        .field-label span { color: var(--acid); margin-left: 4px; }
+        .form-header h2 { font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; color: #fff; }
+        .form-header p { font-family: 'Space Mono', monospace; font-size: 0.65rem; color: var(--text-dim); text-transform: uppercase; }
 
         .form-input {
             width: 100%;
@@ -270,85 +234,8 @@
             border-radius: 8px;
             padding: 14px 16px;
             color: var(--text);
-            font-family: 'DM Sans', sans-serif;
-            font-size: 0.9rem;
-            transition: all 0.2s;
+            margin-top: 8px;
             outline: none;
-        }
-
-        .form-input:focus {
-            border-color: var(--acid);
-            background: var(--surface-3);
-            box-shadow: 0 0 0 3px rgba(130,201,30,0.08);
-        }
-
-        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-
-        /* Handles & Specializations */
-        .handles-row { display: flex; flex-direction: column; gap: 10px; }
-        .handle-input-wrap {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            background: var(--surface-2);
-            border: 1px solid var(--surface-3);
-            border-radius: 8px;
-            padding: 10px 14px;
-        }
-
-        .handle-platform {
-            font-family: 'Space Mono', monospace;
-            font-size: 0.65rem;
-            color: var(--acid);
-            min-width: 36px;
-        }
-
-        .handle-input {
-            flex: 1;
-            background: none;
-            border: none;
-            outline: none;
-            color: var(--text);
-            font-family: 'Space Mono', monospace;
-            font-size: 0.8rem;
-        }
-
-        .spec-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-        .spec-item input[type="checkbox"] { display: none; }
-        .spec-item label {
-            display: flex;
-            flex-direction: column;
-            padding: 12px 14px;
-            background: var(--surface-2);
-            border: 1px solid var(--surface-3);
-            border-radius: 8px;
-            cursor: pointer;
-        }
-
-        .spec-item input:checked + label {
-            border-color: var(--acid);
-            background: rgba(130,201,30,0.07);
-        }
-
-        .form-divider { height: 1px; background: var(--border); margin: 24px 0; }
-
-        /* Pledge & Button */
-        .pledge-row {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            padding: 16px;
-            background: rgba(130,201,30,0.04);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            margin-bottom: 24px;
-        }
-
-        .pledge-text {
-            font-family: 'Space Mono', monospace;
-            font-size: 0.65rem;
-            color: var(--text-dim);
-            line-height: 1.7;
         }
 
         .submit-btn {
@@ -362,212 +249,91 @@
             font-size: 1.3rem;
             letter-spacing: 0.2em;
             cursor: pointer;
-            transition: all 0.2s;
+            margin-top: 24px;
         }
 
-        .submit-btn:hover {
-            background: #94e01f;
-            box-shadow: 0 8px 32px rgba(130,201,30,0.25);
-        }
+        /* Wrappers for injected nav/footer */
+        #global-nav { width: 100%; z-index: 100; position: relative; }
+        #global-footer { width: 100%; flex-shrink: 0; position: relative; z-index: 2; }
 
-        /* Cursor Animation */
-        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
-        .cursor {
-            display: inline-block;
-            width: 2px;
-            height: 1em;
-            background: var(--acid);
-            margin-left: 4px;
-            vertical-align: middle;
-            animation: blink 1s step-end infinite;
-        }
-
-        /* Responsive Logic */
         @media (max-width: 1100px) {
-            main { grid-template-columns: 1fr; padding: 40px 24px; gap: 48px; }
+            main { grid-template-columns: 1fr; padding: 40px 24px; }
             .right-col { position: static; }
         }
-
-        @media (max-width: 600px) {
-            .grid-2, .spec-grid { grid-template-columns: 1fr; }
-            .stats { flex-wrap: wrap; }
-            .stat { border-right: none; border-bottom: 1px solid var(--border); }
-        }
-
-        .hp { display: none !important; }
     </style>
 </head>
 <body>
 
-    <div class="page-bg"></div>
+<div class="page-bg"></div>
 
-    <!-- Calls external nav.html exactly like onboard.html -->
-    <div id="global-nav"></div>
+<div id="global-nav"></div>
 
-    <main>
-        <!-- LEFT COLUMN -->
-        <div class="left-col">
-            <div class="hero-eyebrow">Restricted Access Program</div>
+<main>
+    <div class="left-col">
+        <div class="hero-eyebrow">Restricted Access Program</div>
+        <h1>JOIN<br>THE <span>FOUNDRY.</span></h1>
+        <p class="hero-sub">
+            We don't compete with the giants — we find what they miss. Forge Vertical is building a curated network of ethical researchers.
+        </p>
 
-            <h1>JOIN<br>THE <span>FOUNDRY.</span></h1>
-
-            <p class="hero-sub">
-                We don't compete with the giants — we find what they miss.
-                Forge Vertical is building a curated network of ethical researchers
-                who operate with signal over noise. Every finding matters.
-                Every researcher is accountable.
-            </p>
-
-            <div class="stats">
-                <div class="stat">
-                    <div class="stat-val">24H</div>
-                    <div class="stat-label">First Response</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-val">3</div>
-                    <div class="stat-label">Severity Tiers</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-val">100%</div>
-                    <div class="stat-label">Safe Harbor</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-val">0</div>
-                    <div class="stat-label">Noise Tolerated</div>
-                </div>
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-val">24H</div>
+                <div class="stat-label">First Response</div>
             </div>
-
-            <!-- Video -->
-            <div class="video-block">
-                <video autoplay loop muted playsinline>
-                    <source src="/assets/hack_safe.mp4" type="video/mp4">
-                </video>
-            </div>
-
-            <!-- Repute system -->
-            <div class="repute-block">
-                <div class="repute-title">// The Repute System</div>
-                <div class="repute-item">
-                    <span class="label">Triaged finding — paid bounty</span>
-                    <span class="repute-badge badge-paid">Signal + Bounty</span>
-                </div>
-                <div class="repute-item">
-                    <span class="label">Duplicate submission</span>
-                    <span class="repute-badge badge-dup">5 Repute Pts</span>
-                </div>
-                <div class="repute-item">
-                    <span class="label">Informative / Low severity</span>
-                    <span class="repute-badge badge-info">1 Repute Pt</span>
-                </div>
+            <div class="stat">
+                <div class="stat-val">100%</div>
+                <div class="stat-label">Safe Harbor</div>
             </div>
         </div>
 
-        <!-- RIGHT COLUMN — FORM -->
-        <div class="right-col">
-            <div class="form-card">
-                <div class="form-header">
-                    <h2>Vetting Protocol<span class="cursor"></span></h2>
-                    <p>// Apply for researcher access — reviewed manually</p>
-                </div>
+        <!-- NEW IMAGE PLACEHOLDER -->
+        <div class="image-placeholder">
+            <!-- Replace this div with <img> when ready -->
+        </div>
 
-                <form action="https://formspree.io/f/xvzvzvva" method="POST">
-                    <input type="text" name="_gotcha" class="hp" tabindex="-1" autocomplete="off">
-
-                    <div class="grid-2">
-                        <div class="field-group">
-                            <label class="field-label">Full Name<span>*</span></label>
-                            <input type="text" name="FullName" placeholder="Your legal name" class="form-input" required>
-                        </div>
-                        <div class="field-group">
-                            <label class="field-label">Hacker Alias<span>*</span></label>
-                            <input type="text" name="HackerAlias" placeholder="e.g. forgevertical" class="form-input" required>
-                        </div>
-                    </div>
-
-                    <div class="field-group">
-                        <label class="field-label">Secure Email<span>*</span></label>
-                        <input type="email" name="Email" placeholder="Preferably ProtonMail or similar" class="form-input" required>
-                    </div>
-
-                    <div class="field-group">
-                        <label class="field-label">Platform Handles<span>*</span></label>
-                        <div class="handles-row">
-                            <div class="handle-input-wrap">
-                                <span class="handle-platform">H1</span>
-                                <input type="text" name="Handle_H1" placeholder="@username" class="handle-input">
-                            </div>
-                            <div class="handle-input-wrap">
-                                <span class="handle-platform">YWH</span>
-                                <input type="text" name="Handle_YWH" placeholder="@username" class="handle-input">
-                            </div>
-                            <div class="handle-input-wrap">
-                                <span class="handle-platform">BC</span>
-                                <input type="text" name="Handle_BC" placeholder="@username" class="handle-input">
-                            </div>
-                            <div class="handle-input-wrap">
-                                <span class="handle-platform">INT</span>
-                                <input type="text" name="Handle_Intigriti" placeholder="@username" class="handle-input">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-divider"></div>
-
-                    <div class="field-group">
-                        <label class="field-label">Core Specializations<span>*</span></label>
-                        <div class="spec-grid">
-                            <div class="spec-item">
-                                <input type="checkbox" id="s_ssrf" name="Spec_SSRF" value="1">
-                                <label for="s_ssrf"><span class="spec-name">SSRF</span></label>
-                            </div>
-                            <div class="spec-item">
-                                <input type="checkbox" id="s_csrf" name="Spec_CSRF" value="1">
-                                <label for="s_csrf"><span class="spec-name">CSRF</span></label>
-                            </div>
-                            <div class="spec-item">
-                                <input type="checkbox" id="s_logic" name="Spec_Logic" value="1">
-                                <label for="s_logic"><span class="spec-name">Logic</span></label>
-                            </div>
-                            <div class="spec-item">
-                                <input type="checkbox" id="s_auth" name="Spec_Auth" value="1">
-                                <label for="s_auth"><span class="spec-name">Auth</span></label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-divider"></div>
-
-                    <div class="field-group">
-                        <label class="field-label">Your Best Find<span>*</span></label>
-                        <textarea name="BestFind" class="form-input" style="min-height:120px;" placeholder="Briefly describe impact..." required></textarea>
-                    </div>
-
-                    <div class="pledge-row">
-                        <input type="checkbox" name="IntegrityPledge" id="pledge" required>
-                        <label for="pledge" class="pledge-text">
-                            I operate under the Forge Vertical Integrity Code.
-                        </label>
-                    </div>
-
-                    <button type="submit" class="submit-btn">Request Access</button>
-                </form>
+        <div class="repute-block">
+            <div class="repute-title">// The Repute System</div>
+            <div class="repute-item">
+                <span class="label">Triaged finding — paid bounty</span>
+                <span class="repute-badge badge-paid">Signal + Bounty</span>
             </div>
         </div>
-    </main>
+    </div>
 
-    <!-- Calls external footer.html exactly like onboard.html -->
-    <div id="global-footer"></div>
+    <div class="right-col">
+        <div class="form-card">
+            <div class="form-header">
+                <h2>Vetting Protocol</h2>
+                <p>// Apply for researcher access</p>
+            </div>
+            <form action="https://formspree.io/f/xvzvzvva" method="POST">
+                <div class="field-group">
+                    <label style="font-family: 'Space Mono'; font-size: 0.6rem; color: var(--text-dim);">HACKER ALIAS*</label>
+                    <input type="text" name="HackerAlias" class="form-input" required placeholder="e.g. forgevertical">
+                </div>
+                <div class="field-group">
+                    <label style="font-family: 'Space Mono'; font-size: 0.6rem; color: var(--text-dim);">SECURE EMAIL*</label>
+                    <input type="email" name="Email" class="form-input" required placeholder="ProtonMail preferred">
+                </div>
+                <button type="submit" class="submit-btn">Request Access</button>
+            </form>
+        </div>
+    </div>
+</main>
 
-    <script>
-        async function injectGlobals() {
-            try {
-                const nav = await fetch('/nav.html');
-                if(nav.ok) document.getElementById('global-nav').innerHTML = await nav.text();
-                const foot = await fetch('/footer.html');
-                if(foot.ok) document.getElementById('global-footer').innerHTML = await foot.text();
-            } catch (e) {}
-        }
-        injectGlobals();
-    </script>
+<div id="global-footer"></div>
+
+<script>
+    async function injectGlobals() {
+        try {
+            const nav = await fetch('/nav.html');
+            if(nav.ok) document.getElementById('global-nav').innerHTML = await nav.text();
+            const foot = await fetch('/footer.html');
+            if(foot.ok) document.getElementById('global-footer').innerHTML = await foot.text();
+        } catch (e) {}
+    }
+    injectGlobals();
+</script>
 </body>
 </html>
