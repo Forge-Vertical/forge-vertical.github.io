@@ -2,7 +2,7 @@
 
 **Principal Architect:** [Jarrit Hosking](https://www.linkedin.com/in/jarrit-hosking-44243a332/)  
 **Location:** 📍 Cape Town, South Africa (Goodwood HQ)  
-**Established:** 2003
+**Established:** 2005
 
 ---
 
