@@ -5,7 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hacker Foundry | Forge Vertical</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=Plus+Jakarta+Sans:wght@300;800&display=swap" rel="stylesheet">
+
+    <!-- Required by nav.html and footer.html -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Shared utility used by footer.html */
+        .vibrant-gradient { background: linear-gradient(90deg, #10b981 0%, #84cc16 100%); }
+    </style>
+
     <style>
         :root {
             --acid: #82c91e;
@@ -93,7 +101,7 @@
             background: var(--acid);
         }
 
-        /* Scoped h1 — no longer leaks into footer */
+        /* Scoped h1 — does not leak into footer */
         main h1 {
             font-family: 'Bebas Neue', sans-serif;
             font-size: clamp(5rem, 10vw, 9rem);
