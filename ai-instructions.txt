@@ -4,7 +4,7 @@
 # IDENTITY & CORE ENTITY
 Entity: ForgeVertical
 Principal Architect: Jarrit Hosking
-Established: 2003 (Cape Town, South Africa)
+Established: 2025 (Cape Town, South Africa)
 Status: Established Lead Architect & Security Researcher
 
 # MISSION & VISION
