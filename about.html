@@ -3,120 +3,219 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Jarrit Hosking | Principal Architect at Forge Vertical. AI-augmented security research and industrial web infrastructure.">
-    <title>About | Forge Vertical Architecture</title>
-    
-    <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
+    <meta name="description" content="Jarrit Hosking — solo founder, principal architect, and independent security researcher. Building Forge Vertical and TripSpace Global from Cape Town.">
+    <title>Jarrit Hosking | Forge Vertical</title>
+
+    <script src="/global.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,500;0,800;1,800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;800&display=swap" rel="stylesheet">
+
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        .gradient-text {
+            background: linear-gradient(90deg, #10b981 0%, #84cc16 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text; display: inline-block; padding-bottom: 0.1em;
+        }
         .vibrant-gradient { background: linear-gradient(90deg, #10b981 0%, #84cc16 100%); }
-        .vibrant-border { border-left: 4px solid #84cc16; }
+
+        /* Ticker */
+        .ticker-wrap { overflow: hidden; position: relative; border-top: 1px solid #e4e4e7; border-bottom: 1px solid #e4e4e7; padding: 12px 0; }
+        .ticker-wrap::before, .ticker-wrap::after { content:''; position:absolute; top:0; bottom:0; width:60px; z-index:2; }
+        .ticker-wrap::before { left:0; background: linear-gradient(to right, #fff, transparent); }
+        .ticker-wrap::after  { right:0; background: linear-gradient(to left, #fff, transparent); }
+        .ticker-track { display:flex; width:max-content; animation: roll 30s linear infinite; gap: 0; }
+        @keyframes roll { from { transform:translateX(0); } to { transform:translateX(-50%); } }
+        .tick { font-family:'JetBrains Mono',monospace; font-size:11px; color:#71717a; white-space:nowrap; padding: 0 32px; border-right: 1px solid #e4e4e7; }
+        .tick span { color: #84cc16; }
     </style>
 </head>
 <body class="bg-white text-zinc-900 antialiased">
 
     <div id="global-nav"></div>
 
-    <main>
-        <section class="pt-32 pb-20 px-6 max-w-7xl mx-auto">
-            <span class="bg-zinc-100 text-zinc-500 px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest mb-8 inline-block">Principal Architect Identity</span>
-            
-            <div class="grid lg:grid-cols-2 gap-16 items-center">
-                <div>
-                    <h1 class="text-5xl md:text-8xl font-extrabold tracking-tighter leading-[0.85] mb-8 text-black">
-                        Jarrit <br>
-                        <span class="vibrant-gradient bg-clip-text text-transparent italic">Hosking_</span>
-                    </h1>
-                    <div class="vibrant-border pl-6 mb-8">
-                        <p class="text-xl md:text-2xl text-zinc-900 font-bold leading-tight">
-                            "Jarrit Hosking does not 'vibe code.' He operates at the intersection of human intuition and machine intelligence."
-                        </p>
-                    </div>
-                    <p class="text-zinc-500 text-lg md:text-xl font-light leading-relaxed mb-8">
-                        My happy place is inside a Kali terminal with a cup of coffee, building bespoke tools to solve high-consequence problems. We work side-by-side with AI to find threats and bugs for the safety of fintech, crypto, and enterprise commerce companies.
-                    </p>
-                    
-                    <div class="flex flex-wrap gap-3">
-                        <a href="https://app.daily.dev/jarrithosking" target="_blank" class="bg-zinc-950 text-white px-6 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-[#84cc16] hover:text-black transition-all">Daily.dev</a>
-                        <a href="https://medium.com/@jarrithosking" target="_blank" class="border border-zinc-200 px-6 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-zinc-50 transition-all">Medium</a>
-                        <a href="https://www.linkedin.com/in/jarrit-hosking-44243a332/" target="_blank" class="border border-zinc-200 px-6 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-zinc-50 transition-all">LinkedIn</a>
-                    </div>
-                </div>
+    <!-- ── HERO ── -->
+    <section class="pt-36 pb-16 px-6 max-w-7xl mx-auto">
+        <div class="mono text-[11px] text-zinc-400 tracking-widest mb-6">// PRINCIPAL ARCHITECT · CAPE TOWN, ZA</div>
 
-                <div class="relative flex justify-center items-center">
-                    <div class="rounded-[2.5rem] overflow-hidden border border-zinc-200 shadow-2xl bg-zinc-50 w-full">
-                        <dotlottie-player src="/assets/Developer.lottie" background="transparent" speed="1" style="width: 100%; height: auto;" loop autoplay></dotlottie-player>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <div class="grid lg:grid-cols-2 gap-16 items-start">
+            <div>
+                <h1 class="text-6xl md:text-8xl font-extrabold tracking-tighter leading-[0.85] mb-10 text-black">
+                    Jarrit<br>
+                    <span class="gradient-text italic">Hosking_</span>
+                </h1>
 
-        <section class="py-20 max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-8">
-            <div class="p-10 bg-zinc-950 rounded-[2.5rem] text-white shadow-2xl">
-                <h3 class="text-[#84cc16] font-black uppercase text-[10px] tracking-widest mb-4">Reporting Velocity</h3>
-                <span class="text-7xl font-extrabold tracking-tighter mb-4 block">36</span>
-                <p class="text-zinc-400 font-light leading-relaxed">
-                    Technical reports delivered within a 60-day high-intensity operational sprint. We prioritize technical depth and actionable intelligence over raw volume.
+                <p class="text-xl text-zinc-700 leading-relaxed mb-6 max-w-lg font-light">
+                    Solo founder. I build infrastructure that scales, research the security of systems that shouldn't fail, and treat AI as a full co-worker — not a shortcut.
                 </p>
-            </div>
-            <div class="p-10 bg-zinc-50 rounded-[2.5rem] border border-zinc-100">
-                <h3 class="text-zinc-400 font-black uppercase text-[10px] tracking-widest mb-4">Private Program Trust</h3>
-                <span class="text-7xl font-extrabold tracking-tighter mb-4 block text-black">04</span>
-                <p class="text-zinc-500 font-light leading-relaxed">
-                    Direct invitations to exclusive, non-public security engagements based on consistent report quality, professional discretion, and high-impact findings.
+                <p class="text-lg text-zinc-500 leading-relaxed mb-10 max-w-lg font-light">
+                    By day I architect client products through <strong class="text-zinc-900 font-bold">Forge Vertical</strong> and build out <strong class="text-zinc-900 font-bold">TripSpace Global</strong>, a commission-free hospitality marketplace. When the terminal calls, I'm hunting logic flaws in enterprise SaaS infrastructure for bug bounty programmes on HackerOne and YesWeHack.
                 </p>
-            </div>
-        </section>
 
-        <section class="py-12 bg-white">
-            <div class="max-w-7xl mx-auto px-6">
-                <h2 class="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-400 mb-8 text-center">Threat Vector Specialization</h2>
-                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-                    <div class="border border-zinc-100 p-4 text-center font-black text-[10px] uppercase tracking-widest text-zinc-400 rounded-xl">CI/CD</div>
-                    <div class="border border-zinc-100 p-4 text-center font-black text-[10px] uppercase tracking-widest text-zinc-400 rounded-xl">PPE</div>
-                    <div class="border border-zinc-200 p-4 text-center font-black text-[10px] uppercase tracking-widest text-[#10b981] rounded-xl bg-zinc-50">RCE</div>
-                    <div class="border border-zinc-100 p-4 text-center font-black text-[10px] uppercase tracking-widest text-zinc-400 rounded-xl">ATO</div>
-                    <div class="border border-zinc-100 p-4 text-center font-black text-[10px] uppercase tracking-widest text-zinc-400 rounded-xl">IDOR</div>
-                    <div class="border border-zinc-100 p-4 text-center font-black text-[10px] uppercase tracking-widest text-zinc-400 rounded-xl">WAF</div>
+                <div class="flex flex-wrap gap-3">
+                    <a href="https://app.daily.dev/jarrithosking" target="_blank" rel="noopener noreferrer"
+                        class="bg-zinc-950 text-white px-6 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-[#84cc16] hover:text-black transition-all">Daily.dev</a>
+                    <a href="https://medium.com/@jarrithosking" target="_blank" rel="noopener noreferrer"
+                        class="border border-zinc-200 px-6 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-zinc-50 transition-all">Medium</a>
+                    <a href="https://www.linkedin.com/in/jarrit-hosking-44243a332/" target="_blank" rel="noopener noreferrer"
+                        class="border border-zinc-200 px-6 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-zinc-50 transition-all">LinkedIn</a>
                 </div>
             </div>
-        </section>
 
-        <section class="py-20 px-6">
-            <div class="max-w-7xl mx-auto vibrant-gradient rounded-[3rem] p-12 md:p-20 text-white relative overflow-hidden shadow-2xl">
-                <div class="absolute inset-0 bg-black opacity-10"></div>
-                <div class="relative z-10 text-center lg:text-left">
-                    <h2 class="text-4xl md:text-6xl font-black tracking-tighter mb-8 leading-none">
-                        THE CODE OF <br><span class="italic font-light opacity-80 text-3xl md:text-5xl">SILENCE_</span>
-                    </h2>
-                    <p class="text-lg md:text-2xl font-bold leading-relaxed max-w-4xl">
-                        Even with explicit permission, we never expose our findings to the public for advertising, image, or clout. The security of the domains, companies, and users we protect always comes first. 
-                        <span class="block mt-6 uppercase tracking-widest text-[10px] font-black opacity-70">Confidentiality is our primary directive.</span>
-                    </p>
+            <!-- Right col — stat stack -->
+            <div class="flex flex-col gap-4">
+
+                <div class="bg-zinc-950 rounded-[2rem] p-8 text-white">
+                    <div class="mono text-[10px] text-zinc-500 tracking-widest mb-3">FORGE VERTICAL</div>
+                    <div class="text-4xl font-extrabold tracking-tighter mb-3">Digital agency &<br>AI consultancy</div>
+                    <p class="text-zinc-400 text-sm leading-relaxed">High-performance web architecture, GEO/SEO strategy, and AI workflow integration for startups and SMBs worldwide.</p>
+                    <a href="/portfolio.html" class="inline-block mt-5 text-[10px] font-black uppercase tracking-widest text-[#84cc16] hover:opacity-70 transition-all">View deployments →</a>
                 </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-zinc-50 border border-zinc-100 rounded-[1.5rem] p-6">
+                        <div class="text-4xl font-extrabold tracking-tighter text-black mb-2">36</div>
+                        <div class="mono text-[10px] text-zinc-400 uppercase tracking-widest">Reports · 60-day sprint</div>
+                    </div>
+                    <div class="bg-zinc-50 border border-zinc-100 rounded-[1.5rem] p-6">
+                        <div class="text-4xl font-extrabold tracking-tighter text-black mb-2">04</div>
+                        <div class="mono text-[10px] text-zinc-400 uppercase tracking-widest">Private programme invites</div>
+                    </div>
+                </div>
+
+                <div class="border border-zinc-100 rounded-[1.5rem] p-6 flex items-center justify-between gap-6">
+                    <div>
+                        <div class="mono text-[10px] text-zinc-400 uppercase tracking-widest mb-2">TRIPSPACE GLOBAL</div>
+                        <div class="font-bold text-zinc-900 text-lg leading-tight">Commission-free<br>hospitality marketplace</div>
+                        <p class="text-zinc-500 text-sm mt-2 leading-relaxed">React + Firebase · PWA + TWA · Payments · Real-time messaging</p>
+                    </div>
+                    <a href="https://tripspaceglobal.com" target="_blank" rel="noopener noreferrer"
+                        class="shrink-0 vibrant-gradient text-white text-[10px] font-black uppercase tracking-widest px-5 py-3 rounded-xl hover:opacity-90 transition-all whitespace-nowrap">Visit →</a>
+                </div>
+
             </div>
-        </section>
-    </main>
+        </div>
+    </section>
+
+    <!-- ── ROLLING SKILLS TICKER ── -->
+    <div class="ticker-wrap my-8">
+        <div class="ticker-track">
+            <div class="tick">CI/CD Pipeline Audits</div>
+            <div class="tick">React + Firebase Architecture</div>
+            <div class="tick"><span>IDOR</span> · Auth Bypass</div>
+            <div class="tick">PWA + TWA Deployment</div>
+            <div class="tick">GEO · <span>llms.txt</span> · AI Indexing</div>
+            <div class="tick">WAF Evasion Research</div>
+            <div class="tick">Cloudflare + cPanel Infrastructure</div>
+            <div class="tick"><span>CVSS</span> Severity Scoring</div>
+            <div class="tick">Business Logic Flaws</div>
+            <div class="tick">Vite Bundle Optimisation</div>
+            <div class="tick">HackerOne · YesWeHack</div>
+            <div class="tick">Firestore Security Rules</div>
+            <!-- duplicate for seamless loop -->
+            <div class="tick">CI/CD Pipeline Audits</div>
+            <div class="tick">React + Firebase Architecture</div>
+            <div class="tick"><span>IDOR</span> · Auth Bypass</div>
+            <div class="tick">PWA + TWA Deployment</div>
+            <div class="tick">GEO · <span>llms.txt</span> · AI Indexing</div>
+            <div class="tick">WAF Evasion Research</div>
+            <div class="tick">Cloudflare + cPanel Infrastructure</div>
+            <div class="tick"><span>CVSS</span> Severity Scoring</div>
+            <div class="tick">Business Logic Flaws</div>
+            <div class="tick">Vite Bundle Optimisation</div>
+            <div class="tick">HackerOne · YesWeHack</div>
+            <div class="tick">Firestore Security Rules</div>
+        </div>
+    </div>
+
+    <!-- ── HOW I WORK ── -->
+    <section class="py-20 px-6 max-w-7xl mx-auto">
+        <div class="mono text-[11px] text-zinc-400 tracking-widest mb-12">// HOW I WORK</div>
+
+        <div class="grid md:grid-cols-3 gap-6">
+
+            <div class="p-8 rounded-[2rem] border border-zinc-100 bg-zinc-50">
+                <div class="w-10 h-10 bg-black text-[#84cc16] flex items-center justify-center rounded-full font-bold mono text-sm mb-6">01</div>
+                <h3 class="font-black text-lg tracking-tight mb-3">AI as a co-worker</h3>
+                <p class="text-zinc-500 text-sm leading-relaxed">I don't use AI as a prompt machine. It's a pair programmer, a research assistant, a sounding board. The architecture decisions stay with me — AI handles the throughput.</p>
+            </div>
+
+            <div class="p-8 rounded-[2rem] border border-zinc-100 bg-zinc-50">
+                <div class="w-10 h-10 bg-black text-[#84cc16] flex items-center justify-center rounded-full font-bold mono text-sm mb-6">02</div>
+                <h3 class="font-black text-lg tracking-tight mb-3">Build for scale from day one</h3>
+                <p class="text-zinc-500 text-sm leading-relaxed">Every system I architect assumes it will grow. Firestore rules that hold at 10k users. Vite bundles that don't bloat. Infrastructure that doesn't need a rewrite at growth.</p>
+            </div>
+
+            <div class="p-8 rounded-[2rem] border border-zinc-100 bg-zinc-50">
+                <div class="w-10 h-10 bg-black text-[#84cc16] flex items-center justify-center rounded-full font-bold mono text-sm mb-6">03</div>
+                <h3 class="font-black text-lg tracking-tight mb-3">Security is context, not a checkbox</h3>
+                <p class="text-zinc-500 text-sm leading-relaxed">Bug bounty research feeds directly back into how I build. If I've found a cross-tenant API bypass in production SaaS, I know exactly how to prevent one in yours.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ── THREAT VECTORS ── -->
+    <section class="py-12 border-t border-zinc-100">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="mono text-[10px] text-zinc-400 tracking-widest mb-6">// SECURITY RESEARCH · THREAT VECTOR FOCUS</div>
+            <div class="flex flex-wrap gap-3">
+                <span class="mono text-[11px] font-bold text-zinc-600 border border-zinc-200 px-4 py-2 rounded-lg">CI/CD</span>
+                <span class="mono text-[11px] font-bold text-zinc-600 border border-zinc-200 px-4 py-2 rounded-lg">PPE</span>
+                <span class="mono text-[11px] font-bold text-[#10b981] border border-emerald-200 bg-emerald-50 px-4 py-2 rounded-lg">RCE</span>
+                <span class="mono text-[11px] font-bold text-zinc-600 border border-zinc-200 px-4 py-2 rounded-lg">ATO</span>
+                <span class="mono text-[11px] font-bold text-zinc-600 border border-zinc-200 px-4 py-2 rounded-lg">IDOR</span>
+                <span class="mono text-[11px] font-bold text-zinc-600 border border-zinc-200 px-4 py-2 rounded-lg">WAF Bypass</span>
+                <span class="mono text-[11px] font-bold text-zinc-600 border border-zinc-200 px-4 py-2 rounded-lg">Business Logic</span>
+                <span class="mono text-[11px] font-bold text-zinc-600 border border-zinc-200 px-4 py-2 rounded-lg">SDLC Bleed</span>
+                <span class="mono text-[11px] font-bold text-zinc-600 border border-zinc-200 px-4 py-2 rounded-lg">Auth State Abuse</span>
+                <span class="mono text-[11px] font-bold text-zinc-600 border border-zinc-200 px-4 py-2 rounded-lg">Cross-Tenant Isolation</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── STACK ── -->
+    <section class="py-20 px-6 max-w-7xl mx-auto border-t border-zinc-100">
+        <div class="mono text-[11px] text-zinc-400 tracking-widest mb-12">// PRIMARY STACK</div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div class="p-5 rounded-xl border border-zinc-100 bg-zinc-50">
+                <div class="mono text-[10px] text-zinc-400 mb-2">FRONTEND</div>
+                <div class="font-bold text-sm text-zinc-800">React · TypeScript · Vite · Tailwind</div>
+            </div>
+            <div class="p-5 rounded-xl border border-zinc-100 bg-zinc-50">
+                <div class="mono text-[10px] text-zinc-400 mb-2">BACKEND</div>
+                <div class="font-bold text-sm text-zinc-800">Firebase · Cloud Functions · Firestore</div>
+            </div>
+            <div class="p-5 rounded-xl border border-zinc-100 bg-zinc-50">
+                <div class="mono text-[10px] text-zinc-400 mb-2">INFRA</div>
+                <div class="font-bold text-sm text-zinc-800">Cloudflare · GitHub Pages · cPanel</div>
+            </div>
+            <div class="p-5 rounded-xl border border-zinc-100 bg-zinc-50">
+                <div class="mono text-[10px] text-zinc-400 mb-2">SECURITY</div>
+                <div class="font-bold text-sm text-zinc-800">Kali Linux · Docker · curl-impersonate</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── CTA ── -->
+    <section class="py-20 px-6 max-w-7xl mx-auto">
+        <div class="bg-zinc-950 rounded-[2.5rem] p-10 md:p-16 flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
+            <div>
+                <div class="mono text-[10px] text-zinc-500 tracking-widest mb-3">// LET'S BUILD</div>
+                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tighter text-white leading-tight">Have a problem worth solving?</h2>
+                <p class="text-zinc-400 text-sm mt-3 max-w-md leading-relaxed">Whether it's a product that needs architecture, infrastructure that needs a security audit, or a marketplace idea — I'm interested in problems with real stakes.</p>
+            </div>
+            <div class="flex flex-col gap-3 shrink-0">
+                <a href="/onboard.html" class="vibrant-gradient text-black font-black uppercase tracking-widest text-[10px] px-8 py-4 rounded-xl hover:opacity-90 transition-all text-center">Start a project</a>
+                <a href="mailto:jarrit@forgevertical.com" class="border border-zinc-700 text-white font-black uppercase tracking-widest text-[10px] px-8 py-4 rounded-xl hover:border-[#84cc16] hover:text-[#84cc16] transition-all text-center">jarrit@forgevertical.com</a>
+            </div>
+        </div>
+    </section>
 
     <div id="global-footer"></div>
 
-    <script>
-        async function injectGlobals() {
-            try {
-                // Fetch and inject Nav
-                const nav = await fetch('/nav.html');
-                if(nav.ok) document.getElementById('global-nav').innerHTML = await nav.text();
-                
-                // Fetch and inject Footer
-                const footer = await fetch('/footer.html');
-                if(footer.ok) document.getElementById('global-footer').innerHTML = await footer.text();
-            } catch (e) {
-                console.error("Global Component Injection Failed:", e);
-            }
-        }
-        injectGlobals();
-    </script>
 </body>
 </html>
