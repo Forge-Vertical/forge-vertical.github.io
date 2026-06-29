@@ -1,4 +1,54 @@
+# robots.txt — Forge Vertical (forgevertical.com)
+# https://www.forgevertical.com/robots.txt
+
 User-agent: *
 Allow: /
 
-Sitemap: https://forgevertical.com/sitemap.xml
+# Block internal/admin paths
+Disallow: /admin/
+Disallow: /private/
+Disallow: /drafts/
+Disallow: /tmp/
+
+# Allow all major crawlers explicitly
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+# AI crawlers — allow indexing for GEO visibility
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+# Sitemap
+Sitemap: https://www.forgevertical.com/sitemap.xml
+
+# AI context files
+# llms.txt:     https://www.forgevertical.com/llms.txt
+# context:      https://www.forgevertical.com/context-ai.txt
+# ai-agents:    https://www.forgevertical.com/ai-agents.txt
