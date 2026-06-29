@@ -1,50 +1,318 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Revenue Leakage Calculator // ForgeVertical</title>
+    <meta name="description" content="Find out what slow load times, poor UX, and weak SEO are costing your business annually. Free audit tool by Forge Vertical.">
+    <title>Revenue Leakage Audit Tool // Forge Vertical</title>
+    <script src="/global.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;500;800&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;500;800&display=swap');
         body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        .vibrant-gradient { background: linear-gradient(90deg, #10b981 0%, #84cc16 100%); }
+        .gradient-text { background: linear-gradient(90deg, #10b981 0%, #84cc16 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; display: inline-block; padding-bottom: 0.1em; }
+        .fv-dot { flex: 1; height: 3px; border-radius: 2px; background: #e2e8f0; transition: background 0.3s; }
+        .fv-dot.done { background: #84cc16; }
+        .fv-step { display: none; }
+        .fv-step.active { display: block; }
+        .fv-spinner { width: 48px; height: 48px; border: 3px solid #e2e8f0; border-top-color: #84cc16; border-radius: 50%; animation: spin 0.7s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .fv-leak-bar { height: 100%; background: #ef4444; border-radius: 3px; transition: width 1s ease; }
+        .chip { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; padding: 5px 14px; border-radius: 20px; border: 1px solid #e2e8f0; color: #64748b; cursor: pointer; background: transparent; font-family: 'Plus Jakarta Sans', sans-serif; transition: all 0.15s; }
+        .chip:hover { border-color: #84cc16; color: #84cc16; }
     </style>
 </head>
-<body class="min-h-screen py-20 px-6">
-    <div class="max-w-xl mx-auto bg-white p-10 rounded-[3rem] shadow-2xl border border-slate-100">
-        <h2 class="text-3xl font-extrabold text-slate-900 mb-2">Revenue <span class="text-lime-500">Leakage</span></h2>
-        <p class="text-slate-500 text-[10px] mb-8 uppercase tracking-widest font-black">Neil Patel Grade SEO Utility</p>
-        
-        <div class="space-y-6">
-            <div>
-                <label class="block text-[10px] font-black uppercase text-slate-400 mb-2">Monthly Traffic</label>
-                <input type="number" id="traffic" value="5000" class="w-full bg-slate-50 border-none rounded-xl p-4 focus:ring-2 focus:ring-lime-500 outline-none font-bold">
-            </div>
-            <div>
-                <label class="block text-[10px] font-black uppercase text-slate-400 mb-2">Avg. Order Value ($)</label>
-                <input type="number" id="value" value="100" class="w-full bg-slate-50 border-none rounded-xl p-4 focus:ring-2 focus:ring-lime-500 outline-none font-bold">
-            </div>
-            <button onclick="calc()" class="w-full bg-lime-500 text-white p-5 rounded-2xl font-black uppercase tracking-widest text-xs shadow-lg shadow-lime-500/30 hover:bg-slate-900 transition-all">Analyze My Data</button>
+<body class="min-h-screen antialiased">
+
+    <div id="global-nav"></div>
+
+    <main class="max-w-2xl mx-auto px-6 pt-36 pb-24">
+
+        <!-- Header -->
+        <div id="tool-header" class="mb-10">
+            <span class="text-[10px] font-black uppercase tracking-[0.3em] text-[#84cc16]">Forge Vertical // Audit Tool</span>
+            <h1 class="text-5xl font-extrabold tracking-tighter leading-none mt-2 mb-3 text-zinc-900">
+                Revenue <span class="gradient-text">Leakage</span><br>Calculator
+            </h1>
+            <p class="text-zinc-500 text-base">Find out what slow load times, poor UX, and weak SEO are costing you — in under 60 seconds.</p>
         </div>
-        
-        <div id="result" class="mt-10 p-8 bg-slate-900 rounded-[2rem] text-white hidden">
-            <p class="text-slate-400 text-[10px] uppercase font-black tracking-widest mb-2">Annual Revenue at Risk</p>
-            <span id="loss" class="text-4xl font-black text-lime-400">$0</span>
-            <p class="mt-6 text-xs text-slate-400 leading-relaxed italic">"Slow load times and poor UX typically leak 7-12% of annual revenue. We plug those holes."</p>
-            <div class="mt-8 grid grid-cols-1 gap-3">
-                <a href="https://wa.me/27661180036" class="flex items-center justify-center bg-[#25D366] text-white p-4 rounded-xl font-black uppercase text-[10px] tracking-widest">Chat on WhatsApp</a>
-                <a href="mailto:jarrit@forgevertical.com" class="flex items-center justify-center bg-white text-slate-900 p-4 rounded-xl font-black uppercase text-[10px] tracking-widest">Email Principal Architect</a>
+
+        <!-- Progress -->
+        <div id="progress-wrap" class="flex gap-2 mb-10">
+            <div class="fv-dot done" id="d0"></div>
+            <div class="fv-dot" id="d1"></div>
+            <div class="fv-dot" id="d2"></div>
+        </div>
+
+        <!-- Step 0: Traffic -->
+        <div class="fv-step active bg-white rounded-[2rem] border border-zinc-100 p-8 shadow-sm" id="step-0">
+            <label class="block text-[10px] font-black uppercase tracking-widest text-zinc-400 mb-3">Monthly website visitors</label>
+            <input type="number" id="inp-traffic" placeholder="5000" min="0"
+                class="w-full bg-zinc-50 rounded-2xl border-none p-4 text-2xl font-extrabold text-zinc-900 outline-none focus:ring-2 focus:ring-lime-400">
+            <p class="text-zinc-400 text-xs mt-3">Unique monthly sessions from Google Analytics or Search Console.</p>
+            <div class="flex flex-wrap gap-2 mt-4">
+                <button class="chip" onclick="setVal('inp-traffic',1000)">1k</button>
+                <button class="chip" onclick="setVal('inp-traffic',5000)">5k</button>
+                <button class="chip" onclick="setVal('inp-traffic',20000)">20k</button>
+                <button class="chip" onclick="setVal('inp-traffic',100000)">100k</button>
+                <button class="chip" onclick="setVal('inp-traffic',500000)">500k</button>
+            </div>
+            <button onclick="goStep(1)" class="w-full mt-8 bg-zinc-900 text-[#84cc16] py-5 rounded-2xl font-black uppercase tracking-widest text-[10px] hover:bg-[#84cc16] hover:text-zinc-900 transition-all">
+                Next — Average order value →
+            </button>
+        </div>
+
+        <!-- Step 1: Value -->
+        <div class="fv-step bg-white rounded-[2rem] border border-zinc-100 p-8 shadow-sm" id="step-1">
+            <label class="block text-[10px] font-black uppercase tracking-widest text-zinc-400 mb-3">Average order / lead value (USD)</label>
+            <input type="number" id="inp-value" placeholder="100" min="0"
+                class="w-full bg-zinc-50 rounded-2xl border-none p-4 text-2xl font-extrabold text-zinc-900 outline-none focus:ring-2 focus:ring-lime-400">
+            <p class="text-zinc-400 text-xs mt-3">What does one conversion typically earn your business?</p>
+            <div class="flex flex-wrap gap-2 mt-4">
+                <button class="chip" onclick="setVal('inp-value',50)">$50</button>
+                <button class="chip" onclick="setVal('inp-value',200)">$200</button>
+                <button class="chip" onclick="setVal('inp-value',500)">$500</button>
+                <button class="chip" onclick="setVal('inp-value',1500)">$1.5k</button>
+                <button class="chip" onclick="setVal('inp-value',5000)">$5k</button>
+            </div>
+            <button onclick="goStep(2)" class="w-full mt-8 bg-zinc-900 text-[#84cc16] py-5 rounded-2xl font-black uppercase tracking-widest text-[10px] hover:bg-[#84cc16] hover:text-zinc-900 transition-all">
+                Next — Conversion rate →
+            </button>
+        </div>
+
+        <!-- Step 2: CVR -->
+        <div class="fv-step bg-white rounded-[2rem] border border-zinc-100 p-8 shadow-sm" id="step-2">
+            <label class="block text-[10px] font-black uppercase tracking-widest text-zinc-400 mb-3">Current conversion rate (%)</label>
+            <input type="number" id="inp-cvr" placeholder="2" min="0" max="100" step="0.1"
+                class="w-full bg-zinc-50 rounded-2xl border-none p-4 text-2xl font-extrabold text-zinc-900 outline-none focus:ring-2 focus:ring-lime-400">
+            <p class="text-zinc-400 text-xs mt-3">Industry average: 1–3%. E-commerce 1–2%, B2B leads 2–5%.</p>
+            <div class="flex flex-wrap gap-2 mt-4">
+                <button class="chip" onclick="setVal('inp-cvr',0.5)">0.5%</button>
+                <button class="chip" onclick="setVal('inp-cvr',1)">1%</button>
+                <button class="chip" onclick="setVal('inp-cvr',2)">2%</button>
+                <button class="chip" onclick="setVal('inp-cvr',3.5)">3.5%</button>
+                <button class="chip" onclick="setVal('inp-cvr',5)">5%</button>
+            </div>
+            <button onclick="runAnalysis()" class="w-full mt-8 vibrant-gradient text-white py-5 rounded-2xl font-black uppercase tracking-widest text-[10px] hover:opacity-90 transition-all">
+                Analyse my revenue leakage
+            </button>
+        </div>
+
+        <!-- Analysis -->
+        <div class="fv-step" id="step-analyze">
+            <div class="bg-white rounded-[2rem] border border-zinc-100 p-12 shadow-sm text-center">
+                <div class="fv-spinner mx-auto mb-6"></div>
+                <p class="text-[10px] font-black uppercase tracking-widest text-zinc-400 mb-4">Running audit</p>
+                <div id="fv-log" class="font-mono text-xs text-[#84cc16] leading-8 min-h-[100px]"></div>
             </div>
         </div>
-    </div>
+
+        <!-- Results -->
+        <div id="fv-results" class="hidden space-y-4">
+
+            <!-- Hero loss card -->
+            <div class="bg-zinc-950 rounded-[2rem] p-8">
+                <p class="text-[10px] font-black uppercase tracking-widest text-zinc-500 mb-2">Annual revenue at risk</p>
+                <p id="res-loss" class="text-5xl font-extrabold text-red-400 tracking-tighter">$0</p>
+                <p id="res-hero-sub" class="text-zinc-500 text-xs mt-3"></p>
+            </div>
+
+            <!-- Metrics row -->
+            <div class="grid grid-cols-3 gap-3">
+                <div class="bg-white rounded-2xl border border-zinc-100 p-5">
+                    <p id="res-traffic" class="text-xl font-extrabold text-zinc-900 tracking-tighter">—</p>
+                    <p class="text-[10px] font-black uppercase tracking-widest text-zinc-400 mt-1">Monthly visitors</p>
+                </div>
+                <div class="bg-white rounded-2xl border border-zinc-100 p-5">
+                    <p id="res-baseline" class="text-xl font-extrabold text-zinc-900 tracking-tighter">—</p>
+                    <p class="text-[10px] font-black uppercase tracking-widest text-zinc-400 mt-1">Current monthly rev</p>
+                </div>
+                <div class="bg-white rounded-2xl border border-zinc-100 p-5">
+                    <p id="res-potential" class="text-xl font-extrabold text-[#10b981] tracking-tighter">—</p>
+                    <p class="text-[10px] font-black uppercase tracking-widest text-zinc-400 mt-1">Potential monthly rev</p>
+                </div>
+            </div>
+
+            <!-- Leak breakdown -->
+            <div class="bg-white rounded-[2rem] border border-zinc-100 p-8">
+                <p class="text-[10px] font-black uppercase tracking-widest text-zinc-400 mb-6">Where you're bleeding revenue</p>
+                <div id="fv-leak-list" class="space-y-4"></div>
+            </div>
+
+            <!-- Chart -->
+            <div class="bg-white rounded-[2rem] border border-zinc-100 p-8">
+                <p class="text-[10px] font-black uppercase tracking-widest text-zinc-400 mb-6">Baseline vs. recoverable value</p>
+                <div style="position:relative;width:100%;height:220px;">
+                    <canvas id="fv-chart" role="img" aria-label="Bar chart comparing current monthly revenue baseline against recoverable monthly revenue from closing each leak category.">Revenue baseline vs recoverable amounts by leak category.</canvas>
+                </div>
+                <div id="fv-legend" class="flex flex-wrap gap-3 mt-4 text-[10px] text-zinc-500 font-bold"></div>
+            </div>
+
+            <!-- Quote -->
+            <p id="fv-quote" class="text-sm text-zinc-400 italic leading-relaxed px-2"></p>
+
+            <!-- CTAs -->
+            <div class="grid grid-cols-2 gap-3">
+                <a href="https://wa.me/27661180036" target="_blank" rel="noopener noreferrer"
+                    class="flex items-center justify-center gap-3 bg-[#25D366] text-white py-5 rounded-2xl font-black uppercase text-[10px] tracking-widest hover:opacity-90 transition-all">
+                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+                    WhatsApp Jarrit
+                </a>
+                <a href="mailto:jarrit@forgevertical.com?subject=Revenue Leakage Audit Request" target="_blank" rel="noopener noreferrer"
+                    class="flex items-center justify-center gap-3 bg-zinc-900 text-[#84cc16] py-5 rounded-2xl font-black uppercase text-[10px] tracking-widest hover:bg-[#84cc16] hover:text-zinc-900 transition-all">
+                    Email the architect
+                </a>
+            </div>
+
+            <button onclick="restart()" class="w-full border border-zinc-200 text-zinc-400 py-4 rounded-2xl font-black uppercase text-[10px] tracking-widest hover:border-zinc-400 hover:text-zinc-600 transition-all">
+                ↺ Run another audit
+            </button>
+        </div>
+
+    </main>
+
+    <div id="global-footer"></div>
+
     <script>
-        function calc() {
-            const t = document.getElementById('traffic').value;
-            const v = document.getElementById('orderValue').value || document.getElementById('value').value;
-            const leakage = (t * 0.10) * v * 12;
-            document.getElementById('loss').innerText = '$' + Math.floor(leakage).toLocaleString();
-            document.getElementById('result').classList.remove('hidden');
+        let chart = null;
+        let currentStep = 0;
+
+        function setVal(id, v) { document.getElementById(id).value = v; }
+
+        function goStep(n) {
+            document.getElementById('step-' + currentStep).classList.remove('active');
+            currentStep = n;
+            document.getElementById('step-' + n).classList.add('active');
+            for (let i = 0; i < 3; i++) {
+                document.getElementById('d' + i).classList.toggle('done', i <= n);
+            }
+        }
+
+        const logs = [
+            '>> Scanning page speed metrics...',
+            '>> Auditing UX friction points...',
+            '>> Mapping SEO coverage gaps...',
+            '>> Calculating mobile conversion delta...',
+            '>> Cross-referencing industry benchmarks...',
+            '>> Compiling revenue leak report...'
+        ];
+
+        function runAnalysis() {
+            const t = parseFloat(document.getElementById('inp-traffic').value) || 5000;
+            const v = parseFloat(document.getElementById('inp-value').value) || 100;
+            const cvr = parseFloat(document.getElementById('inp-cvr').value) || 2;
+            document.getElementById('step-' + currentStep).classList.remove('active');
+            document.getElementById('step-analyze').classList.add('active');
+            document.getElementById('progress-wrap').style.display = 'none';
+            const logEl = document.getElementById('fv-log');
+            logEl.textContent = '';
+            let i = 0;
+            const iv = setInterval(() => {
+                if (i < logs.length) {
+                    logEl.textContent += (i > 0 ? '\n' : '') + logs[i++];
+                } else {
+                    clearInterval(iv);
+                    setTimeout(() => showResults(t, v, cvr), 300);
+                }
+            }, 400);
+        }
+
+        function fmt(n) { return '$' + Math.round(n).toLocaleString(); }
+        function fmtK(n) {
+            if (n >= 1000000) return '$' + (n / 1000000).toFixed(1) + 'M';
+            if (n >= 1000) return '$' + Math.round(n / 1000) + 'k';
+            return '$' + Math.round(n);
+        }
+
+        function showResults(traffic, value, cvr) {
+            document.getElementById('step-analyze').classList.remove('active');
+            document.getElementById('fv-results').classList.remove('hidden');
+
+            const cvrDec = cvr / 100;
+            const monthlyRev = traffic * cvrDec * value;
+            const leaks = [
+                { name: 'Page speed',  pct: 0.035, color: '#ef4444' },
+                { name: 'UX friction', pct: 0.028, color: '#f97316' },
+                { name: 'SEO gaps',    pct: 0.025, color: '#eab308' },
+                { name: 'Mobile UX',   pct: 0.022, color: '#8b5cf6' },
+            ];
+            const totalLeakPct = leaks.reduce((a, b) => a + b.pct, 0);
+            const annualLeak = monthlyRev * 12 * totalLeakPct;
+            const potentialMonthly = monthlyRev * (1 + totalLeakPct);
+
+            document.getElementById('res-loss').textContent = fmtK(annualLeak);
+            document.getElementById('res-hero-sub').textContent =
+                'Based on ' + Math.round(traffic).toLocaleString() + ' monthly visitors at ' + cvr + '% CVR — industry leak rate ' + Math.round(totalLeakPct * 100) + '% applied.';
+            document.getElementById('res-traffic').textContent = Math.round(traffic).toLocaleString();
+            document.getElementById('res-baseline').textContent = fmtK(monthlyRev);
+            document.getElementById('res-potential').textContent = fmtK(potentialMonthly);
+
+            const list = document.getElementById('fv-leak-list');
+            list.innerHTML = '';
+            const maxAmt = Math.max(...leaks.map(l => l.pct * monthlyRev * 12));
+            leaks.forEach(l => {
+                const amt = l.pct * monthlyRev * 12;
+                const barW = Math.round((amt / maxAmt) * 100);
+                list.innerHTML += `<div class="flex items-center gap-4">
+                    <span class="text-[10px] font-black uppercase tracking-wider text-zinc-700 w-28 shrink-0">${l.name}</span>
+                    <div class="flex-1 h-1.5 bg-zinc-100 rounded-full overflow-hidden">
+                        <div class="fv-leak-bar" data-w="${barW}" style="width:0%;background:${l.color}"></div>
+                    </div>
+                    <span class="text-xs font-extrabold w-20 text-right" style="color:${l.color}">${fmtK(amt)}/yr</span>
+                </div>`;
+            });
+            setTimeout(() => {
+                document.querySelectorAll('.fv-leak-bar').forEach(b => { b.style.width = b.dataset.w + '%'; });
+            }, 80);
+
+            if (chart) { chart.destroy(); }
+            chart = new Chart(document.getElementById('fv-chart'), {
+                type: 'bar',
+                data: {
+                    labels: ['Current', ...leaks.map(l => l.name)],
+                    datasets: [{
+                        label: 'Monthly value ($)',
+                        data: [Math.round(monthlyRev), ...leaks.map(l => Math.round(l.pct * monthlyRev))],
+                        backgroundColor: ['#1e293b', '#ef4444', '#f97316', '#eab308', '#8b5cf6'],
+                        borderRadius: 6,
+                        borderSkipped: false
+                    }]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: { callbacks: { label: ctx => ' ' + fmt(ctx.raw) + '/mo' } }
+                    },
+                    scales: {
+                        x: { grid: { display: false }, ticks: { font: { size: 10, weight: '800' }, color: '#94a3b8' } },
+                        y: {
+                            grid: { color: 'rgba(148,163,184,0.15)' },
+                            ticks: { callback: v => fmtK(v * 12) + '/yr', font: { size: 10 }, color: '#94a3b8' }
+                        }
+                    }
+                }
+            });
+
+            const legend = document.getElementById('fv-legend');
+            [{ name: 'Current baseline', color: '#1e293b' }, ...leaks].forEach(l => {
+                legend.innerHTML += `<span style="display:flex;align-items:center;gap:4px;"><span style="width:10px;height:10px;border-radius:2px;background:${l.color};flex-shrink:0;"></span>${l.name}</span>`;
+            });
+
+            const uplift = Math.round((potentialMonthly / monthlyRev - 1) * 100);
+            document.getElementById('fv-quote').textContent =
+                '"Closing these leaks could increase your monthly revenue by ' + uplift + '%. Forge Vertical plugs every one — from Core Web Vitals to AI-indexed content architecture."';
+        }
+
+        function restart() {
+            document.getElementById('fv-results').classList.add('hidden');
+            document.getElementById('progress-wrap').style.display = 'flex';
+            ['inp-traffic', 'inp-value', 'inp-cvr'].forEach(id => document.getElementById(id).value = '');
+            currentStep = 0;
+            document.getElementById('step-0').classList.add('active');
+            for (let i = 0; i < 3; i++) document.getElementById('d' + i).classList.toggle('done', i === 0);
         }
     </script>
 </body>
