@@ -3,67 +3,131 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forge Terminal | Onboarding</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;800&display=swap" rel="stylesheet">
-    <style>
-        /* Fix the white gap: Ensure body fills the screen and matches the background */
-        html, body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-            background-color: #ffffff;
-        }
+    <meta name="description" content="Start a project with Forge Vertical. Website, SaaS, SEO, GEO, AI automation, PWA — tell us what you need and we'll send a custom quote.">
+    <title>Start a Project | Forge Vertical</title>
 
-        body { 
-            font-family: 'Plus Jakarta Sans', sans-serif; 
+    <script src="/global.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;500;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        :root {
+            --lime: #84cc16;
+            --lime-dim: #4d7c0f;
+            --bg-dot: #f1f1f4;
+        }
+        html, body { margin: 0; padding: 0; background: #ffffff; }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
             color: #09090b;
-            background-image: radial-gradient(circle at 2px 2px, #f1f1f4 1px, transparent 0);
+            background-image: radial-gradient(circle at 2px 2px, var(--bg-dot) 1px, transparent 0);
             background-size: 40px 40px;
-            display: flex;
-            flex-direction: column;
             min-height: 100vh;
         }
-        
-        .lime-accent { color: #84cc16 !important; }
-        .lime-bg { background-color: #84cc16 !important; }
-        
-        /* Glassmorphic Slate-Blue Card */
-        .form-card { 
-            background: rgba(15, 23, 42, 0.98); 
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        .mono { font-family: 'JetBrains Mono', monospace; }
+
+        /* Dark card */
+        .dcard {
+            background: rgba(9, 9, 11, 0.97);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 24px;
         }
 
-        /* High-Visibility Inputs - Responsive Font Size */
-        input, textarea { 
-            background-color: rgba(255, 255, 255, 0.05) !important; 
-            border: 1px solid rgba(255, 255, 255, 0.2) !important;
-            color: #ffffff !important; 
-            font-size: 1rem !important; /* Default 16px to prevent iOS zoom */
-            transition: all 0.3s ease;
+        /* Service selector chips */
+        .svc-chip {
+            position: relative;
+            cursor: pointer;
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 14px;
+            padding: 16px 14px;
+            transition: border-color 0.2s, background 0.2s;
+            background: rgba(255,255,255,0.03);
+            user-select: none;
         }
-        
-        @media (min-width: 768px) {
-            input, textarea { font-size: 1.125rem !important; }
+        .svc-chip:hover { border-color: rgba(132,204,22,0.4); background: rgba(132,204,22,0.05); }
+        .svc-chip input[type="checkbox"] { position: absolute; opacity: 0; width: 0; height: 0; }
+        .svc-chip.checked { border-color: var(--lime); background: rgba(132,204,22,0.08); }
+        .svc-check {
+            width: 18px; height: 18px; border-radius: 5px;
+            border: 1.5px solid rgba(255,255,255,0.2);
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0; transition: all 0.15s;
         }
-        
-        input:focus, textarea:focus {
-            border-color: #84cc16 !important;
-            background-color: rgba(255, 255, 255, 0.1) !important;
-            outline: none;
-            transform: translateY(-1px);
-        }
+        .svc-chip.checked .svc-check { background: var(--lime); border-color: var(--lime); }
+        .svc-check svg { display: none; }
+        .svc-chip.checked .svc-check svg { display: block; }
 
-        ::placeholder { color: rgba(255, 255, 255, 0.5) !important; }
+        /* Inputs */
+        .fi {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 12px;
+            padding: 13px 16px;
+            width: 100%;
+            color: #fff;
+            font-size: 15px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            transition: border-color 0.2s, background 0.2s;
+            box-sizing: border-box;
+        }
+        .fi:focus { border-color: var(--lime); background: rgba(255,255,255,0.08); outline: none; }
+        .fi::placeholder { color: rgba(255,255,255,0.35); }
 
-        .section-label {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 0.85rem;
-            font-weight: 800;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
+        /* Radio group */
+        .radio-opt {
+            display: flex; align-items: center; gap: 10px;
+            cursor: pointer; color: rgba(255,255,255,0.7);
+            font-size: 14px; font-weight: 600;
+            padding: 10px 14px; border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.15s; flex: 1;
+        }
+        .radio-opt:hover { border-color: rgba(132,204,22,0.4); color: #fff; }
+        .radio-opt input { accent-color: var(--lime); width: 16px; height: 16px; }
+
+        /* Section divider */
+        .sdiv { border-top: 1px solid rgba(255,255,255,0.07); padding-top: 28px; margin-top: 28px; }
+
+        /* Field label */
+        .fl { display: block; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.18em; color: rgba(255,255,255,0.4); margin-bottom: 8px; font-family: 'JetBrains Mono', monospace; }
+
+        /* Budget chips */
+        .budget-chip {
+            flex: 1; min-width: 0;
+            padding: 10px 8px; border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.6); font-size: 11px; font-weight: 800;
+            text-align: center; text-transform: uppercase; letter-spacing: 0.08em;
+            cursor: pointer; transition: all 0.15s;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .budget-chip:hover, .budget-chip.selected { border-color: var(--lime); color: var(--lime); background: rgba(132,204,22,0.08); }
+
+        /* Submit */
+        .btn-submit {
+            width: 100%; padding: 18px;
+            background: var(--lime); color: #09090b;
+            font-weight: 800; font-size: 12px; letter-spacing: 0.18em;
+            text-transform: uppercase; border: none; border-radius: 14px;
+            cursor: pointer; font-family: 'Plus Jakarta Sans', sans-serif;
+            transition: opacity 0.2s, transform 0.1s;
+            box-shadow: 0 8px 32px rgba(132,204,22,0.25);
+        }
+        .btn-submit:hover { opacity: 0.92; }
+        .btn-submit:active { transform: scale(0.99); }
+
+        /* Conditional section */
+        .cond-section { display: none; }
+        .cond-section.visible { display: block; }
+
+        /* Step label */
+        .step-label {
+            font-size: 10px; font-weight: 800; text-transform: uppercase;
+            letter-spacing: 0.2em; color: var(--lime);
+            font-family: 'JetBrains Mono', monospace;
+            margin-bottom: 6px; display: block;
         }
     </style>
 </head>
@@ -71,94 +135,481 @@
 
     <div id="global-nav"></div>
 
-    <main class="max-w-4xl mx-auto py-12 px-6 flex-grow">
-        <header class="mb-12">
-            <span class="lime-accent text-xs font-bold uppercase tracking-[0.2em]">Manual Lead Entry</span>
-            <h1 class="text-4xl md:text-6xl font-black tracking-tighter mt-2 text-zinc-900">Forge Your <span class="italic lime-accent">Vertical.</span></h1>
-            <p class="text-zinc-600 mt-6 text-lg md:text-xl font-light">Define your architectural DNA. We will provide a custom quote.</p>
-        </header>
+    <main class="max-w-3xl mx-auto px-6 pt-36 pb-28">
 
-        <form action="https://formspree.io/f/xvzvzvva" method="POST" class="space-y-8 md:space-y-12">
-            
-            <div class="form-card p-8 md:p-12 rounded-[2rem] md:rounded-[3rem]">
-                <div class="flex flex-col items-center mb-8 md:mb-12 border-b border-white/10 pb-10 text-center">
-                    <img src="assets/form_onboard.gif" alt="Forge Onboarding" class="w-64 md:w-80 h-auto mb-8 rounded-2xl">
-                    <h3 class="section-label lime-accent underline decoration-2 underline-offset-8">01. Contact Details</h3>
-                </div>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
-                    <input type="text" name="First Name" placeholder="First Name" required class="w-full rounded-2xl p-5">
-                    <input type="text" name="Surname" placeholder="Surname" required class="w-full rounded-2xl p-5">
-                    <input type="email" name="Email" placeholder="Email Address" required class="w-full rounded-2xl p-5">
-                    <input type="tel" name="Phone" placeholder="Phone Number" class="w-full rounded-2xl p-5">
-                    <input type="text" name="Company" placeholder="Company Name" class="w-full rounded-2xl p-5 md:col-span-2">
-                    <textarea name="Address" placeholder="Physical/Business Address" rows="2" class="w-full rounded-2xl p-5 md:col-span-2"></textarea>
+        <!-- Header -->
+        <div class="mb-12">
+            <span class="mono text-[11px] text-zinc-400 tracking-widest">// PROJECT INTAKE</span>
+            <h1 class="text-5xl md:text-7xl font-extrabold tracking-tighter leading-[0.85] mt-3 mb-5 text-zinc-900">
+                Forge your<br>
+                <span style="background:linear-gradient(90deg,#10b981,#84cc16);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:inline-block;padding-bottom:0.1em;" class="italic">vertical.</span>
+            </h1>
+            <p class="text-zinc-500 text-lg font-light max-w-lg">Tell us what you need. We'll scope it, price it, and get back to you within 24 hours.</p>
+        </div>
+
+        <form action="https://formspree.io/f/xvzvzvva" method="POST" style="display:flex;flex-direction:column;gap:16px;">
+
+            <!-- ── 01 SERVICE SCOPE ── -->
+            <div class="dcard" style="padding:28px 28px 32px;">
+                <span class="step-label">01 — What are we building?</span>
+                <h2 style="font-size:18px;font-weight:800;color:#fff;margin-bottom:6px;letter-spacing:-0.02em;">Select everything that applies</h2>
+                <p style="font-size:13px;color:rgba(255,255,255,0.4);margin-bottom:20px;">Your selection shapes the rest of this form.</p>
+
+                <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;" id="svc-grid">
+
+                    <label class="svc-chip" data-reveals="web-section">
+                        <input type="checkbox" name="Service[]" value="Website / Landing Page">
+                        <div style="display:flex;align-items:start;gap:10px;">
+                            <div class="svc-check">
+                                <svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="#09090b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            </div>
+                            <div>
+                                <div style="font-size:13px;font-weight:800;color:#fff;margin-bottom:3px;">Website / Landing Page</div>
+                                <div style="font-size:11px;color:rgba(255,255,255,0.4);">Marketing, portfolio, lead gen</div>
+                            </div>
+                        </div>
+                    </label>
+
+                    <label class="svc-chip" data-reveals="saas-section">
+                        <input type="checkbox" name="Service[]" value="SaaS / Web App">
+                        <div style="display:flex;align-items:start;gap:10px;">
+                            <div class="svc-check">
+                                <svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="#09090b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            </div>
+                            <div>
+                                <div style="font-size:13px;font-weight:800;color:#fff;margin-bottom:3px;">SaaS / Web App</div>
+                                <div style="font-size:11px;color:rgba(255,255,255,0.4);">Product, dashboard, tool</div>
+                            </div>
+                        </div>
+                    </label>
+
+                    <label class="svc-chip" data-reveals="pwa-section">
+                        <input type="checkbox" name="Service[]" value="PWA / Mobile App">
+                        <div style="display:flex;align-items:start;gap:10px;">
+                            <div class="svc-check">
+                                <svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="#09090b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            </div>
+                            <div>
+                                <div style="font-size:13px;font-weight:800;color:#fff;margin-bottom:3px;">PWA / Mobile App</div>
+                                <div style="font-size:11px;color:rgba(255,255,255,0.4);">Play Store, iOS-ready PWA</div>
+                            </div>
+                        </div>
+                    </label>
+
+                    <label class="svc-chip" data-reveals="seo-section">
+                        <input type="checkbox" name="Service[]" value="SEO / GEO Optimisation">
+                        <div style="display:flex;align-items:start;gap:10px;">
+                            <div class="svc-check">
+                                <svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="#09090b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            </div>
+                            <div>
+                                <div style="font-size:13px;font-weight:800;color:#fff;margin-bottom:3px;">SEO / GEO</div>
+                                <div style="font-size:11px;color:rgba(255,255,255,0.4);">Rank on Google + AI engines</div>
+                            </div>
+                        </div>
+                    </label>
+
+                    <label class="svc-chip" data-reveals="ai-section">
+                        <input type="checkbox" name="Service[]" value="AI Workflow Automation">
+                        <div style="display:flex;align-items:start;gap:10px;">
+                            <div class="svc-check">
+                                <svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="#09090b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            </div>
+                            <div>
+                                <div style="font-size:13px;font-weight:800;color:#fff;margin-bottom:3px;">AI Automation</div>
+                                <div style="font-size:11px;color:rgba(255,255,255,0.4);">Pipelines, agents, integrations</div>
+                            </div>
+                        </div>
+                    </label>
+
+                    <label class="svc-chip" data-reveals="content-section">
+                        <input type="checkbox" name="Service[]" value="Content Authority Network">
+                        <div style="display:flex;align-items:start;gap:10px;">
+                            <div class="svc-check">
+                                <svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="#09090b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            </div>
+                            <div>
+                                <div style="font-size:13px;font-weight:800;color:#fff;margin-bottom:3px;">Content Network</div>
+                                <div style="font-size:11px;color:rgba(255,255,255,0.4);">Subdomain hubs, pillar clusters</div>
+                            </div>
+                        </div>
+                    </label>
+
+                    <label class="svc-chip">
+                        <input type="checkbox" name="Service[]" value="Domain & Hosting">
+                        <div style="display:flex;align-items:start;gap:10px;">
+                            <div class="svc-check">
+                                <svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="#09090b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            </div>
+                            <div>
+                                <div style="font-size:13px;font-weight:800;color:#fff;margin-bottom:3px;">Domain & Hosting</div>
+                                <div style="font-size:11px;color:rgba(255,255,255,0.4);">Setup, migration, SSL</div>
+                            </div>
+                        </div>
+                    </label>
+
+                    <label class="svc-chip">
+                        <input type="checkbox" name="Service[]" value="Not sure — need guidance">
+                        <div style="display:flex;align-items:start;gap:10px;">
+                            <div class="svc-check">
+                                <svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="#09090b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            </div>
+                            <div>
+                                <div style="font-size:13px;font-weight:800;color:#fff;margin-bottom:3px;">Not sure yet</div>
+                                <div style="font-size:11px;color:rgba(255,255,255,0.4);">Let's figure it out together</div>
+                            </div>
+                        </div>
+                    </label>
+
                 </div>
             </div>
 
-            <div class="form-card p-8 md:p-12 rounded-[2rem] md:rounded-[3rem]">
-                <h3 class="section-label mb-8 lime-accent">02. Project Description</h3>
-                <div class="space-y-8">
-                    <textarea name="Project Vision" placeholder="What are we building? Describe your goals..." rows="6" required class="w-full rounded-2xl p-5"></textarea>
-                    
-                    <div class="pt-8 border-t border-white/10">
-                        <p class="section-label mb-6">Inspiration Benchmarks</p>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <input type="url" name="Inspiration 1" placeholder="URL #1 (Layout)" class="w-full rounded-2xl p-5">
-                            <input type="url" name="Inspiration 2" placeholder="URL #2 (Vibe)" class="w-full rounded-2xl p-5">
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
-                <div class="form-card p-8 md:p-12 rounded-[2rem] md:rounded-[3rem]">
-                    <h3 class="section-label mb-8 lime-accent">03. Infrastructure</h3>
-                    <div class="space-y-10">
-                        <div>
-                            <p class="text-lg font-bold text-white mb-6">Need a Domain Name?</p>
-                            <div class="flex gap-8 md:gap-12">
-                                <label class="flex items-center gap-3 text-lg text-white/90 cursor-pointer hover:text-[#84cc16] transition-colors"><input type="radio" name="Need Domain" value="Yes" class="accent-[#84cc16] h-5 w-5"> Yes</label>
-                                <label class="flex items-center gap-3 text-lg text-white/90 cursor-pointer hover:text-[#84cc16] transition-colors"><input type="radio" name="Need Domain" value="No" checked class="accent-[#84cc16] h-5 w-5"> No</label>
-                            </div>
-                        </div>
-                        <div>
-                            <p class="text-lg font-bold text-white mb-6">Need Hosting?</p>
-                            <div class="flex gap-8 md:gap-12">
-                                <label class="flex items-center gap-3 text-lg text-white/90 cursor-pointer hover:text-[#84cc16] transition-colors"><input type="radio" name="Need Hosting" value="Yes" class="accent-[#84cc16] h-5 w-5"> Yes</label>
-                                <label class="flex items-center gap-3 text-lg text-white/90 cursor-pointer hover:text-[#84cc16] transition-colors"><input type="radio" name="Need Hosting" value="No" checked class="accent-[#84cc16] h-5 w-5"> No</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-card p-8 md:p-12 rounded-[2rem] md:rounded-[3rem] flex flex-col justify-between">
+            <!-- ── 02 CONTACT ── -->
+            <div class="dcard" style="padding:28px;">
+                <span class="step-label">02 — Who are we talking to?</span>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px;">
                     <div>
-                        <h3 class="section-label mb-8 lime-accent">04. Brand Assets</h3>
-                        <input type="url" name="Asset Link" placeholder="Drive/Dropbox Link" class="w-full rounded-2xl p-5 mb-6">
+                        <label class="fl">First name</label>
+                        <input type="text" name="First Name" placeholder="Jane" required class="fi">
                     </div>
-                    <p class="text-xs text-white/40 leading-relaxed uppercase font-medium">The Forge analyzes your existing identity for consistency.</p>
+                    <div>
+                        <label class="fl">Last name</label>
+                        <input type="text" name="Surname" placeholder="Smith" required class="fi">
+                    </div>
+                    <div>
+                        <label class="fl">Email</label>
+                        <input type="email" name="Email" placeholder="jane@company.com" required class="fi">
+                    </div>
+                    <div>
+                        <label class="fl">Phone / WhatsApp</label>
+                        <input type="tel" name="Phone" placeholder="+27 66 118 0036" class="fi">
+                    </div>
+                    <div style="grid-column:1/-1;">
+                        <label class="fl">Company / Brand name</label>
+                        <input type="text" name="Company" placeholder="Acme Corp" class="fi">
+                    </div>
                 </div>
             </div>
 
-            <button type="submit" class="w-full lime-bg text-black py-8 md:py-10 rounded-[1.5rem] md:rounded-[2.5rem] font-black uppercase tracking-[0.2em] md:tracking-[0.4em] text-md md:text-lg hover:scale-[1.01] hover:brightness-110 active:scale-95 transition-all duration-300 shadow-2xl shadow-lime-500/30 mb-8">
-                Commence Build Sequence
-            </button>
+            <!-- ── 03 PROJECT VISION ── -->
+            <div class="dcard" style="padding:28px;">
+                <span class="step-label">03 — Project vision</span>
+                <div style="margin-top:16px;display:flex;flex-direction:column;gap:12px;">
+                    <div>
+                        <label class="fl">What are we building? What's the goal?</label>
+                        <textarea name="Project Vision" rows="5" placeholder="Describe the product, problem it solves, target audience, and what success looks like for you..." required class="fi" style="resize:vertical;"></textarea>
+                    </div>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+                        <div>
+                            <label class="fl">Inspiration URL #1</label>
+                            <input type="url" name="Inspiration 1" placeholder="https://example.com" class="fi">
+                        </div>
+                        <div>
+                            <label class="fl">Inspiration URL #2</label>
+                            <input type="url" name="Inspiration 2" placeholder="https://example.com" class="fi">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="fl">Brand assets (logo, colours, fonts)</label>
+                        <input type="url" name="Asset Link" placeholder="Google Drive / Dropbox link" class="fi">
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── CONDITIONAL: WEB / LANDING PAGE ── -->
+            <div class="dcard cond-section" id="web-section" style="padding:28px;">
+                <span class="step-label">Website details</span>
+                <div style="margin-top:16px;display:flex;flex-direction:column;gap:16px;">
+                    <div>
+                        <label class="fl">Page count / site structure</label>
+                        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                            <label class="radio-opt"><input type="radio" name="Page Count" value="Single landing page"> Single page</label>
+                            <label class="radio-opt"><input type="radio" name="Page Count" value="3–5 pages"> 3–5 pages</label>
+                            <label class="radio-opt"><input type="radio" name="Page Count" value="6–15 pages"> 6–15 pages</label>
+                            <label class="radio-opt"><input type="radio" name="Page Count" value="15+ pages"> 15+ pages</label>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="fl">Does the site need a CMS / blog?</label>
+                        <div style="display:flex;gap:8px;">
+                            <label class="radio-opt"><input type="radio" name="Needs CMS" value="Yes"> Yes</label>
+                            <label class="radio-opt"><input type="radio" name="Needs CMS" value="No"> No</label>
+                            <label class="radio-opt"><input type="radio" name="Needs CMS" value="Not sure"> Not sure</label>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="fl">E-commerce / payment integration needed?</label>
+                        <div style="display:flex;gap:8px;">
+                            <label class="radio-opt"><input type="radio" name="Needs Ecommerce" value="Yes"> Yes</label>
+                            <label class="radio-opt"><input type="radio" name="Needs Ecommerce" value="No"> No</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── CONDITIONAL: SAAS / WEB APP ── -->
+            <div class="dcard cond-section" id="saas-section" style="padding:28px;">
+                <span class="step-label">SaaS / app details</span>
+                <div style="margin-top:16px;display:flex;flex-direction:column;gap:16px;">
+                    <div>
+                        <label class="fl">Do you have an existing backend / API?</label>
+                        <div style="display:flex;gap:8px;">
+                            <label class="radio-opt"><input type="radio" name="Has Backend" value="Yes — existing"> Yes, existing</label>
+                            <label class="radio-opt"><input type="radio" name="Has Backend" value="No — needs build"> No, needs build</label>
+                            <label class="radio-opt"><input type="radio" name="Has Backend" value="Partial"> Partial</label>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="fl">User authentication needed?</label>
+                        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                            <label class="radio-opt"><input type="radio" name="Auth Type" value="None"> None</label>
+                            <label class="radio-opt"><input type="radio" name="Auth Type" value="Email/password"> Email / password</label>
+                            <label class="radio-opt"><input type="radio" name="Auth Type" value="OAuth / SSO"> OAuth / SSO</label>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="fl">Preferred stack (if any)</label>
+                        <input type="text" name="Preferred Stack" placeholder="e.g. React + Firebase, or no preference" class="fi">
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── CONDITIONAL: PWA / MOBILE ── -->
+            <div class="dcard cond-section" id="pwa-section" style="padding:28px;">
+                <span class="step-label">PWA / mobile details</span>
+                <div style="margin-top:16px;display:flex;flex-direction:column;gap:16px;">
+                    <div>
+                        <label class="fl">Target platform</label>
+                        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                            <label class="radio-opt"><input type="radio" name="Platform" value="PWA only"> PWA only</label>
+                            <label class="radio-opt"><input type="radio" name="Platform" value="Play Store (TWA)"> Play Store (TWA)</label>
+                            <label class="radio-opt"><input type="radio" name="Platform" value="Both"> Both</label>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="fl">Push notifications needed?</label>
+                        <div style="display:flex;gap:8px;">
+                            <label class="radio-opt"><input type="radio" name="Push Notifications" value="Yes"> Yes</label>
+                            <label class="radio-opt"><input type="radio" name="Push Notifications" value="No"> No</label>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="fl">Offline functionality required?</label>
+                        <div style="display:flex;gap:8px;">
+                            <label class="radio-opt"><input type="radio" name="Offline Mode" value="Yes"> Yes</label>
+                            <label class="radio-opt"><input type="radio" name="Offline Mode" value="No"> No</label>
+                            <label class="radio-opt"><input type="radio" name="Offline Mode" value="Partial"> Partial</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── CONDITIONAL: SEO / GEO ── -->
+            <div class="dcard cond-section" id="seo-section" style="padding:28px;">
+                <span class="step-label">SEO / GEO details</span>
+                <div style="margin-top:16px;display:flex;flex-direction:column;gap:16px;">
+                    <div>
+                        <label class="fl">What's your current SEO situation?</label>
+                        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                            <label class="radio-opt"><input type="radio" name="SEO Status" value="Starting from zero"> Starting from zero</label>
+                            <label class="radio-opt"><input type="radio" name="SEO Status" value="Existing site, not ranking"> Existing site, not ranking</label>
+                            <label class="radio-opt"><input type="radio" name="SEO Status" value="Ranking but want more"> Ranking, want more</label>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="fl">Primary markets to target</label>
+                        <input type="text" name="Target Markets" placeholder="e.g. South Africa, UK, UAE" class="fi">
+                    </div>
+                    <div>
+                        <label class="fl">AI visibility (GEO) — are you interested in being cited by ChatGPT, Perplexity, Gemini?</label>
+                        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                            <label class="radio-opt"><input type="radio" name="GEO Interest" value="Yes — primary goal"> Yes, primary goal</label>
+                            <label class="radio-opt"><input type="radio" name="GEO Interest" value="Yes — alongside SEO"> Yes, alongside SEO</label>
+                            <label class="radio-opt"><input type="radio" name="GEO Interest" value="Not sure"> Not sure yet</label>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="fl">Do you have existing Schema / structured data?</label>
+                        <div style="display:flex;gap:8px;">
+                            <label class="radio-opt"><input type="radio" name="Has Schema" value="Yes"> Yes</label>
+                            <label class="radio-opt"><input type="radio" name="Has Schema" value="No"> No</label>
+                            <label class="radio-opt"><input type="radio" name="Has Schema" value="Not sure"> Not sure</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── CONDITIONAL: AI AUTOMATION ── -->
+            <div class="dcard cond-section" id="ai-section" style="padding:28px;">
+                <span class="step-label">AI automation details</span>
+                <div style="margin-top:16px;display:flex;flex-direction:column;gap:16px;">
+                    <div>
+                        <label class="fl">What process do you want to automate?</label>
+                        <textarea name="Automation Goal" rows="3" placeholder="e.g. content generation pipeline, lead scoring, customer support, internal reporting..." class="fi" style="resize:vertical;"></textarea>
+                    </div>
+                    <div>
+                        <label class="fl">Current tools / platforms in your stack</label>
+                        <input type="text" name="Current Tools" placeholder="e.g. Notion, Slack, HubSpot, Google Sheets" class="fi">
+                    </div>
+                    <div>
+                        <label class="fl">Do you have API access to these tools?</label>
+                        <div style="display:flex;gap:8px;">
+                            <label class="radio-opt"><input type="radio" name="API Access" value="Yes"> Yes</label>
+                            <label class="radio-opt"><input type="radio" name="API Access" value="No"> No</label>
+                            <label class="radio-opt"><input type="radio" name="API Access" value="Not sure"> Not sure</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── CONDITIONAL: CONTENT NETWORK ── -->
+            <div class="dcard cond-section" id="content-section" style="padding:28px;">
+                <span class="step-label">Content authority network</span>
+                <div style="margin-top:16px;display:flex;flex-direction:column;gap:16px;">
+                    <div>
+                        <label class="fl">How many topic verticals do you want to target?</label>
+                        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                            <label class="radio-opt"><input type="radio" name="Topic Verticals" value="1–2"> 1–2</label>
+                            <label class="radio-opt"><input type="radio" name="Topic Verticals" value="3–5"> 3–5</label>
+                            <label class="radio-opt"><input type="radio" name="Topic Verticals" value="6+"> 6+</label>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="fl">Do you have existing content / blog posts?</label>
+                        <div style="display:flex;gap:8px;">
+                            <label class="radio-opt"><input type="radio" name="Existing Content" value="Yes"> Yes</label>
+                            <label class="radio-opt"><input type="radio" name="Existing Content" value="No — starting fresh"> No, starting fresh</label>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="fl">Do you need AI-optimised llms.txt + schema files?</label>
+                        <div style="display:flex;gap:8px;">
+                            <label class="radio-opt"><input type="radio" name="Needs GEO Files" value="Yes"> Yes</label>
+                            <label class="radio-opt"><input type="radio" name="Needs GEO Files" value="No"> No</label>
+                            <label class="radio-opt"><input type="radio" name="Needs GEO Files" value="Not sure"> Tell me more</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── 04 INFRASTRUCTURE ── -->
+            <div class="dcard" style="padding:28px;">
+                <span class="step-label">04 — Infrastructure</span>
+                <div style="margin-top:16px;display:flex;flex-direction:column;gap:16px;">
+                    <div>
+                        <label class="fl">Domain name</label>
+                        <div style="display:flex;gap:8px;">
+                            <label class="radio-opt"><input type="radio" name="Need Domain" value="Yes — need one"> Need one</label>
+                            <label class="radio-opt"><input type="radio" name="Need Domain" value="Yes — need to transfer"> Need to transfer</label>
+                            <label class="radio-opt"><input type="radio" name="Need Domain" value="No — already have one"> Already have one</label>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="fl">Hosting</label>
+                        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                            <label class="radio-opt"><input type="radio" name="Need Hosting" value="Yes — need setup"> Need setup</label>
+                            <label class="radio-opt"><input type="radio" name="Need Hosting" value="Existing — need migration"> Need migration</label>
+                            <label class="radio-opt"><input type="radio" name="Need Hosting" value="No — sorted"> Already sorted</label>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="fl">Do you have an existing site that needs replacing?</label>
+                        <div style="display:flex;gap:8px;">
+                            <label class="radio-opt"><input type="radio" name="Existing Site" value="Yes"> Yes</label>
+                            <label class="radio-opt"><input type="radio" name="Existing Site" value="No"> No</label>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="fl">Existing site URL (if applicable)</label>
+                        <input type="url" name="Existing Site URL" placeholder="https://yoursite.com" class="fi">
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── 05 BUDGET & TIMELINE ── -->
+            <div class="dcard" style="padding:28px;">
+                <span class="step-label">05 — Budget & timeline</span>
+                <div style="margin-top:16px;display:flex;flex-direction:column;gap:20px;">
+                    <div>
+                        <label class="fl">Approximate budget (USD)</label>
+                        <div style="display:flex;gap:8px;flex-wrap:wrap;" id="budget-chips">
+                            <button type="button" class="budget-chip" onclick="selectBudget(this,'Under $1,000')">Under $1k</button>
+                            <button type="button" class="budget-chip" onclick="selectBudget(this,'$1,000 – $3,000')">$1k – $3k</button>
+                            <button type="button" class="budget-chip" onclick="selectBudget(this,'$3,000 – $7,500')">$3k – $7.5k</button>
+                            <button type="button" class="budget-chip" onclick="selectBudget(this,'$7,500 – $20,000')">$7.5k – $20k</button>
+                            <button type="button" class="budget-chip" onclick="selectBudget(this,'$20,000+')">$20k+</button>
+                            <button type="button" class="budget-chip" onclick="selectBudget(this,'Not sure — need guidance')">Not sure</button>
+                        </div>
+                        <input type="hidden" name="Budget" id="budget-val">
+                    </div>
+                    <div>
+                        <label class="fl">Ideal launch timeline</label>
+                        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                            <label class="radio-opt"><input type="radio" name="Timeline" value="ASAP"> ASAP</label>
+                            <label class="radio-opt"><input type="radio" name="Timeline" value="1 month"> 1 month</label>
+                            <label class="radio-opt"><input type="radio" name="Timeline" value="2–3 months"> 2–3 months</label>
+                            <label class="radio-opt"><input type="radio" name="Timeline" value="3+ months"> 3+ months</label>
+                            <label class="radio-opt"><input type="radio" name="Timeline" value="Flexible"> Flexible</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── 06 ANYTHING ELSE ── -->
+            <div class="dcard" style="padding:28px;">
+                <span class="step-label">06 — Anything else?</span>
+                <div style="margin-top:16px;">
+                    <label class="fl">Additional context, questions, or requirements</label>
+                    <textarea name="Additional Notes" rows="4" placeholder="Anything we should know before we scope this out..." class="fi" style="resize:vertical;margin-top:0;"></textarea>
+                </div>
+            </div>
+
+            <!-- ── PREFERRED CONTACT ── -->
+            <div class="dcard" style="padding:20px 28px;">
+                <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+                    <span class="mono" style="font-size:10px;color:rgba(255,255,255,0.4);letter-spacing:0.15em;text-transform:uppercase;flex-shrink:0;">Preferred reply channel</span>
+                    <div style="display:flex;gap:8px;flex-wrap:wrap;flex:1;">
+                        <label class="radio-opt" style="flex:none;"><input type="radio" name="Reply Channel" value="Email" checked> Email</label>
+                        <label class="radio-opt" style="flex:none;"><input type="radio" name="Reply Channel" value="WhatsApp"> WhatsApp</label>
+                        <label class="radio-opt" style="flex:none;"><input type="radio" name="Reply Channel" value="Signal"> Signal</label>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-submit">Commence build sequence →</button>
+
         </form>
+
+        <p style="text-align:center;font-size:12px;color:#71717a;margin-top:20px;font-family:'JetBrains Mono',monospace;">
+            We respond within 24 hours · jarrit@forgevertical.com
+        </p>
+
     </main>
 
     <div id="global-footer"></div>
 
     <script>
-        async function injectGlobals() {
-            try {
-                const nav = await fetch('/nav.html');
-                if(nav.ok) document.getElementById('global-nav').innerHTML = await nav.text();
-                const foot = await fetch('/footer.html');
-                if(foot.ok) document.getElementById('global-footer').innerHTML = await foot.text();
-            } catch (e) {}
+        // Service chip toggle
+        document.querySelectorAll('.svc-chip').forEach(chip => {
+            chip.addEventListener('click', function() {
+                const cb = this.querySelector('input[type="checkbox"]');
+                cb.checked = !cb.checked;
+                this.classList.toggle('checked', cb.checked);
+                const reveals = this.dataset.reveals;
+                if (reveals) {
+                    const target = document.getElementById(reveals);
+                    if (target) target.classList.toggle('visible', cb.checked);
+                }
+            });
+        });
+
+        // Budget chip selection
+        function selectBudget(el, val) {
+            document.querySelectorAll('.budget-chip').forEach(c => c.classList.remove('selected'));
+            el.classList.add('selected');
+            document.getElementById('budget-val').value = val;
         }
-        injectGlobals();
     </script>
+
 </body>
 </html>
