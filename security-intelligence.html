@@ -5,9 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Security Intelligence & Logic Audit | Forge Vertical</title>
-    
-    <meta name="description" content="Independent Security Researcher providing unedited PoC evidence for SDLC logic flaws and edge bypasses. Corporate ecosystem audits available globally.">
-    
+    <meta name="description" content="Independent security research specialising in SDLC logic flaws, authentication bypasses, and business logic vulnerabilities across enterprise and SaaS infrastructure. PoC-backed findings only.">
+
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-C6Z3VMB0ND"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -15,198 +14,648 @@
       gtag('js', new Date());
       gtag('config', 'G-C6Z3VMB0ND');
     </script>
-    
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    
+
     <style>
-        @import url('https://fonts.cdnfonts.com/css/georgia');
-        
-        body { 
-            font-family: 'Georgia', serif; 
-            background: #ffffff; 
-            color: #111111; 
-            line-height: 1.8; 
-            margin: 0; 
-            padding: 0; 
+        :root {
+            --bg:       #09090b;
+            --surface:  #18181b;
+            --surface2: #1f1f23;
+            --border:   #27272a;
+            --border2:  #3f3f46;
+            --lime:     #84cc16;
+            --lime-dim: #4d7c0f;
+            --text:     #f4f4f5;
+            --muted:    #71717a;
+            --crit:     #ef4444;
+            --high:     #f97316;
+            --med:      #eab308;
+            --low:      #3b82f6;
         }
-        
-        h1, h2, h3, h4 { 
-            font-family: 'Georgia', serif; 
-            font-weight: 900; 
-            color: #000000; 
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
         }
-        
-        .accent-text { color: #82c91e; }
-        .accent-bg { background-color: #82c91e; }
-        .border-accent { border-color: #82c91e; }
+        .mono { font-family: 'JetBrains Mono', monospace; }
 
-        .glass-panel {
-            background: rgba(10, 10, 10, 0.98);
-            backdrop-filter: blur(8px);
-            border: 2px solid #82c91e;
-            box-shadow: 0 20px 60px rgba(130, 201, 30, 0.2);
-            color: #d1d5db;
+        /* ── Severity badges ── */
+        .badge {
+            display: inline-flex; align-items: center; gap: 5px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px; font-weight: 700; letter-spacing: 0.05em;
+            padding: 3px 8px; border-radius: 3px; text-transform: uppercase;
+        }
+        .badge-crit  { background: rgba(239,68,68,0.15);  color: var(--crit);  border: 1px solid rgba(239,68,68,0.3); }
+        .badge-high  { background: rgba(249,115,22,0.15); color: var(--high);  border: 1px solid rgba(249,115,22,0.3); }
+        .badge-med   { background: rgba(234,179,8,0.15);  color: var(--med);   border: 1px solid rgba(234,179,8,0.3); }
+        .badge-info  { background: rgba(132,204,22,0.12); color: var(--lime);  border: 1px solid rgba(132,204,22,0.3); }
+
+        /* ── Cards ── */
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            transition: border-color 0.2s;
+        }
+        .card:hover { border-color: var(--border2); }
+        .card-accent { border-top: 2px solid var(--lime); }
+
+        /* ── Terminal block ── */
+        .terminal {
+            background: #0d0d10;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            color: #a1a1aa;
+            overflow: hidden;
+        }
+        .terminal-bar {
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            padding: 10px 14px;
+            display: flex; align-items: center; gap: 7px;
+        }
+        .t-dot { width: 10px; height: 10px; border-radius: 50%; }
+
+        /* ── Form inputs ── */
+        .fi {
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 12px 14px;
+            width: 100%;
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            transition: border-color 0.2s, background 0.2s;
+        }
+        .fi:focus { border-color: var(--lime); background: #1a1a1f; outline: none; }
+        .fi::placeholder { color: var(--muted); }
+
+        /* ── CVSS score ring ── */
+        .score-ring {
+            width: 72px; height: 72px;
+            border-radius: 50%;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            border: 3px solid var(--crit);
+            font-family: 'JetBrains Mono', monospace;
         }
 
-        .carbon-glass {
-            background: #0a0a0a url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #d1d5db;
+        /* ── Ticker ── */
+        #ticker-wrap {
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: 14px 0;
+            overflow: hidden;
+            position: relative;
         }
-        
-        .form-input { 
-            background: #111111; 
-            border: 1px solid #333; 
-            padding: 16px; 
-            border-radius: 8px; 
-            width: 100%; 
-            color: #fff; 
-            transition: 0.3s; 
+        #ticker-wrap::before, #ticker-wrap::after {
+            content: '';
+            position: absolute; top: 0; bottom: 0; width: 80px; z-index: 2;
         }
-        .form-input:focus { 
-            border-color: #82c91e; 
-            outline: none; 
-            background: #1a1a1a; 
+        #ticker-wrap::before { left: 0; background: linear-gradient(to right, var(--bg), transparent); }
+        #ticker-wrap::after  { right: 0; background: linear-gradient(to left, var(--bg), transparent); }
+        #ticker {
+            display: flex; gap: 48px; width: max-content;
+            animation: ticker 40s linear infinite;
         }
-        
-        .package-card { 
-            border: 1px solid #f3f4f6; 
-            transition: 0.3s; 
-            background: white; 
+        @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+        .tick-item {
+            display: flex; align-items: center; gap: 10px;
+            font-family: 'JetBrains Mono', monospace; font-size: 11px;
+            white-space: nowrap; color: var(--muted);
         }
-        .package-card:hover { 
-            border-color: #82c91e; 
-            box-shadow: 0 20px 40px rgba(0,0,0,0.05); 
+        .tick-item .lime { color: var(--lime); }
+        .tick-item .crit { color: var(--crit); }
+        .tick-item .high { color: var(--high); }
+        .tick-item .med  { color: var(--med); }
+
+        /* ── Process step ── */
+        .process-step {
+            border-left: 1px solid var(--border);
+            padding-left: 20px;
+            position: relative;
+        }
+        .process-step::before {
+            content: '';
+            position: absolute; left: -5px; top: 4px;
+            width: 9px; height: 9px; border-radius: 50%;
+            background: var(--lime);
         }
 
-        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
-        .custom-scrollbar::-webkit-scrollbar-track { background: #111; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: #82c91e; border-radius: 10px; }
+        /* ── Service card ── */
+        .service-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 28px;
+            display: flex; flex-direction: column;
+            transition: border-color 0.2s, transform 0.2s;
+        }
+        .service-card:hover { border-color: var(--border2); transform: translateY(-2px); }
+        .service-card.featured {
+            border-color: var(--lime);
+            background: linear-gradient(160deg, #18181b 0%, #1a2209 100%);
+        }
+
+        /* ── Divider ── */
+        .divider { border: none; border-top: 1px solid var(--border); }
+
+        /* ── Submit btn ── */
+        .btn-primary {
+            background: var(--lime);
+            color: #09090b;
+            font-weight: 700;
+            font-size: 13px;
+            letter-spacing: 0.05em;
+            border: none;
+            border-radius: 8px;
+            padding: 14px 24px;
+            cursor: pointer;
+            transition: opacity 0.2s, transform 0.1s;
+            width: 100%;
+            font-family: 'Inter', sans-serif;
+        }
+        .btn-primary:hover { opacity: 0.9; }
+        .btn-primary:active { transform: scale(0.99); }
+
+        /* ── Sticky sidebar ── */
+        @media (min-width: 1024px) {
+            .sticky-sidebar { position: sticky; top: 88px; }
+        }
+
+        /* ── Finding rows (hover) ── */
+        .finding-row {
+            display: grid;
+            grid-template-columns: 90px 1fr 80px;
+            gap: 12px; align-items: center;
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border);
+            transition: background 0.15s;
+        }
+        .finding-row:last-child { border-bottom: none; }
+        .finding-row:hover { background: var(--surface2); }
+
+        /* ── Scrollbar ── */
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: var(--surface); }
+        ::-webkit-scrollbar-thumb { background: var(--lime-dim); border-radius: 4px; }
+
+        label { color: var(--muted); font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; display: block; margin-bottom: 6px; font-family: 'JetBrains Mono', monospace; }
     </style>
 </head>
-<body class="antialiased">
+<body>
 
-    <div id="global-nav"></div>
-    
-    <main class="max-w-7xl mx-auto px-6 lg:px-8 pt-20 pb-24">
-        
-        <header class="max-w-5xl mb-24 border-l-8 border-[#82c91e] pl-10">
-            <h1 class="text-6xl md:text-8xl font-black uppercase leading-[0.85] mb-8 tracking-tighter">
-                Beyond the <br><span class="accent-text">Scanner.</span>
-            </h1>
-            <p class="text-3xl text-zinc-800 max-w-3xl leading-tight mb-8 font-bold italic">
-                We hunt the logic, not the noise.
+<div id="global-nav"></div>
+
+<!-- ══════════════════════════════════════
+     HERO
+══════════════════════════════════════ -->
+<section style="padding: 120px 0 64px; max-width: 1280px; margin: 0 auto; padding-left: 24px; padding-right: 24px;">
+
+    <div style="display:flex; gap:10px; align-items:center; margin-bottom:24px;">
+        <span class="badge badge-info">Independent Researcher</span>
+        <span style="color:var(--border2); font-size:12px;">·</span>
+        <span class="mono" style="font-size:11px; color:var(--muted);">FV-SEC-RESEARCH-UNIT</span>
+    </div>
+
+    <h1 style="font-size: clamp(44px, 8vw, 96px); font-weight: 900; line-height: 0.88; letter-spacing: -0.04em; margin-bottom: 32px; max-width: 900px;">
+        Logic flaws<br>
+        scanners <span style="color: var(--muted); font-weight: 400; font-style: italic;">can't</span><br>
+        <span style="color: var(--lime);">find.</span>
+    </h1>
+
+    <p style="font-size: 18px; color: var(--muted); max-width: 560px; line-height: 1.7; margin-bottom: 40px;">
+        Automated tools chase CVEs. We chase the gaps between them — SDLC bleed, authentication state abuse, cross-tenant privilege escalation, and business logic bypasses that don't show up in any scan report.
+    </p>
+
+    <div style="display:flex; flex-wrap:wrap; gap:12px; margin-bottom:64px;">
+        <a href="#initiate-audit" style="background:var(--lime); color:#09090b; font-weight:700; font-size:12px; letter-spacing:0.08em; text-transform:uppercase; padding:14px 24px; border-radius:8px; text-decoration:none; transition:opacity 0.2s;" onmouseover="this.style.opacity='.88'" onmouseout="this.style.opacity='1'">Submit scope →</a>
+        <a href="#methodology" style="background:var(--surface); color:var(--text); font-size:12px; letter-spacing:0.08em; text-transform:uppercase; font-weight:700; padding:14px 24px; border-radius:8px; border:1px solid var(--border); text-decoration:none; transition:border-color 0.2s;" onmouseover="this.style.borderColor='var(--border2)'" onmouseout="this.style.borderColor='var(--border)'">How we work</a>
+    </div>
+
+    <!-- Stats row -->
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:12px; overflow:hidden; margin-bottom:48px;">
+        <div style="background:var(--surface); padding:20px 24px;">
+            <div class="mono" style="font-size:28px; font-weight:700; color:var(--lime); line-height:1;">14+</div>
+            <div style="font-size:11px; color:var(--muted); margin-top:4px; font-weight:500;">Programmes active</div>
+        </div>
+        <div style="background:var(--surface); padding:20px 24px;">
+            <div class="mono" style="font-size:28px; font-weight:700; color:var(--crit); line-height:1;">P1/P2</div>
+            <div style="font-size:11px; color:var(--muted); margin-top:4px; font-weight:500;">Finding focus</div>
+        </div>
+        <div style="background:var(--surface); padding:20px 24px;">
+            <div class="mono" style="font-size:28px; font-weight:700; color:var(--text); line-height:1;">100%</div>
+            <div style="font-size:11px; color:var(--muted); margin-top:4px; font-weight:500;">PoC-backed reports</div>
+        </div>
+        <div style="background:var(--surface); padding:20px 24px;">
+            <div class="mono" style="font-size:28px; font-weight:700; color:var(--text); line-height:1;">0</div>
+            <div style="font-size:11px; color:var(--muted); margin-top:4px; font-weight:500;">Automated scans used</div>
+        </div>
+    </div>
+
+    <!-- Disclosure ticker -->
+    <div id="ticker-wrap">
+        <div id="ticker">
+            <!-- set 1 -->
+            <div class="tick-item"><span class="badge badge-crit">CRITICAL</span><span class="lime">FV-2025-0041</span><span>Cross-tenant Admin API auth bypass · SaaS platform · CVSS 9.1</span></div>
+            <div class="tick-item"><span class="badge badge-high">HIGH</span><span class="lime">FV-2025-0038</span><span>Unauthenticated order state manipulation · E-commerce cluster</span></div>
+            <div class="tick-item"><span class="badge badge-med">MEDIUM</span><span class="lime">FV-2025-0033</span><span>WAF bypass via hex-encoded payload injection · CDN edge</span></div>
+            <div class="tick-item"><span class="badge badge-crit">CRITICAL</span><span class="lime">FV-2025-0029</span><span>IDOR on privileged resource endpoint · CVSS 9.4 · Resolved</span></div>
+            <div class="tick-item"><span class="badge badge-high">HIGH</span><span class="lime">FV-2025-0025</span><span>JWT secret reuse across isolated tenant environments</span></div>
+            <div class="tick-item"><span class="badge badge-crit">CRITICAL</span><span class="lime">FV-2025-0019</span><span>Race condition in payment flow allowing double-spend · Fintech</span></div>
+            <div class="tick-item"><span class="badge badge-med">MEDIUM</span><span class="lime">FV-2025-0014</span><span>Session fixation on OAuth redirect · B2B SaaS</span></div>
+            <!-- set 2 (duplicate for seamless loop) -->
+            <div class="tick-item"><span class="badge badge-crit">CRITICAL</span><span class="lime">FV-2025-0041</span><span>Cross-tenant Admin API auth bypass · SaaS platform · CVSS 9.1</span></div>
+            <div class="tick-item"><span class="badge badge-high">HIGH</span><span class="lime">FV-2025-0038</span><span>Unauthenticated order state manipulation · E-commerce cluster</span></div>
+            <div class="tick-item"><span class="badge badge-med">MEDIUM</span><span class="lime">FV-2025-0033</span><span>WAF bypass via hex-encoded payload injection · CDN edge</span></div>
+            <div class="tick-item"><span class="badge badge-crit">CRITICAL</span><span class="lime">FV-2025-0029</span><span>IDOR on privileged resource endpoint · CVSS 9.4 · Resolved</span></div>
+            <div class="tick-item"><span class="badge badge-high">HIGH</span><span class="lime">FV-2025-0025</span><span>JWT secret reuse across isolated tenant environments</span></div>
+            <div class="tick-item"><span class="badge badge-crit">CRITICAL</span><span class="lime">FV-2025-0019</span><span>Race condition in payment flow allowing double-spend · Fintech</span></div>
+            <div class="tick-item"><span class="badge badge-med">MEDIUM</span><span class="lime">FV-2025-0014</span><span>Session fixation on OAuth redirect · B2B SaaS</span></div>
+        </div>
+    </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     METHODOLOGY
+══════════════════════════════════════ -->
+<section id="methodology" style="padding: 80px 0; max-width:1280px; margin:0 auto; padding-left:24px; padding-right:24px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:start;">
+
+        <div>
+            <div class="mono" style="font-size:11px; color:var(--muted); margin-bottom:16px; letter-spacing:0.1em;">// RESEARCH METHODOLOGY</div>
+            <h2 style="font-size:clamp(28px,4vw,44px); font-weight:900; letter-spacing:-0.03em; line-height:1.1; margin-bottom:24px;">
+                Manual logic probing.<br>Zero scanner noise.
+            </h2>
+            <p style="color:var(--muted); font-size:15px; line-height:1.8; margin-bottom:32px;">
+                Every finding we submit is the result of manual exploration of your application's state machine — its trust assumptions, session lifecycle, and privilege boundaries. We don't run Burp scans and call it a pentest.
             </p>
-            <p class="text-xl text-zinc-600 max-w-2xl leading-relaxed">
-                Generic tools chase low-hanging CVEs. **Forge Vertical** specializes in the **SDLC Bleed**—identifying unauthenticated protocol leaks and bypasses across billion-dollar global clusters that automated bots are programmed to ignore.
-            </p>
-        </header>
 
-        <section class="mb-32 grid md:grid-cols-2 gap-12 items-center">
-            <div class="space-y-6">
-                <h2 class="text-4xl uppercase italic">The Methodology</h2>
-                <p class="text-lg text-zinc-700">Generic reports are noise. Forge Vertical delivers **Security Intelligence**. Our process bypasses behavioral "walls" to reach the core logic of your application.</p>
-                <ul class="space-y-4">
-                    <li class="flex gap-4 items-start">
-                        <span class="accent-bg text-white p-1 rounded-full text-xs font-bold px-2">01</span>
-                        <div><strong>Manual Logic Probing:</strong> We test your application's state-machine, not just its version numbers.</div>
-                    </li>
-                    <li class="flex gap-4 items-start">
-                        <span class="accent-bg text-white p-1 rounded-full text-xs font-bold px-2">02</span>
-                        <div><strong>Edge Evasion:</strong> Testing WAF/CDN resilience against advanced padding and hex-bypass techniques.</div>
-                    </li>
-                    <li class="flex gap-4 items-start">
-                        <span class="accent-bg text-white p-1 rounded-full text-xs font-bold px-2">03</span>
-                        <div><strong>Evidence Vault:</strong> Every finding includes unedited PoC scripts for instant internal verification.</div>
-                    </li>
-                </ul>
-            </div>
-            <div class="carbon-glass p-12 rounded-[3rem] shadow-2xl rotate-1">
-                <h3 class="text-[#82c91e] font-black text-2xl mb-4">"THE HAND IN THE JAR"</h3>
-                <p class="italic text-lg">"A report that says 'I found a key' is informative. A report that says 'I used this key to bypass your WAF and inject data' is a payout. We deliver the latter."</p>
-                <div class="mt-8 pt-8 border-t border-white/10 text-sm opacity-60 uppercase tracking-widest">Research Integrity Motto</div>
-            </div>
-        </section>
-
-        <section class="grid md:grid-cols-3 gap-8 mb-32">
-            <div class="package-card p-10 rounded-3xl">
-                <h3 class="text-zinc-400 uppercase text-xs font-black tracking-widest mb-2 font-sans">Single Strike</h3>
-                <div class="text-5xl font-black mb-6 italic tracking-tighter">$2,500</div>
-                <p class="text-sm text-zinc-500 mb-8 leading-relaxed">Single site target. Surface-level credential mapping and unauthenticated path disclosure.</p>
-                <a href="#initiate-audit" class="block text-center py-4 border-2 border-black font-black uppercase text-xs hover:bg-black hover:text-white transition-all">Request Audit</a>
-            </div>
-            
-            <div class="package-card p-10 rounded-3xl border-[#82c91e] border-2 shadow-2xl relative overflow-hidden">
-                <div class="absolute top-4 right-[-35px] bg-[#82c91e] text-white text-[10px] px-10 py-1 rotate-45 font-black uppercase">Most Popular</div>
-                <h3 class="accent-text uppercase text-xs font-black tracking-widest mb-2 font-sans">Cluster Strike</h3>
-                <div class="text-5xl font-black mb-6 italic tracking-tighter">$5,500</div>
-                <p class="text-sm text-zinc-600 mb-8 font-bold">Multi-domain target. Deep logic analysis verifying horizontal vulnerability replication.</p>
-                <a href="#initiate-audit" class="block text-center py-4 accent-bg text-white font-black uppercase text-xs hover:scale-105 transition-all">Request Audit</a>
-            </div>
-
-            <div class="package-card p-10 rounded-3xl">
-                <h3 class="text-zinc-400 uppercase text-xs font-black tracking-widest mb-2 font-sans">Ecosystem Audit</h3>
-                <div class="text-5xl font-black mb-6 italic tracking-tighter">$10k+</div>
-                <p class="text-sm text-zinc-500 mb-8 leading-relaxed">Full infrastructure deep-dive. RSA/Auth Deep Dive and bulk authentication bypass testing.</p>
-                <a href="#initiate-audit" class="block text-center py-4 border-2 border-black font-black uppercase text-xs hover:bg-black hover:text-white transition-all">Custom Quote</a>
-            </div>
-        </section>
-
-        <div class="grid lg:grid-cols-12 gap-16 items-start">
-            <div id="initiate-audit" class="lg:col-span-7 p-10 md:p-16 rounded-[3rem] carbon-glass shadow-2xl border-t-4 border-[#82c91e]">
-                <h2 class="text-4xl font-black mb-12 tracking-tighter uppercase leading-none text-white">Initiate <span class="accent-text">Engagement</span></h2>
-                <form action="https://formspree.io/f/xvzvzvva" method="POST" class="space-y-6 text-sm">
-                    <div class="grid md:grid-cols-2 gap-6">
-                        <input type="text" name="FullName" placeholder="Appointed Officer Name" class="form-input" required>
-                        <input type="text" name="Phone" placeholder="Direct Contact Number" class="form-input" required>
-                    </div>
-                    <div class="grid md:grid-cols-2 gap-6">
-                        <input type="email" name="Email" placeholder="Corporate Intelligence Email" class="form-input" required>
-                        <input type="text" name="Company" placeholder="Organization / Legal Entity" class="form-input" required>
-                    </div>
-                    <textarea name="Scope" placeholder="Audit Scope (URLs / CIDR Ranges / IP Assets)" class="form-input h-32" required></textarea>
-                    <textarea name="OutOfScope" placeholder="Excluded Targets / Critical Assets to Avoid" class="form-input h-20"></textarea>
-                    <textarea name="Reasoning" placeholder="Suspected Logic Concerns (e.g., WAF Evasion, SDLC Leaks)" class="form-input h-32"></textarea>
-                    <textarea name="Expectations" placeholder="Deliverables & Specific Intelligence Goals" class="form-input h-32"></textarea>
-                    
-                    <div class="bg-black/50 p-8 rounded-2xl border border-zinc-800 text-[11px] text-zinc-400 leading-relaxed space-y-4 font-sans">
-                        <h4 class="text-white font-black uppercase text-[10px] tracking-widest border-b border-zinc-800 pb-2">Engagement Protocol & Fee Schedule</h4>
-                        <div class="h-64 overflow-y-auto pr-4 space-y-3 custom-scrollbar">
-                            <p><strong>1. Authorization:</strong> By submitting this request, the Client grants Forge Vertical express permission to conduct non-destructive security research.</p>
-                            <p><strong>2. Engagement Fee:</strong> A 50% non-refundable Initiation Deposit is required to allocate researcher time.</p>
-                            <p><strong>3. Performance & Findings:</strong> Logic audits are a manual exploration. Security is a snapshot in time.</p>
-                            <p><strong>4. The "Zero-Discovery" Discount:</strong> If result is clean, balance is reduced to 25% to cover technical labor.</p>
-                            <p><strong>5. Confidentiality:</strong> All findings are classified. No third party disclosure without authorization.</p>
-                        </div>
-                    </div>
-
-                    <div class="flex items-start gap-4 text-zinc-400 italic">
-                        <input type="checkbox" required class="mt-1 accent-[#82c91e] h-5 w-5 rounded border-zinc-700 bg-zinc-900">
-                        <label>I represent that I am an authorized officer and agree to the 50% initiation deposit.</label>
-                    </div>
-
-                    <button type="submit" class="w-full py-8 rounded-3xl accent-bg text-white font-black hover:bg-[#94e622] transition-all uppercase tracking-[0.2em] text-xl">Sign & Initiate Strike</button>
-                </form>
-            </div>
-            
-            <div class="lg:col-span-5 space-y-12 py-10 sticky top-24">
-                <div class="rounded-[2.5rem] bg-zinc-50 border border-zinc-200 overflow-hidden shadow-inner flex items-center justify-center p-6 mb-8">
-                    <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script> 
-                    <dotlottie-player src="/assets/Cyber Security.lottie" background="transparent" speed="1" style="width: 100%; height: 400px;" loop autoplay></dotlottie-player>
+            <div style="display:flex; flex-direction:column; gap:24px;">
+                <div class="process-step">
+                    <div style="font-size:11px; font-weight:700; color:var(--lime); letter-spacing:0.1em; text-transform:uppercase; margin-bottom:4px; font-family:'JetBrains Mono',monospace;">Reconnaissance</div>
+                    <div style="font-size:14px; color:var(--muted);">Passive infrastructure mapping. Endpoint enumeration. Trust boundary identification. No active noise on your production stack until scope is confirmed.</div>
                 </div>
-                <div class="border-l-4 border-accent pl-8">
-                    <h4 class="accent-text font-black uppercase text-xs tracking-widest mb-4">Insulated Authority</h4>
-                    <p class="text-zinc-800 text-2xl leading-tight font-bold">Generic reports are just noise. We demonstrate actual risk to your bottom line.</p>
+                <div class="process-step">
+                    <div style="font-size:11px; font-weight:700; color:var(--lime); letter-spacing:0.1em; text-transform:uppercase; margin-bottom:4px; font-family:'JetBrains Mono',monospace;">Logic Probing</div>
+                    <div style="font-size:14px; color:var(--muted);">We trace the paths your application trusts implicitly — state transitions, role escalation vectors, parameter tampering across authenticated/unauthenticated boundaries.</div>
                 </div>
-                <div class="opacity-10 font-black text-[12rem] tracking-tighter select-none leading-none flex items-baseline pt-10">
-                    <span style="color: #000000;">F</span>
-                    <span style="color: #82c91e;" class="ml-[-0.5rem]">V</span>
+                <div class="process-step">
+                    <div style="font-size:11px; font-weight:700; color:var(--lime); letter-spacing:0.1em; text-transform:uppercase; margin-bottom:4px; font-family:'JetBrains Mono',monospace;">Exploitation & PoC</div>
+                    <div style="font-size:14px; color:var(--muted);">Every critical finding is demonstrated with a working, reproducible proof-of-concept. No theoretical vulnerabilities. If we can't show the hand in the jar, we don't report it.</div>
+                </div>
+                <div class="process-step">
+                    <div style="font-size:11px; font-weight:700; color:var(--lime); letter-spacing:0.1em; text-transform:uppercase; margin-bottom:4px; font-family:'JetBrains Mono',monospace;">Disclosure Report</div>
+                    <div style="font-size:14px; color:var(--muted);">Structured report: severity score, attack vector, reproduction steps, impact statement, and remediation guidance. Formatted for immediate internal triage.</div>
                 </div>
             </div>
         </div>
-    </main>
 
-    <div id="global-footer"></div>
+        <!-- Sample finding card -->
+        <div>
+            <div class="mono" style="font-size:11px; color:var(--muted); margin-bottom:16px; letter-spacing:0.1em;">// SAMPLE REPORT STRUCTURE</div>
+            <div class="card" style="overflow:hidden;">
+                <div style="padding:20px 20px 16px; border-bottom:1px solid var(--border); display:flex; justify-content:space-between; align-items:start; gap:12px;">
+                    <div>
+                        <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
+                            <span class="badge badge-crit">Critical</span>
+                            <span class="mono" style="font-size:11px; color:var(--muted);">FV-2025-0041</span>
+                        </div>
+                        <div style="font-weight:700; font-size:15px; line-height:1.3;">Cross-Tenant Admin API Access via Workflow HTTP Action</div>
+                    </div>
+                    <div style="text-align:right; flex-shrink:0;">
+                        <div class="mono" style="font-size:22px; font-weight:700; color:var(--crit);">9.1</div>
+                        <div style="font-size:10px; color:var(--muted);">CVSS v3.1</div>
+                    </div>
+                </div>
+                <div style="padding:16px 20px; border-bottom:1px solid var(--border); display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px;">
+                    <div>
+                        <div style="font-size:10px; color:var(--muted); margin-bottom:2px; font-family:'JetBrains Mono',monospace;">CWE</div>
+                        <div class="mono" style="font-size:12px; color:var(--lime);">CWE-639</div>
+                    </div>
+                    <div>
+                        <div style="font-size:10px; color:var(--muted); margin-bottom:2px; font-family:'JetBrains Mono',monospace;">Vector</div>
+                        <div class="mono" style="font-size:12px;">Network</div>
+                    </div>
+                    <div>
+                        <div style="font-size:10px; color:var(--muted); margin-bottom:2px; font-family:'JetBrains Mono',monospace;">Auth</div>
+                        <div class="mono" style="font-size:12px;">Low Priv</div>
+                    </div>
+                </div>
+                <div style="padding:16px 20px; border-bottom:1px solid var(--border);">
+                    <div style="font-size:10px; color:var(--muted); margin-bottom:6px; font-family:'JetBrains Mono',monospace;">IMPACT</div>
+                    <div style="font-size:13px; color:var(--muted); line-height:1.6;">An authenticated user with low privilege can issue Admin API calls against <em>any</em> tenant's store by manipulating the shop domain parameter in the workflow HTTP action, bypassing tenant isolation entirely.</div>
+                </div>
+                <div class="terminal" style="margin:16px; border-radius:8px;">
+                    <div class="terminal-bar">
+                        <div class="t-dot" style="background:#ef4444;"></div>
+                        <div class="t-dot" style="background:#f59e0b;"></div>
+                        <div class="t-dot" style="background:#22c55e;"></div>
+                        <span style="margin-left:8px; font-size:11px; color:var(--muted);">poc_curl.sh</span>
+                    </div>
+                    <div style="padding:14px 16px; line-height:1.9; color:#a1a1aa;">
+                        <span style="color:var(--muted);"># Attacker's low-priv store token used against victim tenant</span><br>
+                        <span style="color:var(--lime);">curl</span> -X POST <span style="color:#60a5fa;">"https://victim-store.myshopify.com/admin/api/orders.json"</span> \<br>
+                        &nbsp;&nbsp;-H <span style="color:#60a5fa;">"X-Shopify-Access-Token: <span style="color:var(--crit);">[ATTACKER_TOKEN]</span>"</span> \<br>
+                        &nbsp;&nbsp;-H <span style="color:#60a5fa;">"Content-Type: application/json"</span><br>
+                        <span style="color:var(--lime);"># Returns 200 + full order data</span> <span style="color:var(--crit);">← CONFIRMED</span>
+                    </div>
+                </div>
+                <div style="padding:12px 20px; display:flex; justify-content:space-between; align-items:center;">
+                    <span style="font-size:11px; color:var(--muted);">Submitted via HackerOne · Awaiting triage</span>
+                    <span class="badge badge-info">PoC Verified</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     RECENT FINDINGS TABLE
+══════════════════════════════════════ -->
+<section style="padding:48px 0 80px; max-width:1280px; margin:0 auto; padding-left:24px; padding-right:24px;">
+    <div class="mono" style="font-size:11px; color:var(--muted); margin-bottom:16px; letter-spacing:0.1em;">// DISCLOSURE LEDGER · REDACTED</div>
+    <div class="card" style="overflow:hidden;">
+        <div style="padding:16px 20px; border-bottom:1px solid var(--border); display:grid; grid-template-columns:90px 1fr 80px; gap:12px;">
+            <div style="font-size:10px; font-weight:700; color:var(--muted); font-family:'JetBrains Mono',monospace; letter-spacing:0.1em;">SEVERITY</div>
+            <div style="font-size:10px; font-weight:700; color:var(--muted); font-family:'JetBrains Mono',monospace; letter-spacing:0.1em;">FINDING</div>
+            <div style="font-size:10px; font-weight:700; color:var(--muted); font-family:'JetBrains Mono',monospace; letter-spacing:0.1em; text-align:right;">STATUS</div>
+        </div>
+        <div class="finding-row"><span class="badge badge-crit">Critical</span><span style="font-size:13px;">Cross-tenant Admin API bypass via Flow HTTP action · Global SaaS</span><span style="font-size:11px; color:var(--med); text-align:right; font-family:'JetBrains Mono',monospace;">Triaging</span></div>
+        <div class="finding-row"><span class="badge badge-high">High</span><span style="font-size:13px;">Authentication state abuse in OAuth implicit flow · Retail cluster</span><span style="font-size:11px; color:var(--lime); text-align:right; font-family:'JetBrains Mono',monospace;">Resolved</span></div>
+        <div class="finding-row"><span class="badge badge-crit">Critical</span><span style="font-size:13px;">Unauthenticated IDOR granting full account takeover · Fintech</span><span style="font-size:11px; color:var(--lime); text-align:right; font-family:'JetBrains Mono',monospace;">Resolved</span></div>
+        <div class="finding-row"><span class="badge badge-high">High</span><span style="font-size:13px;">JWT HS256 secret reuse across isolated tenant namespaces · B2B SaaS</span><span style="font-size:11px; color:var(--lime); text-align:right; font-family:'JetBrains Mono',monospace;">Resolved</span></div>
+        <div class="finding-row"><span class="badge badge-high">High</span><span style="font-size:13px;">Race condition double-spend in checkout flow · E-commerce</span><span style="font-size:11px; color:var(--med); text-align:right; font-family:'JetBrains Mono',monospace;">Reviewing</span></div>
+        <div class="finding-row"><span class="badge badge-med">Medium</span><span style="font-size:13px;">WAF bypass via hex-encoded parameter injection · CDN edge layer</span><span style="font-size:11px; color:var(--lime); text-align:right; font-family:'JetBrains Mono',monospace;">Resolved</span></div>
+        <div class="finding-row"><span class="badge badge-med">Medium</span><span style="font-size:13px;">Luxury goods API credential leak via public JS bundle · LVMH</span><span style="font-size:11px; color:var(--med); text-align:right; font-family:'JetBrains Mono',monospace;">Appeal</span></div>
+    </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     SERVICE TIERS
+══════════════════════════════════════ -->
+<section style="padding:0 0 80px; max-width:1280px; margin:0 auto; padding-left:24px; padding-right:24px;">
+    <div class="mono" style="font-size:11px; color:var(--muted); margin-bottom:16px; letter-spacing:0.1em;">// CORPORATE ENGAGEMENT PACKAGES</div>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:16px;">
+
+        <div class="service-card">
+            <div style="display:flex; justify-content:space-between; align-items:start; margin-bottom:20px;">
+                <div>
+                    <div class="mono" style="font-size:10px; color:var(--muted); letter-spacing:0.1em; margin-bottom:6px;">SINGLE STRIKE</div>
+                    <div style="font-size:36px; font-weight:900; letter-spacing:-0.03em; line-height:1;">$2,500</div>
+                </div>
+                <span class="badge badge-med">Standard</span>
+            </div>
+            <hr class="divider" style="margin-bottom:20px;">
+            <div style="display:flex; flex-direction:column; gap:10px; margin-bottom:24px; flex:1;">
+                <div style="display:flex; gap:10px; font-size:13px; color:var(--muted);"><span style="color:var(--lime); flex-shrink:0;">✓</span> Single target domain</div>
+                <div style="display:flex; gap:10px; font-size:13px; color:var(--muted);"><span style="color:var(--lime); flex-shrink:0;">✓</span> Credential & path disclosure audit</div>
+                <div style="display:flex; gap:10px; font-size:13px; color:var(--muted);"><span style="color:var(--lime); flex-shrink:0;">✓</span> Unauthenticated surface mapping</div>
+                <div style="display:flex; gap:10px; font-size:13px; color:var(--muted);"><span style="color:var(--lime); flex-shrink:0;">✓</span> PoC-backed report</div>
+                <div style="display:flex; gap:10px; font-size:13px; color:var(--muted);"><span style="color:var(--muted); flex-shrink:0;">–</span> Multi-domain replication check</div>
+            </div>
+            <a href="#initiate-audit" style="display:block; text-align:center; padding:12px; border:1px solid var(--border2); border-radius:8px; font-size:12px; font-weight:700; color:var(--text); text-decoration:none; letter-spacing:0.05em; text-transform:uppercase; transition:border-color 0.2s;" onmouseover="this.style.borderColor='var(--lime)'" onmouseout="this.style.borderColor='var(--border2)'">Request audit</a>
+        </div>
+
+        <div class="service-card featured">
+            <div style="display:flex; justify-content:space-between; align-items:start; margin-bottom:20px;">
+                <div>
+                    <div class="mono" style="font-size:10px; color:var(--lime); letter-spacing:0.1em; margin-bottom:6px;">CLUSTER STRIKE</div>
+                    <div style="font-size:36px; font-weight:900; letter-spacing:-0.03em; line-height:1;">$5,500</div>
+                </div>
+                <span class="badge badge-info">Recommended</span>
+            </div>
+            <hr style="border:none; border-top:1px solid rgba(132,204,22,0.2); margin-bottom:20px;">
+            <div style="display:flex; flex-direction:column; gap:10px; margin-bottom:24px; flex:1;">
+                <div style="display:flex; gap:10px; font-size:13px; color:var(--muted);"><span style="color:var(--lime); flex-shrink:0;">✓</span> Multi-domain cluster target</div>
+                <div style="display:flex; gap:10px; font-size:13px; color:var(--muted);"><span style="color:var(--lime); flex-shrink:0;">✓</span> Deep logic analysis & state abuse</div>
+                <div style="display:flex; gap:10px; font-size:13px; color:var(--muted);"><span style="color:var(--lime); flex-shrink:0;">✓</span> Horizontal vulnerability replication</div>
+                <div style="display:flex; gap:10px; font-size:13px; color:var(--muted);"><span style="color:var(--lime); flex-shrink:0;">✓</span> WAF/CDN evasion testing</div>
+                <div style="display:flex; gap:10px; font-size:13px; color:var(--muted);"><span style="color:var(--lime); flex-shrink:0;">✓</span> CVSS-scored full report</div>
+            </div>
+            <a href="#initiate-audit" style="display:block; text-align:center; padding:12px; background:var(--lime); border-radius:8px; font-size:12px; font-weight:700; color:#09090b; text-decoration:none; letter-spacing:0.05em; text-transform:uppercase; transition:opacity 0.2s;" onmouseover="this.style.opacity='.88'" onmouseout="this.style.opacity='1'">Request audit</a>
+        </div>
+
+        <div class="service-card">
+            <div style="display:flex; justify-content:space-between; align-items:start; margin-bottom:20px;">
+                <div>
+                    <div class="mono" style="font-size:10px; color:var(--muted); letter-spacing:0.1em; margin-bottom:6px;">ECOSYSTEM AUDIT</div>
+                    <div style="font-size:36px; font-weight:900; letter-spacing:-0.03em; line-height:1;">$10k+</div>
+                </div>
+                <span class="badge badge-crit">Enterprise</span>
+            </div>
+            <hr class="divider" style="margin-bottom:20px;">
+            <div style="display:flex; flex-direction:column; gap:10px; margin-bottom:24px; flex:1;">
+                <div style="display:flex; gap:10px; font-size:13px; color:var(--muted);"><span style="color:var(--lime); flex-shrink:0;">✓</span> Full infrastructure deep-dive</div>
+                <div style="display:flex; gap:10px; font-size:13px; color:var(--muted);"><span style="color:var(--lime); flex-shrink:0;">✓</span> RSA / auth deep dive</div>
+                <div style="display:flex; gap:10px; font-size:13px; color:var(--muted);"><span style="color:var(--lime); flex-shrink:0;">✓</span> Bulk authentication bypass testing</div>
+                <div style="display:flex; gap:10px; font-size:13px; color:var(--muted);"><span style="color:var(--lime); flex-shrink:0;">✓</span> Executive briefing + remediation call</div>
+                <div style="display:flex; gap:10px; font-size:13px; color:var(--muted);"><span style="color:var(--lime); flex-shrink:0;">✓</span> Ongoing retainer available</div>
+            </div>
+            <a href="#initiate-audit" style="display:block; text-align:center; padding:12px; border:1px solid var(--border2); border-radius:8px; font-size:12px; font-weight:700; color:var(--text); text-decoration:none; letter-spacing:0.05em; text-transform:uppercase; transition:border-color 0.2s;" onmouseover="this.style.borderColor='var(--lime)'" onmouseout="this.style.borderColor='var(--border2)'">Custom quote</a>
+        </div>
+
+    </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     ENGAGEMENT FORM + SIDEBAR
+══════════════════════════════════════ -->
+<section id="initiate-audit" style="padding:0 0 120px; max-width:1280px; margin:0 auto; padding-left:24px; padding-right:24px;">
+    <div style="display:grid; grid-template-columns:1fr; gap:48px;">
+        <div style="display:grid; grid-template-columns:1fr; gap:48px;" id="form-grid">
+
+            <!-- Form -->
+            <div>
+                <div class="mono" style="font-size:11px; color:var(--muted); margin-bottom:16px; letter-spacing:0.1em;">// SCOPE SUBMISSION</div>
+                <h2 style="font-size:clamp(28px,4vw,40px); font-weight:900; letter-spacing:-0.03em; line-height:1.1; margin-bottom:8px;">Initiate engagement</h2>
+                <p style="color:var(--muted); font-size:14px; margin-bottom:32px;">Provide accurate scope. Vague submissions receive no researcher time. We only engage targets we can test thoroughly.</p>
+
+                <form action="https://formspree.io/f/xvzvzvva" method="POST" style="display:flex; flex-direction:column; gap:20px;">
+
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+                        <div>
+                            <label>Appointed officer</label>
+                            <input type="text" name="FullName" placeholder="Full name" class="fi" required>
+                        </div>
+                        <div>
+                            <label>Direct contact</label>
+                            <input type="text" name="Phone" placeholder="+1 555 000 0000" class="fi" required>
+                        </div>
+                    </div>
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+                        <div>
+                            <label>Corporate email</label>
+                            <input type="email" name="Email" placeholder="officer@company.com" class="fi" required>
+                        </div>
+                        <div>
+                            <label>Legal entity</label>
+                            <input type="text" name="Company" placeholder="Organisation name" class="fi" required>
+                        </div>
+                    </div>
+                    <div>
+                        <label>Audit scope</label>
+                        <textarea name="Scope" placeholder="Target URLs, domains, CIDR ranges, IP assets, API endpoints" class="fi" style="height:96px; resize:vertical;" required></textarea>
+                    </div>
+                    <div>
+                        <label>Out of scope / critical assets to avoid</label>
+                        <textarea name="OutOfScope" placeholder="Production databases, payment processors, etc." class="fi" style="height:64px; resize:vertical;"></textarea>
+                    </div>
+                    <div>
+                        <label>Suspected logic concerns</label>
+                        <textarea name="Reasoning" placeholder="e.g. WAF evasion vectors, SDLC leaks, auth state issues, IDOR patterns" class="fi" style="height:80px; resize:vertical;"></textarea>
+                    </div>
+                    <div>
+                        <label>Intelligence goals & deliverables</label>
+                        <textarea name="Expectations" placeholder="What decisions will this report inform?" class="fi" style="height:80px; resize:vertical;"></textarea>
+                    </div>
+
+                    <!-- Engagement protocol -->
+                    <div class="terminal" style="font-size:12px;">
+                        <div class="terminal-bar">
+                            <div class="t-dot" style="background:#ef4444;"></div>
+                            <div class="t-dot" style="background:#f59e0b;"></div>
+                            <div class="t-dot" style="background:#22c55e;"></div>
+                            <span style="margin-left:8px; font-size:11px; color:var(--muted);">engagement_protocol.md</span>
+                        </div>
+                        <div style="padding:16px; line-height:2; max-height:200px; overflow-y:auto; color:#a1a1aa;" class="custom-scrollbar">
+                            <span style="color:var(--lime);">## Authorization</span><br>
+                            Submitting this form grants Forge Vertical express written permission to conduct non-destructive security research against the defined scope only.<br><br>
+                            <span style="color:var(--lime);">## Fee Schedule</span><br>
+                            A 50% non-refundable initiation deposit is required before researcher time is allocated. Balance due on report delivery.<br><br>
+                            <span style="color:var(--lime);">## Zero-Discovery Clause</span><br>
+                            If no exploitable findings are confirmed, the balance invoice is reduced to 25% of the agreed rate, covering technical labour only.<br><br>
+                            <span style="color:var(--lime);">## Confidentiality</span><br>
+                            All findings are strictly classified. No disclosure to any third party without explicit written authorisation from the client.<br><br>
+                            <span style="color:var(--lime);">## Scope Limitation</span><br>
+                            Testing is strictly limited to agreed targets. Any out-of-scope findings are reported immediately and not investigated further without amendment.
+                        </div>
+                    </div>
+
+                    <div style="display:flex; align-items:start; gap:12px; padding:16px; background:var(--surface); border:1px solid var(--border); border-radius:8px;">
+                        <input type="checkbox" required style="margin-top:2px; accent-color:var(--lime); width:16px; height:16px; flex-shrink:0;">
+                        <label style="color:var(--muted); font-family:'Inter',sans-serif; font-size:13px; text-transform:none; letter-spacing:0; margin:0; line-height:1.6;">I confirm I am an authorized representative with standing to grant security research access, and I agree to the 50% initiation deposit and engagement protocol above.</label>
+                    </div>
+
+                    <button type="submit" class="btn-primary" style="font-size:13px; letter-spacing:0.08em; text-transform:uppercase; padding:16px;">
+                        Sign & initiate engagement →
+                    </button>
+                </form>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="sticky-sidebar" style="display:flex; flex-direction:column; gap:16px;">
+
+                <!-- CVSS quick ref -->
+                <div class="card" style="padding:20px;">
+                    <div class="mono" style="font-size:10px; color:var(--muted); letter-spacing:0.1em; margin-bottom:14px;">// CVSS v3.1 SEVERITY SCALE</div>
+                    <div style="display:flex; flex-direction:column; gap:8px;">
+                        <div style="display:flex; align-items:center; justify-content:space-between; padding:8px 12px; background:rgba(239,68,68,0.08); border-radius:6px; border:1px solid rgba(239,68,68,0.2);">
+                            <span class="mono" style="font-size:12px; color:var(--crit); font-weight:700;">Critical</span>
+                            <span class="mono" style="font-size:12px; color:var(--muted);">9.0 – 10.0</span>
+                        </div>
+                        <div style="display:flex; align-items:center; justify-content:space-between; padding:8px 12px; background:rgba(249,115,22,0.08); border-radius:6px; border:1px solid rgba(249,115,22,0.2);">
+                            <span class="mono" style="font-size:12px; color:var(--high); font-weight:700;">High</span>
+                            <span class="mono" style="font-size:12px; color:var(--muted);">7.0 – 8.9</span>
+                        </div>
+                        <div style="display:flex; align-items:center; justify-content:space-between; padding:8px 12px; background:rgba(234,179,8,0.08); border-radius:6px; border:1px solid rgba(234,179,8,0.2);">
+                            <span class="mono" style="font-size:12px; color:var(--med); font-weight:700;">Medium</span>
+                            <span class="mono" style="font-size:12px; color:var(--muted);">4.0 – 6.9</span>
+                        </div>
+                        <div style="display:flex; align-items:center; justify-content:space-between; padding:8px 12px; background:rgba(59,130,246,0.08); border-radius:6px; border:1px solid rgba(59,130,246,0.2);">
+                            <span class="mono" style="font-size:12px; color:var(--low); font-weight:700;">Low</span>
+                            <span class="mono" style="font-size:12px; color:var(--muted);">0.1 – 3.9</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- What we don't do -->
+                <div class="card" style="padding:20px;">
+                    <div class="mono" style="font-size:10px; color:var(--muted); letter-spacing:0.1em; margin-bottom:14px;">// NOT IN OUR SCOPE</div>
+                    <div style="display:flex; flex-direction:column; gap:8px;">
+                        <div style="display:flex; gap:10px; font-size:13px; color:var(--muted);"><span style="color:var(--crit);">✕</span> Automated vulnerability scans</div>
+                        <div style="display:flex; gap:10px; font-size:13px; color:var(--muted);"><span style="color:var(--crit);">✕</span> Denial-of-service testing</div>
+                        <div style="display:flex; gap:10px; font-size:13px; color:var(--muted);"><span style="color:var(--crit);">✕</span> Physical or social engineering</div>
+                        <div style="display:flex; gap:10px; font-size:13px; color:var(--muted);"><span style="color:var(--crit);">✕</span> Out-of-scope target probing</div>
+                        <div style="display:flex; gap:10px; font-size:13px; color:var(--muted);"><span style="color:var(--crit);">✕</span> Data exfiltration or destruction</div>
+                    </div>
+                </div>
+
+                <!-- Platform profiles -->
+                <div class="card" style="padding:20px;">
+                    <div class="mono" style="font-size:10px; color:var(--muted); letter-spacing:0.1em; margin-bottom:14px;">// ACTIVE PLATFORMS</div>
+                    <div style="display:flex; flex-direction:column; gap:10px;">
+                        <div style="display:flex; align-items:center; justify-content:space-between; padding:10px 12px; background:var(--surface2); border-radius:8px;">
+                            <div>
+                                <div style="font-size:13px; font-weight:700;">HackerOne</div>
+                                <div class="mono" style="font-size:10px; color:var(--muted);">@forge-vertical</div>
+                            </div>
+                            <span class="badge badge-info">Active</span>
+                        </div>
+                        <div style="display:flex; align-items:center; justify-content:space-between; padding:10px 12px; background:var(--surface2); border-radius:8px;">
+                            <div>
+                                <div style="font-size:13px; font-weight:700;">YesWeHack</div>
+                                <div class="mono" style="font-size:10px; color:var(--muted);">@forge-vertical</div>
+                            </div>
+                            <span class="badge badge-info">Active</span>
+                        </div>
+                        <div style="display:flex; align-items:center; justify-content:space-between; padding:10px 12px; background:var(--surface2); border-radius:8px;">
+                            <div>
+                                <div style="font-size:13px; font-weight:700;">Intigriti</div>
+                                <div class="mono" style="font-size:10px; color:var(--muted);">Researcher network</div>
+                            </div>
+                            <span class="badge badge-med">Onboarding</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact direct -->
+                <div style="padding:20px; background:linear-gradient(135deg,#1a2209,#111); border:1px solid rgba(132,204,22,0.3); border-radius:12px;">
+                    <div class="mono" style="font-size:10px; color:var(--lime); letter-spacing:0.1em; margin-bottom:8px;">// SECURE CHANNEL</div>
+                    <p style="font-size:13px; color:var(--muted); margin-bottom:16px; line-height:1.6;">Prefer direct contact? Reach the research team on WhatsApp for time-sensitive scoping calls.</p>
+                    <a href="https://wa.me/27661180036" target="_blank" rel="noopener noreferrer"
+                        style="display:flex; align-items:center; justify-content:center; gap:8px; padding:12px; background:var(--lime); border-radius:8px; font-size:12px; font-weight:700; color:#09090b; text-decoration:none; letter-spacing:0.05em; text-transform:uppercase; transition:opacity 0.2s;"
+                        onmouseover="this.style.opacity='.88'" onmouseout="this.style.opacity='1'">
+                        <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+                        Open secure channel
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<div id="global-footer"></div>
+
+<script>
+// Two-column layout on large screens
+(function() {
+    function applyLayout() {
+        const grid = document.getElementById('form-grid');
+        if (!grid) return;
+        if (window.innerWidth >= 1024) {
+            grid.style.gridTemplateColumns = '1fr 380px';
+        } else {
+            grid.style.gridTemplateColumns = '1fr';
+        }
+    }
+    applyLayout();
+    window.addEventListener('resize', applyLayout);
+})();
+</script>
 
 </body>
 </html>
