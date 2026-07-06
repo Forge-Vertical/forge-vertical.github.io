@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Forge Vertical Articles — practical intelligence on GEO, SEO, web architecture, AI indexing, and the infrastructure decisions that actually move the needle.">
+    <title>Articles | Forge Vertical</title>
+    <script src="/global.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,500;0,800;1,800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        .gradient-text {
+            background: linear-gradient(90deg, #10b981 0%, #84cc16 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text; display: inline-block; padding-bottom: 0.1em;
+        }
+        .vibrant-gradient { background: linear-gradient(90deg, #10b981 0%, #84cc16 100%); }
+        .article-card { transition: transform 0.2s, box-shadow 0.2s; }
+        .article-card:hover { transform: translateY(-3px); box-shadow: 0 20px 40px rgba(0,0,0,0.06); }
+    </style>
+</head>
+<body class="bg-white text-zinc-900 antialiased">
+
+    <div id="global-nav"></div>
+
+    <main class="max-w-7xl mx-auto px-6 pt-36 pb-24">
+
+        <!-- Header -->
+        <div class="mb-16">
+            <span class="mono text-[11px] text-zinc-400 tracking-widest">// FORGE VERTICAL · ARTICLES</span>
+            <h1 class="text-5xl md:text-7xl font-extrabold tracking-tighter leading-[0.85] mt-3 mb-5 text-zinc-900">
+                The stuff<br>
+                <span class="gradient-text italic">worth knowing.</span>
+            </h1>
+            <p class="text-zinc-500 text-lg font-light max-w-xl leading-relaxed">
+                No fluff. No recycled listicles. Practical intelligence on GEO, SEO, web infrastructure, and the decisions that separate visible businesses from invisible ones.
+            </p>
+        </div>
+
+        <!-- Category filter -->
+        <div class="flex flex-wrap gap-3 mb-12">
+            <span class="mono text-[10px] font-bold text-zinc-400 uppercase tracking-widest self-center mr-2">Filter:</span>
+            <button class="mono text-[10px] font-bold uppercase tracking-widest px-4 py-2 rounded-lg bg-zinc-900 text-[#84cc16] border border-zinc-900">All</button>
+            <button class="mono text-[10px] font-bold uppercase tracking-widest px-4 py-2 rounded-lg border border-zinc-200 text-zinc-500 hover:border-zinc-400 hover:text-zinc-700 transition-all">GEO</button>
+            <button class="mono text-[10px] font-bold uppercase tracking-widest px-4 py-2 rounded-lg border border-zinc-200 text-zinc-500 hover:border-zinc-400 hover:text-zinc-700 transition-all">SEO</button>
+            <button class="mono text-[10px] font-bold uppercase tracking-widest px-4 py-2 rounded-lg border border-zinc-200 text-zinc-500 hover:border-zinc-400 hover:text-zinc-700 transition-all">Infrastructure</button>
+            <button class="mono text-[10px] font-bold uppercase tracking-widest px-4 py-2 rounded-lg border border-zinc-200 text-zinc-500 hover:border-zinc-400 hover:text-zinc-700 transition-all">AI</button>
+        </div>
+
+        <!-- Featured article -->
+        <a href="/articles/geo-is-real.html" class="block mb-12 group">
+            <div class="article-card bg-zinc-950 rounded-[2rem] p-8 md:p-12 grid md:grid-cols-2 gap-10 items-center">
+                <div>
+                    <div class="flex items-center gap-3 mb-6">
+                        <span class="mono text-[10px] font-bold text-[#84cc16] uppercase tracking-widest border border-[#84cc16]/30 px-3 py-1 rounded-full">Featured</span>
+                        <span class="mono text-[10px] font-bold text-zinc-500 uppercase tracking-widest">GEO</span>
+                    </div>
+                    <h2 class="text-3xl md:text-4xl font-extrabold tracking-tighter leading-tight text-white mb-4 group-hover:text-[#84cc16] transition-colors">
+                        GEO is real — and Cloudflare just proved it
+                    </h2>
+                    <p class="text-zinc-400 text-base leading-relaxed mb-6 font-light">
+                        Some AI models still deny GEO exists. Then Cloudflare's VP sent an email to millions of website owners about AI bots scraping their content. Here's what Generative Engine Optimisation actually is, where it came from, and what you need to do before September 15, 2026.
+                    </p>
+                    <div class="flex items-center gap-6">
+                        <span class="mono text-[10px] text-zinc-500">Jarrit Hosking · July 2026</span>
+                        <span class="mono text-[10px] font-bold text-[#84cc16] uppercase tracking-widest group-hover:gap-3 transition-all">Read article →</span>
+                    </div>
+                </div>
+                <div class="bg-zinc-900 rounded-[1.5rem] p-8 border border-zinc-800">
+                    <div class="mono text-xs text-zinc-500 mb-4 leading-8">
+                        <span class="text-[#84cc16]">User-agent:</span> GPTBot<br>
+                        <span class="text-[#84cc16]">Allow:</span> /<br>
+                        <br>
+                        <span class="text-[#84cc16]">User-agent:</span> PerplexityBot<br>
+                        <span class="text-[#84cc16]">Allow:</span> /<br>
+                        <br>
+                        <span class="text-[#84cc16]">User-agent:</span> ClaudeBot<br>
+                        <span class="text-[#84cc16]">Allow:</span> /<br>
+                        <br>
+                        <span class="text-zinc-600"># Your competitors have none of this.</span><br>
+                        <span class="text-zinc-600"># You just did.</span>
+                    </div>
+                </div>
+            </div>
+        </a>
+
+        <!-- Article grid — more articles slot in here -->
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+            <!-- Coming soon cards — placeholders for next articles -->
+            <div class="article-card bg-zinc-50 border border-zinc-100 rounded-[1.5rem] p-7 flex flex-col justify-between min-h-[280px]">
+                <div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="mono text-[10px] font-bold text-zinc-400 uppercase tracking-widest border border-zinc-200 px-3 py-1 rounded-full">Infrastructure</span>
+                    </div>
+                    <h3 class="text-xl font-extrabold tracking-tight text-zinc-900 mb-3 leading-tight">Your domain name is infrastructure, not admin</h3>
+                    <p class="text-zinc-500 text-sm leading-relaxed font-light">Why choosing between .com and .co.za is one of the most consequential technical decisions a South African business makes — and almost no one treats it that way.</p>
+                </div>
+                <div class="flex items-center justify-between mt-6">
+                    <span class="mono text-[10px] text-zinc-400">Coming soon</span>
+                    <span class="mono text-[10px] font-bold text-zinc-300 uppercase tracking-widest">Forge Vertical</span>
+                </div>
+            </div>
+
+            <div class="article-card bg-zinc-50 border border-zinc-100 rounded-[1.5rem] p-7 flex flex-col justify-between min-h-[280px]">
+                <div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="mono text-[10px] font-bold text-zinc-400 uppercase tracking-widest border border-zinc-200 px-3 py-1 rounded-full">SEO</span>
+                    </div>
+                    <h3 class="text-xl font-extrabold tracking-tight text-zinc-900 mb-3 leading-tight">What a 96% SEO score actually means</h3>
+                    <p class="text-zinc-500 text-sm leading-relaxed font-light">Scoring tools reward presence, not quality. A perfect score and a completely invisible website are not mutually exclusive — and most businesses have both.</p>
+                </div>
+                <div class="flex items-center justify-between mt-6">
+                    <span class="mono text-[10px] text-zinc-400">Coming soon</span>
+                    <span class="mono text-[10px] font-bold text-zinc-300 uppercase tracking-widest">Forge Vertical</span>
+                </div>
+            </div>
+
+            <div class="article-card bg-zinc-50 border border-zinc-100 rounded-[1.5rem] p-7 flex flex-col justify-between min-h-[280px]">
+                <div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="mono text-[10px] font-bold text-zinc-400 uppercase tracking-widest border border-zinc-200 px-3 py-1 rounded-full">AI</span>
+                    </div>
+                    <h3 class="text-xl font-extrabold tracking-tight text-zinc-900 mb-3 leading-tight">Why paying 20% to Booking.com is a choice, not a requirement</h3>
+                    <p class="text-zinc-500 text-sm leading-relaxed font-light">Every rand a platform takes is a rand your property didn't earn. The commission model is a habit, not a law — and the infrastructure to break it already exists.</p>
+                </div>
+                <div class="flex items-center justify-between mt-6">
+                    <span class="mono text-[10px] text-zinc-400">Coming soon</span>
+                    <span class="mono text-[10px] font-bold text-zinc-300 uppercase tracking-widest">Forge Vertical</span>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <div id="global-footer"></div>
+
+</body>
+</html>
