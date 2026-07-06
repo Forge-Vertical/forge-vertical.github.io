@@ -127,10 +127,8 @@
 
         <!-- Image 1 -->
         <div class="max-w-3xl mx-auto px-6 my-10">
-            <div id="img1-container" class="rounded-2xl overflow-hidden bg-zinc-100" style="min-height:200px;display:flex;align-items:center;justify-content:center;">
-                <p class="mono text-xs text-zinc-400">Loading image...</p>
-            </div>
-            <p class="img-caption">Dario Amodei at the Code with Claude developer conference, May 2026 · AP / Don Feria</p>
+            <img src="https://forge-vertical.github.io/forge-vertical.github.io/assets/images/Anthropic-CEO-Dario-Amodei.webp" alt="Dario Amodei, CEO of Anthropic" class="rounded-2xl w-full object-cover" style="max-height:420px;" loading="lazy">
+            <p class="img-caption">Dario Amodei, CEO of Anthropic — the man who warned about the wolf, then released it · 2026</p>
         </div>
 
         <div class="max-w-3xl mx-auto px-6 prose-body">
@@ -246,10 +244,8 @@
 
         <!-- Image 2 -->
         <div class="max-w-3xl mx-auto px-6 my-10">
-            <div id="img2-container" class="rounded-2xl overflow-hidden bg-zinc-100" style="min-height:200px;display:flex;align-items:center;justify-content:center;">
-                <p class="mono text-xs text-zinc-400">Loading image...</p>
-            </div>
-            <p class="img-caption">The Claude Fable interface on a smartphone — Creteil, France, June 10, 2026 · Samuel Boivin / NurPhoto via Getty Images</p>
+            <img src="https://forge-vertical.github.io/forge-vertical.github.io/assets/images/claude-code-on-phone-cover.png" alt="Claude AI on mobile device" class="rounded-2xl w-full object-cover" style="max-height:420px;" loading="lazy">
+            <p class="img-caption">Claude Fable 5 — available on June 9, gone by June 12, back on July 1 · 2026</p>
         </div>
 
         <div class="max-w-3xl mx-auto px-6 prose-body">
@@ -374,10 +370,8 @@
 
         <!-- Image 3 -->
         <div class="max-w-3xl mx-auto px-6 my-10">
-            <div id="img3-container" class="rounded-2xl overflow-hidden bg-zinc-100" style="min-height:200px;display:flex;align-items:center;justify-content:center;">
-                <p class="mono text-xs text-zinc-400">Loading image...</p>
-            </div>
-            <p class="img-caption">Dario Amodei meets with G7 leaders at the AI Impact Summit · Évian-les-Bains, France · June 17, 2026 · Anna Moneymaker / Getty Images</p>
+            <img src="https://forge-vertical.github.io/forge-vertical.github.io/assets/images/government_and_AI-Greggory_DiSalvo-alamy.webp" alt="Government and AI regulation" class="rounded-2xl w-full object-cover" style="max-height:420px;" loading="lazy">
+            <p class="img-caption">Government and AI — a relationship that became a lot more complicated in June 2026 · Greggory DiSalvo / Alamy</p>
         </div>
 
         <div class="max-w-3xl mx-auto px-6 prose-body">
@@ -455,40 +449,7 @@
 
     <div id="global-footer"></div>
 
-    <script>
-        // Load images progressively — fetch from search then inject
-        const images = [
-            {
-                id: 'img1-container',
-                query: 'Dario Amodei Anthropic CEO 2026',
-                alt: 'Dario Amodei at developer conference 2026'
-            },
-            {
-                id: 'img2-container',
-                query: 'Claude AI smartphone screen Anthropic 2026',
-                alt: 'Claude Fable on smartphone'
-            },
-            {
-                id: 'img3-container',
-                query: 'Dario Amodei G7 AI summit 2026',
-                alt: 'Dario Amodei at G7 AI summit'
-            }
-        ];
 
-        // Placeholder styling while images load
-        images.forEach(img => {
-            const container = document.getElementById(img.id);
-            if (container) {
-                container.style.minHeight = '280px';
-                container.style.background = '#18181b';
-                container.innerHTML = `
-                    <div style="text-align:center;padding:2rem;">
-                        <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#84cc16;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:8px;">// Loading image</div>
-                        <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#52525b;">${img.query}</div>
-                    </div>`;
-            }
-        });
-    </script>
 
 </body>
 </html>
