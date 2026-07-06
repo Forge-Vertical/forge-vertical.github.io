@@ -57,6 +57,22 @@
     /* Pulse dot on Audit Tool */
     .nav-pulse { display: inline-block; width: 6px; height: 6px; background: #84cc16; border-radius: 50%; animation: navPulse 1.5s ease-in-out infinite; }
     @keyframes navPulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.7); } }
+
+    /* Articles new badge */
+    .nav-new {
+        display: inline-block;
+        font-size: 8px;
+        font-weight: 900;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        background: #84cc16;
+        color: #000;
+        padding: 1px 5px;
+        border-radius: 3px;
+        margin-left: 4px;
+        vertical-align: middle;
+        line-height: 1.6;
+    }
 </style>
 
 <div id="nav-wrapper">
@@ -69,10 +85,12 @@
             </svg>
         </a>
 
+        <!-- Desktop nav -->
         <div class="hidden md:flex gap-6 text-[11px] font-black uppercase tracking-widest items-center">
             <a href="/about.html" class="nav-link">About</a>
             <a href="/index.html#services" class="nav-link">Services</a>
             <a href="/portfolio.html" class="nav-link">Portfolio</a>
+            <a href="/articles.html" class="nav-link">Articles<span class="nav-new">New</span></a>
             <a href="/security-intelligence.html" class="nav-link">Security Intelligence</a>
             <a href="/tools/roi-calculator.html" class="nav-link flex items-center gap-2">
                 Audit Tool
@@ -83,16 +101,19 @@
             </a>
         </div>
 
+        <!-- Hamburger -->
         <button onclick="toggleMobileMenu()" id="menu-toggle" class="md:hidden z-50 p-2 flex flex-col gap-1.5 items-end group focus:outline-none">
             <span id="bar-1" class="bar w-8 h-1 rounded-full transition-all duration-300"></span>
             <span id="bar-2" class="bar w-6 h-1 rounded-full transition-all duration-300" style="background:#84cc16 !important;"></span>
             <span id="bar-3" class="bar w-8 h-1 rounded-full transition-all duration-300"></span>
         </button>
 
+        <!-- Mobile menu -->
         <div id="mobile-menu" class="fixed inset-0 bg-zinc-950 z-40 translate-x-full transition-transform duration-500 ease-in-out md:hidden flex flex-col items-center justify-center gap-6 text-center">
             <a href="/about.html" onclick="toggleMobileMenu()" class="text-2xl font-black uppercase tracking-tighter text-white hover:text-[#84cc16] transition-colors">About</a>
             <a href="/index.html#services" onclick="toggleMobileMenu()" class="text-2xl font-black uppercase tracking-tighter text-white hover:text-[#84cc16] transition-colors">Services</a>
             <a href="/portfolio.html" onclick="toggleMobileMenu()" class="text-2xl font-black uppercase tracking-tighter text-white hover:text-[#84cc16] transition-colors">Portfolio</a>
+            <a href="/articles.html" onclick="toggleMobileMenu()" class="text-2xl font-black uppercase tracking-tighter text-white hover:text-[#84cc16] transition-colors">Articles</a>
             <a href="/security-intelligence.html" onclick="toggleMobileMenu()" class="text-2xl font-black uppercase tracking-tighter text-white hover:text-[#84cc16] transition-colors">Intelligence</a>
             <a href="/tools/roi-calculator.html" onclick="toggleMobileMenu()" class="text-2xl font-black uppercase tracking-tighter text-[#84cc16]">Audit Tool</a>
             <a href="javascript:void(0)" onclick="showBuildModal(); toggleMobileMenu();" class="mt-4 text-black bg-[#84cc16] px-8 py-4 rounded-full font-black uppercase tracking-widest hover:bg-white transition-all">Build Your Own</a>
@@ -109,7 +130,6 @@
         const theme = document.body.getAttribute('data-nav-theme') || 'light';
         if (theme === 'dark') {
             wrapper.classList.add('theme-dark');
-            // Also flip the FORGE logo text to white
             const logoText = document.getElementById('logo-dark');
             if (logoText) logoText.setAttribute('fill', '#f1f5f9');
         }
