@@ -152,9 +152,13 @@
 
             <!-- TripSpace Global — replaces Secure Ur Phone -->
             <div class="space-y-4">
-                <div class="iframe-container card-shadow border border-zinc-100 group">
-                    <iframe src="https://tripspaceglobal.com/" scrolling="no" title="TripSpace Global preview"></iframe>
-                    <div class="absolute inset-0 bg-zinc-900/0 group-hover:bg-zinc-900/5 transition-all cursor-pointer rounded-[1.5rem]" onclick="window.open('https://tripspaceglobal.com/')"></div>
+                <div class="card-shadow border border-zinc-100 rounded-[1.5rem] overflow-hidden bg-zinc-950 flex flex-col items-center justify-center gap-4 cursor-pointer group" style="aspect-ratio:16/9;" onclick="window.open('https://tripspaceglobal.com/')">
+                    <div class="flex items-center gap-3">
+                        <svg class="w-5 h-5 text-[#84cc16]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                        <span class="mono text-[11px] font-bold text-[#84cc16] tracking-widest uppercase">Cloudflare Protected</span>
+                    </div>
+                    <p class="text-zinc-500 text-[10px] font-bold uppercase tracking-widest">Iframe embedding blocked by security policy</p>
+                    <span class="text-[10px] font-black uppercase tracking-widest text-zinc-600 group-hover:text-[#84cc16] transition-colors">Visit tripspaceglobal.com →</span>
                 </div>
                 <div class="px-2">
                     <div class="flex justify-between items-center mb-2">
@@ -196,9 +200,13 @@
 
             <!-- IPS Promotions Hub -->
             <div class="space-y-4">
-                <div class="iframe-container card-shadow border border-zinc-100 group">
-                    <iframe src="https://promo.intpanelshop.co.za/" scrolling="no" title="IPS Promotions Hub preview"></iframe>
-                    <div class="absolute inset-0 bg-zinc-900/0 group-hover:bg-zinc-900/5 transition-all cursor-pointer rounded-[1.5rem]" onclick="window.open('https://promo.intpanelshop.co.za/')"></div>
+                <div class="card-shadow border border-zinc-100 rounded-[1.5rem] overflow-hidden bg-zinc-950 flex flex-col items-center justify-center gap-4 cursor-pointer group" style="aspect-ratio:16/9;" onclick="window.open('https://promo.intpanelshop.co.za/')">
+                    <div class="flex items-center gap-3">
+                        <svg class="w-5 h-5 text-[#84cc16]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                        <span class="mono text-[11px] font-bold text-[#84cc16] tracking-widest uppercase">Repo Security Policy Active</span>
+                    </div>
+                    <p class="text-zinc-500 text-[10px] font-bold uppercase tracking-widest">Dependabot · Code scanning · Secret scanning enabled</p>
+                    <span class="text-[10px] font-black uppercase tracking-widest text-zinc-600 group-hover:text-[#84cc16] transition-colors">Visit promo.intpanelshop.co.za →</span>
                 </div>
                 <div class="px-2">
                     <div class="flex justify-between items-center mb-2">
@@ -212,8 +220,8 @@
             <!-- Princess Vlei Lodge -->
             <div class="space-y-4">
                 <div class="iframe-container card-shadow border border-zinc-100 group" id="pvl-container">
-                    <iframe id="pvl-iframe" src="" scrolling="no" title="Princess Vlei Lodge preview"></iframe>
-                    <div class="absolute inset-0 bg-zinc-900/0 group-hover:bg-zinc-900/5 transition-all cursor-pointer rounded-[1.5rem]" id="pvl-link"></div>
+                    <iframe id="pvl-iframe" src="https://test-space-global.github.io/princessvleilodge/" scrolling="no" title="Princess Vlei Lodge preview"></iframe>
+                    <div class="absolute inset-0 bg-zinc-900/0 group-hover:bg-zinc-900/5 transition-all cursor-pointer rounded-[1.5rem]" id="pvl-link" onclick="window.open('https://test-space-global.github.io/princessvleilodge/')"></div>
                 </div>
                 <div class="px-2">
                     <div class="flex justify-between items-center mb-2">
@@ -230,14 +238,13 @@
     <div id="global-footer"></div>
 
     <script>
-        // Princess Vlei Lodge — fallback to production domain when live
+        // Princess Vlei Lodge — auto-switch to production domain when live
         (function() {
             var primary = 'https://www.princessvleilodge.co.za/';
             var fallback = 'https://test-space-global.github.io/princessvleilodge/';
             var iframe = document.getElementById('pvl-iframe');
             var link = document.getElementById('pvl-link');
             if (!iframe) return;
-            // Try primary, fall back if it errors (domain not live yet)
             var img = new Image();
             img.onload = function() {
                 iframe.src = primary;
@@ -247,11 +254,7 @@
                 iframe.src = fallback;
                 link.onclick = function() { window.open(fallback); };
             };
-            // favicon.ico as a lightweight domain reachability check
             img.src = 'https://www.princessvleilodge.co.za/favicon.ico?' + Date.now();
-            // Default to fallback immediately while check runs
-            iframe.src = fallback;
-            link.onclick = function() { window.open(fallback); };
         })();
     </script>
 
