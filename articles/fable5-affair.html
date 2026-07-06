@@ -3,13 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Forge Vertical Articles — practical intelligence on GEO, SEO, web architecture, AI indexing, and the infrastructure decisions that actually move the needle.">
-    <title>Articles | Forge Vertical</title>
+    <meta name="description" content="Claude Fable 5 launched June 9, 2026. Three days later the US government shut it down globally. Here is the full story — the most consequential AI event of 2026.">
+    <title>The Fable Affair: When a Government Killed the World's Best AI Model | Forge Vertical</title>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "The Fable Affair: When a Government Killed the World's Best AI Model",
+      "description": "Claude Fable 5 launched June 9, 2026. Three days later the US government shut it down globally for 19 days. The full story of the most consequential AI event of 2026 — and what it means for everyone building on AI.",
+      "author": {
+        "@type": "Person",
+        "name": "Jarrit Hosking",
+        "url": "https://www.forgevertical.com/about.html"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Forge Vertical",
+        "url": "https://www.forgevertical.com"
+      },
+      "datePublished": "2026-07-06",
+      "dateModified": "2026-07-06",
+      "mainEntityOfPage": "https://www.forgevertical.com/articles/fable5-affair.html"
+    }
+    </script>
+
     <script src="/global.js" defer></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,500;0,800;1,800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,500;0,800;1,800&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
+
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
         .mono { font-family: 'JetBrains Mono', monospace; }
@@ -18,172 +42,453 @@
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
             background-clip: text; display: inline-block; padding-bottom: 0.1em;
         }
-        .vibrant-gradient { background: linear-gradient(90deg, #10b981 0%, #84cc16 100%); }
-        .article-card { transition: transform 0.2s, box-shadow 0.2s; }
-        .article-card:hover { transform: translateY(-3px); box-shadow: 0 20px 40px rgba(0,0,0,0.06); }
+        .prose-body {
+            font-family: 'Lora', serif;
+            font-size: 19px;
+            line-height: 1.85;
+            color: #27272a;
+        }
+        .prose-body p { margin-bottom: 1.6em; }
+        .prose-body h2 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 28px; font-weight: 800;
+            letter-spacing: -0.03em; color: #09090b;
+            margin-top: 2.5em; margin-bottom: 0.6em; line-height: 1.2;
+        }
+        .prose-body h3 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 20px; font-weight: 800;
+            letter-spacing: -0.02em; color: #09090b;
+            margin-top: 2em; margin-bottom: 0.5em;
+        }
+        .prose-body strong { font-weight: 700; color: #09090b; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 17px; }
+        .prose-body a { color: #84cc16; text-decoration: underline; text-underline-offset: 3px; }
+        .prose-body code { font-family: 'JetBrains Mono', monospace; font-size: 14px; background: #f4f4f5; padding: 2px 6px; border-radius: 4px; }
+        .callout { background: #f4f4f5; border-left: 3px solid #84cc16; border-radius: 0 12px 12px 0; padding: 20px 24px; margin: 2em 0; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 15px; color: #3f3f46; line-height: 1.7; }
+        .callout.dark { background: #09090b; color: #a1a1aa; border-left-color: #84cc16; }
+        .callout.red { background: rgba(239,68,68,0.06); border-left-color: #ef4444; }
+        .pull-quote { font-family: 'Lora', serif; font-size: 24px; font-style: italic; color: #09090b; border-top: 2px solid #84cc16; border-bottom: 1px solid #e4e4e7; padding: 24px 0; margin: 2.5em 0; line-height: 1.5; }
+        .timeline-item { border-left: 2px solid #e4e4e7; padding-left: 20px; padding-bottom: 24px; position: relative; }
+        .timeline-item::before { content: ''; position: absolute; left: -5px; top: 6px; width: 8px; height: 8px; border-radius: 50%; background: #84cc16; }
+        .timeline-item.red::before { background: #ef4444; }
+        .timeline-item.yellow::before { background: #eab308; }
+        .timeline-date { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #84cc16; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 4px; }
+        .timeline-item.red .timeline-date { color: #ef4444; }
+        .timeline-item.yellow .timeline-date { color: #eab308; }
+        .voice-card { background: #18181b; border: 1px solid #27272a; border-radius: 16px; padding: 20px 24px; margin: 0; }
+        .img-caption { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #71717a; text-align: center; margin-top: 8px; letter-spacing: 0.05em; }
     </style>
 </head>
 <body class="bg-white text-zinc-900 antialiased">
 
     <div id="global-nav"></div>
 
-    <main class="max-w-7xl mx-auto px-6 pt-36 pb-24">
+    <article class="pt-36 pb-24">
 
         <!-- Header -->
-        <div class="mb-16">
-            <span class="mono text-[11px] text-zinc-400 tracking-widest">// FORGE VERTICAL · ARTICLES</span>
-            <h1 class="text-5xl md:text-7xl font-extrabold tracking-tighter leading-[0.85] mt-3 mb-5 text-zinc-900">
-                The stuff<br>
-                <span class="gradient-text italic">worth knowing.</span>
+        <header class="max-w-3xl mx-auto px-6 mb-12">
+            <div class="flex items-center gap-3 mb-6">
+                <a href="/articles.html" class="mono text-[10px] text-zinc-400 hover:text-zinc-600 transition-colors uppercase tracking-widest">← Articles</a>
+                <span class="text-zinc-300">·</span>
+                <span class="mono text-[10px] font-bold text-red-500 uppercase tracking-widest border border-red-200 px-3 py-1 rounded-full">AI · Policy</span>
+            </div>
+
+            <h1 class="text-4xl md:text-6xl font-extrabold tracking-tighter leading-[0.88] mb-6 text-zinc-900">
+                The Fable Affair:<br>
+                When a government<br>
+                <span class="gradient-text italic">killed the world's best AI.</span>
             </h1>
-            <p class="text-zinc-500 text-lg font-light max-w-xl leading-relaxed">
-                No fluff. No recycled listicles. Practical intelligence on GEO, SEO, web infrastructure, and the decisions that separate visible businesses from invisible ones.
+
+            <p class="text-xl text-zinc-500 font-light leading-relaxed mb-8 max-w-2xl">
+                Claude Fable 5 launched on June 9, 2026. Three days later, the US government shut it down for every user on earth. It stayed dark for 19 days. This is the full story — and what it means for anyone building on AI infrastructure.
             </p>
+
+            <div class="flex items-center gap-4 pb-8 border-b border-zinc-100">
+                <div>
+                    <div class="font-bold text-sm text-zinc-900">Jarrit Hosking</div>
+                    <div class="mono text-[10px] text-zinc-400 uppercase tracking-widest">Principal Architect · Forge Vertical · July 2026</div>
+                </div>
+                <div class="ml-auto mono text-[10px] text-zinc-400 uppercase tracking-widest">10 min read</div>
+            </div>
+        </header>
+
+        <!-- Body -->
+        <div class="max-w-3xl mx-auto px-6 prose-body">
+
+            <p>
+                On the morning of June 9, 2026, Anthropic released what it called the most powerful AI model ever made available to the general public. By the evening of June 12, it was gone. Not deprecated, not replaced — switched off globally by a letter from a US government official, taking effect in 90 minutes. Hundreds of millions of users, developers mid-task, enterprise pipelines in flight — all dark, simultaneously, because of a single export control directive.
+            </p>
+
+            <p>
+                It stayed down for 19 days. It came back on July 1. And nothing about how the world thinks about building on AI infrastructure will be the same again.
+            </p>
+
         </div>
 
-        <!-- Category filter -->
-        <div class="flex flex-wrap gap-3 mb-12">
-            <span class="mono text-[10px] font-bold text-zinc-400 uppercase tracking-widest self-center mr-2">Filter:</span>
-            <button class="mono text-[10px] font-bold uppercase tracking-widest px-4 py-2 rounded-lg bg-zinc-900 text-[#84cc16] border border-zinc-900">All</button>
-            <button class="mono text-[10px] font-bold uppercase tracking-widest px-4 py-2 rounded-lg border border-zinc-200 text-zinc-500 hover:border-zinc-400 hover:text-zinc-700 transition-all">GEO</button>
-            <button class="mono text-[10px] font-bold uppercase tracking-widest px-4 py-2 rounded-lg border border-zinc-200 text-zinc-500 hover:border-zinc-400 hover:text-zinc-700 transition-all">SEO</button>
-            <button class="mono text-[10px] font-bold uppercase tracking-widest px-4 py-2 rounded-lg border border-zinc-200 text-zinc-500 hover:border-zinc-400 hover:text-zinc-700 transition-all">Infrastructure</button>
-            <button class="mono text-[10px] font-bold uppercase tracking-widest px-4 py-2 rounded-lg border border-zinc-200 text-zinc-500 hover:border-zinc-400 hover:text-zinc-700 transition-all">AI</button>
+        <!-- Image 1 -->
+        <div class="max-w-3xl mx-auto px-6 my-10">
+            <div id="img1-container" class="rounded-2xl overflow-hidden bg-zinc-100" style="min-height:200px;display:flex;align-items:center;justify-content:center;">
+                <p class="mono text-xs text-zinc-400">Loading image...</p>
+            </div>
+            <p class="img-caption">Dario Amodei at the Code with Claude developer conference, May 2026 · AP / Don Feria</p>
         </div>
 
-        <!-- Featured article -->
-        <a href="/articles/geo-is-real.html" class="block mb-12 group">
-            <div class="article-card bg-zinc-950 rounded-[2rem] p-8 md:p-12 grid md:grid-cols-2 gap-10 items-center">
-                <div>
-                    <div class="flex items-center gap-3 mb-6">
-                        <span class="mono text-[10px] font-bold text-[#84cc16] uppercase tracking-widest border border-[#84cc16]/30 px-3 py-1 rounded-full">Featured</span>
-                        <span class="mono text-[10px] font-bold text-zinc-500 uppercase tracking-widest">GEO</span>
-                    </div>
-                    <h2 class="text-3xl md:text-4xl font-extrabold tracking-tighter leading-tight text-white mb-4 group-hover:text-[#84cc16] transition-colors">
-                        GEO is real — and Cloudflare just proved it
-                    </h2>
-                    <p class="text-zinc-400 text-base leading-relaxed mb-6 font-light">
-                        Some AI models still deny GEO exists. Then Cloudflare's VP sent an email to millions of website owners about AI bots scraping their content. Here's what Generative Engine Optimisation actually is, where it came from, and what you need to do before September 15, 2026.
-                    </p>
-                    <div class="flex items-center gap-6">
-                        <span class="mono text-[10px] text-zinc-500">Jarrit Hosking · July 2026</span>
-                        <span class="mono text-[10px] font-bold text-[#84cc16] uppercase tracking-widest group-hover:gap-3 transition-all">Read article →</span>
-                    </div>
-                </div>
-                <div class="bg-zinc-900 rounded-[1.5rem] p-8 border border-zinc-800">
-                    <div class="mono text-xs text-zinc-500 mb-4 leading-8">
-                        <span class="text-[#84cc16]">User-agent:</span> GPTBot<br>
-                        <span class="text-[#84cc16]">Allow:</span> /<br>
-                        <br>
-                        <span class="text-[#84cc16]">User-agent:</span> PerplexityBot<br>
-                        <span class="text-[#84cc16]">Allow:</span> /<br>
-                        <br>
-                        <span class="text-[#84cc16]">User-agent:</span> ClaudeBot<br>
-                        <span class="text-[#84cc16]">Allow:</span> /<br>
-                        <br>
-                        <span class="text-zinc-600"># Your competitors have none of this.</span><br>
-                        <span class="text-zinc-600"># You just did.</span>
-                    </div>
-                </div>
-            </div>
-        </a>
+        <div class="max-w-3xl mx-auto px-6 prose-body">
 
-        <!-- Second featured article — Fable 5 -->
-        <a href="/articles/fable5-affair.html" class="block mb-12 group">
-            <div class="article-card border border-zinc-100 rounded-[2rem] p-8 md:p-10 grid md:grid-cols-2 gap-8 items-center hover:border-zinc-200 transition-all">
-                <div>
-                    <div class="flex items-center gap-3 mb-4">
-                        <span class="mono text-[10px] font-bold text-red-500 uppercase tracking-widest border border-red-200 px-3 py-1 rounded-full">AI · Policy</span>
-                        <span class="mono text-[10px] font-bold text-zinc-400 uppercase tracking-widest">10 min read</span>
-                    </div>
-                    <h2 class="text-2xl md:text-3xl font-extrabold tracking-tighter leading-tight text-zinc-900 mb-4 group-hover:text-[#84cc16] transition-colors">
-                        The Fable Affair: When a government killed the world's best AI model
-                    </h2>
-                    <p class="text-zinc-500 text-sm leading-relaxed mb-4 font-light">
-                        Claude Fable 5 launched June 9, 2026. Three days later the US government shut it down globally for 19 days. Dario Amodei, Yann LeCun, the Pentagon, Chinese open-source models, and a $1 trillion valuation — here's the full story.
-                    </p>
-                    <div class="flex items-center gap-6">
-                        <span class="mono text-[10px] text-zinc-400">Jarrit Hosking · July 2026</span>
-                        <span class="mono text-[10px] font-bold text-[#84cc16] uppercase tracking-widest">Read article →</span>
-                    </div>
-                </div>
-                <div class="bg-zinc-950 rounded-[1.5rem] p-6 border border-zinc-800">
-                    <div class="space-y-3">
-                        <div class="flex items-center gap-3">
-                            <span class="w-2 h-2 rounded-full bg-[#84cc16]"></span>
-                            <span class="mono text-[11px] text-zinc-400">Jun 9 — Fable 5 launches globally</span>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <span class="w-2 h-2 rounded-full bg-red-500"></span>
-                            <span class="mono text-[11px] text-zinc-400">Jun 12 — US govt shuts it down · 90 min</span>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <span class="w-2 h-2 rounded-full bg-red-500"></span>
-                            <span class="mono text-[11px] text-zinc-400">19 days — global blackout</span>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <span class="w-2 h-2 rounded-full bg-yellow-500"></span>
-                            <span class="mono text-[11px] text-zinc-400">Jun 26 — partial restore, US orgs only</span>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <span class="w-2 h-2 rounded-full bg-[#84cc16]"></span>
-                            <span class="mono text-[11px] text-zinc-400">Jul 1 — Fable 5 returns worldwide</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </a>
+            <h2>What Fable 5 actually was</h2>
 
-        <!-- Article grid — more articles slot in here -->
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <p>
+                To understand why the shutdown mattered, you need to understand what Fable 5 was. Not in marketing terms — in real terms.
+            </p>
 
-            <!-- Coming soon cards — placeholders for next articles -->
-            <div class="article-card bg-zinc-50 border border-zinc-100 rounded-[1.5rem] p-7 flex flex-col justify-between min-h-[280px]">
-                <div>
-                    <div class="flex items-center gap-2 mb-4">
-                        <span class="mono text-[10px] font-bold text-zinc-400 uppercase tracking-widest border border-zinc-200 px-3 py-1 rounded-full">Infrastructure</span>
-                    </div>
-                    <h3 class="text-xl font-extrabold tracking-tight text-zinc-900 mb-3 leading-tight">Your domain name is infrastructure, not admin</h3>
-                    <p class="text-zinc-500 text-sm leading-relaxed font-light">Why choosing between .com and .co.za is one of the most consequential technical decisions a South African business makes — and almost no one treats it that way.</p>
-                </div>
-                <div class="flex items-center justify-between mt-6">
-                    <span class="mono text-[10px] text-zinc-400">Coming soon</span>
-                    <span class="mono text-[10px] font-bold text-zinc-300 uppercase tracking-widest">Forge Vertical</span>
-                </div>
+            <p>
+                <strong>Stripe used it to refactor a 50 million line Ruby codebase in a single day.</strong> A project their engineering team estimated at over two months of work. That is not a benchmark number. That is a real engineering organisation running a real migration on a production codebase and reporting the result.
+            </p>
+
+            <p>
+                Fable 5 shares its underlying model with Claude Mythos 5 — Anthropic's most restricted model, available only to vetted partners through Project Glasswing due to its cybersecurity capabilities. The difference between the two is not intelligence. It is guardrails. Fable 5 is Mythos made safe for general release — frontier capability wrapped in classifiers that block the highest-risk output categories and fall back to Claude Opus 4.8 when triggered. In practice, that fallback occurred in fewer than 5% of sessions.
+            </p>
+
+            <p>
+                The Every newsletter ran a seven-person internal test across a week and called it <em>the best coding model in the world</em>. Genspark said it beat every other model in its evaluations. Hex reported a 90% score on its core analytics benchmark of complex, long-running analytical tasks. The consensus among developers who got three days with it was emphatic: this was a generational step change, not an incremental improvement.
+            </p>
+
+            <div class="pull-quote">
+                "The longer and more complex the task, the larger Fable 5's lead over our other models." — Anthropic launch documentation, June 9, 2026
             </div>
 
-            <div class="article-card bg-zinc-50 border border-zinc-100 rounded-[1.5rem] p-7 flex flex-col justify-between min-h-[280px]">
-                <div>
-                    <div class="flex items-center gap-2 mb-4">
-                        <span class="mono text-[10px] font-bold text-zinc-400 uppercase tracking-widest border border-zinc-200 px-3 py-1 rounded-full">SEO</span>
-                    </div>
-                    <h3 class="text-xl font-extrabold tracking-tight text-zinc-900 mb-3 leading-tight">What a 96% SEO score actually means</h3>
-                    <p class="text-zinc-500 text-sm leading-relaxed font-light">Scoring tools reward presence, not quality. A perfect score and a completely invisible website are not mutually exclusive — and most businesses have both.</p>
-                </div>
-                <div class="flex items-center justify-between mt-6">
-                    <span class="mono text-[10px] text-zinc-400">Coming soon</span>
-                    <span class="mono text-[10px] font-bold text-zinc-300 uppercase tracking-widest">Forge Vertical</span>
-                </div>
+            <h2>The timeline — three days from launch to blackout</h2>
+
+        </div>
+
+        <!-- Timeline -->
+        <div class="max-w-3xl mx-auto px-6 my-10 space-y-0">
+            <div class="timeline-item">
+                <div class="timeline-date">June 9, 2026</div>
+                <div class="font-bold text-zinc-900 mb-1">Fable 5 and Mythos 5 launch</div>
+                <p class="text-zinc-500 text-sm leading-relaxed">Anthropic releases Fable 5 to the public and Mythos 5 to approved Project Glasswing partners. Developers worldwide immediately begin testing. Early results are extraordinary. Enterprise adoption begins within hours.</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">June 10, 2026</div>
+                <div class="font-bold text-zinc-900 mb-1">Dario Amodei publishes "Policy on the AI Exponential"</div>
+                <p class="text-zinc-500 text-sm leading-relaxed">The day after launch, Anthropic's CEO publishes a sweeping essay calling for mandatory third-party testing of frontier AI models — modelled on the FAA — and governments empowered to block unsafe releases. The timing is notable.</p>
+            </div>
+            <div class="timeline-item red">
+                <div class="timeline-date">June 12, 2026 · 5:21 PM ET</div>
+                <div class="font-bold text-zinc-900 mb-1">Government directive arrives — 90 minutes to comply</div>
+                <p class="text-zinc-500 text-sm leading-relaxed">Commerce Secretary Howard Lutnick sends a letter to Dario Amodei ordering suspension of Fable 5 and Mythos 5 access for all foreign nationals. Anthropic has 90 minutes. Unable to verify nationality at scale, it disables both models globally — for everyone.</p>
+            </div>
+            <div class="timeline-item red">
+                <div class="timeline-date">June 13–25, 2026</div>
+                <div class="font-bold text-zinc-900 mb-1">19 days of darkness</div>
+                <p class="text-zinc-500 text-sm leading-relaxed">Developers scramble. Automated workflows freeze mid-task. Enterprise pipelines fall back to Opus 4.8. Chinese open-weight models — Z.ai's GLM-5.2, DeepSeek V4 — fill the gap. Anthropic publicly objects but complies.</p>
+            </div>
+            <div class="timeline-item yellow">
+                <div class="timeline-date">June 26, 2026</div>
+                <div class="font-bold text-zinc-900 mb-1">Partial restoration — Mythos 5 to approved US organisations</div>
+                <p class="text-zinc-500 text-sm leading-relaxed">The government allows approximately 100 vetted US companies and federal agencies to access Mythos 5. Fable 5 remains dark globally.</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">June 30, 2026</div>
+                <div class="font-bold text-zinc-900 mb-1">Export controls lifted</div>
+                <p class="text-zinc-500 text-sm leading-relaxed">Commerce Secretary Lutnick announces the restrictions are removed. Access restored July 1, globally, with a new safeguard blocking the specific jailbreak pattern 99% of the time.</p>
+            </div>
+            <div class="timeline-item" style="padding-bottom:0;">
+                <div class="timeline-date">July 1, 2026</div>
+                <div class="font-bold text-zinc-900 mb-1">Fable 5 returns</div>
+                <p class="text-zinc-500 text-sm leading-relaxed">19 days after going dark, Fable 5 is back. Available on Claude Platform, Claude.ai, Claude Code, and Claude Cowork. The AI world exhales.</p>
+            </div>
+        </div>
+
+        <div class="max-w-3xl mx-auto px-6 prose-body">
+
+            <h2>What triggered the shutdown</h2>
+
+            <p>
+                The official reason was a jailbreak. Amazon researchers had found a sequence of prompts that could get Fable 5 to produce information potentially useful in cyberattacks. Amazon CEO Andy Jassy reportedly communicated this to the White House — including Treasury Secretary Scott Bessent — and the export control directive followed.
+            </p>
+
+            <p>
+                Anthropic's response was pointed. The company said it had reviewed what it believed was the basis of the directive and concluded that the capability demonstrated was <em>widely available from other models and used every day by cyber defenders.</em> In other words: the jailbreak did not unlock anything uniquely dangerous. It revealed capabilities that already exist across the industry.
+            </p>
+
+            <div class="callout red">
+                <strong style="color:#ef4444;font-family:'Plus Jakarta Sans',sans-serif;">The contradiction Anthropic named publicly:</strong> "If this standard was applied across the industry, we believe it would essentially halt all new model deployments for all frontier model providers."
             </div>
 
-            <div class="article-card bg-zinc-50 border border-zinc-100 rounded-[1.5rem] p-7 flex flex-col justify-between min-h-[280px]">
-                <div>
-                    <div class="flex items-center gap-2 mb-4">
-                        <span class="mono text-[10px] font-bold text-zinc-400 uppercase tracking-widest border border-zinc-200 px-3 py-1 rounded-full">AI</span>
+            <p>
+                The government never provided specific details of its concern beyond citing "national security authorities." Anthropic complied — because it had to — while making its disagreement unambiguous.
+            </p>
+
+            <h2>Dario Amodei: the man who warned about the wolf, then released it</h2>
+
+            <p>
+                The timing of Amodei's policy essay — published one day after Fable 5 launched, calling for governments to be empowered to block unsafe AI models — was not lost on anyone. Critics were brutal.
+            </p>
+
+            <p>
+                <strong>Yann LeCun</strong> — Turing Award winner, co-founder of AMI Labs after departing Meta, and the most prominent public sceptic of large language model supremacy — posted on Facebook that Amodei's "ridiculous fear mongering" was directly responsible for what happened. "One reaps what one sows," he wrote. LeCun has consistently argued that the safety warnings from frontier AI CEOs are overstated, self-interested, and damaging to public discourse. He believes the breakthroughs in AI will come not from scaling LLMs but from world models and architectures that understand physical reality — and that the current race is building on foundations that will plateau.
+            </p>
+
+            <p>
+                <strong>Adam Thierer</strong> of the R Street Institute acknowledged on X that Anthropic had "relentlessly raised the regulatory temperature in Washington" — but still argued the government's action represented "a significant escalation in the politicisation of AI and centralisation of control over advanced computation."
+            </p>
+
+            <p>
+                <strong>Alex Stamos</strong>, chief product officer at Corridor and former security chief at Facebook, penned an open letter co-signed by more than 150 executives calling for the directive to be lifted. His central argument: the rules governing AI model safety need to be written down and transparent. "There's nothing that Anthropic or anybody else can look at to say what can and can't I do," he told CNBC.
+            </p>
+
+            <p>
+                Stratechery's <strong>Ben Thompson</strong> offered the defence Anthropic would not say itself: "There's reason for cynicism, given Anthropic's history, but the part of the 'Boy Cries Wolf' myth everyone forgets is that the wolf did come in the end."
+            </p>
+
+        </div>
+
+        <!-- Image 2 -->
+        <div class="max-w-3xl mx-auto px-6 my-10">
+            <div id="img2-container" class="rounded-2xl overflow-hidden bg-zinc-100" style="min-height:200px;display:flex;align-items:center;justify-content:center;">
+                <p class="mono text-xs text-zinc-400">Loading image...</p>
+            </div>
+            <p class="img-caption">The Claude Fable interface on a smartphone — Creteil, France, June 10, 2026 · Samuel Boivin / NurPhoto via Getty Images</p>
+        </div>
+
+        <div class="max-w-3xl mx-auto px-6 prose-body">
+
+            <h2>The voices — what the key figures actually said</h2>
+
+        </div>
+
+        <!-- Voice cards -->
+        <div class="max-w-3xl mx-auto px-6 my-8 grid gap-4">
+
+            <div class="voice-card">
+                <div class="flex justify-between items-start mb-3">
+                    <div>
+                        <div class="font-bold text-white text-sm">Dario Amodei</div>
+                        <div class="mono text-[10px] text-zinc-500 uppercase tracking-widest">CEO, Anthropic</div>
                     </div>
-                    <h3 class="text-xl font-extrabold tracking-tight text-zinc-900 mb-3 leading-tight">Why paying 20% to Booking.com is a choice, not a requirement</h3>
-                    <p class="text-zinc-500 text-sm leading-relaxed font-light">Every rand a platform takes is a rand your property didn't earn. The commission model is a habit, not a law — and the infrastructure to break it already exists.</p>
+                    <span class="mono text-[10px] text-[#84cc16] border border-[#84cc16]/30 px-2 py-1 rounded">Founder</span>
                 </div>
-                <div class="flex items-center justify-between mt-6">
-                    <span class="mono text-[10px] text-zinc-400">Coming soon</span>
-                    <span class="mono text-[10px] font-bold text-zinc-300 uppercase tracking-widest">Forge Vertical</span>
+                <p class="text-zinc-400 text-sm leading-relaxed italic">"AI is progressing extremely fast — much faster than the policy process was built to handle... Frontier AI models, like airplanes, should be required to go through technical testing and auditing, and their release should be blocked or reversed as a threat to public safety if they do not meet high standards of safety."</p>
+                <div class="mono text-[10px] text-zinc-600 mt-3">Policy on the AI Exponential · June 10, 2026</div>
+            </div>
+
+            <div class="voice-card">
+                <div class="flex justify-between items-start mb-3">
+                    <div>
+                        <div class="font-bold text-white text-sm">Yann LeCun</div>
+                        <div class="mono text-[10px] text-zinc-500 uppercase tracking-widest">Turing Award Winner · Founder, AMI Labs</div>
+                    </div>
+                    <span class="mono text-[10px] text-red-400 border border-red-400/30 px-2 py-1 rounded">Sceptic</span>
                 </div>
+                <p class="text-zinc-400 text-sm leading-relaxed italic">"One reaps what one sows." On Amodei's fear mongering being responsible for the shutdown. LeCun has consistently argued the doom narratives are "extremely destructive" and that AI CEOs have "a vested interest in propping up the power of the products they sell."</p>
+                <div class="mono text-[10px] text-zinc-600 mt-3">Facebook post · June 2026</div>
+            </div>
+
+            <div class="voice-card">
+                <div class="flex justify-between items-start mb-3">
+                    <div>
+                        <div class="font-bold text-white text-sm">Alex Stamos</div>
+                        <div class="mono text-[10px] text-zinc-500 uppercase tracking-widest">CPO, Corridor · Former Facebook Security Chief</div>
+                    </div>
+                    <span class="mono text-[10px] text-blue-400 border border-blue-400/30 px-2 py-1 rounded">Industry</span>
+                </div>
+                <p class="text-zinc-400 text-sm leading-relaxed italic">"Those rules need to be written down and transparent. That has not happened. There's nothing that Anthropic or anybody else can look at to say what can and can't I do. For every American company, the fear is that at any moment you can now be shut down for a completely arbitrary decision capriciously."</p>
+                <div class="mono text-[10px] text-zinc-600 mt-3">CNBC interview · June 2026</div>
+            </div>
+
+            <div class="voice-card">
+                <div class="flex justify-between items-start mb-3">
+                    <div>
+                        <div class="font-bold text-white text-sm">Francesco Bailo</div>
+                        <div class="mono text-[10px] text-zinc-500 uppercase tracking-widest">Deputy Director, AI Trust & Governance Centre, Univ. of Sydney</div>
+                    </div>
+                    <span class="mono text-[10px] text-yellow-400 border border-yellow-400/30 px-2 py-1 rounded">Academic</span>
+                </div>
+                <p class="text-zinc-400 text-sm leading-relaxed italic">"The US government likely realised it had overreacted, and also that its decision would produce a dangerous, messy precedent in terms of regulations. It was also clear that if Fable and Mythos were blocked on these grounds, competitor models would have to be blocked too."</p>
+                <div class="mono text-[10px] text-zinc-600 mt-3">Al Jazeera · July 2026</div>
+            </div>
+
+            <div class="voice-card">
+                <div class="flex justify-between items-start mb-3">
+                    <div>
+                        <div class="font-bold text-white text-sm">Bruno Retailleau</div>
+                        <div class="mono text-[10px] text-zinc-500 uppercase tracking-widest">Former French Interior Minister · Presidential Candidate</div>
+                    </div>
+                    <span class="mono text-[10px] text-purple-400 border border-purple-400/30 px-2 py-1 rounded">Global</span>
+                </div>
+                <p class="text-zinc-400 text-sm leading-relaxed italic">"A nation that depends on others for its technology is a nation that can be unplugged overnight."</p>
+                <div class="mono text-[10px] text-zinc-600 mt-3">Posted on X · June 2026</div>
             </div>
 
         </div>
-    </main>
+
+        <div class="max-w-3xl mx-auto px-6 prose-body">
+
+            <h2>The China problem</h2>
+
+            <p>
+                While Fable 5 was dark, something uncomfortable happened. Chinese open-weight models moved into the gap.
+            </p>
+
+            <p>
+                <strong>Z.ai's GLM-5.2</strong> arrived right after Anthropic disabled access. As an open-weight model — meaning its trained weights are publicly downloadable and self-hostable — it cannot be switched off by a government letter. Benchmarks placed it close behind leading closed-source models. Reuters reported it surprised global users.
+            </p>
+
+            <p>
+                <strong>DeepSeek V4</strong> advanced its context window to 1 million tokens as standard, adapted for Huawei Ascend chips, reducing dependence on foreign AI hardware.
+            </p>
+
+            <p>
+                The irony was pointed. The US government's action, taken in the name of national security, handed 19 days of uncontested access to Chinese AI providers. Enterprise developers, mid-task, facing broken pipelines, went looking for alternatives. Some found Chinese open-weight models. Some of those developers did not come back.
+            </p>
+
+            <div class="callout dark">
+                <span class="text-[#84cc16] font-bold block mb-2 font-sans text-sm">The strategic cost:</span>
+                <span class="text-zinc-400">VentureBeat noted that "frontier model launches are starting to look less like ordinary product releases and more like negotiated deployments shaped by US national security review — a shift that could slow American distribution even as Chinese competitors move aggressively through open-weight and lower-cost channels."</span>
+            </div>
+
+            <h2>The deeper tension — and the Department of War</h2>
+
+            <p>
+                The Fable shutdown was not the first confrontation between Anthropic and the Trump administration. In March 2026, the Pentagon labelled Anthropic a "supply chain risk" — a designation historically reserved for US adversaries, never before applied to an American company — after Anthropic refused to provide Claude for what it considered ethically unacceptable military applications.
+            </p>
+
+            <p>
+                The Department of War had demanded Claude be available for all lawful uses, including mass domestic surveillance and fully autonomous weapons. Anthropic refused. A federal judge issued a preliminary injunction finding the designation likely violated constitutional protections. Litigation was still ongoing when the export control directive arrived.
+            </p>
+
+            <p>
+                Dario Amodei's statement on the Department of War dispute drew a line that few CEOs of $1 trillion companies would draw in public: <em>"We cannot in good conscience accede to their request."</em>
+            </p>
+
+            <p>
+                At the same time, Anthropic is not a neutral actor in Washington. It signed a $200 million Department of Defense contract in 2025. It was the first frontier AI company to deploy models in classified US government networks, the first at the National Laboratories, and the first to provide custom models for national security customers. Claude is extensively used across intelligence analysis, operational planning, and cyber operations.
+            </p>
+
+            <p>
+                The picture that emerges is complicated. Anthropic is simultaneously the company most trusted by the US government with classified AI access, the company most publicly committed to safety as a constraint on that access, and the company most willing to sue the government when it disagrees with how that access is demanded.
+            </p>
+
+        </div>
+
+        <!-- Image 3 -->
+        <div class="max-w-3xl mx-auto px-6 my-10">
+            <div id="img3-container" class="rounded-2xl overflow-hidden bg-zinc-100" style="min-height:200px;display:flex;align-items:center;justify-content:center;">
+                <p class="mono text-xs text-zinc-400">Loading image...</p>
+            </div>
+            <p class="img-caption">Dario Amodei meets with G7 leaders at the AI Impact Summit · Évian-les-Bains, France · June 17, 2026 · Anna Moneymaker / Getty Images</p>
+        </div>
+
+        <div class="max-w-3xl mx-auto px-6 prose-body">
+
+            <h2>What this means for anyone building on AI</h2>
+
+            <p>
+                The Fable affair revealed something that developers and enterprises had not fully internalised: <strong>AI models are infrastructure, and infrastructure can be taken away by a letter.</strong>
+            </p>
+
+            <p>
+                Not by a bug. Not by a deprecation schedule with six months notice. By a government official, at 5:21 PM on a Friday, with 90 minutes to comply.
+            </p>
+
+            <p>
+                VentureBeat reported that enterprise technical leaders are already moving toward model-agnostic fallback architectures — proxy layers that can dynamically reroute production pipelines from proprietary APIs to locally hosted open-weight alternatives when access is disrupted. The lesson from June 2026 is that single-provider dependency on a frontier closed model is now a recognised risk category, not just a theoretical one.
+            </p>
+
+            <p>
+                For smaller operators — developers, agencies, startups — the implications are more immediate. If you have built a product that depends on a specific model's capabilities, you need a fallback. Not because the model will be bad, but because it might not be there.
+            </p>
+
+            <div class="callout">
+                <strong>The practical reality for 2026 and beyond:</strong> Frontier AI releases are no longer ordinary product launches. They are negotiated deployments shaped by national security review. The US government has demonstrated both the willingness and the legal authority to pull a model within hours of a concern being raised. Build accordingly.
+            </div>
+
+            <h2>Where Claude stands now</h2>
+
+            <p>
+                Fable 5 is back. It is available on Claude Platform, Claude.ai, Claude Code, and Claude Cowork. For Pro, Max, Team, and select Enterprise plans, it is included for up to 50% of weekly usage limits through July 7, after which it requires usage credits.
+            </p>
+
+            <p>
+                The new safeguard that Anthropic implemented during the shutdown blocks the specific jailbreak pattern that triggered the directive in 99% of cases. In the remaining 1%, Fable's output only includes previously discovered or already patched security flaws. Commerce's Center for AI Standards and Innovation tested both the original and new safeguards independently.
+            </p>
+
+            <p>
+                Anthropic's revenue run rate stood at $47 billion at the time of the shutdown, up from roughly $10 billion a year prior. The company recently closed a funding round at a $965 billion valuation — higher than OpenAI's $852 billion at the same time. Both companies have now confidentially filed IPO prospectuses with the SEC.
+            </p>
+
+            <p>
+                The question that does not yet have an answer is whether the regulatory framework will be resolved before the next Fable-class model arrives. The Trump administration faces an August 2026 deadline to create standardised benchmarks for evaluating security risks of new AI models. <strong>Whether that produces a coherent, written, transparent process — or another case-by-case intervention at 5:21 PM on a Friday — is the most important open question in AI right now.</strong>
+            </p>
+
+            <div class="pull-quote">
+                "There is nothing qualitatively different between the previous technological revolutions and this one. It's just another set of tools that makes us more efficient." — Yann LeCun, on why he rejects the doom narrative
+            </div>
+
+            <p>
+                LeCun may be right about the long arc. He may also be wrong about this specific moment. What is not in dispute is that a 19-day global blackout of the world's most capable public AI model, triggered by a government letter, is not a routine event in the history of technology. It is the first of its kind.
+            </p>
+
+            <p>
+                It will not be the last.
+            </p>
+
+        </div>
+
+        <!-- Footer -->
+        <div class="max-w-3xl mx-auto px-6 mt-16 pt-8 border-t border-zinc-100">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+                <div>
+                    <div class="mono text-[10px] text-zinc-400 uppercase tracking-widest mb-1">Written by</div>
+                    <div class="font-bold text-zinc-900">Jarrit Hosking</div>
+                    <div class="mono text-[10px] text-zinc-400">Principal Architect · Forge Vertical · Cape Town</div>
+                </div>
+                <div class="flex gap-3">
+                    <a href="/articles.html" class="mono text-[10px] font-bold uppercase tracking-widest border border-zinc-200 px-5 py-3 rounded-xl hover:border-zinc-400 transition-all text-zinc-600">← All articles</a>
+                    <a href="/onboard.html" style="background:linear-gradient(90deg,#10b981,#84cc16);" class="mono text-[10px] font-bold uppercase tracking-widest px-5 py-3 rounded-xl text-white hover:opacity-90 transition-all">Start a project</a>
+                </div>
+            </div>
+        </div>
+
+    </article>
 
     <div id="global-footer"></div>
+
+    <script>
+        // Load images progressively — fetch from search then inject
+        const images = [
+            {
+                id: 'img1-container',
+                query: 'Dario Amodei Anthropic CEO 2026',
+                alt: 'Dario Amodei at developer conference 2026'
+            },
+            {
+                id: 'img2-container',
+                query: 'Claude AI smartphone screen Anthropic 2026',
+                alt: 'Claude Fable on smartphone'
+            },
+            {
+                id: 'img3-container',
+                query: 'Dario Amodei G7 AI summit 2026',
+                alt: 'Dario Amodei at G7 AI summit'
+            }
+        ];
+
+        // Placeholder styling while images load
+        images.forEach(img => {
+            const container = document.getElementById(img.id);
+            if (container) {
+                container.style.minHeight = '280px';
+                container.style.background = '#18181b';
+                container.innerHTML = `
+                    <div style="text-align:center;padding:2rem;">
+                        <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#84cc16;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:8px;">// Loading image</div>
+                        <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#52525b;">${img.query}</div>
+                    </div>`;
+            }
+        });
+    </script>
 
 </body>
 </html>
