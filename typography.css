@@ -1,0 +1,135 @@
+/*
+ * typography.css — Forge Vertical
+ * Global type scale adjustment
+ * Link in every page <head> AFTER the Tailwind CDN script:
+ * <link rel="stylesheet" href="/typography.css">
+ */
+
+/* ── Base scale bump ── */
+html {
+    font-size: 17px; /* Tailwind default is 16px — this lifts everything proportionally */
+}
+
+/* ── Body copy ── */
+body {
+    font-size: 1rem;        /* 17px */
+    line-height: 1.75;
+}
+
+/* ── Navigation links ── */
+#nav-wrapper .nav-link {
+    font-size: 12px !important; /* was 11px */
+}
+
+#nav-wrapper .nav-cta {
+    font-size: 12px !important;
+}
+
+/* ── Tailwind text-xs override (10px → 12px) ── */
+.text-xs,
+.text-\[10px\],
+.text-\[11px\] {
+    font-size: 12px !important;
+    line-height: 1.6 !important;
+}
+
+/* ── Tailwind text-sm override (14px → 15px) ── */
+.text-sm {
+    font-size: 15px !important;
+    line-height: 1.7 !important;
+}
+
+/* ── Tailwind text-base (16px → 18px) ── */
+.text-base {
+    font-size: 18px !important;
+}
+
+/* ── Tailwind text-lg (18px → 20px) ── */
+.text-lg {
+    font-size: 20px !important;
+    line-height: 1.7 !important;
+}
+
+/* ── Tailwind text-xl (20px → 22px) ── */
+.text-xl {
+    font-size: 22px !important;
+    line-height: 1.65 !important;
+}
+
+/* ── Tracking widest labels — keep readable but don't grow too much ── */
+.tracking-widest {
+    letter-spacing: 0.15em;
+}
+
+/* ── Mono / JetBrains — bump slightly ── */
+.mono,
+[class*="font-mono"],
+.font-mono {
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+/* ── Form inputs — already at 15px, bump to 16px ── */
+.fi,
+input,
+textarea,
+select {
+    font-size: 16px !important; /* also prevents iOS zoom on focus */
+}
+
+/* ── Card body text — the small zinc-500 descriptions ── */
+.text-zinc-500,
+.text-zinc-400,
+.text-zinc-600 {
+    font-size: inherit;
+}
+
+/* ── Article prose body ── */
+.prose-body {
+    font-size: 20px !important;
+    line-height: 1.9 !important;
+}
+
+.prose-body h2 {
+    font-size: 30px !important;
+}
+
+.prose-body h3 {
+    font-size: 22px !important;
+}
+
+/* ── Security intelligence mono terminal ── */
+.terminal-body {
+    font-size: 13px !important;
+    line-height: 2 !important;
+}
+
+/* ── Badge text — keep compact but legible ── */
+.badge {
+    font-size: 11px !important;
+}
+
+/* ── Footer fine print — bump from 10px ── */
+footer p,
+footer a,
+footer span,
+footer li {
+    font-size: 13px !important;
+}
+
+/* ── Mobile — slightly more aggressive bump on small screens ── */
+@media (max-width: 768px) {
+    html {
+        font-size: 17px;
+    }
+
+    .text-xs,
+    .text-\[10px\],
+    .text-\[11px\] {
+        font-size: 13px !important;
+    }
+
+    .text-sm {
+        font-size: 15px !important;
+    }
+}
