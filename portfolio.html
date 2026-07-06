@@ -193,9 +193,67 @@
                 </div>
             </div>
 
+
+            <!-- IPS Promotions Hub -->
+            <div class="space-y-4">
+                <div class="iframe-container card-shadow border border-zinc-100 group">
+                    <iframe src="https://promo.intpanelshop.co.za/" scrolling="no" title="IPS Promotions Hub preview"></iframe>
+                    <div class="absolute inset-0 bg-zinc-900/0 group-hover:bg-zinc-900/5 transition-all cursor-pointer rounded-[1.5rem]" onclick="window.open('https://promo.intpanelshop.co.za/')"></div>
+                </div>
+                <div class="px-2">
+                    <div class="flex justify-between items-center mb-2">
+                        <h3 class="font-extrabold text-zinc-900 uppercase italic">IPS Promotions Hub</h3>
+                        <span class="text-[9px] font-black uppercase tracking-widest bg-lime-100 text-lime-700 px-3 py-1 rounded-full">SME Node</span>
+                    </div>
+                    <p class="text-sm text-zinc-500 font-light leading-relaxed">A high-performance promotions hub for International Panel Shop — Cape Town's premier autobody repair centre. 100+ suburb-specific landing pages, Sure Drive rewards integration, Mobicred finance, and a cinematic service showcase built for local SEO dominance across the Western Cape.</p>
+                </div>
+            </div>
+
+            <!-- Princess Vlei Lodge -->
+            <div class="space-y-4">
+                <div class="iframe-container card-shadow border border-zinc-100 group" id="pvl-container">
+                    <iframe id="pvl-iframe" src="" scrolling="no" title="Princess Vlei Lodge preview"></iframe>
+                    <div class="absolute inset-0 bg-zinc-900/0 group-hover:bg-zinc-900/5 transition-all cursor-pointer rounded-[1.5rem]" id="pvl-link"></div>
+                </div>
+                <div class="px-2">
+                    <div class="flex justify-between items-center mb-2">
+                        <h3 class="font-extrabold text-zinc-900 uppercase italic">Princess Vlei Lodge</h3>
+                        <span class="text-[9px] font-black uppercase tracking-widest bg-[#0f172a] text-[#84cc16] px-3 py-1 rounded-full">Hospitality</span>
+                    </div>
+                    <p class="text-sm text-zinc-500 font-light leading-relaxed">A cinematic hospitality landing page for a four-unit nature lodge on the edge of Princess Vlei wetland, Cape Town. Custom SVG bird illustrations, three-platform booking integration (Nightsbridge, TripSpace Global, Airbnb), and a full GEO indexing stack — built as Forge Vertical's first TripSpace partner property.</p>
+                </div>
+            </div>
+
         </div>
     </main>
 
     <div id="global-footer"></div>
+
+    <script>
+        // Princess Vlei Lodge — fallback to production domain when live
+        (function() {
+            var primary = 'https://www.princessvleilodge.co.za/';
+            var fallback = 'https://test-space-global.github.io/princessvleilodge/';
+            var iframe = document.getElementById('pvl-iframe');
+            var link = document.getElementById('pvl-link');
+            if (!iframe) return;
+            // Try primary, fall back if it errors (domain not live yet)
+            var img = new Image();
+            img.onload = function() {
+                iframe.src = primary;
+                link.onclick = function() { window.open(primary); };
+            };
+            img.onerror = function() {
+                iframe.src = fallback;
+                link.onclick = function() { window.open(fallback); };
+            };
+            // favicon.ico as a lightweight domain reachability check
+            img.src = 'https://www.princessvleilodge.co.za/favicon.ico?' + Date.now();
+            // Default to fallback immediately while check runs
+            iframe.src = fallback;
+            link.onclick = function() { window.open(fallback); };
+        })();
+    </script>
+
 </body>
 </html>
