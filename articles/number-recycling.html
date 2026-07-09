@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="South African phone networks recycle your number with as little as 90 days notice. The person who gets it inherits your bank OTPs, your Telegram 2FA, your WhatsApp history. This is a POPIA violation hiding in plain sight — and it just happened to us.">
+    <title>Your Phone Number Is Not Yours: The Recycling Crisis South Africa Refuses to Talk About | Forge Vertical</title>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Your Phone Number Is Not Yours: The Recycling Crisis South Africa Refuses to Talk About",
+      "description": "South African operators recycle prepaid numbers after as little as 90 days of inactivity — silently, without adequate warning, handing strangers access to your bank OTPs, 2FA codes, and digital identity. A first-hand account and the research that proves how serious this is.",
+      "author": {
+        "@type": "Person",
+        "name": "Jarrit Hosking",
+        "url": "https://www.forgevertical.com/about.html"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Forge Vertical",
+        "url": "https://www.forgevertical.com"
+      },
+      "datePublished": "2026-07-09",
+      "dateModified": "2026-07-09",
+      "mainEntityOfPage": "https://www.forgevertical.com/articles/number-recycling.html"
+    }
+    </script>
+
+    <script src="/global.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,500;0,800;1,800&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        .gradient-text {
+            background: linear-gradient(90deg, #10b981 0%, #84cc16 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text; display: inline-block; padding-bottom: 0.1em;
+        }
+        .prose-body { font-family: 'Lora', serif; font-size: 19px; line-height: 1.85; color: #27272a; }
+        .prose-body p { margin-bottom: 1.6em; }
+        .prose-body h2 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 28px; font-weight: 800; letter-spacing: -0.03em; color: #09090b; margin-top: 2.5em; margin-bottom: 0.6em; line-height: 1.2; }
+        .prose-body h3 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 20px; font-weight: 800; letter-spacing: -0.02em; color: #09090b; margin-top: 2em; margin-bottom: 0.5em; }
+        .prose-body strong { font-weight: 700; color: #09090b; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 17px; }
+        .prose-body a { color: #84cc16; text-decoration: underline; text-underline-offset: 3px; }
+        .prose-body code { font-family: 'JetBrains Mono', monospace; font-size: 14px; background: #f4f4f5; padding: 2px 6px; border-radius: 4px; }
+        .callout { background: #f4f4f5; border-left: 3px solid #84cc16; border-radius: 0 12px 12px 0; padding: 20px 24px; margin: 2em 0; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 15px; color: #3f3f46; line-height: 1.7; }
+        .callout.dark { background: #09090b; color: #a1a1aa; border-left-color: #84cc16; }
+        .callout.red { background: rgba(239,68,68,0.06); border-left-color: #ef4444; color: #3f3f46; }
+        .callout.amber { background: rgba(245,158,11,0.06); border-left-color: #f59e0b; color: #3f3f46; }
+        .pull-quote { font-family: 'Lora', serif; font-size: 24px; font-style: italic; color: #09090b; border-top: 2px solid #84cc16; border-bottom: 1px solid #e4e4e7; padding: 24px 0; margin: 2.5em 0; line-height: 1.5; }
+        .stat-card { background: #09090b; border-radius: 16px; padding: 24px; text-align: center; }
+        .stat-val { font-family: 'JetBrains Mono', monospace; font-size: 42px; font-weight: 700; color: #ef4444; line-height: 1; margin-bottom: 8px; }
+        .stat-lbl { font-size: 12px; color: #71717a; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; }
+        .operator-row { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid #f4f4f5; font-family: 'Plus Jakarta Sans', sans-serif; }
+        .img-caption { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #71717a; text-align: center; margin-top: 8px; letter-spacing: 0.05em; }
+        .checklist li { display: flex; gap: 12px; align-items: start; margin-bottom: 12px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 15px; color: #3f3f46; line-height: 1.6; }
+        .checklist li::before { content: '→'; color: #84cc16; font-weight: 800; flex-shrink: 0; }
+    </style>
+</head>
+<body class="bg-white text-zinc-900 antialiased">
+
+    <div id="global-nav"></div>
+
+    <article class="pt-36 pb-24">
+
+        <!-- Header -->
+        <header class="max-w-3xl mx-auto px-6 mb-12">
+            <div class="flex items-center gap-3 mb-6">
+                <a href="/articles.html" class="mono text-[10px] text-zinc-400 hover:text-zinc-600 transition-colors uppercase tracking-widest">← Articles</a>
+                <span class="text-zinc-300">·</span>
+                <span class="mono text-[10px] font-bold text-red-500 uppercase tracking-widest border border-red-200 px-3 py-1 rounded-full">Security · Public Interest</span>
+            </div>
+
+            <h1 class="text-4xl md:text-5xl font-extrabold tracking-tighter leading-[0.9] mb-6 text-zinc-900">
+                Your phone number<br>
+                is not yours.<br>
+                <span class="gradient-text italic">The recycling crisis nobody warned you about.</span>
+            </h1>
+
+            <p class="text-xl text-zinc-500 font-light leading-relaxed mb-8 max-w-2xl">
+                South African networks recycle prepaid numbers after as little as 90 days of inactivity. The person who gets your old number inherits your bank OTPs, your Telegram 2FA, your WhatsApp blocks, and pieces of your digital identity. This happened to us — twice. And a Princeton University study proves it is far worse than most people realise.
+            </p>
+
+            <div class="bg-red-50 border border-red-100 rounded-2xl p-5 mb-8">
+                <p class="font-bold text-red-700 text-sm mb-1">⚠️ Public interest disclosure</p>
+                <p class="text-red-600 text-sm leading-relaxed">This article contains first-hand accounts from directly affected individuals. Names are withheld where requested. All operator recycling timelines are sourced from official operator documentation and ICASA's July 2026 Numbering Plan Fourth Amendment Regulations.</p>
+            </div>
+
+            <div class="flex items-center gap-4 pb-8 border-b border-zinc-100">
+                <div>
+                    <div class="font-bold text-sm text-zinc-900">Jarrit Hosking</div>
+                    <div class="mono text-[10px] text-zinc-400 uppercase tracking-widest">Principal Architect · Forge Vertical · July 9, 2026</div>
+                </div>
+                <div class="ml-auto mono text-[10px] text-zinc-400 uppercase tracking-widest">12 min read</div>
+            </div>
+        </header>
+
+        <!-- Body -->
+        <div class="max-w-3xl mx-auto px-6 prose-body">
+
+            <p>
+                I got a new SIM card this week. Within minutes of activating it, I discovered the number had a history — a WhatsApp Business account that had been permanently banned, and an active Telegram 2FA prompt for a login that was not mine. Someone else's account. Someone else's email address. Live, on a number I had just been handed as "new."
+            </p>
+
+            <p>
+                This was not a hack. Nobody broke in. The previous owner of that number simply stopped loading airtime. The network recycled it. And without any warning, any cooling-off period worth the name, or any mechanism to clean the number's digital footprint before reassignment, it landed in my hands still carrying everything its previous owner had attached to it.
+            </p>
+
+            <p>
+                My father's experience was different but equally alarming. He uses WiFi for most of his communication — WhatsApp over data, calls over WiFi, no SMS habit. He does not load airtime frequently because he does not need to. One day he simply found that the number was gone. No appeal. No notice that he could act on in time. A number he had used for years, linked to his bank accounts, his email recovery, his contacts — quietly decommissioned and scheduled for reassignment to a stranger.
+            </p>
+
+            <div class="pull-quote">
+                "A number he had used for years, linked to his bank, his email recovery, his contacts — quietly decommissioned and scheduled for reassignment to a stranger."
+            </div>
+
+            <p>
+                These are not edge cases. They are two instances of a systemic practice that South African networks have been running quietly for years, that ICASA only just moved to address in July 2026, and that carries security implications so serious that Princeton University dedicated an entire study to documenting them.
+            </p>
+
+            <h2>How the recycling works — and how fast</h2>
+
+            <p>
+                Every South African mobile network recycles prepaid numbers. The timelines vary, but none of them are generous:
+            </p>
+
+        </div>
+
+        <!-- Operator table -->
+        <div class="max-w-3xl mx-auto px-6 my-8">
+            <div class="bg-zinc-50 border border-zinc-100 rounded-2xl p-6">
+                <p class="mono text-[10px] text-zinc-400 uppercase tracking-widest mb-4">// SA OPERATOR RECYCLING TIMELINES · pre-July 2026</p>
+                <div class="operator-row">
+                    <span class="font-bold text-zinc-900">MTN</span>
+                    <span class="mono text-sm text-red-500 font-bold">90 days inactivity</span>
+                </div>
+                <div class="operator-row">
+                    <span class="font-bold text-zinc-900">Cell C</span>
+                    <span class="mono text-sm text-red-500 font-bold">90 days inactivity</span>
+                </div>
+                <div class="operator-row">
+                    <span class="font-bold text-zinc-900">Telkom</span>
+                    <span class="mono text-sm text-red-500 font-bold">90 days inactivity</span>
+                </div>
+                <div class="operator-row border-none">
+                    <span class="font-bold text-zinc-900">Vodacom</span>
+                    <span class="mono text-sm text-amber-500 font-bold">83–100 days inactivity</span>
+                </div>
+                <p class="mono text-[10px] text-zinc-400 mt-4">Sources: Daily Maverick 2023 · Vodacom official support documentation · MTN Corporate Affairs</p>
+            </div>
+        </div>
+
+        <div class="max-w-3xl mx-auto px-6 prose-body">
+
+            <p>
+                Until this month, there was no standardised process. Networks could — and did — recycle numbers with minimal notice, inconsistent quarantine periods, and no obligation to clean the number's associations before handing it to a new subscriber. The previous owner might not know until they tried to make a call and found their SIM dead.
+            </p>
+
+            <p>
+                <strong>Inactivity</strong> as defined by the operators means no revenue-generating activity — no voice calls, no SMS, no data, no airtime top-up. Under this definition, a person who uses their phone exclusively over WiFi (calls via WhatsApp, no SMS habit, no airtime reload) is classified as inactive even if they are using the number every day. That is exactly what happened to my father. He was not inactive. He was just not generating revenue for Vodacom in the specific ways Vodacom chose to define as "activity."
+            </p>
+
+            <div class="callout red">
+                <strong style="color:#ef4444;">The definition of "active" is the problem:</strong> Using WhatsApp over WiFi, receiving calls over internet, browsing over a home connection — none of this counts as activity under the operators' recycling criteria. You can be a daily active user of your number and still lose it.
+            </div>
+
+            <h2>What the new ICASA regulations actually say</h2>
+
+            <p>
+                On July 1, 2026 — this month — ICASA published the Numbering Plan Fourth Amendment Regulations, finally creating a standardised national framework. The headline numbers sound like progress:
+            </p>
+
+            <p>
+                Operators must notify subscribers after 60 consecutive days of inactivity, then allow a 30-day grace period. After 90 days total, the number can be deactivated. After deactivation, it must be quarantined for one month before reassignment.
+            </p>
+
+            <p>
+                Subscribers who know they will be inactive — for example, travelling — can apply for an exemption valid for 183 days, at no cost.
+            </p>
+
+            <p>
+                On paper, this is better than what existed before. But the detail reveals how much remains unresolved.
+            </p>
+
+            <div class="callout amber">
+                <strong>What the regulations do not address:</strong> There is no obligation on operators to clean a number's digital associations before reassignment. No requirement to notify banks, WhatsApp, Telegram, or any platform that the number has changed hands. No mechanism for the previous owner to audit which accounts remain linked to their number. The quarantine period — 30 days — is designed to separate the number from its previous use, but it provides no technical guarantee that associations are cleared. A month after your number is deactivated, it can be handed to a stranger with your bank's OTP routing still pointing at it.
+            </div>
+
+            <p>
+                Vodacom pushed for the quarantine to be cut to seven days. ICASA rejected this. MTN asked for three months to implement the new system. ICASA gave everyone six months. The rules take full practical effect around January 2027.
+            </p>
+
+            <p>
+                Until then, the old rules still apply in practice. And even after January 2027, the fundamental security problem — that recycled numbers inherit active digital associations — remains unaddressed.
+            </p>
+
+            <h2>The Princeton study: what the research actually found</h2>
+
+            <p>
+                In 2020 and 2021, researchers from Princeton University's Department of Computer Science and Center for Information Technology Policy published a landmark study: <em>Security and Privacy Risks of Number Recycling at Mobile Carriers in the United States.</em>
+            </p>
+
+            <p>
+                They examined 259 phone numbers available for new subscribers at two major US carriers. The findings should be on the front page of every newspaper in South Africa right now.
+            </p>
+
+        </div>
+
+        <!-- Stats grid -->
+        <div class="max-w-3xl mx-auto px-6 my-10">
+            <p class="mono text-[10px] text-zinc-400 uppercase tracking-widest mb-4">// Princeton University Study — Number Recycling Security Risks · 2021</p>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                <div class="stat-card">
+                    <div class="stat-val">66%</div>
+                    <div class="stat-lbl">of recycled numbers still linked to online accounts</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-val">100</div>
+                    <div class="stat-lbl">of 259 numbers linked to leaked credentials on the web</div>
+                </div>
+                <div class="stat-card col-span-2 md:col-span-1">
+                    <div class="stat-val">400%</div>
+                    <div class="stat-lbl">increase in SIM-swap attacks 2020–2024 · FBI IC3</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="max-w-3xl mx-auto px-6 prose-body">
+
+            <p>
+                Two-thirds of recycled numbers — still linked to accounts. Not cleared. Not notified. Still pointing to the previous owner's email, banking profile, and social media. The person who receives that number receives those links with it.
+            </p>
+
+            <p>
+                The Princeton researchers identified five specific attack categories enabled by number recycling. Every single one of them is possible with South African numbers right now:
+            </p>
+
+            <p>
+                <strong>Direct account takeover.</strong> The new owner receives the previous owner's 2FA SMS codes. With a leaked password — freely available on data breach markets — they can log into the account without even triggering a "forgot password" flow. The researchers found 100 numbers linked to email addresses that had already appeared in password breaches on HaveIBeenPwned.
+            </p>
+
+            <p>
+                <strong>Targeted takeover.</strong> An attacker who knows someone has lost their number can monitor the recycling pool and deliberately acquire that specific number. Once obtained, every SMS-based account recovery goes to them.
+            </p>
+
+            <p>
+                <strong>Smishing.</strong> A new subscriber receiving texts intended for the previous owner is more likely to trust them. The texts arrive in context — from banks, from services the previous owner used. A malicious new owner can use this to complete social engineering attacks.
+            </p>
+
+            <p>
+                <strong>Mass exploitation.</strong> Attackers can purchase blocks of recycled numbers, test each one programmatically for live account associations, and conduct bulk account takeovers. This is not theoretical. The Consumer Financial Protection Bureau in the US observed a 35% increase in credit fraud cases tied to recycled numbers.
+            </p>
+
+            <p>
+                <strong>Doubly insecure configuration.</strong> The term coined in the Princeton study for accounts that use SMS both for 2FA login and for account recovery — meaning a recycled number provides complete account control, no password required.
+            </p>
+
+            <p>
+                Professor Arvind Narayanan of Princeton, one of the study's authors, stated the recommendation plainly: <em>"If you need to give up your number, unlink it from online services first. Consider low-cost number 'parking' services. Use more secure alternatives to SMS-2FA such as authenticator apps."</em>
+            </p>
+
+            <p>
+                The problem, of course, is that most people do not give up their number voluntarily. It is taken from them — as it was taken from my father — with minimal warning and no practical time to unlink anything.
+            </p>
+
+            <h2>The POPIA dimension</h2>
+
+            <p>
+                South Africa's Protection of Personal Information Act is explicit: personal information may only be processed with the knowledge and consent of the data subject, must be kept secure, and must not be retained longer than necessary. The Information Regulator, led by Advocate Pansy Tlakula, has enforcement powers including administrative fines of up to R10 million.
+            </p>
+
+            <p>
+                Number recycling, as currently practised, sits in uncomfortable tension with several POPIA principles simultaneously.
+            </p>
+
+            <p>
+                When a number is recycled and a new subscriber begins receiving OTP messages, banking alerts, and 2FA codes intended for the previous owner, that is personal information being processed by an unauthorised party. The previous owner did not consent to their bank communications being routed to a stranger. The new owner did not consent to processing the previous owner's personal information. The bank did not know the number had changed hands.
+            </p>
+
+            <p>
+                The RICA Act compounds this. Every SIM card in South Africa must be RICA-registered — linked to a verified identity document and address. When a number is recycled, the new owner RICA-registers it to themselves. But the digital ecosystem — every platform that authenticated using that number — still associates it with the previous owner's RICA-verified identity. Two people, one RICA'd number, no resolution mechanism.
+            </p>
+
+            <div class="callout dark">
+                <span class="text-[#84cc16] font-bold block mb-2 font-sans text-sm">The compliance question nobody is asking:</span>
+                <span class="text-zinc-400">If an operator recycles a number without adequately notifying the previous owner, without a meaningful quarantine period, and without requiring platforms to update their records — are they compliant with POPIA's information security obligations? The Information Regulator has not yet ruled on this. It should.</span>
+            </div>
+
+            <h2>The business model problem — and a solution</h2>
+
+            <p>
+                The networks are not recycling numbers out of malice. They are recycling them because phone numbers are a finite national resource — ICASA allocates them, and networks are legally obligated to use their allocation efficiently. The pressure to recycle comes partly from regulation, not despite it.
+            </p>
+
+            <p>
+                But the underlying tension is real and worth naming: the networks built their revenue models on voice calls and SMS. WhatsApp, iMessage, Signal, WiFi calling, and data-first communication have made those models increasingly irrelevant. A prepaid subscriber who uses their number entirely over data — never making a call, never sending an SMS, never loading airtime — generates close to zero revenue for the operator by traditional metrics. So the operator flags the number as inactive and recycles it.
+            </p>
+
+            <p>
+                The subscriber, meanwhile, is active every day. Their number is essential infrastructure — linked to their bank, their employer's HR system, their children's school, their doctor's patient portal, their pension fund. The operator's definition of "inactive" does not map to reality in any meaningful sense.
+            </p>
+
+            <div class="pull-quote">
+                "The operator's definition of 'inactive' does not map to reality. A person using WhatsApp every day on WiFi is not inactive. They are just not profitable enough by legacy metrics."
+            </div>
+
+            <p>
+                There is a straightforward solution that does not require regulatory intervention, does not deprive operators of revenue, and does not require users to change their behaviour: <strong>a SIM retention fee.</strong>
+            </p>
+
+            <p>
+                A nominal monthly charge — R10 per SIM is a reasonable starting point — for maintaining number reservation independently of usage. This serves everyone:
+            </p>
+
+            <ul class="checklist list-none pl-0 mb-8">
+                <li>Subscribers who use WiFi exclusively retain their number without having to "prove" activity by loading airtime they do not need</li>
+                <li>Operators generate a small but meaningful revenue stream from the millions of SIMs that currently generate nothing</li>
+                <li>The number pool remains available for genuinely abandoned numbers while protecting active-but-data-first users</li>
+                <li>The digital security risk from recycled numbers is dramatically reduced because fewer numbers cycle through the recycling pool</li>
+            </ul>
+
+            <p>
+                MTN and FNB Connect argued to ICASA during the July 2026 consultation that operators should be permitted to charge a nominal retention fee for the exemption process. ICASA declined — but notably, it did so partly because operators had already argued for longer inactivity periods, suggesting the cost of retaining a dormant number is small. A small recurring fee would resolve that ambiguity entirely and provide a sustainable model for number reservation.
+            </p>
+
+            <h2>What you can do right now</h2>
+
+            <p>
+                The regulatory fix is coming — but slowly. ICASA's new rules give operators until January 2027 to implement, and even then the one-month quarantine does not solve the underlying security problem. Here is what you can do today to protect yourself and your family:
+            </p>
+
+        </div>
+
+        <!-- Action list -->
+        <div class="max-w-3xl mx-auto px-6 my-8">
+            <div class="bg-zinc-50 border border-zinc-100 rounded-2xl p-6 space-y-4">
+                <p class="mono text-[10px] text-zinc-400 uppercase tracking-widest mb-2">// PROTECT YOURSELF NOW</p>
+
+                <div class="flex gap-4 p-4 bg-white rounded-xl border border-zinc-100">
+                    <span class="mono text-sm font-bold text-[#84cc16] flex-shrink-0">01</span>
+                    <div>
+                        <div class="font-bold text-zinc-900 text-sm mb-1">Switch your bank OTPs to an authenticator app</div>
+                        <p class="text-zinc-500 text-sm leading-relaxed">Google Authenticator, Microsoft Authenticator, or Authy. These generate codes locally on your device — no phone number involved. If your bank supports it, enable it now. This is the single most important action you can take.</p>
+                    </div>
+                </div>
+
+                <div class="flex gap-4 p-4 bg-white rounded-xl border border-zinc-100">
+                    <span class="mono text-sm font-bold text-[#84cc16] flex-shrink-0">02</span>
+                    <div>
+                        <div class="font-bold text-zinc-900 text-sm mb-1">Audit every account linked to your phone number</div>
+                        <p class="text-zinc-500 text-sm leading-relaxed">Check your accounts at your bank, Google, Apple, WhatsApp, Telegram, Instagram, Facebook, LinkedIn, and any financial platform. Know which ones would send recovery codes to your number — and update each one to use an authenticator app or backup email instead.</p>
+                    </div>
+                </div>
+
+                <div class="flex gap-4 p-4 bg-white rounded-xl border border-zinc-100">
+                    <span class="mono text-sm font-bold text-[#84cc16] flex-shrink-0">03</span>
+                    <div>
+                        <div class="font-bold text-zinc-900 text-sm mb-1">Keep your number active by operator standards — not yours</div>
+                        <p class="text-zinc-500 text-sm leading-relaxed">Even if you use WiFi exclusively, ensure your SIM shows revenue-generating activity at least once every 60 days. A R2 airtime purchase or a single SMS every two months is enough to reset the inactivity clock. Set a calendar reminder.</p>
+                    </div>
+                </div>
+
+                <div class="flex gap-4 p-4 bg-white rounded-xl border border-zinc-100">
+                    <span class="mono text-sm font-bold text-[#84cc16] flex-shrink-0">04</span>
+                    <div>
+                        <div class="font-bold text-zinc-900 text-sm mb-1">If you are getting a new number — ask if it is recycled</div>
+                        <p class="text-zinc-500 text-sm leading-relaxed">You have the right to ask your operator whether the number you are being assigned was previously owned. They may not be obligated to tell you, but ask. If you receive immediate indications of a prior owner — unexpected messages, blocked platform access, arriving 2FA codes — report it to the Information Regulator and contact the operator immediately.</p>
+                    </div>
+                </div>
+
+                <div class="flex gap-4 p-4 bg-white rounded-xl border border-zinc-100">
+                    <span class="mono text-sm font-bold text-[#84cc16] flex-shrink-0">05</span>
+                    <div>
+                        <div class="font-bold text-zinc-900 text-sm mb-1">If you are losing a number — delink everything first</div>
+                        <p class="text-zinc-500 text-sm leading-relaxed">Before you let a number go — whether deliberately or because you cannot prevent it — delink it from every account you can access. Change every SMS-based 2FA to an authenticator app. Update your bank, your email provider, your social accounts. Once the number is reassigned, you lose the ability to do this.</p>
+                    </div>
+                </div>
+
+                <div class="flex gap-4 p-4 bg-white rounded-xl border border-zinc-100">
+                    <span class="mono text-sm font-bold text-[#84cc16] flex-shrink-0">06</span>
+                    <div>
+                        <div class="font-bold text-zinc-900 text-sm mb-1">Use Signal, not SMS, for sensitive communications</div>
+                        <p class="text-zinc-500 text-sm leading-relaxed">Signal ties to a phone number but encrypts end-to-end and can be migrated to a new number. More importantly, move away from SMS-based 2FA as a primary security layer. It was never designed to be the last line of defence for your bank account.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="max-w-3xl mx-auto px-6 prose-body">
+
+            <h2>What we need from operators — and from ICASA</h2>
+
+            <p>
+                The July 2026 regulations are a start. They are not enough. These are the specific changes that would address the actual security risk rather than just the notification gap:
+            </p>
+
+            <p>
+                <strong>Mandatory platform notification.</strong> Before a number is reassigned, operators should be required to notify major platforms — WhatsApp, Telegram, the major banks, Google, Apple — that the number is changing hands. The technical infrastructure to do this exists. Telesign and similar services already provide real-time number deactivation signals to businesses that pay for them. Make it mandatory and standardised.
+            </p>
+
+            <p>
+                <strong>A meaningful quarantine period.</strong> Thirty days is not enough to clear a number's digital associations. Six months — matching the exemption period ICASA already uses — would give previous owners time to discover their number is gone and update their accounts.
+            </p>
+
+            <p>
+                <strong>A SIM retention product.</strong> A nominal monthly fee — R10 is reasonable — for number reservation regardless of usage activity. This serves WiFi-first users, travellers, and anyone whose usage pattern does not fit the voice-and-SMS revenue model the operators built their inactivity definitions around.
+            </p>
+
+            <p>
+                <strong>POPIA enforcement.</strong> The Information Regulator should issue formal guidance on whether the current recycling practice, and specifically the transfer of OTP routing and 2FA associations to unauthorised parties, constitutes a POPIA violation. The Act is clear on data security and purpose limitation. Number recycling without adequate clearing measures appears to breach both.
+            </p>
+
+            <div class="callout">
+                <strong>The question every South African should ask their network operator:</strong> "If my number is recycled without my knowledge, are you liable for any financial loss I suffer because a stranger received my bank OTP?" The answer, currently, is almost certainly no. It should not be.
+            </div>
+
+            <h2>The house analogy</h2>
+
+            <p>
+                When you buy a house in South Africa, the seller is legally required to disclose known defects, existing encumbrances, and any third-party claims on the property. You do not buy a house and discover three months later that the previous owner's creditors have a claim on the garage. The law protects you.
+            </p>
+
+            <p>
+                A phone number in 2026 is infrastructure in the same way a house is infrastructure. It is tied to your financial accounts, your legal identity through RICA, your employment records, your medical history, your children's schools. The person who gets your recycled number does not just get a string of digits. They get a key to a house that was never properly decommissioned before it was handed to them.
+            </p>
+
+            <p>
+                The buyer of that house — the new subscriber — has no way to know what doors that key opens. And the previous owner does not know they have lost their key until they try to open a door and find it does not work anymore.
+            </p>
+
+            <p>
+                The networks built a system that serves their operational needs and their legal obligation to use numbering resources efficiently. They did not build a system that protects the people whose identities are attached to those numbers. ICASA's July 2026 regulations begin to address the notification gap. They do not address the security gap.
+            </p>
+
+            <p>
+                Until they do, the most important thing any South African can do is treat their phone number as temporary, fragile infrastructure — not permanent identity. Because as of today, that is exactly what it is.
+            </p>
+
+        </div>
+
+        <!-- Image -->
+        <div class="max-w-3xl mx-auto px-6 my-10">
+            <img src="https://forge-vertical.github.io/assets/images/shutterstock_2270488801-1.jpg"
+                 alt="Phone number security and SIM card recycling"
+                 class="rounded-2xl w-full object-cover"
+                 style="max-height:420px;"
+                 loading="lazy">
+            <p class="img-caption">A phone number in 2026 is not just a contact detail — it is the key to your banking, your identity, and your digital life · Shutterstock</p>
+        </div>
+
+        <!-- Footer -->
+        <div class="max-w-3xl mx-auto px-6 mt-8 pt-8 border-t border-zinc-100">
+            <div class="bg-zinc-50 rounded-2xl p-6 mb-8">
+                <p class="mono text-[10px] text-zinc-400 uppercase tracking-widest mb-3">// Sources & further reading</p>
+                <ul class="space-y-2 text-sm text-zinc-500 font-sans">
+                    <li>Princeton University — Security and Privacy Risks of Number Recycling at Mobile Carriers · recyclednumbers.cs.princeton.edu</li>
+                    <li>Daily Maverick — Cell number recycling by SA networks leaves customers fuming · September 12, 2023</li>
+                    <li>TechCentral — New rules on how operators can cut off your dormant SIM · July 2026</li>
+                    <li>ICASA — Numbering Plan Fourth Amendment Regulations, 2026 · Gazetted July 1, 2026</li>
+                    <li>Telesign — Number Deactivation and the Recycled Phone Number Dilemma · 2025</li>
+                    <li>ID Dataweb — Recycled Phone Number Fraud · April 2026</li>
+                    <li>FBI IC3 — 400% increase in SIM-swap attacks 2020–2024</li>
+                    <li>Arvind Narayanan, Princeton — public statement on number recycling security advice</li>
+                </ul>
+            </div>
+
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+                <div>
+                    <div class="mono text-[10px] text-zinc-400 uppercase tracking-widest mb-1">Written by</div>
+                    <div class="font-bold text-zinc-900">Jarrit Hosking</div>
+                    <div class="mono text-[10px] text-zinc-400">Principal Architect · Forge Vertical · Cape Town</div>
+                </div>
+                <div class="flex gap-3">
+                    <a href="/articles.html" class="mono text-[10px] font-bold uppercase tracking-widest border border-zinc-200 px-5 py-3 rounded-xl hover:border-zinc-400 transition-all text-zinc-600">← All articles</a>
+                    <a href="/onboard.html" style="background:linear-gradient(90deg,#10b981,#84cc16);" class="mono text-[10px] font-bold uppercase tracking-widest px-5 py-3 rounded-xl text-white hover:opacity-90 transition-all">Start a project</a>
+                </div>
+            </div>
+        </div>
+
+    </article>
+
+    <div id="global-footer"></div>
+
+</body>
+</html>
