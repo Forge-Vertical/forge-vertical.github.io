@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Jarrit Hosking built Forge Vertical from a privacy-obsessed teenager fixing computers in Cape Town. The story of Prinymity, the collision repair trade, China, security research, and how AI changed everything.">
+    <title>From Prinymity to Forge Vertical: A Founder's Story | Forge Vertical</title>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "From Prinymity to Forge Vertical: How a Privacy-Obsessed Kid Built a Tech Company Without a Degree",
+      "description": "Jarrit Hosking started with a second-hand PC, a Mobirise licence, and a name nobody could pronounce. This is the full story of how that became Forge Vertical.",
+      "author": {
+        "@type": "Person",
+        "name": "Jarrit Hosking",
+        "url": "https://www.forgevertical.com/about.html"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Forge Vertical",
+        "url": "https://www.forgevertical.com"
+      },
+      "datePublished": "2026-07-19",
+      "dateModified": "2026-07-19",
+      "mainEntityOfPage": "https://www.forgevertical.com/articles/founder-story.html"
+    }
+    </script>
+
+    <script src="/global.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,500;0,800;1,800&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/typography.css">
+
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        .gradient-text { background: linear-gradient(90deg, #10b981 0%, #84cc16 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; display: inline-block; padding-bottom: 0.1em; }
+        .prose-body { font-family: 'Lora', serif; font-size: 19px; line-height: 1.85; color: #27272a; }
+        .prose-body p { margin-bottom: 1.6em; }
+        .prose-body h2 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 28px; font-weight: 800; letter-spacing: -0.03em; color: #09090b; margin-top: 2.5em; margin-bottom: 0.6em; line-height: 1.2; }
+        .prose-body h3 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 20px; font-weight: 800; letter-spacing: -0.02em; color: #09090b; margin-top: 2em; margin-bottom: 0.5em; }
+        .prose-body strong { font-weight: 700; color: #09090b; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 17px; }
+        .prose-body a { color: #84cc16; text-decoration: underline; text-underline-offset: 3px; }
+        .prose-body em { font-style: italic; color: #52525b; }
+        .callout { background: #f4f4f5; border-left: 3px solid #84cc16; border-radius: 0 12px 12px 0; padding: 20px 24px; margin: 2em 0; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 15px; color: #3f3f46; line-height: 1.7; }
+        .callout.dark { background: #09090b; color: #a1a1aa; border-left-color: #84cc16; }
+        .pull-quote { font-family: 'Lora', serif; font-size: 24px; font-style: italic; color: #09090b; border-top: 2px solid #84cc16; border-bottom: 1px solid #e4e4e7; padding: 24px 0; margin: 2.5em 0; line-height: 1.5; }
+        .timeline-dot { position: relative; padding-left: 28px; }
+        .timeline-dot::before { content: ''; position: absolute; left: 0; top: 8px; width: 8px; height: 8px; border-radius: 50%; background: #84cc16; }
+        .chapter-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #84cc16; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 6px; display: block; }
+        .img-caption { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #71717a; text-align: center; margin-top: 8px; letter-spacing: 0.05em; }
+    </style>
+</head>
+<body class="bg-white text-zinc-900 antialiased">
+
+    <div id="global-nav"></div>
+
+    <article class="pt-36 pb-24">
+
+        <!-- Header -->
+        <header class="max-w-3xl mx-auto px-6 mb-12">
+            <div class="flex items-center gap-3 mb-6">
+                <a href="/articles.html" class="mono text-[10px] text-zinc-400 hover:text-zinc-600 transition-colors uppercase tracking-widest">← Articles</a>
+                <span class="text-zinc-300">·</span>
+                <span class="mono text-[10px] font-bold text-[#84cc16] uppercase tracking-widest border border-[#84cc16]/30 px-3 py-1 rounded-full">Founder · Origin</span>
+            </div>
+
+            <h1 class="text-4xl md:text-5xl font-extrabold tracking-tighter leading-[0.9] mb-6 text-zinc-900">
+                From Prinymity<br>
+                to Forge Vertical:<br>
+                <span class="gradient-text italic">building without permission.</span>
+            </h1>
+
+            <p class="text-xl text-zinc-500 font-light leading-relaxed mb-8 max-w-2xl">
+                I started with a second-hand PC, a Mobirise licence, and a business name nobody could pronounce. No degree. No mentor. No roadmap. This is the full story of how that became Forge Vertical — and why the path matters more than the destination.
+            </p>
+
+            <div class="bg-zinc-50 border border-zinc-100 rounded-2xl p-5 mb-8 flex items-start gap-4">
+                <div>
+                    <div class="font-bold text-zinc-900 text-sm mb-1">Jarrit Hosking</div>
+                    <div class="mono text-[10px] text-zinc-400 uppercase tracking-widest">Founder · Forge Vertical · Cape Town, South Africa</div>
+                    <div class="mono text-[10px] text-zinc-400 mt-1">July 2026 · 15 min read</div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Body -->
+        <div class="max-w-3xl mx-auto px-6 prose-body">
+
+            <span class="chapter-label">// Chapter 01 — The Name Nobody Could Pronounce</span>
+
+            <p>
+                The name was supposed to be clever. <em>Pri</em> for privacy. <em>Nymity</em> for anonymity. Put them together and you get Prinymity — a word that communicated exactly what I cared about and absolutely nothing else to anyone who saw it for the first time.
+            </p>
+
+            <p>
+                "Is it Prince-ymity?" "Prin-ee-mity?" "Prin... what?" I heard every variation. The fumbling became a running joke. But the idea behind the name was serious — I had been obsessed with privacy, anonymity, and how digital systems worked since before I had the vocabulary to describe why. The name was a signal to the three people who would get it immediately, and an interesting puzzle for everyone else.
+            </p>
+
+            <p>
+                Prinymity launched around 2018 to 2020. I was building custom PCs, fixing computers, and designing small-business websites using Mobirise — a drag-and-drop builder that was genuinely good for what it was at the time. Cape Town. Self-taught. No formal qualification beyond primary school, and a determination that the absence of a certificate was not the same as the absence of ability.
+            </p>
+
+            <div class="pull-quote">
+                "The absence of a certificate is not the same as the absence of ability. I never believed otherwise."
+            </div>
+
+            <p>
+                One of my first real gigs was setting up an i5 Lenovo for an actuary. Full setup — printer, Office installation, the works. But the part I remember most was the optimisation pass at the end: stripping visual effects, setting the CPU performance profile to maximum throughput, minimum at 5% to avoid unnecessary throttling. Not because it was on a checklist. Because it bothered me to hand someone a machine that was not running at what it was capable of. That instinct — extract the actual performance from whatever you are working with — has not changed.
+            </p>
+
+            <h2>The trades, TEFL, and China</h2>
+
+            <span class="chapter-label">// Chapter 02 — Learning with your hands</span>
+
+            <p>
+                Before the websites and the code, there was panel beating. I trained in the collision repair trade at Lance's Panel &amp; Spray — the same family business that would later become one of Forge Vertical's first clients, and the environment that gave birth to the Sure Drive loyalty system and Aurora Repair.
+            </p>
+
+            <p>
+                Panel beating is a precision craft that most people do not think of as technical work. It is. Reading a panel for stress lines, understanding how metal moves under heat, knowing the difference between a repair that will hold and one that looks right today and fails in six months — that is diagnostic thinking applied to physical materials. The same way a developer reads a stack trace or a security researcher traces a request through an application. The medium is different. The discipline is the same.
+            </p>
+
+            <p>
+                Then there was China. I am TEFL-certified — TQUK Level 5 through The TEFL Academy, 2017 and 2018 — and I went to teach English. It was one of the better decisions I have made. Living and working in an environment where you do not speak the language, where every system works differently, where you have to solve daily problems without the scaffolding you normally rely on — it builds a particular kind of adaptability. You learn to read signals rather than words. You learn that most problems have a workaround if you are willing to look for one rather than wait for permission to find it.
+            </p>
+
+            <p>
+                I also spent time as a safety-testing crew member for stunts on <em>Fear Factor India</em>, filmed in Cape Town. The job is exactly what it sounds like: you run the stunt before the talent does, identifying what can go wrong before anyone is in danger. Applied risk assessment. Physical consequence. Not entirely unlike security research, as it turns out.
+            </p>
+
+            <h2>Lockdown and the pivot that wasn't</h2>
+
+            <span class="chapter-label">// Chapter 03 — When the world stopped, I started</span>
+
+            <p>
+                COVID-19 lockdown in South Africa was one of the strictest in the world. For many businesses, it was the end. For Prinymity, it was unexpectedly clarifying. When you cannot go anywhere and most physical commerce stops, the internet becomes the only channel for everything. Businesses that had been ignoring their web presence for years suddenly understood why it mattered. Small operators who had been running on word-of-mouth suddenly needed a searchable, credible digital presence.
+            </p>
+
+            <p>
+                I was ready for that moment, in a limited but real way. The work was Mobirise websites, basic SEO, some local directory listings. Nothing architecturally complex. But it was real work solving real problems for real clients, and it taught me the gap between what most small businesses had online and what they actually needed.
+            </p>
+
+            <p>
+                Prinymity was not a failure. It was a proof of concept — proof that I could find clients, deliver work, and maintain relationships without a credential to hide behind. The limitation was not the clients or the demand. It was the tools. Mobirise had a ceiling and I had hit it. I needed to build things that Mobirise could not build.
+            </p>
+
+            <div class="callout">
+                <strong>The Prinymity domain is still live and indexed.</strong> Years of clean history, genuine backlinks, and consistent presence make it real SEO equity. <a href="https://www.google.com/search?q=prinymity" target="_blank" rel="noopener noreferrer">Search for Prinymity</a> — it is there. Forge Vertical is Prinymity with a new face, a deeper stack, and a much clearer vision of what it is building toward.
+            </div>
+
+            <h2>Learning to code — properly</h2>
+
+            <span class="chapter-label">// Chapter 04 — HTML to Firebase, one rabbit hole at a time</span>
+
+            <p>
+                The self-directed education path is not glamorous to describe. Udemy courses in HTML, CSS, JavaScript, Python, C++ fundamentals. Hours on YouTube. Documentation. Stack Overflow. Building things that broke, understanding why they broke, building them again. No bootcamp, no cohort, no one to ask when something did not make sense except forums and documentation and the willingness to sit with a problem until it gave up its answer.
+            </p>
+
+            <p>
+                What changed the rate of progress was the arrival of capable AI tools as genuine development partners. Not as autocomplete. Not as a search engine replacement. As actual collaborators that could reason about architecture, suggest approaches I had not considered, catch errors in logic before they reached production, and help me move at a speed that would otherwise require a team.
+            </p>
+
+            <p>
+                <strong>I am explicit about this because I think the dishonesty around AI-assisted development is counterproductive.</strong> A significant portion of the industry pretends that AI tools are just faster autocomplete, used only for boilerplate, while quietly depending on them for everything. That pretence serves nobody. What I have learned is that directing AI development tools effectively is itself a skill — a real one, with a high ceiling — and that the person who knows what to build, why to build it, and whether the output is correct or not is the person doing the actual work. The AI is a tool. An exceptional one. But a tool.
+            </p>
+
+            <h2>Aurora, Sure Drive, and the family business problem</h2>
+
+            <span class="chapter-label">// Chapter 05 — Building for a problem you already understand</span>
+
+            <p>
+                The best projects I have built came from problems I lived with before I knew how to solve them technically.
+            </p>
+
+            <p>
+                <strong>Aurora Repair</strong> exists because I watched the collision repair industry — the one I trained in — operate on paper, phone calls, and manual quotes for years. Getting from a damaged car to an accurate, trustworthy repair quote takes real time and real back-and-forth between insurers and repairers. I built an AI-driven assessment engine that does OCR licence-plate scanning, pulls real-time parts pricing, and generates tiered repair quotes automatically. Economy parts pathway or OEM — the insurer or repairer sees real options, not one number someone calculated manually.
+            </p>
+
+            <p>
+                <strong>Sure Drive</strong> started as an even simpler idea — a car-repair savings fund for customers of the family business. The complication was regulatory: a straightforward savings product collides with South African insurance law and hire-purchase credit regulation. The solution was to design around the regulation rather than ignore it. A digital token loyalty currency — "Sure Bucks," one rand equals one SB — is structurally a gift and rewards system, not a savings or credit product. Same real value to the customer. Different legal architecture. No exposure. The ability to see that distinction, and then build the system that exploits it correctly, came directly from understanding the business problem before touching a line of code.
+            </p>
+
+            <p>
+                <strong>The International Panel Shop check-in and release system</strong> is the quietest one and in some ways my favourite. A digital intake form with real terms and conditions, electronic signature capture, automated email delivery to both customer and business, and a structured release checklist that closes the liability loop cleanly. It replaced paper. It created permanent records. It removed friction from a daily workflow. Small, complete, and genuinely useful — the kind of internal tool that most agencies would never build because it does not look impressive in a portfolio, but that real businesses need more than they need another landing page.
+            </p>
+
+            <h2>Security research — the career inside the career</h2>
+
+            <span class="chapter-label">// Chapter 06 — Finding what is broken before someone else does</span>
+
+            <p>
+                The privacy obsession that named Prinymity eventually became something more structured. Web application security research.
+            </p>
+
+            <p>
+                I work through TryHackMe for structured learning — covering IDOR, SQL injection, XSS, SSRF, command injection, authentication bypass, file inclusion vulnerabilities, content discovery, and subdomain enumeration. And I submit real findings on real production systems via HackerOne, Bugcrowd, and YesWeHack. The findings are real. Client confidentiality is maintained by personal choice, beyond what standard Safe Harbor terms require, because discretion is part of the work.
+            </p>
+
+            <p>
+                Security research changes how you build. When you spend time finding the gaps in other people's systems — the state machine assumptions, the trust boundaries, the edge cases that nobody tested — you cannot go back to building without that perspective. The Firestore security rules in TripSpace Global were independently designed, audited, and hardened because I knew exactly what a poorly written security rule looks like in production. I found one myself: a rule that restricted a sensitive collection to admin-only access looked correct on paper but accidentally blocked the very check needed to grant a Director Candidate their own permissions. The rule never accounted for someone needing to read their own record. I diagnosed it, traced it to the exact line, corrected it. Not luck. Method.
+            </p>
+
+            <div class="callout dark">
+                <span class="text-[#84cc16] font-bold block mb-2 font-sans text-sm">On the platforms:</span>
+                <span class="text-zinc-400">HackerOne and YesWeHack are where I get the most traction — the programmes suit my methodology. Bugcrowd and Intigriti are strict with new researchers, which is fair. Building a track record takes time regardless of what you find. The work is the work.</span>
+            </div>
+
+            <h2>TripSpace Global — the product that is the mission</h2>
+
+            <span class="chapter-label">// Chapter 07 — Building what the market was missing</span>
+
+            <p>
+                TripSpace Global did not begin as a grand vision. It began as a question: why does every accommodation booking platform take a percentage of every booking, indefinitely, from people who own the property, do the work, and carry all the operational risk?
+            </p>
+
+            <p>
+                The answer — platforms provide distribution, technology, and trust infrastructure — is real and worth paying for. The problem is that no meaningful alternative existed. Commission or nothing. Platform terms or no guests. That is not a partnership. That is a dependency.
+            </p>
+
+            <p>
+                So I built the alternative. React, TypeScript, 30+ Firebase Cloud Functions, PayFast and PayPal payment integration, real-time messaging between hosts and travellers, a multi-tier affiliate and partner revenue-share system, Firestore security rules I audited myself, an AI pricing assistant, a host verification programme, a QR check-in system, and a car damage assessment tool powered by Google Gemini. All solo. All production. All live.
+            </p>
+
+            <p>
+                As of July 2026, TripSpace Global is in closed testing on the Google Play Store — 14 days of testing with opted-in testers before production access is unlocked. The web platform is live. The first host listings are live. Real bookings are moving.
+            </p>
+
+            <p>
+                I am not writing that to impress anyone. I am writing it because I want to be clear about what solo-built actually means in this context. It means no co-founder split the work. It means no senior engineer reviewed the architecture before it went live. It means every decision — every tradeoff between speed and correctness, between scope and shipping — was mine. And the platform works, processes real money, and is growing.
+            </p>
+
+            <h2>Forge Vertical — Prinymity with a new face</h2>
+
+            <span class="chapter-label">// Chapter 08 — Where it all connects</span>
+
+            <p>
+                Forge Vertical is not a rebrand. It is a recognition that what I was doing had always been the same thing, and it deserved a name that said so clearly.
+            </p>
+
+            <p>
+                Prinymity fixed computers and built Mobirise sites. Forge Vertical architects full-stack platforms, builds AI integrations, deploys GEO content stacks, and conducts security research on enterprise infrastructure. The tools are different. The instinct — find what is not working, understand why, build something better — has not changed since the i5 Lenovo setup in someone's home office in Cape Town.
+            </p>
+
+            <p>
+                The Prinymity domain still carries real value. Years of clean indexing, genuine history, no spam associations. When search engines and AI models encounter Prinymity in backlinks pointing to Forge Vertical, they read continuity — the same entity, developed over time, not a new brand with no history. That is a real asset and I intend to use it properly.
+            </p>
+
+            <p>
+                Today I am also applying to work within established technical teams. Not because Forge Vertical is not working — it is — but because I know the difference between building alone and building alongside experienced engineers who will correct me, challenge my assumptions, and show me things I cannot find in documentation. The self-directed path has limits. I know where some of those limits are. I want to find the rest of them.
+            </p>
+
+            <p>
+                The CV and portfolio attached to this article are the honest version of where I stand. No inflation. No projects I cannot demo. No claimed experience I cannot explain in technical detail. What is there is what I built, what I learned, and what I am still figuring out.
+            </p>
+
+            <div class="pull-quote">
+                "I am genuinely early in a formal technical career. I am not looking for a senior title. I am looking for the right environment to learn, be corrected, and grow properly."
+            </div>
+
+            <p>
+                That sentence is in my CV because I believe it is the most honest thing a self-taught developer can say when they are ready to stop building alone. Most people in that position either oversell to compensate for the credential gap, or undersell because the credential gap makes them doubt work that is actually good. I am trying to do neither.
+            </p>
+
+            <p>
+                The work is real. The learning is ongoing. The name has changed. The obsession has not.
+            </p>
+
+        </div>
+
+        <!-- Timeline summary -->
+        <div class="max-w-3xl mx-auto px-6 my-16">
+            <p class="mono text-[10px] text-zinc-400 uppercase tracking-widest mb-6">// The journey — key moments</p>
+            <div class="space-y-6">
+                <div class="timeline-dot">
+                    <div class="mono text-[10px] text-zinc-400 uppercase tracking-widest mb-1">2017–2018</div>
+                    <div class="font-bold text-zinc-900">TEFL certification · Taught English in China</div>
+                    <p class="text-zinc-500 text-sm mt-1">Built adaptability and problem-solving without a safety net.</p>
+                </div>
+                <div class="timeline-dot">
+                    <div class="mono text-[10px] text-zinc-400 uppercase tracking-widest mb-1">Pre-2020</div>
+                    <div class="font-bold text-zinc-900">Collision repair trade · Lance's Panel & Spray</div>
+                    <p class="text-zinc-500 text-sm mt-1">Precision diagnostics, physical consequence, hands-on problem-solving.</p>
+                </div>
+                <div class="timeline-dot">
+                    <div class="mono text-[10px] text-zinc-400 uppercase tracking-widest mb-1">2018–2020</div>
+                    <div class="font-bold text-zinc-900">Prinymity founded</div>
+                    <p class="text-zinc-500 text-sm mt-1">Custom PC builds, Mobirise websites, privacy/security obsession. First tech business. Still indexed.</p>
+                </div>
+                <div class="timeline-dot">
+                    <div class="mono text-[10px] text-zinc-400 uppercase tracking-widest mb-1">2020+</div>
+                    <div class="font-bold text-zinc-900">Lockdown → self-directed development education</div>
+                    <p class="text-zinc-500 text-sm mt-1">HTML, CSS, JavaScript, Python, C++. Udemy. Documentation. Building things that broke.</p>
+                </div>
+                <div class="timeline-dot">
+                    <div class="mono text-[10px] text-zinc-400 uppercase tracking-widest mb-1">2022–2024</div>
+                    <div class="font-bold text-zinc-900">Aurora Repair · Sure Drive · IPS Check-in system</div>
+                    <p class="text-zinc-500 text-sm mt-1">First production platforms. AI-driven assessment, regulatory navigation, real payment integration.</p>
+                </div>
+                <div class="timeline-dot">
+                    <div class="mono text-[10px] text-zinc-400 uppercase tracking-widest mb-1">2024–2025</div>
+                    <div class="font-bold text-zinc-900">Security research — HackerOne, Bugcrowd, YesWeHack</div>
+                    <p class="text-zinc-500 text-sm mt-1">Real findings on production systems. TryHackMe structured learning. Bug bounty active.</p>
+                </div>
+                <div class="timeline-dot">
+                    <div class="mono text-[10px] text-zinc-400 uppercase tracking-widest mb-1">2025</div>
+                    <div class="font-bold text-zinc-900">Forge Vertical · TripSpace Global launched</div>
+                    <p class="text-zinc-500 text-sm mt-1">Commission-free travel marketplace. 30+ Cloud Functions. Real bookings. GEO infrastructure. Solo-built.</p>
+                </div>
+                <div class="timeline-dot">
+                    <div class="mono text-[10px] text-[#84cc16] uppercase tracking-widest mb-1">July 2026</div>
+                    <div class="font-bold text-zinc-900">TripSpace Global — Google Play Store closed testing · Day 14</div>
+                    <p class="text-zinc-500 text-sm mt-1">Production access imminent. First host listings live. Real revenue moving. Applying to join experienced teams.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- CV + Portfolio download links -->
+        <div class="max-w-3xl mx-auto px-6 mb-12">
+            <div class="bg-zinc-950 rounded-2xl p-8 grid md:grid-cols-2 gap-4">
+                <div>
+                    <p class="mono text-[10px] text-zinc-500 uppercase tracking-widest mb-3">// Documents</p>
+                    <h3 class="font-bold text-white mb-2">CV & Portfolio</h3>
+                    <p class="text-zinc-400 text-sm leading-relaxed">The honest version. No inflation. Every project listed is live, demo-able, and explainable in technical detail.</p>
+                </div>
+                <div class="flex flex-col gap-3 justify-center">
+                    <a href="/assets/Jarrit_Hosking_CV.pdf" download
+                        class="flex items-center justify-center gap-3 bg-white text-zinc-900 py-4 rounded-xl font-black uppercase text-[10px] tracking-widest hover:bg-[#84cc16] transition-all">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                        Download CV
+                    </a>
+                    <a href="/assets/Jarrit_Hosking_Portfolio.pdf" download
+                        class="flex items-center justify-center gap-3 border border-zinc-700 text-white py-4 rounded-xl font-black uppercase text-[10px] tracking-widest hover:border-[#84cc16] hover:text-[#84cc16] transition-all">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                        Download Portfolio
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="max-w-3xl mx-auto px-6 pt-8 border-t border-zinc-100">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+                <div>
+                    <div class="mono text-[10px] text-zinc-400 uppercase tracking-widest mb-1">Written by</div>
+                    <div class="font-bold text-zinc-900">Jarrit Hosking</div>
+                    <div class="mono text-[10px] text-zinc-400">Founder · Forge Vertical · Cape Town</div>
+                </div>
+                <div class="flex gap-3 flex-wrap">
+                    <a href="/articles.html" class="mono text-[10px] font-bold uppercase tracking-widest border border-zinc-200 px-5 py-3 rounded-xl hover:border-zinc-400 transition-all text-zinc-600">← All articles</a>
+                    <a href="/about.html" class="mono text-[10px] font-bold uppercase tracking-widest border border-zinc-200 px-5 py-3 rounded-xl hover:border-zinc-400 transition-all text-zinc-600">About Jarrit</a>
+                    <a href="/onboard.html" style="background:linear-gradient(90deg,#10b981,#84cc16);" class="mono text-[10px] font-bold uppercase tracking-widest px-5 py-3 rounded-xl text-white hover:opacity-90 transition-all">Start a project</a>
+                </div>
+            </div>
+        </div>
+
+    </article>
+
+    <div id="global-footer"></div>
+
+</body>
+</html>
