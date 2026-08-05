@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SiteBuild Studio | Build Your Website</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,500;0,800;1,800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        /* Step progress */
+        .step-indicator { transition: all 0.3s; }
+        .step-indicator.active { background: #84cc16; color: #09090b; }
+        .step-indicator.done { background: #3f6212; color: #84cc16; }
+        /* Form inputs */
+        .fi { background: #f8fafc; border: 1.5px solid #e4e4e7; border-radius: 10px; padding: 12px 16px; width: 100%; font-size: 15px; font-family: 'Plus Jakarta Sans', sans-serif; color: #09090b; transition: border-color 0.2s; box-sizing: border-box; }
+        .fi:focus { border-color: #84cc16; outline: none; background: #fff; }
+        .fi::placeholder { color: #a1a1aa; }
+        textarea.fi { resize: vertical; min-height: 80px; }
+        /* Style chips */
+        .style-chip { cursor: pointer; border: 1.5px solid #e4e4e7; border-radius: 12px; padding: 14px; transition: all 0.2s; text-align: center; }
+        .style-chip:hover { border-color: #84cc16; }
+        .style-chip.selected { border-color: #84cc16; background: rgba(132,204,22,0.08); }
+        .style-chip input { display: none; }
+        /* Color swatch */
+        .color-swatch { width: 36px; height: 36px; border-radius: 8px; cursor: pointer; border: 2px solid transparent; transition: all 0.15s; flex-shrink: 0; }
+        .color-swatch.selected { border-color: #09090b; transform: scale(1.1); }
+        /* Upload zone */
+        .upload-zone { border: 2px dashed #e4e4e7; border-radius: 14px; padding: 32px; text-align: center; cursor: pointer; transition: all 0.2s; }
+        .upload-zone:hover, .upload-zone.dragover { border-color: #84cc16; background: rgba(132,204,22,0.04); }
+        /* Section label */
+        .section-label { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.2em; color: #71717a; font-family: 'JetBrains Mono', monospace; margin-bottom: 8px; display: block; }
+        /* Generating overlay */
+        #generating-overlay { display: none; position: fixed; inset: 0; background: rgba(9,9,11,0.96); z-index: 999; flex-direction: column; align-items: center; justify-content: center; }
+        #generating-overlay.active { display: flex; }
+        .gen-spinner { width: 56px; height: 56px; border: 3px solid #27272a; border-top-color: #84cc16; border-radius: 50%; animation: spin 0.8s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .gen-log { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #84cc16; line-height: 2; text-align: center; margin-top: 16px; min-height: 80px; }
+        /* Preview iframe */
+        #preview-frame { border: none; width: 100%; height: 600px; border-radius: 16px; }
+    </style>
+</head>
+<body class="bg-zinc-50 min-h-screen">
+
+    <!-- Generating overlay -->
+    <div id="generating-overlay">
+        <div class="gen-spinner"></div>
+        <p class="mono text-[10px] text-zinc-500 uppercase tracking-widest mt-6 mb-2">Building your site</p>
+        <div class="gen-log" id="gen-log">Initialising Gemini 2.5 Flash...</div>
+        <p class="mono text-[10px] text-zinc-600 mt-6">This takes 30–60 seconds. Do not close this tab.</p>
+    </div>
+
+    <div class="max-w-3xl mx-auto px-6 py-16">
+
+        <!-- Header -->
+        <div class="mb-10">
+            <div class="mono text-[10px] text-zinc-400 uppercase tracking-widest mb-2">// Forge Vertical · SiteBuild Studio</div>
+            <h1 class="text-4xl font-extrabold tracking-tighter text-zinc-900 mb-2">Build your website.<br><span style="background:linear-gradient(90deg,#10b981,#84cc16);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">In minutes.</span></h1>
+            <p class="text-zinc-500 text-base font-light">Fill in your business details. We generate a complete, responsive website — yours to edit immediately.</p>
+        </div>
+
+        <!-- Progress bar -->
+        <div class="flex items-center gap-2 mb-10" id="progress-bar">
+            <div class="step-indicator active flex-1 text-center py-2 rounded-lg mono text-[10px] font-bold uppercase tracking-widest" id="si-0">01 Business</div>
+            <div class="step-indicator flex-1 text-center py-2 rounded-lg mono text-[10px] font-bold uppercase tracking-widest bg-zinc-200 text-zinc-400" id="si-1">02 Services</div>
+            <div class="step-indicator flex-1 text-center py-2 rounded-lg mono text-[10px] font-bold uppercase tracking-widest bg-zinc-200 text-zinc-400" id="si-2">03 Style</div>
+            <div class="step-indicator flex-1 text-center py-2 rounded-lg mono text-[10px] font-bold uppercase tracking-widest bg-zinc-200 text-zinc-400" id="si-3">04 Media</div>
+            <div class="step-indicator flex-1 text-center py-2 rounded-lg mono text-[10px] font-bold uppercase tracking-widest bg-zinc-200 text-zinc-400" id="si-4">05 Build</div>
+        </div>
+
+        <!-- STEP 0: Business Info -->
+        <div id="step-0" class="step-panel space-y-5">
+            <div class="bg-white rounded-2xl border border-zinc-100 p-6 space-y-5">
+                <h2 class="font-extrabold text-lg tracking-tight text-zinc-900">Tell us about your business</h2>
+                <div>
+                    <label class="section-label">Business name *</label>
+                    <input type="text" id="biz-name" class="fi" placeholder="Cape Town Auto Services">
+                </div>
+                <div>
+                    <label class="section-label">Industry / business type *</label>
+                    <input type="text" id="biz-industry" class="fi" placeholder="Automotive repair, Guesthouse, Law firm, Restaurant...">
+                </div>
+                <div>
+                    <label class="section-label">City & country *</label>
+                    <input type="text" id="biz-location" class="fi" placeholder="Cape Town, South Africa">
+                </div>
+                <div>
+                    <label class="section-label">Tagline / what you do in one sentence</label>
+                    <input type="text" id="biz-tagline" class="fi" placeholder="Cape Town's most trusted panel beaters since 1998">
+                </div>
+                <div>
+                    <label class="section-label">About your business (2–4 sentences)</label>
+                    <textarea id="biz-about" class="fi" placeholder="Tell us your story, what makes you different, and why customers choose you..."></textarea>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="section-label">Phone number</label>
+                        <input type="tel" id="biz-phone" class="fi" placeholder="+27 21 000 0000">
+                    </div>
+                    <div>
+                        <label class="section-label">Email address</label>
+                        <input type="email" id="biz-email" class="fi" placeholder="info@yourbusiness.com">
+                    </div>
+                </div>
+                <div>
+                    <label class="section-label">Physical address</label>
+                    <input type="text" id="biz-address" class="fi" placeholder="123 Main Road, Cape Town, 8001">
+                </div>
+                <div>
+                    <label class="section-label">Website domain (if you have one)</label>
+                    <input type="text" id="biz-domain" class="fi" placeholder="yourbusiness.co.za">
+                </div>
+            </div>
+            <button onclick="goStep(1)" class="w-full bg-zinc-900 text-[#84cc16] py-4 rounded-xl mono text-[10px] font-bold uppercase tracking-widest hover:bg-[#84cc16] hover:text-zinc-900 transition-all">Next — Services & pages →</button>
+        </div>
+
+        <!-- STEP 1: Services -->
+        <div id="step-1" class="step-panel hidden space-y-5">
+            <div class="bg-white rounded-2xl border border-zinc-100 p-6 space-y-5">
+                <h2 class="font-extrabold text-lg tracking-tight text-zinc-900">What do you offer?</h2>
+
+                <div>
+                    <label class="section-label">Your main services or products (one per line) *</label>
+                    <textarea id="biz-services" class="fi" style="min-height:120px;" placeholder="Panel beating & spray painting&#10;Insurance claim repairs&#10;Dent removal&#10;Full vehicle restoration"></textarea>
+                </div>
+
+                <div>
+                    <label class="section-label">Pages you want on your site</label>
+                    <div class="flex flex-wrap gap-2 mt-1" id="page-chips">
+                        <label class="style-chip selected text-sm font-bold text-zinc-700"><input type="checkbox" name="pages" value="Home" checked> Home</label>
+                        <label class="style-chip text-sm font-bold text-zinc-700"><input type="checkbox" name="pages" value="About"> About</label>
+                        <label class="style-chip text-sm font-bold text-zinc-700"><input type="checkbox" name="pages" value="Services"> Services</label>
+                        <label class="style-chip text-sm font-bold text-zinc-700"><input type="checkbox" name="pages" value="Gallery"> Gallery</label>
+                        <label class="style-chip text-sm font-bold text-zinc-700"><input type="checkbox" name="pages" value="Testimonials"> Testimonials</label>
+                        <label class="style-chip text-sm font-bold text-zinc-700"><input type="checkbox" name="pages" value="Contact"> Contact</label>
+                        <label class="style-chip text-sm font-bold text-zinc-700"><input type="checkbox" name="pages" value="Blog"> Blog</label>
+                        <label class="style-chip text-sm font-bold text-zinc-700"><input type="checkbox" name="pages" value="Pricing"> Pricing</label>
+                        <label class="style-chip text-sm font-bold text-zinc-700"><input type="checkbox" name="pages" value="FAQ"> FAQ</label>
+                        <label class="style-chip text-sm font-bold text-zinc-700"><input type="checkbox" name="pages" value="Booking"> Online Booking</label>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="section-label">Do you have customer testimonials? (optional)</label>
+                    <textarea id="biz-testimonials" class="fi" placeholder='"Excellent service, fixed my car in 2 days." — John S.&#10;"Best panel shop in Cape Town." — Sarah M.'></textarea>
+                </div>
+
+                <div>
+                    <label class="section-label">Trading hours (optional)</label>
+                    <input type="text" id="biz-hours" class="fi" placeholder="Mon–Fri 8am–5pm, Sat 8am–1pm">
+                </div>
+
+                <div>
+                    <label class="section-label">Any specific call-to-action you want? (optional)</label>
+                    <input type="text" id="biz-cta" class="fi" placeholder="Get a free quote, Book online, Call us now...">
+                </div>
+            </div>
+            <div class="flex gap-3">
+                <button onclick="goStep(0)" class="flex-1 border border-zinc-200 text-zinc-500 py-4 rounded-xl mono text-[10px] font-bold uppercase tracking-widest hover:border-zinc-400 transition-all">← Back</button>
+                <button onclick="goStep(2)" class="flex-1 bg-zinc-900 text-[#84cc16] py-4 rounded-xl mono text-[10px] font-bold uppercase tracking-widest hover:bg-[#84cc16] hover:text-zinc-900 transition-all">Next — Style →</button>
+            </div>
+        </div>
+
+        <!-- STEP 2: Style -->
+        <div id="step-2" class="step-panel hidden space-y-5">
+            <div class="bg-white rounded-2xl border border-zinc-100 p-6 space-y-6">
+                <h2 class="font-extrabold text-lg tracking-tight text-zinc-900">Choose your style</h2>
+
+                <div>
+                    <label class="section-label">Website style *</label>
+                    <div class="grid grid-cols-2 gap-3" id="style-grid">
+
+                        <label class="style-chip" data-style="modern-dark">
+                            <input type="radio" name="style" value="modern-dark">
+                            <div class="w-full h-16 rounded-lg mb-3" style="background:linear-gradient(135deg,#09090b 0%,#1a1a1a 100%);border:1px solid #27272a;"></div>
+                            <div class="font-bold text-sm text-zinc-900">Modern Dark</div>
+                            <div class="text-xs text-zinc-400 mt-1">Dark, bold, premium</div>
+                        </label>
+
+                        <label class="style-chip" data-style="clean-light">
+                            <input type="radio" name="style" value="clean-light">
+                            <div class="w-full h-16 rounded-lg mb-3" style="background:linear-gradient(135deg,#fff 0%,#f8fafc 100%);border:1px solid #e4e4e7;"></div>
+                            <div class="font-bold text-sm text-zinc-900">Clean Light</div>
+                            <div class="text-xs text-zinc-400 mt-1">Minimal, professional, trust-first</div>
+                        </label>
+
+                        <label class="style-chip" data-style="vibrant-brand">
+                            <input type="radio" name="style" value="vibrant-brand">
+                            <div class="w-full h-16 rounded-lg mb-3" style="background:linear-gradient(135deg,#0f172a 0%,#1e3a5f 100%);border:1px solid #1e40af;"></div>
+                            <div class="font-bold text-sm text-zinc-900">Vibrant Brand</div>
+                            <div class="text-xs text-zinc-400 mt-1">Bold colour, high energy</div>
+                        </label>
+
+                        <label class="style-chip" data-style="earthy-warm">
+                            <input type="radio" name="style" value="earthy-warm">
+                            <div class="w-full h-16 rounded-lg mb-3" style="background:linear-gradient(135deg,#1c1410 0%,#3d2b1f 100%);border:1px solid #92400e;"></div>
+                            <div class="font-bold text-sm text-zinc-900">Earthy Warm</div>
+                            <div class="text-xs text-zinc-400 mt-1">Hospitality, nature, lifestyle</div>
+                        </label>
+
+                    </div>
+                </div>
+
+                <div>
+                    <label class="section-label">Brand accent colour</label>
+                    <div class="flex flex-wrap gap-3 mt-1 items-center">
+                        <div class="color-swatch selected" style="background:#84cc16;" data-color="#84cc16" title="Lime"></div>
+                        <div class="color-swatch" style="background:#3b82f6;" data-color="#3b82f6" title="Blue"></div>
+                        <div class="color-swatch" style="background:#ef4444;" data-color="#ef4444" title="Red"></div>
+                        <div class="color-swatch" style="background:#f97316;" data-color="#f97316" title="Orange"></div>
+                        <div class="color-swatch" style="background:#8b5cf6;" data-color="#8b5cf6" title="Purple"></div>
+                        <div class="color-swatch" style="background:#14b8a6;" data-color="#14b8a6" title="Teal"></div>
+                        <div class="color-swatch" style="background:#f59e0b;" data-color="#f59e0b" title="Amber"></div>
+                        <div class="color-swatch" style="background:#ec4899;" data-color="#ec4899" title="Pink"></div>
+                        <div class="flex items-center gap-2 ml-2">
+                            <label class="section-label mb-0">Custom:</label>
+                            <input type="color" id="custom-color" value="#84cc16" class="w-9 h-9 rounded-lg cursor-pointer border border-zinc-200" style="padding:2px;">
+                        </div>
+                    </div>
+                    <input type="hidden" id="selected-color" value="#84cc16">
+                </div>
+
+                <div>
+                    <label class="section-label">Anything else about the look you want?</label>
+                    <input type="text" id="style-notes" class="fi" placeholder="e.g. professional but friendly, minimalist, lots of whitespace, luxury feel...">
+                </div>
+
+            </div>
+            <div class="flex gap-3">
+                <button onclick="goStep(1)" class="flex-1 border border-zinc-200 text-zinc-500 py-4 rounded-xl mono text-[10px] font-bold uppercase tracking-widest hover:border-zinc-400 transition-all">← Back</button>
+                <button onclick="goStep(3)" class="flex-1 bg-zinc-900 text-[#84cc16] py-4 rounded-xl mono text-[10px] font-bold uppercase tracking-widest hover:bg-[#84cc16] hover:text-zinc-900 transition-all">Next — Media →</button>
+            </div>
+        </div>
+
+        <!-- STEP 3: Media -->
+        <div id="step-3" class="step-panel hidden space-y-5">
+            <div class="bg-white rounded-2xl border border-zinc-100 p-6 space-y-5">
+                <h2 class="font-extrabold text-lg tracking-tight text-zinc-900">Logo & images</h2>
+                <p class="text-zinc-400 text-sm">All optional — we'll use professional Pexels placeholders for anything not provided.</p>
+
+                <div>
+                    <label class="section-label">Upload your logo</label>
+                    <div class="upload-zone" id="logo-zone" ondragover="dragOver(event,'logo-zone')" ondragleave="dragLeave('logo-zone')" ondrop="dropFile(event,'logo-input','logo-preview')" onclick="document.getElementById('logo-input').click()">
+                        <input type="file" id="logo-input" accept="image/*" class="hidden" onchange="previewFile(this,'logo-preview','logo-zone')">
+                        <div id="logo-preview">
+                            <svg class="w-8 h-8 text-zinc-300 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                            <p class="mono text-[10px] text-zinc-400 uppercase tracking-widest">Click or drag your logo here</p>
+                            <p class="text-xs text-zinc-300 mt-1">PNG, JPG, SVG · Max 5MB</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="section-label">Business / product images (up to 6)</label>
+                    <div class="upload-zone" id="images-zone" ondragover="dragOver(event,'images-zone')" ondragleave="dragLeave('images-zone')" ondrop="dropFiles(event,'images-input','images-preview')" onclick="document.getElementById('images-input').click()">
+                        <input type="file" id="images-input" accept="image/*" multiple class="hidden" onchange="previewFiles(this,'images-preview','images-zone')">
+                        <div id="images-preview">
+                            <svg class="w-8 h-8 text-zinc-300 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                            <p class="mono text-[10px] text-zinc-400 uppercase tracking-widest">Click or drag images here</p>
+                            <p class="text-xs text-zinc-300 mt-1">Up to 6 images · PNG, JPG · Max 5MB each</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="section-label">Describe the images you'd like if you have no photos</label>
+                    <textarea id="image-desc" class="fi" placeholder="e.g. modern auto repair workshop, cars being worked on, friendly staff, clean industrial environment..."></textarea>
+                </div>
+            </div>
+            <div class="flex gap-3">
+                <button onclick="goStep(2)" class="flex-1 border border-zinc-200 text-zinc-500 py-4 rounded-xl mono text-[10px] font-bold uppercase tracking-widest hover:border-zinc-400 transition-all">← Back</button>
+                <button onclick="goStep(4)" class="flex-1 bg-zinc-900 text-[#84cc16] py-4 rounded-xl mono text-[10px] font-bold uppercase tracking-widest hover:bg-[#84cc16] hover:text-zinc-900 transition-all">Next — Review & pay →</button>
+            </div>
+        </div>
+
+        <!-- STEP 4: Review & Pay -->
+        <div id="step-4" class="step-panel hidden space-y-5">
+            <div class="bg-white rounded-2xl border border-zinc-100 p-6">
+                <h2 class="font-extrabold text-lg tracking-tight text-zinc-900 mb-5">Review your order</h2>
+                <div id="order-summary" class="space-y-3 text-sm text-zinc-600 mb-6"></div>
+
+                <div class="border-t border-zinc-100 pt-5">
+                    <div class="flex justify-between items-center mb-1">
+                        <span class="font-bold text-zinc-900">Website generation</span>
+                        <span class="mono font-bold text-zinc-900">R 799</span>
+                    </div>
+                    <div class="flex justify-between items-center text-zinc-400 text-xs mb-4">
+                        <span>Once-off · Includes unlimited post-build edits</span>
+                        <span>incl. VAT</span>
+                    </div>
+                    <div class="bg-zinc-50 rounded-xl p-4 text-xs text-zinc-500 mb-5 space-y-1">
+                        <div class="flex gap-2"><span class="text-[#84cc16]">✓</span> Complete responsive website generated in minutes</div>
+                        <div class="flex gap-2"><span class="text-[#84cc16]">✓</span> Edit any section after delivery</div>
+                        <div class="flex gap-2"><span class="text-[#84cc16]">✓</span> JSON-LD Schema & SEO structure included</div>
+                        <div class="flex gap-2"><span class="text-[#84cc16]">✓</span> Mobile-first responsive design</div>
+                        <div class="flex gap-2"><span class="text-[#84cc16]">✓</span> Download as clean HTML file</div>
+                    </div>
+
+                    <!-- PayFast form — credentials to be added -->
+                    <form id="payfast-form" action="https://www.payfast.co.za/eng/process" method="POST">
+                        <input type="hidden" name="merchant_id" value="YOUR_MERCHANT_ID">
+                        <input type="hidden" name="merchant_key" value="YOUR_MERCHANT_KEY">
+                        <input type="hidden" name="return_url" id="pf-return" value="">
+                        <input type="hidden" name="cancel_url" value="https://www.forgevertical.com/tools/sitebuild-intake.html?cancelled=1">
+                        <input type="hidden" name="notify_url" value="https://YOUR_BACKEND_URL/api/payfast-notify">
+                        <input type="hidden" name="name_first" id="pf-name" value="">
+                        <input type="hidden" name="email_address" id="pf-email" value="">
+                        <input type="hidden" name="m_payment_id" id="pf-payment-id" value="">
+                        <input type="hidden" name="amount" value="799.00">
+                        <input type="hidden" name="item_name" value="Forge Vertical — SiteBuild Studio">
+                        <input type="hidden" name="item_description" value="AI-generated responsive business website">
+                        <!-- Business data payload — sent via custom_str fields -->
+                        <input type="hidden" name="custom_str1" id="pf-payload" value="">
+
+                        <button type="button" onclick="initiatePayment()"
+                            class="w-full py-5 rounded-xl font-black uppercase tracking-widest text-sm text-zinc-900 hover:opacity-90 transition-all"
+                            style="background:linear-gradient(90deg,#10b981,#84cc16);">
+                            Pay R799 &amp; Build My Site →
+                        </button>
+                    </form>
+
+                    <!-- Dev mode: bypass payment for testing -->
+                    <button onclick="bypassPaymentAndBuild()"
+                        class="w-full mt-3 py-3 rounded-xl mono text-[10px] font-bold uppercase tracking-widest text-zinc-400 border border-zinc-200 hover:border-zinc-300 transition-all"
+                        id="dev-bypass">
+                        [DEV] Generate without payment
+                    </button>
+                </div>
+            </div>
+            <button onclick="goStep(3)" class="w-full border border-zinc-200 text-zinc-500 py-4 rounded-xl mono text-[10px] font-bold uppercase tracking-widest hover:border-zinc-400 transition-all">← Back</button>
+        </div>
+
+        <!-- STEP 5: Result -->
+        <div id="step-5" class="step-panel hidden space-y-5">
+            <div class="bg-zinc-950 rounded-2xl p-6 flex items-center justify-between mb-2">
+                <div>
+                    <p class="mono text-[10px] text-[#84cc16] uppercase tracking-widest mb-1">// Build complete</p>
+                    <h2 class="font-extrabold text-white text-xl tracking-tight">Your website is ready.</h2>
+                </div>
+                <div class="flex gap-3">
+                    <button onclick="downloadSite()" class="bg-[#84cc16] text-zinc-900 px-5 py-3 rounded-xl mono text-[10px] font-bold uppercase tracking-widest hover:opacity-90 transition-all">Download HTML</button>
+                    <button onclick="editMode()" class="border border-zinc-700 text-white px-5 py-3 rounded-xl mono text-[10px] font-bold uppercase tracking-widest hover:border-[#84cc16] hover:text-[#84cc16] transition-all">Edit sections</button>
+                </div>
+            </div>
+            <iframe id="preview-frame" src="about:blank" title="Generated website preview"></iframe>
+        </div>
+
+    </div>
+
+    <script>
+    // ── State ──────────────────────────────────────────────
+    let currentStep = 0;
+    let selectedColor = '#84cc16';
+    let selectedStyle = 'modern-dark';
+    let generatedHtml = '';
+
+    // ── Step navigation ──────────────────────────────────
+    function goStep(n) {
+        document.querySelectorAll('.step-panel').forEach(p => p.classList.add('hidden'));
+        document.getElementById('step-' + n).classList.remove('hidden');
+        for (let i = 0; i <= 4; i++) {
+            const si = document.getElementById('si-' + i);
+            if (!si) continue;
+            si.classList.remove('active','done','bg-zinc-200','text-zinc-400');
+            if (i < n) { si.classList.add('done','bg-zinc-800','text-[#84cc16]'); }
+            else if (i === n) { si.classList.add('active'); }
+            else { si.classList.add('bg-zinc-200','text-zinc-400'); }
+        }
+        currentStep = n;
+        if (n === 4) buildOrderSummary();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // ── Style chip selection ──────────────────────────────
+    document.querySelectorAll('[data-style]').forEach(chip => {
+        chip.addEventListener('click', () => {
+            document.querySelectorAll('[data-style]').forEach(c => c.classList.remove('selected'));
+            chip.classList.add('selected');
+            selectedStyle = chip.dataset.style;
+        });
+    });
+
+    // Page chips
+    document.querySelectorAll('#page-chips label').forEach(chip => {
+        chip.addEventListener('click', () => chip.classList.toggle('selected'));
+    });
+
+    // ── Colour selection ──────────────────────────────────
+    document.querySelectorAll('.color-swatch').forEach(sw => {
+        sw.addEventListener('click', () => {
+            document.querySelectorAll('.color-swatch').forEach(s => s.classList.remove('selected'));
+            sw.classList.add('selected');
+            selectedColor = sw.dataset.color;
+            document.getElementById('selected-color').value = selectedColor;
+            document.getElementById('custom-color').value = selectedColor;
+        });
+    });
+    document.getElementById('custom-color').addEventListener('input', e => {
+        document.querySelectorAll('.color-swatch').forEach(s => s.classList.remove('selected'));
+        selectedColor = e.target.value;
+        document.getElementById('selected-color').value = selectedColor;
+    });
+
+    // ── Upload helpers ────────────────────────────────────
+    function dragOver(e, zoneId) { e.preventDefault(); document.getElementById(zoneId).classList.add('dragover'); }
+    function dragLeave(zoneId) { document.getElementById(zoneId).classList.remove('dragover'); }
+    function dropFile(e, inputId, previewId) {
+        e.preventDefault();
+        const file = e.dataTransfer.files[0];
+        if (file) { const dt = new DataTransfer(); dt.items.add(file); document.getElementById(inputId).files = dt.files; previewFile(document.getElementById(inputId), previewId, e.currentTarget.id); }
+    }
+    function dropFiles(e, inputId, previewId) {
+        e.preventDefault();
+        const files = e.dataTransfer.files;
+        if (files.length) { document.getElementById(inputId).files = files; previewFiles(document.getElementById(inputId), previewId, e.currentTarget.id); }
+    }
+    function previewFile(input, previewId, zoneId) {
+        const file = input.files[0];
+        if (!file) return;
+        document.getElementById(zoneId).classList.remove('dragover');
+        const reader = new FileReader();
+        reader.onload = e => {
+            document.getElementById(previewId).innerHTML = `<img src="${e.target.result}" class="max-h-24 mx-auto rounded-lg object-contain">
+            <p class="mono text-[10px] text-[#84cc16] uppercase tracking-widest mt-2">${file.name}</p>`;
+        };
+        reader.readAsDataURL(file);
+    }
+    function previewFiles(input, previewId, zoneId) {
+        const files = Array.from(input.files).slice(0, 6);
+        document.getElementById(zoneId).classList.remove('dragover');
+        document.getElementById(previewId).innerHTML = `<div class="flex flex-wrap gap-2 justify-center">${files.map(f => `<div class="mono text-[10px] text-[#84cc16] bg-zinc-900 px-2 py-1 rounded">${f.name}</div>`).join('')}</div>
+        <p class="mono text-[10px] text-zinc-400 mt-2">${files.length} image${files.length !== 1 ? 's' : ''} selected</p>`;
+    }
+
+    // ── Order summary ─────────────────────────────────────
+    function buildOrderSummary() {
+        const pages = [...document.querySelectorAll('[name="pages"]:checked')].map(i => i.value);
+        document.getElementById('order-summary').innerHTML = `
+            <div class="flex justify-between"><span class="text-zinc-400">Business</span><span class="font-bold text-zinc-800">${document.getElementById('biz-name').value || '—'}</span></div>
+            <div class="flex justify-between"><span class="text-zinc-400">Industry</span><span class="font-bold text-zinc-800">${document.getElementById('biz-industry').value || '—'}</span></div>
+            <div class="flex justify-between"><span class="text-zinc-400">Location</span><span class="font-bold text-zinc-800">${document.getElementById('biz-location').value || '—'}</span></div>
+            <div class="flex justify-between"><span class="text-zinc-400">Pages</span><span class="font-bold text-zinc-800">${pages.join(', ') || 'Home'}</span></div>
+            <div class="flex justify-between"><span class="text-zinc-400">Style</span><span class="font-bold text-zinc-800">${selectedStyle}</span></div>
+            <div class="flex justify-between"><span class="text-zinc-400">Accent colour</span><span class="flex items-center gap-2"><span class="inline-block w-4 h-4 rounded" style="background:${selectedColor}"></span><span class="font-bold text-zinc-800">${selectedColor}</span></span></div>
+        `;
+    }
+
+    // ── Collect all data ──────────────────────────────────
+    function collectData() {
+        const pages = [...document.querySelectorAll('[name="pages"]:checked')].map(i => i.value);
+        return {
+            name: document.getElementById('biz-name').value,
+            industry: document.getElementById('biz-industry').value,
+            location: document.getElementById('biz-location').value,
+            tagline: document.getElementById('biz-tagline').value,
+            about: document.getElementById('biz-about').value,
+            phone: document.getElementById('biz-phone').value,
+            email: document.getElementById('biz-email').value,
+            address: document.getElementById('biz-address').value,
+            domain: document.getElementById('biz-domain').value,
+            services: document.getElementById('biz-services').value,
+            pages,
+            testimonials: document.getElementById('biz-testimonials').value,
+            hours: document.getElementById('biz-hours').value,
+            cta: document.getElementById('biz-cta').value,
+            style: selectedStyle,
+            color: selectedColor,
+            styleNotes: document.getElementById('style-notes').value,
+            imageDesc: document.getElementById('image-desc').value,
+        };
+    }
+
+    // ── PayFast initiation ────────────────────────────────
+    function initiatePayment() {
+        const data = collectData();
+        if (!data.name || !data.industry) { alert('Please fill in your business name and industry before paying.'); return; }
+        const paymentId = 'FV-' + Date.now();
+        document.getElementById('pf-name').value = data.name;
+        document.getElementById('pf-email').value = data.email;
+        document.getElementById('pf-payment-id').value = paymentId;
+        document.getElementById('pf-payload').value = JSON.stringify(data);
+        // Return URL carries the data so generation can happen post-payment
+        const encoded = encodeURIComponent(JSON.stringify(data));
+        document.getElementById('pf-return').value = `https://www.forgevertical.com/tools/sitebuild-intake.html?build=1&data=${encoded}`;
+        document.getElementById('payfast-form').submit();
+    }
+
+    // ── Dev bypass (testing without payment) ─────────────
+    async function bypassPaymentAndBuild() {
+        const data = collectData();
+        if (!data.name) { alert('Enter at least a business name first.'); return; }
+        await runGeneration(data);
+    }
+
+    // ── Generation ────────────────────────────────────────
+    async function runGeneration(data) {
+        const overlay = document.getElementById('generating-overlay');
+        const log = document.getElementById('gen-log');
+        overlay.classList.add('active');
+        const logs = [
+            'Analysing business data...',
+            'Selecting layout architecture...',
+            'Generating hero section...',
+            'Building services grid...',
+            'Adding contact & footer...',
+            'Injecting Schema markup...',
+            'Optimising for mobile...',
+            'Finalising output...',
+        ];
+        let li = 0;
+        const logInterval = setInterval(() => {
+            if (li < logs.length) log.textContent = logs[li++];
+        }, 900);
+
+        try {
+            const response = await fetch('/api/generate-site', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data),
+            });
+            const result = await response.json();
+            clearInterval(logInterval);
+            overlay.classList.remove('active');
+            if (result.html) {
+                generatedHtml = result.html;
+                showResult();
+            } else {
+                alert('Generation failed: ' + (result.error || 'Unknown error'));
+            }
+        } catch (err) {
+            clearInterval(logInterval);
+            overlay.classList.remove('active');
+            alert('Network error — check the API is running.');
+        }
+    }
+
+    function showResult() {
+        // Hide progress bar on result
+        document.getElementById('progress-bar').style.display = 'none';
+        goStep(5);
+        const frame = document.getElementById('preview-frame');
+        const blob = new Blob([generatedHtml], { type: 'text/html' });
+        frame.src = URL.createObjectURL(blob);
+    }
+
+    function downloadSite() {
+        if (!generatedHtml) return;
+        const blob = new Blob([generatedHtml], { type: 'text/html' });
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = (document.getElementById('biz-name').value || 'my-website').replace(/\s+/g,'-').toLowerCase() + '.html';
+        a.click();
+    }
+
+    function editMode() {
+        alert('Section editor coming soon — download the HTML for now and edit directly, or contact Jarrit for a hosted edit session.');
+    }
+
+    // ── Handle return from PayFast ────────────────────────
+    (function() {
+        const params = new URLSearchParams(window.location.search);
+        if (params.get('build') === '1') {
+            try {
+                const data = JSON.parse(decodeURIComponent(params.get('data') || '{}'));
+                if (data.name) runGeneration(data);
+            } catch(e) {}
+        }
+        if (params.get('cancelled') === '1') {
+            alert('Payment cancelled. Your details are still saved — click Pay when you are ready.');
+        }
+    })();
+    </script>
+
+</body>
+</html>
