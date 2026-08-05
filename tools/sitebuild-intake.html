@@ -243,8 +243,19 @@
                 <div class="flex gap-2 text-xs text-zinc-500"><span class="text-[#84cc16]">✓</span> Mobile-first responsive on all devices</div>
             </div>
 
-            <!-- PayFast form -->
-            <form id="payfast-form" action="https://www.payfast.co.za/eng/process" method="POST">
+            <!-- PayPal payment button -->
+            <button type="button" onclick="payWithPayPal('https://www.paypal.com/ncp/payment/L2UCL5SN7WYSQ')"
+                class="w-full py-5 rounded-xl font-black uppercase tracking-widest text-sm text-zinc-900 hover:opacity-90 transition-all mb-3"
+                style="background:linear-gradient(90deg,#10b981,#84cc16);">
+                Pay R799 &amp; Build My Site →
+            </button>
+
+            <p class="text-zinc-400 text-xs text-center mb-3">
+                Secure payment via PayPal · Your form data is saved and restored automatically after payment.
+            </p>
+
+            <!-- PayFast form — wire up when credentials are ready -->
+            <form id="payfast-form" action="https://www.payfast.co.za/eng/process" method="POST" class="hidden">
                 <input type="hidden" name="merchant_id"       value="YOUR_MERCHANT_ID">
                 <input type="hidden" name="merchant_key"      value="YOUR_MERCHANT_KEY">
                 <input type="hidden" name="return_url"        id="pf-return"  value="">
@@ -257,11 +268,6 @@
                 <input type="hidden" name="item_name"         value="Forge Vertical SiteBuild Studio">
                 <input type="hidden" name="item_description"  value="AI-generated responsive business website — once-off">
                 <input type="hidden" name="custom_str1"       id="pf-data"    value="">
-                <button type="button" onclick="initiatePayment()"
-                    class="w-full py-5 rounded-xl font-black uppercase tracking-widest text-sm text-zinc-900 hover:opacity-90 transition-all mb-3"
-                    style="background:linear-gradient(90deg,#10b981,#84cc16);">
-                    Pay R799 &amp; Build My Site →
-                </button>
             </form>
 
             <!-- DEV BYPASS — remove before going live -->
