@@ -339,6 +339,133 @@ let clientGhToken  = '';
 let clientGhRepo   = '';
 
 // ─────────────────────────────────────────────────────────────────
+// LOCAL STORAGE — save & restore form data across payment redirects
+// Prevents the "I just paid and lost all my data" problem
+// ─────────────────────────────────────────────────────────────────
+const STORAGE_KEY = 'fv_sitebuild_draft';
+
+function saveToStorage() {
+    try {
+        const pages = [...document.querySelectorAll('[name="pages"]:checked')].map(i => i.value);
+        const draft = {
+            name:         document.getElementById('biz-name').value,
+            industry:     document.getElementById('biz-industry').value,
+            location:     document.getElementById('biz-location').value,
+            tagline:      document.getElementById('biz-tagline').value,
+            about:        document.getElementById('biz-about').value,
+            phone:        document.getElementById('biz-phone').value,
+            email:        document.getElementById('biz-email').value,
+            address:      document.getElementById('biz-address').value,
+            domain:       document.getElementById('biz-domain').value,
+            services:     document.getElementById('biz-services').value,
+            testimonials: document.getElementById('biz-testimonials').value,
+            hours:        document.getElementById('biz-hours').value,
+            cta:          document.getElementById('biz-cta').value,
+            styleNotes:   document.getElementById('style-notes').value,
+            pages,
+            style:        selectedStyle,
+            color:        selectedColor,
+            gh_username:  document.getElementById('gh-username')?.value || '',
+            gh_repo:      document.getElementById('gh-repo')?.value || '',
+            gh_enabled:   document.getElementById('enable-github').checked,
+            netlify:      document.getElementById('enable-netlify').checked,
+            download:     document.getElementById('enable-download').checked,
+            savedAt:      Date.now(),
+        };
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(draft));
+        console.log('[SiteBuild] Draft saved to localStorage');
+    } catch (e) {
+        console.warn('[SiteBuild] Could not save draft:', e);
+    }
+}
+
+function restoreFromStorage() {
+    try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return false;
+
+        const draft = JSON.parse(raw);
+
+        // Expire drafts older than 2 hours
+        if (Date.now() - draft.savedAt > 2 * 60 * 60 * 1000) {
+            localStorage.removeItem(STORAGE_KEY);
+            return false;
+        }
+
+        // Restore text fields
+        const set = (id, val) => {
+            const el = document.getElementById(id);
+            if (el && val !== undefined) el.value = val;
+        };
+        set('biz-name',        draft.name);
+        set('biz-industry',    draft.industry);
+        set('biz-location',    draft.location);
+        set('biz-tagline',     draft.tagline);
+        set('biz-about',       draft.about);
+        set('biz-phone',       draft.phone);
+        set('biz-email',       draft.email);
+        set('biz-address',     draft.address);
+        set('biz-domain',      draft.domain);
+        set('biz-services',    draft.services);
+        set('biz-testimonials',draft.testimonials);
+        set('biz-hours',       draft.hours);
+        set('biz-cta',         draft.cta);
+        set('style-notes',     draft.styleNotes);
+        set('gh-username',     draft.gh_username);
+        set('gh-repo',         draft.gh_repo);
+
+        // Restore page checkboxes
+        if (draft.pages && draft.pages.length) {
+            document.querySelectorAll('[name="pages"]').forEach(cb => {
+                cb.checked = draft.pages.includes(cb.value);
+                const chip = cb.closest('.page-chip');
+                if (chip) chip.classList.toggle('selected', cb.checked);
+            });
+        }
+
+        // Restore style chip
+        if (draft.style) {
+            selectedStyle = draft.style;
+            document.querySelectorAll('[data-style]').forEach(c => {
+                c.classList.toggle('selected', c.dataset.style === draft.style);
+            });
+        }
+
+        // Restore colour
+        if (draft.color) {
+            selectedColor = draft.color;
+            document.getElementById('selected-color').value = draft.color;
+            document.getElementById('custom-color').value   = draft.color;
+            document.querySelectorAll('.color-swatch').forEach(s => {
+                s.classList.toggle('selected', s.dataset.color === draft.color);
+            });
+        }
+
+        // Restore publish options
+        if (document.getElementById('enable-download'))
+            document.getElementById('enable-download').checked = draft.download !== false;
+        if (document.getElementById('enable-netlify'))
+            document.getElementById('enable-netlify').checked = !!draft.netlify;
+        if (document.getElementById('enable-github')) {
+            document.getElementById('enable-github').checked = !!draft.gh_enabled;
+            if (draft.gh_enabled) {
+                document.getElementById('github-fields').classList.remove('hidden');
+            }
+        }
+
+        console.log('[SiteBuild] Draft restored from localStorage');
+        return true;
+    } catch (e) {
+        console.warn('[SiteBuild] Could not restore draft:', e);
+        return false;
+    }
+}
+
+function clearStorage() {
+    localStorage.removeItem(STORAGE_KEY);
+}
+
+// ─────────────────────────────────────────────────────────────────
 // STEP NAVIGATION
 // ─────────────────────────────────────────────────────────────────
 function goStep(n) {
@@ -480,7 +607,36 @@ function initiatePayment() {
     const encoded = encodeURIComponent(JSON.stringify({ ...d, project_id: pid }));
     document.getElementById('pf-return').value =
         `${window.location.origin}/tools/sitebuild-intake.html?build=1&pid=${pid}&data=${encoded}`;
+
+    // Save form data before leaving — restored if URL data is missing on return
+    saveToStorage();
+
     document.getElementById('payfast-form').submit();
+}
+
+// ─────────────────────────────────────────────────────────────────
+// PAYPAL PAYMENT LINK — alternative to PayFast
+// Use this if paying via a PayPal.me or PayPal payment link instead.
+// Saves form data to localStorage then redirects to PayPal.
+// On return (?build=1), data is restored automatically.
+// ─────────────────────────────────────────────────────────────────
+function payWithPayPal(paypalUrl) {
+    const d = collectData();
+    if (!d.name || !d.industry) {
+        alert('Please fill in your business name and industry before paying.');
+        return;
+    }
+
+    // Generate project ID and save everything
+    const pid = 'FV-PP-' + Date.now();
+    projectId = pid;
+
+    // Store project ID so we can retrieve it on return
+    saveToStorage();
+    localStorage.setItem(STORAGE_KEY + '_pid', pid);
+
+    // Redirect to PayPal — they return to ?build=1 via auto-return URL
+    window.location.href = paypalUrl;
 }
 
 // ─────────────────────────────────────────────────────────────────
@@ -721,6 +877,7 @@ function startOver() {
     logoBase64    = '';
     clientGhToken = '';
     clientGhRepo  = '';
+    clearStorage();
     document.getElementById('progress-pills').style.display = 'flex';
     document.getElementById('github-deploy-btn').classList.add('hidden');
     document.getElementById('netlify-btn').classList.add('hidden');
@@ -739,19 +896,58 @@ function startOver() {
 }
 
 // ─────────────────────────────────────────────────────────────────
-// HANDLE RETURN FROM PAYFAST
+// HANDLE RETURN FROM PAYMENT (PayFast or PayPal)
 // ─────────────────────────────────────────────────────────────────
 (function () {
     const params = new URLSearchParams(window.location.search);
+
     if (params.get('build') === '1') {
+        let data = null;
+
+        // Try URL-encoded data first (PayFast — most reliable)
         try {
-            const data = JSON.parse(decodeURIComponent(params.get('data') || '{}'));
-            projectId  = params.get('pid') || data.project_id || ('FV-' + Date.now());
-            data.project_id = projectId;
-            if (data.name) triggerBuild(data);
+            const raw = params.get('data');
+            if (raw) {
+                data = JSON.parse(decodeURIComponent(raw));
+            }
         } catch (e) {
-            console.error('Could not parse return data:', e);
+            console.warn('[SiteBuild] Could not parse URL data, trying localStorage...');
         }
+
+        // Fall back to localStorage (PayPal link or URL data was too long)
+        if (!data || !data.name) {
+            const restored = restoreFromStorage();
+            if (restored) {
+                data = collectData();
+                console.log('[SiteBuild] Data restored from localStorage');
+            }
+        } else {
+            // URL data found — restore into form fields too so user can see it
+            restoreFromStorage();
+        }
+
+        if (data && data.name) {
+            // Get project ID from URL, localStorage, or generate new
+            projectId = params.get('pid')
+                || localStorage.getItem(STORAGE_KEY + '_pid')
+                || data.project_id
+                || ('FV-' + Date.now());
+            data.project_id = projectId;
+
+            // Clear stored PID — no longer needed
+            localStorage.removeItem(STORAGE_KEY + '_pid');
+
+            // Short delay so page renders before overlay appears
+            setTimeout(() => triggerBuild(data), 500);
+        } else {
+            console.error('[SiteBuild] No data available after payment return');
+            alert('Could not retrieve your form data after payment. Please fill in the form again — your payment was received.');
+        }
+    }
+
+    // Restore draft on normal page load too (so refreshing doesn't wipe the form)
+    if (!params.get('build')) {
+        restoreFromStorage();
     }
 })();
 </script>
