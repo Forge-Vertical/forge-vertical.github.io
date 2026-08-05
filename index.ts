@@ -1,6 +1,7 @@
 import { serve } from '@hono/node-server';
 import { Hono } from 'hono';
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'fs';
+import { cors } from 'hono/cors';
 import 'dotenv/config';
 import { ingestSite } from './ingestor';
 import { refactorToTailwind } from './forge';
@@ -15,6 +16,18 @@ const projectsRoot = './vertical-projects';
 [enginePath, projectsRoot].forEach(p => {
     if (!existsSync(p)) mkdirSync(p, { recursive: true });
 });
+
+// CORS — allow the GitHub Pages frontend to call this server
+app.use('*', cors({
+    origin: [
+        'https://forge-vertical.github.io',
+        'https://www.forgevertical.com',
+        'http://localhost:7777',
+        'http://localhost:3000',
+    ],
+    allowMethods: ['GET', 'POST', 'OPTIONS'],
+    allowHeaders: ['Content-Type', 'Authorization'],
+}));
 
 // ─────────────────────────────────────────────────────────────────
 // SOVEREIGN FILE SERVER
@@ -64,7 +77,7 @@ app.get('*', (c) => {
 app.post('/api/forge', async (c) => {
     try {
         const { url } = await c.req.json();
-        const siteData      = await ingestSite(url);
+        const siteData       = await ingestSite(url);
         const refactoredHtml = await refactorToTailwind(siteData.html);
         writeFileSync(`${enginePath}/index.html`, refactoredHtml);
         return c.json({
@@ -77,46 +90,83 @@ app.post('/api/forge', async (c) => {
 });
 
 // ─────────────────────────────────────────────────────────────────
-// NEW: SiteBuild Studio — generate from scratch
-// POST /api/generate-site
+// NEW: SiteBuild Studio — trigger build
+// POST /api/trigger-build
 // Body: business data JSON from sitebuild-intake.html
+//
+// This endpoint:
+// 1. Validates the payload
+// 2. Uses YOUR_FORGE_WRITE_TOKEN (from .env / GitHub secret) to write
+//    build-request.json to the repo — NEVER exposing the token to the browser
+// 3. Returns the project_id so the browser can poll for completion
 // ─────────────────────────────────────────────────────────────────
-app.post('/api/generate-site', async (c) => {
+app.post('/api/trigger-build', async (c) => {
     try {
         const data = await c.req.json();
 
         // Basic validation
         if (!data.name || !data.industry) {
-            return c.json(
-                { status: 'Error', error: 'Business name and industry are required' },
-                400
-            );
+            return c.json({ error: 'Business name and industry are required' }, 400);
         }
 
-        // Sanitise pages array
+        // Sanitise pages
         if (!Array.isArray(data.pages) || data.pages.length === 0) {
             data.pages = ['Home', 'Services', 'Contact'];
         }
 
-        const html = await generateSite(data);
-
-        // Optionally write to vertical-projects for local testing
-        if (data.project_id) {
-            const projectDir = `${projectsRoot}/${data.project_id}`;
-            if (!existsSync(projectDir)) mkdirSync(projectDir, { recursive: true });
-            writeFileSync(`${projectDir}/index.html`, html);
-            writeFileSync(`${projectDir}/build-status.json`, JSON.stringify({
-                status:     'complete',
-                built_at:   new Date().toISOString(),
-                project_id: data.project_id
-            }));
+        // Generate a project ID if not provided
+        if (!data.project_id) {
+            data.project_id = 'FV-' + Date.now();
         }
 
-        return c.json({ status: 'Generated', html });
+        const FORGE_REPO        = 'Forge-Vertical/forge-vertical.github.io';
+        const FORGE_WRITE_TOKEN = process.env.YOUR_FORGE_WRITE_TOKEN;
+
+        if (!FORGE_WRITE_TOKEN) {
+            console.error('YOUR_FORGE_WRITE_TOKEN not set in environment');
+            return c.json({ error: 'Server configuration error — token not set' }, 500);
+        }
+
+        // Write build-request.json to vertical-projects/{project_id}/
+        // This push triggers FORGE_SITEBUILD.yml via paths filter
+        const filePath = `vertical-projects/${data.project_id}/build-request.json`;
+        const content  = Buffer.from(JSON.stringify(data, null, 2)).toString('base64');
+
+        const ghRes = await fetch(
+            `https://api.github.com/repos/${FORGE_REPO}/contents/${filePath}`,
+            {
+                method: 'PUT',
+                headers: {
+                    'Authorization': `token ${FORGE_WRITE_TOKEN}`,
+                    'Content-Type':  'application/json',
+                    'User-Agent':    'ForgeVertical-SiteBuild/1.0',
+                },
+                body: JSON.stringify({
+                    message: `forge: build request ${data.project_id}`,
+                    content,
+                })
+            }
+        );
+
+        if (!ghRes.ok) {
+            const err = await ghRes.json() as any;
+            throw new Error(`GitHub API error: ${err.message || ghRes.status}`);
+        }
+
+        console.log(`[SiteBuild] Build request submitted: ${data.project_id}`);
+
+        // Return project_id — browser will poll the public GitHub Pages URL
+        // for build-status.json (no token needed, it's a public file)
+        return c.json({
+            status:     'Submitted',
+            project_id: data.project_id,
+            poll_url:   `https://forge-vertical.github.io/vertical-projects/${data.project_id}/build-status.json`,
+            result_url: `https://forge-vertical.github.io/vertical-projects/${data.project_id}/index.html`,
+        });
 
     } catch (error: any) {
-        console.error('GENERATE-SITE ERROR:', error);
-        return c.json({ status: 'Error', error: error.message }, 500);
+        console.error('[SiteBuild Error]:', error);
+        return c.json({ error: error.message }, 500);
     }
 });
 
@@ -137,25 +187,33 @@ app.post('/api/payfast-notify', async (c) => {
         if (paymentStatus === 'COMPLETE') {
             console.log(`[PayFast] Payment complete: ${paymentId}`);
 
-            // Parse the business data payload stored in custom_str1
             try {
                 const data = JSON.parse(customData || '{}');
                 if (data.project_id && data.name) {
-                    // Generate the site server-side on payment confirmation
-                    // This is the fallback in case the browser-side trigger failed
-                    const projectDir = `${projectsRoot}/${data.project_id}`;
-                    if (!existsSync(projectDir)) mkdirSync(projectDir, { recursive: true });
+                    // Trigger build via GitHub API using server-side token
+                    const FORGE_REPO        = 'Forge-Vertical/forge-vertical.github.io';
+                    const FORGE_WRITE_TOKEN = process.env.YOUR_FORGE_WRITE_TOKEN;
 
-                    // Only generate if not already done
-                    if (!existsSync(`${projectDir}/index.html`)) {
-                        const html = await generateSite(data);
-                        writeFileSync(`${projectDir}/index.html`, html);
-                        writeFileSync(`${projectDir}/build-status.json`, JSON.stringify({
-                            status:     'complete',
-                            built_at:   new Date().toISOString(),
-                            project_id: data.project_id
-                        }));
-                        console.log(`[PayFast] Site generated for ${data.project_id}`);
+                    if (FORGE_WRITE_TOKEN) {
+                        const filePath = `vertical-projects/${data.project_id}/build-request.json`;
+                        const content  = Buffer.from(JSON.stringify(data, null, 2)).toString('base64');
+
+                        await fetch(
+                            `https://api.github.com/repos/${FORGE_REPO}/contents/${filePath}`,
+                            {
+                                method: 'PUT',
+                                headers: {
+                                    'Authorization': `token ${FORGE_WRITE_TOKEN}`,
+                                    'Content-Type':  'application/json',
+                                    'User-Agent':    'ForgeVertical-SiteBuild/1.0',
+                                },
+                                body: JSON.stringify({
+                                    message: `forge: build request ${data.project_id} (PayFast confirmed)`,
+                                    content,
+                                })
+                            }
+                        );
+                        console.log(`[PayFast] Build triggered for ${data.project_id}`);
                     }
                 }
             } catch (parseErr) {
@@ -163,12 +221,11 @@ app.post('/api/payfast-notify', async (c) => {
             }
         }
 
-        // PayFast requires a 200 OK response — always return it
+        // PayFast requires 200 OK — always return it
         return c.text('OK', 200);
 
     } catch (error: any) {
         console.error('[PayFast IPN Error]:', error);
-        // Still return 200 so PayFast does not keep retrying
         return c.text('OK', 200);
     }
 });
@@ -177,11 +234,11 @@ app.post('/api/payfast-notify', async (c) => {
 // START SERVER
 // ─────────────────────────────────────────────────────────────────
 const port = Number(process.env.PORT) || 7777;
-console.log(`FORGE OPERATIONAL ON PORT ${port}`);
+console.log(`\nFORGE OPERATIONAL ON PORT ${port}`);
 console.log(`Routes active:`);
-console.log(`  GET  *                    — static file server`);
-console.log(`  POST /api/forge           — site refactor (ingest URL)`);
-console.log(`  POST /api/generate-site   — SiteBuild Studio (from scratch)`);
-console.log(`  POST /api/payfast-notify  — PayFast IPN handler`);
+console.log(`  GET  *                     — static file server`);
+console.log(`  POST /api/forge            — site refactor (ingest URL)`);
+console.log(`  POST /api/trigger-build    — SiteBuild Studio trigger`);
+console.log(`  POST /api/payfast-notify   — PayFast IPN handler\n`);
 
 serve({ fetch: app.fetch, port });
