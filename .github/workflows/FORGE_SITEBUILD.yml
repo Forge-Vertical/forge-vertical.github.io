@@ -1,0 +1,117 @@
+name: FORGE_SITEBUILD
+
+on:
+  push:
+    paths:
+      - 'vertical-projects/*/build-request.json'
+  workflow_dispatch:
+    inputs:
+      project_id:
+        description: 'Project ID to build'
+        required: true
+
+jobs:
+  build-site:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.FORGE_VERTICAL_DEPLOY_KEY }}
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      # Find the project that triggered this build
+      - name: Detect build request
+        id: detect
+        run: |
+          # Find the most recently modified build-request.json
+          CHANGED=$(git diff --name-only HEAD~1 HEAD | grep 'build-request.json' | head -1)
+          if [ -z "$CHANGED" ]; then
+            # workflow_dispatch fallback
+            CHANGED="vertical-projects/${{ github.event.inputs.project_id }}/build-request.json"
+          fi
+          PROJECT_DIR=$(dirname "$CHANGED")
+          PROJECT_ID=$(basename "$PROJECT_DIR")
+          echo "project_dir=$PROJECT_DIR" >> $GITHUB_OUTPUT
+          echo "project_id=$PROJECT_ID" >> $GITHUB_OUTPUT
+          echo "Building: $PROJECT_ID"
+
+      # Run the generation engine
+      - name: Install Dependencies
+        run: npm install --no-package-lock
+
+      - name: Generate website
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          PROJECT_DIR: ${{ steps.detect.outputs.project_dir }}
+          PROJECT_ID: ${{ steps.detect.outputs.project_id }}
+        run: npx tsx -e "
+          import { generateSite } from './generate-site.ts';
+          import { readFileSync, writeFileSync } from 'fs';
+          import { join } from 'path';
+
+          const projectDir = process.env.PROJECT_DIR!;
+          const projectId = process.env.PROJECT_ID!;
+          const data = JSON.parse(readFileSync(join(projectDir, 'build-request.json'), 'utf8'));
+
+          generateSite(data)
+            .then(html => {
+              writeFileSync(join(projectDir, 'index.html'), html);
+              writeFileSync(join(projectDir, 'build-status.json'), JSON.stringify({
+                status: 'complete',
+                built_at: new Date().toISOString(),
+                project_id: projectId
+              }));
+              console.log('✓ Site generated for', projectId);
+            })
+            .catch(err => {
+              writeFileSync(join(projectDir, 'build-status.json'), JSON.stringify({
+                status: 'error',
+                error: err.message,
+                built_at: new Date().toISOString(),
+                project_id: projectId
+              }));
+              console.error('✗ Generation failed:', err.message);
+              process.exit(1);
+            });
+        "
+
+      # Commit the generated site back to repo
+      - name: Commit generated site
+        run: |
+          git config user.name "Forge-SiteBuild-Bot"
+          git config user.email "bot@forgevertical.com"
+          git add vertical-projects/
+          git commit -m "forge: site built for ${{ steps.detect.outputs.project_id }}" || echo "No changes"
+          git push origin main
+
+      # If the project has a github_token, deploy to their GitHub Pages
+      - name: Deploy to client GitHub Pages (if token provided)
+        env:
+          PROJECT_DIR: ${{ steps.detect.outputs.project_dir }}
+        run: |
+          REQUEST=$(cat "$PROJECT_DIR/build-request.json")
+          GITHUB_TOKEN=$(echo $REQUEST | node -e "const d=JSON.parse(require('fs').readFileSync('/dev/stdin','utf8')); process.stdout.write(d.github_token||'')")
+          GITHUB_REPO=$(echo $REQUEST | node -e "const d=JSON.parse(require('fs').readFileSync('/dev/stdin','utf8')); process.stdout.write(d.github_repo||'')")
+          
+          if [ -n "$GITHUB_TOKEN" ] && [ -n "$GITHUB_REPO" ]; then
+            echo "Deploying to $GITHUB_REPO..."
+            # Encode the HTML file as base64 and push via GitHub API
+            HTML_B64=$(base64 -w 0 "$PROJECT_DIR/index.html")
+            curl -s -X PUT \
+              -H "Authorization: token $GITHUB_TOKEN" \
+              -H "Content-Type: application/json" \
+              "https://api.github.com/repos/$GITHUB_REPO/contents/index.html" \
+              -d "{\"message\":\"Deploy site via Forge Vertical SiteBuild\",\"content\":\"$HTML_B64\"}"
+            echo "Deployed to GitHub Pages"
+          else
+            echo "No GitHub deployment configured — skipping"
+          fi
