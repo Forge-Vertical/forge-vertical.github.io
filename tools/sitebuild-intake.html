@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SiteBuild Studio | Forge Vertical</title>
+    <meta name="description" content="Build a complete responsive business website in minutes. Fill in your details, pay once, download or publish instantly.">
+    <script src="/global.js" defer></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,500;0,800;1,800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/typography.css">
@@ -14,10 +16,13 @@
         .fi:focus { border-color:#84cc16; outline:none; background:#fff; }
         .fi::placeholder { color:#a1a1aa; }
         textarea.fi { resize:vertical; min-height:80px; }
-        .style-chip { cursor:pointer; border:1.5px solid #e4e4e7; border-radius:12px; padding:14px; transition:all 0.2s; text-align:center; }
+        .style-chip { cursor:pointer; border:1.5px solid #e4e4e7; border-radius:12px; padding:14px; transition:all 0.2s; text-align:center; display:block; }
         .style-chip:hover { border-color:#84cc16; }
         .style-chip.selected { border-color:#84cc16; background:rgba(132,204,22,0.08); }
         .style-chip input { display:none; }
+        .page-chip { cursor:pointer; border:1.5px solid #e4e4e7; border-radius:8px; padding:6px 12px; transition:all 0.15s; display:inline-block; font-size:12px; font-weight:700; color:#71717a; }
+        .page-chip.selected { border-color:#84cc16; color:#09090b; background:rgba(132,204,22,0.08); }
+        .page-chip input { display:none; }
         .color-swatch { width:36px; height:36px; border-radius:8px; cursor:pointer; border:2px solid transparent; transition:all 0.15s; flex-shrink:0; }
         .color-swatch.selected { border-color:#09090b; transform:scale(1.1); }
         .upload-zone { border:2px dashed #e4e4e7; border-radius:14px; padding:28px; text-align:center; cursor:pointer; transition:all 0.2s; }
@@ -27,36 +32,35 @@
         .step-pill.active { background:#09090b; color:#84cc16; }
         .step-pill.done { background:#1a2e05; color:#84cc16; }
         .step-pill.pending { background:#f4f4f5; color:#a1a1aa; }
-
-        /* Building overlay */
         #build-overlay { display:none; position:fixed; inset:0; background:rgba(9,9,11,0.97); z-index:999; flex-direction:column; align-items:center; justify-content:center; }
         #build-overlay.active { display:flex; }
         .build-spinner { width:60px; height:60px; border:3px solid #27272a; border-top-color:#84cc16; border-radius:50%; animation:spin 0.8s linear infinite; }
         @keyframes spin { to { transform:rotate(360deg); } }
-        .build-log-line { font-family:'JetBrains Mono',monospace; font-size:12px; color:#84cc16; line-height:1.8; }
-        .build-log-line.done { color:#4ade80; }
-        .build-log-line.pending { color:#3f3f46; }
-
-        /* Result */
-        #result-frame { border:none; width:100%; border-radius:16px; height:500px; }
+        .log-line { font-family:'JetBrains Mono',monospace; font-size:12px; line-height:1.9; }
+        .log-line.pending { color:#3f3f46; }
+        .log-line.active  { color:#84cc16; }
+        .log-line.done    { color:#4ade80; }
+        #result-frame { border:none; width:100%; border-radius:16px; height:520px; }
+        .card { background:#fff; border-radius:20px; border:1px solid #e4e4e7; padding:24px; box-shadow:0 1px 4px rgba(0,0,0,0.04); }
     </style>
 </head>
 <body class="bg-zinc-50 min-h-screen">
 
-<!-- Build overlay -->
+<!-- ── Build overlay ── -->
 <div id="build-overlay">
     <div class="build-spinner mb-8"></div>
-    <p class="mono text-[10px] text-zinc-500 uppercase tracking-widest mb-6">Building your website</p>
-    <div class="space-y-1 text-center mb-8" id="build-log">
-        <p class="build-log-line pending" id="log-0">◦ Submitting your business data...</p>
-        <p class="build-log-line pending" id="log-1">◦ Triggering Gemini 2.5 Flash engine...</p>
-        <p class="build-log-line pending" id="log-2">◦ Generating hero & navigation...</p>
-        <p class="build-log-line pending" id="log-3">◦ Building services & about sections...</p>
-        <p class="build-log-line pending" id="log-4">◦ Adding contact, footer & Schema markup...</p>
-        <p class="build-log-line pending" id="log-5">◦ Optimising for mobile...</p>
-        <p class="build-log-line pending" id="log-6">◦ Finalising output...</p>
+    <p class="mono text-[10px] text-zinc-500 uppercase tracking-widest mb-6">Forge Vertical · Building your site</p>
+    <div class="space-y-1 text-center mb-8">
+        <p class="log-line pending" id="log-0">◦ Submitting your business data...</p>
+        <p class="log-line pending" id="log-1">◦ Triggering Gemini 2.5 Flash engine...</p>
+        <p class="log-line pending" id="log-2">◦ Generating hero & navigation...</p>
+        <p class="log-line pending" id="log-3">◦ Building services & about sections...</p>
+        <p class="log-line pending" id="log-4">◦ Adding contact, footer & Schema markup...</p>
+        <p class="log-line pending" id="log-5">◦ Optimising for mobile...</p>
+        <p class="log-line pending" id="log-6">◦ Finalising output...</p>
     </div>
-    <div id="build-timer" class="mono text-[10px] text-zinc-600 uppercase tracking-widest">Elapsed: 0s</div>
+    <p class="mono text-[10px] text-zinc-600 uppercase tracking-widest" id="build-timer">Elapsed: 0s</p>
+    <p class="mono text-[10px] text-zinc-700 mt-3">Do not close this tab. Typical build: 30–90 seconds.</p>
 </div>
 
 <div class="max-w-2xl mx-auto px-6 py-16">
@@ -64,57 +68,59 @@
     <!-- Header -->
     <div class="mb-10">
         <a href="/index.html" class="mono text-[10px] text-zinc-400 uppercase tracking-widest hover:text-zinc-600 transition-colors">← Forge Vertical</a>
-        <div class="mono text-[10px] text-zinc-400 uppercase tracking-widest mt-4 mb-2">// SiteBuild Studio</div>
-        <h1 class="text-4xl font-extrabold tracking-tighter text-zinc-900 mb-2">
+        <div class="mono text-[10px] text-zinc-400 uppercase tracking-widest mt-5 mb-2">// SiteBuild Studio</div>
+        <h1 class="text-4xl font-extrabold tracking-tighter text-zinc-900 leading-tight mb-3">
             Your website.<br>
-            <span style="background:linear-gradient(90deg,#10b981,#84cc16);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:inline-block;">Built in minutes.</span>
+            <span style="background:linear-gradient(90deg,#10b981,#84cc16);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:inline-block;padding-bottom:0.1em;">Built in minutes.</span>
         </h1>
-        <p class="text-zinc-500 text-sm font-light leading-relaxed max-w-md">Fill in your details. We generate a complete responsive website — download it, publish it to GitHub Pages, or copy the code. One once-off payment.</p>
+        <p class="text-zinc-500 text-sm font-light leading-relaxed max-w-md">Fill in your business details, choose your style, pay once. We generate a complete responsive website — download it, publish to GitHub Pages, or drag to Netlify.</p>
     </div>
 
-    <!-- Progress -->
+    <!-- Progress pills -->
     <div class="flex gap-2 mb-8" id="progress-pills">
-        <div class="step-pill active" id="pill-0">01 Business</div>
+        <div class="step-pill active"  id="pill-0">01 Business</div>
         <div class="step-pill pending" id="pill-1">02 Services</div>
         <div class="step-pill pending" id="pill-2">03 Style</div>
         <div class="step-pill pending" id="pill-3">04 Publish</div>
         <div class="step-pill pending" id="pill-4">05 Build</div>
     </div>
 
-    <!-- STEP 0: Business -->
+    <!-- ── STEP 0: Business ── -->
     <div id="step-0" class="space-y-5">
-        <div class="bg-white rounded-2xl border border-zinc-100 p-6 space-y-4 shadow-sm">
+        <div class="card space-y-4">
             <h2 class="font-extrabold text-base tracking-tight text-zinc-900">Your business</h2>
             <div><label class="section-label">Business name *</label><input type="text" id="biz-name" class="fi" placeholder="Cape Town Auto Services"></div>
-            <div><label class="section-label">Industry / type *</label><input type="text" id="biz-industry" class="fi" placeholder="Automotive repair, Guesthouse, Law firm..."></div>
+            <div><label class="section-label">Industry / business type *</label><input type="text" id="biz-industry" class="fi" placeholder="Automotive repair, Guesthouse, Law firm, Restaurant..."></div>
             <div><label class="section-label">City & country *</label><input type="text" id="biz-location" class="fi" placeholder="Cape Town, South Africa"></div>
-            <div><label class="section-label">Tagline</label><input type="text" id="biz-tagline" class="fi" placeholder="Cape Town's most trusted panel beaters since 1998"></div>
-            <div><label class="section-label">About your business</label><textarea id="biz-about" class="fi" placeholder="What makes you different? Why do customers choose you?"></textarea></div>
+            <div><label class="section-label">Tagline — what you do in one line</label><input type="text" id="biz-tagline" class="fi" placeholder="Cape Town's most trusted panel beaters since 1998"></div>
+            <div><label class="section-label">About your business</label><textarea id="biz-about" class="fi" placeholder="What makes you different? Why do customers choose you? 2–4 sentences."></textarea></div>
             <div class="grid grid-cols-2 gap-3">
                 <div><label class="section-label">Phone</label><input type="tel" id="biz-phone" class="fi" placeholder="+27 21 000 0000"></div>
                 <div><label class="section-label">Email</label><input type="email" id="biz-email" class="fi" placeholder="info@yourbusiness.com"></div>
             </div>
             <div><label class="section-label">Address</label><input type="text" id="biz-address" class="fi" placeholder="123 Main Road, Cape Town, 8001"></div>
+            <div><label class="section-label">Your domain (if you have one)</label><input type="text" id="biz-domain" class="fi" placeholder="yourbusiness.co.za"></div>
         </div>
         <button onclick="goStep(1)" class="w-full bg-zinc-900 text-[#84cc16] py-4 rounded-xl mono text-[10px] font-bold uppercase tracking-widest hover:bg-[#84cc16] hover:text-zinc-900 transition-all">Next — Services →</button>
     </div>
 
-    <!-- STEP 1: Services -->
+    <!-- ── STEP 1: Services ── -->
     <div id="step-1" class="space-y-5 hidden">
-        <div class="bg-white rounded-2xl border border-zinc-100 p-6 space-y-4 shadow-sm">
+        <div class="card space-y-5">
             <h2 class="font-extrabold text-base tracking-tight text-zinc-900">What you offer</h2>
             <div><label class="section-label">Services or products (one per line) *</label><textarea id="biz-services" class="fi" style="min-height:110px;" placeholder="Panel beating & spray painting&#10;Insurance claim repairs&#10;Dent removal&#10;Full vehicle restoration"></textarea></div>
             <div>
                 <label class="section-label">Pages to include</label>
-                <div class="flex flex-wrap gap-2" id="page-chips">
-                    <label class="style-chip selected text-xs font-bold text-zinc-700 px-3 py-2"><input type="checkbox" name="pages" value="Home" checked> Home</label>
-                    <label class="style-chip text-xs font-bold text-zinc-700 px-3 py-2"><input type="checkbox" name="pages" value="About"> About</label>
-                    <label class="style-chip text-xs font-bold text-zinc-700 px-3 py-2"><input type="checkbox" name="pages" value="Services"> Services</label>
-                    <label class="style-chip text-xs font-bold text-zinc-700 px-3 py-2"><input type="checkbox" name="pages" value="Gallery"> Gallery</label>
-                    <label class="style-chip text-xs font-bold text-zinc-700 px-3 py-2"><input type="checkbox" name="pages" value="Testimonials"> Testimonials</label>
-                    <label class="style-chip text-xs font-bold text-zinc-700 px-3 py-2"><input type="checkbox" name="pages" value="Contact"> Contact</label>
-                    <label class="style-chip text-xs font-bold text-zinc-700 px-3 py-2"><input type="checkbox" name="pages" value="FAQ"> FAQ</label>
-                    <label class="style-chip text-xs font-bold text-zinc-700 px-3 py-2"><input type="checkbox" name="pages" value="Pricing"> Pricing</label>
+                <div class="flex flex-wrap gap-2 mt-1">
+                    <label class="page-chip selected"><input type="checkbox" name="pages" value="Home" checked> Home</label>
+                    <label class="page-chip"><input type="checkbox" name="pages" value="About"> About</label>
+                    <label class="page-chip"><input type="checkbox" name="pages" value="Services"> Services</label>
+                    <label class="page-chip"><input type="checkbox" name="pages" value="Gallery"> Gallery</label>
+                    <label class="page-chip"><input type="checkbox" name="pages" value="Testimonials"> Testimonials</label>
+                    <label class="page-chip"><input type="checkbox" name="pages" value="Contact"> Contact</label>
+                    <label class="page-chip"><input type="checkbox" name="pages" value="FAQ"> FAQ</label>
+                    <label class="page-chip"><input type="checkbox" name="pages" value="Pricing"> Pricing</label>
+                    <label class="page-chip"><input type="checkbox" name="pages" value="Booking"> Online Booking</label>
                 </div>
             </div>
             <div><label class="section-label">Testimonials (optional — one per line)</label><textarea id="biz-testimonials" class="fi" placeholder='"Great service!" — John S.'></textarea></div>
@@ -127,22 +133,22 @@
         </div>
     </div>
 
-    <!-- STEP 2: Style -->
+    <!-- ── STEP 2: Style ── -->
     <div id="step-2" class="space-y-5 hidden">
-        <div class="bg-white rounded-2xl border border-zinc-100 p-6 space-y-5 shadow-sm">
+        <div class="card space-y-6">
             <h2 class="font-extrabold text-base tracking-tight text-zinc-900">Look & feel</h2>
             <div>
-                <label class="section-label">Style *</label>
+                <label class="section-label">Website style *</label>
                 <div class="grid grid-cols-2 gap-3">
-                    <label class="style-chip" data-style="modern-dark"><input type="radio" name="style" value="modern-dark"><div class="w-full h-12 rounded-lg mb-2" style="background:#09090b;border:1px solid #27272a;"></div><div class="font-bold text-sm text-zinc-900">Modern Dark</div><div class="text-[11px] text-zinc-400">Bold & premium</div></label>
-                    <label class="style-chip" data-style="clean-light"><input type="radio" name="style" value="clean-light"><div class="w-full h-12 rounded-lg mb-2" style="background:#fff;border:1px solid #e4e4e7;"></div><div class="font-bold text-sm text-zinc-900">Clean Light</div><div class="text-[11px] text-zinc-400">Professional & clear</div></label>
-                    <label class="style-chip" data-style="vibrant-brand"><input type="radio" name="style" value="vibrant-brand"><div class="w-full h-12 rounded-lg mb-2" style="background:#0f172a;border:1px solid #1e40af;"></div><div class="font-bold text-sm text-zinc-900">Vibrant Brand</div><div class="text-[11px] text-zinc-400">Bold colour & energy</div></label>
-                    <label class="style-chip" data-style="earthy-warm"><input type="radio" name="style" value="earthy-warm"><div class="w-full h-12 rounded-lg mb-2" style="background:#1c1410;border:1px solid #92400e;"></div><div class="font-bold text-sm text-zinc-900">Earthy Warm</div><div class="text-[11px] text-zinc-400">Hospitality & lifestyle</div></label>
+                    <label class="style-chip" data-style="modern-dark"><input type="radio" name="style" value="modern-dark"><div class="w-full h-12 rounded-lg mb-2" style="background:#09090b;border:1px solid #27272a;"></div><div class="font-bold text-sm text-zinc-900">Modern Dark</div><div class="text-[11px] text-zinc-400 mt-1">Bold & premium</div></label>
+                    <label class="style-chip" data-style="clean-light"><input type="radio" name="style" value="clean-light"><div class="w-full h-12 rounded-lg mb-2" style="background:#fff;border:1px solid #e4e4e7;"></div><div class="font-bold text-sm text-zinc-900">Clean Light</div><div class="text-[11px] text-zinc-400 mt-1">Professional & clear</div></label>
+                    <label class="style-chip" data-style="vibrant-brand"><input type="radio" name="style" value="vibrant-brand"><div class="w-full h-12 rounded-lg mb-2" style="background:#0f172a;border:1px solid #1e40af;"></div><div class="font-bold text-sm text-zinc-900">Vibrant Brand</div><div class="text-[11px] text-zinc-400 mt-1">Bold colour & energy</div></label>
+                    <label class="style-chip" data-style="earthy-warm"><input type="radio" name="style" value="earthy-warm"><div class="w-full h-12 rounded-lg mb-2" style="background:#1c1410;border:1px solid #92400e;"></div><div class="font-bold text-sm text-zinc-900">Earthy Warm</div><div class="text-[11px] text-zinc-400 mt-1">Hospitality & lifestyle</div></label>
                 </div>
             </div>
             <div>
-                <label class="section-label">Accent colour</label>
-                <div class="flex flex-wrap gap-3 items-center">
+                <label class="section-label">Brand accent colour</label>
+                <div class="flex flex-wrap gap-3 items-center mt-1">
                     <div class="color-swatch selected" style="background:#84cc16;" data-color="#84cc16"></div>
                     <div class="color-swatch" style="background:#3b82f6;" data-color="#3b82f6"></div>
                     <div class="color-swatch" style="background:#ef4444;" data-color="#ef4444"></div>
@@ -155,13 +161,17 @@
                 </div>
                 <input type="hidden" id="selected-color" value="#84cc16">
             </div>
-            <div><label class="section-label">Logo upload (optional)</label>
+            <div>
+                <label class="section-label">Logo (optional)</label>
                 <div class="upload-zone" onclick="document.getElementById('logo-input').click()">
                     <input type="file" id="logo-input" accept="image/*" class="hidden" onchange="handleLogoUpload(this)">
-                    <div id="logo-preview"><p class="mono text-[10px] text-zinc-400 uppercase tracking-widest">Click to upload logo</p><p class="text-xs text-zinc-300 mt-1">PNG, JPG, SVG</p></div>
+                    <div id="logo-preview">
+                        <p class="mono text-[10px] text-zinc-400 uppercase tracking-widest">Click to upload your logo</p>
+                        <p class="text-xs text-zinc-300 mt-1">PNG, JPG, SVG · Max 5MB</p>
+                    </div>
                 </div>
             </div>
-            <div><label class="section-label">Style notes (optional)</label><input type="text" id="style-notes" class="fi" placeholder="e.g. minimal, lots of whitespace, luxury feel, friendly..."></div>
+            <div><label class="section-label">Style notes (optional)</label><input type="text" id="style-notes" class="fi" placeholder="e.g. minimalist, luxury feel, friendly and approachable..."></div>
         </div>
         <div class="flex gap-3">
             <button onclick="goStep(1)" class="flex-1 border border-zinc-200 text-zinc-400 py-4 rounded-xl mono text-[10px] font-bold uppercase tracking-widest hover:border-zinc-400 transition-all">← Back</button>
@@ -169,46 +179,44 @@
         </div>
     </div>
 
-    <!-- STEP 3: Publish options -->
+    <!-- ── STEP 3: Publish options ── -->
     <div id="step-3" class="space-y-5 hidden">
-        <div class="bg-white rounded-2xl border border-zinc-100 p-6 space-y-5 shadow-sm">
-            <h2 class="font-extrabold text-base tracking-tight text-zinc-900">Where do you want to publish?</h2>
-            <p class="text-zinc-400 text-sm">All optional — you can always download the HTML file. Select any extras you want set up automatically.</p>
+        <div class="card space-y-5">
+            <h2 class="font-extrabold text-base tracking-tight text-zinc-900">Where do you want your site?</h2>
+            <p class="text-zinc-400 text-sm">All optional. You can always download the HTML file and host it anywhere.</p>
 
-            <!-- GitHub Pages -->
-            <div class="border border-zinc-100 rounded-xl p-4">
-                <div class="flex items-center gap-3 mb-3">
-                    <input type="checkbox" id="enable-github" class="w-4 h-4 rounded" style="accent-color:#84cc16;">
-                    <label for="enable-github" class="font-bold text-sm text-zinc-900 cursor-pointer">Publish to GitHub Pages (free hosting)</label>
-                </div>
-                <div id="github-fields" class="space-y-3 hidden">
-                    <div class="bg-zinc-50 rounded-lg p-3 text-xs text-zinc-500 leading-relaxed">
-                        Your site will be live at <span class="mono font-bold text-zinc-700">yourusername.github.io/your-repo</span> — completely free. You need a GitHub account and a personal access token with <span class="mono font-bold">repo</span> scope.
-                        <a href="https://github.com/settings/tokens/new?scopes=repo&description=ForgeSiteBuild" target="_blank" rel="noopener noreferrer" class="text-[#84cc16] underline block mt-1">Generate token on GitHub →</a>
-                    </div>
-                    <div><label class="section-label">GitHub username</label><input type="text" id="gh-username" class="fi" placeholder="yourusername"></div>
-                    <div><label class="section-label">Repository name (will be created if it doesn't exist)</label><input type="text" id="gh-repo" class="fi" placeholder="my-business-site"></div>
-                    <div><label class="section-label">Personal access token</label><input type="password" id="gh-token" class="fi" placeholder="ghp_..."></div>
-                    <p class="mono text-[10px] text-zinc-400">Your token is used only for this deployment and is never stored.</p>
-                </div>
-            </div>
-
-            <!-- Download only -->
             <div class="border border-zinc-100 rounded-xl p-4">
                 <div class="flex items-center gap-3">
                     <input type="checkbox" id="enable-download" checked class="w-4 h-4 rounded" style="accent-color:#84cc16;">
                     <label for="enable-download" class="font-bold text-sm text-zinc-900 cursor-pointer">Download HTML file</label>
                 </div>
-                <p class="text-zinc-400 text-xs mt-2 ml-7">Clean single-file HTML with Tailwind CDN. Open in any browser. Edit in any text editor. Upload to any host.</p>
+                <p class="text-zinc-400 text-xs mt-2 ml-7">Single file. Open in any browser. Edit in any text editor. Upload to any host via FTP or cPanel.</p>
             </div>
 
-            <!-- Netlify drop -->
+            <div class="border border-zinc-100 rounded-xl p-4">
+                <div class="flex items-center gap-3 mb-1">
+                    <input type="checkbox" id="enable-github" class="w-4 h-4 rounded" style="accent-color:#84cc16;">
+                    <label for="enable-github" class="font-bold text-sm text-zinc-900 cursor-pointer">Publish to GitHub Pages — free hosting</label>
+                </div>
+                <p class="text-zinc-400 text-xs mb-3 ml-7">Your site lives at <span class="mono font-bold text-zinc-600">yourusername.github.io/repo</span> — completely free.</p>
+                <div id="github-fields" class="space-y-3 hidden">
+                    <div class="bg-zinc-50 rounded-lg p-3 text-xs text-zinc-500 leading-relaxed">
+                        You need a GitHub Personal Access Token with <span class="mono font-bold">repo</span> scope.
+                        <a href="https://github.com/settings/tokens/new?scopes=repo&description=MySitePublish" target="_blank" rel="noopener noreferrer" class="text-[#84cc16] underline ml-1">Generate token →</a>
+                    </div>
+                    <div><label class="section-label">GitHub username</label><input type="text" id="gh-username" class="fi" placeholder="yourusername"></div>
+                    <div><label class="section-label">Repository name</label><input type="text" id="gh-repo" class="fi" placeholder="my-business-site"></div>
+                    <div><label class="section-label">Personal access token</label><input type="password" id="gh-token" class="fi" placeholder="ghp_..."></div>
+                    <p class="mono text-[10px] text-zinc-400">Your token is used only for this deployment and never stored by Forge Vertical.</p>
+                </div>
+            </div>
+
             <div class="border border-zinc-100 rounded-xl p-4">
                 <div class="flex items-center gap-3">
                     <input type="checkbox" id="enable-netlify" class="w-4 h-4 rounded" style="accent-color:#84cc16;">
-                    <label for="enable-netlify" class="font-bold text-sm text-zinc-900 cursor-pointer">Deploy to Netlify (free hosting)</label>
+                    <label for="enable-netlify" class="font-bold text-sm text-zinc-900 cursor-pointer">Deploy to Netlify — free hosting</label>
                 </div>
-                <p class="text-zinc-400 text-xs mt-2 ml-7">After building, we'll open Netlify Drop in a new tab — drag your downloaded file there and it's live in seconds.</p>
+                <p class="text-zinc-400 text-xs mt-2 ml-7">After building we open Netlify Drop and download your file — drag and drop to go live in seconds.</p>
             </div>
         </div>
         <div class="flex gap-3">
@@ -217,37 +225,38 @@
         </div>
     </div>
 
-    <!-- STEP 4: Review & Pay -->
+    <!-- ── STEP 4: Review & Pay ── -->
     <div id="step-4" class="space-y-5 hidden">
-        <div class="bg-white rounded-2xl border border-zinc-100 p-6 shadow-sm">
-            <h2 class="font-extrabold text-base tracking-tight text-zinc-900 mb-4">Review & build</h2>
-            <div id="order-summary" class="space-y-2 text-sm text-zinc-600 mb-5 pb-5 border-b border-zinc-100"></div>
-
-            <div class="flex justify-between items-center mb-1">
+        <div class="card">
+            <h2 class="font-extrabold text-base tracking-tight text-zinc-900 mb-5">Review your order</h2>
+            <div id="order-summary" class="space-y-2 text-sm text-zinc-600 pb-5 mb-5 border-b border-zinc-100"></div>
+            <div class="flex justify-between items-baseline mb-1">
                 <span class="font-bold text-zinc-900">SiteBuild Studio — once-off</span>
-                <span class="mono font-bold text-zinc-900 text-lg">R799</span>
+                <span class="mono font-bold text-zinc-900 text-xl">R799</span>
             </div>
-            <div class="space-y-1 mb-5">
-                <div class="flex gap-2 text-xs text-zinc-500"><span class="text-[#84cc16]">✓</span> Complete responsive website generated by Gemini 2.5 Flash</div>
-                <div class="flex gap-2 text-xs text-zinc-500"><span class="text-[#84cc16]">✓</span> Download HTML · GitHub Pages · Netlify options</div>
-                <div class="flex gap-2 text-xs text-zinc-500"><span class="text-[#84cc16]">✓</span> JSON-LD Schema & mobile-responsive included</div>
-                <div class="flex gap-2 text-xs text-zinc-500"><span class="text-[#84cc16]">✓</span> All sections clearly commented for easy editing</div>
+            <p class="text-zinc-400 text-xs mb-4">Includes VAT · One payment · No subscription</p>
+            <div class="space-y-2 mb-5">
+                <div class="flex gap-2 text-xs text-zinc-500"><span class="text-[#84cc16]">✓</span> Complete responsive website — Gemini 2.5 Flash</div>
+                <div class="flex gap-2 text-xs text-zinc-500"><span class="text-[#84cc16]">✓</span> Download · GitHub Pages · Netlify — your choice</div>
+                <div class="flex gap-2 text-xs text-zinc-500"><span class="text-[#84cc16]">✓</span> JSON-LD Schema & SEO structure included</div>
+                <div class="flex gap-2 text-xs text-zinc-500"><span class="text-[#84cc16]">✓</span> All sections commented for easy editing</div>
+                <div class="flex gap-2 text-xs text-zinc-500"><span class="text-[#84cc16]">✓</span> Mobile-first responsive on all devices</div>
             </div>
 
             <!-- PayFast form -->
             <form id="payfast-form" action="https://www.payfast.co.za/eng/process" method="POST">
-                <input type="hidden" name="merchant_id" value="YOUR_MERCHANT_ID">
-                <input type="hidden" name="merchant_key" value="YOUR_MERCHANT_KEY">
-                <input type="hidden" name="return_url" id="pf-return" value="">
-                <input type="hidden" name="cancel_url" value="https://www.forgevertical.com/tools/sitebuild-intake.html?cancelled=1">
-                <input type="hidden" name="notify_url" value="https://api.forgevertical.com/payfast-notify">
-                <input type="hidden" name="name_first" id="pf-name" value="">
-                <input type="hidden" name="email_address" id="pf-email" value="">
-                <input type="hidden" name="m_payment_id" id="pf-pid" value="">
-                <input type="hidden" name="amount" value="799.00">
-                <input type="hidden" name="item_name" value="Forge Vertical SiteBuild Studio">
-                <input type="hidden" name="custom_str1" id="pf-data" value="">
-
+                <input type="hidden" name="merchant_id"       value="YOUR_MERCHANT_ID">
+                <input type="hidden" name="merchant_key"      value="YOUR_MERCHANT_KEY">
+                <input type="hidden" name="return_url"        id="pf-return"  value="">
+                <input type="hidden" name="cancel_url"        value="https://www.forgevertical.com/tools/sitebuild-intake.html?cancelled=1">
+                <input type="hidden" name="notify_url"        value="https://YOUR_SERVER_URL/api/payfast-notify">
+                <input type="hidden" name="name_first"        id="pf-name"    value="">
+                <input type="hidden" name="email_address"     id="pf-email"   value="">
+                <input type="hidden" name="m_payment_id"      id="pf-pid"     value="">
+                <input type="hidden" name="amount"            value="799.00">
+                <input type="hidden" name="item_name"         value="Forge Vertical SiteBuild Studio">
+                <input type="hidden" name="item_description"  value="AI-generated responsive business website — once-off">
+                <input type="hidden" name="custom_str1"       id="pf-data"    value="">
                 <button type="button" onclick="initiatePayment()"
                     class="w-full py-5 rounded-xl font-black uppercase tracking-widest text-sm text-zinc-900 hover:opacity-90 transition-all mb-3"
                     style="background:linear-gradient(90deg,#10b981,#84cc16);">
@@ -255,95 +264,134 @@
                 </button>
             </form>
 
+            <!-- DEV BYPASS — remove before going live -->
             <button onclick="devBuild()"
                 class="w-full py-3 rounded-xl mono text-[10px] font-bold uppercase tracking-widest text-zinc-400 border border-zinc-200 hover:border-zinc-400 transition-all">
-                [DEV] Skip payment & build
+                [DEV] Skip payment &amp; build now
             </button>
         </div>
         <button onclick="goStep(3)" class="w-full border border-zinc-200 text-zinc-400 py-4 rounded-xl mono text-[10px] font-bold uppercase tracking-widest hover:border-zinc-400 transition-all">← Back</button>
     </div>
 
-    <!-- STEP 5: Result -->
+    <!-- ── STEP 5: Result ── -->
     <div id="step-5" class="space-y-4 hidden">
         <div class="bg-zinc-950 rounded-2xl p-6">
             <p class="mono text-[10px] text-[#84cc16] uppercase tracking-widest mb-1">// Build complete</p>
             <h2 class="font-extrabold text-white text-xl tracking-tight mb-4">Your site is ready.</h2>
             <div class="flex flex-wrap gap-3">
-                <button onclick="downloadSite()" class="bg-[#84cc16] text-zinc-900 px-5 py-3 rounded-xl mono text-[10px] font-bold uppercase tracking-widest hover:opacity-90 transition-all">↓ Download HTML</button>
-                <button onclick="copyCode()" class="border border-zinc-700 text-white px-5 py-3 rounded-xl mono text-[10px] font-bold uppercase tracking-widest hover:border-[#84cc16] hover:text-[#84cc16] transition-all">⎘ Copy code</button>
-                <button id="github-deploy-btn" onclick="deployToGitHub()" class="hidden border border-zinc-700 text-white px-5 py-3 rounded-xl mono text-[10px] font-bold uppercase tracking-widest hover:border-[#84cc16] hover:text-[#84cc16] transition-all">⬆ Push to GitHub</button>
-                <button id="netlify-btn" onclick="openNetlify()" class="hidden border border-zinc-700 text-white px-5 py-3 rounded-xl mono text-[10px] font-bold uppercase tracking-widest hover:border-[#84cc16] hover:text-[#84cc16] transition-all">⬆ Deploy to Netlify</button>
-                <button onclick="startOver()" class="border border-zinc-800 text-zinc-500 px-5 py-3 rounded-xl mono text-[10px] font-bold uppercase tracking-widest hover:border-zinc-600 transition-all">↺ Build another</button>
+                <button onclick="downloadSite()"
+                    class="bg-[#84cc16] text-zinc-900 px-5 py-3 rounded-xl mono text-[10px] font-bold uppercase tracking-widest hover:opacity-90 transition-all">
+                    ↓ Download HTML
+                </button>
+                <button onclick="copyCode()"
+                    class="border border-zinc-700 text-white px-5 py-3 rounded-xl mono text-[10px] font-bold uppercase tracking-widest hover:border-[#84cc16] hover:text-[#84cc16] transition-all">
+                    ⎘ Copy code
+                </button>
+                <button id="github-deploy-btn" onclick="deployToGitHub()"
+                    class="hidden border border-zinc-700 text-white px-5 py-3 rounded-xl mono text-[10px] font-bold uppercase tracking-widest hover:border-[#84cc16] hover:text-[#84cc16] transition-all">
+                    ⬆ Push to GitHub
+                </button>
+                <button id="netlify-btn" onclick="openNetlify()"
+                    class="hidden border border-zinc-700 text-white px-5 py-3 rounded-xl mono text-[10px] font-bold uppercase tracking-widest hover:border-[#84cc16] hover:text-[#84cc16] transition-all">
+                    ⬆ Open Netlify Drop
+                </button>
+                <button onclick="startOver()"
+                    class="border border-zinc-800 text-zinc-500 px-5 py-3 rounded-xl mono text-[10px] font-bold uppercase tracking-widest hover:border-zinc-600 transition-all">
+                    ↺ Build another
+                </button>
             </div>
-            <p id="github-live-url" class="mono text-[10px] text-[#84cc16] mt-3 hidden"></p>
+            <p id="github-live-url" class="mono text-[10px] text-[#84cc16] mt-4 hidden"></p>
         </div>
         <iframe id="result-frame" src="about:blank" title="Generated website preview"></iframe>
+        <p class="text-zinc-400 text-xs text-center">Scroll the preview to see your full site. All sections are commented for easy editing.</p>
     </div>
 
 </div>
 
 <script>
-// ── Config ──────────────────────────────────────────────────────────────────
-// GitHub repo where vertical-projects lives (your Forge Vertical repo)
-const FORGE_REPO = 'Forge-Vertical/forge-vertical.github.io';
-// GitHub token for writing build requests to the Forge repo (limited scope: contents write)
-// This token can only write to vertical-projects/ — NOT your secrets
-const FORGE_WRITE_TOKEN = 'YOUR_FORGE_WRITE_TOKEN'; // set this — read below
+// ─────────────────────────────────────────────────────────────────
+// CONFIG
+// The token NEVER lives here — it lives in index.ts on the server.
+// The browser only knows the server URL.
+// ─────────────────────────────────────────────────────────────────
 
-// ── State ────────────────────────────────────────────────────────────────────
-let currentStep = 0;
-let selectedColor = '#84cc16';
-let selectedStyle = 'modern-dark';
-let generatedHtml = '';
-let projectId = '';
-let logoBase64 = '';
+// URL of your running Hono server
+// For local testing: http://localhost:7777
+// For production: your server's public URL (Render, Railway, VPS, etc.)
+const SERVER_URL = 'http://localhost:7777';
 
-// ── Step nav ─────────────────────────────────────────────────────────────────
+// Your Forge Vertical GitHub repo — used for POLLING only (public URLs, no token)
+const FORGE_REPO_OWNER = 'Forge-Vertical';
+const FORGE_REPO_NAME  = 'forge-vertical.github.io';
+
+// ─────────────────────────────────────────────────────────────────
+// STATE
+// ─────────────────────────────────────────────────────────────────
+let currentStep    = 0;
+let selectedColor  = '#84cc16';
+let selectedStyle  = 'modern-dark';
+let generatedHtml  = '';
+let projectId      = '';
+let logoBase64     = '';
+let timerInterval  = null;
+let elapsedSecs    = 0;
+let clientGhToken  = '';
+let clientGhRepo   = '';
+
+// ─────────────────────────────────────────────────────────────────
+// STEP NAVIGATION
+// ─────────────────────────────────────────────────────────────────
 function goStep(n) {
     document.querySelectorAll('[id^="step-"]').forEach(s => s.classList.add('hidden'));
     document.getElementById('step-' + n).classList.remove('hidden');
-    ['pill-0','pill-1','pill-2','pill-3','pill-4'].forEach((id, i) => {
-        const el = document.getElementById(id);
-        el.classList.remove('active','done','pending');
-        if (i < n) el.classList.add('done');
-        else if (i === n) el.classList.add('active');
-        else el.classList.add('pending');
-    });
+    for (let i = 0; i <= 4; i++) {
+        const pill = document.getElementById('pill-' + i);
+        if (!pill) continue;
+        pill.classList.remove('active', 'done', 'pending');
+        if      (i < n)  pill.classList.add('done');
+        else if (i === n) pill.classList.add('active');
+        else              pill.classList.add('pending');
+    }
     currentStep = n;
-    if (n === 4) buildSummary();
+    if (n === 4) buildOrderSummary();
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// ── Style chips ───────────────────────────────────────────────────────────────
-document.querySelectorAll('[data-style]').forEach(c => {
-    c.addEventListener('click', () => {
-        document.querySelectorAll('[data-style]').forEach(x => x.classList.remove('selected'));
-        c.classList.add('selected');
-        selectedStyle = c.dataset.style;
+// ─────────────────────────────────────────────────────────────────
+// INTERACTIVE CONTROLS
+// ─────────────────────────────────────────────────────────────────
+document.querySelectorAll('[data-style]').forEach(chip => {
+    chip.addEventListener('click', () => {
+        document.querySelectorAll('[data-style]').forEach(c => c.classList.remove('selected'));
+        chip.classList.add('selected');
+        selectedStyle = chip.dataset.style;
     });
 });
-document.querySelectorAll('#page-chips label').forEach(c => {
-    c.addEventListener('click', () => c.classList.toggle('selected'));
+
+document.querySelectorAll('.page-chip').forEach(chip => {
+    chip.addEventListener('click', () => chip.classList.toggle('selected'));
 });
+
 document.querySelectorAll('.color-swatch').forEach(sw => {
     sw.addEventListener('click', () => {
         document.querySelectorAll('.color-swatch').forEach(s => s.classList.remove('selected'));
         sw.classList.add('selected');
         selectedColor = sw.dataset.color;
         document.getElementById('selected-color').value = selectedColor;
-        document.getElementById('custom-color').value = selectedColor;
+        document.getElementById('custom-color').value   = selectedColor;
     });
 });
+
 document.getElementById('custom-color').addEventListener('input', e => {
     document.querySelectorAll('.color-swatch').forEach(s => s.classList.remove('selected'));
     selectedColor = e.target.value;
     document.getElementById('selected-color').value = selectedColor;
 });
+
 document.getElementById('enable-github').addEventListener('change', e => {
     document.getElementById('github-fields').classList.toggle('hidden', !e.target.checked);
 });
 
-// Logo upload
 function handleLogoUpload(input) {
     const file = input.files[0];
     if (!file) return;
@@ -351,166 +399,199 @@ function handleLogoUpload(input) {
     reader.onload = e => {
         logoBase64 = e.target.result;
         document.getElementById('logo-preview').innerHTML =
-            `<img src="${e.target.result}" class="max-h-16 mx-auto rounded object-contain mb-1">
+            `<img src="${e.target.result}" class="max-h-16 mx-auto rounded object-contain mb-2">
              <p class="mono text-[10px] text-[#84cc16]">${file.name}</p>`;
     };
     reader.readAsDataURL(file);
 }
 
-// ── Collect data ──────────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────────
+// COLLECT DATA
+// ─────────────────────────────────────────────────────────────────
 function collectData() {
     const pages = [...document.querySelectorAll('[name="pages"]:checked')].map(i => i.value);
     return {
-        name: document.getElementById('biz-name').value,
-        industry: document.getElementById('biz-industry').value,
-        location: document.getElementById('biz-location').value,
-        tagline: document.getElementById('biz-tagline').value,
-        about: document.getElementById('biz-about').value,
-        phone: document.getElementById('biz-phone').value,
-        email: document.getElementById('biz-email').value,
-        address: document.getElementById('biz-address').value,
-        services: document.getElementById('biz-services').value,
-        pages,
-        testimonials: document.getElementById('biz-testimonials').value,
-        hours: document.getElementById('biz-hours').value,
-        cta: document.getElementById('biz-cta').value,
-        style: selectedStyle,
-        color: selectedColor,
-        styleNotes: document.getElementById('style-notes').value,
-        logoBase64: logoBase64 || null,
-        // Publish options
-        github_token: document.getElementById('gh-token')?.value || null,
-        github_repo: document.getElementById('gh-username')?.value && document.getElementById('gh-repo')?.value
-            ? `${document.getElementById('gh-username').value}/${document.getElementById('gh-repo').value}`
-            : null,
+        name:         document.getElementById('biz-name').value.trim(),
+        industry:     document.getElementById('biz-industry').value.trim(),
+        location:     document.getElementById('biz-location').value.trim(),
+        tagline:      document.getElementById('biz-tagline').value.trim(),
+        about:        document.getElementById('biz-about').value.trim(),
+        phone:        document.getElementById('biz-phone').value.trim(),
+        email:        document.getElementById('biz-email').value.trim(),
+        address:      document.getElementById('biz-address').value.trim(),
+        domain:       document.getElementById('biz-domain').value.trim(),
+        services:     document.getElementById('biz-services').value.trim(),
+        pages:        pages.length ? pages : ['Home', 'Services', 'Contact'],
+        testimonials: document.getElementById('biz-testimonials').value.trim(),
+        hours:        document.getElementById('biz-hours').value.trim(),
+        cta:          document.getElementById('biz-cta').value.trim(),
+        style:        selectedStyle,
+        color:        selectedColor,
+        styleNotes:   document.getElementById('style-notes').value.trim(),
+        logoBase64:   logoBase64 || null,
         deploy_netlify: document.getElementById('enable-netlify').checked,
+        // Client's own GitHub credentials for their site deployment
+        // These are the CLIENT'S token for THEIR repo — not the Forge token
+        github_token: document.getElementById('gh-token')?.value?.trim() || null,
+        github_repo:  (document.getElementById('gh-username')?.value?.trim() &&
+                       document.getElementById('gh-repo')?.value?.trim())
+                        ? `${document.getElementById('gh-username').value.trim()}/${document.getElementById('gh-repo').value.trim()}`
+                        : null,
     };
 }
 
-// ── Order summary ─────────────────────────────────────────────────────────────
-function buildSummary() {
+// ─────────────────────────────────────────────────────────────────
+// ORDER SUMMARY
+// ─────────────────────────────────────────────────────────────────
+function buildOrderSummary() {
     const d = collectData();
-    const pages = d.pages.join(', ') || 'Home';
+    const pages = d.pages.join(', ');
+    const publishOpts = [];
+    if (document.getElementById('enable-download').checked) publishOpts.push('Download HTML');
+    if (document.getElementById('enable-github').checked)   publishOpts.push('GitHub Pages');
+    if (document.getElementById('enable-netlify').checked)  publishOpts.push('Netlify');
     document.getElementById('order-summary').innerHTML = `
         <div class="flex justify-between"><span class="text-zinc-400">Business</span><span class="font-bold">${d.name || '—'}</span></div>
         <div class="flex justify-between"><span class="text-zinc-400">Industry</span><span class="font-bold">${d.industry || '—'}</span></div>
         <div class="flex justify-between"><span class="text-zinc-400">Location</span><span class="font-bold">${d.location || '—'}</span></div>
         <div class="flex justify-between"><span class="text-zinc-400">Pages</span><span class="font-bold">${pages}</span></div>
         <div class="flex justify-between"><span class="text-zinc-400">Style</span><span class="font-bold">${d.style}</span></div>
-        <div class="flex justify-between"><span class="text-zinc-400">Accent</span><span class="flex items-center gap-2"><span class="w-3 h-3 rounded inline-block" style="background:${d.color}"></span><span class="font-bold">${d.color}</span></span></div>
-        ${d.github_repo ? `<div class="flex justify-between"><span class="text-zinc-400">GitHub</span><span class="font-bold">${d.github_repo}</span></div>` : ''}
+        <div class="flex justify-between"><span class="text-zinc-400">Accent</span><span class="flex items-center gap-2"><span class="inline-block w-3 h-3 rounded" style="background:${d.color}"></span><span class="font-bold">${d.color}</span></span></div>
+        <div class="flex justify-between"><span class="text-zinc-400">Publish via</span><span class="font-bold">${publishOpts.join(', ') || 'Download'}</span></div>
+        ${d.github_repo ? `<div class="flex justify-between"><span class="text-zinc-400">GitHub repo</span><span class="font-bold">${d.github_repo}</span></div>` : ''}
     `;
 }
 
-// ── PayFast ───────────────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────────
+// PAYFAST
+// ─────────────────────────────────────────────────────────────────
 function initiatePayment() {
     const d = collectData();
-    if (!d.name || !d.industry) { alert('Please enter your business name and industry.'); return; }
+    if (!d.name || !d.industry) {
+        alert('Please fill in your business name and industry before paying.');
+        return;
+    }
     const pid = 'FV-' + Date.now();
     projectId = pid;
-    document.getElementById('pf-name').value = d.name;
+    document.getElementById('pf-name').value  = d.name;
     document.getElementById('pf-email').value = d.email || '';
-    document.getElementById('pf-pid').value = pid;
-    document.getElementById('pf-data').value = JSON.stringify({ ...d, project_id: pid });
+    document.getElementById('pf-pid').value   = pid;
+    document.getElementById('pf-data').value  = JSON.stringify({ ...d, project_id: pid });
     const encoded = encodeURIComponent(JSON.stringify({ ...d, project_id: pid }));
     document.getElementById('pf-return').value =
-        `https://www.forgevertical.com/tools/sitebuild-intake.html?build=1&pid=${pid}&data=${encoded}`;
+        `${window.location.origin}/tools/sitebuild-intake.html?build=1&pid=${pid}&data=${encoded}`;
     document.getElementById('payfast-form').submit();
 }
 
-// ── Dev skip ──────────────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────────
+// DEV BYPASS
+// ─────────────────────────────────────────────────────────────────
 function devBuild() {
     const d = collectData();
-    if (!d.name) { alert('Enter a business name first.'); return; }
+    if (!d.name) { alert('Please enter a business name first.'); return; }
     const pid = 'FV-DEV-' + Date.now();
     projectId = pid;
     triggerBuild({ ...d, project_id: pid });
 }
 
-// ── Core build trigger — writes JSON to repo, workflow does the rest ──────────
+// ─────────────────────────────────────────────────────────────────
+// CORE BUILD TRIGGER
+// Posts to /api/trigger-build on the Hono server.
+// Server uses YOUR_FORGE_WRITE_TOKEN (from .env) — never exposed here.
+// Browser polls the PUBLIC GitHub Pages URL for build-status.json.
+// ─────────────────────────────────────────────────────────────────
 async function triggerBuild(data) {
+    // Store client GitHub details for post-build deployment
+    clientGhToken = data.github_token || '';
+    clientGhRepo  = data.github_repo  || '';
+
     showOverlay();
+    setLog(0, 'active');
 
     try {
-        // Step 1: Write build-request.json to vertical-projects/{project_id}/
-        // This triggers FORGE_SITEBUILD.yml automatically via the push event
-        setLog(0, true);
-        const content = btoa(unescape(encodeURIComponent(JSON.stringify(data, null, 2))));
-        const path = `vertical-projects/${data.project_id}/build-request.json`;
-
-        const writeRes = await fetch(`https://api.github.com/repos/${FORGE_REPO}/contents/${path}`, {
-            method: 'PUT',
-            headers: {
-                'Authorization': `token ${FORGE_WRITE_TOKEN}`,
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                message: `forge: build request ${data.project_id}`,
-                content,
-            })
+        // POST to our server — token stays server-side
+        const res = await fetch(`${SERVER_URL}/api/trigger-build`, {
+            method:  'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body:    JSON.stringify(data),
         });
 
-        if (!writeRes.ok) throw new Error('Failed to submit build request to Forge');
+        if (!res.ok) {
+            const err = await res.json();
+            throw new Error(err.error || `Server error ${res.status}`);
+        }
 
-        // Step 2: Poll for build-status.json to appear
-        setLog(1, true);
-        const statusPath = `vertical-projects/${data.project_id}/build-status.json`;
-        let attempts = 0;
-        const maxAttempts = 60; // 2 mins max
+        const result = await res.json();
+        projectId = result.project_id;
+
+        setLog(0, 'done');
+        setLog(1, 'active');
+
+        // Poll the PUBLIC GitHub Pages URL — no token needed
+        // File appears once the Action commits it back to the repo
+        const pollUrl = `https://${FORGE_REPO_OWNER}.github.io/${FORGE_REPO_NAME}/vertical-projects/${projectId}/build-status.json`;
+
+        let attempts   = 0;
+        const maxAttempts = 75; // ~5 min
 
         const poll = async () => {
             attempts++;
-            if (attempts > 2) setLog(Math.min(2 + Math.floor(attempts / 8), 5), true);
+            if (attempts === 5)  { setLog(1, 'done'); setLog(2, 'active'); }
+            if (attempts === 10) { setLog(2, 'done'); setLog(3, 'active'); }
+            if (attempts === 15) { setLog(3, 'done'); setLog(4, 'active'); }
+            if (attempts === 20) { setLog(4, 'done'); setLog(5, 'active'); }
+            if (attempts === 25) { setLog(5, 'done'); setLog(6, 'active'); }
 
-            const statusRes = await fetch(
-                `https://api.github.com/repos/${FORGE_REPO}/contents/${statusPath}`,
-                { headers: { 'Authorization': `token ${FORGE_WRITE_TOKEN}` } }
-            );
+            try {
+                // Add cache-busting so browser doesn't serve stale file
+                const statusRes = await fetch(`${pollUrl}?t=${Date.now()}`);
 
-            if (statusRes.ok) {
-                const statusData = await statusRes.json();
-                const status = JSON.parse(atob(statusData.content));
+                if (statusRes.ok) {
+                    const status = await statusRes.json();
 
-                if (status.status === 'complete') {
-                    // Fetch the generated index.html
-                    const htmlRes = await fetch(
-                        `https://api.github.com/repos/${FORGE_REPO}/contents/vertical-projects/${data.project_id}/index.html`,
-                        { headers: { 'Authorization': `token ${FORGE_WRITE_TOKEN}` } }
-                    );
-                    if (htmlRes.ok) {
-                        const htmlData = await htmlRes.json();
-                        generatedHtml = decodeURIComponent(escape(atob(htmlData.content)));
-                        setLog(6, true);
-                        setTimeout(() => showResult(data), 500);
+                    if (status.status === 'complete') {
+                        // Fetch the generated HTML from public GitHub Pages URL
+                        const htmlUrl = `https://${FORGE_REPO_OWNER}.github.io/${FORGE_REPO_NAME}/vertical-projects/${projectId}/index.html?t=${Date.now()}`;
+                        const htmlRes = await fetch(htmlUrl);
+                        if (htmlRes.ok) {
+                            generatedHtml = await htmlRes.text();
+                            setLog(6, 'done');
+                            setTimeout(() => showResult(data), 600);
+                            return;
+                        }
+                    }
+
+                    if (status.status === 'error') {
+                        hideOverlay();
+                        alert('Build failed: ' + (status.error || 'Unknown error. Check GitHub Actions logs.'));
                         return;
                     }
-                } else if (status.status === 'error') {
-                    hideOverlay();
-                    alert('Build failed: ' + status.error);
-                    return;
                 }
+            } catch (e) {
+                // File not yet available — normal during build
             }
 
             if (attempts >= maxAttempts) {
                 hideOverlay();
-                alert('Build timed out — the GitHub Action may still be running. Check back in a minute.');
+                alert('Build is taking longer than expected. Check the Actions tab in your GitHub repo — it may still be running.');
                 return;
             }
 
-            setTimeout(poll, 4000); // poll every 4 seconds
+            setTimeout(poll, 4000);
         };
 
-        setTimeout(poll, 8000); // first check after 8s (gives Action time to start)
+        // First poll after 15s — Actions need time to start
+        setTimeout(poll, 15000);
 
     } catch (err) {
         hideOverlay();
-        alert('Error: ' + err.message);
+        alert('Error: ' + err.message + '\n\nMake sure the Forge Vertical server is running at ' + SERVER_URL);
     }
 }
 
-// ── Overlay helpers ───────────────────────────────────────────────────────────
-let timerInterval;
-let elapsedSecs = 0;
+// ─────────────────────────────────────────────────────────────────
+// OVERLAY
+// ─────────────────────────────────────────────────────────────────
 function showOverlay() {
     document.getElementById('build-overlay').classList.add('active');
     elapsedSecs = 0;
@@ -519,128 +600,158 @@ function showOverlay() {
         document.getElementById('build-timer').textContent = `Elapsed: ${elapsedSecs}s`;
     }, 1000);
 }
+
 function hideOverlay() {
     document.getElementById('build-overlay').classList.remove('active');
-    clearInterval(timerInterval);
-}
-function setLog(idx, done) {
-    const el = document.getElementById('log-' + idx);
-    if (!el) return;
-    el.classList.remove('pending');
-    el.classList.add(done ? 'done' : 'build-log-line');
-    el.textContent = (done ? '✓ ' : '◦ ') + el.textContent.replace(/^[✓◦] /, '');
+    if (timerInterval) clearInterval(timerInterval);
 }
 
-// ── Show result ───────────────────────────────────────────────────────────────
+function setLog(idx, state) {
+    const el = document.getElementById('log-' + idx);
+    if (!el) return;
+    el.classList.remove('pending', 'active', 'done');
+    el.classList.add(state);
+    const text   = el.textContent.replace(/^[✓►◦] /, '');
+    const prefix = state === 'done' ? '✓ ' : state === 'active' ? '► ' : '◦ ';
+    el.textContent = prefix + text;
+}
+
+// ─────────────────────────────────────────────────────────────────
+// SHOW RESULT
+// ─────────────────────────────────────────────────────────────────
 function showResult(data) {
     hideOverlay();
     document.getElementById('progress-pills').style.display = 'none';
     goStep(5);
 
-    // Show relevant publish buttons
-    if (data.github_token && data.github_repo) {
+    if (clientGhToken && clientGhRepo) {
         document.getElementById('github-deploy-btn').classList.remove('hidden');
     }
     if (data.deploy_netlify) {
         document.getElementById('netlify-btn').classList.remove('hidden');
     }
 
-    // Render preview
     const blob = new Blob([generatedHtml], { type: 'text/html' });
     document.getElementById('result-frame').src = URL.createObjectURL(blob);
 }
 
-// ── Delivery options ──────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────────
+// DELIVERY OPTIONS
+// ─────────────────────────────────────────────────────────────────
 function downloadSite() {
     const name = (document.getElementById('biz-name').value || 'my-website')
         .replace(/\s+/g, '-').toLowerCase();
     const blob = new Blob([generatedHtml], { type: 'text/html' });
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
+    const a    = document.createElement('a');
+    a.href     = URL.createObjectURL(blob);
     a.download = name + '.html';
     a.click();
 }
 
 function copyCode() {
-    navigator.clipboard.writeText(generatedHtml).then(() => {
-        alert('HTML copied to clipboard.');
-    });
+    navigator.clipboard.writeText(generatedHtml)
+        .then(()  => alert('HTML copied to clipboard.'))
+        .catch(()  => alert('Copy failed — use Download instead.'));
 }
 
 async function deployToGitHub() {
-    const d = collectData();
-    if (!d.github_token || !d.github_repo) return;
-
-    const btn = document.getElementById('github-deploy-btn');
-    btn.textContent = 'Pushing...';
-
-    const content = btoa(unescape(encodeURIComponent(generatedHtml)));
-    const [owner, repo] = d.github_repo.split('/');
-
-    // Try to get existing file SHA (needed for updates)
-    let sha = null;
-    const existing = await fetch(
-        `https://api.github.com/repos/${d.github_repo}/contents/index.html`,
-        { headers: { 'Authorization': `token ${d.github_token}` } }
-    );
-    if (existing.ok) {
-        const data = await existing.json();
-        sha = data.sha;
+    if (!clientGhToken || !clientGhRepo) {
+        alert('GitHub token and repo name are required. Go back to step 3.');
+        return;
     }
+    const btn  = document.getElementById('github-deploy-btn');
+    btn.textContent = 'Pushing...';
+    btn.disabled    = true;
 
-    const res = await fetch(`https://api.github.com/repos/${d.github_repo}/contents/index.html`, {
-        method: 'PUT',
-        headers: { 'Authorization': `token ${d.github_token}`, 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            message: 'Deploy site via Forge Vertical SiteBuild Studio',
-            content,
-            ...(sha ? { sha } : {})
-        })
-    });
+    try {
+        const content = btoa(unescape(encodeURIComponent(generatedHtml)));
 
-    if (res.ok) {
-        const liveUrl = `https://${owner}.github.io/${repo}`;
-        btn.textContent = '✓ Pushed to GitHub';
-        btn.style.color = '#84cc16';
-        const urlEl = document.getElementById('github-live-url');
-        urlEl.classList.remove('hidden');
-        urlEl.innerHTML = `Live at: <a href="${liveUrl}" target="_blank" rel="noopener noreferrer" class="underline">${liveUrl}</a> (may take 1–2 min to propagate)`;
-    } else {
-        btn.textContent = 'Push failed';
-        alert('GitHub push failed. Check your token has repo write access.');
+        // Check for existing file to get SHA (required for updates)
+        let sha = null;
+        const existing = await fetch(
+            `https://api.github.com/repos/${clientGhRepo}/contents/index.html`,
+            { headers: { 'Authorization': `token ${clientGhToken}` } }
+        );
+        if (existing.ok) {
+            const existingData = await existing.json();
+            sha = existingData.sha;
+        }
+
+        const res = await fetch(
+            `https://api.github.com/repos/${clientGhRepo}/contents/index.html`,
+            {
+                method:  'PUT',
+                headers: { 'Authorization': `token ${clientGhToken}`, 'Content-Type': 'application/json' },
+                body:    JSON.stringify({
+                    message: 'Deploy site via Forge Vertical SiteBuild Studio',
+                    content,
+                    ...(sha ? { sha } : {})
+                })
+            }
+        );
+
+        if (res.ok) {
+            const [owner, repo] = clientGhRepo.split('/');
+            const liveUrl = `https://${owner}.github.io/${repo}`;
+            btn.textContent  = '✓ Pushed to GitHub';
+            btn.style.color  = '#84cc16';
+            btn.disabled     = false;
+            const urlEl = document.getElementById('github-live-url');
+            urlEl.classList.remove('hidden');
+            urlEl.innerHTML = `Live at: <a href="${liveUrl}" target="_blank" rel="noopener noreferrer" class="underline">${liveUrl}</a> — may take 1–2 min`;
+        } else {
+            const err = await res.json();
+            throw new Error(err.message || 'Push failed');
+        }
+    } catch (err) {
+        btn.textContent = '✗ Push failed';
+        btn.disabled    = false;
+        alert('GitHub push failed: ' + err.message);
     }
 }
 
 function openNetlify() {
     window.open('https://app.netlify.com/drop', '_blank');
-    setTimeout(downloadSite, 500); // auto-download so they can drag the file
+    setTimeout(downloadSite, 800);
 }
 
 function startOver() {
     generatedHtml = '';
-    projectId = '';
-    logoBase64 = '';
+    projectId     = '';
+    logoBase64    = '';
+    clientGhToken = '';
+    clientGhRepo  = '';
     document.getElementById('progress-pills').style.display = 'flex';
-    // Reset logs
+    document.getElementById('github-deploy-btn').classList.add('hidden');
+    document.getElementById('netlify-btn').classList.add('hidden');
+    document.getElementById('github-live-url').classList.add('hidden');
+    document.getElementById('logo-preview').innerHTML =
+        '<p class="mono text-[10px] text-zinc-400 uppercase tracking-widest">Click to upload your logo</p><p class="text-xs text-zinc-300 mt-1">PNG, JPG, SVG · Max 5MB</p>';
     for (let i = 0; i <= 6; i++) {
         const el = document.getElementById('log-' + i);
-        if (el) { el.classList.remove('done'); el.classList.add('pending'); el.textContent = '◦ ' + el.textContent.replace(/^[✓◦] /, ''); }
+        if (el) {
+            el.classList.remove('done', 'active');
+            el.classList.add('pending');
+            el.textContent = '◦ ' + el.textContent.replace(/^[✓►◦] /, '');
+        }
     }
     goStep(0);
 }
 
-// ── Handle return from PayFast ────────────────────────────────────────────────
-(function() {
+// ─────────────────────────────────────────────────────────────────
+// HANDLE RETURN FROM PAYFAST
+// ─────────────────────────────────────────────────────────────────
+(function () {
     const params = new URLSearchParams(window.location.search);
     if (params.get('build') === '1') {
         try {
             const data = JSON.parse(decodeURIComponent(params.get('data') || '{}'));
-            projectId = params.get('pid') || data.project_id || ('FV-' + Date.now());
-            if (data.name) triggerBuild({ ...data, project_id: projectId });
-        } catch(e) { console.error(e); }
-    }
-    if (params.get('cancelled') === '1') {
-        // Just show the form — data is still in the fields
+            projectId  = params.get('pid') || data.project_id || ('FV-' + Date.now());
+            data.project_id = projectId;
+            if (data.name) triggerBuild(data);
+        } catch (e) {
+            console.error('Could not parse return data:', e);
+        }
     }
 })();
 </script>
