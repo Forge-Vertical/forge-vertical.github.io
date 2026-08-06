@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revenue Leakage Calculator // ForgeVertical</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;500;800&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; color: #1e293b; }
+    </style>
+</head>
+<body class="min-h-screen py-20 px-6">
+    <div class="max-w-xl mx-auto bg-white p-10 rounded-[3rem] shadow-2xl border border-slate-100">
+        <h2 class="text-3xl font-extrabold text-slate-900 mb-2">Revenue <span class="text-lime-500">Leakage</span></h2>
+        <p class="text-slate-500 text-[10px] mb-8 uppercase tracking-widest font-black">Neil Patel Grade SEO Utility</p>
+        
+        <div class="space-y-6">
+            <div>
+                <label class="block text-[10px] font-black uppercase text-slate-400 mb-2">Monthly Traffic</label>
+                <input type="number" id="traffic" value="5000" class="w-full bg-slate-50 border-none rounded-xl p-4 focus:ring-2 focus:ring-lime-500 outline-none font-bold">
+            </div>
+            <div>
+                <label class="block text-[10px] font-black uppercase text-slate-400 mb-2">Avg. Order Value ($)</label>
+                <input type="number" id="value" value="100" class="w-full bg-slate-50 border-none rounded-xl p-4 focus:ring-2 focus:ring-lime-500 outline-none font-bold">
+            </div>
+            <button onclick="calc()" class="w-full bg-lime-500 text-white p-5 rounded-2xl font-black uppercase tracking-widest text-xs shadow-lg shadow-lime-500/30 hover:bg-slate-900 transition-all">Analyze My Data</button>
+        </div>
+        
+        <div id="result" class="mt-10 p-8 bg-slate-900 rounded-[2rem] text-white hidden">
+            <p class="text-slate-400 text-[10px] uppercase font-black tracking-widest mb-2">Annual Revenue at Risk</p>
+            <span id="loss" class="text-4xl font-black text-lime-400">$0</span>
+            <p class="mt-6 text-xs text-slate-400 leading-relaxed italic">"Slow load times and poor UX typically leak 7-12% of annual revenue. We plug those holes."</p>
+            <div class="mt-8 grid grid-cols-1 gap-3">
+                <a href="https://wa.me/27661180036" class="flex items-center justify-center bg-[#25D366] text-white p-4 rounded-xl font-black uppercase text-[10px] tracking-widest">Chat on WhatsApp</a>
+                <a href="mailto:jarrit@forgevertical.com" class="flex items-center justify-center bg-white text-slate-900 p-4 rounded-xl font-black uppercase text-[10px] tracking-widest">Email Principal Architect</a>
+            </div>
+        </div>
+    </div>
+    <script>
+        function calc() {
+            const t = document.getElementById('traffic').value;
+            const v = document.getElementById('orderValue').value || document.getElementById('value').value;
+            const leakage = (t * 0.10) * v * 12;
+            document.getElementById('loss').innerText = '$' + Math.floor(leakage).toLocaleString();
+            document.getElementById('result').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
