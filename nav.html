@@ -1,152 +1,146 @@
 <style>
-    /* Nav wrapper */
     #nav-wrapper {
         position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
+        top: 0; left: 0; right: 0;
         z-index: 100;
-        transition: background 0.3s ease, backdrop-filter 0.3s ease, box-shadow 0.3s ease;
+        transition: background 0.3s ease, box-shadow 0.3s ease;
     }
 
-    /* Scrolled state — works on both dark and light pages */
-    #nav-wrapper.scrolled {
-        background: rgba(10, 10, 10, 0.92);
-        backdrop-filter: blur(16px);
-        -webkit-backdrop-filter: blur(16px);
-        box-shadow: 0 1px 0 rgba(255,255,255,0.06);
+    /* ── AT REST — frosted glass, works on ANY background ── */
+    /* Dark pages: text is light. Light pages: nav solidifies on scroll anyway. */
+    #nav-wrapper .nav-inner {
+        background: rgba(6, 8, 12, 0.55);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-bottom: 1px solid rgba(255,255,255,0.07);
+        transition: background 0.3s ease, border-color 0.3s ease;
     }
 
-    /* Nav links — default dark (for white pages) */
+    /* ── SCROLLED — fully solid dark, works on all pages ── */
+    #nav-wrapper.scrolled .nav-inner {
+        background: rgba(6, 8, 12, 0.96);
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+        box-shadow: 0 4px 32px rgba(0,0,0,0.4);
+    }
+
+    /* ── LINKS — always white/light, lime on hover ── */
     #nav-wrapper .nav-link {
-        color: #0f172a;
-        transition: color 0.2s;
+        color: rgba(220, 228, 240, 0.85);
+        transition: color 0.18s;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 10px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
+        text-decoration: none;
     }
     #nav-wrapper .nav-link:hover { color: #84cc16; }
 
-    /* Dark page override */
-    #nav-wrapper.theme-dark .nav-link { color: #e2e8f0; }
-    #nav-wrapper.theme-dark .nav-link:hover { color: #84cc16; }
-
-    /* Once scrolled, always light text (dark bg) */
-    #nav-wrapper.scrolled .nav-link { color: #e2e8f0; }
-    #nav-wrapper.scrolled .nav-link:hover { color: #84cc16; }
-
-    /* CTA button */
+    /* ── CTA BUTTON ── */
     #nav-wrapper .nav-cta {
-        background: #0f172a;
-        color: #fff;
-        transition: background 0.2s, color 0.2s;
+        background: linear-gradient(90deg, #10b981, #84cc16);
+        color: #06080c;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 10px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
+        text-decoration: none;
+        padding: 9px 20px;
+        border-radius: 8px;
+        transition: opacity 0.18s;
+        white-space: nowrap;
     }
-    #nav-wrapper.theme-dark .nav-cta {
-        background: rgba(255,255,255,0.08);
-        border: 1px solid rgba(255,255,255,0.12);
-        color: #fff;
+    #nav-wrapper .nav-cta:hover { opacity: 0.85; }
+
+    /* ── HAMBURGER BARS ── */
+    #nav-wrapper .bar {
+        background: rgba(220,228,240,0.85);
+        transition: all 0.3s;
     }
-    #nav-wrapper.scrolled .nav-cta {
+
+    /* ── BADGES ── */
+    .nav-pulse {
+        display: inline-block;
+        width: 5px; height: 5px;
         background: #84cc16;
-        color: #000;
+        border-radius: 50%;
+        animation: navPulse 1.5s ease-in-out infinite;
     }
-    #nav-wrapper .nav-cta:hover { background: #84cc16 !important; color: #000 !important; }
-
-    /* Hamburger bars */
-    #nav-wrapper .bar { background: #0f172a; transition: background 0.2s; }
-    #nav-wrapper.theme-dark .bar { background: #e2e8f0; }
-    #nav-wrapper.scrolled .bar { background: #e2e8f0; }
-
-    /* Pulse dot on Audit Tool */
-    .nav-pulse { display: inline-block; width: 6px; height: 6px; background: #84cc16; border-radius: 50%; animation: navPulse 1.5s ease-in-out infinite; }
-    @keyframes navPulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.7); } }
-
-    /* Articles new badge */
+    @keyframes navPulse {
+        0%, 100% { opacity: 1; transform: scale(1); }
+        50% { opacity: 0.5; transform: scale(0.7); }
+    }
     .nav-new {
         display: inline-block;
-        font-size: 8px;
-        font-weight: 900;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        background: #84cc16;
-        color: #000;
-        padding: 1px 5px;
-        border-radius: 3px;
-        margin-left: 4px;
-        vertical-align: middle;
-        line-height: 1.6;
+        font-size: 7px; font-weight: 900;
+        letter-spacing: 0.1em; text-transform: uppercase;
+        background: #84cc16; color: #000;
+        padding: 1px 5px; border-radius: 3px;
+        margin-left: 4px; vertical-align: middle; line-height: 1.6;
     }
 </style>
 
 <div id="nav-wrapper">
-    <nav class="max-w-7xl mx-auto px-6 py-6 flex justify-between items-center relative overflow-visible">
+    <div class="nav-inner">
+        <nav class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center relative">
 
-        <a href="/index.html" class="flex items-center z-50">
-            <svg width="260" height="40" viewBox="0 0 260 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <text x="0" y="30" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="28" letter-spacing="-0.05em" fill="#0f172a" id="logo-dark">FORGE</text>
-                <text x="98" y="30" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="28" letter-spacing="-0.05em" fill="#84cc16">VERTICAL</text>
-            </svg>
-        </a>
-
-        <!-- Desktop nav -->
-        <div class="hidden md:flex gap-6 text-[11px] font-black uppercase tracking-widest items-center">
-            <a href="/about.html" class="nav-link">About</a>
-            <a href="/index.html#services" class="nav-link">Services</a>
-            <a href="/portfolio.html" class="nav-link">Portfolio</a>
-            <a href="/articles.html" class="nav-link">Articles<span class="nav-new">New</span></a>
-            <a href="/security-intelligence.html" class="nav-link">Security Intelligence</a>
-            <a href="/tools/revenue-audit.html" class="nav-link flex items-center gap-2">
-                Audit Tool
-                <span class="nav-pulse"></span>
+            <!-- Logo -->
+            <a href="/index.html" class="flex items-center z-50">
+                <svg width="240" height="34" viewBox="0 0 240 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <text x="0" y="26" font-family="'JetBrains Mono', monospace" font-weight="700" font-size="22" letter-spacing="-0.02em" fill="#f0f2f4">FORGE</text>
+                    <text x="90" y="26" font-family="'JetBrains Mono', monospace" font-weight="700" font-size="22" letter-spacing="-0.02em" fill="#84cc16">VERTICAL</text>
+                </svg>
             </a>
-            <a href="/tools/sitebuild-intake.html" class="nav-cta px-6 py-2.5 rounded-full uppercase ml-4">
-                Build Your Own
-            </a>
-        </div>
 
-        <!-- Hamburger -->
-        <button onclick="toggleMobileMenu()" id="menu-toggle" class="md:hidden z-50 p-2 flex flex-col gap-1.5 items-end group focus:outline-none">
-            <span id="bar-1" class="bar w-8 h-1 rounded-full transition-all duration-300"></span>
-            <span id="bar-2" class="bar w-6 h-1 rounded-full transition-all duration-300" style="background:#84cc16 !important;"></span>
-            <span id="bar-3" class="bar w-8 h-1 rounded-full transition-all duration-300"></span>
-        </button>
+            <!-- Desktop nav -->
+            <div class="hidden md:flex gap-7 items-center">
+                <a href="/about.html" class="nav-link">About</a>
+                <a href="/index.html#services" class="nav-link">Services</a>
+                <a href="/portfolio.html" class="nav-link">Portfolio</a>
+                <a href="/articles.html" class="nav-link">Articles<span class="nav-new">New</span></a>
+                <a href="/security-intelligence.html" class="nav-link">Security</a>
+                <a href="/tools/revenue-audit.html" class="nav-link flex items-center gap-2">
+                    Audit Tool<span class="nav-pulse"></span>
+                </a>
+                <a href="/onboard.html" class="nav-cta ml-2">
+                    Start a project
+                </a>
+            </div>
 
-        <!-- Mobile menu -->
-        <div id="mobile-menu" class="fixed inset-0 bg-zinc-950 z-40 translate-x-full transition-transform duration-500 ease-in-out md:hidden flex flex-col items-center justify-center gap-6 text-center">
-            <a href="/about.html" onclick="toggleMobileMenu()" class="text-2xl font-black uppercase tracking-tighter text-white hover:text-[#84cc16] transition-colors">About</a>
-            <a href="/index.html#services" onclick="toggleMobileMenu()" class="text-2xl font-black uppercase tracking-tighter text-white hover:text-[#84cc16] transition-colors">Services</a>
-            <a href="/portfolio.html" onclick="toggleMobileMenu()" class="text-2xl font-black uppercase tracking-tighter text-white hover:text-[#84cc16] transition-colors">Portfolio</a>
-            <a href="/articles.html" onclick="toggleMobileMenu()" class="text-2xl font-black uppercase tracking-tighter text-white hover:text-[#84cc16] transition-colors">Articles</a>
-            <a href="/security-intelligence.html" onclick="toggleMobileMenu()" class="text-2xl font-black uppercase tracking-tighter text-white hover:text-[#84cc16] transition-colors">Intelligence</a>
-            <a href="/tools/revenue-audit.html" onclick="toggleMobileMenu()" class="text-2xl font-black uppercase tracking-tighter text-[#84cc16]">Audit Tool</a>
-            <a href="/tools/sitebuild-intake.html" onclick="toggleMobileMenu();" class="mt-4 text-black bg-[#84cc16] px-8 py-4 rounded-full font-black uppercase tracking-widest hover:bg-white transition-all">Build Your Own</a>
-        </div>
+            <!-- Hamburger -->
+            <button onclick="toggleMobileMenu()" id="menu-toggle"
+                class="md:hidden z-50 p-2 flex flex-col gap-1.5 items-end focus:outline-none">
+                <span id="bar-1" class="bar w-7 h-0.5 rounded-full"></span>
+                <span id="bar-2" class="bar w-5 h-0.5 rounded-full" style="background:#84cc16 !important;"></span>
+                <span id="bar-3" class="bar w-7 h-0.5 rounded-full"></span>
+            </button>
 
-    </nav>
+            <!-- Mobile menu -->
+            <div id="mobile-menu"
+                class="fixed inset-0 bg-[#06080c] z-40 translate-x-full transition-transform duration-500 ease-in-out md:hidden flex flex-col items-center justify-center gap-7 text-center">
+                <a href="/about.html" onclick="toggleMobileMenu()" class="text-xl font-bold uppercase tracking-widest text-zinc-200 hover:text-[#84cc16] transition-colors" style="font-family:'JetBrains Mono',monospace;">About</a>
+                <a href="/index.html#services" onclick="toggleMobileMenu()" class="text-xl font-bold uppercase tracking-widest text-zinc-200 hover:text-[#84cc16] transition-colors" style="font-family:'JetBrains Mono',monospace;">Services</a>
+                <a href="/portfolio.html" onclick="toggleMobileMenu()" class="text-xl font-bold uppercase tracking-widest text-zinc-200 hover:text-[#84cc16] transition-colors" style="font-family:'JetBrains Mono',monospace;">Portfolio</a>
+                <a href="/articles.html" onclick="toggleMobileMenu()" class="text-xl font-bold uppercase tracking-widest text-zinc-200 hover:text-[#84cc16] transition-colors" style="font-family:'JetBrains Mono',monospace;">Articles</a>
+                <a href="/security-intelligence.html" onclick="toggleMobileMenu()" class="text-xl font-bold uppercase tracking-widest text-zinc-200 hover:text-[#84cc16] transition-colors" style="font-family:'JetBrains Mono',monospace;">Security</a>
+                <a href="/tools/revenue-audit.html" onclick="toggleMobileMenu()" class="text-xl font-bold uppercase tracking-widest text-[#84cc16]" style="font-family:'JetBrains Mono',monospace;">Audit Tool</a>
+                <a href="/onboard.html" onclick="toggleMobileMenu()"
+                    class="mt-4 px-8 py-4 rounded-xl font-bold uppercase tracking-widest text-sm"
+                    style="background:linear-gradient(90deg,#10b981,#84cc16);color:#06080c;font-family:'JetBrains Mono',monospace;">
+                    Start a project
+                </a>
+            </div>
+
+        </nav>
+    </div>
 </div>
 
 <script>
     (function() {
         const wrapper = document.getElementById('nav-wrapper');
-
-        // Read theme from body data attribute
-        const theme = document.body.getAttribute('data-nav-theme') || 'light';
-        if (theme === 'dark') {
-            wrapper.classList.add('theme-dark');
-            const logoText = document.getElementById('logo-dark');
-            if (logoText) logoText.setAttribute('fill', '#f1f5f9');
-        }
-
-        // Scroll solidification
         function onScroll() {
-            if (window.scrollY > 40) {
-                wrapper.classList.add('scrolled');
-                const logoText = document.getElementById('logo-dark');
-                if (logoText) logoText.setAttribute('fill', '#f1f5f9');
-            } else {
-                wrapper.classList.remove('scrolled');
-                const logoText = document.getElementById('logo-dark');
-                if (logoText) {
-                    logoText.setAttribute('fill', theme === 'dark' ? '#f1f5f9' : '#0f172a');
-                }
-            }
+            wrapper.classList.toggle('scrolled', window.scrollY > 40);
         }
         window.addEventListener('scroll', onScroll, { passive: true });
         onScroll();
@@ -158,16 +152,9 @@
         const bar2 = document.getElementById('bar-2');
         const bar3 = document.getElementById('bar-3');
         menu.classList.toggle('translate-x-full');
-        if (!menu.classList.contains('translate-x-full')) {
-            bar1.style.transform = 'translateY(10px) rotate(45deg)';
-            bar2.style.opacity = '0';
-            bar3.style.transform = 'translateY(-10px) rotate(-45deg)';
-        } else {
-            bar1.style.transform = 'none';
-            bar2.style.opacity = '1';
-            bar3.style.transform = 'none';
-        }
+        const open = !menu.classList.contains('translate-x-full');
+        bar1.style.transform = open ? 'translateY(8px) rotate(45deg)' : 'none';
+        bar2.style.opacity   = open ? '0' : '1';
+        bar3.style.transform = open ? 'translateY(-8px) rotate(-45deg)' : 'none';
     }
-
-    // Build Your Own now links directly to /tools/sitebuild-intake.html
 </script>
