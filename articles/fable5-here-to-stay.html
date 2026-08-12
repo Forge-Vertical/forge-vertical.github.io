@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Claude Fable 5 survived a government shutdown, a 19-day suspension, and came back stronger with new safeguards. It's now a permanent part of Anthropic's model lineup — and the roadmap ahead is even more ambitious. What does Anthropic have planned next?">
+    <title>Fable 5 Is Here to Stay: What Anthropic Has Planned Next | Forge Vertical</title>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Fable 5 Is Here to Stay: What Anthropic Has Planned Next",
+      "description": "Claude Fable 5 survived a US government export control order, a 19-day suspension, and returned with new safeguards. It is now permanently part of Anthropic's model lineup. Here is the full story of what happened — and the roadmap ahead.",
+      "author": { "@type": "Person", "name": "Jarrit Hosking", "url": "https://www.forgevertical.com/about.html" },
+      "publisher": { "@type": "Organization", "name": "Forge Vertical", "url": "https://www.forgevertical.com" },
+      "datePublished": "2026-08-12",
+      "dateModified": "2026-08-12",
+      "mainEntityOfPage": "https://www.forgevertical.com/articles/fable5-here-to-stay.html"
+    }
+    </script>
+
+    <script src="/global.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/typography.css">
+
+    <style>
+        body { font-family: 'Outfit', sans-serif; background: #fff; }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        .g-text { background: linear-gradient(90deg,#10b981,#84cc16); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; display:inline-block; padding-bottom:0.05em; }
+        .prose-body { font-family: 'Lora', serif; font-size: 19px; line-height: 1.85; color: #27272a; }
+        .prose-body p { margin-bottom: 1.6em; }
+        .prose-body h2 { font-family: 'Outfit', sans-serif; font-size: 28px; font-weight: 700; letter-spacing: -0.02em; color: #09090b; margin-top: 2.5em; margin-bottom: 0.6em; line-height: 1.2; }
+        .prose-body strong { font-weight: 700; color: #09090b; font-family: 'Outfit', sans-serif; font-size: 17px; }
+        .prose-body a { color: #84cc16; text-decoration: underline; text-underline-offset: 3px; }
+        .callout { background: #f4f4f5; border-left: 3px solid #84cc16; border-radius: 0 12px 12px 0; padding: 20px 24px; margin: 2em 0; font-family: 'Outfit', sans-serif; font-size: 15px; color: #3f3f46; line-height: 1.7; }
+        .callout.dark { background: #09090b; color: #a1a1aa; border-left-color: #84cc16; }
+        .callout.amber { background: rgba(245,158,11,0.06); border-left-color: #f59e0b; color: #3f3f46; }
+        .pull-quote { font-family: 'Lora', serif; font-size: 23px; font-style: italic; color: #09090b; border-top: 2px solid #84cc16; border-bottom: 1px solid #e4e4e7; padding: 24px 0; margin: 2.5em 0; line-height: 1.5; }
+        .img-caption { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #71717a; text-align: center; margin-top: 8px; letter-spacing: 0.05em; }
+        .chapter-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #84cc16; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 6px; display: block; }
+        .stat-card { background: #09090b; border-radius: 16px; padding: 22px; text-align: center; }
+        .stat-val { font-family: 'JetBrains Mono', monospace; font-size: 34px; font-weight: 700; line-height: 1; margin-bottom: 6px; }
+        .stat-lbl { font-size: 11px; color: #71717a; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; }
+        .timeline-row { display: grid; grid-template-columns: 100px 1fr; gap: 20px; padding: 16px 0; border-bottom: 1px solid #f4f4f5; align-items: start; }
+        .timeline-row:last-child { border-bottom: none; }
+        .t-date { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700; color: #84cc16; padding-top: 3px; }
+        .t-event { font-size: 14px; color: #3f3f46; line-height: 1.6; font-family: 'Outfit', sans-serif; }
+        .model-card { border: 1px solid #e4e4e7; border-radius: 14px; padding: 20px; background: #f8fafc; }
+        .model-tier { font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 8px; display: block; }
+        .model-name { font-family: 'Outfit', sans-serif; font-size: 17px; font-weight: 700; color: #09090b; margin-bottom: 4px; }
+        .model-desc { font-size: 13px; color: #52525b; line-height: 1.6; }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div id="global-nav"></div>
+
+    <article class="pt-36 pb-24">
+
+        <!-- Header -->
+        <header class="max-w-3xl mx-auto px-6 mb-12">
+            <div class="flex items-center gap-3 mb-6">
+                <a href="/articles.html" class="mono text-[10px] text-zinc-400 hover:text-zinc-600 transition-colors uppercase tracking-widest">← Articles</a>
+                <span class="text-zinc-300">·</span>
+                <a href="/articles/fable5-affair.html" class="mono text-[10px] text-zinc-400 hover:text-zinc-600 transition-colors uppercase tracking-widest">← The Fable 5 Affair</a>
+                <span class="text-zinc-300">·</span>
+                <span class="mono text-[10px] font-bold text-[#84cc16] uppercase tracking-widest border border-[#84cc16]/30 px-3 py-1 rounded-full">Follow-up · AI</span>
+            </div>
+
+            <h1 class="text-4xl md:text-5xl font-bold tracking-tight leading-[1.0] mb-6 text-zinc-900" style="font-family:'Outfit',sans-serif;letter-spacing:-0.03em;">
+                Fable 5 is here<br>to stay — and<br>
+                <span class="g-text">what comes next.</span>
+            </h1>
+
+            <p class="text-xl text-zinc-500 font-light leading-relaxed mb-8 max-w-2xl" style="font-family:'Outfit',sans-serif;">
+                Claude Fable 5 survived a US government export control order, a 19-day global suspension, and a jailbreak that forced Anthropic to rebuild its safety architecture under pressure. It's back. It's permanently in the lineup. And the roadmap ahead — Fable 5.1, Mythos 5, Sonnet 5, Opus 5, a potential IPO — is the most ambitious in Anthropic's history. Here is where things stand.
+            </p>
+
+            <div class="bg-zinc-50 border border-zinc-100 rounded-2xl p-5 mb-8">
+                <p class="mono text-[10px] text-zinc-400 uppercase tracking-widest mb-2">// This is a follow-up</p>
+                <p class="text-zinc-600 text-sm leading-relaxed">This article picks up where <a href="/articles/fable5-affair.html" class="text-[#84cc16] underline">The Fable 5 Affair</a> left off. That piece covered the launch, the shutdown, and the political drama. This one covers the resolution, the new model landscape, and what Anthropic is building next.</p>
+            </div>
+
+            <div class="flex items-center gap-4 pb-8 border-b border-zinc-100">
+                <div>
+                    <div class="font-bold text-sm text-zinc-900">Jarrit Hosking</div>
+                    <div class="mono text-[10px] text-zinc-400 uppercase tracking-widest">Forge Vertical · Cape Town · August 12, 2026</div>
+                </div>
+                <div class="ml-auto mono text-[10px] text-zinc-400 uppercase tracking-widest">10 min read</div>
+            </div>
+        </header>
+
+        <!-- Body -->
+        <div class="max-w-3xl mx-auto px-6 prose-body">
+
+            <span class="chapter-label">// Chapter 01 — The resolution</span>
+
+            <p>
+                When we last left Fable 5, it had been online for three days, shutdown by a US government export control order, and Anthropic was scrambling to comply with a directive that gave them no warning and no runway. The model that had been described as the company's most capable general release was inaccessible to every user on earth — including Anthropic's own foreign-national employees.
+            </p>
+
+            <p>
+                That situation lasted 19 days. On June 30, 2026, the US Department of Commerce withdrew the export control order. On July 1, <cite index="7-1">Fable 5 became available again globally across the Claude Platform, Claude.ai, Claude Code, and Claude Cowork.</cite> The shutdown was over. But Fable 5 that came back was not identical to the one that had gone offline.
+            </p>
+
+            <p>
+                <cite index="17-1">To redeploy, Anthropic added defence in depth: a new classifier that blocks the reported jailbreak technique in over 99% of cases and reroutes flagged requests to Claude Opus 4.8, a wider safety margin, accepted government conditions, and a HackerOne channel for responsible vulnerability disclosure.</cite> The US Commerce Department's AI standards body CAISI tested the safeguards and called them extraordinarily strong. The model that came back was, by design, harder to misuse than the one that had shipped in June.
+            </p>
+
+            <p>
+                The trigger for the original shutdown had been a jailbreak — a technique that let the model read a codebase and surface software vulnerabilities in ways that regulators judged too dangerous for unrestricted export. <cite index="18-1">Anthropic said the technique was narrow, already known, and present in rival models too.</cite> Whether that argument was correct, it was not enough to prevent the order. The redeployment only happened because Anthropic built the technical safeguards that satisfied the government's concern — not because they won the argument.
+            </p>
+
+            <div class="pull-quote">
+                "Frontier model launches are starting to look less like ordinary product releases and more like negotiated deployments shaped by US national security review."
+            </div>
+
+            <p>
+                <cite index="9-1">Frontier model launches are starting to look less like ordinary product releases and more like negotiated deployments shaped by US national security review — a shift that could slow American distribution even as Chinese competitors move aggressively through open-weight and lower-cost channels.</cite> That structural reality — American frontier AI increasingly subject to export review, Chinese alternatives increasingly available — will shape every Anthropic release from here.
+            </p>
+
+        </div>
+
+        <!-- Timeline -->
+        <div class="max-w-3xl mx-auto px-6 my-10">
+            <p class="mono text-[10px] text-zinc-400 uppercase tracking-widest mb-4">// The complete Fable 5 timeline</p>
+            <div class="bg-zinc-50 border border-zinc-100 rounded-2xl p-6">
+                <div class="timeline-row">
+                    <div class="t-date">Jun 9</div>
+                    <div class="t-event"><strong>Fable 5 and Mythos 5 launch.</strong> First publicly available Mythos-class model. State-of-the-art on nearly all tested benchmarks.</div>
+                </div>
+                <div class="timeline-row">
+                    <div class="t-date">Jun 12</div>
+                    <div class="t-event"><strong>Export control order lands at 5:21pm ET.</strong> Commerce Department order signed by Secretary Howard Lutnick. Anthropic suspends all global access to both models within hours.</div>
+                </div>
+                <div class="timeline-row">
+                    <div class="t-date">Jun 12–30</div>
+                    <div class="t-event"><strong>19 days offline.</strong> All Claude models except Opus, Sonnet, and Haiku remain fully available. Anthropic builds new safety classifier, engages CAISI, opens HackerOne channel.</div>
+                </div>
+                <div class="timeline-row">
+                    <div class="t-date">Jun 30</div>
+                    <div class="t-event"><strong>Export controls lifted.</strong> Sonnet 5 also releases the same day — near-Opus intelligence at Sonnet cost.</div>
+                </div>
+                <div class="timeline-row">
+                    <div class="t-date">Jul 1</div>
+                    <div class="t-event"><strong>Fable 5 redeployed globally.</strong> Available on Claude Platform, claude.ai, Claude Code, and Cowork for Pro/Max/Team plans at up to 50% of weekly limits.</div>
+                </div>
+                <div class="timeline-row">
+                    <div class="t-date">Jul 20</div>
+                    <div class="t-event"><strong>Fable 5 added to Max and Team Premium plans</strong> permanently. Credit-based access for usage beyond subscription limits at $10/$50 per million tokens.</div>
+                </div>
+                <div class="timeline-row">
+                    <div class="t-date">Jul 24</div>
+                    <div class="t-event"><strong>Claude Opus 5 launches.</strong> Near-Fable-5 capabilities at half the price. New general-purpose flagship for everyday use.</div>
+                </div>
+                <div class="timeline-row">
+                    <div class="t-date">Aug 2026</div>
+                    <div class="t-event"><strong>Fable 5.1 rumoured internally complete.</strong> Two X posts on July 26 claim it is finished and due in August at unchanged pricing. Officially unconfirmed.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="max-w-3xl mx-auto px-6 prose-body">
+
+            <h2>The current model landscape — what you can actually use</h2>
+
+            <span class="chapter-label">// Chapter 02 — The full lineup as of August 2026</span>
+
+            <p>
+                <cite index="13-1">The Claude family as of August 2026 covers three named size tiers — Opus, Sonnet, and Haiku — joined in June 2026 by the Mythos-class tier that sits above the Opus class, with the current frontier being Claude Fable 5.</cite> But the actual model landscape is more nuanced than that hierarchy suggests.
+            </p>
+
+        </div>
+
+        <!-- Model cards -->
+        <div class="max-w-3xl mx-auto px-6 my-8">
+            <div class="grid md:grid-cols-2 gap-4">
+                <div class="model-card" style="border-color:rgba(205,147,88,0.3);background:rgba(205,147,88,0.04);">
+                    <span class="model-tier" style="color:#CD9458;">Mythos-class · Frontier</span>
+                    <div class="model-name">Claude Fable 5</div>
+                    <div class="model-desc">The public Mythos-class model. <cite index="8-1">State-of-the-art on nearly all tested benchmarks. ~80% on SWE-bench Pro. Priced at $10/$50 per million input/output tokens.</cite> Always-on adaptive thinking. Available on all major cloud platforms.</div>
+                </div>
+                <div class="model-card" style="border-color:rgba(239,68,68,0.3);background:rgba(239,68,68,0.04);">
+                    <span class="model-tier" style="color:#ef4444;">Mythos-class · Restricted</span>
+                    <div class="model-name">Claude Mythos 5</div>
+                    <div class="model-desc">Same underlying weights as Fable 5 with fewer safeguards. <cite index="8-1">Available only in limited availability to approved customers in Project Glasswing.</cite> Cybersecurity and critical infrastructure focus. US organisations only.</div>
+                </div>
+                <div class="model-card">
+                    <span class="model-tier" style="color:#84cc16;">Opus-class · General purpose</span>
+                    <div class="model-name">Claude Opus 5</div>
+                    <div class="model-desc"><cite index="10-1">Near Fable 5 capabilities at half the price.</cite> Launched July 24. Thoughtful and proactive. Designed for everyday use. The new practical flagship for users who don't need the absolute frontier.</div>
+                </div>
+                <div class="model-card">
+                    <span class="model-tier" style="color:#60a5fa;">Sonnet-class · Balanced</span>
+                    <div class="model-name">Claude Sonnet 5</div>
+                    <div class="model-desc">Launched June 30. Near-Opus intelligence at Sonnet cost. <cite index="13-1">The most capable Sonnet-tier model, bringing near-Opus intelligence to coding and agentic work at Sonnet cost.</cite> The practical choice for most production use cases.</div>
+                </div>
+            </div>
+            <p class="mono text-[10px] text-zinc-400 mt-3">Sources: Anthropic official announcements · Codersera · AIToolsReview · Gizmodo · July–August 2026</p>
+        </div>
+
+        <div class="max-w-3xl mx-auto px-6 prose-body">
+
+            <h2>What comes next — the roadmap Anthropic hasn't officially published</h2>
+
+            <span class="chapter-label">// Chapter 03 — Reading the signals</span>
+
+            <p>
+                Anthropic does not publish a public roadmap in the way that some tech companies do. What exists instead is a pattern — a cadence of releases that, once you see it, lets you make reasonably confident predictions about what is coming and when.
+            </p>
+
+            <p>
+                <cite index="14-1">As of August 8, 2026, three models previously tracked as rumour have shipped: Claude Sonnet 5 launched June 30, Fable 5 and Mythos 5 were restored on July 1, and Claude Opus 5 launched July 24, confirming the "Honeycomb" leak cycle.</cite> The pattern is real. Leaks from the Honeycomb cycle have been consistently accurate.
+            </p>
+
+            <p>
+                The immediate next question is Fable 5.1. <cite index="14-1">It remains officially unconfirmed — no Anthropic announcement, no system card, no pricing page — but two posts on July 26 claimed it is finished internally and due in August at unchanged pricing. Given Anthropic's 2026 cadence of a new release roughly every four to eight weeks, an official Fable 5.1 announcement is plausible within weeks, not months.</cite>
+            </p>
+
+            <p>
+                Beyond the immediate point release, the longer arc is more ambitious. <cite index="16-1">A true "Fable 6" is a Q4 2026 or Q1 2027 question at the earliest.</cite> Whether it carries that name — or whether Anthropic chooses a completely different naming structure — is genuinely uncertain. What is not uncertain is that the Mythos-class tier will keep advancing. The Project Glasswing programme, which provides Mythos 5 to approved cybersecurity organisations in the US, is the leading edge of a model line that is getting more capable at a rate the government is already finding difficult to manage.
+            </p>
+
+            <div class="callout dark">
+                <span class="text-[#84cc16] font-bold block mb-2 font-sans text-sm">The IPO signal:</span>
+                <span class="text-zinc-400"><cite index="15-1">Trackers put Anthropic's ARR near $70 billion, Fable 5 is back worldwide, and the IPO window has moved to late 2026. The central forecast has ARR reaching $115 billion by May 2027, with Claude Code contributing approximately $21.6 billion, and the IPO pricing around November 30, 2026.</cite> An Anthropic IPO would be one of the largest tech listings in years — and it would come from a company that spent its first three years explicitly positioning itself as the safety-conscious alternative to OpenAI.</span>
+            </div>
+
+            <h2>The safety paradox — and why it matters</h2>
+
+            <span class="chapter-label">// Chapter 04 — The tension at the core of Anthropic</span>
+
+            <p>
+                The most interesting thing about Fable 5's journey is not the government shutdown or the jailbreak or the 19-day suspension. It is what all of that reveals about the fundamental tension inside Anthropic.
+            </p>
+
+            <p>
+                <cite index="12-1">Anthropic described Fable 5 as a model that "came with risks" — specifically that without safeguards, its capabilities in cybersecurity "could be misused to cause serious damage."</cite> The company then released it anyway, with safeguards that a jailbreak penetrated in three days. Then the government stepped in and effectively said those safeguards were not enough. Then Anthropic built better safeguards and got the model back online.
+            </p>
+
+            <p>
+                This is not a criticism of Anthropic. It is a description of a genuinely hard problem. The company was founded explicitly to solve AI safety — to build the most powerful AI systems in the world in a way that keeps them from causing harm. Fable 5's story is what that mission looks like in practice: messy, iterative, contested, and shaped by actors — governments, competitors, security researchers — that Anthropic does not control.
+            </p>
+
+            <p>
+                The <cite index="10-1">intentional decision not to train Opus 5 on cyber tasks</cite> is another signal of this balancing act. Anthropic is actively choosing to limit certain capabilities even as it advances others. The model is more capable than its predecessor on cybersecurity tasks purely because it is more generally capable — not because Anthropic tried to make it better at finding vulnerabilities. That distinction matters to regulators and to the company's own mission. Whether it holds as models become more generally capable is the open question.
+            </p>
+
+            <h2>What this means if you build on Claude</h2>
+
+            <span class="chapter-label">// Chapter 05 — The practical implications</span>
+
+            <p>
+                The Fable 5 story has a direct practical implication for anyone building products or pipelines on Claude: model-agnostic fallback architecture is no longer optional. <cite index="9-1">Enterprise technical leaders are moving toward model-agnostic fallback architectures — deploying proxy layers that can dynamically reroute critical production pipelines from proprietary APIs to locally hosted, open-weight alternatives.</cite>
+            </p>
+
+            <p>
+                The 19-day Fable 5 suspension affected nobody running on Sonnet or Haiku. It affected everyone who had built a product specifically dependent on Fable 5's capabilities. The companies that had designed for that dependency without fallbacks discovered — expensively — that even the most powerful AI model can go dark overnight when a government order lands.
+            </p>
+
+            <p>
+                Anthropic's own API documentation has addressed this directly: <cite index="6-1">the fallback parameter allows the API to retry using recommended models or named alternatives when a model is unavailable, with fallback credit refunding the prompt-cache cost of switching so you avoid paying twice.</cite> Use it. Design for model continuity rather than model specificity. The regulatory environment that produced the June 12 order has not gone away — it has, if anything, intensified.
+            </p>
+
+            <div class="callout">
+                <strong>The practical checklist for Claude builders:</strong>
+                <ul style="margin-top:10px;list-style:none;padding:0;space-y:8px;">
+                    <li style="margin-bottom:8px;">→ Use the <code>fallbacks</code> parameter — route to Opus 5 or Sonnet 5 if Fable 5 is unavailable</li>
+                    <li style="margin-bottom:8px;">→ Test your application on Sonnet 5 — it delivers near-Opus intelligence at Sonnet cost</li>
+                    <li style="margin-bottom:8px;">→ Do not hardcode Fable 5 as a single dependency in production pipelines</li>
+                    <li style="margin-bottom:8px;">→ Watch for Fable 5.1 — improved safeguards, same pricing, likely August 2026</li>
+                    <li>→ If you run cybersecurity tooling: Mythos 5 access via Project Glasswing is the legitimate channel</li>
+                </ul>
+            </div>
+
+            <h2>The story that is still being written</h2>
+
+            <p>
+                Fable 5 is not a resolved chapter. It is the opening of a longer story about what it means to deploy frontier AI at a time when governments are still figuring out how to regulate it, when the capabilities gap between American and Chinese models is narrowing, and when the very safety features that make a model trustworthy can also become leverage points for regulatory intervention.
+            </p>
+
+            <p>
+                Anthropic is a company that was founded on the belief that the most important thing is to get powerful AI right — that safety and capability are not opposites, and that the organisation best positioned to deploy frontier AI is the one that takes both seriously. Fable 5's story is a test of that thesis in real conditions. The model came back. The safeguards held. The regulatory process, messy and political as it was, produced a model that is arguably more trustworthy than the one that launched on June 9.
+            </p>
+
+            <p>
+                What comes next — Fable 5.1, Fable 6, whatever Anthropic decides to call the next Mythos-class release — will face the same gauntlet. The pattern is established now. Launch. Review. Shutdown. Rebuild. Redeploy. Whether that cycle produces better AI, safer AI, or simply slower AI is the question Anthropic — and the regulators, and the competitors, and the builders who depend on these models — will spend the next two years answering.
+            </p>
+
+        </div>
+
+        <!-- Stats -->
+        <div class="max-w-3xl mx-auto px-6 my-10">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="stat-card"><div class="stat-val" style="color:#84cc16;">19</div><div class="stat-lbl">Days offline</div></div>
+                <div class="stat-card"><div class="stat-val" style="color:#84cc16;">80%</div><div class="stat-lbl">SWE-bench Pro score</div></div>
+                <div class="stat-card"><div class="stat-val" style="color:#84cc16;">99%+</div><div class="stat-lbl">Jailbreak block rate</div></div>
+                <div class="stat-card"><div class="stat-val" style="color:#ef4444;">$70B</div><div class="stat-lbl">Anthropic ARR tracker</div></div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="max-w-3xl mx-auto px-6 mt-8">
+            <div class="bg-zinc-50 rounded-2xl p-6 mb-8">
+                <p class="mono text-[10px] text-zinc-400 uppercase tracking-widest mb-3">// Sources</p>
+                <ul class="space-y-2 text-sm text-zinc-500 font-sans leading-relaxed">
+                    <li><a href="https://www.anthropic.com/news/claude-fable-5-mythos-5" target="_blank" rel="noopener noreferrer" class="text-[#84cc16] hover:underline">Anthropic — Introducing Claude Fable 5 and Claude Mythos 5 · June 9, 2026</a></li>
+                    <li><a href="https://www.anthropic.com/news/redeploying-fable-5" target="_blank" rel="noopener noreferrer" class="text-[#84cc16] hover:underline">Anthropic — Redeploying Claude Fable 5 · June 30, 2026</a></li>
+                    <li><a href="https://platform.claude.com/docs/en/about-claude/models/introducing-claude-fable-5-and-claude-mythos-5" target="_blank" rel="noopener noreferrer" class="text-[#84cc16] hover:underline">Claude Platform Docs — Fable 5 and Mythos 5 · 2026</a></li>
+                    <li><a href="https://venturebeat.com/technology/anthropic-is-bringing-back-claude-fable-5-globally-after-us-lifts-export-control-order-where-can-enterprises-access-it" target="_blank" rel="noopener noreferrer" class="text-[#84cc16] hover:underline">VentureBeat — Anthropic brings back Fable 5 globally · July 1, 2026</a></li>
+                    <li><a href="https://codersera.com/blog/claude-fable-5-launch-guide-2026/" target="_blank" rel="noopener noreferrer" class="text-[#84cc16] hover:underline">CoderSera — Claude Fable 5 Launch Guide · June 2026</a></li>
+                    <li><a href="https://gizmodo.com/anthropic-releases-new-claude-model-positions-it-as-a-cost-efficient-version-of-fable-5-2000790486" target="_blank" rel="noopener noreferrer" class="text-[#84cc16] hover:underline">Gizmodo — Anthropic releases Claude Opus 5 · July 24, 2026</a></li>
+                    <li><a href="https://aitoolsreview.co.uk/insights/next-claude-model" target="_blank" rel="noopener noreferrer" class="text-[#84cc16] hover:underline">AIToolsReview — What's the Next Claude Model? · August 2026</a></li>
+                    <li><a href="https://futuresearch.ai/anthropic-financial-forecast/" target="_blank" rel="noopener noreferrer" class="text-[#84cc16] hover:underline">FutureSearch — Anthropic Revenue and Valuation · August 2026</a></li>
+                    <li><a href="https://techsy.io/en/blog/claude-fable-6-release-date" target="_blank" rel="noopener noreferrer" class="text-[#84cc16] hover:underline">Techsy — Claude Fable 6 Release Date · July 2026</a></li>
+                </ul>
+            </div>
+
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+                <div>
+                    <div class="mono text-[10px] text-zinc-400 uppercase tracking-widest mb-1">Written by</div>
+                    <div class="font-bold text-zinc-900">Jarrit Hosking</div>
+                    <div class="mono text-[10px] text-zinc-400">Forge Vertical · Cape Town</div>
+                </div>
+                <div class="flex gap-3 flex-wrap">
+                    <a href="/articles.html" class="mono text-[10px] font-bold uppercase tracking-widest border border-zinc-200 px-5 py-3 rounded-xl hover:border-zinc-400 transition-all text-zinc-600">← All articles</a>
+                    <a href="/articles/fable5-affair.html" class="mono text-[10px] font-bold uppercase tracking-widest border border-zinc-200 px-5 py-3 rounded-xl hover:border-zinc-400 transition-all text-zinc-600">← The Fable 5 Affair</a>
+                    <a href="/articles/ai-future-of-work.html" style="background:linear-gradient(90deg,#10b981,#84cc16);" class="mono text-[10px] font-bold uppercase tracking-widest px-5 py-3 rounded-xl text-zinc-900 hover:opacity-90 transition-all">After Work →</a>
+                </div>
+            </div>
+        </div>
+
+    </article>
+
+    <div id="global-footer"></div>
+</body>
+</html>
