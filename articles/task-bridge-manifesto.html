@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="If AI is going to displace human work, we need an open protocol that redirects that displaced work back to humans — deliberately, transparently, at scale. Task-bridge is a proposal for that protocol. This is a call to every developer and AI company to help build it.">
+    <title>The Missing Protocol: An Open Call to AI Companies and Developers | Forge Vertical</title>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "The Missing Protocol: An Open Call to AI Companies and Developers to Solve the Human Work Problem",
+      "description": "If AI is going to displace human work, we need an open protocol that redirects displaced work back to humans deliberately. Task-bridge is a proposal for that protocol. This is a call to Anthropic, OpenAI, Google DeepMind, and every developer building agentic AI to help build it.",
+      "author": { "@type": "Person", "name": "Jarrit Hosking", "url": "https://www.forgevertical.com/about.html" },
+      "publisher": { "@type": "Organization", "name": "Forge Vertical", "url": "https://www.forgevertical.com" },
+      "datePublished": "2026-08-12",
+      "dateModified": "2026-08-12",
+      "mainEntityOfPage": "https://www.forgevertical.com/articles/task-bridge-manifesto.html"
+    }
+    </script>
+
+    <script src="/global.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/typography.css">
+
+    <style>
+        body { font-family: 'Outfit', sans-serif; background: #fff; }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        .g-text { background: linear-gradient(90deg,#10b981,#84cc16); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; display:inline-block; padding-bottom:0.05em; }
+        .prose-body { font-family: 'Lora', serif; font-size: 19px; line-height: 1.85; color: #27272a; }
+        .prose-body p { margin-bottom: 1.6em; }
+        .prose-body h2 { font-family: 'Outfit', sans-serif; font-size: 28px; font-weight: 700; letter-spacing: -0.02em; color: #09090b; margin-top: 2.5em; margin-bottom: 0.6em; line-height: 1.2; }
+        .prose-body h3 { font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 700; letter-spacing: -0.02em; color: #09090b; margin-top: 2em; margin-bottom: 0.5em; }
+        .prose-body strong { font-weight: 700; color: #09090b; font-family: 'Outfit', sans-serif; font-size: 17px; }
+        .prose-body a { color: #84cc16; text-decoration: underline; text-underline-offset: 3px; }
+        .prose-body code { font-family: 'JetBrains Mono', monospace; font-size: 13px; background: #f4f4f5; padding: 2px 6px; border-radius: 4px; }
+        .callout { background: #f4f4f5; border-left: 3px solid #84cc16; border-radius: 0 12px 12px 0; padding: 20px 24px; margin: 2em 0; font-family: 'Outfit', sans-serif; font-size: 15px; color: #3f3f46; line-height: 1.7; }
+        .callout.dark { background: #09090b; color: #a1a1aa; border-left-color: #84cc16; }
+        .callout.red { background: rgba(239,68,68,0.05); border-left-color: #ef4444; color: #3f3f46; }
+        .callout.amber { background: rgba(245,158,11,0.05); border-left-color: #f59e0b; color: #3f3f46; }
+        .pull-quote { font-family: 'Lora', serif; font-size: 23px; font-style: italic; color: #09090b; border-top: 2px solid #84cc16; border-bottom: 1px solid #e4e4e7; padding: 24px 0; margin: 2.5em 0; line-height: 1.5; }
+        .chapter-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #84cc16; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 6px; display: block; }
+        .img-caption { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #71717a; text-align: center; margin-top: 8px; letter-spacing: 0.05em; }
+        .code-block { background: #09090b; border-radius: 12px; padding: 24px; font-family: 'JetBrains Mono', monospace; font-size: 12px; line-height: 1.8; color: #84cc16; overflow-x: auto; margin: 2em 0; }
+        .code-block .c { color: #3f3f46; }
+        .code-block .k { color: #60a5fa; }
+        .code-block .s { color: #f59e0b; }
+        .code-block .n { color: #c4c9d4; }
+        .cta-card { background: linear-gradient(135deg, #09090b 0%, #0d1a0d 100%); border: 1px solid rgba(132,204,22,0.2); border-radius: 20px; padding: 40px; }
+        .who-card { background: #f8fafc; border: 1px solid #e4e4e7; border-radius: 14px; padding: 20px 24px; }
+        .who-title { font-family: 'Outfit', sans-serif; font-size: 15px; font-weight: 700; color: #09090b; margin-bottom: 6px; }
+        .who-role { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: #71717a; text-transform: uppercase; letter-spacing: 0.14em; margin-bottom: 10px; }
+        .who-ask { font-size: 13px; color: #52525b; line-height: 1.65; }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div id="global-nav"></div>
+
+    <article class="pt-36 pb-24">
+
+        <!-- Header -->
+        <header class="max-w-3xl mx-auto px-6 mb-12">
+            <div class="flex items-center gap-3 mb-6">
+                <a href="/articles.html" class="mono text-[10px] text-zinc-400 hover:text-zinc-600 transition-colors uppercase tracking-widest">← Articles</a>
+                <span class="text-zinc-300">·</span>
+                <a href="/articles/ai-future-of-work.html" class="mono text-[10px] text-zinc-400 hover:text-zinc-600 transition-colors uppercase tracking-widest">← After Work</a>
+                <span class="text-zinc-300">·</span>
+                <span class="mono text-[10px] font-bold text-[#84cc16] uppercase tracking-widest border border-[#84cc16]/30 px-3 py-1 rounded-full">Open call · AI · Dev</span>
+            </div>
+
+            <h1 class="text-4xl md:text-5xl font-bold tracking-tight leading-[1.0] mb-6 text-zinc-900" style="font-family:'Outfit',sans-serif;letter-spacing:-0.03em;">
+                The missing<br>protocol — and a<br>
+                <span class="g-text">call to build it.</span>
+            </h1>
+
+            <p class="text-xl text-zinc-500 font-light leading-relaxed mb-8 max-w-2xl" style="font-family:'Outfit',sans-serif;">
+                We have detailed predictions about AI displacing human work. We have political debates about universal basic income. We have government hearings. What we do not have is a technical standard that deliberately routes work displaced by AI back to humans — transparently, at scale, with dignity. That standard needs to exist. This is a call to Anthropic, OpenAI, Google DeepMind, and every developer building agentic systems to help build it.
+            </p>
+
+            <div class="bg-zinc-50 border border-zinc-100 rounded-2xl p-5 mb-8">
+                <p class="mono text-[10px] text-zinc-400 uppercase tracking-widest mb-2">// This is a follow-up to</p>
+                <p class="text-zinc-600 text-sm leading-relaxed"><a href="/articles/ai-future-of-work.html" class="text-[#84cc16] underline">After Work: What the World Looks Like When AI Does Everything</a> explored the scale of the displacement problem and who is talking about it. This article proposes a concrete technical response — and invites collaboration on building it.</p>
+            </div>
+
+            <div class="flex items-center gap-4 pb-8 border-b border-zinc-100">
+                <div>
+                    <div class="font-bold text-sm text-zinc-900">Jarrit Hosking</div>
+                    <div class="mono text-[10px] text-zinc-400 uppercase tracking-widest">Forge Vertical · Cape Town · August 12, 2026</div>
+                </div>
+                <div class="ml-auto mono text-[10px] text-zinc-400 uppercase tracking-widest">14 min read</div>
+            </div>
+        </header>
+
+        <!-- Body -->
+        <div class="max-w-3xl mx-auto px-6 prose-body">
+
+            <span class="chapter-label">// Chapter 01 — The gap nobody is filling</span>
+
+            <p>
+                Every serious conversation about AI and work arrives at the same impasse. The economists project displacement. The politicians debate redistribution. The AI companies talk about augmentation. And then everyone goes back to what they were doing, because the gap between the macro-level debate and the micro-level reality — a specific person whose specific job is being automated, right now, in a specific company — is enormous and nobody has a concrete bridge across it.
+            </p>
+
+            <p>
+                The policies being discussed — universal basic income, AI taxation, mandatory retraining — operate at the level of nation-states and decades. The displacement is happening at the level of workflows and quarters. The mismatch in scale is one of the most dangerous aspects of the current moment. By the time the policy response arrives, the disruption will already have reshaped the labour market in ways that are very difficult to reverse.
+            </p>
+
+            <p>
+                What is missing is not a policy. It is a <strong>protocol</strong>. A technical standard, like OAuth for authentication or SMTP for email, that creates a defined interface between AI systems and human workers — one that makes it structurally easy for any AI agent to route work to a human when that is the better choice, and to pay that human fairly for doing it.
+            </p>
+
+            <div class="pull-quote">
+                "We need a protocol, not a policy. Something that makes it structurally easy — technically trivial — for any AI agent to route work to a human. The way OAuth made authentication trivial. The way SMTP made email trivial."
+            </div>
+
+            <p>
+                This is not a new idea at the concept level. Amazon Mechanical Turk demonstrated in 2005 that human microtask markets could work at scale. Every content moderation system at every major platform routes certain decisions to human reviewers because AI cannot handle them reliably. The concept is proven. What does not exist is the standard — the open protocol that any agentic AI system can call, regardless of which company built it, to connect a task to a human worker who can complete it.
+            </p>
+
+            <h2>What task-bridge is trying to be</h2>
+
+            <span class="chapter-label">// Chapter 02 — The proposal</span>
+
+            <p>
+                The <a href="https://github.com/Jotto1988/task-bridge" target="_blank" rel="noopener noreferrer">task-bridge repository</a> on GitHub is an early attempt at exactly this. The core idea is simple: a standardised JSON interface that any AI agent can call to declare that a task has exceeded its confident capability threshold and route it — with context, with compensation parameters, with a structured description of what is needed — to a human worker pool.
+            </p>
+
+            <p>
+                Think of it as a structured handoff layer sitting between AI execution and human execution. The agent does not just fail and stop. It does not hallucinate an answer it is not confident in. It calls the protocol, describes the task it cannot complete reliably, specifies the skills needed to complete it, and routes it to a marketplace of human workers who have those skills — paying them fairly from the economics that the AI operation was already budgeting.
+            </p>
+
+        </div>
+
+        <!-- Code block -->
+        <div class="max-w-3xl mx-auto px-6 my-8">
+            <p class="mono text-[10px] text-zinc-400 uppercase tracking-widest mb-3">// What a task-bridge handoff call might look like</p>
+            <div class="code-block">
+<span class="c">// AI agent encounters a task it cannot complete confidently</span>
+<span class="c">// Instead of failing or hallucinating, it calls task-bridge</span>
+
+<span class="n">POST</span> <span class="s">/api/v1/handoff</span>
+{
+  <span class="k">"task_id"</span>: <span class="s">"tb_8f2a9c"</span>,
+  <span class="k">"agent"</span>: <span class="s">"claude-fable-5"</span>,
+  <span class="k">"confidence_score"</span>: <span class="s">0.43</span>,
+  <span class="k">"confidence_threshold"</span>: <span class="s">0.75</span>,
+  <span class="k">"task_type"</span>: <span class="s">"legal_document_review"</span>,
+  <span class="k">"task_description"</span>: <span class="s">"Review this South African lease agreement for non-standard clauses that deviate from the Rental Housing Act. Flag any clauses that may be unenforceable."</span>,
+  <span class="k">"context"</span>: { <span class="k">"jurisdiction"</span>: <span class="s">"ZA"</span>, <span class="k">"document_pages"</span>: <span class="s">12</span> },
+  <span class="k">"required_skills"</span>: [<span class="s">"south_african_property_law"</span>, <span class="s">"contract_review"</span>],
+  <span class="k">"budget_max_usd"</span>: <span class="s">25.00</span>,
+  <span class="k">"deadline_minutes"</span>: <span class="s">240</span>,
+  <span class="k">"payment_on_completion"</span>: <span class="s">true</span>
+}
+
+<span class="c">// task-bridge matches to a qualified human worker</span>
+<span class="c">// Worker completes task. Result returns to AI pipeline.</span>
+<span class="c">// Worker is paid. Task is logged. No hallucination.</span>
+            </div>
+        </div>
+
+        <div class="max-w-3xl mx-auto px-6 prose-body">
+
+            <p>
+                The elegance of this model is that it does not require AI companies to limit their systems or governments to pass new laws. It requires AI developers to build a <code>confidence_threshold</code> mechanism into their agents — something many already have in some form — and connect that threshold to a standardised routing protocol rather than a failure state.
+            </p>
+
+            <p>
+                The human worker side of the equation is equally important. A protocol that routes tasks to humans only works if there is a structured marketplace on the other side — one where workers have verified skills, transparent compensation, and genuine agency over which tasks they accept. This is not Amazon Mechanical Turk, where workers are anonymous and compensation is often degrading. It is a skilled labour exchange where the skills are real, the compensation is fair, and the workers are partners in an AI pipeline rather than a residual category.
+            </p>
+
+            <h2>The ecosystem that is already emerging</h2>
+
+            <span class="chapter-label">// Chapter 03 — You are not alone in building this</span>
+
+            <p>
+                Task-bridge is not the only project approaching this problem. A small but serious ecosystem of human-in-the-loop protocols is already building, and the overlap is meaningful.
+            </p>
+
+            <p>
+                <a href="https://github.com/rotorstar/hitl-protocol" target="_blank" rel="noopener noreferrer">HITL Protocol</a> by rotorstar frames the problem from the service side: <cite index="19-1">"HITL Protocol is to human decisions what OAuth is to authentication — an open standard connecting Services, Agents, and Humans."</cite> It proposes a standardised flow for services to request human input when an AI agent is about to make a consequential decision — cancel an insurance policy, book a non-refundable trip, wire money. The human stays in their preferred messaging channel — Telegram, WhatsApp, Slack — and taps a decision button there. No wall of text. No blind agent decisions.
+            </p>
+
+            <p>
+                <a href="https://github.com/agentrq/agentrq" target="_blank" rel="noopener noreferrer">AgentRQ</a> approaches it from the task management side: <cite index="21-1">a modern, high-performance platform designed for seamless collaboration between human operators and AI agents, where humans can break down complex goals into manageable tasks and delegate work directly to AI agents — or, critically, for AI agents to surface tasks back to humans when they need review or approval.</cite>
+            </p>
+
+            <p>
+                <cite index="19-1">Every agent framework already has its own mechanism for gating what the agent itself is about to do — OpenAI's Agents SDK can pause a tool call, LangGraph has interrupt(), OpenClaw asks before running a dangerous command.</cite> What none of them have is a standardised interface for routing work to humans outside the framework. That is the gap task-bridge is aimed at.
+            </p>
+
+            <div class="callout dark">
+                <span class="text-[#84cc16] font-bold block mb-2 font-sans text-sm">The key distinction:</span>
+                <span class="text-zinc-400">Every current framework gates what the AI agent does internally. Task-bridge gates what happens when the AI agent encounters work that humans should do — and creates a structured market for that work to actually reach humans and pay them for completing it. These are complementary, not competing, ideas.</span>
+            </div>
+
+            <h2>Why this needs to be open</h2>
+
+            <span class="chapter-label">// Chapter 04 — The case for an open standard</span>
+
+            <p>
+                The most important word in the task-bridge proposal is <strong>open</strong>. Not open-source in the sense of a GitHub licence, though that matters. Open in the sense that no single company controls it.
+            </p>
+
+            <p>
+                If Anthropic builds a human handoff system, it will route tasks to Anthropic-preferred workers on Anthropic-preferred terms. If OpenAI builds one, same story. If a startup builds one with VC backing, the economics of the marketplace will be shaped by investor return requirements rather than worker welfare. Every closed implementation of this idea has the same failure mode: the platform captures the value that should flow to the workers.
+            </p>
+
+            <p>
+                An open protocol — governed by a foundation or a working group or a consortium of contributors, with no single entity able to change the spec unilaterally — does not have this failure mode. The protocol defines how tasks are described, how workers are matched, how compensation is calculated and delivered. The actual marketplace implementations sit on top of the protocol. Multiple competing marketplaces, any of which can receive tasks from any agent that implements the standard.
+            </p>
+
+            <p>
+                This is exactly how the internet's foundational protocols work. HTTP does not care which web server you run. SMTP does not care which email client sends the message. DNS does not care which registrar holds the domain. The protocol is the neutral layer. The implementations compete on quality.
+            </p>
+
+            <p>
+                Task-bridge needs to be that neutral layer for human work in AI pipelines. If it is, it can scale to absorb a meaningful fraction of the displaced work that AI creates. If it is captured by any single company, it becomes another platform that extracts value from workers rather than directing value to them.
+            </p>
+
+            <h2>A direct call — who needs to read this</h2>
+
+            <span class="chapter-label">// Chapter 05 — The ask</span>
+
+            <p>
+                This is not a think-piece. It is a call to action addressed to specific people building specific things.
+            </p>
+
+        </div>
+
+        <!-- Who cards -->
+        <div class="max-w-3xl mx-auto px-6 my-8 space-y-4">
+
+            <div class="who-card">
+                <div class="who-role">AI labs</div>
+                <div class="who-title">Anthropic, OpenAI, Google DeepMind, xAI, Mistral</div>
+                <div class="who-ask">Every agentic AI system you ship needs a human handoff mechanism. Right now those mechanisms are proprietary, inconsistent, and invisible to the workers who receive the tasks. Commit to implementing an open handoff standard in your agent SDKs. Not because it is commercially necessary — it may not be. Because your own safety frameworks require human oversight of consequential AI decisions, and that oversight needs to reach real humans through a system that compensates them fairly. You have stated this is a value. Here is the technical implementation of that value.</div>
+            </div>
+
+            <div class="who-card">
+                <div class="who-role">Agent framework developers</div>
+                <div class="who-title">LangGraph, CrewAI, AutoGen, LlamaIndex, Pydantic AI</div>
+                <div class="who-ask">You already have interrupt and human-in-the-loop mechanisms. Add a standard handoff interface that connects to external human worker pools. One additional output type: <code>HANDOFF_TO_HUMAN</code> with a structured payload. That is the entire implementation on your side. The rest of the system handles the matching, the payment, the delivery. You give your agent a way to route work out of the pipeline with dignity rather than failing in place.</div>
+            </div>
+
+            <div class="who-card">
+                <div class="who-role">Marketplace platforms</div>
+                <div class="who-title">Upwork, Toptal, Fiverr, Contra, Turing</div>
+                <div class="who-ask">You already have the worker side of this equation. What you do not have is a standardised inbound interface for AI-generated task routing. Implement the task-bridge protocol on your intake layer and your platform becomes the human side of every AI pipeline that adopts the standard. That is not a small opportunity. As agentic AI systems handle more of what humans previously did, the volume of work that reaches confidence thresholds and needs human completion will grow. You can be the destination for that work at scale — if you implement the standard.</div>
+            </div>
+
+            <div class="who-card">
+                <div class="who-role">Developers building agentic systems</div>
+                <div class="who-title">You — reading this right now</div>
+                <div class="who-ask">You are building the pipelines that will route tasks in the AI economy. You have a choice, in every pipeline you build, between a failure state and a handoff state. A failure state says: the AI could not do this, so nothing happens. A handoff state says: the AI could not do this confidently enough, so it routed it to a human who can — and paid them. The protocol is open. The implementation is straightforward. The choice to build toward a system that creates human work rather than eliminating it is yours, made pipeline by pipeline, right now.</div>
+            </div>
+
+            <div class="who-card" style="border-color:rgba(132,204,22,0.3);background:rgba(132,204,22,0.03);">
+                <div class="who-role" style="color:#84cc16;">Contribute</div>
+                <div class="who-title">The task-bridge repository</div>
+                <div class="who-ask">The work is at <a href="https://github.com/Jotto1988/task-bridge" target="_blank" rel="noopener noreferrer" class="text-[#84cc16] underline">github.com/Jotto1988/task-bridge</a>. The spec is early and the implementation is partial. That is deliberate — this is a call for collaboration, not a finished product. Open a PR. Open an issue. Fork it and show a better version. The goal is not a single implementation that becomes the standard — it is a conversation, a community, and eventually a working group that produces something nobody owns and everyone can build on.</div>
+            </div>
+
+        </div>
+
+        <div class="max-w-3xl mx-auto px-6 prose-body">
+
+            <h2>The world we are trying to build toward</h2>
+
+            <span class="chapter-label">// Chapter 06 — What success looks like</span>
+
+            <p>
+                The article that preceded this one — <a href="/articles/ai-future-of-work.html">After Work</a> — ended with Hawking's warning: the outcome depends on how the wealth is distributed, not on how much wealth AI creates. A successful task-bridge protocol is a mechanism for distribution — not of wealth directly, but of work. Of meaningful activity. Of the dignity that comes from being genuinely useful rather than technically supported.
+            </p>
+
+            <p>
+                Success looks like this: an AI agent working on a legal contract, a medical record, a financial analysis, a piece of creative work encounters a decision point where it is not confident it can get the answer right. Instead of hallucinating, instead of failing, instead of producing a plausible-sounding wrong answer, it calls the protocol. A human with the relevant skills — a paralegal, a medical coder, a financial analyst, a writer — receives the task, completes it, and is paid fairly. The AI pipeline continues. The human has work.
+            </p>
+
+            <p>
+                Multiply that by the millions of tasks per day that AI systems will encounter at their confidence limits. Multiply it by the number of workers who will be displaced from their primary employment by AI automation over the next decade. The match is not perfect — the tasks that AI cannot complete reliably are not always the tasks that displaced workers are immediately qualified for. But it is a start. It is a structural mechanism rather than a political hope. And it can be built now, by the people who are already building the AI systems that create the displacement in the first place.
+            </p>
+
+            <div class="callout">
+                <strong>The argument in one paragraph:</strong> AI companies have stated publicly — Dario Amodei, Sam Altman, Demis Hassabis — that they take the job displacement risk seriously and believe AI developers have a responsibility to address it. A human-in-the-loop routing protocol that creates skilled work for displaced workers at the exact point where AI systems are least reliable is the most direct possible expression of that responsibility. It is not a charity. It is good engineering. It makes the AI pipeline more reliable by removing the hallucination risk at the edges of AI capability. And it creates human work as a structural byproduct of that engineering decision.
+            </div>
+
+            <h2>The honest version</h2>
+
+            <span class="chapter-label">// Chapter 07 — What this does not solve</span>
+
+            <p>
+                Task-bridge does not solve the job displacement problem. It is worth being precise about this.
+            </p>
+
+            <p>
+                The volume of work that AI systems will route to humans through a confidence threshold mechanism is not going to replace the volume of work that AI systems will absorb from human workers over the next decade. The IMF's estimate that 60% of jobs in advanced economies are already exposed to AI disruption is not addressable by routing edge cases to human workers. The scale is different by orders of magnitude.
+            </p>
+
+            <p>
+                What task-bridge can do is three things. First, it can make AI pipelines more reliable by replacing hallucinated outputs with genuinely human-completed work at the edges of AI capability. Second, it can create a new category of skilled digital work — AI pipeline oversight, edge-case completion, AI output verification — that represents genuine employment rather than a political concession. Third, it can establish a precedent: that AI systems should be designed with explicit, compensated human handoff mechanisms, not just implicit failure states.
+            </p>
+
+            <p>
+                The precedent is arguably the most important of the three. A world where AI pipelines routinely route work to humans and pay them fairly for it is a world where the political economy of AI displacement is different — where AI companies are structurally invested in the welfare of human workers rather than structurally indifferent to them. That is not everything. But it is something real, and it is something that developers building agentic systems can choose to create, right now, by the technical decisions they make in the systems they are already building.
+            </p>
+
+            <p>
+                The protocol is at <a href="https://github.com/Jotto1988/task-bridge" target="_blank" rel="noopener noreferrer">github.com/Jotto1988/task-bridge</a>. The conversation starts there.
+            </p>
+
+        </div>
+
+        <!-- Final CTA -->
+        <div class="max-w-3xl mx-auto px-6 my-12">
+            <div class="cta-card">
+                <p class="mono text-[10px] text-[#84cc16] uppercase tracking-widest mb-4">// The ask — in one line</p>
+                <h3 class="text-2xl font-bold text-white mb-4" style="font-family:'Outfit',sans-serif;letter-spacing:-0.02em;">If you build AI agents, add a human handoff state. If you run a worker platform, implement the inbound protocol. If you work at Anthropic, OpenAI, or Google — this is your stated responsibility. Let's build it together.</h3>
+                <div class="flex flex-wrap gap-3 mt-6">
+                    <a href="https://github.com/Jotto1988/task-bridge" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-5 py-3 rounded-xl font-bold text-sm text-zinc-900 hover:opacity-90 transition-all" style="background:linear-gradient(90deg,#10b981,#84cc16);font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.12em;">
+                        View on GitHub →
+                    </a>
+                    <a href="https://github.com/rotorstar/hitl-protocol" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-5 py-3 rounded-xl font-bold text-zinc-400 border border-zinc-700 hover:border-[#84cc16] hover:text-[#84cc16] transition-all" style="font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.12em;">
+                        HITL Protocol →
+                    </a>
+                    <a href="https://github.com/agentrq/agentrq" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-5 py-3 rounded-xl font-bold text-zinc-400 border border-zinc-700 hover:border-[#84cc16] hover:text-[#84cc16] transition-all" style="font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.12em;">
+                        AgentRQ →
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sources -->
+        <div class="max-w-3xl mx-auto px-6 mt-8">
+            <div class="bg-zinc-50 rounded-2xl p-6 mb-8">
+                <p class="mono text-[10px] text-zinc-400 uppercase tracking-widest mb-3">// Sources & related projects</p>
+                <ul class="space-y-2 text-sm text-zinc-500 font-sans leading-relaxed">
+                    <li><a href="https://github.com/Jotto1988/task-bridge" target="_blank" rel="noopener noreferrer" class="text-[#84cc16] hover:underline">task-bridge — github.com/Jotto1988/task-bridge</a></li>
+                    <li><a href="https://github.com/rotorstar/hitl-protocol" target="_blank" rel="noopener noreferrer" class="text-[#84cc16] hover:underline">HITL Protocol — Human-in-the-Loop Protocol for Autonomous Agent Services · rotorstar</a></li>
+                    <li><a href="https://github.com/agentrq/agentrq" target="_blank" rel="noopener noreferrer" class="text-[#84cc16] hover:underline">AgentRQ — Human-in-loop realtime conversational task manager for AI Agents</a></li>
+                    <li><a href="https://github.com/mariovallereyes/the-bridge" target="_blank" rel="noopener noreferrer" class="text-[#84cc16] hover:underline">The Bridge — Open-source protocol for humans to organize task delegation · mariovallereyes</a></li>
+                    <li><a href="https://github.com/AxmeAI/openai-agents-handoff-bridge" target="_blank" rel="noopener noreferrer" class="text-[#84cc16] hover:underline">OpenAI Agents Handoff Bridge — Durable handoff between agents with human-in-the-loop gates</a></li>
+                    <li><a href="/articles/ai-future-of-work.html" class="text-[#84cc16] hover:underline">After Work: What the World Looks Like When AI Does Everything · Forge Vertical · August 2026</a></li>
+                    <li>Dario Amodei — January 2026 public statement on AI job displacement</li>
+                    <li>IMF — AI Will Transform the Global Economy · 2026</li>
+                    <li>WEF — Future of Jobs Report 2025 · 92M displaced, 170M new roles by 2030</li>
+                </ul>
+            </div>
+
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+                <div>
+                    <div class="mono text-[10px] text-zinc-400 uppercase tracking-widest mb-1">Written by</div>
+                    <div class="font-bold text-zinc-900">Jarrit Hosking</div>
+                    <div class="mono text-[10px] text-zinc-400">Forge Vertical · Cape Town · August 12, 2026</div>
+                </div>
+                <div class="flex gap-3 flex-wrap">
+                    <a href="/articles.html" class="mono text-[10px] font-bold uppercase tracking-widest border border-zinc-200 px-5 py-3 rounded-xl hover:border-zinc-400 transition-all text-zinc-600">← All articles</a>
+                    <a href="/articles/ai-future-of-work.html" class="mono text-[10px] font-bold uppercase tracking-widest border border-zinc-200 px-5 py-3 rounded-xl hover:border-zinc-400 transition-all text-zinc-600">← After Work</a>
+                    <a href="https://github.com/Jotto1988/task-bridge" target="_blank" rel="noopener noreferrer" style="background:linear-gradient(90deg,#10b981,#84cc16);" class="mono text-[10px] font-bold uppercase tracking-widest px-5 py-3 rounded-xl text-zinc-900 hover:opacity-90 transition-all">GitHub →</a>
+                </div>
+            </div>
+        </div>
+
+    </article>
+
+    <div id="global-footer"></div>
+</body>
+</html>
