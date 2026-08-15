@@ -254,7 +254,7 @@
     </aside>
 
     <div>
-        <div id="sync-notice">Loaded from fv-extras.json · <span id="sync-time"></span> · <a href="/onboard.html">Submit a listing</a></div>
+        <div id="sync-notice">Loaded from listings.json · <span id="sync-time"></span> · <a href="/onboard.html">Submit a listing</a></div>
         <div id="listings-area">
             <div id="sort-bar">
                 <span class="sort-label" id="results-count">Loading...</span>
@@ -289,7 +289,9 @@
 <script>
 // ── Config ────────────────────────────────────────────────────────
 // All listings in fv-extras.json — edit that file to add/remove listings
-const FV_EXTRAS = './fv-extras.json';
+// listings.json is auto-generated daily by SYNC_DIRECTORY.yml GitHub Action
+// It merges SiteBuild Studio listings + fv-extras.json
+const FV_EXTRAS = './listings.json';
 
 // ── State ─────────────────────────────────────────────────────────
 let allListings = [];
@@ -308,7 +310,7 @@ const catColors = {
 // To add new listings: edit fv-extras.json and redeploy both files.
 async function init() {
     try {
-        const res = await fetch('./fv-extras.json?t=' + Date.now());
+        const res = await fetch('./listings.json?t=' + Date.now());
         if (!res.ok) throw new Error('Could not load listings');
         const data = await res.json();
 
@@ -360,7 +362,6 @@ function filterListings() {
     const term        = document.getElementById('search-input').value.toLowerCase();
     const onlyVer     = document.getElementById('filter-verified').checked;
     const onlyFeat    = document.getElementById('filter-featured').checked;
-    const onlyFV      = document.getElementById('filter-fv').checked;
 
     let filtered = allListings.filter(l => {
         const catMatch  = currentCat === 'all' || l.category === currentCat;
