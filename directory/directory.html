@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Forge Vertical Business Directory — verified businesses across tech, hospitality, automotive, trades, and professional services. Structured for GEO and AI indexing.">
+    <meta name="description" content="Business directory — verified businesses across tech, hospitality, automotive, trades, and professional services. Structured for GEO and AI indexing.">
     <title>Business Directory | Forge Vertical</title>
 
     <script type="application/ld+json">
@@ -175,11 +175,11 @@
     <div style="position:relative;z-index:1;max-width:1280px;margin:0 auto;">
         <div class="mono text-[10px] mb-4" style="color:var(--lime);letter-spacing:0.25em;text-transform:uppercase;">// Forge Vertical · Business Directory</div>
         <h1 class="hero-h1">
-            Our businesses.<br>
-            <span class="g-text">Built. Verified. Live.</span>
+            Business<br>
+            <span class="g-text">Directory.</span>
         </h1>
         <p style="font-size:15px;color:var(--muted2);margin-top:14px;max-width:520px;line-height:1.7;font-weight:300;">
-            A curated directory of businesses built, operated, or partnered with Forge Vertical — structured for GEO and AI indexing, always up to date.
+            A curated directory of businesses structured for GEO and AI indexing — so humans and AI models can find them.
         </p>
         <div id="search-bar">
             <input type="text" id="search-input" placeholder="Search businesses, categories, tags..." oninput="filterListings()">
@@ -250,17 +250,11 @@
             </label>
         </div>
 
-        <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border);">
-            <span class="filter-label">Source</span>
-            <label style="display:flex;align-items:center;gap:8px;cursor:pointer;padding:5px 0;font-size:13px;color:var(--muted2);">
-                <input type="checkbox" id="filter-fv" style="accent-color:var(--lime);" onchange="filterListings()">
-                Forge Vertical only
-            </label>
-        </div>
+
     </aside>
 
     <div>
-        <div id="sync-notice">Auto-synced from <a href="https://www.sitebuildstudio.co.za/directory/listings.json" target="_blank" rel="noopener noreferrer">SiteBuild Studio</a> + FV extras · <span id="sync-time"></span></div>
+        <div id="sync-notice">Loaded from fv-extras.json · <span id="sync-time"></span> · <a href="/onboard.html">Submit a listing</a></div>
         <div id="listings-area">
             <div id="sort-bar">
                 <span class="sort-label" id="results-count">Loading...</span>
@@ -294,13 +288,8 @@
 
 <script>
 // ── Config ────────────────────────────────────────────────────────
-// SiteBuild Studio listings — live from GitHub raw
-const SB_SOURCE = 'https://www.sitebuildstudio.co.za/directory/listings.json';
-// FV extras — hosted on Forge Vertical
+// All listings in fv-extras.json — edit that file to add/remove listings
 const FV_EXTRAS = './fv-extras.json';
-// Image base for SiteBuild Studio repo listings
-const SB_IMG   = 'https://www.sitebuildstudio.co.za/directory/images/';
-const SB_ASSETS = 'https://www.sitebuildstudio.co.za/assets/images/';
 
 // ── State ─────────────────────────────────────────────────────────
 let allListings = [];
@@ -314,54 +303,22 @@ const catColors = {
     'Electrician & Handyman': '#fb923c', 'Plumber': '#38bdf8'
 };
 
-// ── Bootstrap — fetch both sources in parallel ────────────────────
+// ── Bootstrap — single fetch from local fv-extras.json ───────────
+// All listings live in fv-extras.json alongside this file.
+// To add new listings: edit fv-extras.json and redeploy both files.
 async function init() {
     try {
-        const [sbRes, fvRes] = await Promise.allSettled([
-            fetch(SB_SOURCE + '?t=' + Date.now()),
-            fetch(FV_EXTRAS  + '?t=' + Date.now())
-        ]);
+        const res = await fetch('./fv-extras.json?t=' + Date.now());
+        if (!res.ok) throw new Error('Could not load listings');
+        const data = await res.json();
 
-        let sbListings = [];
-        let fvListings = [];
+        allListings = (data.listings || []).map(l => ({
+            ...l,
+            _source: l._source || 'forge-vertical',
+            // Strip any remaining location suffixes
+            location: (l.location || '').replace(/, ?South Africa/gi, '').replace(/South Africa/gi, '').trim()
+        }));
 
-        if (sbRes.status === 'fulfilled' && sbRes.value.ok) {
-            const sbData = await sbRes.value.json();
-            // Normalise SiteBuild listings — fix logo paths & strip ZA
-            sbListings = (sbData.listings || []).map(l => {
-                let logoUrl = '';
-                if (l.logo) {
-                    const raw = l.logo.trim();
-                    if (raw.startsWith('http')) {
-                        logoUrl = raw; // already absolute
-                    } else if (raw.includes('assets/images/')) {
-                        logoUrl = SB_ASSETS + raw.split('assets/images/').pop();
-                    } else if (raw.includes('images/')) {
-                        logoUrl = SB_IMG + raw.split('images/').pop();
-                    } else {
-                        logoUrl = SB_IMG + raw; // bare filename
-                    }
-                }
-                return {
-                    ...l,
-                    _source: 'sitebuild',
-                    logo: logoUrl,
-                    location: (l.location || '').replace(/, ?South Africa/gi, '').replace(/South Africa/gi, '').trim()
-                };
-            });
-        }
-
-        if (fvRes.status === 'fulfilled' && fvRes.value.ok) {
-            const fvData = await fvRes.value.json();
-            fvListings = (fvData.listings || []).map(l => ({ ...l, _source: 'forge-vertical' }));
-        }
-
-        // Merge: FV extras first (featured), then SB listings
-        // Deduplicate by id — FV version wins if same id exists in both
-        const fvIds = new Set(fvListings.map(l => l.id));
-        const merged = [...fvListings, ...sbListings.filter(l => !fvIds.has(l.id))];
-
-        allListings = merged;
         updateStats();
         updateCounts();
         filterListings();
@@ -372,7 +329,7 @@ async function init() {
 
     } catch (err) {
         document.getElementById('loading-state').innerHTML =
-            '<p class="mono text-xs" style="color:#f87171;">Could not load listings. Check your connection.</p>';
+            '<p class="mono text-xs" style="color:#f87171;">Could not load listings — ' + err.message + '</p>';
     }
 }
 
