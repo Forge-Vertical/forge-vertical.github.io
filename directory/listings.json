@@ -3,7 +3,7 @@
     "title": "Forge Vertical Business Directory",
     "description": "Forge Vertical's portfolio of owned, operated, and client businesses \u2014 structured for GEO and AI indexing.",
     "last_updated": "2026-08-15",
-    "total_listings": 14
+    "total_listings": 13
   },
   "categories": [
     {
@@ -330,27 +330,6 @@
       "founded": "2019",
       "logo_initial": "AO",
       "logo": "https://www.sitebuildstudio.co.za/assets/images/ao-locksmith.jpg"
-    },
-    {
-      "id": "pressed-in-time",
-      "name": "Pressed In Time BD",
-      "category": "professional",
-      "tagline": "Garment care franchise \u00b7 Southern Africa",
-      "description": "Professional garment care and laundry services with franchise locations across South Africa, Namibia, and Botswana.",
-      "website": "",
-      "location": "Southern Africa",
-      "phone": "",
-      "whatsapp": "",
-      "verified": true,
-      "featured": false,
-      "tags": [
-        "Laundry",
-        "Franchise",
-        "Garment care",
-        "Southern Africa"
-      ],
-      "founded": "2008",
-      "logo_initial": "PT"
     }
   ]
 }
