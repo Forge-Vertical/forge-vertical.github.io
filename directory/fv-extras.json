@@ -12,7 +12,13 @@
       "whatsapp": "27657417593",
       "verified": true,
       "featured": true,
-      "tags": ["Web development", "SaaS", "AI", "GEO", "Security"],
+      "tags": [
+        "Web development",
+        "SaaS",
+        "AI",
+        "GEO",
+        "Security"
+      ],
       "founded": "2020",
       "logo": "https://forge-vertical.github.io/assets/images/forge-logo.png",
       "logo_initial": "FV"
@@ -29,24 +35,35 @@
       "whatsapp": "",
       "verified": true,
       "featured": true,
-      "tags": ["Zero commission", "AI travel", "Africa", "BnB", "Guesthouse"],
+      "tags": [
+        "Zero commission",
+        "AI travel",
+        "Africa",
+        "BnB",
+        "Guesthouse"
+      ],
       "founded": "2025",
       "logo": "https://www.sitebuildstudio.co.za/directory/images/TRIPSPACEGLOBAL.webp",
       "logo_initial": "TG"
     },
     {
-      "id": "aurora-repair",
+      "id": "aurora",
       "name": "Aurora Repair",
       "category": "tech",
       "tagline": "AI-powered vehicle damage assessment",
-      "description": "An AI tool that turns photos of vehicle damage into an instant, itemised repair assessment — built in partnership with International Panel Shop.",
+      "description": "An AI tool that turns photos of vehicle damage into an instant, itemised repair assessment \u2014 built in partnership with International Panel Shop.",
       "website": "https://www.aurora-repair.com",
       "location": "Cape Town",
       "phone": "",
       "whatsapp": "",
       "verified": true,
       "featured": true,
-      "tags": ["AI assessment", "Insurance", "Panel beating", "Quotes"],
+      "tags": [
+        "AI assessment",
+        "Insurance",
+        "Panel beating",
+        "Quotes"
+      ],
       "founded": "2023",
       "logo": "https://www.sitebuildstudio.co.za/directory/images/aurora.png",
       "logo_initial": "AU"
@@ -56,14 +73,19 @@
       "name": "SiteBuild Studio",
       "category": "tech",
       "tagline": "Web design for Cape Town small businesses",
-      "description": "A Cape Town web design studio specialising in clean, affordable websites for local small businesses. Built on solid fundamentals — mobile-first, fast, and structured for search from day one.",
+      "description": "A Cape Town web design studio specialising in clean, affordable websites for local small businesses. Built on solid fundamentals \u2014 mobile-first, fast, and structured for search from day one.",
       "website": "https://www.sitebuildstudio.co.za",
       "location": "Cape Town",
       "phone": "+27 84 579 5239",
       "whatsapp": "27845795239",
       "verified": true,
       "featured": false,
-      "tags": ["Web design", "Small business", "Cape Town", "Affordable"],
+      "tags": [
+        "Web design",
+        "Small business",
+        "Cape Town",
+        "Affordable"
+      ],
       "founded": "2024",
       "logo": "https://www.sitebuildstudio.co.za/assets/images/SB-LOGO.png",
       "logo_initial": "SS"
@@ -73,7 +95,7 @@
       "name": "International Panel Shop",
       "category": "automotive",
       "tagline": "Cape Town collision repair specialists",
-      "description": "Panel beating and auto body repairs for all vehicle makes, from minor scratches to major collision and insurance work — over 20 years of experience.",
+      "description": "Panel beating and auto body repairs for all vehicle makes, from minor scratches to major collision and insurance work \u2014 over 20 years of experience.",
       "website": "https://www.intpanelshop.co.za",
       "location": "Goodwood, Cape Town",
       "address": "7 Bloem Street, Townsend Estate, Goodwood, Cape Town, 7460",
@@ -81,7 +103,12 @@
       "whatsapp": "27716871308",
       "verified": true,
       "featured": false,
-      "tags": ["Panel beating", "Spray painting", "Insurance repairs", "Cape Town"],
+      "tags": [
+        "Panel beating",
+        "Spray painting",
+        "Insurance repairs",
+        "Cape Town"
+      ],
       "founded": "2000",
       "logo": "https://www.sitebuildstudio.co.za/directory/images/IPS-LOGO.webp",
       "logo_initial": "IP"
@@ -91,14 +118,20 @@
       "name": "The Egypt Tour Specialists",
       "category": "hospitality",
       "tagline": "Award-winning guided tours of Egypt",
-      "description": "Led by Samer 'Sem Sem', winner of the Wanderlust World Guide Award 2016 — the first Middle Eastern guide to receive the gold. Bespoke day trips, tour packages, and private experiences across Egypt.",
+      "description": "Led by Samer 'Sem Sem', winner of the Wanderlust World Guide Award 2016 \u2014 the first Middle Eastern guide to receive the gold. Bespoke day trips, tour packages, and private experiences across Egypt.",
       "website": "https://theegypttourspecialists.co.uk",
       "location": "Cairo, Egypt",
       "phone": "+44 7476 719185",
       "whatsapp": "201224972209",
       "verified": true,
       "featured": false,
-      "tags": ["Egypt", "Tours", "Award-winning", "Day trips", "Egyptology"],
+      "tags": [
+        "Egypt",
+        "Tours",
+        "Award-winning",
+        "Day trips",
+        "Egyptology"
+      ],
       "founded": "2020",
       "logo": "https://theegypttourspecialists.co.uk/wp-content/uploads/2021/02/ETS-Logo-Final-1.png",
       "logo_initial": "ET"
@@ -107,7 +140,7 @@
       "id": "princess-vlei-lodge",
       "name": "Princess Vlei Lodge",
       "category": "hospitality",
-      "tagline": "Lakeside lodge · Cape Town",
+      "tagline": "Lakeside lodge \u00b7 Cape Town",
       "description": "Boutique lakeside lodge in Cape Town offering a tranquil retreat close to the city. Multiple units, perfect for short and extended stays.",
       "website": "https://tripspaceglobal.com",
       "location": "Cape Town",
@@ -115,7 +148,12 @@
       "whatsapp": "",
       "verified": true,
       "featured": false,
-      "tags": ["Lodge", "Lake", "Cape Town", "Boutique"],
+      "tags": [
+        "Lodge",
+        "Lake",
+        "Cape Town",
+        "Boutique"
+      ],
       "founded": "2010",
       "logo": "",
       "logo_initial": "PV"
@@ -133,7 +171,12 @@
       "whatsapp": "27655038871",
       "verified": true,
       "featured": false,
-      "tags": ["Rope access", "High-rise", "Waterproofing", "Window cleaning"],
+      "tags": [
+        "Rope access",
+        "High-rise",
+        "Waterproofing",
+        "Window cleaning"
+      ],
       "founded": "2015",
       "logo": "https://www.sitebuildstudio.co.za/directory/images/skyroplogo.png",
       "logo_initial": "SR"
@@ -150,7 +193,12 @@
       "whatsapp": "27736795182",
       "verified": true,
       "featured": false,
-      "tags": ["Mechanic", "Car repairs", "Diagnostics", "Cape Town"],
+      "tags": [
+        "Mechanic",
+        "Car repairs",
+        "Diagnostics",
+        "Cape Town"
+      ],
       "founded": "2018",
       "logo": "https://www.sitebuildstudio.co.za/directory/images/autods.webp",
       "logo_initial": "AD"
@@ -168,7 +216,12 @@
       "whatsapp": "",
       "verified": true,
       "featured": false,
-      "tags": ["Skills training", "Plumbing", "Nonprofit", "Cape Town"],
+      "tags": [
+        "Skills training",
+        "Plumbing",
+        "Nonprofit",
+        "Cape Town"
+      ],
       "founded": "2018",
       "logo": "https://www.sitebuildstudio.co.za/directory/images/preferred-logo-256x74.png",
       "logo_initial": "SE"
@@ -177,7 +230,7 @@
       "id": "scouts-for-kids",
       "name": "Scouts for Kids",
       "category": "nonprofit",
-      "tagline": "Youth development · Bonteheuwel",
+      "tagline": "Youth development \u00b7 Bonteheuwel",
       "description": "A Cape Town nonprofit working to keep youth off the streets through hiking, mentorship, and educational support for children in Bonteheuwel.",
       "website": "https://www.scoutsforkids.org",
       "location": "Bonteheuwel, Cape Town",
@@ -185,7 +238,12 @@
       "whatsapp": "27717990196",
       "verified": true,
       "featured": false,
-      "tags": ["Youth", "Nonprofit", "Mentorship", "Cape Town"],
+      "tags": [
+        "Youth",
+        "Nonprofit",
+        "Mentorship",
+        "Cape Town"
+      ],
       "founded": "2016",
       "logo": "https://www.sitebuildstudio.co.za/directory/images/scoutforkidslogo.png",
       "logo_initial": "SK"
@@ -203,7 +261,12 @@
       "whatsapp": "27727791046",
       "verified": true,
       "featured": false,
-      "tags": ["Bookkeeping", "Tax", "Accounting", "Small business"],
+      "tags": [
+        "Bookkeeping",
+        "Tax",
+        "Accounting",
+        "Small business"
+      ],
       "founded": "2015",
       "logo": "https://www.sitebuildstudio.co.za/assets/images/bookkeepers-logo-large-scaled.png",
       "logo_initial": "BK"
@@ -213,7 +276,7 @@
       "name": "AO Locksmith",
       "category": "trades",
       "tagline": "24/7 mobile car locksmith",
-      "description": "24/7 mobile car locksmith — car keys, lost keys, ignitions, and lockouts. Professional, certified, reliable service that comes to you.",
+      "description": "24/7 mobile car locksmith \u2014 car keys, lost keys, ignitions, and lockouts. Professional, certified, reliable service that comes to you.",
       "website": "",
       "location": "Kraaifontein, Cape Town",
       "address": "5th Avenue, Eikendal, Kraaifontein, 7570",
@@ -221,10 +284,37 @@
       "whatsapp": "27812099604",
       "verified": true,
       "featured": false,
-      "tags": ["Locksmith", "Car keys", "24/7", "Mobile"],
+      "tags": [
+        "Locksmith",
+        "Car keys",
+        "24/7",
+        "Mobile"
+      ],
       "founded": "2019",
       "logo": "https://www.sitebuildstudio.co.za/assets/images/ao-locksmith.jpg",
       "logo_initial": "AO"
+    },
+    {
+      "id": "sitebuild-studio-directory",
+      "name": "SiteBuild Studio",
+      "category": "tech",
+      "tagline": "Web design & business directory for Cape Town SMEs",
+      "description": "A Cape Town web design studio building clean, affordable websites for local small businesses \u2014 plus a growing business directory of verified Cape Town companies.",
+      "website": "https://www.sitebuildstudio.co.za",
+      "location": "Cape Town",
+      "phone": "+27 84 579 5239",
+      "whatsapp": "27845795239",
+      "verified": true,
+      "featured": false,
+      "tags": [
+        "Web design",
+        "Small business",
+        "Directory",
+        "Affordable"
+      ],
+      "founded": "2024",
+      "logo": "https://www.sitebuildstudio.co.za/assets/images/SB-LOGO.png",
+      "logo_initial": "SS"
     }
   ]
 }
