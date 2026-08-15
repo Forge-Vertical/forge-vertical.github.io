@@ -1,9 +1,9 @@
 {
   "meta": {
     "title": "Forge Vertical Business Directory",
-    "description": "A curated directory of Cape Town and South African businesses across tech, hospitality, automotive, and professional services.",
+    "description": "Forge Vertical's portfolio of owned, operated, and client businesses \u2014 structured for GEO and AI indexing.",
     "last_updated": "2026-08-15",
-    "total_listings": 8
+    "total_listings": 14
   },
   "categories": [
     {
@@ -27,21 +27,49 @@
       "color": "#a78bfa"
     },
     {
-      "id": "health",
-      "label": "Health & Wellness",
+      "id": "trades",
+      "label": "Trades & Maintenance",
       "color": "#f59e0b"
+    },
+    {
+      "id": "nonprofit",
+      "label": "Nonprofit & Community",
+      "color": "#f472b6"
     }
   ],
   "listings": [
     {
+      "id": "forge-vertical",
+      "name": "Forge Vertical",
+      "category": "tech",
+      "tagline": "Built for the future. From day one.",
+      "description": "Cape Town-based digital agency building websites, SaaS platforms, and AI integrations with security, SEO, GEO, and AEO built in from the first commit.",
+      "website": "https://www.forgevertical.com",
+      "location": "Cape Town, South Africa",
+      "phone": "+27 65 741 7593",
+      "whatsapp": "27657417593",
+      "verified": true,
+      "featured": true,
+      "tags": [
+        "Web development",
+        "SaaS",
+        "AI",
+        "GEO",
+        "Security"
+      ],
+      "founded": "2020",
+      "logo_initial": "FV"
+    },
+    {
       "id": "tripspace-global",
       "name": "TripSpace Global",
       "category": "hospitality",
-      "tagline": "Commission-free accommodation marketplace",
-      "description": "Africa-focused hospitality marketplace connecting travellers and hosts without the 15\u201325% OTA commission. Flat monthly fee. AI travel companion Aria built in.",
+      "tagline": "Commission-free travel marketplace",
+      "description": "A commission-free travel marketplace for accommodation, car rentals, safaris, and experiences. Hosts list for a flat monthly fee and keep 100% of every booking \u2014 no commission ever charged.",
       "website": "https://tripspaceglobal.com",
       "location": "Cape Town, South Africa",
-      "region": "Western Cape",
+      "phone": "",
+      "whatsapp": "",
       "verified": true,
       "featured": true,
       "tags": [
@@ -57,12 +85,13 @@
     {
       "id": "aurora-repair",
       "name": "Aurora Repair",
-      "category": "automotive",
+      "category": "tech",
       "tagline": "AI-powered vehicle damage assessment",
-      "description": "Intelligent vehicle damage assessment platform using AI to generate accurate repair quotes. Connects insurers and panel shops with real-time parts pricing.",
-      "website": "https://aurora-repair.com",
+      "description": "An AI tool that turns photos of vehicle damage into an instant, itemised repair assessment ready to submit to your insurer or panel shop \u2014 built in partnership with International Panel Shop.",
+      "website": "https://www.aurora-repair.com",
       "location": "Cape Town, South Africa",
-      "region": "Western Cape",
+      "phone": "",
+      "whatsapp": "",
       "verified": true,
       "featured": true,
       "tags": [
@@ -72,38 +101,83 @@
         "Quotes"
       ],
       "founded": "2023",
-      "logo_initial": "AR"
+      "logo_initial": "AU"
     },
     {
-      "id": "forge-vertical",
-      "name": "Forge Vertical",
+      "id": "sitebuild-studio",
+      "name": "SiteBuild Studio",
       "category": "tech",
-      "tagline": "Built for the future. From day one.",
-      "description": "Cape Town-based digital agency building websites, SaaS platforms, and AI integrations with security, SEO, GEO, and AEO built in from the first commit.",
-      "website": "https://www.forgevertical.com",
+      "tagline": "Web design for Cape Town small businesses",
+      "description": "A Cape Town web design studio specialising in clean, affordable websites for local small businesses. Built on solid fundamentals \u2014 mobile-first, fast, and structured for search from day one.",
+      "website": "https://www.sitebuildstudio.co.za",
       "location": "Cape Town, South Africa",
-      "region": "Western Cape",
+      "phone": "+27 84 579 5239",
+      "whatsapp": "27845795239",
       "verified": true,
-      "featured": true,
+      "featured": false,
       "tags": [
-        "Web development",
-        "SaaS",
-        "AI",
-        "GEO",
-        "Security"
+        "Web design",
+        "Small business",
+        "Cape Town",
+        "Affordable"
+      ],
+      "founded": "2024",
+      "logo_initial": "SS"
+    },
+    {
+      "id": "international-panel-shop",
+      "name": "International Panel Shop",
+      "category": "automotive",
+      "tagline": "Cape Town collision repair specialists",
+      "description": "Panel beating and auto body repairs for all vehicle makes, from minor scratches to major collision and insurance work \u2014 over 20 years of experience, with free vehicle collection on larger repairs.",
+      "website": "https://www.intpanelshop.co.za",
+      "location": "Goodwood, Cape Town",
+      "address": "7 Bloem Street, Townsend Estate, Goodwood, Cape Town, 7460",
+      "phone": "021 801 8007",
+      "whatsapp": "27716871308",
+      "verified": true,
+      "featured": false,
+      "tags": [
+        "Panel beating",
+        "Spray painting",
+        "Insurance repairs",
+        "Cape Town"
+      ],
+      "founded": "2000",
+      "logo_initial": "IP"
+    },
+    {
+      "id": "egypt-tour-specialists",
+      "name": "The Egypt Tour Specialists",
+      "category": "hospitality",
+      "tagline": "Award-winning guided tours of Egypt",
+      "description": "Led by Samer 'Sem Sem', winner of the Wanderlust World Guide Award 2016 \u2014 the first Middle Eastern guide to receive the gold. Bespoke day trips, tour packages, and private experiences across Egypt. Small groups, no third parties, community-based.",
+      "website": "https://theegypttourspecialists.co.uk",
+      "location": "Cairo, Egypt",
+      "phone": "+44 7476 719185",
+      "whatsapp": "201224972209",
+      "verified": true,
+      "featured": false,
+      "tags": [
+        "Egypt",
+        "Tours",
+        "Award-winning",
+        "Day trips",
+        "Egyptology"
       ],
       "founded": "2020",
-      "logo_initial": "FV"
+      "logo_initial": "ET"
     },
     {
       "id": "princess-vlei-lodge",
       "name": "Princess Vlei Lodge",
       "category": "hospitality",
       "tagline": "Lakeside lodge \u00b7 Cape Town",
-      "description": "Boutique lakeside lodge in Cape Town offering a tranquil retreat close to the city. Multiple units. Perfect for short and extended stays.",
+      "description": "Boutique lakeside lodge in Cape Town offering a tranquil retreat close to the city. Multiple units, perfect for short and extended stays.",
       "website": "https://tripspaceglobal.com",
       "location": "Cape Town, South Africa",
-      "region": "Western Cape",
+      "phone": "",
+      "whatsapp": "",
       "verified": true,
       "featured": false,
       "tags": [
@@ -116,24 +190,134 @@
       "logo_initial": "PV"
     },
     {
-      "id": "international-panel-shop",
-      "name": "International Panel Shop",
-      "category": "automotive",
-      "tagline": "Cape Town collision repair specialists",
-      "description": "Professional panel beating and spray painting in Cape Town. Insurance-approved repairs, dent removal, full vehicle restoration, and fleet services.",
-      "website": "https://intpanelshop.co.za",
-      "location": "Cape Town, South Africa",
-      "region": "Western Cape",
+      "id": "sky-rope-specialist",
+      "name": "Sky Rope Specialist",
+      "category": "trades",
+      "tagline": "Rope access & high-rise maintenance",
+      "description": "A rope access company with 9 years of industry experience, delivering high-rise window cleaning, painting, waterproofing, signage, and anchor testing to international safety standards.",
+      "website": "https://skyropespecialist.co.za",
+      "location": "Maitland, Cape Town",
+      "address": "19 Ferndale Drive, Maitland, Cape Town",
+      "phone": "065 503 8871",
+      "whatsapp": "27655038871",
       "verified": true,
       "featured": false,
       "tags": [
-        "Panel beating",
-        "Spray painting",
-        "Insurance repairs",
+        "Rope access",
+        "High-rise",
+        "Waterproofing",
+        "Window cleaning"
+      ],
+      "founded": "2015",
+      "logo_initial": "SR"
+    },
+    {
+      "id": "auto-digital-solutions",
+      "name": "Auto Digital Solutions",
+      "category": "automotive",
+      "tagline": "Mechanical car services & repairs",
+      "description": "Mechanical car services and repairs in Cape Town, from oil changes and diagnostics to full engine overhauls, with honest, transparent pricing and no hidden fees.",
+      "website": "https://autods.co.za",
+      "location": "Cape Town, South Africa",
+      "phone": "073 679 5182",
+      "whatsapp": "27736795182",
+      "verified": true,
+      "featured": false,
+      "tags": [
+        "Mechanic",
+        "Car repairs",
+        "Diagnostics",
         "Cape Town"
       ],
-      "founded": "1995",
-      "logo_initial": "IP"
+      "founded": "2018",
+      "logo_initial": "AD"
+    },
+    {
+      "id": "seriti-skills-development",
+      "name": "Seriti Skills Development PBO",
+      "category": "nonprofit",
+      "tagline": "Plumbing skills training & development",
+      "description": "A public benefit organisation offering plumbing maintenance and entrepreneurial skills training, helping individuals build employable trade skills and start their own plumbing businesses.",
+      "website": "https://www.seritipbo.org",
+      "location": "Milnerton, Cape Town",
+      "address": "34 Farnworth Street, Rugby, Milnerton, 7441",
+      "phone": "066 231 6778",
+      "whatsapp": "",
+      "verified": true,
+      "featured": false,
+      "tags": [
+        "Skills training",
+        "Plumbing",
+        "Nonprofit",
+        "Cape Town"
+      ],
+      "founded": "2018",
+      "logo_initial": "SE"
+    },
+    {
+      "id": "scouts-for-kids",
+      "name": "Scouts for Kids",
+      "category": "nonprofit",
+      "tagline": "Youth development \u00b7 Bonteheuwel",
+      "description": "A Cape Town nonprofit working to keep youth off the streets and away from gangs and drugs, through hiking, mentorship, and educational support for children in Bonteheuwel.",
+      "website": "https://www.scoutsforkids.org",
+      "location": "Bonteheuwel, Cape Town",
+      "phone": "",
+      "whatsapp": "27717990196",
+      "verified": true,
+      "featured": false,
+      "tags": [
+        "Youth",
+        "Nonprofit",
+        "Mentorship",
+        "Cape Town"
+      ],
+      "founded": "2016",
+      "logo_initial": "SK"
+    },
+    {
+      "id": "bookkeepers-cape-town",
+      "name": "Bookkeepers Cape Town",
+      "category": "professional",
+      "tagline": "Accounting & tax for small business",
+      "description": "A personalised accounting and tax consulting firm for small and medium businesses, offering bookkeeping, payroll, tax returns, and CIPC company secretarial services, built on long-term client relationships.",
+      "website": "https://bookkeepersincapetown.co.za",
+      "location": "Century City, Cape Town",
+      "address": "Unit 129, Millennium Business Park, Century City, 7441",
+      "phone": "021 525 9787",
+      "whatsapp": "27727791046",
+      "verified": true,
+      "featured": false,
+      "tags": [
+        "Bookkeeping",
+        "Tax",
+        "Accounting",
+        "Small business"
+      ],
+      "founded": "2015",
+      "logo_initial": "BK"
+    },
+    {
+      "id": "ao-locksmith",
+      "name": "AO Locksmith",
+      "category": "trades",
+      "tagline": "24/7 mobile car locksmith \u00b7 Cape Town",
+      "description": "24/7 mobile car locksmith serving Cape Town \u2014 car keys, lost keys, ignitions, and lockouts, with professional, certified, reliable service that comes to you.",
+      "website": "",
+      "location": "Kraaifontein, Cape Town",
+      "address": "5th Avenue, Eikendal, Kraaifontein, Cape Town, 7570",
+      "phone": "083 329 3860",
+      "whatsapp": "27812099604",
+      "verified": true,
+      "featured": false,
+      "tags": [
+        "Locksmith",
+        "Car keys",
+        "24/7",
+        "Mobile"
+      ],
+      "founded": "2019",
+      "logo_initial": "AO"
     },
     {
       "id": "pressed-in-time",
@@ -141,9 +325,10 @@
       "category": "professional",
       "tagline": "Garment care franchise \u00b7 Southern Africa",
       "description": "Professional garment care and laundry services with franchise locations across South Africa, Namibia, and Botswana.",
-      "website": "#",
+      "website": "",
       "location": "Southern Africa",
-      "region": "Multi-region",
+      "phone": "",
+      "whatsapp": "",
       "verified": true,
       "featured": false,
       "tags": [
@@ -154,48 +339,6 @@
       ],
       "founded": "2008",
       "logo_initial": "PT"
-    },
-    {
-      "id": "sitebuild-studio",
-      "name": "SiteBuild Studio",
-      "category": "tech",
-      "tagline": "Web design for Cape Town small businesses",
-      "description": "A Cape Town web design studio specialising in clean, affordable websites for local small businesses. Built on solid fundamentals \u2014 mobile-first, fast, and structured for search from day one.",
-      "website": "https://www.sitebuildstudio.co.za",
-      "location": "Cape Town, South Africa",
-      "region": "Western Cape",
-      "verified": true,
-      "featured": false,
-      "tags": [
-        "Web design",
-        "Small business",
-        "Cape Town",
-        "Affordable",
-        "Mobile-first"
-      ],
-      "founded": "2024",
-      "logo_initial": "SS"
-    },
-    {
-      "id": "egypt-tour-specialists",
-      "name": "The Egypt Tour Specialists",
-      "category": "hospitality",
-      "tagline": "Award-winning guided tours of Egypt",
-      "description": "Led by Samer 'Sem Sem', winner of the Wanderlust World Guide Award 2016 \u2014 the first Middle Eastern guide to receive the gold. Bespoke day trips, tour packages, and private experiences across Egypt. Small groups, no third parties, community-based.",
-      "website": "https://theegypttourspecialists.co.uk",
-      "location": "Cairo, Egypt (UK registered)",
-      "region": "Egypt / United Kingdom",
-      "verified": true,
-      "featured": false,
-      "tags": [
-        "Egypt",
-        "Tours",
-        "Award-winning",
-        "Day trips",
-        "Egyptology"
-      ],
-      "founded": "2020",
-      "logo_initial": "ET"
     }
   ]
 }
