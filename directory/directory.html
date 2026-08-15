@@ -81,15 +81,7 @@
         .stat-n { font-family: 'JetBrains Mono', monospace; font-size: 20px; font-weight: 700; color: var(--lime); }
         .stat-l { font-size: 11px; color: var(--muted2); margin-top: 2px; }
 
-        /* Source badge */
-        .source-badge {
-            display: inline-flex; align-items: center; gap: 6px;
-            font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 700;
-            text-transform: uppercase; letter-spacing: 0.12em;
-            padding: 3px 9px; border-radius: 4px; margin-bottom: 10px;
-        }
-        .source-fv { color: var(--lime); border: 1px solid rgba(132,204,22,0.25); background: rgba(132,204,22,0.06); }
-        .source-sb { color: #60a5fa; border: 1px solid rgba(96,165,250,0.25); background: rgba(96,165,250,0.06); }
+
 
         /* Main layout */
         #main { display: grid; grid-template-columns: 220px 1fr; min-height: 80vh; }
@@ -407,10 +399,7 @@ function renderListings(listings) {
         const color    = catColors[l.category] || '#84cc16';
         const rgb      = hexToRgb(color);
         const tags     = (l.tags || []).slice(0, 4).map(t => `<span class="card-tag">${t}</span>`).join('');
-        const isFV     = l._source === 'forge-vertical';
-        const srcBadge = isFV
-            ? `<span class="source-badge source-fv">Forge Vertical</span>`
-            : `<span class="source-badge source-sb">SiteBuild Studio</span>`;
+
         const featBadge = l.featured ? '<span class="featured-badge">Featured</span>' : '';
         const website   = l.website && l.website !== '' ? l.website : null;
 
@@ -429,7 +418,6 @@ function renderListings(listings) {
             class="listing-card ${l.featured ? 'featured' : ''}"
             style="${l.featured ? `border-color:rgba(${rgb},0.25)` : ''}">
             ${featBadge}
-            ${srcBadge}
             <div class="card-logo" style="background:rgba(${rgb},0.12);border:1px solid rgba(${rgb},0.2);">
                 ${logoHtml}
             </div>
