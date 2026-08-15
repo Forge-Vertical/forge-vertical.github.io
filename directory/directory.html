@@ -369,8 +369,11 @@ function renderListings(listings) {
             class="listing-card ${l.featured ? 'featured' : ''}" style="${l.featured ? `border-color:rgba(${hexToRgb(color)},0.25)` : ''}">
             ${featuredBadge}
             ${verifiedBadge}
-            <div class="card-logo" style="background:rgba(${hexToRgb(color)},0.12);border:1px solid rgba(${hexToRgb(color)},0.2);color:${color};">
-                ${l.logo_initial}
+            <div class="card-logo" style="background:rgba(${hexToRgb(color)},0.12);border:1px solid rgba(${hexToRgb(color)},0.2);overflow:hidden;padding:${l.logo ? '2px' : '0'};">
+                ${l.logo
+                    ? `<img src="${l.logo}" alt="${l.name} logo" style="width:100%;height:100%;object-fit:contain;border-radius:8px;" onerror="this.style.display='none';this.parentNode.style.color='${color}';this.parentNode.innerHTML='${l.logo_initial}'">`
+                    : `<span style="color:${color};font-size:13px;font-weight:700;">${l.logo_initial}</span>`
+                }
             </div>
             <div class="card-name">${l.name}</div>
             <div class="card-tagline">${l.tagline}</div>
