@@ -1,42 +1,11 @@
 {
   "meta": {
-    "title": "Forge Vertical Business Directory",
-    "description": "Forge Vertical's portfolio of owned, operated, and client businesses \u2014 structured for GEO and AI indexing.",
-    "last_updated": "2026-08-15",
-    "total_listings": 13
+    "total_listings": 23,
+    "sources": [
+      "forge-vertical",
+      "sitebuild-studio"
+    ]
   },
-  "categories": [
-    {
-      "id": "tech",
-      "label": "Technology & Digital",
-      "color": "#84cc16"
-    },
-    {
-      "id": "hospitality",
-      "label": "Hospitality & Travel",
-      "color": "#10b981"
-    },
-    {
-      "id": "automotive",
-      "label": "Automotive & Repair",
-      "color": "#60a5fa"
-    },
-    {
-      "id": "professional",
-      "label": "Professional Services",
-      "color": "#a78bfa"
-    },
-    {
-      "id": "trades",
-      "label": "Trades & Maintenance",
-      "color": "#f59e0b"
-    },
-    {
-      "id": "nonprofit",
-      "label": "Nonprofit & Community",
-      "color": "#f472b6"
-    }
-  ],
   "listings": [
     {
       "id": "forge-vertical",
@@ -45,7 +14,7 @@
       "tagline": "Built for the future. From day one.",
       "description": "Cape Town-based digital agency building websites, SaaS platforms, and AI integrations with security, SEO, GEO, and AEO built in from the first commit.",
       "website": "https://www.forgevertical.com",
-      "location": "Cape Town, South Africa",
+      "location": "Cape Town",
       "phone": "+27 65 741 7593",
       "whatsapp": "27657417593",
       "verified": true,
@@ -58,17 +27,18 @@
         "Security"
       ],
       "founded": "2020",
+      "logo": "https://forge-vertical.github.io/assets/images/forge-logo.png",
       "logo_initial": "FV",
-      "logo": "https://forge-vertical.github.io/assets/images/forge-logo.png"
+      "_source": "forge-vertical"
     },
     {
       "id": "tripspace-global",
       "name": "TripSpace Global",
       "category": "hospitality",
       "tagline": "Commission-free travel marketplace",
-      "description": "A commission-free travel marketplace for accommodation, car rentals, safaris, and experiences. Hosts list for a flat monthly fee and keep 100% of every booking \u2014 no commission ever charged.",
+      "description": "A commission-free travel marketplace for accommodation, car rentals, safaris, and experiences. Hosts list for a flat monthly fee and keep 100% of every booking.",
       "website": "https://tripspaceglobal.com",
-      "location": "Cape Town, South Africa",
+      "location": "Cape Town",
       "phone": "",
       "whatsapp": "",
       "verified": true,
@@ -81,17 +51,18 @@
         "Guesthouse"
       ],
       "founded": "2025",
+      "logo": "https://www.sitebuildstudio.co.za/directory/images/TRIPSPACEGLOBAL.webp",
       "logo_initial": "TG",
-      "logo": "https://www.sitebuildstudio.co.za/directory/images/TRIPSPACEGLOBAL.webp"
+      "_source": "forge-vertical"
     },
     {
       "id": "aurora-repair",
       "name": "Aurora Repair",
       "category": "tech",
       "tagline": "AI-powered vehicle damage assessment",
-      "description": "An AI tool that turns photos of vehicle damage into an instant, itemised repair assessment ready to submit to your insurer or panel shop \u2014 built in partnership with International Panel Shop.",
+      "description": "An AI tool that turns photos of vehicle damage into an instant, itemised repair assessment \u2014 built in partnership with International Panel Shop.",
       "website": "https://www.aurora-repair.com",
-      "location": "Cape Town, South Africa",
+      "location": "Cape Town",
       "phone": "",
       "whatsapp": "",
       "verified": true,
@@ -103,8 +74,9 @@
         "Quotes"
       ],
       "founded": "2023",
+      "logo": "https://www.sitebuildstudio.co.za/directory/images/aurora.png",
       "logo_initial": "AU",
-      "logo": "https://www.sitebuildstudio.co.za/directory/images/aurora.png"
+      "_source": "forge-vertical"
     },
     {
       "id": "sitebuild-studio",
@@ -113,7 +85,7 @@
       "tagline": "Web design for Cape Town small businesses",
       "description": "A Cape Town web design studio specialising in clean, affordable websites for local small businesses. Built on solid fundamentals \u2014 mobile-first, fast, and structured for search from day one.",
       "website": "https://www.sitebuildstudio.co.za",
-      "location": "Cape Town, South Africa",
+      "location": "Cape Town",
       "phone": "+27 84 579 5239",
       "whatsapp": "27845795239",
       "verified": true,
@@ -125,15 +97,16 @@
         "Affordable"
       ],
       "founded": "2024",
+      "logo": "https://www.sitebuildstudio.co.za/assets/images/SB-LOGO.png",
       "logo_initial": "SS",
-      "logo": "https://www.sitebuildstudio.co.za/assets/images/SB-LOGO.png"
+      "_source": "forge-vertical"
     },
     {
       "id": "international-panel-shop",
       "name": "International Panel Shop",
       "category": "automotive",
       "tagline": "Cape Town collision repair specialists",
-      "description": "Panel beating and auto body repairs for all vehicle makes, from minor scratches to major collision and insurance work \u2014 over 20 years of experience, with free vehicle collection on larger repairs.",
+      "description": "Panel beating and auto body repairs for all vehicle makes, from minor scratches to major collision and insurance work \u2014 over 20 years of experience.",
       "website": "https://www.intpanelshop.co.za",
       "location": "Goodwood, Cape Town",
       "address": "7 Bloem Street, Townsend Estate, Goodwood, Cape Town, 7460",
@@ -148,15 +121,16 @@
         "Cape Town"
       ],
       "founded": "2000",
+      "logo": "https://www.sitebuildstudio.co.za/directory/images/IPS-LOGO.webp",
       "logo_initial": "IP",
-      "logo": "https://www.sitebuildstudio.co.za/directory/images/IPS-LOGO.webp"
+      "_source": "forge-vertical"
     },
     {
       "id": "egypt-tour-specialists",
       "name": "The Egypt Tour Specialists",
       "category": "hospitality",
       "tagline": "Award-winning guided tours of Egypt",
-      "description": "Led by Samer 'Sem Sem', winner of the Wanderlust World Guide Award 2016 \u2014 the first Middle Eastern guide to receive the gold. Bespoke day trips, tour packages, and private experiences across Egypt. Small groups, no third parties, community-based.",
+      "description": "Led by Samer 'Sem Sem', winner of the Wanderlust World Guide Award 2016 \u2014 the first Middle Eastern guide to receive the gold. Bespoke day trips, tour packages, and private experiences across Egypt.",
       "website": "https://theegypttourspecialists.co.uk",
       "location": "Cairo, Egypt",
       "phone": "+44 7476 719185",
@@ -171,8 +145,9 @@
         "Egyptology"
       ],
       "founded": "2020",
+      "logo": "https://theegypttourspecialists.co.uk/wp-content/uploads/2021/02/ETS-Logo-Final-1.png",
       "logo_initial": "ET",
-      "logo": "https://theegypttourspecialists.co.uk/wp-content/uploads/2021/02/ETS-Logo-Final-1.png"
+      "_source": "forge-vertical"
     },
     {
       "id": "princess-vlei-lodge",
@@ -181,7 +156,7 @@
       "tagline": "Lakeside lodge \u00b7 Cape Town",
       "description": "Boutique lakeside lodge in Cape Town offering a tranquil retreat close to the city. Multiple units, perfect for short and extended stays.",
       "website": "https://tripspaceglobal.com",
-      "location": "Cape Town, South Africa",
+      "location": "Cape Town",
       "phone": "",
       "whatsapp": "",
       "verified": true,
@@ -193,7 +168,9 @@
         "Boutique"
       ],
       "founded": "2010",
-      "logo_initial": "PV"
+      "logo": "",
+      "logo_initial": "PV",
+      "_source": "forge-vertical"
     },
     {
       "id": "sky-rope-specialist",
@@ -215,17 +192,18 @@
         "Window cleaning"
       ],
       "founded": "2015",
+      "logo": "https://www.sitebuildstudio.co.za/directory/images/skyroplogo.png",
       "logo_initial": "SR",
-      "logo": "https://www.sitebuildstudio.co.za/directory/images/skyroplogo.png"
+      "_source": "forge-vertical"
     },
     {
       "id": "auto-digital-solutions",
       "name": "Auto Digital Solutions",
       "category": "automotive",
       "tagline": "Mechanical car services & repairs",
-      "description": "Mechanical car services and repairs in Cape Town, from oil changes and diagnostics to full engine overhauls, with honest, transparent pricing and no hidden fees.",
+      "description": "Mechanical car services and repairs, from oil changes and diagnostics to full engine overhauls, with honest, transparent pricing and no hidden fees.",
       "website": "https://autods.co.za",
-      "location": "Cape Town, South Africa",
+      "location": "Cape Town",
       "phone": "073 679 5182",
       "whatsapp": "27736795182",
       "verified": true,
@@ -237,15 +215,16 @@
         "Cape Town"
       ],
       "founded": "2018",
+      "logo": "https://www.sitebuildstudio.co.za/directory/images/autods.webp",
       "logo_initial": "AD",
-      "logo": "https://www.sitebuildstudio.co.za/directory/images/autods.webp"
+      "_source": "forge-vertical"
     },
     {
       "id": "seriti-skills-development",
       "name": "Seriti Skills Development PBO",
       "category": "nonprofit",
       "tagline": "Plumbing skills training & development",
-      "description": "A public benefit organisation offering plumbing maintenance and entrepreneurial skills training, helping individuals build employable trade skills and start their own plumbing businesses.",
+      "description": "A public benefit organisation offering plumbing maintenance and entrepreneurial skills training, helping individuals build employable trade skills and start their own businesses.",
       "website": "https://www.seritipbo.org",
       "location": "Milnerton, Cape Town",
       "address": "34 Farnworth Street, Rugby, Milnerton, 7441",
@@ -260,15 +239,16 @@
         "Cape Town"
       ],
       "founded": "2018",
+      "logo": "https://www.sitebuildstudio.co.za/directory/images/preferred-logo-256x74.png",
       "logo_initial": "SE",
-      "logo": "https://www.sitebuildstudio.co.za/directory/images/preferred-logo-256x74.png"
+      "_source": "forge-vertical"
     },
     {
       "id": "scouts-for-kids",
       "name": "Scouts for Kids",
       "category": "nonprofit",
       "tagline": "Youth development \u00b7 Bonteheuwel",
-      "description": "A Cape Town nonprofit working to keep youth off the streets and away from gangs and drugs, through hiking, mentorship, and educational support for children in Bonteheuwel.",
+      "description": "A Cape Town nonprofit working to keep youth off the streets through hiking, mentorship, and educational support for children in Bonteheuwel.",
       "website": "https://www.scoutsforkids.org",
       "location": "Bonteheuwel, Cape Town",
       "phone": "",
@@ -282,15 +262,16 @@
         "Cape Town"
       ],
       "founded": "2016",
+      "logo": "https://www.sitebuildstudio.co.za/directory/images/scoutforkidslogo.png",
       "logo_initial": "SK",
-      "logo": "https://www.sitebuildstudio.co.za/directory/images/scoutforkidslogo.png"
+      "_source": "forge-vertical"
     },
     {
       "id": "bookkeepers-cape-town",
       "name": "Bookkeepers Cape Town",
       "category": "professional",
       "tagline": "Accounting & tax for small business",
-      "description": "A personalised accounting and tax consulting firm for small and medium businesses, offering bookkeeping, payroll, tax returns, and CIPC company secretarial services, built on long-term client relationships.",
+      "description": "A personalised accounting and tax consulting firm for small and medium businesses, offering bookkeeping, payroll, tax returns, and CIPC company secretarial services.",
       "website": "https://bookkeepersincapetown.co.za",
       "location": "Century City, Cape Town",
       "address": "Unit 129, Millennium Business Park, Century City, 7441",
@@ -305,18 +286,19 @@
         "Small business"
       ],
       "founded": "2015",
+      "logo": "https://www.sitebuildstudio.co.za/assets/images/bookkeepers-logo-large-scaled.png",
       "logo_initial": "BK",
-      "logo": "https://www.sitebuildstudio.co.za/assets/images/bookkeepers-logo-large-scaled.png"
+      "_source": "forge-vertical"
     },
     {
       "id": "ao-locksmith",
       "name": "AO Locksmith",
       "category": "trades",
-      "tagline": "24/7 mobile car locksmith \u00b7 Cape Town",
-      "description": "24/7 mobile car locksmith serving Cape Town \u2014 car keys, lost keys, ignitions, and lockouts, with professional, certified, reliable service that comes to you.",
+      "tagline": "24/7 mobile car locksmith",
+      "description": "24/7 mobile car locksmith \u2014 car keys, lost keys, ignitions, and lockouts. Professional, certified, reliable service that comes to you.",
       "website": "",
       "location": "Kraaifontein, Cape Town",
-      "address": "5th Avenue, Eikendal, Kraaifontein, Cape Town, 7570",
+      "address": "5th Avenue, Eikendal, Kraaifontein, 7570",
       "phone": "083 329 3860",
       "whatsapp": "27812099604",
       "verified": true,
@@ -328,8 +310,189 @@
         "Mobile"
       ],
       "founded": "2019",
+      "logo": "https://www.sitebuildstudio.co.za/assets/images/ao-locksmith.jpg",
       "logo_initial": "AO",
-      "logo": "https://www.sitebuildstudio.co.za/assets/images/ao-locksmith.jpg"
+      "_source": "forge-vertical"
+    },
+    {
+      "id": "aurora",
+      "name": "AURORA",
+      "category": "AI Vehicle Damage Assessment",
+      "location": "Cape Town",
+      "address": "",
+      "phone": "",
+      "whatsapp": "",
+      "description": "An AI tool that turns photos of vehicle damage into an instant, itemised repair assessment ready to submit to your insurer or panel shop \u2014 built in partnership with International Panel Shop.",
+      "logo": "https://www.sitebuildstudio.co.za/directory/images/aurora.png",
+      "website": "https://www.aurora-repair.com",
+      "_source": "sitebuild",
+      "tagline": "An AI tool that turns photos of vehicle damage into an insta",
+      "verified": true,
+      "featured": false,
+      "tags": [],
+      "logo_initial": "AU"
+    },
+    {
+      "id": "b-glamerous-belhar",
+      "name": "B-Glamerous Hair & Beauty Salon \u2014 Belhar",
+      "category": "Hair & Beauty Salon",
+      "location": "Belhar, Cape Town",
+      "address": "31 Keurboom Street, Old Belhar",
+      "phone": "062 251 5237",
+      "whatsapp": "064 311 9618",
+      "description": "A hair and beauty salon in Old Belhar, offering the full range of hair and beauty treatments. Ask for Monray or Brichard.",
+      "logo": "https://www.sitebuildstudio.co.za/assets/images/bglamerous.jpeg",
+      "website": "",
+      "_source": "sitebuild",
+      "tagline": "A hair and beauty salon in Old Belhar, offering the full ran",
+      "verified": true,
+      "featured": false,
+      "tags": [],
+      "logo_initial": "B-"
+    },
+    {
+      "id": "b-glamerous-parow-valley",
+      "name": "B-Glamerous Hair & Beauty Salon \u2014 Parow Valley",
+      "category": "Hair & Beauty Salon",
+      "location": "Parow Valley, Cape Town",
+      "address": "42 Prinsloo Street, Parow Valley",
+      "phone": "062 251 5237",
+      "whatsapp": "064 311 9618",
+      "description": "The Parow Valley branch of B-Glamerous Hair & Beauty Salon.",
+      "logo": "https://www.sitebuildstudio.co.za/assets/images/bglamerous.jpeg",
+      "website": "",
+      "_source": "sitebuild",
+      "tagline": "The Parow Valley branch of B-Glamerous Hair & Beauty Salon.",
+      "verified": true,
+      "featured": false,
+      "tags": [],
+      "logo_initial": "B-"
+    },
+    {
+      "id": "douglas-cleaning-services",
+      "name": "Douglas Cleaning Services",
+      "category": "Cleaning Services",
+      "location": "Cape Town",
+      "address": "",
+      "phone": "074 374 1208",
+      "whatsapp": "074 374 1208",
+      "description": "Residential and commercial cleaning services in Cape Town.",
+      "logo": "https://www.sitebuildstudio.co.za/assets/images/douglas-cleaning-services.jpg",
+      "website": "",
+      "_source": "sitebuild",
+      "tagline": "Residential and commercial cleaning services in Cape Town.",
+      "verified": true,
+      "featured": false,
+      "tags": [],
+      "logo_initial": "DO"
+    },
+    {
+      "id": "martins-electricals",
+      "name": "Martins Electricals",
+      "category": "Electrician & Handyman",
+      "location": "Cape Town",
+      "address": "",
+      "phone": "067 280 0732",
+      "whatsapp": "067 280 0732",
+      "description": "Household electrical wiring, general electrical repairs, and handyman services in Cape Town.",
+      "logo": "https://www.sitebuildstudio.co.za/assets/images/martins-electricals.png",
+      "website": "",
+      "_source": "sitebuild",
+      "tagline": "Household electrical wiring, general electrical repairs, and",
+      "verified": true,
+      "featured": false,
+      "tags": [],
+      "logo_initial": "MA"
+    },
+    {
+      "id": "one-days-plumbing-services",
+      "name": "One Day's Plumbing Services",
+      "category": "Plumber",
+      "location": "Cape Town",
+      "address": "",
+      "phone": "065 327 0980",
+      "whatsapp": "065 327 0980",
+      "description": "General plumbing services and repairs in Cape Town.",
+      "logo": "https://www.sitebuildstudio.co.za/assets/images/one-days-plumbing-services.jpg",
+      "website": "",
+      "_source": "sitebuild",
+      "tagline": "General plumbing services and repairs in Cape Town.",
+      "verified": true,
+      "featured": false,
+      "tags": [],
+      "logo_initial": "ON"
+    },
+    {
+      "id": "pj-maintenance",
+      "name": "PJ Maintenance",
+      "category": "Home Maintenance & Renovations",
+      "location": "Cape Town",
+      "address": "",
+      "phone": "064 549 4296",
+      "whatsapp": "064 549 4296",
+      "description": "General home maintenance and renovations across the Western Cape \u2014 painting, plumbing, roofing, ceilings, kitchen cupboards, decking, paving, and tiling, with over 10 years of experience.",
+      "logo": "https://www.sitebuildstudio.co.za/assets/images/421e3dfb-81dd-4ab6-be37-5c61558094fd.jpg",
+      "website": "https://pj2maintainall.wixsite.com/pj-maintenance",
+      "_source": "sitebuild",
+      "tagline": "General home maintenance and renovations across the Western ",
+      "verified": true,
+      "featured": false,
+      "tags": [],
+      "logo_initial": "PJ"
+    },
+    {
+      "id": "cameo-hair-and-beauty",
+      "name": "Cameo Hair and Beauty",
+      "category": "Hair & Beauty Salon",
+      "location": "Milnerton, Cape Town",
+      "address": "Shop 2, Ascot Centre, Yarrow Road, Milnerton",
+      "phone": "",
+      "whatsapp": "061 473 1681",
+      "description": "A ladies' and gents' hair and beauty salon in Milnerton, offering a full range of hair and beauty treatments.",
+      "logo": "https://www.sitebuildstudio.co.za/assets/images/cameohairsalon.jpg",
+      "website": "",
+      "_source": "sitebuild",
+      "tagline": "A ladies' and gents' hair and beauty salon in Milnerton, off",
+      "verified": true,
+      "featured": false,
+      "tags": [],
+      "logo_initial": "CA"
+    },
+    {
+      "id": "forge-vertical-security",
+      "name": "Forge Vertical \u2014 Security Intelligence",
+      "category": "Cybersecurity & Security Research",
+      "location": "Cape Town",
+      "address": "",
+      "phone": "",
+      "whatsapp": "",
+      "description": "Independent security research specialising in SDLC logic flaws, authentication bypasses, and business logic vulnerabilities across enterprise and SaaS infrastructure \u2014 PoC-backed findings only, active on HackerOne and YesWeHack.",
+      "logo": "https://raw.githubusercontent.com/Forge-Vertical/forge-vertical.github.io/main/favicon.png",
+      "website": "https://www.forgevertical.com/security-intelligence.html",
+      "_source": "sitebuild",
+      "tagline": "Independent security research specialising in SDLC logic fla",
+      "verified": true,
+      "featured": false,
+      "tags": [],
+      "logo_initial": "FO"
+    },
+    {
+      "id": "webway-host",
+      "name": "Webway Host",
+      "category": "Web Hosting & VPS",
+      "location": "",
+      "address": "",
+      "phone": "",
+      "whatsapp": "",
+      "description": "South African web hosting provider offering shared hosting, reseller hosting, VPS and cloud hosting, domain registration, and cloud backup, hosted in a redundant local datacenter.",
+      "logo": "https://www.sitebuildstudio.co.za/assets/images/webwaylogo.png",
+      "website": "https://portal.webway.host/aff.php?aff=353",
+      "_source": "sitebuild",
+      "tagline": "South African web hosting provider offering shared hosting, ",
+      "verified": true,
+      "featured": false,
+      "tags": [],
+      "logo_initial": "WE"
     }
   ]
 }
