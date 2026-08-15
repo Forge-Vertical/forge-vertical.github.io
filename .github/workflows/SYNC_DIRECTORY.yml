@@ -1,0 +1,101 @@
+# ─────────────────────────────────────────────────────────────────
+# SYNC_DIRECTORY.yml
+# Runs daily at 2am UTC + on every push to main
+# Fetches SiteBuild Studio listings, merges FV extras, commits
+# combined file as directory/listings.json
+# ─────────────────────────────────────────────────────────────────
+name: Sync Business Directory
+
+on:
+  schedule:
+    - cron: '0 2 * * *'   # Daily at 2am UTC
+  push:
+    branches: [main]
+    paths:
+      - 'directory/fv-extras.json'   # Also runs when you add FV listings
+  workflow_dispatch:                  # Manual trigger from Actions tab
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Fetch SiteBuild Studio listings
+        run: |
+          curl -s "https://www.sitebuildstudio.co.za/directory/listings.json" \
+            -o /tmp/sb-listings.json
+          echo "SiteBuild listings fetched:"
+          python3 -c "import json; d=json.load(open('/tmp/sb-listings.json')); print(f'  {len(d[\"listings\"])} listings')"
+
+      - name: Merge and write combined listings
+        run: |
+          python3 << 'PYEOF'
+          import json
+
+          SB_IMG    = "https://www.sitebuildstudio.co.za/directory/images/"
+          SB_ASSETS = "https://www.sitebuildstudio.co.za/assets/images/"
+
+          # Load SiteBuild Studio source
+          with open('/tmp/sb-listings.json') as f:
+              sb_data = json.load(f)
+
+          # Normalise SB listings — fix logo paths, strip SA from location
+          def fix_logo(raw):
+              if not raw:
+                  return ""
+              if raw.startswith("http"):
+                  return raw
+              if "assets/images/" in raw:
+                  return SB_ASSETS + raw.split("assets/images/")[-1]
+              if "images/" in raw:
+                  return SB_IMG + raw.split("images/")[-1]
+              return SB_IMG + raw
+
+          def fix_location(loc):
+              import re
+              return re.sub(r',?\s*South Africa', '', loc or '').strip()
+
+          sb_listings = [
+              {**l, "_source": "sitebuild", "logo": fix_logo(l.get("logo","")), "location": fix_location(l.get("location",""))}
+              for l in sb_data.get("listings", [])
+          ]
+
+          # Load FV extras
+          with open('directory/fv-extras.json') as f:
+              fv_data = json.load(f)
+
+          fv_listings = [{**l, "_source": l.get("_source","forge-vertical")} for l in fv_data.get("listings", [])]
+
+          # Merge — FV wins on duplicate IDs
+          fv_ids = {l["id"] for l in fv_listings}
+          merged = fv_listings + [l for l in sb_listings if l["id"] not in fv_ids]
+
+          output = {
+              "meta": {
+                  "total_listings": len(merged),
+                  "last_synced": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
+                  "sources": ["forge-vertical", "sitebuild-studio"]
+              },
+              "listings": merged
+          }
+
+          with open('directory/listings.json', 'w') as f:
+              json.dump(output, f, indent=2)
+
+          print(f"Combined: {len(merged)} listings written to directory/listings.json")
+          PYEOF
+
+      - name: Commit if changed
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add directory/listings.json
+          if git diff --staged --quiet; then
+            echo "No changes — listings already up to date"
+          else
+            git commit -m "sync: update directory listings [$(date -u +%Y-%m-%d)]"
+            git push
+          fi
