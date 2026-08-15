@@ -1,36 +1,12 @@
 {
   "meta": {
-    "total_listings": 23,
+    "total_listings": 21,
     "sources": [
       "forge-vertical",
       "sitebuild-studio"
     ]
   },
   "listings": [
-    {
-      "id": "forge-vertical",
-      "name": "Forge Vertical",
-      "category": "tech",
-      "tagline": "Built for the future. From day one.",
-      "description": "Cape Town-based digital agency building websites, SaaS platforms, and AI integrations with security, SEO, GEO, and AEO built in from the first commit.",
-      "website": "https://www.forgevertical.com",
-      "location": "Cape Town",
-      "phone": "+27 65 741 7593",
-      "whatsapp": "27657417593",
-      "verified": true,
-      "featured": true,
-      "tags": [
-        "Web development",
-        "SaaS",
-        "AI",
-        "GEO",
-        "Security"
-      ],
-      "founded": "2020",
-      "logo": "https://forge-vertical.github.io/assets/images/forge-logo.png",
-      "logo_initial": "FV",
-      "_source": "forge-vertical"
-    },
     {
       "id": "tripspace-global",
       "name": "TripSpace Global",
@@ -82,8 +58,8 @@
       "id": "sitebuild-studio",
       "name": "SiteBuild Studio",
       "category": "tech",
-      "tagline": "Web design for Cape Town small businesses",
-      "description": "A Cape Town web design studio specialising in clean, affordable websites for local small businesses. Built on solid fundamentals \u2014 mobile-first, fast, and structured for search from day one.",
+      "tagline": "Web design for small businesses",
+      "description": "A web design studio building clean, affordable websites for small businesses. Custom-coded from scratch \u2014 no templates. Mobile-first, SEO-ready, and structured for search from day one.",
       "website": "https://www.sitebuildstudio.co.za",
       "location": "Cape Town",
       "phone": "+27 84 579 5239",
@@ -168,7 +144,7 @@
         "Boutique"
       ],
       "founded": "2010",
-      "logo": "",
+      "logo": "https://raw.githubusercontent.com/Test-Space-Global/princessvleilodge/main/assets/images/logo2.png",
       "logo_initial": "PV",
       "_source": "forge-vertical"
     },
@@ -312,29 +288,6 @@
       "founded": "2019",
       "logo": "https://www.sitebuildstudio.co.za/assets/images/ao-locksmith.jpg",
       "logo_initial": "AO",
-      "_source": "forge-vertical"
-    },
-    {
-      "id": "sitebuild-studio-directory",
-      "name": "SiteBuild Studio",
-      "category": "tech",
-      "tagline": "Web design & business directory for Cape Town SMEs",
-      "description": "A Cape Town web design studio building clean, affordable websites for local small businesses \u2014 plus a growing business directory of verified Cape Town companies.",
-      "website": "https://www.sitebuildstudio.co.za",
-      "location": "Cape Town",
-      "phone": "+27 84 579 5239",
-      "whatsapp": "27845795239",
-      "verified": true,
-      "featured": false,
-      "tags": [
-        "Web design",
-        "Small business",
-        "Directory",
-        "Affordable"
-      ],
-      "founded": "2024",
-      "logo": "https://www.sitebuildstudio.co.za/assets/images/SB-LOGO.png",
-      "logo_initial": "SS",
       "_source": "forge-vertical"
     },
     {
