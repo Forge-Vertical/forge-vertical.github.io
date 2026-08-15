@@ -372,8 +372,7 @@ function filterListings() {
             (l.tags || []).some(t => t.toLowerCase().includes(term));
         const verMatch  = !onlyVer  || l.verified;
         const featMatch = !onlyFeat || l.featured;
-        const fvMatch   = !onlyFV   || l._source === 'forge-vertical';
-        return catMatch && termMatch && verMatch && featMatch && fvMatch;
+        return catMatch && termMatch && verMatch && featMatch;
     });
 
     filtered = sortArr(filtered);
