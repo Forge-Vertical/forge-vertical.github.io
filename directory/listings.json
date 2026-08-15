@@ -3,7 +3,7 @@
     "title": "Forge Vertical Business Directory",
     "description": "A curated directory of Cape Town and South African businesses across tech, hospitality, automotive, and professional services.",
     "last_updated": "2026-08-15",
-    "total_listings": 7
+    "total_listings": 8
   },
   "categories": [
     {
@@ -159,21 +159,43 @@
       "id": "sitebuild-studio",
       "name": "SiteBuild Studio",
       "category": "tech",
-      "tagline": "AI-generated websites for small businesses",
-      "description": "Affordable website generation for Cape Town small businesses. Fill in your details, pay once, get a complete responsive website built by Gemini 2.5 Flash.",
-      "website": "https://www.forgevertical.com/tools/sitebuild-intake.html",
+      "tagline": "Web design for Cape Town small businesses",
+      "description": "A Cape Town web design studio specialising in clean, affordable websites for local small businesses. Built on solid fundamentals \u2014 mobile-first, fast, and structured for search from day one.",
+      "website": "https://www.sitebuildstudio.co.za",
       "location": "Cape Town, South Africa",
       "region": "Western Cape",
       "verified": true,
       "featured": false,
       "tags": [
-        "Websites",
-        "AI",
+        "Web design",
         "Small business",
-        "Affordable"
+        "Cape Town",
+        "Affordable",
+        "Mobile-first"
       ],
-      "founded": "2026",
+      "founded": "2024",
       "logo_initial": "SS"
+    },
+    {
+      "id": "egypt-tour-specialists",
+      "name": "The Egypt Tour Specialists",
+      "category": "hospitality",
+      "tagline": "Award-winning guided tours of Egypt",
+      "description": "Led by Samer 'Sem Sem', winner of the Wanderlust World Guide Award 2016 \u2014 the first Middle Eastern guide to receive the gold. Bespoke day trips, tour packages, and private experiences across Egypt. Small groups, no third parties, community-based.",
+      "website": "https://theegypttourspecialists.co.uk",
+      "location": "Cairo, Egypt (UK registered)",
+      "region": "Egypt / United Kingdom",
+      "verified": true,
+      "featured": false,
+      "tags": [
+        "Egypt",
+        "Tours",
+        "Award-winning",
+        "Day trips",
+        "Egyptology"
+      ],
+      "founded": "2020",
+      "logo_initial": "ET"
     }
   ]
 }
