@@ -53,18 +53,44 @@ jobs:
           def fix_location(loc):
               return re.sub(r',?\s*South Africa', '', loc or '').strip()
 
+          # Map SiteBuild Studio long category strings to short IDs
+          CAT_MAP = {
+              "travel & accommodation": "hospitality",
+              "hospitality": "hospitality",
+              "autobody shop": "automotive",
+              "auto mechanic": "automotive",
+              "automotive locksmith": "automotive",
+              "rope access & high-rise maintenance": "trades",
+              "home maintenance & renovations": "trades",
+              "cleaning services": "trades",
+              "electrician & handyman": "trades",
+              "plumber": "trades",
+              "nonprofit & skills development": "nonprofit",
+              "nonprofit & youth development": "nonprofit",
+              "bookkeeping & accounting": "professional",
+              "hair & beauty salon": "professional",
+              "ai vehicle damage assessment": "tech",
+              "cybersecurity & security research": "tech",
+              "web hosting & vps": "tech",
+              "technology": "tech",
+          }
+
+          def map_category(cat):
+              return CAT_MAP.get((cat or "").lower(), cat.lower().split(" & ")[0][:12])
+
           def normalise(l, source):
+              cat = l.get("category", "")
               return {
                   **l,
                   "_source": source,
                   "logo": fix_logo(l.get("logo", "")),
                   "location": fix_location(l.get("location", "")),
-                  # Map SiteBuild fields to directory fields
-                  "tagline": l.get("tagline", l.get("description", "")[:60]),
+                  "category": map_category(cat),
+                  "tagline": l.get("tagline", (l.get("description", "")[:80] + "...") if len(l.get("description","")) > 80 else l.get("description","")),
                   "verified": l.get("verified", True),
                   "featured": l.get("featured", False),
-                  "tags": l.get("tags", []),
-                  "logo_initial": l.get("logo_initial", l.get("name","??")[:2].upper()),
+                  "tags": l.get("tags", [cat] if cat else []),
+                  "logo_initial": l.get("logo_initial", (l.get("name","??")[:2].upper())),
               }
 
           # Load SiteBuild Studio — key is "businesses"
