@@ -56,7 +56,7 @@
       "_source": "forge-vertical"
     },
     {
-      "id": "aurora-repair",
+      "id": "aurora",
       "name": "Aurora Repair",
       "category": "tech",
       "tagline": "AI-powered vehicle damage assessment",
@@ -315,27 +315,32 @@
       "_source": "forge-vertical"
     },
     {
-      "id": "aurora",
-      "name": "AURORA",
-      "category": "AI Vehicle Damage Assessment",
+      "id": "sitebuild-studio-directory",
+      "name": "SiteBuild Studio",
+      "category": "tech",
+      "tagline": "Web design & business directory for Cape Town SMEs",
+      "description": "A Cape Town web design studio building clean, affordable websites for local small businesses \u2014 plus a growing business directory of verified Cape Town companies.",
+      "website": "https://www.sitebuildstudio.co.za",
       "location": "Cape Town",
-      "address": "",
-      "phone": "",
-      "whatsapp": "",
-      "description": "An AI tool that turns photos of vehicle damage into an instant, itemised repair assessment ready to submit to your insurer or panel shop \u2014 built in partnership with International Panel Shop.",
-      "logo": "https://www.sitebuildstudio.co.za/directory/images/aurora.png",
-      "website": "https://www.aurora-repair.com",
-      "_source": "sitebuild",
-      "tagline": "An AI tool that turns photos of vehicle damage into an insta",
+      "phone": "+27 84 579 5239",
+      "whatsapp": "27845795239",
       "verified": true,
       "featured": false,
-      "tags": [],
-      "logo_initial": "AU"
+      "tags": [
+        "Web design",
+        "Small business",
+        "Directory",
+        "Affordable"
+      ],
+      "founded": "2024",
+      "logo": "https://www.sitebuildstudio.co.za/assets/images/SB-LOGO.png",
+      "logo_initial": "SS",
+      "_source": "forge-vertical"
     },
     {
       "id": "b-glamerous-belhar",
       "name": "B-Glamerous Hair & Beauty Salon \u2014 Belhar",
-      "category": "Hair & Beauty Salon",
+      "category": "professional",
       "location": "Belhar, Cape Town",
       "address": "31 Keurboom Street, Old Belhar",
       "phone": "062 251 5237",
@@ -344,16 +349,18 @@
       "logo": "https://www.sitebuildstudio.co.za/assets/images/bglamerous.jpeg",
       "website": "",
       "_source": "sitebuild",
-      "tagline": "A hair and beauty salon in Old Belhar, offering the full ran",
+      "tagline": "A hair and beauty salon in Old Belhar, offering the full range of hair and beaut...",
       "verified": true,
       "featured": false,
-      "tags": [],
+      "tags": [
+        "Hair & Beauty Salon"
+      ],
       "logo_initial": "B-"
     },
     {
       "id": "b-glamerous-parow-valley",
       "name": "B-Glamerous Hair & Beauty Salon \u2014 Parow Valley",
-      "category": "Hair & Beauty Salon",
+      "category": "professional",
       "location": "Parow Valley, Cape Town",
       "address": "42 Prinsloo Street, Parow Valley",
       "phone": "062 251 5237",
@@ -365,13 +372,15 @@
       "tagline": "The Parow Valley branch of B-Glamerous Hair & Beauty Salon.",
       "verified": true,
       "featured": false,
-      "tags": [],
+      "tags": [
+        "Hair & Beauty Salon"
+      ],
       "logo_initial": "B-"
     },
     {
       "id": "douglas-cleaning-services",
       "name": "Douglas Cleaning Services",
-      "category": "Cleaning Services",
+      "category": "trades",
       "location": "Cape Town",
       "address": "",
       "phone": "074 374 1208",
@@ -383,13 +392,15 @@
       "tagline": "Residential and commercial cleaning services in Cape Town.",
       "verified": true,
       "featured": false,
-      "tags": [],
+      "tags": [
+        "Cleaning Services"
+      ],
       "logo_initial": "DO"
     },
     {
       "id": "martins-electricals",
       "name": "Martins Electricals",
-      "category": "Electrician & Handyman",
+      "category": "trades",
       "location": "Cape Town",
       "address": "",
       "phone": "067 280 0732",
@@ -398,16 +409,18 @@
       "logo": "https://www.sitebuildstudio.co.za/assets/images/martins-electricals.png",
       "website": "",
       "_source": "sitebuild",
-      "tagline": "Household electrical wiring, general electrical repairs, and",
+      "tagline": "Household electrical wiring, general electrical repairs, and handyman services i...",
       "verified": true,
       "featured": false,
-      "tags": [],
+      "tags": [
+        "Electrician & Handyman"
+      ],
       "logo_initial": "MA"
     },
     {
       "id": "one-days-plumbing-services",
       "name": "One Day's Plumbing Services",
-      "category": "Plumber",
+      "category": "trades",
       "location": "Cape Town",
       "address": "",
       "phone": "065 327 0980",
@@ -419,13 +432,15 @@
       "tagline": "General plumbing services and repairs in Cape Town.",
       "verified": true,
       "featured": false,
-      "tags": [],
+      "tags": [
+        "Plumber"
+      ],
       "logo_initial": "ON"
     },
     {
       "id": "pj-maintenance",
       "name": "PJ Maintenance",
-      "category": "Home Maintenance & Renovations",
+      "category": "trades",
       "location": "Cape Town",
       "address": "",
       "phone": "064 549 4296",
@@ -434,16 +449,18 @@
       "logo": "https://www.sitebuildstudio.co.za/assets/images/421e3dfb-81dd-4ab6-be37-5c61558094fd.jpg",
       "website": "https://pj2maintainall.wixsite.com/pj-maintenance",
       "_source": "sitebuild",
-      "tagline": "General home maintenance and renovations across the Western ",
+      "tagline": "General home maintenance and renovations across the Western Cape \u2014 painting, plu...",
       "verified": true,
       "featured": false,
-      "tags": [],
+      "tags": [
+        "Home Maintenance & Renovations"
+      ],
       "logo_initial": "PJ"
     },
     {
       "id": "cameo-hair-and-beauty",
       "name": "Cameo Hair and Beauty",
-      "category": "Hair & Beauty Salon",
+      "category": "professional",
       "location": "Milnerton, Cape Town",
       "address": "Shop 2, Ascot Centre, Yarrow Road, Milnerton",
       "phone": "",
@@ -452,16 +469,18 @@
       "logo": "https://www.sitebuildstudio.co.za/assets/images/cameohairsalon.jpg",
       "website": "",
       "_source": "sitebuild",
-      "tagline": "A ladies' and gents' hair and beauty salon in Milnerton, off",
+      "tagline": "A ladies' and gents' hair and beauty salon in Milnerton, offering a full range o...",
       "verified": true,
       "featured": false,
-      "tags": [],
+      "tags": [
+        "Hair & Beauty Salon"
+      ],
       "logo_initial": "CA"
     },
     {
       "id": "forge-vertical-security",
       "name": "Forge Vertical \u2014 Security Intelligence",
-      "category": "Cybersecurity & Security Research",
+      "category": "tech",
       "location": "Cape Town",
       "address": "",
       "phone": "",
@@ -470,16 +489,18 @@
       "logo": "https://raw.githubusercontent.com/Forge-Vertical/forge-vertical.github.io/main/favicon.png",
       "website": "https://www.forgevertical.com/security-intelligence.html",
       "_source": "sitebuild",
-      "tagline": "Independent security research specialising in SDLC logic fla",
+      "tagline": "Independent security research specialising in SDLC logic flaws, authentication b...",
       "verified": true,
       "featured": false,
-      "tags": [],
+      "tags": [
+        "Cybersecurity & Security Research"
+      ],
       "logo_initial": "FO"
     },
     {
       "id": "webway-host",
       "name": "Webway Host",
-      "category": "Web Hosting & VPS",
+      "category": "tech",
       "location": "",
       "address": "",
       "phone": "",
@@ -488,10 +509,12 @@
       "logo": "https://www.sitebuildstudio.co.za/assets/images/webwaylogo.png",
       "website": "https://portal.webway.host/aff.php?aff=353",
       "_source": "sitebuild",
-      "tagline": "South African web hosting provider offering shared hosting, ",
+      "tagline": "South African web hosting provider offering shared hosting, reseller hosting, VP...",
       "verified": true,
       "featured": false,
-      "tags": [],
+      "tags": [
+        "Web Hosting & VPS"
+      ],
       "logo_initial": "WE"
     }
   ]
