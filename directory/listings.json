@@ -58,7 +58,8 @@
         "Security"
       ],
       "founded": "2020",
-      "logo_initial": "FV"
+      "logo_initial": "FV",
+      "logo": "https://forge-vertical.github.io/assets/images/forge-logo.png"
     },
     {
       "id": "tripspace-global",
@@ -80,7 +81,8 @@
         "Guesthouse"
       ],
       "founded": "2025",
-      "logo_initial": "TG"
+      "logo_initial": "TG",
+      "logo": "https://www.sitebuildstudio.co.za/directory/images/TRIPSPACEGLOBAL.webp"
     },
     {
       "id": "aurora-repair",
@@ -101,7 +103,8 @@
         "Quotes"
       ],
       "founded": "2023",
-      "logo_initial": "AU"
+      "logo_initial": "AU",
+      "logo": "https://www.sitebuildstudio.co.za/directory/images/aurora.png"
     },
     {
       "id": "sitebuild-studio",
@@ -122,7 +125,8 @@
         "Affordable"
       ],
       "founded": "2024",
-      "logo_initial": "SS"
+      "logo_initial": "SS",
+      "logo": "https://www.sitebuildstudio.co.za/assets/images/SB-LOGO.png"
     },
     {
       "id": "international-panel-shop",
@@ -144,7 +148,8 @@
         "Cape Town"
       ],
       "founded": "2000",
-      "logo_initial": "IP"
+      "logo_initial": "IP",
+      "logo": "https://www.sitebuildstudio.co.za/directory/images/IPS-LOGO.webp"
     },
     {
       "id": "egypt-tour-specialists",
@@ -166,7 +171,8 @@
         "Egyptology"
       ],
       "founded": "2020",
-      "logo_initial": "ET"
+      "logo_initial": "ET",
+      "logo": "https://theegypttourspecialists.co.uk/wp-content/uploads/2021/02/ETS-Logo-Final-1.png"
     },
     {
       "id": "princess-vlei-lodge",
@@ -209,7 +215,8 @@
         "Window cleaning"
       ],
       "founded": "2015",
-      "logo_initial": "SR"
+      "logo_initial": "SR",
+      "logo": "https://www.sitebuildstudio.co.za/directory/images/skyroplogo.png"
     },
     {
       "id": "auto-digital-solutions",
@@ -230,7 +237,8 @@
         "Cape Town"
       ],
       "founded": "2018",
-      "logo_initial": "AD"
+      "logo_initial": "AD",
+      "logo": "https://www.sitebuildstudio.co.za/directory/images/autods.webp"
     },
     {
       "id": "seriti-skills-development",
@@ -252,7 +260,8 @@
         "Cape Town"
       ],
       "founded": "2018",
-      "logo_initial": "SE"
+      "logo_initial": "SE",
+      "logo": "https://www.sitebuildstudio.co.za/directory/images/preferred-logo-256x74.png"
     },
     {
       "id": "scouts-for-kids",
@@ -273,7 +282,8 @@
         "Cape Town"
       ],
       "founded": "2016",
-      "logo_initial": "SK"
+      "logo_initial": "SK",
+      "logo": "https://www.sitebuildstudio.co.za/directory/images/scoutforkidslogo.png"
     },
     {
       "id": "bookkeepers-cape-town",
@@ -295,7 +305,8 @@
         "Small business"
       ],
       "founded": "2015",
-      "logo_initial": "BK"
+      "logo_initial": "BK",
+      "logo": "https://www.sitebuildstudio.co.za/assets/images/bookkeepers-logo-large-scaled.png"
     },
     {
       "id": "ao-locksmith",
@@ -317,7 +328,8 @@
         "Mobile"
       ],
       "founded": "2019",
-      "logo_initial": "AO"
+      "logo_initial": "AO",
+      "logo": "https://www.sitebuildstudio.co.za/assets/images/ao-locksmith.jpg"
     },
     {
       "id": "pressed-in-time",
