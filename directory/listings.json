@@ -1,6 +1,6 @@
 {
   "meta": {
-    "total_listings": 21,
+    "total_listings": 22,
     "sources": [
       "forge-vertical",
       "sitebuild-studio"
@@ -469,6 +469,26 @@
         "Web Hosting & VPS"
       ],
       "logo_initial": "WE"
+    },
+    {
+      "id": "suredrive",
+      "name": "SureDrive",
+      "category": "automotive f",
+      "location": "Cape Town",
+      "address": "",
+      "phone": "",
+      "whatsapp": "",
+      "description": "A prepaid repair wallet for your car \u2014 convert cash into SureBucks ahead of time so panel beating and mechanical bills never catch you off guard. Partnered exclusively with International Panel Shop, with a mandatory digital pre-inspection on every vehicle.",
+      "logo": "https://www.sitebuildstudio.co.za/assets/images/suredrive.png",
+      "website": "https://sure-drive-9a8c9.web.app/",
+      "_source": "sitebuild",
+      "tagline": "A prepaid repair wallet for your car \u2014 convert cash into SureBucks ahead of time...",
+      "verified": true,
+      "featured": false,
+      "tags": [
+        "Automotive FinTech"
+      ],
+      "logo_initial": "SU"
     }
   ]
 }
