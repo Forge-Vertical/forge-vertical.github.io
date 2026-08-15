@@ -73,7 +73,7 @@
         "Affordable"
       ],
       "founded": "2024",
-      "logo": "https://www.sitebuildstudio.co.za/directory/images/data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2044%2044%22%3E%3Crect%20width%3D%2244%22%20height%3D%2244%22%20rx%3D%2210%22%20fill%3D%22%230a0a0f%22/%3E%3Ctext%20x%3D%2222%22%20y%3D%2219%22%20font-family%3D%22Arial%2Csans-serif%22%20font-size%3D%2215%22%20font-weight%3D%22900%22%20fill%3D%22%23ffffff%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%22-0.5%22%3ESB%3C/text%3E%3Ctext%20x%3D%2222%22%20y%3D%2230%22%20font-family%3D%22Arial%2Csans-serif%22%20font-size%3D%225%22%20font-weight%3D%22600%22%20fill%3D%22%236b7280%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%220.8%22%3ESITEBUILD%3C/text%3E%3Ctext%20x%3D%2222%22%20y%3D%2237%22%20font-family%3D%22Arial%2Csans-serif%22%20font-size%3D%224.5%22%20font-weight%3D%22400%22%20fill%3D%22%234b5563%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%221%22%3ESTUDIO%3C/text%3E%3C/svg%3E",
+      "logo": "https://raw.githubusercontent.com/SiteBuild-Studio/SiteBuild-Studio/main/assets/images/sitebuild-logo.png",
       "logo_initial": "SS",
       "_source": "forge-vertical"
     },
@@ -302,7 +302,7 @@
       "logo": "https://www.sitebuildstudio.co.za/assets/images/bglamerous.jpeg",
       "website": "",
       "_source": "sitebuild",
-      "tagline": "A hair and beauty salon in Old Belhar, offering the full range of hair and beaut...",
+      "tagline": "Hair & Beauty Salon",
       "verified": true,
       "featured": false,
       "tags": [
@@ -322,7 +322,7 @@
       "logo": "https://www.sitebuildstudio.co.za/assets/images/bglamerous.jpeg",
       "website": "",
       "_source": "sitebuild",
-      "tagline": "The Parow Valley branch of B-Glamerous Hair & Beauty Salon.",
+      "tagline": "Hair & Beauty Salon",
       "verified": true,
       "featured": false,
       "tags": [
@@ -342,7 +342,7 @@
       "logo": "https://www.sitebuildstudio.co.za/assets/images/douglas-cleaning-services.jpg",
       "website": "",
       "_source": "sitebuild",
-      "tagline": "Residential and commercial cleaning services in Cape Town.",
+      "tagline": "Cleaning Services",
       "verified": true,
       "featured": false,
       "tags": [
@@ -362,7 +362,7 @@
       "logo": "https://www.sitebuildstudio.co.za/assets/images/martins-electricals.png",
       "website": "",
       "_source": "sitebuild",
-      "tagline": "Household electrical wiring, general electrical repairs, and handyman services i...",
+      "tagline": "Electrician & Handyman",
       "verified": true,
       "featured": false,
       "tags": [
@@ -382,7 +382,7 @@
       "logo": "https://www.sitebuildstudio.co.za/assets/images/one-days-plumbing-services.jpg",
       "website": "",
       "_source": "sitebuild",
-      "tagline": "General plumbing services and repairs in Cape Town.",
+      "tagline": "Plumber",
       "verified": true,
       "featured": false,
       "tags": [
@@ -402,7 +402,7 @@
       "logo": "https://www.sitebuildstudio.co.za/assets/images/421e3dfb-81dd-4ab6-be37-5c61558094fd.jpg",
       "website": "https://pj2maintainall.wixsite.com/pj-maintenance",
       "_source": "sitebuild",
-      "tagline": "General home maintenance and renovations across the Western Cape \u2014 painting, plu...",
+      "tagline": "Home Maintenance & Renovations",
       "verified": true,
       "featured": false,
       "tags": [
@@ -422,7 +422,7 @@
       "logo": "https://www.sitebuildstudio.co.za/assets/images/cameohairsalon.jpg",
       "website": "",
       "_source": "sitebuild",
-      "tagline": "A ladies' and gents' hair and beauty salon in Milnerton, offering a full range o...",
+      "tagline": "Hair & Beauty Salon",
       "verified": true,
       "featured": false,
       "tags": [
@@ -442,7 +442,7 @@
       "logo": "https://raw.githubusercontent.com/Forge-Vertical/forge-vertical.github.io/main/favicon.png",
       "website": "https://www.forgevertical.com/security-intelligence.html",
       "_source": "sitebuild",
-      "tagline": "Independent security research specialising in SDLC logic flaws, authentication b...",
+      "tagline": "Cybersecurity & Security Research",
       "verified": true,
       "featured": false,
       "tags": [
@@ -462,7 +462,7 @@
       "logo": "https://www.sitebuildstudio.co.za/assets/images/webwaylogo.png",
       "website": "https://portal.webway.host/aff.php?aff=353",
       "_source": "sitebuild",
-      "tagline": "South African web hosting provider offering shared hosting, reseller hosting, VP...",
+      "tagline": "Web Hosting & VPS",
       "verified": true,
       "featured": false,
       "tags": [
@@ -482,7 +482,7 @@
       "logo": "https://www.sitebuildstudio.co.za/assets/images/suredrive.png",
       "website": "https://sure-drive-9a8c9.web.app/",
       "_source": "sitebuild",
-      "tagline": "A prepaid repair wallet for your car \u2014 convert cash into SureBucks ahead of time...",
+      "tagline": "Automotive FinTech",
       "verified": true,
       "featured": false,
       "tags": [
