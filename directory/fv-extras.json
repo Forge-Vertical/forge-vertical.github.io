@@ -1,0 +1,117 @@
+{
+  "listings": [
+    {
+      "id": "forge-vertical",
+      "name": "Forge Vertical",
+      "category": "tech",
+      "tagline": "Built for the future. From day one.",
+      "description": "Cape Town-based digital agency building websites, SaaS platforms, and AI integrations with security, SEO, GEO, and AEO built in from the first commit.",
+      "website": "https://www.forgevertical.com",
+      "location": "Cape Town",
+      "phone": "+27 65 741 7593",
+      "whatsapp": "27657417593",
+      "verified": true,
+      "featured": true,
+      "tags": [
+        "Web development",
+        "SaaS",
+        "AI",
+        "GEO",
+        "Security"
+      ],
+      "founded": "2020",
+      "logo": "https://forge-vertical.github.io/assets/images/forge-logo.png",
+      "logo_initial": "FV"
+    },
+    {
+      "id": "tripspace-global",
+      "name": "TripSpace Global",
+      "category": "hospitality",
+      "tagline": "Commission-free travel marketplace",
+      "description": "A commission-free travel marketplace for accommodation, car rentals, safaris, and experiences. Hosts list for a flat monthly fee and keep 100% of every booking.",
+      "website": "https://tripspaceglobal.com",
+      "location": "Cape Town",
+      "phone": "",
+      "whatsapp": "",
+      "verified": true,
+      "featured": true,
+      "tags": [
+        "Zero commission",
+        "AI travel",
+        "Africa",
+        "BnB",
+        "Guesthouse"
+      ],
+      "founded": "2025",
+      "logo": "https://www.sitebuildstudio.co.za/directory/images/TRIPSPACEGLOBAL.webp",
+      "logo_initial": "TG"
+    },
+    {
+      "id": "aurora-repair",
+      "name": "Aurora Repair",
+      "category": "tech",
+      "tagline": "AI-powered vehicle damage assessment",
+      "description": "An AI tool that turns photos of vehicle damage into an instant, itemised repair assessment \u2014 built in partnership with International Panel Shop.",
+      "website": "https://www.aurora-repair.com",
+      "location": "Cape Town",
+      "phone": "",
+      "whatsapp": "",
+      "verified": true,
+      "featured": true,
+      "tags": [
+        "AI assessment",
+        "Insurance",
+        "Panel beating",
+        "Quotes"
+      ],
+      "founded": "2023",
+      "logo": "https://www.sitebuildstudio.co.za/directory/images/aurora.png",
+      "logo_initial": "AU"
+    },
+    {
+      "id": "egypt-tour-specialists",
+      "name": "The Egypt Tour Specialists",
+      "category": "hospitality",
+      "tagline": "Award-winning guided tours of Egypt",
+      "description": "Led by Samer 'Sem Sem', winner of the Wanderlust World Guide Award 2016 \u2014 the first Middle Eastern guide to receive the gold. Bespoke day trips, tour packages, and private experiences across Egypt.",
+      "website": "https://theegypttourspecialists.co.uk",
+      "location": "Cairo, Egypt",
+      "phone": "+44 7476 719185",
+      "whatsapp": "201224972209",
+      "verified": true,
+      "featured": false,
+      "tags": [
+        "Egypt",
+        "Tours",
+        "Award-winning",
+        "Day trips",
+        "Egyptology"
+      ],
+      "founded": "2020",
+      "logo": "https://theegypttourspecialists.co.uk/wp-content/uploads/2021/02/ETS-Logo-Final-1.png",
+      "logo_initial": "ET"
+    },
+    {
+      "id": "princess-vlei-lodge",
+      "name": "Princess Vlei Lodge",
+      "category": "hospitality",
+      "tagline": "Lakeside lodge \u00b7 Cape Town",
+      "description": "Boutique lakeside lodge in Cape Town offering a tranquil retreat close to the city. Multiple units, perfect for short and extended stays.",
+      "website": "https://tripspaceglobal.com",
+      "location": "Cape Town",
+      "phone": "",
+      "whatsapp": "",
+      "verified": true,
+      "featured": false,
+      "tags": [
+        "Lodge",
+        "Lake",
+        "Cape Town",
+        "Boutique"
+      ],
+      "founded": "2010",
+      "logo": "",
+      "logo_initial": "PV"
+    }
+  ]
+}
