@@ -468,6 +468,44 @@
         .reveal.up { opacity: 1; transform: none; }
 
         #global-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; }
+
+        /* ── MOBILE RESPONSIVE FIXES ─────────────────────── */
+        @media (max-width: 768px) {
+            .two-col-grid {
+                grid-template-columns: 1fr !important;
+            }
+            .img-card {
+                height: 220px !important;
+            }
+            /* Proof strip: 2 columns on mobile */
+            .proof {
+                grid-template-columns: repeat(2, 1fr) !important;
+            }
+            /* Services & AI grids: single column on mobile */
+            .svc-grid, .ai-grid {
+                grid-template-columns: 1fr !important;
+            }
+            /* Process: 2 col on mobile */
+            .proc-grid {
+                grid-template-columns: 1fr 1fr !important;
+            }
+            /* Tool logos: ensure they scroll properly */
+            .tools-row {
+                padding-bottom: 4px;
+            }
+            /* Section padding reduction */
+            section[style*="padding:100px 0"] {
+                padding: 64px 0 !important;
+            }
+        }
+
+        /* ── IMAGE QUALITY IMPROVEMENTS ─────────────────── */
+        .img-card img {
+            transition: transform 0.4s ease;
+        }
+        .img-card:hover img {
+            transform: scale(1.02);
+        }
     </style>
 </head>
 <body>
@@ -540,7 +578,7 @@
 ═══════════════════════════════════════════ -->
 <section style="padding:100px 0; background:var(--bg);">
 <div class="wrap">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;" class="reveal">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;" class="reveal two-col-grid">
         <div>
             <div class="s-eye">// The difference</div>
             <h2 class="sh">Most agencies build a website.<br><span class="g-text">We build infrastructure.</span></h2>
@@ -548,7 +586,7 @@
             <a href="/onboard.html" class="btn-p" style="margin-top:8px;">Start a project →</a>
         </div>
         <div class="img-card" style="height:400px;">
-            <img src="https://images.pexels.com/photos/1181263/pexels-photo-1181263.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Professional developer at dual monitor workstation — Cape Town web development" loading="lazy">
+            <img src="https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Professional developer coding — Cape Town full-stack development" loading="lazy">
             <div class="img-overlay"></div>
             <div class="img-label">Infrastructure-first builds</div>
         </div>
@@ -579,7 +617,7 @@
 
     <!-- Image above cards -->
     <div class="img-card reveal" style="height:280px;margin-bottom:20px;">
-        <img src="https://images.pexels.com/photos/8386434/pexels-photo-8386434.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="AI and cybersecurity professional working with multiple screens" loading="lazy">
+        <img src="https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="AI-powered development and technology — Forge Vertical" loading="lazy">
         <div class="img-overlay"></div>
         <div class="img-label">AI-powered development · 2026</div>
     </div>
@@ -675,14 +713,14 @@
 ═══════════════════════════════════════════ -->
 <section style="padding:100px 0; background:var(--bg); border-top:1px solid var(--border);">
 <div class="wrap">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;margin-bottom:60px;" class="reveal">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;margin-bottom:60px;" class="reveal two-col-grid">
         <div>
             <div class="s-eye">// What we build</div>
             <h2 class="sh">Services</h2>
             <p class="ss">From a single landing page to a full SaaS platform with AI integrations, payment infrastructure, and admin dashboards. Every project ships to production.</p>
         </div>
         <div class="img-card" style="height:280px;margin-top:8px;">
-            <img src="https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Software development team working on SaaS platform — Cape Town tech" loading="lazy">
+            <img src="https://images.pexels.com/photos/3183153/pexels-photo-3183153.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="SaaS platform development — Cape Town technology" loading="lazy">
             <div class="img-overlay"></div>
             <div class="img-label">Full-stack builds · Cape Town</div>
         </div>
@@ -810,7 +848,7 @@
     <!-- Cape Town aerial image strip above CTA -->
     <div style="max-width:1280px;margin:0 auto 60px;padding:0 6vw;position:relative;z-index:1;" class="reveal">
         <div class="img-card" style="height:260px;">
-            <img src="https://images.pexels.com/photos/259447/pexels-photo-259447.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Cape Town CBD aerial view — technology and business hub of South Africa" loading="lazy">
+            <img src="https://images.pexels.com/photos/2916450/pexels-photo-2916450.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Cape Town aerial night view — Africa's technology and innovation capital" loading="lazy">
             <div class="img-overlay"></div>
             <div class="img-label">Cape Town · Africa's tech capital</div>
         </div>
