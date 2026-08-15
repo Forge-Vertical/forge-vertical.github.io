@@ -3,14 +3,34 @@
     "title": "Forge Vertical Business Directory",
     "description": "A curated directory of Cape Town and South African businesses across tech, hospitality, automotive, and professional services.",
     "last_updated": "2026-08-15",
-    "total_listings": 12
+    "total_listings": 7
   },
   "categories": [
-    { "id": "tech", "label": "Technology & Digital", "color": "#84cc16" },
-    { "id": "hospitality", "label": "Hospitality & Travel", "color": "#10b981" },
-    { "id": "automotive", "label": "Automotive & Repair", "color": "#60a5fa" },
-    { "id": "professional", "label": "Professional Services", "color": "#a78bfa" },
-    { "id": "health", "label": "Health & Wellness", "color": "#f59e0b" }
+    {
+      "id": "tech",
+      "label": "Technology & Digital",
+      "color": "#84cc16"
+    },
+    {
+      "id": "hospitality",
+      "label": "Hospitality & Travel",
+      "color": "#10b981"
+    },
+    {
+      "id": "automotive",
+      "label": "Automotive & Repair",
+      "color": "#60a5fa"
+    },
+    {
+      "id": "professional",
+      "label": "Professional Services",
+      "color": "#a78bfa"
+    },
+    {
+      "id": "health",
+      "label": "Health & Wellness",
+      "color": "#f59e0b"
+    }
   ],
   "listings": [
     {
@@ -18,13 +38,19 @@
       "name": "TripSpace Global",
       "category": "hospitality",
       "tagline": "Commission-free accommodation marketplace",
-      "description": "Africa-focused hospitality marketplace connecting travellers and hosts without the 15–25% OTA commission. Flat monthly fee. AI travel companion Aria built in.",
+      "description": "Africa-focused hospitality marketplace connecting travellers and hosts without the 15\u201325% OTA commission. Flat monthly fee. AI travel companion Aria built in.",
       "website": "https://tripspaceglobal.com",
       "location": "Cape Town, South Africa",
       "region": "Western Cape",
       "verified": true,
       "featured": true,
-      "tags": ["Zero commission", "AI travel", "Africa", "BnB", "Guesthouse"],
+      "tags": [
+        "Zero commission",
+        "AI travel",
+        "Africa",
+        "BnB",
+        "Guesthouse"
+      ],
       "founded": "2025",
       "logo_initial": "TG"
     },
@@ -39,7 +65,12 @@
       "region": "Western Cape",
       "verified": true,
       "featured": true,
-      "tags": ["AI assessment", "Insurance", "Panel beating", "Quotes"],
+      "tags": [
+        "AI assessment",
+        "Insurance",
+        "Panel beating",
+        "Quotes"
+      ],
       "founded": "2023",
       "logo_initial": "AR"
     },
@@ -54,7 +85,13 @@
       "region": "Western Cape",
       "verified": true,
       "featured": true,
-      "tags": ["Web development", "SaaS", "AI", "GEO", "Security"],
+      "tags": [
+        "Web development",
+        "SaaS",
+        "AI",
+        "GEO",
+        "Security"
+      ],
       "founded": "2020",
       "logo_initial": "FV"
     },
@@ -62,14 +99,19 @@
       "id": "princess-vlei-lodge",
       "name": "Princess Vlei Lodge",
       "category": "hospitality",
-      "tagline": "Lakeside lodge · Cape Town",
+      "tagline": "Lakeside lodge \u00b7 Cape Town",
       "description": "Boutique lakeside lodge in Cape Town offering a tranquil retreat close to the city. Multiple units. Perfect for short and extended stays.",
       "website": "https://tripspaceglobal.com",
       "location": "Cape Town, South Africa",
       "region": "Western Cape",
       "verified": true,
       "featured": false,
-      "tags": ["Lodge", "Lake", "Cape Town", "Boutique"],
+      "tags": [
+        "Lodge",
+        "Lake",
+        "Cape Town",
+        "Boutique"
+      ],
       "founded": "2010",
       "logo_initial": "PV"
     },
@@ -84,7 +126,12 @@
       "region": "Western Cape",
       "verified": true,
       "featured": false,
-      "tags": ["Panel beating", "Spray painting", "Insurance repairs", "Cape Town"],
+      "tags": [
+        "Panel beating",
+        "Spray painting",
+        "Insurance repairs",
+        "Cape Town"
+      ],
       "founded": "1995",
       "logo_initial": "IP"
     },
@@ -92,14 +139,19 @@
       "id": "pressed-in-time",
       "name": "Pressed In Time BD",
       "category": "professional",
-      "tagline": "Garment care franchise · Southern Africa",
+      "tagline": "Garment care franchise \u00b7 Southern Africa",
       "description": "Professional garment care and laundry services with franchise locations across South Africa, Namibia, and Botswana.",
       "website": "#",
       "location": "Southern Africa",
       "region": "Multi-region",
       "verified": true,
       "featured": false,
-      "tags": ["Laundry", "Franchise", "Garment care", "Southern Africa"],
+      "tags": [
+        "Laundry",
+        "Franchise",
+        "Garment care",
+        "Southern Africa"
+      ],
       "founded": "2008",
       "logo_initial": "PT"
     },
@@ -114,84 +166,14 @@
       "region": "Western Cape",
       "verified": true,
       "featured": false,
-      "tags": ["Websites", "AI", "Small business", "Affordable"],
+      "tags": [
+        "Websites",
+        "AI",
+        "Small business",
+        "Affordable"
+      ],
       "founded": "2026",
       "logo_initial": "SS"
-    },
-    {
-      "id": "yoco",
-      "name": "Yoco",
-      "category": "tech",
-      "tagline": "Digital commerce platform for SMEs",
-      "description": "South Africa's leading digital commerce platform. Over 200,000 merchants process more than R34 billion annually. Card machines, online payments, business tools.",
-      "website": "https://yoco.com",
-      "location": "Cape Town, South Africa",
-      "region": "Western Cape",
-      "verified": false,
-      "featured": false,
-      "tags": ["Payments", "Fintech", "SME", "Card machine"],
-      "founded": "2015",
-      "logo_initial": "YC"
-    },
-    {
-      "id": "naked-insurance",
-      "name": "Naked Insurance",
-      "category": "professional",
-      "tagline": "AI-powered insurance in under 90 seconds",
-      "description": "South Africa's leading insurtech. Get a car, home, or valuables insurance quote in under 90 seconds. No call centre. AI-powered claims.",
-      "website": "https://naked.insure",
-      "location": "Cape Town, South Africa",
-      "region": "Western Cape",
-      "verified": false,
-      "featured": false,
-      "tags": ["Insurance", "AI", "Insurtech", "Digital"],
-      "founded": "2018",
-      "logo_initial": "NI"
-    },
-    {
-      "id": "luno",
-      "name": "Luno",
-      "category": "tech",
-      "tagline": "Cryptocurrency exchange · Africa",
-      "description": "Cape Town-based cryptocurrency exchange making it safe and easy to buy, store, and learn about digital assets. Operating across Africa and globally.",
-      "website": "https://luno.com",
-      "location": "Cape Town, South Africa",
-      "region": "Western Cape",
-      "verified": false,
-      "featured": false,
-      "tags": ["Crypto", "Bitcoin", "Exchange", "Africa"],
-      "founded": "2013",
-      "logo_initial": "LN"
-    },
-    {
-      "id": "aerobotics",
-      "name": "Aerobotics",
-      "category": "tech",
-      "tagline": "Drone & AI crop analytics",
-      "description": "AI-powered drone analytics for farmers and insurers. Computer vision identifies plant stress, disease, and yield potential at scale for agricultural markets worldwide.",
-      "website": "https://aerobotics.com",
-      "location": "Cape Town, South Africa",
-      "region": "Western Cape",
-      "verified": false,
-      "featured": false,
-      "tags": ["AI", "Agritech", "Drones", "Farming"],
-      "founded": "2015",
-      "logo_initial": "AB"
-    },
-    {
-      "id": "ozow",
-      "name": "Ozow",
-      "category": "tech",
-      "tagline": "Instant pay-by-bank technology",
-      "description": "Instant EFT and pay-by-bank technology for merchants and consumers. Over 6 million registered users. Now accepting cryptocurrency via MoneyBadger integration.",
-      "website": "https://ozow.com",
-      "location": "Cape Town, South Africa",
-      "region": "Western Cape",
-      "verified": false,
-      "featured": false,
-      "tags": ["Payments", "EFT", "Fintech", "Instant"],
-      "founded": "2014",
-      "logo_initial": "OZ"
     }
   ]
 }
