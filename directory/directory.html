@@ -260,7 +260,7 @@
     </aside>
 
     <div>
-        <div id="sync-notice">Auto-synced from <a href="https://github.com/SiteBuild-Studio/SiteBuild-Studio/blob/main/directory/listings.json" target="_blank" rel="noopener noreferrer">SiteBuild Studio</a> + FV extras · <span id="sync-time"></span></div>
+        <div id="sync-notice">Auto-synced from <a href="https://www.sitebuildstudio.co.za/directory/listings.json" target="_blank" rel="noopener noreferrer">SiteBuild Studio</a> + FV extras · <span id="sync-time"></span></div>
         <div id="listings-area">
             <div id="sort-bar">
                 <span class="sort-label" id="results-count">Loading...</span>
@@ -295,7 +295,7 @@
 <script>
 // ── Config ────────────────────────────────────────────────────────
 // SiteBuild Studio listings — live from GitHub raw
-const SB_SOURCE = 'https://raw.githubusercontent.com/SiteBuild-Studio/SiteBuild-Studio/main/directory/listings.json';
+const SB_SOURCE = 'https://www.sitebuildstudio.co.za/directory/listings.json';
 // FV extras — hosted on Forge Vertical
 const FV_EXTRAS = './fv-extras.json';
 // Image base for SiteBuild Studio repo listings
@@ -328,12 +328,27 @@ async function init() {
         if (sbRes.status === 'fulfilled' && sbRes.value.ok) {
             const sbData = await sbRes.value.json();
             // Normalise SiteBuild listings — fix logo paths & strip ZA
-            sbListings = (sbData.listings || []).map(l => ({
-                ...l,
-                _source: 'sitebuild',
-                logo: l.logo ? SB_IMG + l.logo.replace('../assets/images/', SB_ASSETS).replace(/^.*images\//, '') : '',
-                location: (l.location || '').replace(', South Africa', '').replace(',South Africa', '')
-            }));
+            sbListings = (sbData.listings || []).map(l => {
+                let logoUrl = '';
+                if (l.logo) {
+                    const raw = l.logo.trim();
+                    if (raw.startsWith('http')) {
+                        logoUrl = raw; // already absolute
+                    } else if (raw.includes('assets/images/')) {
+                        logoUrl = SB_ASSETS + raw.split('assets/images/').pop();
+                    } else if (raw.includes('images/')) {
+                        logoUrl = SB_IMG + raw.split('images/').pop();
+                    } else {
+                        logoUrl = SB_IMG + raw; // bare filename
+                    }
+                }
+                return {
+                    ...l,
+                    _source: 'sitebuild',
+                    logo: logoUrl,
+                    location: (l.location || '').replace(/, ?South Africa/gi, '').replace(/South Africa/gi, '').trim()
+                };
+            });
         }
 
         if (fvRes.status === 'fulfilled' && fvRes.value.ok) {
