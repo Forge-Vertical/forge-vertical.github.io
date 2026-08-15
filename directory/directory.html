@@ -229,14 +229,6 @@
             <span class="filter-dot" style="background:#f472b6"></span>Nonprofit
             <span class="filter-count" id="count-nonprofit">—</span>
         </button>
-        <button class="filter-btn" data-cat="Electrician &amp; Handyman" onclick="setCat('Electrician &amp; Handyman',this)">
-            <span class="filter-dot" style="background:#fb923c"></span>Electrician
-            <span class="filter-count" id="count-electrician">—</span>
-        </button>
-        <button class="filter-btn" data-cat="Plumber" onclick="setCat('Plumber',this)">
-            <span class="filter-dot" style="background:#38bdf8"></span>Plumbing
-            <span class="filter-count" id="count-plumber">—</span>
-        </button>
 
         <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border);">
             <span class="filter-label">Show only</span>
@@ -351,10 +343,6 @@ function updateCounts() {
         const el = document.getElementById('count-' + c);
         if (el) el.textContent = allListings.filter(l => l.category === c).length;
     });
-    const elEl = document.getElementById('count-electrician');
-    const plEl = document.getElementById('count-plumber');
-    if (elEl) elEl.textContent = allListings.filter(l => l.category === 'Electrician & Handyman').length;
-    if (plEl) plEl.textContent = allListings.filter(l => l.category === 'Plumber').length;
 }
 
 // ── Filter ────────────────────────────────────────────────────────
