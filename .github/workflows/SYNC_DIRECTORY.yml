@@ -1,19 +1,19 @@
 # ─────────────────────────────────────────────────────────────────
 # SYNC_DIRECTORY.yml
-# Runs daily at 2am UTC + on every push to main
-# Fetches SiteBuild Studio listings, merges FV extras, commits
-# combined file as directory/listings.json
+# Runs daily at 2am UTC + on push when fv-extras.json changes
+# Fetches SiteBuild Studio listings from GitHub raw, merges with
+# fv-extras.json, commits combined file as directory/listings.json
 # ─────────────────────────────────────────────────────────────────
 name: Sync Business Directory
 
 on:
   schedule:
-    - cron: '0 2 * * *'   # Daily at 2am UTC
+    - cron: '0 2 * * *'
   push:
     branches: [main]
     paths:
-      - 'directory/fv-extras.json'   # Also runs when you add FV listings
-  workflow_dispatch:                  # Manual trigger from Actions tab
+      - 'directory/fv-extras.json'
+  workflow_dispatch:
 
 jobs:
   sync:
@@ -22,52 +22,60 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.FORGE_VERTICAL_DEPLOY_KEY }}
+          fetch-depth: 0
 
       - name: Fetch SiteBuild Studio listings
         run: |
-          curl -s "https://www.sitebuildstudio.co.za/directory/listings.json" \
+          curl -s \
+            -H "User-Agent: Mozilla/5.0" \
+            "https://raw.githubusercontent.com/SiteBuild-Studio/SiteBuild-Studio/main/directory/listings.json" \
             -o /tmp/sb-listings.json
-          echo "SiteBuild listings fetched:"
-          python3 -c "import json; d=json.load(open('/tmp/sb-listings.json')); print(f'  {len(d[\"listings\"])} listings')"
+          echo "Fetched. Top-level keys:"
+          python3 -c "import json; d=json.load(open('/tmp/sb-listings.json')); print(list(d.keys()))"
 
       - name: Merge and write combined listings
         run: |
           python3 << 'PYEOF'
-          import json
+          import json, re
 
           SB_IMG    = "https://www.sitebuildstudio.co.za/directory/images/"
           SB_ASSETS = "https://www.sitebuildstudio.co.za/assets/images/"
 
-          # Load SiteBuild Studio source
-          with open('/tmp/sb-listings.json') as f:
-              sb_data = json.load(f)
-
-          # Normalise SB listings — fix logo paths, strip SA from location
           def fix_logo(raw):
-              if not raw:
-                  return ""
-              if raw.startswith("http"):
-                  return raw
-              if "assets/images/" in raw:
-                  return SB_ASSETS + raw.split("assets/images/")[-1]
-              if "images/" in raw:
-                  return SB_IMG + raw.split("images/")[-1]
+              if not raw: return ""
+              if raw.startswith("http"): return raw
+              if "assets/images/" in raw: return SB_ASSETS + raw.split("assets/images/")[-1]
+              if "images/" in raw: return SB_IMG + raw.split("images/")[-1]
               return SB_IMG + raw
 
           def fix_location(loc):
-              import re
               return re.sub(r',?\s*South Africa', '', loc or '').strip()
 
-          sb_listings = [
-              {**l, "_source": "sitebuild", "logo": fix_logo(l.get("logo","")), "location": fix_location(l.get("location",""))}
-              for l in sb_data.get("listings", [])
-          ]
+          def normalise(l, source):
+              return {
+                  **l,
+                  "_source": source,
+                  "logo": fix_logo(l.get("logo", "")),
+                  "location": fix_location(l.get("location", "")),
+                  # Map SiteBuild fields to directory fields
+                  "tagline": l.get("tagline", l.get("description", "")[:60]),
+                  "verified": l.get("verified", True),
+                  "featured": l.get("featured", False),
+                  "tags": l.get("tags", []),
+                  "logo_initial": l.get("logo_initial", l.get("name","??")[:2].upper()),
+              }
 
-          # Load FV extras
+          # Load SiteBuild Studio — key is "businesses"
+          with open('/tmp/sb-listings.json') as f:
+              sb_raw = json.load(f)
+          sb_listings = [normalise(l, "sitebuild") for l in sb_raw.get("businesses", [])]
+
+          # Load FV extras — key is "listings"
           with open('directory/fv-extras.json') as f:
-              fv_data = json.load(f)
-
-          fv_listings = [{**l, "_source": l.get("_source","forge-vertical")} for l in fv_data.get("listings", [])]
+              fv_raw = json.load(f)
+          fv_listings = [normalise(l, l.get("_source","forge-vertical")) for l in fv_raw.get("listings", [])]
 
           # Merge — FV wins on duplicate IDs
           fv_ids = {l["id"] for l in fv_listings}
@@ -76,7 +84,6 @@ jobs:
           output = {
               "meta": {
                   "total_listings": len(merged),
-                  "last_synced": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
                   "sources": ["forge-vertical", "sitebuild-studio"]
               },
               "listings": merged
@@ -85,7 +92,7 @@ jobs:
           with open('directory/listings.json', 'w') as f:
               json.dump(output, f, indent=2)
 
-          print(f"Combined: {len(merged)} listings written to directory/listings.json")
+          print(f"Done: {len(fv_listings)} FV + {len([l for l in sb_listings if l['id'] not in fv_ids])} SB = {len(merged)} total")
           PYEOF
 
       - name: Commit if changed
@@ -94,8 +101,8 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add directory/listings.json
           if git diff --staged --quiet; then
-            echo "No changes — listings already up to date"
+            echo "No changes"
           else
-            git commit -m "sync: update directory listings [$(date -u +%Y-%m-%d)]"
+            git commit -m "sync: directory listings [$(date -u +%Y-%m-%d)]"
             git push
           fi
