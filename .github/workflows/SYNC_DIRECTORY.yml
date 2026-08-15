@@ -86,7 +86,7 @@ jobs:
                   "logo": fix_logo(l.get("logo", "")),
                   "location": fix_location(l.get("location", "")),
                   "category": map_category(cat),
-                  "tagline": l.get("tagline", (l.get("description", "")[:80] + "...") if len(l.get("description","")) > 80 else l.get("description","")),
+                  "tagline": l.get("tagline") or cat or "",
                   "verified": l.get("verified", True),
                   "featured": l.get("featured", False),
                   "tags": l.get("tags", [cat] if cat else []),
