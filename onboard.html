@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Start a project with Forge Vertical — websites, SaaS platforms, AI integrations, GEO and AEO. Tell us what you need and we will tell you exactly what it costs.">
+    <title>Start a Project | Forge Vertical</title>
+    <script src="/global.js" defer></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/typography.css">
+    <style>
+        :root {
+            --bg: #06080c; --surface: #0b0f14; --border: #1a2030;
+            --border2: #232d3f; --text: #eef0f4; --muted: #3d4f6a;
+            --muted2: #6a7d96; --lime: #84cc16; --emerald: #10b981;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background: var(--bg); color: var(--text); font-family: 'Outfit', sans-serif; }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        .g-text { background: linear-gradient(90deg, var(--emerald), var(--lime)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; display: inline-block; }
+
+        /* Form fields */
+        .fi {
+            width: 100%; background: rgba(255,255,255,0.04); border: 1px solid var(--border2);
+            border-radius: 10px; padding: 13px 16px; color: var(--text);
+            font-family: 'Outfit', sans-serif; font-size: 15px;
+            outline: none; transition: border-color 0.2s;
+        }
+        .fi:focus { border-color: var(--lime); }
+        .fi::placeholder { color: var(--muted); }
+        textarea.fi { resize: vertical; min-height: 100px; }
+        select.fi { cursor: pointer; }
+
+        /* Service chips */
+        .svc-chip { cursor: pointer; }
+        .svc-chip input { display: none; }
+        .svc-chip-inner {
+            display: block; padding: 10px 16px; border-radius: 8px;
+            border: 1px solid var(--border2); color: var(--muted2);
+            font-size: 13px; font-weight: 500; transition: all 0.15s;
+            text-align: center;
+        }
+        .svc-chip input:checked + .svc-chip-inner {
+            border-color: var(--lime); color: var(--lime);
+            background: rgba(132,204,22,0.08);
+        }
+        .svc-chip-inner:hover { border-color: var(--muted); color: var(--text); }
+
+        /* Submit button */
+        .btn-submit {
+            width: 100%; padding: 15px; border-radius: 12px; border: none; cursor: pointer;
+            background: linear-gradient(90deg, var(--emerald), var(--lime));
+            color: #06080c; font-family: 'JetBrains Mono', monospace;
+            font-size: 12px; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 0.14em; transition: opacity 0.18s;
+        }
+        .btn-submit:hover { opacity: 0.88; }
+        .btn-submit:disabled { opacity: 0.5; cursor: not-allowed; }
+
+        /* Success state */
+        #success-state { display: none; }
+
+        /* Field label */
+        .fl { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700;
+              text-transform: uppercase; letter-spacing: 0.18em; color: var(--muted2);
+              margin-bottom: 8px; display: block; }
+
+        /* WhatsApp fallback */
+        .wa-btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            border: 1px solid var(--border2); color: var(--muted2);
+            padding: 12px 20px; border-radius: 10px;
+            font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 0.12em; text-decoration: none;
+            transition: all 0.18s;
+        }
+        .wa-btn:hover { border-color: #25D366; color: #25D366; }
+    </style>
+</head>
+<body>
+
+<div id="global-nav"></div>
+
+<section class="min-h-screen py-20 px-6">
+<div class="max-w-2xl mx-auto">
+
+    <!-- Header -->
+    <div class="mb-10">
+        <div class="mono text-[10px] text-[var(--lime)] uppercase tracking-widest mb-4">// Start a project</div>
+        <h1 class="text-4xl font-bold tracking-tight mb-4" style="letter-spacing:-0.03em;">
+            Tell us what you need.<br>
+            <span class="g-text">We'll tell you what it costs.</span>
+        </h1>
+        <p class="text-[var(--muted2)] text-base font-light leading-relaxed">
+            No lengthy discovery calls. Fill this in, we review it, and you get a clear scope and price — usually within 24 hours.
+        </p>
+    </div>
+
+    <!-- Form -->
+    <div id="form-state">
+        <form id="onboard-form" class="space-y-6">
+
+            <!-- Name + Email -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label class="fl" for="name">Your name *</label>
+                    <input type="text" id="name" name="name" class="fi" placeholder="Jane Smith" required>
+                </div>
+                <div>
+                    <label class="fl" for="email">Email address *</label>
+                    <input type="email" id="email" name="email" class="fi" placeholder="jane@yourbusiness.com" required>
+                </div>
+            </div>
+
+            <!-- Phone + Company -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label class="fl" for="phone">Phone / WhatsApp</label>
+                    <input type="tel" id="phone" name="phone" class="fi" placeholder="+27 65 000 0000">
+                </div>
+                <div>
+                    <label class="fl" for="company">Business name</label>
+                    <input type="text" id="company" name="company" class="fi" placeholder="Your business">
+                </div>
+            </div>
+
+            <!-- Service needed -->
+            <div>
+                <label class="fl">What do you need?</label>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+                    <label class="svc-chip"><input type="radio" name="service" value="Website"><span class="svc-chip-inner">Website</span></label>
+                    <label class="svc-chip"><input type="radio" name="service" value="SaaS / Web App"><span class="svc-chip-inner">SaaS / Web App</span></label>
+                    <label class="svc-chip"><input type="radio" name="service" value="AI Integration"><span class="svc-chip-inner">AI Integration</span></label>
+                    <label class="svc-chip"><input type="radio" name="service" value="SEO / GEO / AEO"><span class="svc-chip-inner">SEO / GEO / AEO</span></label>
+                    <label class="svc-chip"><input type="radio" name="service" value="Security Audit"><span class="svc-chip-inner">Security Audit</span></label>
+                    <label class="svc-chip"><input type="radio" name="service" value="Not sure yet"><span class="svc-chip-inner">Not sure yet</span></label>
+                </div>
+            </div>
+
+            <!-- Budget -->
+            <div>
+                <label class="fl" for="budget">Rough budget range</label>
+                <select id="budget" name="budget" class="fi">
+                    <option value="">Select a range</option>
+                    <option value="Under R5,000">Under R5,000</option>
+                    <option value="R5,000 – R15,000">R5,000 – R15,000</option>
+                    <option value="R15,000 – R50,000">R15,000 – R50,000</option>
+                    <option value="R50,000 – R150,000">R50,000 – R150,000</option>
+                    <option value="R150,000+">R150,000+</option>
+                    <option value="Not sure">Not sure</option>
+                </select>
+            </div>
+
+            <!-- Message -->
+            <div>
+                <label class="fl" for="message">Tell us about your project *</label>
+                <textarea id="message" name="message" class="fi" placeholder="What are you building? What problem are you solving? What does success look like?" required></textarea>
+            </div>
+
+            <!-- Timeline -->
+            <div>
+                <label class="fl" for="timeline">When do you need it?</label>
+                <select id="timeline" name="timeline" class="fi">
+                    <option value="">Select timeline</option>
+                    <option value="ASAP">ASAP</option>
+                    <option value="Within 1 month">Within 1 month</option>
+                    <option value="1–3 months">1–3 months</option>
+                    <option value="3+ months">3+ months</option>
+                    <option value="Flexible">Flexible</option>
+                </select>
+            </div>
+
+            <!-- Error message -->
+            <div id="form-error" class="hidden mono text-xs text-red-400 px-1"></div>
+
+            <!-- Submit -->
+            <button type="submit" id="submit-btn" class="btn-submit">
+                Send brief →
+            </button>
+
+            <p class="mono text-[10px] text-[var(--muted)] text-center">
+                Prefer to talk first? 
+                <a href="https://wa.me/27657417593" target="_blank" rel="noopener noreferrer" class="text-[var(--lime)] hover:underline">WhatsApp Jarrit →</a>
+            </p>
+
+        </form>
+    </div>
+
+    <!-- Success state -->
+    <div id="success-state" class="text-center py-16">
+        <div class="w-16 h-16 rounded-2xl mx-auto mb-6 flex items-center justify-center" style="background:rgba(132,204,22,0.1);border:1px solid rgba(132,204,22,0.2);">
+            <svg width="28" height="28" fill="none" stroke="#84cc16" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+        </div>
+        <h2 class="text-2xl font-bold mb-3" style="letter-spacing:-0.02em;">Brief received.</h2>
+        <p class="text-[var(--muted2)] text-base mb-2">We'll review your project and be in touch within 24 hours.</p>
+        <p class="text-[var(--muted2)] text-sm mb-8">
+            Need something urgent?
+            <a href="https://wa.me/27657417593" target="_blank" rel="noopener noreferrer" class="text-[var(--lime)] underline">WhatsApp Jarrit directly →</a>
+        </p>
+        <a href="/index.html" class="mono text-[10px] font-bold uppercase tracking-widest border border-[var(--border2)] px-5 py-3 rounded-xl hover:border-[var(--muted)] transition-all text-[var(--muted2)]">← Back to home</a>
+    </div>
+
+</div>
+</section>
+
+<div id="global-footer"></div>
+
+<script>
+// ── Config ────────────────────────────────────────────────────────
+// Firebase Cloud Function URL — update after deploying functions
+// Format: https://us-central1-YOUR_PROJECT_ID.cloudfunctions.net/submitLead
+// Or via Firebase Hosting rewrite: /api/submit-lead
+const FUNCTION_URL = 'https://us-central1-forge-vertical.cloudfunctions.net/submitLead';
+
+// ── Form submit ───────────────────────────────────────────────────
+document.getElementById('onboard-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const btn = document.getElementById('submit-btn');
+    const err = document.getElementById('form-error');
+    btn.disabled    = true;
+    btn.textContent = 'Sending...';
+    err.classList.add('hidden');
+
+    const form = e.target as HTMLFormElement;
+
+    const payload = {
+        name:     (document.getElementById('name')    as HTMLInputElement).value.trim(),
+        email:    (document.getElementById('email')   as HTMLInputElement).value.trim(),
+        phone:    (document.getElementById('phone')   as HTMLInputElement).value.trim(),
+        company:  (document.getElementById('company') as HTMLInputElement).value.trim(),
+        message:  (document.getElementById('message') as HTMLTextAreaElement).value.trim(),
+        service:  (document.querySelector('input[name="service"]:checked') as HTMLInputElement)?.value || '',
+        budget:   (document.getElementById('budget')   as HTMLSelectElement).value,
+        timeline: (document.getElementById('timeline') as HTMLSelectElement).value,
+        source:   'forgevertical.com/onboard',
+    };
+
+    try {
+        const res = await fetch(FUNCTION_URL, {
+            method:  'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body:    JSON.stringify(payload),
+        });
+
+        const data = await res.json();
+
+        if (res.ok && data.success) {
+            document.getElementById('form-state').style.display    = 'none';
+            document.getElementById('success-state').style.display = 'block';
+        } else {
+            throw new Error(data.error || 'Submission failed');
+        }
+
+    } catch (error: any) {
+        err.textContent = error.message || 'Something went wrong. Please try WhatsApp instead.';
+        err.classList.remove('hidden');
+        btn.disabled    = false;
+        btn.textContent = 'Send brief →';
+    }
+});
+</script>
+
+</body>
+</html>
