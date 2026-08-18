@@ -32,9 +32,6 @@ Web design studio for Cape Town small businesses. Custom-coded, mobile-first, SE
 **[International Panel Shop](https://www.intpanelshop.co.za)**  
 23-year-old Cape Town panel beating business. Collision repairs, dent removal, re-sprays. Free quotes via WhatsApp.
 
-**[The Egypt Tour Specialists](https://theegypttourspecialists.co.uk)**  
-Award-winning guided tours of Egypt led by Samer "Sem Sem" — winner of the Wanderlust World Guide Award 2016.
-
 ---
 
 ## Open Source
