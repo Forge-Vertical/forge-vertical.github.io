@@ -1,6 +1,6 @@
 {
   "meta": {
-    "total_listings": 22,
+    "total_listings": 23,
     "sources": [
       "forge-vertical",
       "sitebuild-studio"
@@ -489,6 +489,26 @@
         "Automotive FinTech"
       ],
       "logo_initial": "SU"
+    },
+    {
+      "id": "two-oceans-roadside-assistance",
+      "name": "Two Oceans Road Side Assistance",
+      "category": "roadside ass",
+      "location": "Woodstock, Cape Town",
+      "address": "152 Victoria Rd, Woodstock, Cape Town, 7925",
+      "phone": "073 500 7911",
+      "whatsapp": "073 500 7911",
+      "description": "24-hour roadside assistance and towing serving Cape Town \u2014 available any time, day or night.",
+      "logo": "https://www.sitebuildstudio.co.za/assets/images/tow-service.webp",
+      "website": "",
+      "_source": "sitebuild",
+      "tagline": "Roadside Assistance & Towing",
+      "verified": true,
+      "featured": false,
+      "tags": [
+        "Roadside Assistance & Towing"
+      ],
+      "logo_initial": "TW"
     }
   ]
 }
