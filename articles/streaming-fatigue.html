@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Netflix, Prime, Disney, Hulu, Apple TV, Max. The average household now spends R3,000+ per year on streaming services for content they mostly don't want. One developer's honest experience building their own solution — and a case for open source, community, and owning your own stack.">
+    <title>I Cancelled Netflix. Here's What I Built Instead. | Forge Vertical</title>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "I Cancelled Netflix. Here's What I Built Instead.",
+      "author": { "@type": "Person", "name": "Jarrit Hosking", "url": "https://www.forgevertical.com/about.html" },
+      "publisher": { "@type": "Organization", "name": "Forge Vertical", "url": "https://www.forgevertical.com" },
+      "datePublished": "2026-08-19",
+      "mainEntityOfPage": "https://www.forgevertical.com/articles/streaming-fatigue.html"
+    }
+    </script>
+    <script src="/global.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/typography.css">
+    <style>
+        body { font-family: 'Outfit', sans-serif; background: #fff; }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        .g-text { background: linear-gradient(90deg,#10b981,#84cc16); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; display:inline-block; }
+        .prose-body { font-family: 'Lora', serif; font-size: 19px; line-height: 1.85; color: #27272a; }
+        .prose-body p { margin-bottom: 1.6em; }
+        .prose-body h2 { font-family: 'Outfit', sans-serif; font-size: 28px; font-weight: 700; letter-spacing: -0.02em; color: #09090b; margin-top: 2.5em; margin-bottom: 0.6em; line-height: 1.2; }
+        .prose-body strong { font-weight: 700; color: #09090b; font-family: 'Outfit', sans-serif; font-size: 17px; }
+        .prose-body a { color: #84cc16; text-decoration: underline; text-underline-offset: 3px; }
+        .callout { background: #f4f4f5; border-left: 3px solid #84cc16; border-radius: 0 12px 12px 0; padding: 20px 24px; margin: 2em 0; font-family: 'Outfit', sans-serif; font-size: 15px; color: #3f3f46; line-height: 1.7; }
+        .callout.dark { background: #09090b; color: #a1a1aa; border-left-color: #84cc16; }
+        .callout.red { background: rgba(239,68,68,0.05); border-left-color: #ef4444; color: #3f3f46; }
+        .pull-quote { font-family: 'Lora', serif; font-size: 23px; font-style: italic; color: #09090b; border-top: 2px solid #84cc16; border-bottom: 1px solid #e4e4e7; padding: 24px 0; margin: 2.5em 0; line-height: 1.5; }
+        .chapter-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #84cc16; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 6px; display: block; }
+        .price-row { display: flex; justify-content: space-between; align-items: center; padding: 13px 0; border-bottom: 1px solid #f4f4f5; font-family: 'Outfit', sans-serif; font-size: 14px; }
+        .price-row:last-child { border-bottom: none; }
+        .price-name { color: #09090b; font-weight: 600; }
+        .price-val { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 700; }
+        .price-note { font-size: 12px; color: #71717a; margin-left: 8px; }
+        .cta-inline { background: #09090b; border-radius: 20px; padding: 36px; margin: 3em 0; }
+        .cta-inline h3 { font-family: 'Outfit', sans-serif; font-size: 22px; font-weight: 700; color: #f4f4f5; margin-bottom: 10px; letter-spacing: -0.02em; }
+        .cta-inline p { font-size: 14px; color: #71717a; margin-bottom: 20px; line-height: 1.65; }
+        .cta-btn { display: inline-block; background: linear-gradient(90deg,#10b981,#84cc16); color: #ffffff !important; padding: 12px 24px; border-radius: 10px; font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; text-decoration: none; transition: opacity 0.18s; }
+        .cta-btn:hover { opacity: 0.85; }
+    </style>
+</head>
+<body class="antialiased">
+<div id="global-nav"></div>
+<article class="pt-20 pb-24">
+
+    <header class="max-w-3xl mx-auto px-6 mt-10 mb-12">
+        <div class="flex items-center gap-3 mb-6">
+            <a href="/articles.html" class="mono text-[10px] text-zinc-400 hover:text-zinc-600 uppercase tracking-widest">← Articles</a>
+            <span class="text-zinc-300">·</span>
+            <span class="mono text-[10px] font-bold text-[#84cc16] uppercase tracking-widest border border-[#84cc16]/30 px-3 py-1 rounded-full">Technology · Open Source · Personal</span>
+        </div>
+        <h1 class="text-4xl md:text-5xl font-bold tracking-tight leading-[1.0] mb-6 text-zinc-900" style="font-family:'Outfit',sans-serif;letter-spacing:-0.03em;">
+            I cancelled Netflix.<br>
+            <span class="g-text">Here's what I built instead.</span>
+        </h1>
+        <p class="text-xl text-zinc-500 font-light leading-relaxed mb-8 max-w-2xl" style="font-family:'Outfit',sans-serif;">
+            Netflix, Prime, Disney, Hulu, Apple TV, Max — the average household now spends over $3,000 per year on streaming subscriptions for content they mostly don't want. One developer's honest experience, a case for open source, community, and owning your own stack.
+        </p>
+        <div class="callout red">
+            <strong>Important note before reading:</strong> This article is a personal experience and a case for open source communities. It is not a guide for piracy, redistribution, or commercial exploitation of content that does not belong to you. The ethical line is clear — personal use of content you have access to through legitimate means is different from selling or redistributing content that belongs to someone else. The tools discussed are legal. How you use them is your responsibility.
+        </div>
+        <div class="flex items-center gap-4 pb-8 border-b border-zinc-100">
+            <div>
+                <div class="font-bold text-sm text-zinc-900">Jarrit Hosking</div>
+                <div class="mono text-[10px] text-zinc-400 uppercase tracking-widest">Forge Vertical · Cape Town · August 19, 2026</div>
+            </div>
+            <div class="ml-auto mono text-[10px] text-zinc-400 uppercase tracking-widest">10 min read</div>
+        </div>
+    </header>
+
+    <div class="max-w-3xl mx-auto px-6 prose-body">
+
+        <span class="chapter-label">// Chapter 01 — The maths that broke me</span>
+
+        <p>
+            I did the calculation one evening and it genuinely annoyed me. Not because the individual numbers were shocking — R229 for Netflix, R59 for Prime, R179 for Disney — but because of what those numbers added up to when I looked at them honestly.
+        </p>
+
+        <p>
+            <cite index="22-1">According to a US survey, consumers spent an average of $3,350 per year on streaming in 2025 — $278.50 per month — to stay connected to their chosen services.</cite> That is before you factor in the South African rand equivalent at current exchange rates. <cite index="15-1">In South Africa in 2026, Netflix charges R229 per month for a plan that gives you 4K on multiple screens. Amazon Prime is R59 per month. Disney+ is R179 per month after the introductory period.</cite> Add Showmax at R39 if you want local content. That is R506 per month — R6,072 per year — before you even get to Apple TV or any of the premium sports add-ons.
+        </p>
+
+        <p>
+            And what do you actually watch? For most people the honest answer is: a few series that you finish in a week, followed by months of scrolling through a catalogue of things you have no interest in. The content you actually want to watch is spread across four platforms simultaneously. The show everyone is talking about this week is on the one you do not have. The moment you subscribe, everyone moves on to something else that is exclusive to a different platform.
+        </p>
+
+        <div class="pull-quote">
+            "The average American household subscribes to 4.7 streaming services and spends roughly $56 per month — $672 per year — on streaming alone. And if you have a premium tier or two in there, you're probably north of $100 per month."
+        </div>
+
+        <p>
+            <cite index="16-1">Subscribing to all eight major streaming services costs approximately $85–120 per month for ad-free plans.</cite> That is the cable bill that streaming was supposed to kill. It did not kill the bill. It just replaced one monopoly with eight competing ones.
+        </p>
+
+        <h2>The experience that broke me specifically</h2>
+
+        <span class="chapter-label">// Chapter 02 — One show. Four platforms. No good answer.</span>
+
+        <p>
+            I am not someone who watches a lot of television. When I want to watch something, I generally know what it is. I do not want to browse. I want to watch the specific thing, at the time I choose to watch it, without an advertisement appearing in the middle of a scene I have been waiting three episodes to reach.
+        </p>
+
+        <p>
+            The streaming model is not built for that. It is built on the assumption that you will scroll, discover, and end up watching something you did not plan to watch. The recommendation algorithm is not trying to find you the specific thing you want. It is trying to maximise the amount of time you spend on the platform. Those are different goals with different outcomes.
+        </p>
+
+        <p>
+            I was paying for three platforms. The content I wanted to watch that month was split across all three, plus one service I did not have. The content that was actually available on the platforms I paid for — that I had any genuine interest in watching — amounted to maybe six hours. Six hours of content I wanted. Thousands of rands per year. The maths does not work.
+        </p>
+
+        <p>
+            So I started looking for another way.
+        </p>
+
+        <h2>What I found — and what I built</h2>
+
+        <span class="chapter-label">// Chapter 03 — The open source route</span>
+
+        <p>
+            The developer community has been building alternatives to the streaming platform model for years. Not piracy tools — that is a different conversation with a different ethical picture. But open source media management and streaming platforms that let you organise, access, and stream content you have legitimately obtained, through a personal interface that you control, on infrastructure that you own.
+        </p>
+
+        <p>
+            I found a repository with a free API key. I hooked it up to Firebase and GCP. I disconnected the sign-up flow — this is strictly personal, one user, one account, zero redistribution. The result is a personal streaming platform that runs on Google Cloud infrastructure at essentially zero cost at personal-use scale.
+        </p>
+
+        <p>
+            The content I watch is content I have access to through legitimate means. I am not selling it. I am not sharing it publicly. I am not building a business on someone else's intellectual property. I am watching things I want to watch, when I want to watch them, on an interface I built myself, without paying R500 per month for the privilege of being shown things I do not want.
+        </p>
+
+        <div class="callout dark">
+            <span class="text-[#84cc16] font-bold block mb-2 font-sans text-sm">The GCP cost at personal scale:</span>
+            <span class="text-zinc-400">Firebase Hosting is free up to 10GB transfer per month. Cloud Run at personal viewing volume — a few hours per day — runs at effectively zero. The Firebase free tier covers authentication, Firestore reads for a personal media library, and Cloud Functions for any API calls. The total monthly infrastructure cost for a personal streaming setup on GCP: under R5. Compare that to R506 per month across three commercial platforms.</span>
+        </div>
+
+        <h2>The streaming price table — what you are actually paying</h2>
+
+        <span class="chapter-label">// Chapter 04 — The real numbers</span>
+
+    </div>
+
+    <!-- Price table -->
+    <div class="max-w-3xl mx-auto px-6 my-8">
+        <div class="bg-zinc-50 border border-zinc-100 rounded-2xl p-6">
+            <p class="mono text-[10px] text-zinc-400 uppercase tracking-widest mb-4">// Streaming costs · South Africa · August 2026</p>
+            <div class="price-row">
+                <span class="price-name">Netflix Standard (ad-free)</span>
+                <div><span class="price-val" style="color:#ef4444;">R229/month</span><span class="price-note">1080p, 2 screens</span></div>
+            </div>
+            <div class="price-row">
+                <span class="price-name">Netflix Premium</span>
+                <div><span class="price-val" style="color:#ef4444;">R289/month</span><span class="price-note">4K, 4 screens</span></div>
+            </div>
+            <div class="price-row">
+                <span class="price-name">Amazon Prime</span>
+                <div><span class="price-val" style="color:#f59e0b;">R59/month</span><span class="price-note">4K, 3 screens — best value</span></div>
+            </div>
+            <div class="price-row">
+                <span class="price-name">Disney+</span>
+                <div><span class="price-val" style="color:#ef4444;">R179/month</span><span class="price-note">after 3-month intro</span></div>
+            </div>
+            <div class="price-row">
+                <span class="price-name">Apple TV+</span>
+                <div><span class="price-val" style="color:#f59e0b;">R99/month</span><span class="price-note">originals only, small library</span></div>
+            </div>
+            <div class="price-row">
+                <span class="price-name">Showmax</span>
+                <div><span class="price-val" style="color:#84cc16;">R39/month</span><span class="price-note">local content, HBO included</span></div>
+            </div>
+            <div class="price-row" style="background:rgba(239,68,68,0.03);margin: 0 -24px;padding:13px 24px;">
+                <span class="price-name font-bold">All of the above</span>
+                <div><span class="price-val" style="color:#ef4444;font-size:18px;">R894/month</span><span class="price-note">R10,728 per year</span></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-3xl mx-auto px-6 prose-body">
+
+        <p>
+            <cite index="11-1">Amazon Prime at R59 per month is genuinely the best value in South African streaming in 2026 — 4K streaming with 3 concurrent screens, plus Amazon shopping benefits. Netflix charges R229 per month for those same specs. That is not a small gap, that is a chasm.</cite> If you are going to keep any subscription, Prime is the defensible one.
+        </p>
+
+        <p>
+            But even Prime, the cheapest and most rational of the major platforms, is R708 per year for content you may or may not watch. That is the problem. Not the price per platform. The aggregate.
+        </p>
+
+        <h2>The case for open source and community</h2>
+
+        <span class="chapter-label">// Chapter 05 — What the developer community has been quietly building</span>
+
+        <p>
+            There is a thriving open source ecosystem built around personal media management, self-hosted streaming, and community-maintained software that does everything the commercial platforms do — without the subscription model, without the algorithm trying to maximise your screen time, and without the content being locked behind whichever platform paid the most to licence it this month.
+        </p>
+
+        <p>
+            This ecosystem is not piracy. It is the difference between the community that maintains open source software and the corporation that sells proprietary software. The tools are legitimate. The community is genuine. The people building and maintaining these projects are doing it because they believe in open infrastructure, personal control over technology, and the principle that software should serve the people who use it — not the platform that hosts it.
+        </p>
+
+        <p>
+            The practical application — building a personal streaming setup on GCP, Firebase, or any other cloud infrastructure — is a weekend project for someone with basic developer skills. It requires: a free API key from a community project, a Firebase project on the Spark free tier, and an afternoon of configuration. The result is a personal media platform that you own, control, and pay almost nothing to run.
+        </p>
+
+        <!-- CTA -->
+        <div class="cta-inline">
+            <h3>Want to build something you own instead of renting it forever?</h3>
+            <p>This is exactly the kind of personal infrastructure project Forge Vertical can help with — whether it is a media platform, a personal dashboard, a custom tool that does something the commercial alternatives do not. The principle is the same: own your stack. Build it once. Pay almost nothing to run it. Tell us what you want to build.</p>
+            <a href="/onboard.html" class="cta-btn">Start a project →</a>
+        </div>
+
+        <h2>The ethical line — where it is and why it matters</h2>
+
+        <span class="chapter-label">// Chapter 06 — This is the part that actually matters</span>
+
+        <p>
+            The open source streaming community has a clear ethical line and it is worth stating it plainly: personal use is different from distribution.
+        </p>
+
+        <p>
+            Building a personal media platform for your own use, accessing content you have legitimately obtained, running it on your own infrastructure with no public access — this sits in a different ethical category from operating a commercial piracy service, redistributing content you do not own, or building a business on someone else's creative work without compensation.
+        </p>
+
+        <p>
+            The creative people who make the content that these platforms licence — the writers, directors, actors, crew, animators, composers — deserve to be paid for their work. The mechanism that currently pays them is imperfect and skewed heavily toward the platforms rather than the creators, but that is a problem with the platform model, not a justification for bypassing compensation entirely.
+        </p>
+
+        <p>
+            The ethical position is this: support creators directly where you can. Buy the thing when there is a good way to buy it. Use the open source tools for personal viewing of content you have legitimate access to. Do not sell what does not belong to you. Do not build a commercial service on someone else's creative labour without their consent and compensation.
+        </p>
+
+        <p>
+            That line is clear. The community that builds these open source tools generally understands it and states it clearly in their documentation. The people who cross it are not part of that community — they are using the tools for a different purpose than they were built for.
+        </p>
+
+        <h2>What this is really about</h2>
+
+        <span class="chapter-label">// Chapter 07 — Owning your stack</span>
+
+        <p>
+            This article is not really about streaming. It is about the broader principle of owning your own technology stack rather than renting access to someone else's.
+        </p>
+
+        <p>
+            The streaming model is one version of a pattern that appears across almost every category of software: subscription access to a platform you do not own, whose pricing you cannot control, whose continuation depends on decisions made by a board in another country, and which can change its terms, raise its prices, or remove content you depend on at any time without consulting you.
+        </p>
+
+        <p>
+            The alternative is building. Building takes time and skill. It requires understanding the technology at a level deeper than clicking "subscribe." But what it produces is infrastructure you own, that runs at cost rather than at margin, that does exactly what you need it to do because you built it for that purpose.
+        </p>
+
+        <p>
+            The open source community makes that possible. The cloud infrastructure to run it is more accessible and more affordable than it has ever been. The skills to build it are learnable by anyone willing to spend the time.
+        </p>
+
+        <p>
+            I cancelled Netflix. I built something instead. I pay almost nothing to run it. I watch exactly what I want to watch. And I own the whole thing.
+        </p>
+
+        <p>
+            That is what owning your stack looks like in practice. It applies to streaming. It applies to your website. It applies to your CRM, your analytics, your business tools. The principle is the same everywhere: build once, own it, pay cost rather than margin, and never have a platform make decisions for you that you should be making for yourself.
+        </p>
+
+    </div>
+
+    <!-- Final CTA -->
+    <div class="max-w-3xl mx-auto px-6 mt-12">
+        <div class="bg-zinc-50 border border-zinc-100 rounded-2xl p-8 text-center">
+            <p class="mono text-[10px] text-[#84cc16] uppercase tracking-widest mb-3">// Build something you own</p>
+            <h3 class="text-xl font-bold text-zinc-900 mb-3" style="font-family:'Outfit',sans-serif;letter-spacing:-0.02em;">Infrastructure-first. Yours permanently. Costs you almost nothing to run.</h3>
+            <p class="text-zinc-500 text-sm mb-6">Whether you need a website, a SaaS platform, a personal tool, or a business application — Forge Vertical builds on infrastructure you own and control. No lock-in. No ongoing licence fees. No platform making decisions for you.</p>
+            <div class="flex flex-wrap gap-3 justify-center">
+                <a href="/onboard.html" style="background:linear-gradient(90deg,#10b981,#84cc16);" class="mono text-[10px] font-bold uppercase tracking-widest px-5 py-3 rounded-xl text-white hover:opacity-90 transition-all">Start a project →</a>
+                <a href="https://wa.me/27657417593" target="_blank" rel="noopener noreferrer" class="mono text-[10px] font-bold uppercase tracking-widest border border-zinc-200 px-5 py-3 rounded-xl hover:border-zinc-400 transition-all text-zinc-600">WhatsApp Jarrit →</a>
+            </div>
+        </div>
+        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mt-8">
+            <div>
+                <div class="mono text-[10px] text-zinc-400 uppercase tracking-widest mb-1">Written by</div>
+                <div class="font-bold text-zinc-900">Jarrit Hosking</div>
+                <div class="mono text-[10px] text-zinc-400">Forge Vertical · Cape Town</div>
+            </div>
+            <div class="flex gap-3 flex-wrap">
+                <a href="/articles.html" class="mono text-[10px] font-bold uppercase tracking-widest border border-zinc-200 px-5 py-3 rounded-xl hover:border-zinc-400 transition-all text-zinc-600">← All articles</a>
+                <a href="/articles/networkchuck.html" class="mono text-[10px] font-bold uppercase tracking-widest border border-zinc-200 px-5 py-3 rounded-xl hover:border-zinc-400 transition-all text-zinc-600">NetworkChuck →</a>
+            </div>
+        </div>
+    </div>
+
+</article>
+<div id="global-footer"></div>
+</body>
+</html>
