@@ -21,6 +21,14 @@
         .vibrant-gradient { background: linear-gradient(90deg, #10b981 0%, #84cc16 100%); }
         .article-card { transition: transform 0.2s, box-shadow 0.2s; }
         .article-card:hover { transform: translateY(-3px); box-shadow: 0 20px 40px rgba(0,0,0,0.06); }
+        .card-cover { width: 100%; height: 160px; object-fit: cover; border-radius: 12px; margin-bottom: 16px; display: block; }
+        .card-cover-wrap { position: relative; overflow: hidden; border-radius: 12px; margin-bottom: 16px; height: 160px; }
+        .card-cover-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+        .article-card:hover .card-cover-wrap img { transform: scale(1.04); }
+        .card-cover-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.4) 0%, transparent 60%); border-radius: 12px; }
+        .logo-chip { display: inline-flex; align-items: center; gap: 6px; background: #fff; border: 1px solid #e4e4e7; border-radius: 8px; padding: 4px 10px; margin-bottom: 12px; }
+        .logo-chip img { height: 16px; width: auto; }
+        .logo-chip span { font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 700; color: #71717a; text-transform: uppercase; letter-spacing: 0.1em; }
     </style>
 </head>
 <body class="bg-white text-zinc-900 antialiased">
@@ -170,77 +178,99 @@
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
 
             <a href="/articles/streaming-fatigue.html" class="article-card block bg-zinc-50 border border-zinc-100 rounded-[1.5rem] p-7 flex flex-col justify-between min-h-[280px] hover:border-[#84cc16] transition-all group">
-                <div><div class="flex items-center gap-2 mb-4"><span class="mono text-[10px] font-bold text-[#84cc16] uppercase tracking-widest border border-[#84cc16]/30 px-3 py-1 rounded-full">Technology · Open Source</span></div>
+                <div>
+                <div class="card-cover-wrap"><img src="https://images.pexels.com/photos/1201996/pexels-photo-1201996.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Streaming TV setup" loading="lazy"><div class="card-cover-overlay"></div></div>
+                <div class="flex items-center gap-2 mb-4"><span class="mono text-[10px] font-bold text-[#84cc16] uppercase tracking-widest border border-[#84cc16]/30 px-3 py-1 rounded-full">Technology · Open Source</span></div>
                 <h3 class="text-xl font-extrabold tracking-tight text-zinc-900 mb-3 leading-tight group-hover:text-[#84cc16] transition-colors">I cancelled Netflix. Here's what I built instead.</h3>
                 <p class="text-zinc-500 text-sm leading-relaxed font-light">Netflix, Prime, Disney, Hulu — the average household spends R10,000+ per year on streaming for content they mostly don't want. One developer's honest experience building a personal alternative on GCP.</p></div>
                 <div class="flex items-center justify-between mt-6"><span class="mono text-[10px] text-zinc-400">Jarrit Hosking · August 2026</span><span class="mono text-[10px] font-bold text-[#84cc16] uppercase tracking-widest">Read →</span></div>
             </a>
 
             <a href="/articles/networkchuck.html" class="article-card block bg-zinc-50 border border-zinc-100 rounded-[1.5rem] p-7 flex flex-col justify-between min-h-[280px] hover:border-[#84cc16] transition-all group">
-                <div><div class="flex items-center gap-2 mb-4"><span class="mono text-[10px] font-bold text-[#84cc16] uppercase tracking-widest border border-[#84cc16]/30 px-3 py-1 rounded-full">Technology · Personal</span></div>
+                <div>
+                <div class="card-cover-wrap"><img src="https://images.pexels.com/photos/4974915/pexels-photo-4974915.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Developer coding with coffee" loading="lazy"><div class="card-cover-overlay"></div></div>
+                <div class="flex items-center gap-2 mb-4"><span class="mono text-[10px] font-bold text-[#84cc16] uppercase tracking-widest border border-[#84cc16]/30 px-3 py-1 rounded-full">Technology · Personal</span></div>
                 <h3 class="text-xl font-extrabold tracking-tight text-zinc-900 mb-3 leading-tight group-hover:text-[#84cc16] transition-colors">NetworkChuck: why building cool stuff is enough of a reason</h3>
                 <p class="text-zinc-500 text-sm leading-relaxed font-light">5.3 million subscribers, 400 million views, and a way of making technology feel like the most exciting thing in the world. A personal tribute — with a prayer at the end.</p></div>
                 <div class="flex items-center justify-between mt-6"><span class="mono text-[10px] text-zinc-400">Jarrit Hosking · August 2026</span><span class="mono text-[10px] font-bold text-[#84cc16] uppercase tracking-widest">Read →</span></div>
             </a>
 
             <a href="/articles/webuycars-is-a-tech-company.html" class="article-card block bg-zinc-50 border border-zinc-100 rounded-[1.5rem] p-7 flex flex-col justify-between min-h-[280px] hover:border-[#84cc16] transition-all group">
-                <div><div class="flex items-center gap-2 mb-4"><span class="mono text-[10px] font-bold text-[#84cc16] uppercase tracking-widest border border-[#84cc16]/30 px-3 py-1 rounded-full">Technology · Business</span></div>
+                <div>
+                <div class="card-cover-wrap"><img src="https://images.pexels.com/photos/1592384/pexels-photo-1592384.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Car dealership technology" loading="lazy"><div class="card-cover-overlay"></div></div>
+                <div class="flex items-center gap-2 mb-4"><span class="mono text-[10px] font-bold text-[#84cc16] uppercase tracking-widest border border-[#84cc16]/30 px-3 py-1 rounded-full">Technology · Business</span></div>
                 <h3 class="text-xl font-extrabold tracking-tight text-zinc-900 mb-3 leading-tight group-hover:text-[#84cc16] transition-colors">WeBuyCars is a tech company — here's what your business can learn from it</h3>
                 <p class="text-zinc-500 text-sm leading-relaxed font-light">Two brothers built an R25 billion business from a backyard car operation. An AI model has bought 2,800 vehicles autonomously. Here is what that means for every business owner.</p></div>
                 <div class="flex items-center justify-between mt-6"><span class="mono text-[10px] text-zinc-400">Jarrit Hosking · August 2026</span><span class="mono text-[10px] font-bold text-[#84cc16] uppercase tracking-widest">Read →</span></div>
             </a>
 
             <a href="/articles/international-panel-shop.html" class="article-card block bg-zinc-50 border border-zinc-100 rounded-[1.5rem] p-7 flex flex-col justify-between min-h-[280px] hover:border-[#84cc16] transition-all group">
-                <div><div class="flex items-center gap-2 mb-4"><span class="mono text-[10px] font-bold text-[#84cc16] uppercase tracking-widest border border-[#84cc16]/30 px-3 py-1 rounded-full">Business · Automotive</span></div>
+                <div>
+                <div class="card-cover-wrap"><img src="/assets/images/international-panel-shop.webp" alt="International Panel Shop Cape Town" loading="lazy"><div class="card-cover-overlay"></div></div>
+                <div class="flex items-center gap-2 mb-4"><span class="mono text-[10px] font-bold text-[#84cc16] uppercase tracking-widest border border-[#84cc16]/30 px-3 py-1 rounded-full">Business · Automotive</span></div>
                 <h3 class="text-xl font-extrabold tracking-tight text-zinc-900 mb-3 leading-tight group-hover:text-[#84cc16] transition-colors">Built from a garage, forged over 23 years: the story of International Panel Shop</h3>
                 <p class="text-zinc-500 text-sm leading-relaxed font-light">It started with a Ford Fairlane and a price sucked out of a thumb. Twenty-three years later it is a 4.8-star panel beating business with R2.23M in assets, now for sale through Aldes.</p></div>
                 <div class="flex items-center justify-between mt-6"><span class="mono text-[10px] text-zinc-400">Jarrit Hosking · August 2026</span><span class="mono text-[10px] font-bold text-[#84cc16] uppercase tracking-widest">Read →</span></div>
             </a>
 
             <a href="/articles/google-ai-owns-your-story.html" class="article-card block bg-zinc-50 border border-zinc-100 rounded-[1.5rem] p-7 flex flex-col justify-between min-h-[280px] hover:border-[#84cc16] transition-all group">
-                <div><div class="flex items-center gap-2 mb-4"><span class="mono text-[10px] font-bold text-[#84cc16] uppercase tracking-widest border border-[#84cc16]/30 px-3 py-1 rounded-full">SEO · GEO · AEO</span></div>
+                <div>
+                <div class="card-cover-wrap"><img src="https://images.pexels.com/photos/270637/pexels-photo-270637.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Search engine marketing analytics" loading="lazy"><div class="card-cover-overlay"></div></div>
+                <div class="flex items-center gap-2 mb-4"><span class="mono text-[10px] font-bold text-[#84cc16] uppercase tracking-widest border border-[#84cc16]/30 px-3 py-1 rounded-full">SEO · GEO · AEO</span></div>
                 <h3 class="text-xl font-extrabold tracking-tight text-zinc-900 mb-3 leading-tight group-hover:text-[#84cc16] transition-colors">Google now writes your story. Here's how to take it back.</h3>
                 <p class="text-zinc-500 text-sm leading-relaxed font-light">Google is testing AI summaries under paid ads. Seven actions to shape what AI says about your business before anyone clicks. No ad spend required.</p></div>
                 <div class="flex items-center justify-between mt-6"><span class="mono text-[10px] text-zinc-400">Jarrit Hosking · August 2026</span><span class="mono text-[10px] font-bold text-[#84cc16] uppercase tracking-widest">Read →</span></div>
             </a>
 
             <a href="/articles/task-bridge-manifesto.html" class="article-card block bg-zinc-50 border border-zinc-100 rounded-[1.5rem] p-7 flex flex-col justify-between min-h-[280px] hover:border-[#84cc16] transition-all group">
-                <div><div class="flex items-center gap-2 mb-4"><span class="mono text-[10px] font-bold text-[#84cc16] uppercase tracking-widest border border-[#84cc16]/30 px-3 py-1 rounded-full">Open call · AI · Dev</span></div>
+                <div>
+                <div class="card-cover-wrap"><img src="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Human and AI collaboration" loading="lazy"><div class="card-cover-overlay"></div></div>
+                <div class="flex items-center gap-2 mb-4"><span class="mono text-[10px] font-bold text-[#84cc16] uppercase tracking-widest border border-[#84cc16]/30 px-3 py-1 rounded-full">Open call · AI · Dev</span></div>
                 <h3 class="text-xl font-extrabold tracking-tight text-zinc-900 mb-3 leading-tight group-hover:text-[#84cc16] transition-colors">The missing protocol — a call to AI companies and developers</h3>
                 <p class="text-zinc-500 text-sm leading-relaxed font-light">If AI displaces human work, we need an open protocol to route that work back to humans. task-bridge is the proposal. A call to Anthropic, OpenAI, Google DeepMind and every agentic AI developer.</p></div>
                 <div class="flex items-center justify-between mt-6"><span class="mono text-[10px] text-zinc-400">Jarrit Hosking · August 2026</span><span class="mono text-[10px] font-bold text-[#84cc16] uppercase tracking-widest">Read →</span></div>
             </a>
 
             <a href="/articles/fable5-here-to-stay.html" class="article-card block bg-zinc-50 border border-zinc-100 rounded-[1.5rem] p-7 flex flex-col justify-between min-h-[280px] hover:border-[#84cc16] transition-all group">
-                <div><div class="flex items-center gap-2 mb-4"><span class="mono text-[10px] font-bold text-[#84cc16] uppercase tracking-widest border border-[#84cc16]/30 px-3 py-1 rounded-full">Follow-up · AI</span></div>
+                <div>
+                <div class="card-cover-wrap" style="background:#09090b;display:flex;align-items:center;justify-content:center;"><img src="https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800" alt="AI technology Anthropic" loading="lazy" style="opacity:0.7;"><div class="card-cover-overlay"></div></div>
+                <div class="flex items-center gap-2 mb-4"><span class="mono text-[10px] font-bold text-[#84cc16] uppercase tracking-widest border border-[#84cc16]/30 px-3 py-1 rounded-full">Follow-up · AI</span></div>
                 <h3 class="text-xl font-extrabold tracking-tight text-zinc-900 mb-3 leading-tight group-hover:text-[#84cc16] transition-colors">Fable 5 is here to stay — and what Anthropic has planned next</h3>
                 <p class="text-zinc-500 text-sm leading-relaxed font-light">The model survived a 19-day government shutdown, returned with stronger safeguards, and is now permanently in the lineup. The full roadmap ahead.</p></div>
                 <div class="flex items-center justify-between mt-6"><span class="mono text-[10px] text-zinc-400">Jarrit Hosking · August 2026</span><span class="mono text-[10px] font-bold text-[#84cc16] uppercase tracking-widest">Read →</span></div>
             </a>
 
             <a href="/articles/ai-future-of-work.html" class="article-card block bg-zinc-50 border border-zinc-100 rounded-[1.5rem] p-7 flex flex-col justify-between min-h-[280px] hover:border-[#84cc16] transition-all group">
-                <div><div class="flex items-center gap-2 mb-4"><span class="mono text-[10px] font-bold text-[#84cc16] uppercase tracking-widest border border-[#84cc16]/30 px-3 py-1 rounded-full">AI · Future of Work</span></div>
+                <div>
+                <div class="card-cover-wrap"><img src="https://images.pexels.com/photos/8386434/pexels-photo-8386434.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Future of work AI technology" loading="lazy"><div class="card-cover-overlay"></div></div>
+                <div class="flex items-center gap-2 mb-4"><span class="mono text-[10px] font-bold text-[#84cc16] uppercase tracking-widest border border-[#84cc16]/30 px-3 py-1 rounded-full">AI · Future of Work</span></div>
                 <h3 class="text-xl font-extrabold tracking-tight text-zinc-900 mb-3 leading-tight group-hover:text-[#84cc16] transition-colors">After Work: What the World Looks Like When AI Does Everything</h3>
                 <p class="text-zinc-500 text-sm leading-relaxed font-light">Musk, Amodei, Hawking — what 2030 and 2040 look like for human employment. The IMF numbers and the honest picture.</p></div>
                 <div class="flex items-center justify-between mt-6"><span class="mono text-[10px] text-zinc-400">Jarrit Hosking · August 2026</span><span class="mono text-[10px] font-bold text-[#84cc16] uppercase tracking-widest">Read →</span></div>
             </a>
 
             <a href="/articles/cape-town-tech.html" class="article-card block bg-zinc-50 border border-zinc-100 rounded-[1.5rem] p-7 flex flex-col justify-between min-h-[280px] hover:border-[#84cc16] transition-all group">
-                <div><div class="flex items-center gap-2 mb-4"><span class="mono text-[10px] font-bold text-[#84cc16] uppercase tracking-widest border border-[#84cc16]/30 px-3 py-1 rounded-full">Technology · Cape Town</span></div>
+                <div>
+                <div class="card-cover-wrap"><img src="https://images.pexels.com/photos/259447/pexels-photo-259447.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Cape Town cityscape" loading="lazy"><div class="card-cover-overlay"></div></div>
+                <div class="flex items-center gap-2 mb-4"><span class="mono text-[10px] font-bold text-[#84cc16] uppercase tracking-widest border border-[#84cc16]/30 px-3 py-1 rounded-full">Technology · Cape Town</span></div>
                 <h3 class="text-xl font-extrabold tracking-tight text-zinc-900 mb-3 leading-tight group-hover:text-[#84cc16] transition-colors">Silicon Cape: Inside Africa's Most Surprising Tech Capital</h3>
                 <p class="text-zinc-500 text-sm leading-relaxed font-light">Cape Town climbed 24 places in the 2026 Global Startup Ecosystem Index. The full picture of what is being built here.</p></div>
                 <div class="flex items-center justify-between mt-6"><span class="mono text-[10px] text-zinc-400">Jarrit Hosking · August 2026</span><span class="mono text-[10px] font-bold text-[#84cc16] uppercase tracking-widest">Read →</span></div>
             </a>
 
             <a href="/articles/ota-commission.html" class="article-card block bg-zinc-50 border border-zinc-100 rounded-[1.5rem] p-7 flex flex-col justify-between min-h-[280px] hover:border-[#84cc16] transition-all group">
-                <div><div class="flex items-center gap-2 mb-4"><span class="mono text-[10px] font-bold text-[#84cc16] uppercase tracking-widest border border-[#84cc16]/30 px-3 py-1 rounded-full">Hospitality · Business</span></div>
+                <div>
+                <div class="card-cover-wrap"><img src="https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Hotel hospitality accommodation" loading="lazy"><div class="card-cover-overlay"></div></div>
+                <div class="flex items-center gap-2 mb-4"><span class="mono text-[10px] font-bold text-[#84cc16] uppercase tracking-widest border border-[#84cc16]/30 px-3 py-1 rounded-full">Hospitality · Business</span></div>
                 <h3 class="text-xl font-extrabold tracking-tight text-zinc-900 mb-3 leading-tight group-hover:text-[#84cc16] transition-colors">The Commission Trap: Why 20% Is a Choice, Not a Requirement</h3>
                 <p class="text-zinc-500 text-sm leading-relaxed font-light">The real cost of OTA distribution is 30–35%. The data, the alternatives, the movement away from platform dependency.</p></div>
                 <div class="flex items-center justify-between mt-6"><span class="mono text-[10px] text-zinc-400">Jarrit Hosking · August 2026</span><span class="mono text-[10px] font-bold text-[#84cc16] uppercase tracking-widest">Read →</span></div>
             </a>
 
             <a href="/articles/number-recycling.html" class="article-card block bg-zinc-50 border border-zinc-100 rounded-[1.5rem] p-7 flex flex-col justify-between min-h-[280px] hover:border-[#84cc16] transition-all group">
-                <div><div class="flex items-center gap-2 mb-4"><span class="mono text-[10px] font-bold text-[#84cc16] uppercase tracking-widest border border-[#84cc16]/30 px-3 py-1 rounded-full">Security · Public Interest</span></div>
+                <div>
+                <div class="card-cover-wrap"><img src="https://images.pexels.com/photos/699122/pexels-photo-699122.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Mobile phone SIM security" loading="lazy"><div class="card-cover-overlay"></div></div>
+                <div class="flex items-center gap-2 mb-4"><span class="mono text-[10px] font-bold text-[#84cc16] uppercase tracking-widest border border-[#84cc16]/30 px-3 py-1 rounded-full">Security · Public Interest</span></div>
                 <h3 class="text-xl font-extrabold tracking-tight text-zinc-900 mb-3 leading-tight group-hover:text-[#84cc16] transition-colors">Your Phone Number Is Not Yours</h3>
                 <p class="text-zinc-500 text-sm leading-relaxed font-light">SA networks recycle numbers after 90 days. The new owner inherits your bank OTPs and 2FA codes.</p></div>
                 <div class="flex items-center justify-between mt-6"><span class="mono text-[10px] text-zinc-400">Jarrit Hosking · August 2026</span><span class="mono text-[10px] font-bold text-[#84cc16] uppercase tracking-widest">Read →</span></div>
