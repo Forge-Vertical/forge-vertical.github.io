@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /subdomains/seriti-pbo/
+
+Sitemap: https://www.forgevertical.com/subdomains/seriti-pbo/sitemap.xml
