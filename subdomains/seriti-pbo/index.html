@@ -77,33 +77,24 @@
     background:rgba(20,33,44,0.92);backdrop-filter:blur(6px);
     border-bottom:1px solid var(--line);
   }
-  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:86px;}
+  nav .wrap{display:flex;align-items:center;justify-content:center;height:112px;}
   .logo{
     display:flex;align-items:center;gap:12px;text-decoration:none;
   }
-  .logo .mark{width:60px;height:60px;flex-shrink:0;object-fit:contain;}
+  .logo .mark{width:88px;height:88px;flex-shrink:0;object-fit:contain;}
   .logo .word{display:flex;flex-direction:column;line-height:1.15;}
   .logo .word .l1{
-    font-family:'Oswald',sans-serif;font-weight:700;font-size:1.05rem;
+    font-family:'Oswald',sans-serif;font-weight:700;font-size:1.5rem;
     letter-spacing:0.02em;text-transform:uppercase;
   }
   .logo .word .l1 .s1{color:var(--offwhite);}
   .logo .word .l1 .s2{color:var(--green-light);}
   .logo .word .l2{
-    font-family:'Space Mono',monospace;font-size:0.56rem;letter-spacing:0.14em;
+    font-family:'Space Mono',monospace;font-size:0.72rem;letter-spacing:0.14em;
     text-transform:uppercase;color:var(--copper-light);opacity:0.85;
   }
   footer .logo .word .l1 .s1{color:var(--offwhite);}
   footer .logo{margin-bottom:0;}
-  .navlinks{display:flex;align-items:center;gap:34px;}
-  .navlinks a{
-    color:var(--concrete);text-decoration:none;font-size:0.85rem;
-    font-family:'Space Mono',monospace;letter-spacing:0.05em;text-transform:uppercase;
-    opacity:0.85;transition:opacity .2s, color .2s;
-  }
-  .navlinks a:hover{opacity:1;color:var(--copper-light);}
-  .navlinks .btn{padding:10px 20px;font-size:0.72rem;}
-  .navtoggle{display:none;background:none;border:none;color:var(--offwhite);font-size:1.5rem;cursor:pointer;}
 
   /* ===== HERO ===== */
   .hero{
@@ -248,11 +239,6 @@
 
   /* ===== RESPONSIVE ===== */
   @media (max-width:860px){
-    .navlinks{position:fixed;top:86px;left:0;right:0;background:var(--navy);
-      flex-direction:column;align-items:flex-start;padding:24px;gap:20px;
-      border-bottom:1px solid var(--line);transform:translateY(-130%);transition:transform .3s ease;}
-    .navlinks.open{transform:translateY(0);}
-    .navtoggle{display:block;}
     .goals-grid{grid-template-columns:1fr;}
     .pipeline{flex-direction:column;gap:36px;}
     .pipeline::before{display:none;}
@@ -307,15 +293,6 @@
       <img class="mark" src="seritilogomark-v3.png" alt="Seriti Skills Development PBO logo">
       <span class="word"><span class="l1"><span class="s1">SERITI</span> <span class="s2">SKILLS</span></span><span class="l2">Development PBO</span></span>
     </a>
-    <button class="navtoggle" id="navToggle" aria-label="Toggle menu">&#9776;</button>
-    <div class="navlinks" id="navLinks">
-      <a href="#about">About</a>
-      <a href="#program">The Program</a>
-      <a href="#stories">Stories</a>
-      <a href="#support">Support Us</a>
-      <a href="#contact">Contact</a>
-      <a href="#support" class="btn solid">Donate</a>
-    </div>
   </div>
 </nav>
 
@@ -524,11 +501,6 @@
 </footer>
 
 <script>
-  const toggle = document.getElementById('navToggle');
-  const links = document.getElementById('navLinks');
-  toggle.addEventListener('click', () => links.classList.toggle('open'));
-  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
-
   const io = new IntersectionObserver((entries) => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
   }, { threshold: 0.15 });
