@@ -3,261 +3,446 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Explore Forge Vertical's live deployments. A portfolio of high-performance websites, SaaS interfaces, and SEO-optimized architecture built for global and local industries.">
-    <title>Portfolio // Forge-Vertical Architectures</title>
-    <script src="/global.js"></script>
+    <meta name="description" content="Forge Vertical live deployments — websites, SaaS platforms, AI tools, and open source projects built for performance, security, and GEO indexing from day one.">
+    <title>Portfolio | Forge Vertical</title>
+    <script src="/global.js" defer></script>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/typography.css">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;500;800&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #ffffff; color: #1e293b; }
-        .vibrant-gradient { background: linear-gradient(90deg, #10b981 0%, #84cc16 100%); }
-        .gradient-text { background: linear-gradient(90deg, #10b981 0%, #84cc16 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; display: inline-block; padding-bottom: 0.1em; }
-        .card-shadow { box-shadow: 0 10px 30px rgba(0,0,0,0.04); }
-        .iframe-container {
-            position: relative;
-            width: 100%;
-            padding-top: 56.25%;
-            overflow: hidden;
-            border-radius: 1.5rem;
-            background-color: #f8fafc;
+        :root {
+            --bg:      #06080c;
+            --surface: #0b0f14;
+            --surface2:#111620;
+            --border:  #1a2030;
+            --border2: #232d3f;
+            --text:    #eef0f4;
+            --muted:   #3d4f6a;
+            --muted2:  #6a7d96;
+            --lime:    #84cc16;
+            --emerald: #10b981;
         }
-        .iframe-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 250%;
-            height: 250%;
-            transform: scale(0.4);
-            transform-origin: 0 0;
-            border: none;
-            pointer-events: none;
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body { background: var(--bg); color: var(--text); font-family: 'Outfit', sans-serif; overflow-x: hidden; }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        .g-text { background: linear-gradient(90deg, var(--emerald), var(--lime)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; display: inline-block; }
+
+        /* Marble hero bg */
+        .marble-bg { position: absolute; inset: 0; overflow: hidden; z-index: 0; }
+        .marble-bg::before {
+            content: '';
+            position: absolute; inset: 0;
+            background:
+                radial-gradient(ellipse 70% 60% at -5% 20%, rgba(16,185,129,0.13) 0%, transparent 65%),
+                radial-gradient(ellipse 80% 70% at 50% 50%, rgba(15,30,60,0.85) 0%, transparent 100%),
+                radial-gradient(ellipse 50% 50% at 105% 80%, rgba(132,204,22,0.07) 0%, transparent 70%);
         }
+
+        /* Hero */
+        #hero { position: relative; padding: 100px 6vw 80px; border-bottom: 1px solid var(--border); }
+        .hero-h1 { font-family: 'Outfit', sans-serif; font-size: clamp(40px, 5vw, 72px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.0; margin-bottom: 18px; }
+        .hero-sub { font-size: 16px; color: var(--muted2); font-weight: 300; line-height: 1.7; max-width: 520px; margin-bottom: 36px; }
+
+        /* Stats strip */
+        #stats { display: flex; overflow-x: auto; scrollbar-width: none; border-bottom: 1px solid var(--border); background: var(--surface); }
+        #stats::-webkit-scrollbar { display: none; }
+        .stat-item { padding: 18px 32px; border-right: 1px solid var(--border); flex-shrink: 0; }
+        .stat-item:last-child { border-right: none; }
+        .stat-n { font-family: 'JetBrains Mono', monospace; font-size: 24px; font-weight: 700; color: var(--lime); }
+        .stat-l { font-size: 11px; color: var(--muted2); margin-top: 2px; }
+
+        /* Filter tabs */
+        #filter-bar { display: flex; gap: 8px; flex-wrap: wrap; padding: 24px 6vw; border-bottom: 1px solid var(--border); background: var(--surface); }
+        .filter-btn { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; padding: 7px 16px; border-radius: 8px; border: 1px solid var(--border2); color: var(--muted2); background: transparent; cursor: pointer; transition: all 0.15s; }
+        .filter-btn:hover { border-color: var(--muted); color: var(--text); }
+        .filter-btn.active { border-color: var(--lime); color: var(--lime); background: rgba(132,204,22,0.08); }
+
+        /* Grid */
+        #portfolio-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 1px; background: var(--border); padding: 0; }
+        @media (max-width: 640px) { #portfolio-grid { grid-template-columns: 1fr; } }
+
+        /* Project card */
+        .proj-card { background: var(--surface); padding: 0; transition: background 0.18s; position: relative; display: flex; flex-direction: column; }
+        .proj-card:hover { background: var(--surface2); }
+
+        /* Preview — iframe or static */
+        .proj-preview { position: relative; width: 100%; padding-top: 56.25%; overflow: hidden; background: var(--surface2); border-bottom: 1px solid var(--border); }
+        .proj-preview iframe { position: absolute; top: 0; left: 0; width: 250%; height: 250%; transform: scale(0.4); transform-origin: 0 0; border: none; pointer-events: none; }
+        .proj-preview .overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(6,8,12,0.6) 0%, transparent 50%); cursor: pointer; transition: background 0.2s; }
+        .proj-preview:hover .overlay { background: linear-gradient(to top, rgba(6,8,12,0.3) 0%, transparent 50%); }
+
+        /* Static preview for non-iframe cards */
+        .proj-preview-static { position: relative; width: 100%; aspect-ratio: 16/9; background: var(--surface2); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: center; cursor: pointer; overflow: hidden; }
+        .proj-preview-static .preview-logo { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 700; color: var(--muted2); letter-spacing: 0.1em; }
+        .proj-preview-static::after { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(132,204,22,0.06) 0%, transparent 70%); pointer-events: none; }
+
+        /* Card body */
+        .proj-body { padding: 20px 22px 22px; flex: 1; }
+        .proj-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; gap: 12px; }
+        .proj-name { font-family: 'Outfit', sans-serif; font-size: 16px; font-weight: 700; color: var(--text); }
+        .proj-badge { font-family: 'JetBrains Mono', monospace; font-size: 8px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; padding: 3px 9px; border-radius: 4px; white-space: nowrap; flex-shrink: 0; }
+        .badge-green { background: rgba(132,204,22,0.1); color: var(--lime); border: 1px solid rgba(132,204,22,0.2); }
+        .badge-blue  { background: rgba(96,165,250,0.1); color: #60a5fa; border: 1px solid rgba(96,165,250,0.2); }
+        .badge-purple{ background: rgba(167,139,250,0.1); color: #a78bfa; border: 1px solid rgba(167,139,250,0.2); }
+        .badge-amber { background: rgba(245,158,11,0.1); color: #f59e0b; border: 1px solid rgba(245,158,11,0.2); }
+        .badge-pink  { background: rgba(244,114,182,0.1); color: #f472b6; border: 1px solid rgba(244,114,182,0.2); }
+        .proj-desc { font-size: 13px; color: var(--muted2); line-height: 1.65; margin-bottom: 14px; }
+        .proj-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 14px; }
+        .proj-tag { font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; padding: 2px 7px; border-radius: 4px; background: rgba(255,255,255,0.04); color: var(--muted2); border: 1px solid var(--border2); }
+        .proj-footer { display: flex; justify-content: space-between; align-items: center; padding-top: 12px; border-top: 1px solid var(--border); }
+        .proj-link { font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--lime); text-decoration: none; transition: opacity 0.15s; }
+        .proj-link:hover { opacity: 0.75; }
+        .proj-url { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--muted); }
+
+        /* CTA */
+        #cta { padding: 80px 6vw; text-align: center; border-top: 1px solid var(--border); background: var(--surface); }
+        .cta-h { font-family: 'Outfit', sans-serif; font-size: clamp(28px, 4vw, 52px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.0; margin-bottom: 14px; }
+        .btn-p { display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(90deg, var(--emerald), var(--lime)); color: #06080c; padding: 13px 28px; border-radius: 10px; font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; text-decoration: none; transition: opacity 0.18s; }
+        .btn-p:hover { opacity: 0.85; }
+        .btn-g { display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--border2); color: var(--muted2); padding: 13px 24px; border-radius: 10px; font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; text-decoration: none; transition: all 0.18s; }
+        .btn-g:hover { border-color: var(--muted); color: var(--text); }
     </style>
 </head>
-<body class="antialiased">
-    <div id="global-nav"></div>
+<body>
+<div id="global-nav"></div>
 
-    <header class="max-w-7xl mx-auto px-6 py-20">
-        <h1 class="text-5xl md:text-7xl font-extrabold tracking-tighter text-zinc-900 mb-6">
-            Live <span class="gradient-text italic">Deployments.</span>
+<!-- Hero -->
+<section id="hero">
+    <div class="marble-bg"></div>
+    <div style="position:relative;z-index:1;max-width:1280px;margin:0 auto;">
+        <div class="mono text-[10px] mb-4" style="color:var(--lime);letter-spacing:0.25em;text-transform:uppercase;">// Forge Vertical · Live Deployments</div>
+        <h1 class="hero-h1">
+            Built. Deployed.<br>
+            <span class="g-text">Actually live.</span>
         </h1>
-        <p class="text-zinc-500 text-xl max-w-2xl font-light mb-8">A visual catalog of infrastructure forged for performance, security, and industrial scale.</p>
-        <a href="https://wa.me/27657417593" target="_blank" rel="noopener noreferrer"
-            class="inline-flex items-center justify-center gap-3 border border-zinc-200 bg-white text-black px-8 py-4 rounded-2xl font-black uppercase tracking-widest text-[10px] hover:border-[#25D366] hover:text-[#25D366] transition-all card-shadow">
-            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
-            Discuss a Deployment
-        </a>
-    </header>
-
-    <main class="max-w-7xl mx-auto px-6 pb-40">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-
-            <div class="space-y-4">
-                <div class="iframe-container card-shadow border border-zinc-100 group">
-                    <iframe src="https://www.aurora-repair.com/" scrolling="no" title="Aurora Repair preview"></iframe>
-                    <div class="absolute inset-0 bg-zinc-900/0 group-hover:bg-zinc-900/5 transition-all cursor-pointer rounded-[1.5rem]" onclick="window.open('https://www.aurora-repair.com/')"></div>
-                </div>
-                <div class="px-2">
-                    <div class="flex justify-between items-center mb-2">
-                        <h3 class="font-extrabold text-zinc-900 uppercase italic">Aurora Repair</h3>
-                        <span class="text-[9px] font-black uppercase tracking-widest bg-lime-100 text-lime-700 px-3 py-1 rounded-full">SME Node</span>
-                    </div>
-                    <p class="text-sm text-zinc-500 font-light leading-relaxed">An AI-powered automotive assessment platform designed to automate vehicle repair quotes, streamline panel beater operations, and capture local lead generation for the auto repair industry.</p>
-                </div>
-            </div>
-
-            <div class="space-y-4">
-                <div class="iframe-container card-shadow border border-zinc-100 group">
-                    <iframe src="https://fairdiscovery.org/" scrolling="no" title="Fair Discovery preview"></iframe>
-                    <div class="absolute inset-0 bg-zinc-900/0 group-hover:bg-zinc-900/5 transition-all cursor-pointer rounded-[1.5rem]" onclick="window.open('https://fairdiscovery.org/')"></div>
-                </div>
-                <div class="px-2">
-                    <div class="flex justify-between items-center mb-2">
-                        <h3 class="font-extrabold text-zinc-900 uppercase italic">Fair Discovery</h3>
-                        <span class="text-[9px] font-black uppercase tracking-widest bg-blue-100 text-blue-700 px-3 py-1 rounded-full">Intel Infrastructure</span>
-                    </div>
-                    <p class="text-sm text-zinc-500 font-light leading-relaxed">A high-friction digital marketplace engineered to distribute sovereign-grade cybersecurity tools, forensic network auditors, and premium software assets via automated payment gateways.</p>
-                </div>
-            </div>
-
-            <div class="space-y-4">
-                <div class="iframe-container card-shadow border border-zinc-100 group">
-                    <iframe src="https://forge-vertical-projects.github.io/ship-chandlers-sa/" scrolling="no" title="Ship Chandlers SA preview"></iframe>
-                    <div class="absolute inset-0 bg-zinc-900/0 group-hover:bg-zinc-900/5 transition-all cursor-pointer rounded-[1.5rem]" onclick="window.open('https://forge-vertical-projects.github.io/ship-chandlers-sa/')"></div>
-                </div>
-                <div class="px-2">
-                    <div class="flex justify-between items-center mb-2">
-                        <h3 class="font-extrabold text-zinc-900 uppercase italic">Ship Chandlers SA</h3>
-                        <span class="text-[9px] font-black uppercase tracking-widest bg-zinc-100 text-zinc-600 px-3 py-1 rounded-full">Logistics Node</span>
-                    </div>
-                    <p class="text-sm text-zinc-500 font-light leading-relaxed">A high-performance logistics and maritime supply portal. Engineered for targeted SEO dominance in the Cape Town harbor sector to secure commercial shipping contracts and vessel provisions.</p>
-                </div>
-            </div>
-
-            <div class="space-y-4">
-                <div class="iframe-container card-shadow border border-zinc-100 group">
-                    <iframe src="https://project-builds.github.io/handyman-ct/" scrolling="no" title="Handyman CT preview"></iframe>
-                    <div class="absolute inset-0 bg-zinc-900/0 group-hover:bg-zinc-900/5 transition-all cursor-pointer rounded-[1.5rem]" onclick="window.open('https://project-builds.github.io/handyman-ct/')"></div>
-                </div>
-                <div class="px-2">
-                    <div class="flex justify-between items-center mb-2">
-                        <h3 class="font-extrabold text-zinc-900 uppercase italic">Handyman CT</h3>
-                        <span class="text-[9px] font-black uppercase tracking-widest bg-lime-100 text-lime-700 px-3 py-1 rounded-full">SME Node</span>
-                    </div>
-                    <p class="text-sm text-zinc-500 font-light leading-relaxed">A high-conversion local service deployment for Cape Town property maintenance. Optimized for local SEO mapping to capture search intent for residential and commercial repair services.</p>
-                </div>
-            </div>
-
-            <div class="space-y-4">
-                <div class="iframe-container card-shadow border border-zinc-100 group">
-                    <iframe src="https://www.seritipbo.org/" scrolling="no" title="Seriti PBO preview"></iframe>
-                    <div class="absolute inset-0 bg-zinc-900/0 group-hover:bg-zinc-900/5 transition-all cursor-pointer rounded-[1.5rem]" onclick="window.open('https://www.seritipbo.org/')"></div>
-                </div>
-                <div class="px-2">
-                    <div class="flex justify-between items-center mb-2">
-                        <h3 class="font-extrabold text-zinc-900 uppercase italic">Seriti PBO</h3>
-                        <span class="text-[9px] font-black uppercase tracking-widest bg-zinc-100 text-zinc-600 px-3 py-1 rounded-full">Organization Site</span>
-                    </div>
-                    <p class="text-sm text-zinc-500 font-light leading-relaxed">A digital presence forged for a Public Benefit Organization. Structured to build community trust, streamline donor outreach, and facilitate transparent organizational operations globally.</p>
-                </div>
-            </div>
-
-            <div class="space-y-4">
-                <div class="iframe-container card-shadow border border-zinc-100 group">
-                    <iframe src="https://www.intpanelshop.co.za/" scrolling="no" title="Int Panel Shop preview"></iframe>
-                    <div class="absolute inset-0 bg-zinc-900/0 group-hover:bg-zinc-900/5 transition-all cursor-pointer rounded-[1.5rem]" onclick="window.open('https://www.intpanelshop.co.za/')"></div>
-                </div>
-                <div class="px-2">
-                    <div class="flex justify-between items-center mb-2">
-                        <h3 class="font-extrabold text-zinc-900 uppercase italic">Int Panelshop</h3>
-                        <span class="text-[9px] font-black uppercase tracking-widest bg-lime-100 text-lime-700 px-3 py-1 rounded-full">SME Node</span>
-                    </div>
-                    <p class="text-sm text-zinc-500 font-light leading-relaxed">A robust digital footprint for an automotive body repair center. Built to outrank local competitors, showcase collision repair expertise, and drive direct customer booking inquiries.</p>
-                </div>
-            </div>
-
-            <div class="space-y-4">
-                <div class="iframe-container card-shadow border border-zinc-100 group">
-                    <iframe src="https://sure-drive-9a8c9.web.app/" scrolling="no" title="Sure Drive preview"></iframe>
-                    <div class="absolute inset-0 bg-zinc-900/0 group-hover:bg-zinc-900/5 transition-all cursor-pointer rounded-[1.5rem]" onclick="window.open('https://sure-drive-9a8c9.web.app/')"></div>
-                </div>
-                <div class="px-2">
-                    <div class="flex justify-between items-center mb-2">
-                        <h3 class="font-extrabold text-zinc-900 uppercase italic">Sure Drive</h3>
-                        <span class="text-[9px] font-black uppercase tracking-widest bg-zinc-900 text-white px-3 py-1 rounded-full">SaaS Utility</span>
-                    </div>
-                    <p class="text-sm text-zinc-500 font-light leading-relaxed">A lean, rapid-response SaaS utility app. Architected for optimal mobile-first performance and streamlined user onboarding within the driver safety and vehicle management sector.</p>
-                </div>
-            </div>
-
-            <!-- TripSpace Global — replaces Secure Ur Phone -->
-            <div class="space-y-4">
-                <div class="card-shadow border border-zinc-100 rounded-[1.5rem] overflow-hidden bg-zinc-950 flex flex-col items-center justify-center gap-4 cursor-pointer group" style="aspect-ratio:16/9;" onclick="window.open('https://tripspaceglobal.com/')">
-                    <div class="flex items-center gap-3">
-                        <svg class="w-5 h-5 text-[#84cc16]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
-                        <span class="mono text-[11px] font-bold text-[#84cc16] tracking-widest uppercase">Cloudflare Protected</span>
-                    </div>
-                    <p class="text-zinc-500 text-[10px] font-bold uppercase tracking-widest">Iframe embedding blocked by security policy</p>
-                    <span class="text-[10px] font-black uppercase tracking-widest text-zinc-600 group-hover:text-[#84cc16] transition-colors">Visit tripspaceglobal.com →</span>
-                </div>
-                <div class="px-2">
-                    <div class="flex justify-between items-center mb-2">
-                        <h3 class="font-extrabold text-zinc-900 uppercase italic">TripSpace Global</h3>
-                        <span class="text-[9px] font-black uppercase tracking-widest bg-[#0f172a] text-[#84cc16] px-3 py-1 rounded-full">Marketplace</span>
-                    </div>
-                    <p class="text-sm text-zinc-500 font-light leading-relaxed">A commission-free hospitality marketplace connecting travellers directly with hosts across Africa and beyond. Built on React + Firebase with PWA and TWA delivery, real-time messaging, and integrated payments.</p>
-                </div>
-            </div>
-
-            <div class="space-y-4">
-                <div class="iframe-container card-shadow border border-zinc-100 group">
-                    <iframe src="https://autods.co.za/" scrolling="no" title="Auto DS preview"></iframe>
-                    <div class="absolute inset-0 bg-zinc-900/0 group-hover:bg-zinc-900/5 transition-all cursor-pointer rounded-[1.5rem]" onclick="window.open('https://autods.co.za/')"></div>
-                </div>
-                <div class="px-2">
-                    <div class="flex justify-between items-center mb-2">
-                        <h3 class="font-extrabold text-zinc-900 uppercase italic">Auto DS</h3>
-                        <span class="text-[9px] font-black uppercase tracking-widest bg-lime-100 text-lime-700 px-3 py-1 rounded-full">SME Node</span>
-                    </div>
-                    <p class="text-sm text-zinc-500 font-light leading-relaxed">A specialized digital architecture engineered for the automotive services sector. Built with a focus on high-speed performance, local search visibility, and seamless customer intake flows.</p>
-                </div>
-            </div>
-
-            <div class="space-y-4">
-                <div class="iframe-container card-shadow border border-zinc-100 group">
-                    <iframe src="https://skyropespecialist.co.za/" scrolling="no" title="Skyrope Specialist preview"></iframe>
-                    <div class="absolute inset-0 bg-zinc-900/0 group-hover:bg-zinc-900/5 transition-all cursor-pointer rounded-[1.5rem]" onclick="window.open('https://skyropespecialist.co.za/')"></div>
-                </div>
-                <div class="px-2">
-                    <div class="flex justify-between items-center mb-2">
-                        <h3 class="font-extrabold text-zinc-900 uppercase italic">Skyrope Specialist</h3>
-                        <span class="text-[9px] font-black uppercase tracking-widest bg-zinc-100 text-zinc-600 px-3 py-1 rounded-full">Industrial Node</span>
-                    </div>
-                    <p class="text-sm text-zinc-500 font-light leading-relaxed">An industrial rope access and maintenance portal. Optimized for high-risk sector lead generation and showcasing technical certifications for commercial high-rise projects.</p>
-                </div>
-            </div>
-
-
-            <!-- IPS Promotions Hub -->
-            <div class="space-y-4">
-                <div class="card-shadow border border-zinc-100 rounded-[1.5rem] overflow-hidden bg-zinc-950 flex flex-col items-center justify-center gap-4 cursor-pointer group" style="aspect-ratio:16/9;" onclick="window.open('https://promo.intpanelshop.co.za/')">
-                    <div class="flex items-center gap-3">
-                        <svg class="w-5 h-5 text-[#84cc16]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
-                        <span class="mono text-[11px] font-bold text-[#84cc16] tracking-widest uppercase">Repo Security Policy Active</span>
-                    </div>
-                    <p class="text-zinc-500 text-[10px] font-bold uppercase tracking-widest">Dependabot · Code scanning · Secret scanning enabled</p>
-                    <span class="text-[10px] font-black uppercase tracking-widest text-zinc-600 group-hover:text-[#84cc16] transition-colors">Visit promo.intpanelshop.co.za →</span>
-                </div>
-                <div class="px-2">
-                    <div class="flex justify-between items-center mb-2">
-                        <h3 class="font-extrabold text-zinc-900 uppercase italic">IPS Promotions Hub</h3>
-                        <span class="text-[9px] font-black uppercase tracking-widest bg-lime-100 text-lime-700 px-3 py-1 rounded-full">SME Node</span>
-                    </div>
-                    <p class="text-sm text-zinc-500 font-light leading-relaxed">A high-performance promotions hub for International Panel Shop — Cape Town's premier autobody repair centre. 100+ suburb-specific landing pages, Sure Drive rewards integration, Mobicred finance, and a cinematic service showcase built for local SEO dominance across the Western Cape.</p>
-                </div>
-            </div>
-
-            <!-- Princess Vlei Lodge -->
-            <div class="space-y-4">
-                <div class="iframe-container card-shadow border border-zinc-100 group" id="pvl-container">
-                    <iframe id="pvl-iframe" src="https://test-space-global.github.io/princessvleilodge/" scrolling="no" title="Princess Vlei Lodge preview"></iframe>
-                    <div class="absolute inset-0 bg-zinc-900/0 group-hover:bg-zinc-900/5 transition-all cursor-pointer rounded-[1.5rem]" id="pvl-link" onclick="window.open('https://test-space-global.github.io/princessvleilodge/')"></div>
-                </div>
-                <div class="px-2">
-                    <div class="flex justify-between items-center mb-2">
-                        <h3 class="font-extrabold text-zinc-900 uppercase italic">Princess Vlei Lodge</h3>
-                        <span class="text-[9px] font-black uppercase tracking-widest bg-[#0f172a] text-[#84cc16] px-3 py-1 rounded-full">Hospitality</span>
-                    </div>
-                    <p class="text-sm text-zinc-500 font-light leading-relaxed">A cinematic hospitality landing page for a four-unit nature lodge on the edge of Princess Vlei wetland, Cape Town. Custom SVG bird illustrations, three-platform booking integration (Nightsbridge, TripSpace Global, Airbnb), and a full GEO indexing stack — built as Forge Vertical's first TripSpace partner property.</p>
-                </div>
-            </div>
-
+        <p class="hero-sub">Websites, SaaS platforms, AI tools, and open source projects — each one shipped to production with security, SEO, and GEO indexing built in from the first commit.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:12px;">
+            <a href="/onboard.html" class="btn-p">Start a project →</a>
+            <a href="https://wa.me/27657417593" target="_blank" rel="noopener noreferrer" class="btn-g">
+                <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                WhatsApp Jarrit
+            </a>
         </div>
-    </main>
+    </div>
+</section>
 
-    <div id="global-footer"></div>
+<!-- Stats -->
+<div id="stats">
+    <div class="stat-item"><div class="stat-n">12</div><div class="stat-l">Live deployments</div></div>
+    <div class="stat-item"><div class="stat-n">5</div><div class="stat-l">SaaS platforms</div></div>
+    <div class="stat-item"><div class="stat-n">3</div><div class="stat-l">AI-integrated</div></div>
+    <div class="stat-item"><div class="stat-n">2</div><div class="stat-l">Open source</div></div>
+    <div class="stat-item"><div class="stat-n">0%</div><div class="stat-l">Lock-in on any build</div></div>
+</div>
 
-    <script>
-        // Princess Vlei Lodge — auto-switch to production domain when live
-        (function() {
-            var primary = 'https://www.princessvleilodge.co.za/';
-            var fallback = 'https://test-space-global.github.io/princessvleilodge/';
-            var iframe = document.getElementById('pvl-iframe');
-            var link = document.getElementById('pvl-link');
-            if (!iframe) return;
-            var img = new Image();
-            img.onload = function() {
-                iframe.src = primary;
-                link.onclick = function() { window.open(primary); };
-            };
-            img.onerror = function() {
-                iframe.src = fallback;
-                link.onclick = function() { window.open(fallback); };
-            };
-            img.src = 'https://www.princessvleilodge.co.za/favicon.ico?' + Date.now();
-        })();
-    </script>
+<!-- Filters -->
+<div id="filter-bar">
+    <button class="filter-btn active" onclick="filterCards('all', this)">All</button>
+    <button class="filter-btn" onclick="filterCards('saas', this)">SaaS</button>
+    <button class="filter-btn" onclick="filterCards('ai', this)">AI</button>
+    <button class="filter-btn" onclick="filterCards('hospitality', this)">Hospitality</button>
+    <button class="filter-btn" onclick="filterCards('automotive', this)">Automotive</button>
+    <button class="filter-btn" onclick="filterCards('nonprofit', this)">Nonprofit</button>
+    <button class="filter-btn" onclick="filterCards('opensource', this)">Open Source</button>
+    <button class="filter-btn" onclick="filterCards('trades', this)">Trades</button>
+</div>
+
+<!-- Grid -->
+<div id="portfolio-grid">
+
+    <!-- TripSpace Global -->
+    <div class="proj-card" data-cat="saas hospitality">
+        <div class="proj-preview-static" onclick="window.open('https://tripspaceglobal.com/')">
+            <div style="text-align:center;">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:700;color:var(--lime);letter-spacing:-0.02em;">TripSpace</div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:0.2em;margin-top:4px;">GLOBAL</div>
+            </div>
+        </div>
+        <div class="proj-body">
+            <div class="proj-top">
+                <div class="proj-name">TripSpace Global</div>
+                <span class="proj-badge badge-green">SaaS · Hospitality</span>
+            </div>
+            <p class="proj-desc">Commission-free travel marketplace connecting travellers and hosts across Africa and beyond. AI travel companion Aria built in. Flat monthly fee — hosts keep 100% of every booking. React + Firebase + PayFast + PayPal.</p>
+            <div class="proj-tags"><span class="proj-tag">React</span><span class="proj-tag">Firebase</span><span class="proj-tag">AI</span><span class="proj-tag">PWA</span><span class="proj-tag">PayFast</span></div>
+            <div class="proj-footer">
+                <span class="proj-url">tripspaceglobal.com</span>
+                <a href="https://tripspaceglobal.com/" target="_blank" rel="noopener noreferrer" class="proj-link">Visit →</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Aurora Repair -->
+    <div class="proj-card" data-cat="ai automotive saas">
+        <div class="proj-preview" onclick="window.open('https://www.aurora-repair.com/')">
+            <iframe src="https://www.aurora-repair.com/" scrolling="no" title="Aurora Repair" loading="lazy"></iframe>
+            <div class="overlay"></div>
+        </div>
+        <div class="proj-body">
+            <div class="proj-top">
+                <div class="proj-name">Aurora Repair</div>
+                <span class="proj-badge badge-blue">AI · Automotive</span>
+            </div>
+            <p class="proj-desc">AI-powered vehicle damage assessment. Photos in, itemised repair assessment out — ready to submit to insurers or panel shops. Gemini 2.5 Flash under the hood. Built in partnership with International Panel Shop.</p>
+            <div class="proj-tags"><span class="proj-tag">Gemini API</span><span class="proj-tag">Firebase</span><span class="proj-tag">Computer Vision</span></div>
+            <div class="proj-footer">
+                <span class="proj-url">aurora-repair.com</span>
+                <a href="https://www.aurora-repair.com/" target="_blank" rel="noopener noreferrer" class="proj-link">Visit →</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Princess Vlei Lodge -->
+    <div class="proj-card" data-cat="hospitality">
+        <div class="proj-preview" id="pvl-preview" onclick="visitPVL()">
+            <iframe id="pvl-iframe" src="https://test-space-global.github.io/princessvleilodge/" scrolling="no" title="Princess Vlei Lodge" loading="lazy"></iframe>
+            <div class="overlay"></div>
+        </div>
+        <div class="proj-body">
+            <div class="proj-top">
+                <div class="proj-name">Princess Vlei Lodge</div>
+                <span class="proj-badge badge-green">Hospitality</span>
+            </div>
+            <p class="proj-desc">Cinematic hospitality landing page for a four-unit nature lodge on the edge of Princess Vlei wetland, Cape Town. Custom SVG bird illustrations, three-platform booking integration, and a full GEO indexing stack.</p>
+            <div class="proj-tags"><span class="proj-tag">GEO</span><span class="proj-tag">Nightsbridge</span><span class="proj-tag">TripSpace</span><span class="proj-tag">Airbnb</span></div>
+            <div class="proj-footer">
+                <span class="proj-url">princessvleilodge</span>
+                <a href="https://test-space-global.github.io/princessvleilodge/" target="_blank" rel="noopener noreferrer" class="proj-link">Visit →</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- IPS Promo Hub -->
+    <div class="proj-card" data-cat="automotive saas">
+        <div class="proj-preview-static" onclick="window.open('https://promo.intpanelshop.co.za/')">
+            <div style="text-align:center;">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:700;color:var(--text);letter-spacing:0.05em;">IPS</div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:0.2em;margin-top:4px;">PROMOTIONS HUB</div>
+            </div>
+        </div>
+        <div class="proj-body">
+            <div class="proj-top">
+                <div class="proj-name">IPS Promotions Hub</div>
+                <span class="proj-badge badge-blue">Automotive · SEO</span>
+            </div>
+            <p class="proj-desc">High-performance promotions hub for International Panel Shop. 100+ suburb-specific landing pages, Sure Drive rewards integration, Mobicred finance, and a cinematic service showcase built for local SEO dominance across the Western Cape.</p>
+            <div class="proj-tags"><span class="proj-tag">Local SEO</span><span class="proj-tag">Mobicred</span><span class="proj-tag">Sure Drive</span></div>
+            <div class="proj-footer">
+                <span class="proj-url">promo.intpanelshop.co.za</span>
+                <a href="https://promo.intpanelshop.co.za/" target="_blank" rel="noopener noreferrer" class="proj-link">Visit →</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- International Panel Shop -->
+    <div class="proj-card" data-cat="automotive">
+        <div class="proj-preview" onclick="window.open('https://www.intpanelshop.co.za/')">
+            <iframe src="https://www.intpanelshop.co.za/" scrolling="no" title="International Panel Shop" loading="lazy"></iframe>
+            <div class="overlay"></div>
+        </div>
+        <div class="proj-body">
+            <div class="proj-top">
+                <div class="proj-name">International Panel Shop</div>
+                <span class="proj-badge badge-blue">Automotive</span>
+            </div>
+            <p class="proj-desc">23-year-old Cape Town panel beating and auto body repair business. Collision repairs, dent removal, full re-sprays. Free quotes via WhatsApp. Available for acquisition through Aldes Franchising.</p>
+            <div class="proj-tags"><span class="proj-tag">GEO</span><span class="proj-tag">Local SEO</span><span class="proj-tag">WhatsApp CTA</span></div>
+            <div class="proj-footer">
+                <span class="proj-url">intpanelshop.co.za</span>
+                <a href="https://www.intpanelshop.co.za/" target="_blank" rel="noopener noreferrer" class="proj-link">Visit →</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sure Drive -->
+    <div class="proj-card" data-cat="saas automotive">
+        <div class="proj-preview-static" onclick="window.open('https://sure-drive-9a8c9.web.app/')">
+            <div style="text-align:center;">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:700;color:var(--lime);letter-spacing:0.05em;">SURE DRIVE</div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:0.2em;margin-top:4px;">DRIVER REWARDS</div>
+            </div>
+        </div>
+        <div class="proj-body">
+            <div class="proj-top">
+                <div class="proj-name">Sure Drive</div>
+                <span class="proj-badge badge-purple">SaaS · Rewards</span>
+            </div>
+            <p class="proj-desc">Lean mobile-first SaaS rewards platform for driver safety and vehicle management. Streamlined user onboarding, Firebase backend, integrated with IPS Promotions Hub.</p>
+            <div class="proj-tags"><span class="proj-tag">Firebase</span><span class="proj-tag">PWA</span><span class="proj-tag">Mobile-first</span></div>
+            <div class="proj-footer">
+                <span class="proj-url">sure-drive-9a8c9.web.app</span>
+                <a href="https://sure-drive-9a8c9.web.app/" target="_blank" rel="noopener noreferrer" class="proj-link">Visit →</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- task-bridge -->
+    <div class="proj-card" data-cat="opensource ai">
+        <div class="proj-preview-static" onclick="window.open('https://github.com/Jotto1988/task-bridge')">
+            <div style="text-align:center;padding:0 20px;">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:700;color:var(--lime);letter-spacing:0.05em;margin-bottom:8px;">task-bridge</div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:0.15em;">OPEN PROTOCOL · GITHUB</div>
+                <div style="margin-top:14px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap;">
+                    <span style="font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--muted2);border:1px solid var(--border2);padding:3px 8px;border-radius:4px;">AI → HUMAN</span>
+                    <span style="font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--muted2);border:1px solid var(--border2);padding:3px 8px;border-radius:4px;">HUMAN → HUMAN</span>
+                    <span style="font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--muted2);border:1px solid var(--border2);padding:3px 8px;border-radius:4px;">OPEN STANDARD</span>
+                </div>
+            </div>
+        </div>
+        <div class="proj-body">
+            <div class="proj-top">
+                <div class="proj-name">task-bridge</div>
+                <span class="proj-badge badge-amber">Open Source</span>
+            </div>
+            <p class="proj-desc">An open protocol for routing AI-displaced work back to humans. A structured handoff layer between AI agents and skilled human workers — bidirectional, skill-gated, timer-based, with full cost payout. A call to the developer community and AI companies to adopt the standard.</p>
+            <div class="proj-tags"><span class="proj-tag">Protocol</span><span class="proj-tag">AI</span><span class="proj-tag">HITL</span><span class="proj-tag">Open Source</span></div>
+            <div class="proj-footer">
+                <span class="proj-url">github.com/Jotto1988</span>
+                <a href="https://github.com/Jotto1988/task-bridge" target="_blank" rel="noopener noreferrer" class="proj-link">View on GitHub →</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Seriti PBO -->
+    <div class="proj-card" data-cat="nonprofit">
+        <div class="proj-preview" onclick="window.open('https://www.forgevertical.com/subdomains/seriti-pbo/')">
+            <iframe src="https://www.forgevertical.com/subdomains/seriti-pbo/" scrolling="no" title="Seriti Skills Development PBO" loading="lazy"></iframe>
+            <div class="overlay"></div>
+        </div>
+        <div class="proj-body">
+            <div class="proj-top">
+                <div class="proj-name">Seriti Skills Development PBO</div>
+                <span class="proj-badge badge-pink">Nonprofit</span>
+            </div>
+            <p class="proj-desc">Built for Seriti Skills Development PBO — a Cape Town nonprofit offering plumbing trade training and entrepreneurial skills development. Hosted on Forge Vertical infrastructure while the primary domain is offline.</p>
+            <div class="proj-tags"><span class="proj-tag">Nonprofit</span><span class="proj-tag">Cape Town</span><span class="proj-tag">Hosted</span></div>
+            <div class="proj-footer">
+                <span class="proj-url">forgevertical.com/subdomains/seriti-pbo</span>
+                <a href="https://www.forgevertical.com/subdomains/seriti-pbo/" target="_blank" rel="noopener noreferrer" class="proj-link">Visit →</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Auto DS -->
+    <div class="proj-card" data-cat="automotive">
+        <div class="proj-preview" onclick="window.open('https://autods.co.za/')">
+            <iframe src="https://autods.co.za/" scrolling="no" title="Auto Digital Solutions" loading="lazy"></iframe>
+            <div class="overlay"></div>
+        </div>
+        <div class="proj-body">
+            <div class="proj-top">
+                <div class="proj-name">Auto Digital Solutions</div>
+                <span class="proj-badge badge-blue">Automotive</span>
+            </div>
+            <p class="proj-desc">Cape Town mechanical car services and repairs. High-speed performance, local search visibility, and seamless customer intake flows built for the automotive services sector.</p>
+            <div class="proj-tags"><span class="proj-tag">Local SEO</span><span class="proj-tag">Mobile-first</span><span class="proj-tag">Cape Town</span></div>
+            <div class="proj-footer">
+                <span class="proj-url">autods.co.za</span>
+                <a href="https://autods.co.za/" target="_blank" rel="noopener noreferrer" class="proj-link">Visit →</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sky Rope Specialist -->
+    <div class="proj-card" data-cat="trades">
+        <div class="proj-preview" onclick="window.open('https://skyropespecialist.co.za/')">
+            <iframe src="https://skyropespecialist.co.za/" scrolling="no" title="Sky Rope Specialist" loading="lazy"></iframe>
+            <div class="overlay"></div>
+        </div>
+        <div class="proj-body">
+            <div class="proj-top">
+                <div class="proj-name">Sky Rope Specialist</div>
+                <span class="proj-badge badge-amber">Trades</span>
+            </div>
+            <p class="proj-desc">Industrial rope access and high-rise maintenance portal. Optimised for high-risk sector lead generation and showcasing technical certifications for commercial high-rise projects in Cape Town.</p>
+            <div class="proj-tags"><span class="proj-tag">Rope Access</span><span class="proj-tag">Local SEO</span><span class="proj-tag">Lead Gen</span></div>
+            <div class="proj-footer">
+                <span class="proj-url">skyropespecialist.co.za</span>
+                <a href="https://skyropespecialist.co.za/" target="_blank" rel="noopener noreferrer" class="proj-link">Visit →</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ship Chandlers SA -->
+    <div class="proj-card" data-cat="trades">
+        <div class="proj-preview" onclick="window.open('https://forge-vertical-projects.github.io/ship-chandlers-sa/')">
+            <iframe src="https://forge-vertical-projects.github.io/ship-chandlers-sa/" scrolling="no" title="Ship Chandlers SA" loading="lazy"></iframe>
+            <div class="overlay"></div>
+        </div>
+        <div class="proj-body">
+            <div class="proj-top">
+                <div class="proj-name">Ship Chandlers SA</div>
+                <span class="proj-badge badge-blue">Maritime · Logistics</span>
+            </div>
+            <p class="proj-desc">High-performance logistics and maritime supply portal. Engineered for targeted SEO dominance in the Cape Town harbour sector to secure commercial shipping contracts and vessel provisions.</p>
+            <div class="proj-tags"><span class="proj-tag">Maritime</span><span class="proj-tag">SEO</span><span class="proj-tag">Cape Town</span></div>
+            <div class="proj-footer">
+                <span class="proj-url">ship-chandlers-sa</span>
+                <a href="https://forge-vertical-projects.github.io/ship-chandlers-sa/" target="_blank" rel="noopener noreferrer" class="proj-link">Visit →</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Handyman CT -->
+    <div class="proj-card" data-cat="trades">
+        <div class="proj-preview" onclick="window.open('https://project-builds.github.io/handyman-ct/')">
+            <iframe src="https://project-builds.github.io/handyman-ct/" scrolling="no" title="Handyman CT" loading="lazy"></iframe>
+            <div class="overlay"></div>
+        </div>
+        <div class="proj-body">
+            <div class="proj-top">
+                <div class="proj-name">Handyman CT</div>
+                <span class="proj-badge badge-amber">Trades · Local</span>
+            </div>
+            <p class="proj-desc">High-conversion local service deployment for Cape Town property maintenance. Optimised for local SEO to capture search intent for residential and commercial repair services.</p>
+            <div class="proj-tags"><span class="proj-tag">Local SEO</span><span class="proj-tag">Cape Town</span><span class="proj-tag">Lead Gen</span></div>
+            <div class="proj-footer">
+                <span class="proj-url">handyman-ct</span>
+                <a href="https://project-builds.github.io/handyman-ct/" target="_blank" rel="noopener noreferrer" class="proj-link">Visit →</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- CTA -->
+<section id="cta">
+    <h2 class="cta-h">Want to be on this list?<br><span class="g-text">Let's build something.</span></h2>
+    <p style="color:var(--muted2);font-size:15px;margin-bottom:36px;font-weight:300;">Tell us what you need. We'll tell you what it costs and when it ships.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:14px;justify-content:center;">
+        <a href="/onboard.html" class="btn-p">Start a project →</a>
+        <a href="https://wa.me/27657417593" target="_blank" rel="noopener noreferrer" class="btn-g">
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            WhatsApp Jarrit
+        </a>
+    </div>
+</section>
+
+<div id="global-footer"></div>
+
+<script>
+// ── Category filter ────────────────────────────────────────────
+function filterCards(cat, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.proj-card').forEach(card => {
+        const cats = card.getAttribute('data-cat') || '';
+        card.style.display = (cat === 'all' || cats.includes(cat)) ? 'flex' : 'none';
+    });
+}
+
+// ── Princess Vlei Lodge — fallback URL ────────────────────────
+function visitPVL() {
+    const primary  = 'https://test-space-global.github.io/princessvleilodge/';
+    const fallback = 'https://tripspaceglobal.com/';
+    fetch(primary, { method: 'HEAD', mode: 'no-cors' })
+        .then(() => window.open(primary))
+        .catch(() => window.open(fallback));
+}
+</script>
 
 </body>
 </html>
