@@ -1,165 +1,539 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Seriti Skills Development PBO</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <style>
-    body { font-family: system-ui, -apple-system, sans-serif; color: #2d3748; }
-    .hero { background: #0f172a; color: #ffffff; padding: 5rem 0; }
-    .feature-card { border: none; background: #f8fafc; border-radius: 0.75rem; padding: 1.5rem; height: 100%; }
-    .bank-box { background: #e2e8f0; border-radius: 0.5rem; padding: 1.5rem; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seriti Skills Development PBO — Maintenance Plumbing &amp; Entrepreneurial Skills</title>
+<meta name="description" content="Seriti Skills Development PBO trains community members in maintenance plumbing and entrepreneurship — practical skills, mentorship, and a pathway to dignity and independence. Milnerton, Cape Town.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Work+Sans:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#14212C;
+    --navy-2:#1C2E3B;
+    --copper:#B8722F;
+    --copper-light:#D68F4E;
+    --verdigris:#6E9C89;
+    --green:#2B9F52;
+    --green-light:#5CC17E;
+    --concrete:#EDE7DC;
+    --offwhite:#FAF7F2;
+    --charcoal:#22282C;
+    --line: rgba(184,114,47,0.35);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--offwhite);
+    color:var(--charcoal);
+    font-family:'Work Sans', sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4{
+    font-family:'Oswald', sans-serif;
+    text-transform:uppercase;
+    letter-spacing:0.01em;
+    line-height:1.1;
+    font-weight:600;
+  }
+  .eyebrow{
+    font-family:'Space Mono', monospace;
+    font-size:0.75rem;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--copper);
+  }
+  a{color:inherit;}
+  img,svg{display:block;max-width:100%;}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px;}
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;
+    font-family:'Space Mono', monospace;
+    font-size:0.8rem;letter-spacing:0.08em;text-transform:uppercase;
+    padding:14px 26px;border-radius:2px;
+    border:1.5px solid var(--copper);
+    background:transparent;color:var(--offwhite);
+    cursor:pointer;transition:all .25s ease;
+    text-decoration:none;
+  }
+  .btn:hover{background:var(--copper);color:var(--navy);}
+  .btn.solid{background:var(--copper);color:var(--navy);}
+  .btn.solid:hover{background:var(--copper-light);border-color:var(--copper-light);}
+  .btn.dark{border-color:var(--navy);color:var(--navy);}
+  .btn.dark:hover{background:var(--navy);color:var(--offwhite);}
+
+  /* ===== NAV ===== */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    background:rgba(20,33,44,0.92);backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:74px;}
+  .logo{
+    display:flex;align-items:center;gap:12px;text-decoration:none;
+  }
+  .logo .mark{width:38px;height:38px;flex-shrink:0;}
+  .logo .word{display:flex;flex-direction:column;line-height:1.15;}
+  .logo .word .l1{
+    font-family:'Oswald',sans-serif;font-weight:700;font-size:1.05rem;
+    letter-spacing:0.02em;text-transform:uppercase;
+  }
+  .logo .word .l1 .s1{color:var(--offwhite);}
+  .logo .word .l1 .s2{color:var(--green-light);}
+  .logo .word .l2{
+    font-family:'Space Mono',monospace;font-size:0.56rem;letter-spacing:0.14em;
+    text-transform:uppercase;color:var(--copper-light);opacity:0.85;
+  }
+  footer .logo .word .l1 .s1{color:var(--offwhite);}
+  footer .logo{margin-bottom:0;}
+  .navlinks{display:flex;align-items:center;gap:34px;}
+  .navlinks a{
+    color:var(--concrete);text-decoration:none;font-size:0.85rem;
+    font-family:'Space Mono',monospace;letter-spacing:0.05em;text-transform:uppercase;
+    opacity:0.85;transition:opacity .2s, color .2s;
+  }
+  .navlinks a:hover{opacity:1;color:var(--copper-light);}
+  .navlinks .btn{padding:10px 20px;font-size:0.72rem;}
+  .navtoggle{display:none;background:none;border:none;color:var(--offwhite);font-size:1.5rem;cursor:pointer;}
+
+  /* ===== HERO ===== */
+  .hero{
+    position:relative;background:var(--navy);color:var(--offwhite);
+    padding:170px 0 120px;overflow:hidden;
+  }
+  .hero-pipe{
+    position:absolute;top:0;right:-6%;height:100%;width:60%;
+    opacity:0.5;pointer-events:none;
+  }
+  .hero .wrap{position:relative;z-index:2;}
+  .hero-content{max-width:640px;}
+  .hero h1{
+    font-size:clamp(2.4rem,5.2vw,4rem);
+    margin:18px 0 22px;color:var(--offwhite);
+  }
+  .hero h1 em{font-style:normal;color:var(--copper-light);}
+  .hero p.lead{
+    font-size:1.05rem;color:var(--concrete);max-width:520px;margin-bottom:36px;
+  }
+  .hero-ctas{display:flex;gap:16px;flex-wrap:wrap;}
+  .hero-stats{
+    display:flex;gap:40px;margin-top:64px;flex-wrap:wrap;
+    border-top:1px solid var(--line);padding-top:28px;
+  }
+  .hero-stats div{font-family:'Space Mono',monospace;}
+  .hero-stats .num{font-size:1.6rem;color:var(--copper-light);font-weight:700;}
+  .hero-stats .lbl{font-size:0.7rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--concrete);opacity:0.75;}
+
+  /* ===== PIPE JOINT DIVIDER ===== */
+  .joint{
+    position:relative;height:64px;background:var(--offwhite);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .joint.on-navy{background:var(--navy);}
+  .joint.on-concrete{background:var(--concrete);}
+  .joint svg{width:100%;max-width:1120px;height:100%;}
+
+  /* ===== SECTION GENERIC ===== */
+  section{padding:96px 0;}
+  .bg-concrete{background:var(--concrete);}
+  .bg-navy{background:var(--navy);color:var(--offwhite);}
+  .bg-off{background:var(--offwhite);}
+  .section-head{max-width:680px;margin-bottom:56px;}
+  .section-head h2{font-size:clamp(1.8rem,3.4vw,2.6rem);margin-top:10px;}
+  .bg-navy .section-head p, .bg-navy p.lead{color:var(--concrete);}
+  .section-head p{color:#4b4438;margin-top:14px;font-size:1rem;max-width:560px;}
+
+  /* ===== ABOUT / GOALS ===== */
+  .goals-grid{
+    display:grid;grid-template-columns:repeat(2,1fr);gap:1px;
+    background:var(--copper);border:1px solid var(--copper);
+  }
+  .goal{
+    background:var(--offwhite);padding:34px 30px;position:relative;
+  }
+  .goal .fitting{
+    width:34px;height:34px;margin-bottom:18px;
+  }
+  .goal h3{font-size:1.05rem;margin-bottom:10px;color:var(--navy);}
+  .goal p{font-size:0.92rem;color:#4b4438;}
+
+  /* ===== PIPELINE / HOW IT WORKS ===== */
+  .pipeline{
+    display:flex;justify-content:space-between;align-items:flex-start;
+    position:relative;margin-top:20px;gap:0;
+  }
+  .pipeline::before{
+    content:"";position:absolute;top:34px;left:0;right:0;height:6px;
+    background:repeating-linear-gradient(90deg, var(--copper) 0 28px, var(--copper-light) 28px 30px);
+    border-radius:3px;z-index:0;
+  }
+  .pipe-stop{position:relative;z-index:1;flex:1;text-align:center;padding:0 14px;}
+  .pipe-stop .ring{
+    width:68px;height:68px;border-radius:50%;background:var(--navy);
+    border:5px solid var(--copper-light);
+    display:flex;align-items:center;justify-content:center;margin:0 auto 20px;
+    font-family:'Space Mono',monospace;font-weight:700;color:var(--offwhite);font-size:1.1rem;
+  }
+  .pipe-stop h3{font-size:1rem;margin-bottom:10px;color:var(--navy);}
+  .pipe-stop p{font-size:0.85rem;color:#4b4438;}
+
+  /* ===== TESTIMONIAL / VIDEO ===== */
+  .video-block{
+    display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;
+  }
+  .video-frame{
+    position:relative;padding-top:56.25%;background:#000;
+    border:2px solid var(--copper);
+  }
+  .video-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
+  .quote{
+    font-family:'Oswald',sans-serif;font-size:1.5rem;line-height:1.35;
+    color:var(--offwhite);text-transform:none;margin:16px 0 24px;
+  }
+  .quote::before{content:"“";color:var(--copper-light);}
+  .quote::after{content:"”";color:var(--copper-light);}
+
+  /* ===== SUPPORT / CSR ===== */
+  .support-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:48px;align-items:start;}
+  .support-copy p{color:#4b4438;margin-bottom:16px;}
+  .support-copy ul{margin:20px 0 0 20px;color:#4b4438;font-size:0.94rem;}
+  .support-copy li{margin-bottom:8px;}
+  .bank-card{
+    background:var(--navy);color:var(--offwhite);
+    border:1px solid var(--copper);
+    padding:36px 34px;
+  }
+  .bank-card h3{color:var(--copper-light);font-size:1.05rem;margin-bottom:22px;}
+  .bank-row{
+    display:flex;justify-content:space-between;gap:12px;
+    padding:11px 0;border-bottom:1px solid var(--line);
+    font-family:'Space Mono',monospace;font-size:0.82rem;
+  }
+  .bank-row:last-of-type{border-bottom:none;}
+  .bank-row span:first-child{color:var(--concrete);opacity:0.7;text-transform:uppercase;letter-spacing:0.05em;font-size:0.7rem;padding-top:2px;}
+  .bank-row span:last-child{text-align:right;color:var(--offwhite);}
+  .tax-note{
+    margin-top:22px;padding-top:18px;border-top:1px solid var(--line);
+    font-size:0.82rem;color:var(--green-light);
+  }
+
+  /* ===== CONTACT ===== */
+  .contact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--copper);border:1px solid var(--copper);}
+  .contact-cell{background:var(--concrete);padding:32px 28px;}
+  .contact-cell .eyebrow{margin-bottom:12px;display:block;}
+  .contact-cell a, .contact-cell div{font-family:'Oswald',sans-serif;font-size:1.05rem;color:var(--navy);text-decoration:none;text-transform:none;letter-spacing:0;}
+
+  /* ===== FOOTER ===== */
+  footer{background:var(--navy);color:var(--concrete);padding:46px 0 34px;}
+  footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;}
+  footer .fnote{font-family:'Space Mono',monospace;font-size:0.72rem;opacity:0.6;letter-spacing:0.04em;}
+
+  /* ===== REVEAL ANIM ===== */
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+  @media (prefers-reduced-motion: reduce){
+    .reveal{opacity:1;transform:none;transition:none;}
+    html{scroll-behavior:auto;}
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width:860px){
+    .navlinks{position:fixed;top:74px;left:0;right:0;background:var(--navy);
+      flex-direction:column;align-items:flex-start;padding:24px;gap:20px;
+      border-bottom:1px solid var(--line);transform:translateY(-130%);transition:transform .3s ease;}
+    .navlinks.open{transform:translateY(0);}
+    .navtoggle{display:block;}
+    .goals-grid{grid-template-columns:1fr;}
+    .pipeline{flex-direction:column;gap:36px;}
+    .pipeline::before{display:none;}
+    .video-block{grid-template-columns:1fr;}
+    .support-grid{grid-template-columns:1fr;}
+    .contact-grid{grid-template-columns:1fr;}
+    .hero{padding:150px 0 90px;}
+    .hero-pipe{opacity:0.25;}
+  }
+</style>
 </head>
 <body>
 
-  <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-    <div class="container">
-      <a class="navbar-brand fw-bold" href="#">Seriti Skills Development PBO</a>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="#mission">About Us</a></li>
-          <li class="nav-item"><a class="nav-link" href="#goals">Goals</a></li>
-          <li class="nav-item"><a class="nav-link" href="#donate">Donate</a></li>
-          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+<nav>
+  <div class="wrap">
+    <a href="#top" class="logo">
+      <svg class="mark" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+        <rect x="30" y="112" width="60" height="3" rx="1.5" fill="#B8722F" opacity="0.35"/>
+        <rect x="53" y="70" width="14" height="38" rx="2" fill="#B8722F"/>
+        <rect x="53" y="82" width="14" height="3.4" fill="#D68F4E"/>
+        <rect x="53" y="96" width="14" height="3.4" fill="#D68F4E"/>
+        <circle cx="60" cy="108" r="9" fill="none" stroke="#D68F4E" stroke-width="3"/>
+        <line x1="60" y1="99" x2="60" y2="117" stroke="#D68F4E" stroke-width="2.4"/>
+        <line x1="51" y1="108" x2="69" y2="108" stroke="#D68F4E" stroke-width="2.4"/>
+        <g fill="none" stroke="#2B9F52" stroke-width="3.2" stroke-linecap="round">
+          <path d="M60,70 L60,46"/><path d="M60,70 L38,54"/><path d="M60,70 L82,54"/>
+          <path d="M60,46 L60,20"/><path d="M60,46 L44,30"/><path d="M60,46 L76,30"/>
+          <path d="M38,54 L20,44"/><path d="M38,54 L26,66"/>
+          <path d="M82,54 L100,44"/><path d="M82,54 L94,66"/>
+        </g>
+        <g fill="#FAF7F2" stroke="#B8722F" stroke-width="2.4">
+          <circle cx="60" cy="46" r="4"/><circle cx="38" cy="54" r="3.6"/><circle cx="82" cy="54" r="3.6"/>
+        </g>
+        <g fill="#2B9F52">
+          <circle cx="60" cy="20" r="6.4"/><circle cx="44" cy="30" r="4.6"/><circle cx="76" cy="30" r="4.6"/>
+          <circle cx="20" cy="44" r="5"/><circle cx="26" cy="66" r="4"/>
+          <circle cx="100" cy="44" r="5"/><circle cx="94" cy="66" r="4"/>
+        </g>
+      </svg>
+      <span class="word"><span class="l1"><span class="s1">SERITI</span> <span class="s2">SKILLS</span></span><span class="l2">Development PBO</span></span>
+    </a>
+    <button class="navtoggle" id="navToggle" aria-label="Toggle menu">&#9776;</button>
+    <div class="navlinks" id="navLinks">
+      <a href="#about">About</a>
+      <a href="#program">The Program</a>
+      <a href="#stories">Stories</a>
+      <a href="#support">Support Us</a>
+      <a href="#contact">Contact</a>
+      <a href="#support" class="btn solid">Donate</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <svg class="hero-pipe" viewBox="0 0 500 700" xmlns="http://www.w3.org/2000/svg">
+    <path d="M480 -20 C 380 100, 420 220, 300 300 C 180 380, 220 480, 120 560 C 60 610, 40 660, -20 700"
+          fill="none" stroke="#B8722F" stroke-width="34" stroke-linecap="round"/>
+    <path d="M480 -20 C 380 100, 420 220, 300 300 C 180 380, 220 480, 120 560 C 60 610, 40 660, -20 700"
+          fill="none" stroke="#D68F4E" stroke-width="34" stroke-linecap="round" stroke-dasharray="2 26" opacity="0.6"/>
+    <circle cx="300" cy="300" r="26" fill="none" stroke="#2B9F52" stroke-width="6"/>
+    <circle cx="120" cy="560" r="18" fill="none" stroke="#2B9F52" stroke-width="5"/>
+  </svg>
+  <div class="wrap">
+    <div class="hero-content">
+      <span class="eyebrow">Seriti Skills Development NPC — Milnerton, Cape Town</span>
+      <h1>Practical trade skills, <em>built to hold.</em></h1>
+      <p class="lead">Seriti Skills Development PBO trains community members in maintenance plumbing and entrepreneurship — pairing hands-on trade instruction with mentorship, apprenticeships, and a real path to owning your own work.</p>
+      <div class="hero-ctas">
+        <a href="#support" class="btn solid">Support the Program</a>
+        <a href="#program" class="btn">See How It Works</a>
+      </div>
+      <div class="hero-stats reveal">
+        <div><div class="num" style="color:var(--green-light);">100%</div><div class="lbl">Section 18A eligible</div></div>
+        <div><div class="num">2</div><div class="lbl">Skills tracks: trade + business</div></div>
+        <div><div class="num">1</div><div class="lbl">Community, Milnerton &amp; beyond</div></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="joint on-navy">
+  <svg viewBox="0 0 1120 64" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="0" y="27" width="1120" height="10" fill="#B8722F"/>
+    <rect x="530" y="14" width="60" height="36" fill="#14212C" stroke="#D68F4E" stroke-width="4"/>
+    <rect x="522" y="10" width="10" height="44" fill="#D68F4E"/>
+    <rect x="588" y="10" width="10" height="44" fill="#D68F4E"/>
+  </svg>
+</div>
+
+<section class="bg-off" id="about">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Why This Program Exists</span>
+      <h2>Skills that restore dignity — and pay the bills.</h2>
+      <p>Plumbing keeps homes, schools and businesses running. It's also a trade with steady demand and a low barrier to entry — which makes it a direct route out of unemployment when it's taught properly, with mentorship attached. That's the gap Seriti fills.</p>
+    </div>
+    <div class="goals-grid reveal">
+      <div class="goal">
+        <svg class="fitting" viewBox="0 0 40 40"><circle cx="20" cy="20" r="17" fill="none" stroke="#B8722F" stroke-width="4"/><path d="M20 8v24M8 20h24" stroke="#B8722F" stroke-width="3"/></svg>
+        <h3>Restore Dignity Through Skill</h3>
+        <p>Give people practical plumbing maintenance skills they can use immediately to support themselves and their households.</p>
+      </div>
+      <div class="goal">
+        <svg class="fitting" viewBox="0 0 40 40"><rect x="6" y="6" width="28" height="28" fill="none" stroke="#2B9F52" stroke-width="4"/><path d="M6 20h28" stroke="#2B9F52" stroke-width="3"/></svg>
+        <h3>Grow Capacity, Not Just a Certificate</h3>
+        <p>Develop each participant's understanding and confidence through structured education and hands-on experience, not theory alone.</p>
+      </div>
+      <div class="goal">
+        <svg class="fitting" viewBox="0 0 40 40"><path d="M8 32 L20 8 L32 32 Z" fill="none" stroke="#B8722F" stroke-width="4"/></svg>
+        <h3>Open Real Employment Pathways</h3>
+        <p>Increase employability in plumbing maintenance specifically, and in the broader trades and small-business economy.</p>
+      </div>
+      <div class="goal">
+        <svg class="fitting" viewBox="0 0 40 40"><circle cx="20" cy="20" r="12" fill="none" stroke="#2B9F52" stroke-width="4"/><circle cx="20" cy="20" r="4" fill="#2B9F52"/></svg>
+        <h3>Build Water &amp; Land Awareness</h3>
+        <p>Every graduate leaves understanding water conservation and responsible land use — skills the whole community benefits from.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="joint on-concrete">
+  <svg viewBox="0 0 1120 64" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="0" y="27" width="1120" height="10" fill="#B8722F"/>
+    <rect x="530" y="14" width="60" height="36" fill="#EDE7DC" stroke="#B8722F" stroke-width="4"/>
+    <rect x="522" y="10" width="10" height="44" fill="#B8722F"/>
+    <rect x="588" y="10" width="10" height="44" fill="#B8722F"/>
+  </svg>
+</div>
+
+<section class="bg-concrete" id="program">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">The Training Pipeline</span>
+      <h2>From first fitting to first client.</h2>
+      <p>The Maintenance Plumbing and Entrepreneurial Skills Development program runs as one connected line — each stage feeds directly into the next, the same way a working system does.</p>
+    </div>
+    <div class="pipeline reveal">
+      <div class="pipe-stop">
+        <div class="ring">01</div>
+        <h3>Learn the Trade</h3>
+        <p>Core maintenance plumbing instruction — real tools, real fittings, real household and commercial systems.</p>
+      </div>
+      <div class="pipe-stop">
+        <div class="ring">02</div>
+        <h3>Apprentice &amp; Mentor</h3>
+        <p>Supervised, hands-on placements pair theory with practical experience under experienced tradespeople.</p>
+      </div>
+      <div class="pipe-stop">
+        <div class="ring">03</div>
+        <h3>Business Skills</h3>
+        <p>Entrepreneurship training so graduates can quote, invoice, and run their own plumbing maintenance work.</p>
+      </div>
+      <div class="pipe-stop">
+        <div class="ring">04</div>
+        <h3>Work &amp; Earn</h3>
+        <p>Participants move into employment or start independent plumbing maintenance businesses in their community.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="joint on-navy">
+  <svg viewBox="0 0 1120 64" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="0" y="27" width="1120" height="10" fill="#B8722F"/>
+    <rect x="530" y="14" width="60" height="36" fill="#14212C" stroke="#D68F4E" stroke-width="4"/>
+    <rect x="522" y="10" width="10" height="44" fill="#D68F4E"/>
+    <rect x="588" y="10" width="10" height="44" fill="#D68F4E"/>
+  </svg>
+</div>
+
+<section class="bg-navy" id="stories">
+  <div class="wrap">
+    <div class="video-block reveal">
+      <div>
+        <span class="eyebrow">In Their Own Words</span>
+        <p class="quote">Hear directly from someone who came through the program — what it taught them, and where it's taken them since.</p>
+        <a href="https://www.youtube.com/watch?v=eHY-SV1ghng" target="_blank" rel="noopener" class="btn">Watch on YouTube</a>
+      </div>
+      <div class="video-frame">
+        <iframe src="https://www.youtube.com/embed/eHY-SV1ghng" title="Seriti Skills Development participant story" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="joint on-concrete" style="background:var(--offwhite);">
+  <svg viewBox="0 0 1120 64" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="0" y="27" width="1120" height="10" fill="#B8722F"/>
+    <rect x="530" y="14" width="60" height="36" fill="#FAF7F2" stroke="#B8722F" stroke-width="4"/>
+    <rect x="522" y="10" width="10" height="44" fill="#B8722F"/>
+    <rect x="588" y="10" width="10" height="44" fill="#B8722F"/>
+  </svg>
+</div>
+
+<section class="bg-off" id="support">
+  <div class="wrap">
+    <div class="support-grid reveal">
+      <div class="support-copy">
+        <span class="eyebrow">Corporate Social Responsibility</span>
+        <h2 style="margin:12px 0 20px;font-size:clamp(1.7rem,3vw,2.3rem);">Fund a graduate. Fulfil your CSR commitment.</h2>
+        <p>Donating to Seriti Skills Development PBO is a direct, practical way for your company to meet its Corporate Social Responsibility commitments while investing in a community's long-term wellbeing.</p>
+        <p>As a registered Public Benefit Organisation, we issue a Section 18A certificate for every donation — entitling your company to a deduction from taxable income for bona fide cash or asset donations.</p>
+        <ul>
+          <li>Sponsor tools and materials for a training cohort</li>
+          <li>Fund a mentorship or apprenticeship placement</li>
+          <li>Support the entrepreneurship track so graduates can start trading</li>
         </ul>
+        <a href="mailto:info@seritipbo.org" class="btn dark" style="margin-top:26px;">Talk to Us About Partnering</a>
+      </div>
+      <div class="bank-card">
+        <h3>Banking Details</h3>
+        <div class="bank-row"><span>Account Name</span><span>Seriti Skills Development NPC</span></div>
+        <div class="bank-row"><span>Bank</span><span>FNB</span></div>
+        <div class="bank-row"><span>Account Type</span><span>Cheque Account</span></div>
+        <div class="bank-row"><span>Account No.</span><span>63058354077</span></div>
+        <div class="bank-row"><span>Swift Code</span><span>FIRNZAJJ</span></div>
+        <div class="tax-note">✓ Section 18A tax certificates issued for all donations.</div>
       </div>
     </div>
-  </nav>
+  </div>
+</section>
 
-  <!-- Hero Section -->
-  <section id="home" class="hero text-center">
-    <div class="container">
-      <h1 class="display-5 fw-bold mb-3">Maintenance Plumbing & Entrepreneurial Skills Development</h1>
-      <p class="lead col-lg-8 mx-auto text-light">
-        A timely intervention enhancing technical plumbing expertise and self-sufficiency across South Africa.
-      </p>
-      <div class="mt-4">
-        <a href="#donate" class="btn btn-primary btn-lg px-4 me-2">Donate</a>
-        <a href="#contact" class="btn btn-outline-light btn-lg px-4">Contact Us</a>
+<section class="bg-concrete" id="contact">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Get In Touch</span>
+      <h2>Talk to Seriti.</h2>
+    </div>
+    <div class="contact-grid reveal">
+      <div class="contact-cell">
+        <span class="eyebrow">Email</span>
+        <a href="mailto:info@seritipbo.org">info@seritipbo.org</a>
+      </div>
+      <div class="contact-cell">
+        <span class="eyebrow">Cell</span>
+        <a href="tel:+27662316778">066 231 6778</a>
+      </div>
+      <div class="contact-cell">
+        <span class="eyebrow">Address</span>
+        <div>34 Farnworth Street<br>Rugby, Milnerton, 7441</div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Mission & Introduction -->
-  <section id="mission" class="py-5">
-    <div class="container">
-      <div class="row align-items-center g-4">
-        <div class="col-md-6">
-          <h2 class="fw-bold mb-3">Our Mission</h2>
-          <p>
-            The Maintenance Plumbing and Entrepreneurial Skills Development program is a targeted initiative offering relevant practical courses, theoretical knowledge, and apprenticeship pathways. 
-          </p>
-          <p>
-            By bridging the skills gap in essential maintenance plumbing, we prepare participants for sustainable self-employment, enterprise creation, and lasting community resilience.
-          </p>
-        </div>
-        <div class="col-md-6">
-          <div class="p-4 bg-light rounded-3 border">
-            <h4 class="fw-bold">Why Maintenance Plumbing?</h4>
-            <p class="mb-0 text-muted">
-              Plumbing is essential for maintaining sanitation, water infrastructure, and functional operations across residential, commercial, and industrial facilities. Our curriculum ensures preventive maintenance that safeguards vital systems while establishing local employment avenues.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+<footer>
+  <div class="wrap">
+    <a href="#top" class="logo">
+      <svg class="mark" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+        <rect x="30" y="112" width="60" height="3" rx="1.5" fill="#B8722F" opacity="0.35"/>
+        <rect x="53" y="70" width="14" height="38" rx="2" fill="#B8722F"/>
+        <rect x="53" y="82" width="14" height="3.4" fill="#D68F4E"/>
+        <rect x="53" y="96" width="14" height="3.4" fill="#D68F4E"/>
+        <circle cx="60" cy="108" r="9" fill="none" stroke="#D68F4E" stroke-width="3"/>
+        <line x1="60" y1="99" x2="60" y2="117" stroke="#D68F4E" stroke-width="2.4"/>
+        <line x1="51" y1="108" x2="69" y2="108" stroke="#D68F4E" stroke-width="2.4"/>
+        <g fill="none" stroke="#2B9F52" stroke-width="3.2" stroke-linecap="round">
+          <path d="M60,70 L60,46"/><path d="M60,70 L38,54"/><path d="M60,70 L82,54"/>
+          <path d="M60,46 L60,20"/><path d="M60,46 L44,30"/><path d="M60,46 L76,30"/>
+          <path d="M38,54 L20,44"/><path d="M38,54 L26,66"/>
+          <path d="M82,54 L100,44"/><path d="M82,54 L94,66"/>
+        </g>
+        <g fill="#FAF7F2" stroke="#B8722F" stroke-width="2.4">
+          <circle cx="60" cy="46" r="4"/><circle cx="38" cy="54" r="3.6"/><circle cx="82" cy="54" r="3.6"/>
+        </g>
+        <g fill="#2B9F52">
+          <circle cx="60" cy="20" r="6.4"/><circle cx="44" cy="30" r="4.6"/><circle cx="76" cy="30" r="4.6"/>
+          <circle cx="20" cy="44" r="5"/><circle cx="26" cy="66" r="4"/>
+          <circle cx="100" cy="44" r="5"/><circle cx="94" cy="66" r="4"/>
+        </g>
+      </svg>
+      <span class="word"><span class="l1"><span class="s1">SERITI</span> <span class="s2">SKILLS</span></span><span class="l2">Development PBO</span></span>
+    </a>
+    <div class="fnote">Seriti Skills Development NPC · Maintenance Plumbing &amp; Entrepreneurial Skills Development · Milnerton, Cape Town</div>
+  </div>
+</footer>
 
-  <!-- Program Goals -->
-  <section id="goals" class="py-5 bg-light">
-    <div class="container">
-      <h2 class="text-center fw-bold mb-5">Program Goals</h2>
-      <div class="row g-4">
-        <div class="col-md-4">
-          <div class="feature-card shadow-sm">
-            <h5 class="fw-bold text-primary">01. PROVIDE</h5>
-            <p>Practical plumbing maintenance skills to empower community members and restore long-term dignity.</p>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="feature-card shadow-sm">
-            <h5 class="fw-bold text-primary">02. DEVELOP</h5>
-            <p>Personal and technical capacity through structured hands-on vocational education and mentoring.</p>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="feature-card shadow-sm">
-            <h5 class="fw-bold text-primary">03. INCREASE</h5>
-            <p>Direct employability and entrepreneurial opportunities across maintenance plumbing trades.</p>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="feature-card shadow-sm">
-            <h5 class="fw-bold text-primary">04. IMPROVE</h5>
-            <p>Community awareness around water and land conservation, emphasizing sustainable infrastructure care.</p>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="feature-card shadow-sm">
-            <h5 class="fw-bold text-primary">05. ENCOURAGE</h5>
-            <p>Self-sufficiency, economic resilience, and active contribution to the broader South African economy.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+<script>
+  const toggle = document.getElementById('navToggle');
+  const links = document.getElementById('navLinks');
+  toggle.addEventListener('click', () => links.classList.toggle('open'));
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
 
-  <!-- Donation & Section 18A -->
-  <section id="donate" class="py-5">
-    <div class="container">
-      <div class="row g-4 align-items-center">
-        <div class="col-lg-6">
-          <h2 class="fw-bold mb-3">Support Our Work</h2>
-          <p>
-            Partnering with Seriti Skills Development PBO enables companies to maximize Corporate Social Responsibility (CSR) impact. 
-          </p>
-          <p>
-            We provide all donors with a <strong>Section 18A certificate</strong>, entitling individuals and organizations to taxable income deductions for bona fide donations.
-          </p>
-        </div>
-        <div class="col-lg-6">
-          <div class="bank-box">
-            <h5 class="fw-bold mb-3">Banking Details</h5>
-            <p class="mb-1"><strong>Account Name:</strong> Seriti Skills Development NPC</p>
-            <p class="mb-1"><strong>Bank:</strong> FNB</p>
-            <p class="mb-1"><strong>Account Type:</strong> Cheque Account</p>
-            <p class="mb-1"><strong>Account Number:</strong> 63058354077</p>
-            <p class="mb-0"><strong>Swift Code:</strong> FIRNZAJJ</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact & Footer -->
-  <footer id="contact" class="bg-dark text-light py-5">
-    <div class="container">
-      <div class="row g-4">
-        <div class="col-md-4">
-          <h5 class="fw-bold">Seriti Skills Development PBO</h5>
-          <p class="text-secondary small">Empowering communities through vocational excellence and enterprise development.</p>
-        </div>
-        <div class="col-md-4">
-          <h6 class="fw-bold">Location</h6>
-          <p class="text-secondary mb-1">34 Farnworth Street</p>
-          <p class="text-secondary mb-0">Rugby, Milnerton, 7441</p>
-        </div>
-        <div class="col-md-4">
-          <h6 class="fw-bold">Contact</h6>
-          <p class="text-secondary mb-1">Email: <a href="mailto:info@seritipbo.org" class="text-light text-decoration-none">info@seritipbo.org</a></p>
-          <p class="text-secondary mb-0">Cell: <a href="tel:0662316778" class="text-light text-decoration-none">066 231 6778</a></p>
-        </div>
-      </div>
-      <hr class="border-secondary my-4">
-      <div class="text-center text-secondary small">
-        &copy; 2025 Seriti Skills Development PBO. All Rights Reserved.
-      </div>
-    </div>
-  </footer>
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
 
 </body>
 </html>
