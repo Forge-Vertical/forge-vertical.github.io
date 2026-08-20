@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="task-bridge — an open protocol for routing AI-displaced work back to humans. A structured handoff layer between AI agents and skilled human workers.">
+    <title>task-bridge | Open Protocol</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #06080c; --surface: #0b0f14; --border: #1a2030;
+            --border2: #232d3f; --text: #eef0f4; --muted: #3d4f6a;
+            --muted2: #6a7d96; --lime: #84cc16; --emerald: #10b981;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body { background: var(--bg); color: var(--text); font-family: 'Outfit', sans-serif; min-height: 100vh; overflow-x: hidden; }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        .g-text { background: linear-gradient(90deg, var(--emerald), var(--lime)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; display: inline-block; }
+
+        /* Marble bg */
+        .marble { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+        .marble::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 70% 50% at 10% 20%, rgba(16,185,129,0.10) 0%, transparent 60%), radial-gradient(ellipse 60% 50% at 90% 80%, rgba(132,204,22,0.07) 0%, transparent 60%); }
+
+        .wrap { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; padding: 80px 24px 120px; }
+
+        /* Header */
+        .eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.25em; color: var(--lime); margin-bottom: 20px; display: block; }
+        h1 { font-size: clamp(40px, 6vw, 72px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.0; margin-bottom: 20px; }
+        .sub { font-size: 17px; color: var(--muted2); font-weight: 300; line-height: 1.75; max-width: 600px; margin-bottom: 40px; }
+
+        /* Buttons */
+        .btn-row { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 80px; }
+        .btn-p { display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(90deg, var(--emerald), var(--lime)); color: #06080c; padding: 12px 24px; border-radius: 10px; font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; text-decoration: none; transition: opacity 0.18s; }
+        .btn-p:hover { opacity: 0.85; }
+        .btn-g { display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--border2); color: var(--muted2); padding: 12px 20px; border-radius: 10px; font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; text-decoration: none; transition: all 0.18s; }
+        .btn-g:hover { border-color: var(--muted); color: var(--text); }
+
+        /* Flow diagram */
+        .flow { display: flex; align-items: center; flex-wrap: wrap; gap: 0; margin-bottom: 80px; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
+        .flow-node { flex: 1; min-width: 140px; padding: 24px 20px; text-align: center; border-right: 1px solid var(--border); }
+        .flow-node:last-child { border-right: none; }
+        .flow-icon { font-size: 22px; margin-bottom: 8px; }
+        .flow-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.18em; color: var(--muted2); margin-bottom: 4px; }
+        .flow-name { font-size: 13px; font-weight: 600; color: var(--text); }
+        .flow-arrow { font-family: 'JetBrains Mono', monospace; font-size: 16px; color: var(--lime); padding: 24px 8px; border-right: 1px solid var(--border); flex-shrink: 0; }
+
+        /* Spec cards */
+        .section-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.2em; color: var(--lime); margin-bottom: 16px; display: block; }
+        .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; margin-bottom: 60px; }
+        .card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+        .card-title { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700; color: var(--lime); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px; }
+        .card-body { font-size: 13px; color: var(--muted2); line-height: 1.65; }
+
+        /* Call to AI companies */
+        .call-out { background: var(--surface); border: 1px solid var(--border2); border-radius: 16px; padding: 36px; margin-bottom: 60px; }
+        .call-out h2 { font-size: 22px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 12px; }
+        .call-out p { font-size: 14px; color: var(--muted2); line-height: 1.7; margin-bottom: 16px; }
+        .company-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+        .company-tag { font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; padding: 4px 12px; border-radius: 6px; border: 1px solid var(--border2); color: var(--muted2); }
+
+        /* Status badge */
+        .status-row { display: flex; align-items: center; gap: 10px; margin-bottom: 60px; }
+        .status-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--lime); animation: pulse 2s ease-in-out infinite; flex-shrink: 0; }
+        @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+        .status-text { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted2); text-transform: uppercase; letter-spacing: 0.15em; }
+
+        /* Footer */
+        .footer { border-top: 1px solid var(--border); padding-top: 32px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+        .footer-links { display: flex; gap: 20px; }
+        .footer-link { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted); text-decoration: none; text-transform: uppercase; letter-spacing: 0.1em; transition: color 0.15s; }
+        .footer-link:hover { color: var(--lime); }
+    </style>
+</head>
+<body>
+<div class="marble"></div>
+<div class="wrap">
+
+    <!-- Header -->
+    <span class="eyebrow">// Open Protocol · v0.1 · Active Development</span>
+    <h1>task<span class="g-text">-bridge</span></h1>
+    <p class="sub">An open protocol for routing AI-displaced work back to humans. A structured handoff layer between AI agents and skilled human workers — bidirectional, skill-gated, timer-based, with full cost payout to the human who does the work.</p>
+
+    <div class="btn-row">
+        <a href="https://github.com/Jotto1988/task-bridge" target="_blank" rel="noopener noreferrer" class="btn-p">
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2a10 10 0 00-3.16 19.5c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.46-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.56-1.11-4.56-4.95 0-1.1.39-1.99 1.03-2.69-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.6 9.6 0 015 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.69 0 3.85-2.34 4.7-4.57 4.95.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0012 2z"/></svg>
+            View on GitHub
+        </a>
+        <a href="/articles/task-bridge-manifesto.html" class="btn-g">Read the manifesto →</a>
+        <a href="/onboard.html" class="btn-g">Build with Forge Vertical →</a>
+    </div>
+
+    <!-- Status -->
+    <div class="status-row">
+        <div class="status-dot"></div>
+        <span class="status-text">Protocol spec in active development · Seeking contributors · Call open to Anthropic, OpenAI, Google DeepMind, xAI</span>
+    </div>
+
+    <!-- Flow diagram -->
+    <span class="section-label">// How it works</span>
+    <div class="flow">
+        <div class="flow-node">
+            <div class="flow-icon">🤖</div>
+            <div class="flow-label">Step 01</div>
+            <div class="flow-name">AI Agent hits limit</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node">
+            <div class="flow-icon">📋</div>
+            <div class="flow-label">Step 02</div>
+            <div class="flow-name">Task posted to bridge</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node">
+            <div class="flow-icon">🧑‍💼</div>
+            <div class="flow-label">Step 03</div>
+            <div class="flow-name">Human worker claims</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node">
+            <div class="flow-icon">⏱</div>
+            <div class="flow-label">Step 04</div>
+            <div class="flow-name">Timer starts · work done</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node">
+            <div class="flow-icon">💸</div>
+            <div class="flow-label">Step 05</div>
+            <div class="flow-name">Full payout to human</div>
+        </div>
+    </div>
+
+    <!-- Spec cards -->
+    <span class="section-label">// Protocol principles</span>
+    <div class="cards">
+        <div class="card">
+            <div class="card-title">Bidirectional flow</div>
+            <div class="card-body">AI → Human for tasks requiring judgment, creativity, or physical presence. Human → Human for tasks that need a different skill set. The protocol handles both.</div>
+        </div>
+        <div class="card">
+            <div class="card-title">Skill-gated claiming</div>
+            <div class="card-body">Tasks are tagged with required skills. Workers only see tasks they are qualified for. No race-to-the-bottom on price — quality is the filter.</div>
+        </div>
+        <div class="card">
+            <div class="card-title">Timer-based completion</div>
+            <div class="card-body">Every task has a deadline. The timer starts when a worker claims. Escrow is released on completion. No payment held by the platform.</div>
+        </div>
+        <div class="card">
+            <div class="card-title">Full cost payout</div>
+            <div class="card-body">The human who does the work receives the full posted amount. The protocol takes no commission. Infrastructure cost is covered separately — not extracted from worker pay.</div>
+        </div>
+        <div class="card">
+            <div class="card-title">Guild structure</div>
+            <div class="card-body">Workers belong to skill guilds. Guilds maintain quality standards, onboard members, and vouch for competence. Reputation travels with the worker, not the platform.</div>
+        </div>
+        <div class="card">
+            <div class="card-title">Open standard</div>
+            <div class="card-body">The protocol is open. Any AI company, any platform, any developer can implement it. The goal is a universal handoff layer — not a proprietary marketplace.</div>
+        </div>
+    </div>
+
+    <!-- Call to AI companies -->
+    <div class="call-out">
+        <span class="section-label">// Open call</span>
+        <h2>A call to the companies<br>building the AI that <span class="g-text">displaces the work.</span></h2>
+        <p>If your AI agents are taking on tasks that previously required human workers, you have a responsibility to help route that displaced work back to humans who need it. task-bridge is the proposed mechanism. An open protocol, not a proprietary system. One that works for everyone or works for no one.</p>
+        <p>This is not a criticism of AI progress. It is a proposal for what responsible AI deployment looks like in practice — where the efficiency gains do not simply disappear into corporate margins, but are structured to create human opportunity alongside AI capability.</p>
+        <div class="company-row">
+            <span class="company-tag">Anthropic</span>
+            <span class="company-tag">OpenAI</span>
+            <span class="company-tag">Google DeepMind</span>
+            <span class="company-tag">xAI</span>
+            <span class="company-tag">Meta AI</span>
+            <span class="company-tag">Mistral</span>
+            <span class="company-tag">Every agentic AI developer</span>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="footer-links">
+            <a href="https://github.com/Jotto1988/task-bridge" target="_blank" rel="noopener noreferrer" class="footer-link">GitHub →</a>
+            <a href="/articles/task-bridge-manifesto.html" class="footer-link">Manifesto →</a>
+            <a href="https://www.forgevertical.com" class="footer-link">Forge Vertical →</a>
+        </div>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;">Built by Jarrit Hosking · Cape Town · 2026</span>
+    </div>
+
+</div>
+</body>
+</html>
