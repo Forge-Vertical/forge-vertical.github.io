@@ -1,244 +1,177 @@
-import { serve } from '@hono/node-server';
-import { Hono } from 'hono';
-import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'fs';
-import { cors } from 'hono/cors';
-import 'dotenv/config';
-import { ingestSite } from './ingestor';
-import { refactorToTailwind } from './forge';
-import { generateSite } from './generate-site';
+import * as functions from 'firebase-functions/v2/https';
+import * as admin from 'firebase-admin';
 
-const app = new Hono();
+admin.initializeApp();
+const db = admin.firestore();
 
-const enginePath   = './forge-engine';
-const projectsRoot = './vertical-projects';
+async function getZohoAccessToken(): Promise<string> {
+    const { default: fetch } = await import('node-fetch');
+    const res = await fetch(
+        `https://accounts.zoho.com/oauth/v2/token` +
+        `?refresh_token=${process.env.ZOHO_REFRESH_TOKEN}` +
+        `&client_id=${process.env.ZOHO_CLIENT_ID}` +
+        `&client_secret=${process.env.ZOHO_CLIENT_SECRET}` +
+        `&grant_type=refresh_token`,
+        { method: 'POST' }
+    );
+    const data: any = await res.json();
+    if (!data.access_token) throw new Error('Token refresh failed: ' + JSON.stringify(data));
+    return data.access_token;
+}
 
-// Initialise folders
-[enginePath, projectsRoot].forEach(p => {
-    if (!existsSync(p)) mkdirSync(p, { recursive: true });
-});
+async function createZohoCRMLead(lead: any, token: string) {
+    const { default: fetch } = await import('node-fetch');
+    const res = await fetch('https://www.zohoapis.com/crm/v3/Leads', {
+        method: 'POST',
+        headers: { 'Authorization': `Zoho-oauthtoken ${token}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            data: [{
+                Last_Name:   lead.name,
+                Email:       lead.email,
+                Phone:       lead.phone || '',
+                Company:     lead.company || lead.name,
+                Description: `Service: ${lead.service}\nPlatform: ${lead.platform || 'unknown'}\nPages: ${lead.pageCount || 'unknown'}\nKnown issues: ${lead.knownBugs || 'none'}\n\n${lead.message}`,
+                Lead_Source: 'Website — Audit Tool',
+            }],
+            trigger: ['workflow']
+        }),
+    });
+    const data: any = await res.json();
+    if (data.data?.[0]?.code === 'SUCCESS') return data.data[0].details.id;
+    throw new Error('CRM lead failed: ' + JSON.stringify(data));
+}
 
-// CORS — allow the GitHub Pages frontend to call this server
-app.use('*', cors({
-    origin: [
-        'https://forge-vertical.github.io',
-        'https://www.forgevertical.com',
-        'http://localhost:7777',
-        'http://localhost:3000',
-    ],
-    allowMethods: ['GET', 'POST', 'OPTIONS'],
-    allowHeaders: ['Content-Type', 'Authorization'],
-}));
+async function createZohoInvoiceEstimate(lead: any, token: string) {
+    const { default: fetch } = await import('node-fetch');
 
-// ─────────────────────────────────────────────────────────────────
-// SOVEREIGN FILE SERVER
-// ─────────────────────────────────────────────────────────────────
-app.get('*', (c) => {
-    const url  = new URL(c.req.url);
-    let   path = url.pathname === '/' ? './index.html' : `.${url.pathname}`;
+    // Get org ID
+    const orgRes = await fetch('https://invoice.zoho.com/api/v3/organizations', {
+        headers: { 'Authorization': `Zoho-oauthtoken ${token}` }
+    });
+    const orgData: any = await orgRes.json();
+    const orgId = orgData.organizations?.[0]?.organization_id;
+    if (!orgId) throw new Error('No Zoho Invoice org found');
 
-    // Auth check on forge-engine assets
-    if (path.includes('forge-engine')) {
-        const auth = c.req.query('auth');
-        if (auth !== 'success' && auth !== 'VFKNMJUBYQQG6')
-            return c.redirect('/build?error=unauthorized');
+    // Build line items
+    const lineItems: any[] = [{
+        name: 'Forge Audit — Full site audit',
+        description: `GEO/AI indexing + SEO + Security + Technical · PDF report + Loom walkthrough\nSite: ${lead.scannedUrl || ''} · Platform: ${lead.platform || 'unknown'} · Pages: ${lead.pageCount || 'unknown'}`,
+        rate: 2500,
+        quantity: 1,
+    }];
+
+    if (Array.isArray(lead.auditResults)) {
+        lead.auditResults
+            .filter((i: any) => !i.pass && i.price > 0)
+            .forEach((i: any) => lineItems.push({
+                name: `Fix — ${i.name}`,
+                description: i.why ? i.why.split('.')[0] + '.' : '',
+                rate: i.price,
+                quantity: 1,
+            }));
     }
 
-    if (existsSync(path)) {
-        const content = readFileSync(path);
-        const ext     = path.split('.').pop()?.toLowerCase();
-        const mimeMap: Record<string, string> = {
-            'html': 'text/html',
-            'css':  'text/css',
-            'js':   'application/javascript',
-            'ts':   'text/plain',
-            'mp4':  'video/mp4',
-            'png':  'image/png',
-            'jpg':  'image/jpeg',
-            'jpeg': 'image/jpeg',
-            'webp': 'image/webp',
-            'svg':  'image/svg+xml',
-            'ico':  'image/x-icon',
-            'txt':  'text/plain',
-            'json': 'application/json',
-            'xml':  'application/xml',
+    const expiry = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10);
+
+    const estRes = await fetch(`https://invoice.zoho.com/api/v3/estimates?organization_id=${orgId}`, {
+        method: 'POST',
+        headers: { 'Authorization': `Zoho-oauthtoken ${token}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            customer_name: lead.name,
+            customer_email: lead.email,
+            estimate_number: `FV-${Date.now().toString().slice(-6)}`,
+            reference_number: lead.scannedUrl || '',
+            expiry_date: expiry,
+            line_items: lineItems,
+            discount: 10,
+            discount_type: 'entity_level',
+            notes: `Forge Vertical audit for ${lead.scannedUrl || 'your website'}. WhatsApp +27 65 741 7593 or email jarrit@forgevertical.com to proceed. Valid 30 days.`,
+            terms: 'Prices in ZAR. 50% deposit, 50% on completion. 10% bundle discount applied.',
+        }),
+    });
+
+    const estData: any = await estRes.json();
+    if (estData.estimate?.estimate_id) return estData.estimate;
+    throw new Error('Invoice estimate failed: ' + JSON.stringify(estData));
+}
+
+export const submitLead = functions.onRequest(
+    { secrets: ['ZOHO_CLIENT_ID', 'ZOHO_CLIENT_SECRET', 'ZOHO_REFRESH_TOKEN'] },
+    async (req, res) => {
+
+    res.set('Access-Control-Allow-Origin', '*');
+    res.set('Access-Control-Allow-Methods', 'POST, OPTIONS');
+    res.set('Access-Control-Allow-Headers', 'Content-Type');
+    if (req.method === 'OPTIONS') { res.status(204).send(''); return; }
+    if (req.method !== 'POST') { res.status(405).json({ error: 'Method not allowed' }); return; }
+
+    try {
+        const b = req.body;
+        if (!b.name || !b.email) { res.status(400).json({ error: 'Name and email required' }); return; }
+
+        const lead = {
+            name:         b.name.trim(),
+            email:        b.email.trim().toLowerCase(),
+            phone:        b.phone?.trim()      || '',
+            company:      b.company?.trim()    || '',
+            message:      b.message?.trim()    || '',
+            service:      b.service?.trim()    || '',
+            platform:     b.platform?.trim()   || '',
+            pageCount:    b.pageCount?.trim()  || '',
+            knownBugs:    b.knownBugs?.trim()  || '',
+            scannedUrl:   b.scannedUrl?.trim() || '',
+            auditResults: b.auditResults       || null,
+            source:       b.source?.trim()     || 'forgevertical.com',
+            timestamp:    admin.firestore.FieldValue.serverTimestamp(),
+            status:       'new',
+            zoho_crm_id:  null as string | null,
+            zoho_est_id:  null as string | null,
         };
-        return c.body(content, 200, {
-            'Content-Type': mimeMap[ext || 'html'] || 'text/plain'
-        });
-    }
-    return c.text('404: Asset Missing', 404);
-});
 
-// ─────────────────────────────────────────────────────────────────
-// EXISTING: Site refactor (ingest URL → restyle with Gemini)
-// POST /api/forge
-// Body: { url: string }
-// ─────────────────────────────────────────────────────────────────
-app.post('/api/forge', async (c) => {
-    try {
-        const { url } = await c.req.json();
-        const siteData       = await ingestSite(url);
-        const refactoredHtml = await refactorToTailwind(siteData.html);
-        writeFileSync(`${enginePath}/index.html`, refactoredHtml);
-        return c.json({
-            status:      'Forged',
-            downloadUrl: '/forge-engine/index.html?auth=VFKNMJUBYQQG6'
-        });
-    } catch (error: any) {
-        return c.json({ status: 'Error', message: error.message }, 500);
-    }
-});
+        // Always save to Firestore first
+        const docRef = await db.collection('leads').add(lead);
+        console.log(`[Lead] Firestore: ${docRef.id}`);
 
-// ─────────────────────────────────────────────────────────────────
-// NEW: SiteBuild Studio — trigger build
-// POST /api/trigger-build
-// Body: business data JSON from sitebuild-intake.html
-//
-// This endpoint:
-// 1. Validates the payload
-// 2. Uses YOUR_FORGE_WRITE_TOKEN (from .env / GitHub secret) to write
-//    build-request.json to the repo — NEVER exposing the token to the browser
-// 3. Returns the project_id so the browser can poll for completion
-// ─────────────────────────────────────────────────────────────────
-app.post('/api/trigger-build', async (c) => {
-    try {
-        const data = await c.req.json();
+        // Zoho — one token for both CRM and Invoice
+        try {
+            const token = await getZohoAccessToken();
 
-        // Basic validation
-        if (!data.name || !data.industry) {
-            return c.json({ error: 'Business name and industry are required' }, 400);
-        }
+            // CRM
+            const crmId = await createZohoCRMLead(lead, token);
+            await docRef.update({ zoho_crm_id: crmId, status: 'crm_synced' });
+            console.log(`[Lead] CRM: ${crmId}`);
 
-        // Sanitise pages
-        if (!Array.isArray(data.pages) || data.pages.length === 0) {
-            data.pages = ['Home', 'Services', 'Contact'];
-        }
-
-        // Generate a project ID if not provided
-        if (!data.project_id) {
-            data.project_id = 'FV-' + Date.now();
-        }
-
-        const FORGE_REPO        = 'Forge-Vertical/forge-vertical.github.io';
-        const FORGE_WRITE_TOKEN = process.env.YOUR_FORGE_WRITE_TOKEN;
-
-        if (!FORGE_WRITE_TOKEN) {
-            console.error('YOUR_FORGE_WRITE_TOKEN not set in environment');
-            return c.json({ error: 'Server configuration error — token not set' }, 500);
-        }
-
-        // Write build-request.json to vertical-projects/{project_id}/
-        // This push triggers FORGE_SITEBUILD.yml via paths filter
-        const filePath = `vertical-projects/${data.project_id}/build-request.json`;
-        const content  = Buffer.from(JSON.stringify(data, null, 2)).toString('base64');
-
-        const ghRes = await fetch(
-            `https://api.github.com/repos/${FORGE_REPO}/contents/${filePath}`,
-            {
-                method: 'PUT',
-                headers: {
-                    'Authorization': `token ${FORGE_WRITE_TOKEN}`,
-                    'Content-Type':  'application/json',
-                    'User-Agent':    'ForgeVertical-SiteBuild/1.0',
-                },
-                body: JSON.stringify({
-                    message: `forge: build request ${data.project_id}`,
-                    content,
-                })
-            }
-        );
-
-        if (!ghRes.ok) {
-            const err = await ghRes.json() as any;
-            throw new Error(`GitHub API error: ${err.message || ghRes.status}`);
-        }
-
-        console.log(`[SiteBuild] Build request submitted: ${data.project_id}`);
-
-        // Return project_id — browser will poll the public GitHub Pages URL
-        // for build-status.json (no token needed, it's a public file)
-        return c.json({
-            status:     'Submitted',
-            project_id: data.project_id,
-            poll_url:   `https://forge-vertical.github.io/vertical-projects/${data.project_id}/build-status.json`,
-            result_url: `https://forge-vertical.github.io/vertical-projects/${data.project_id}/index.html`,
-        });
-
-    } catch (error: any) {
-        console.error('[SiteBuild Error]:', error);
-        return c.json({ error: error.message }, 500);
-    }
-});
-
-// ─────────────────────────────────────────────────────────────────
-// NEW: PayFast IPN notification
-// POST /api/payfast-notify
-// Called by PayFast server when payment is confirmed
-// ─────────────────────────────────────────────────────────────────
-app.post('/api/payfast-notify', async (c) => {
-    try {
-        const body          = await c.req.parseBody();
-        const paymentStatus = body['payment_status'] as string;
-        const paymentId     = body['m_payment_id']   as string;
-        const customData    = body['custom_str1']     as string;
-
-        console.log(`[PayFast IPN] ${paymentId} — ${paymentStatus}`);
-
-        if (paymentStatus === 'COMPLETE') {
-            console.log(`[PayFast] Payment complete: ${paymentId}`);
-
-            try {
-                const data = JSON.parse(customData || '{}');
-                if (data.project_id && data.name) {
-                    // Trigger build via GitHub API using server-side token
-                    const FORGE_REPO        = 'Forge-Vertical/forge-vertical.github.io';
-                    const FORGE_WRITE_TOKEN = process.env.YOUR_FORGE_WRITE_TOKEN;
-
-                    if (FORGE_WRITE_TOKEN) {
-                        const filePath = `vertical-projects/${data.project_id}/build-request.json`;
-                        const content  = Buffer.from(JSON.stringify(data, null, 2)).toString('base64');
-
-                        await fetch(
-                            `https://api.github.com/repos/${FORGE_REPO}/contents/${filePath}`,
-                            {
-                                method: 'PUT',
-                                headers: {
-                                    'Authorization': `token ${FORGE_WRITE_TOKEN}`,
-                                    'Content-Type':  'application/json',
-                                    'User-Agent':    'ForgeVertical-SiteBuild/1.0',
-                                },
-                                body: JSON.stringify({
-                                    message: `forge: build request ${data.project_id} (PayFast confirmed)`,
-                                    content,
-                                })
-                            }
-                        );
-                        console.log(`[PayFast] Build triggered for ${data.project_id}`);
-                    }
+            // Invoice estimate — only when audit results are present
+            if (Array.isArray(lead.auditResults) && lead.auditResults.length > 0) {
+                try {
+                    const est = await createZohoInvoiceEstimate(lead, token);
+                    await docRef.update({ zoho_est_id: est.estimate_id, zoho_est_number: est.estimate_number, status: 'estimate_created' });
+                    console.log(`[Lead] Invoice estimate: ${est.estimate_number}`);
+                } catch (estErr: any) {
+                    console.error('[Lead] Invoice estimate failed (non-fatal):', estErr.message);
                 }
-            } catch (parseErr) {
-                console.error('[PayFast] Could not parse custom_str1:', parseErr);
             }
+
+        } catch (zohoErr: any) {
+            await docRef.update({ status: 'zoho_failed', zoho_error: zohoErr.message });
+            console.error('[Lead] Zoho failed — lead safe in Firestore:', zohoErr.message);
         }
 
-        // PayFast requires 200 OK — always return it
-        return c.text('OK', 200);
+        res.status(200).json({ success: true, message: 'Thank you — we will be in touch within 24 hours.' });
 
-    } catch (error: any) {
-        console.error('[PayFast IPN Error]:', error);
-        return c.text('OK', 200);
+    } catch (err: any) {
+        console.error('[submitLead]', err);
+        res.status(500).json({ error: 'Something went wrong. Please try WhatsApp.' });
     }
 });
 
-// ─────────────────────────────────────────────────────────────────
-// START SERVER
-// ─────────────────────────────────────────────────────────────────
-const port = Number(process.env.PORT) || 7777;
-console.log(`\nFORGE OPERATIONAL ON PORT ${port}`);
-console.log(`Routes active:`);
-console.log(`  GET  *                     — static file server`);
-console.log(`  POST /api/forge            — site refactor (ingest URL)`);
-console.log(`  POST /api/trigger-build    — SiteBuild Studio trigger`);
-console.log(`  POST /api/payfast-notify   — PayFast IPN handler\n`);
-
-serve({ fetch: app.fetch, port });
+export const getLeads = functions.onRequest(
+    { secrets: ['ZOHO_CLIENT_ID', 'ZOHO_CLIENT_SECRET', 'ZOHO_REFRESH_TOKEN'] },
+    async (req, res) => {
+    res.set('Access-Control-Allow-Origin', '*');
+    if (req.query.secret !== process.env.ADMIN_SECRET) { res.status(401).json({ error: 'Unauthorised' }); return; }
+    try {
+        const snap = await db.collection('leads').orderBy('timestamp', 'desc').limit(100).get();
+        res.status(200).json({ leads: snap.docs.map(d => ({ id: d.id, ...d.data() })), total: snap.size });
+    } catch (err: any) { res.status(500).json({ error: err.message }); }
+});
