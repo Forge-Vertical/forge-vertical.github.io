@@ -131,6 +131,39 @@
                 <input type="url" id="scan-url" class="fi" placeholder="https://yourbusiness.com">
                 <div class="form-error" id="url-error">Please enter a valid URL starting with https://</div>
             </div>
+            <div style="margin-bottom:20px;">
+                <label class="form-label" for="platform">Website platform</label>
+                <select id="platform" class="fi" style="cursor:pointer;">
+                    <option value="">Select your platform (optional)</option>
+                    <option value="static">Static HTML / GitHub Pages / Custom coded</option>
+                    <option value="wordpress">WordPress</option>
+                    <option value="shopify">Shopify</option>
+                    <option value="wix">Wix</option>
+                    <option value="squarespace">Squarespace</option>
+                    <option value="mobirise">Mobirise</option>
+                    <option value="webflow">Webflow</option>
+                    <option value="godaddy">GoDaddy Website Builder</option>
+                    <option value="aibuilder">AI-generated / WYSIWYG builder</option>
+                    <option value="other">Other / Not sure</option>
+                </select>
+            </div>
+            <div class="form-grid" style="margin-bottom:14px;">
+                <div>
+                    <label class="form-label" for="page-count">Approx. number of pages</label>
+                    <select id="page-count" class="fi" style="cursor:pointer;">
+                        <option value="">Not sure</option>
+                        <option value="1-5">1–5 pages</option>
+                        <option value="6-15">6–15 pages</option>
+                        <option value="16-50">16–50 pages</option>
+                        <option value="51-100">51–100 pages</option>
+                        <option value="100+">100+ pages</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="form-label" for="known-bugs">Known issues or bugs</label>
+                    <input type="text" id="known-bugs" class="fi" placeholder="e.g. contact form broken, slow loading...">
+                </div>
+            </div>
             <div class="form-grid">
                 <div>
                     <label class="form-label" for="lead-name">Your name *</label>
@@ -305,14 +338,14 @@ async function startScan() {
     if (!url || !url.startsWith('http')) { document.getElementById('url-error').style.display = 'block'; return; }
     if (!name || !email) { document.getElementById('lead-error').style.display = 'block'; return; }
 
-    scanData = {url, name, email, phone: document.getElementById('lead-phone').value.trim(), company: document.getElementById('lead-company').value.trim(), results:{}, score:0, catScores:{}};
+    scanData = {url, name, email, phone: document.getElementById('lead-phone').value.trim(), company: document.getElementById('lead-company').value.trim(), platform: document.getElementById('platform').value, pageCount: document.getElementById('page-count').value, knownBugs: document.getElementById('known-bugs').value.trim(), results:{}, score:0, catScores:{}};
 
     document.getElementById('scan-btn').disabled = true;
     document.getElementById('results-section').style.display = 'none';
     document.getElementById('progress-section').style.display = 'block';
     document.getElementById('progress-section').scrollIntoView({behavior:'smooth',block:'start'});
 
-    submitToCRM();
+    // CRM submitted after scan with full results — called in buildResults
 
     const allItems = Object.values(CHECKS).flatMap(cat => cat.items);
     const stepsEl = document.getElementById('scan-steps');
@@ -448,6 +481,84 @@ function buildResults() {
             <div class="quote-total-amount">R${total.toLocaleString()}</div>
         </div>`;
 
+    // Platform-aware fix note
+    const platformNotes = {
+        static: {label:'Static HTML / Custom code', note:'All fixes can be applied directly to your source files. Forge Vertical can edit your code directly — fastest resolution for all issues.', color:'var(--green)'},
+        wordpress: {label:'WordPress', note:'Most fixes apply via plugin or theme editor. Security headers via Really Simple SSL or Wordfence. Schema via Yoast SEO or Rank Math. llms.txt, sitemap, and robots via file upload or plugin. Some fixes require theme file edits — Forge Vertical handles this safely.', color:'var(--amber)'},
+        shopify: {label:'Shopify', note:'robots.txt, sitemap, and OG tags manageable via theme or Shopify admin. Security headers (HSTS, CSP, X-Frame) applied via Cloudflare proxy — no store code changes needed. Schema via app or theme.liquid edits. llms.txt and context-ai.txt via custom file upload.', color:'var(--amber)'},
+        wix: {label:'Wix', note:'Wix controls most server headers — CSP, HSTS, X-Frame are platform-managed. Schema, OG tags, and meta data editable in Wix SEO settings. llms.txt and context-ai.txt can be added as static files. robots.txt editable in Wix settings panel.', color:'var(--red)'},
+        squarespace: {label:'Squarespace', note:'Most security headers are platform-controlled. Schema and OG tags available via Squarespace SEO settings and code injection. robots.txt editable in settings. llms.txt via file storage. Limited server-level control.', color:'var(--red)'},
+        mobirise: {label:'Mobirise', note:'Exported static HTML — all fixes apply directly to exported code before upload. Forge Vertical can rewrite your index.html with all fixes applied. Security headers require hosting-level configuration (Cloudflare recommended).', color:'var(--lime)'},
+        webflow: {label:'Webflow', note:'Meta tags, OG tags, schema injectable via Webflow custom code. robots.txt and sitemap manageable via Webflow settings. Security headers via Cloudflare proxy. llms.txt via Webflow's asset hosting.', color:'var(--amber)'},
+        aibuilder: {label:'AI-generated / WYSIWYG builder', note:'Fix approach depends on whether you have access to the exported HTML. If yes: send Forge Vertical your index.html and we rewrite it clean with all fixes applied. If platform-locked: Cloudflare proxy handles server-level security headers without touching your code.', color:'var(--amber)'},
+        other: {label:'Platform unknown', note:'Send Forge Vertical your index.html source and we will assess what is directly fixable versus what requires a hosting-level solution via Cloudflare.', color:'var(--muted2)'},
+    };
+    const pn = platformNotes[scanData.platform];
+    const platformNoteEl = document.getElementById('platform-note');
+    if (pn && platformNoteEl) {
+        platformNoteEl.innerHTML = `<div style="padding:12px 20px;border-bottom:1px solid var(--border);background:rgba(255,255,255,0.02);">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:${pn.color};margin-bottom:6px;">Platform: ${pn.label}</div>
+            <div style="font-size:12px;color:var(--muted2);line-height:1.6;">${pn.note}</div>
+        </div>`;
+    }
+
+    // Maintenance recommendation card
+    const maintEl = document.createElement('div');
+    maintEl.style.cssText = 'background:var(--surface);border:1px solid var(--border2);border-radius:16px;overflow:hidden;margin-bottom:14px;';
+    maintEl.innerHTML = `
+        <div style="padding:20px;border-bottom:1px solid var(--border);background:var(--surface2);">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:var(--amber);margin-bottom:4px;">// Maintenance recommendation</div>
+            <div style="font-size:15px;font-weight:700;margin-bottom:4px;">Websites are never finished.</div>
+            <div style="font-size:13px;color:var(--muted2);line-height:1.6;">Search engines update their algorithms. AI crawlers change how they index. Security vulnerabilities are discovered in plugins, dependencies, and platforms. What passes today may flag tomorrow. A site that is not actively maintained loses ground — in search rankings, in AI citation quality, and in security posture.</div>
+        </div>
+        <div style="padding:16px 20px;display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+            <div style="background:rgba(132,204,22,0.06);border:1px solid rgba(132,204,22,0.15);border-radius:10px;padding:14px;">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--lime);margin-bottom:6px;">Forge Care — R3,500/month</div>
+                <div style="font-size:12px;color:var(--muted2);line-height:1.6;">Monthly GEO content drop · Security monitoring and patches · Hosting and uptime · Monthly ranking and indexing report · Schema and llms.txt kept current as standards evolve.</div>
+            </div>
+            <div style="background:rgba(245,158,11,0.06);border:1px solid rgba(245,158,11,0.15);border-radius:10px;padding:14px;">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--amber);margin-bottom:6px;">Without maintenance</div>
+                <div style="font-size:12px;color:var(--muted2);line-height:1.6;">GEO indexing degrades as AI crawlers update standards · Security vulnerabilities accumulate · Rankings drop as competitors update · New Google requirements missed.</div>
+            </div>
+        </div>`;
+    document.getElementById('issues-container').before(maintEl);
+
+    // Rebuild recommendation card
+    const rebuildEl = document.createElement('div');
+    rebuildEl.style.cssText = 'background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-bottom:14px;';
+    const issueCount = Object.values(CHECKS).flatMap(c => c.items).filter(i => !scanData.results[i.id]?.pass).length;
+    const rebuildThreshold = issueCount >= 8;
+    rebuildEl.innerHTML = `
+        <div style="padding:20px;border-bottom:1px solid var(--border);background:var(--surface2);">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:${rebuildThreshold ? 'var(--red)' : 'var(--lime)'};margin-bottom:4px;">// ${rebuildThreshold ? 'Rebuild recommended' : 'Fix or rebuild?'}</div>
+            <div style="font-size:15px;font-weight:700;margin-bottom:4px;">${rebuildThreshold ? 'A rebuild may cost less than fixing everything.' : 'You have two options.'}</div>
+            <div style="font-size:13px;color:var(--muted2);line-height:1.6;">${rebuildThreshold ? `With ${issueCount} issues found — many of which are foundational — patching them one by one on your current platform costs more in time and money than starting clean. A Forge Vertical rebuild includes every fix in this report, built in from day one, on infrastructure you own with no lock-in.` : 'You can fix the individual issues on your current platform, or use this as the moment to rebuild properly — with GEO, SEO, and security built in from the first commit rather than retrofitted after.'}</div>
+        </div>
+        <div style="padding:16px 20px;display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+            <div style="background:rgba(132,204,22,0.06);border:1px solid rgba(132,204,22,0.15);border-radius:10px;padding:14px;">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--lime);margin-bottom:6px;">Forge Build — from R25,000</div>
+                <div style="font-size:12px;color:var(--muted2);line-height:1.6;">Complete rebuild. Every item in this report resolved from day one. GEO/AI indexing stack · Security hardened · Schema · llms.txt · sitemap · You own everything. Zero lock-in.</div>
+                <a href="/onboard.html" style="display:inline-block;margin-top:10px;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--lime);text-decoration:none;">Start a rebuild brief →</a>
+            </div>
+            <div style="background:rgba(255,255,255,0.03);border:1px solid var(--border2);border-radius:10px;padding:14px;">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--muted2);margin-bottom:6px;">Fix existing site</div>
+                <div style="font-size:12px;color:var(--muted2);line-height:1.6;">Use the itemised quote above. Each fix applied to your current platform. Best when your site structure is solid and you want targeted improvements only.</div>
+                <a href="https://wa.me/27657417593" target="_blank" rel="noopener noreferrer" style="display:inline-block;margin-top:10px;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted2);text-decoration:none;">WhatsApp Jarrit →</a>
+            </div>
+        </div>`;
+    document.getElementById('issues-container').before(rebuildEl);
+
+    // Submit to CRM with full audit results for Zoho Invoice estimate
+    const auditPayload = Object.values(CHECKS).flatMap(cat => cat.items).map(item => ({
+        id: item.id,
+        name: item.name,
+        pass: scanData.results[item.id]?.pass || false,
+        status: scanData.results[item.id]?.status || 'fail',
+        price: item.price,
+        why: item.why || '',
+    }));
+    submitToCRM(auditPayload);
+
     const container = document.getElementById('issues-container');
     container.innerHTML = '';
     Object.entries(CHECKS).forEach(([catId, cat]) => {
@@ -494,7 +605,7 @@ async function submitToCRM() {
             body: JSON.stringify({
                 name: scanData.name, email: scanData.email,
                 phone: scanData.phone, company: scanData.company || scanData.name,
-                message: `Site audit request for: ${scanData.url}`,
+                message: `Site audit request for: ${scanData.url}\nPlatform: ${scanData.platform || 'not specified'}\nPages: ${scanData.pageCount || 'unknown'}\nKnown issues: ${scanData.knownBugs || 'none reported'}`,
                 service: 'Forge Audit', source: 'forgevertical.com/tools/audit'
             })
         });
@@ -529,7 +640,9 @@ function downloadPDF() {
     doc.text('Site Audit Report', lm, 27);
     doc.setTextColor(106,125,150);
     doc.setFontSize(9);
-    doc.text(`${domain}  ·  ${date}  ·  forgevertical.com`, lm, 34);
+    const platformLabel = scanData.platform ? ` · Platform: ${scanData.platform}` : '';
+    const pageLabel = scanData.pageCount ? ` · Pages: ${scanData.pageCount}` : '';
+    doc.text(`${domain}  ·  ${date}  ·  forgevertical.com${platformLabel}${pageLabel}`, lm, 34);
     doc.text('jarrit@forgevertical.com  ·  +27 65 741 7593', lm, 40);
     y = 58;
 
