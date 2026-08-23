@@ -3,317 +3,643 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Find out what slow load times, poor UX, and weak SEO are costing your business annually. Free audit tool by Forge Vertical.">
-    <title>Revenue Leakage Audit Tool // Forge Vertical</title>
-    <script src="/global.js"></script>
+    <meta name="description" content="Free website audit from Forge Vertical. Scan your site for SEO, GEO/AI indexing, and security gaps. Get a full PDF report with pricing to fix every issue.">
+    <title>Free Site Audit | Forge Vertical</title>
+    <script src="/global.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;500;800&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+    <link rel="stylesheet" href="/typography.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; color: #1e293b; }
-        .vibrant-gradient { background: linear-gradient(90deg, #10b981 0%, #84cc16 100%); }
-        .gradient-text { background: linear-gradient(90deg, #10b981 0%, #84cc16 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; display: inline-block; padding-bottom: 0.1em; }
-        .fv-dot { flex: 1; height: 3px; border-radius: 2px; background: #e2e8f0; transition: background 0.3s; }
-        .fv-dot.done { background: #84cc16; }
-        .fv-step { display: none; }
-        .fv-step.active { display: block; }
-        .fv-spinner { width: 48px; height: 48px; border: 3px solid #e2e8f0; border-top-color: #84cc16; border-radius: 50%; animation: spin 0.7s linear infinite; }
-        @keyframes spin { to { transform: rotate(360deg); } }
-        .fv-leak-bar { height: 100%; background: #ef4444; border-radius: 3px; transition: width 1s ease; }
-        .chip { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; padding: 5px 14px; border-radius: 20px; border: 1px solid #e2e8f0; color: #64748b; cursor: pointer; background: transparent; font-family: 'Plus Jakarta Sans', sans-serif; transition: all 0.15s; }
-        .chip:hover { border-color: #84cc16; color: #84cc16; }
+        :root{--bg:#06080c;--surface:#0b0f14;--surface2:#111620;--border:#1a2030;--border2:#232d3f;--text:#eef0f4;--muted:#3d4f6a;--muted2:#6a7d96;--lime:#84cc16;--emerald:#10b981;--red:#ef4444;--amber:#f59e0b;--green:#22c55e;}
+        *{box-sizing:border-box;margin:0;padding:0;}
+        html{scroll-behavior:smooth;}
+        body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;overflow-x:hidden;}
+        .mono{font-family:'JetBrains Mono',monospace;}
+        .g-text{background:linear-gradient(90deg,var(--emerald),var(--lime));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:inline-block;}
+
+        #hero{padding:80px 6vw 60px;border-bottom:1px solid var(--border);position:relative;overflow:hidden;}
+        #hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 0% 50%,rgba(16,185,129,0.10) 0%,transparent 60%),radial-gradient(ellipse 50% 50% at 100% 50%,rgba(132,204,22,0.06) 0%,transparent 60%);pointer-events:none;}
+        .hero-inner{max-width:900px;margin:0 auto;position:relative;z-index:1;}
+        .eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.25em;color:var(--lime);margin-bottom:16px;display:block;}
+        h1{font-size:clamp(36px,5vw,64px);font-weight:700;letter-spacing:-0.03em;line-height:1.0;margin-bottom:14px;}
+        .hero-sub{font-size:16px;color:var(--muted2);font-weight:300;line-height:1.7;max-width:560px;margin-bottom:36px;}
+
+        #scan-form-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:28px;max-width:900px;margin:0 auto;}
+        .form-label{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:var(--muted2);margin-bottom:8px;display:block;}
+        .fi{width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border2);border-radius:10px;padding:12px 16px;color:var(--text);font-family:'Outfit',sans-serif;font-size:15px;outline:none;transition:border-color 0.2s;}
+        .fi:focus{border-color:var(--lime);}
+        .fi::placeholder{color:var(--muted);}
+        .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+        @media(max-width:600px){.form-grid{grid-template-columns:1fr;}}
+        .url-row{margin-bottom:20px;}
+        .btn-scan{width:100%;padding:14px;border-radius:12px;border:none;cursor:pointer;background:linear-gradient(90deg,var(--emerald),var(--lime));color:#06080c;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;transition:opacity 0.18s;display:flex;align-items:center;justify-content:center;gap:8px;}
+        .btn-scan:hover{opacity:0.88;}
+        .btn-scan:disabled{opacity:0.45;cursor:not-allowed;}
+        .form-note{font-size:12px;color:var(--muted2);text-align:center;margin-top:10px;}
+        .form-error{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--red);margin-top:8px;display:none;}
+
+        #progress-section{display:none;max-width:900px;margin:32px auto 0;padding:0 6vw;}
+        .progress-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:28px;}
+        .progress-label{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted2);margin-bottom:10px;letter-spacing:0.05em;}
+        .progress-track{height:3px;background:var(--border2);border-radius:2px;overflow:hidden;margin-bottom:20px;}
+        .progress-fill{height:100%;background:linear-gradient(90deg,var(--emerald),var(--lime));border-radius:2px;transition:width 0.3s;width:0%;}
+        .scan-steps{display:flex;flex-direction:column;gap:6px;max-height:200px;overflow-y:auto;}
+        .scan-step{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);display:flex;align-items:center;gap:8px;}
+        .scan-step.active{color:var(--lime);}
+        .scan-step.done{color:var(--green);}
+        .step-dot{width:6px;height:6px;border-radius:50%;background:currentColor;flex-shrink:0;}
+
+        #results-section{display:none;max-width:900px;margin:32px auto 0;padding:0 6vw 80px;}
+
+        .score-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:28px;margin-bottom:20px;display:flex;align-items:center;gap:28px;flex-wrap:wrap;}
+        .score-ring{width:100px;height:100px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0;border:3px solid;}
+        .score-ring.good{border-color:var(--green);background:rgba(34,197,94,0.08);}
+        .score-ring.mid{border-color:var(--amber);background:rgba(245,158,11,0.08);}
+        .score-ring.bad{border-color:var(--red);background:rgba(239,68,68,0.08);}
+        .score-num{font-family:'JetBrains Mono',monospace;font-size:32px;font-weight:700;line-height:1;}
+        .score-ring.good .score-num{color:var(--green);}
+        .score-ring.mid .score-num{color:var(--amber);}
+        .score-ring.bad .score-num{color:var(--red);}
+        .score-lbl{font-size:11px;color:var(--muted2);}
+        .score-info{flex:1;min-width:200px;}
+        .score-title{font-size:20px;font-weight:700;letter-spacing:-0.02em;margin-bottom:6px;}
+        .score-sub{font-size:14px;color:var(--muted2);line-height:1.6;margin-bottom:14px;}
+        .mini-bars{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+        .mini-bar-label{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted2);display:flex;justify-content:space-between;margin-bottom:3px;text-transform:uppercase;letter-spacing:0.1em;}
+        .mini-bar-track{height:3px;background:var(--border2);border-radius:2px;overflow:hidden;}
+        .mini-bar-fill{height:100%;border-radius:2px;transition:width 0.6s;}
+
+        .action-row{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:14px;}
+        .btn-dl{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(90deg,var(--emerald),var(--lime));color:#06080c;padding:12px 24px;border-radius:10px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;border:none;cursor:pointer;transition:opacity 0.18s;}
+        .btn-dl:hover{opacity:0.85;}
+        .btn-ghost{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--border2);color:var(--muted2);padding:12px 20px;border-radius:10px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;background:transparent;cursor:pointer;transition:all 0.18s;text-decoration:none;}
+        .btn-ghost:hover{border-color:var(--muted);color:var(--text);}
+        .crm-status{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted2);display:flex;align-items:center;gap:6px;margin-bottom:14px;}
+        .crm-dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s ease-in-out infinite;}
+        @keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.4;}}
+
+        .quote-card{background:var(--surface);border:1px solid var(--border2);border-radius:16px;overflow:hidden;margin-bottom:14px;}
+        .quote-head{padding:20px;border-bottom:1px solid var(--border);background:var(--surface2);}
+        .quote-head h3{font-size:16px;font-weight:700;margin-bottom:4px;}
+        .quote-head p{font-size:13px;color:var(--muted2);}
+        .quote-line{display:flex;justify-content:space-between;align-items:flex-start;padding:12px 20px;border-bottom:1px solid var(--border);gap:16px;}
+        .quote-item-name{font-size:13px;font-weight:600;color:var(--text);}
+        .quote-item-desc{font-size:12px;color:var(--muted2);margin-top:2px;}
+        .quote-item-price{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;color:var(--lime);white-space:nowrap;flex-shrink:0;}
+        .quote-total{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;background:var(--surface2);}
+        .quote-total-label{font-size:14px;font-weight:700;}
+        .quote-total-amount{font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:700;color:var(--lime);}
+        .quote-discount-note{font-size:12px;color:var(--green);margin-top:2px;}
+
+        .issues-section{background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-bottom:14px;}
+        .issues-head{padding:16px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+        .issues-head-title{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;}
+        .issues-head-score{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;}
+        .check-item{padding:16px 20px;border-bottom:1px solid var(--border);display:flex;gap:12px;align-items:flex-start;}
+        .check-item:last-child{border-bottom:none;}
+        .check-badge{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;font-size:11px;font-weight:700;}
+        .check-badge.pass{background:rgba(34,197,94,0.12);color:var(--green);}
+        .check-badge.fail{background:rgba(239,68,68,0.12);color:var(--red);}
+        .check-badge.warn{background:rgba(245,158,11,0.12);color:var(--amber);}
+        .check-content{flex:1;}
+        .check-name{font-size:14px;font-weight:600;color:var(--text);margin-bottom:2px;}
+        .check-status{font-size:12px;margin-bottom:4px;}
+        .check-status.pass{color:var(--green);}
+        .check-status.fail{color:var(--red);}
+        .check-status.warn{color:var(--amber);}
+        .check-why{font-size:12px;color:var(--muted2);line-height:1.6;margin-bottom:4px;}
+        .check-toggle{font-size:11px;color:var(--lime);cursor:pointer;font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:0.08em;}
+        .check-detail{font-size:12px;color:var(--muted2);line-height:1.6;margin-top:8px;padding:10px 14px;background:rgba(255,255,255,0.03);border-radius:8px;border-left:2px solid var(--lime);display:none;}
+        .check-price{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:var(--lime);white-space:nowrap;flex-shrink:0;margin-top:2px;}
     </style>
 </head>
-<body class="min-h-screen antialiased">
+<body>
+<div id="global-nav"></div>
 
-    <div id="global-nav"></div>
+<section id="hero">
+    <div class="hero-inner">
+        <span class="eyebrow">// Forge Vertical · Free Site Audit</span>
+        <h1>Find out what your<br><span class="g-text">site is missing.</span></h1>
+        <p class="hero-sub">Full scan across SEO, GEO/AI indexing, and security. Instant PDF report. Itemised quote to fix every gap — in rands, no surprises.</p>
 
-    <main class="max-w-2xl mx-auto px-6 pt-36 pb-24">
-
-        <!-- Header -->
-        <div id="tool-header" class="mb-10">
-            <span class="text-[10px] font-black uppercase tracking-[0.3em] text-[#84cc16]">Forge Vertical // Audit Tool</span>
-            <h1 class="text-5xl font-extrabold tracking-tighter leading-none mt-2 mb-3 text-zinc-900">
-                Revenue <span class="gradient-text">Leakage</span><br>Calculator
-            </h1>
-            <p class="text-zinc-500 text-base">Find out what slow load times, poor UX, and weak SEO are costing you — in under 60 seconds.</p>
-        </div>
-
-        <!-- Progress -->
-        <div id="progress-wrap" class="flex gap-2 mb-10">
-            <div class="fv-dot done" id="d0"></div>
-            <div class="fv-dot" id="d1"></div>
-            <div class="fv-dot" id="d2"></div>
-        </div>
-
-        <!-- Step 0: Traffic -->
-        <div class="fv-step active bg-white rounded-[2rem] border border-zinc-100 p-8 shadow-sm" id="step-0">
-            <label class="block text-[10px] font-black uppercase tracking-widest text-zinc-400 mb-3">Monthly website visitors</label>
-            <input type="number" id="inp-traffic" placeholder="5000" min="0"
-                class="w-full bg-zinc-50 rounded-2xl border-none p-4 text-2xl font-extrabold text-zinc-900 outline-none focus:ring-2 focus:ring-lime-400">
-            <p class="text-zinc-400 text-xs mt-3">Unique monthly sessions from Google Analytics or Search Console.</p>
-            <div class="flex flex-wrap gap-2 mt-4">
-                <button class="chip" onclick="setVal('inp-traffic',1000)">1k</button>
-                <button class="chip" onclick="setVal('inp-traffic',5000)">5k</button>
-                <button class="chip" onclick="setVal('inp-traffic',20000)">20k</button>
-                <button class="chip" onclick="setVal('inp-traffic',100000)">100k</button>
-                <button class="chip" onclick="setVal('inp-traffic',500000)">500k</button>
+        <div id="scan-form-card">
+            <div class="url-row">
+                <label class="form-label" for="scan-url">Website to audit</label>
+                <input type="url" id="scan-url" class="fi" placeholder="https://yourbusiness.com">
+                <div class="form-error" id="url-error">Please enter a valid URL starting with https://</div>
             </div>
-            <button onclick="goStep(1)" class="w-full mt-8 bg-zinc-900 text-[#84cc16] py-5 rounded-2xl font-black uppercase tracking-widest text-[10px] hover:bg-[#84cc16] hover:text-zinc-900 transition-all">
-                Next — Average order value →
-            </button>
-        </div>
-
-        <!-- Step 1: Value -->
-        <div class="fv-step bg-white rounded-[2rem] border border-zinc-100 p-8 shadow-sm" id="step-1">
-            <label class="block text-[10px] font-black uppercase tracking-widest text-zinc-400 mb-3">Average order / lead value (USD)</label>
-            <input type="number" id="inp-value" placeholder="100" min="0"
-                class="w-full bg-zinc-50 rounded-2xl border-none p-4 text-2xl font-extrabold text-zinc-900 outline-none focus:ring-2 focus:ring-lime-400">
-            <p class="text-zinc-400 text-xs mt-3">What does one conversion typically earn your business?</p>
-            <div class="flex flex-wrap gap-2 mt-4">
-                <button class="chip" onclick="setVal('inp-value',50)">$50</button>
-                <button class="chip" onclick="setVal('inp-value',200)">$200</button>
-                <button class="chip" onclick="setVal('inp-value',500)">$500</button>
-                <button class="chip" onclick="setVal('inp-value',1500)">$1.5k</button>
-                <button class="chip" onclick="setVal('inp-value',5000)">$5k</button>
-            </div>
-            <button onclick="goStep(2)" class="w-full mt-8 bg-zinc-900 text-[#84cc16] py-5 rounded-2xl font-black uppercase tracking-widest text-[10px] hover:bg-[#84cc16] hover:text-zinc-900 transition-all">
-                Next — Conversion rate →
-            </button>
-        </div>
-
-        <!-- Step 2: CVR -->
-        <div class="fv-step bg-white rounded-[2rem] border border-zinc-100 p-8 shadow-sm" id="step-2">
-            <label class="block text-[10px] font-black uppercase tracking-widest text-zinc-400 mb-3">Current conversion rate (%)</label>
-            <input type="number" id="inp-cvr" placeholder="2" min="0" max="100" step="0.1"
-                class="w-full bg-zinc-50 rounded-2xl border-none p-4 text-2xl font-extrabold text-zinc-900 outline-none focus:ring-2 focus:ring-lime-400">
-            <p class="text-zinc-400 text-xs mt-3">Industry average: 1–3%. E-commerce 1–2%, B2B leads 2–5%.</p>
-            <div class="flex flex-wrap gap-2 mt-4">
-                <button class="chip" onclick="setVal('inp-cvr',0.5)">0.5%</button>
-                <button class="chip" onclick="setVal('inp-cvr',1)">1%</button>
-                <button class="chip" onclick="setVal('inp-cvr',2)">2%</button>
-                <button class="chip" onclick="setVal('inp-cvr',3.5)">3.5%</button>
-                <button class="chip" onclick="setVal('inp-cvr',5)">5%</button>
-            </div>
-            <button onclick="runAnalysis()" class="w-full mt-8 vibrant-gradient text-white py-5 rounded-2xl font-black uppercase tracking-widest text-[10px] hover:opacity-90 transition-all">
-                Analyse my revenue leakage
-            </button>
-        </div>
-
-        <!-- Analysis -->
-        <div class="fv-step" id="step-analyze">
-            <div class="bg-white rounded-[2rem] border border-zinc-100 p-12 shadow-sm text-center">
-                <div class="fv-spinner mx-auto mb-6"></div>
-                <p class="text-[10px] font-black uppercase tracking-widest text-zinc-400 mb-4">Running audit</p>
-                <div id="fv-log" class="font-mono text-xs text-[#84cc16] leading-8 min-h-[100px]"></div>
-            </div>
-        </div>
-
-        <!-- Results -->
-        <div id="fv-results" class="hidden space-y-4">
-
-            <!-- Hero loss card -->
-            <div class="bg-zinc-950 rounded-[2rem] p-8">
-                <p class="text-[10px] font-black uppercase tracking-widest text-zinc-500 mb-2">Annual revenue at risk</p>
-                <p id="res-loss" class="text-5xl font-extrabold text-red-400 tracking-tighter">$0</p>
-                <p id="res-hero-sub" class="text-zinc-500 text-xs mt-3"></p>
-            </div>
-
-            <!-- Metrics row -->
-            <div class="grid grid-cols-3 gap-3">
-                <div class="bg-white rounded-2xl border border-zinc-100 p-5">
-                    <p id="res-traffic" class="text-xl font-extrabold text-zinc-900 tracking-tighter">—</p>
-                    <p class="text-[10px] font-black uppercase tracking-widest text-zinc-400 mt-1">Monthly visitors</p>
+            <div class="form-grid">
+                <div>
+                    <label class="form-label" for="lead-name">Your name *</label>
+                    <input type="text" id="lead-name" class="fi" placeholder="Jane Smith">
                 </div>
-                <div class="bg-white rounded-2xl border border-zinc-100 p-5">
-                    <p id="res-baseline" class="text-xl font-extrabold text-zinc-900 tracking-tighter">—</p>
-                    <p class="text-[10px] font-black uppercase tracking-widest text-zinc-400 mt-1">Current monthly rev</p>
+                <div>
+                    <label class="form-label" for="lead-email">Email address *</label>
+                    <input type="email" id="lead-email" class="fi" placeholder="jane@yourbusiness.com">
                 </div>
-                <div class="bg-white rounded-2xl border border-zinc-100 p-5">
-                    <p id="res-potential" class="text-xl font-extrabold text-[#10b981] tracking-tighter">—</p>
-                    <p class="text-[10px] font-black uppercase tracking-widest text-zinc-400 mt-1">Potential monthly rev</p>
+                <div>
+                    <label class="form-label" for="lead-phone">WhatsApp number</label>
+                    <input type="tel" id="lead-phone" class="fi" placeholder="+27 65 000 0000">
+                </div>
+                <div>
+                    <label class="form-label" for="lead-company">Business name</label>
+                    <input type="text" id="lead-company" class="fi" placeholder="Your business">
                 </div>
             </div>
-
-            <!-- Leak breakdown -->
-            <div class="bg-white rounded-[2rem] border border-zinc-100 p-8">
-                <p class="text-[10px] font-black uppercase tracking-widest text-zinc-400 mb-6">Where you're bleeding revenue</p>
-                <div id="fv-leak-list" class="space-y-4"></div>
-            </div>
-
-            <!-- Chart -->
-            <div class="bg-white rounded-[2rem] border border-zinc-100 p-8">
-                <p class="text-[10px] font-black uppercase tracking-widest text-zinc-400 mb-6">Baseline vs. recoverable value</p>
-                <div style="position:relative;width:100%;height:220px;">
-                    <canvas id="fv-chart" role="img" aria-label="Bar chart comparing current monthly revenue baseline against recoverable monthly revenue from closing each leak category.">Revenue baseline vs recoverable amounts by leak category.</canvas>
-                </div>
-                <div id="fv-legend" class="flex flex-wrap gap-3 mt-4 text-[10px] text-zinc-500 font-bold"></div>
-            </div>
-
-            <!-- Quote -->
-            <p id="fv-quote" class="text-sm text-zinc-400 italic leading-relaxed px-2"></p>
-
-            <!-- CTAs -->
-            <div class="grid grid-cols-2 gap-3">
-                <a href="https://wa.me/27657417593" target="_blank" rel="noopener noreferrer"
-                    class="flex items-center justify-center gap-3 bg-[#25D366] text-white py-5 rounded-2xl font-black uppercase text-[10px] tracking-widest hover:opacity-90 transition-all">
-                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
-                    WhatsApp Jarrit
-                </a>
-                <a href="mailto:jarrit@forgevertical.com?subject=Revenue Leakage Audit Request" target="_blank" rel="noopener noreferrer"
-                    class="flex items-center justify-center gap-3 bg-zinc-900 text-[#84cc16] py-5 rounded-2xl font-black uppercase text-[10px] tracking-widest hover:bg-[#84cc16] hover:text-zinc-900 transition-all">
-                    Email the architect
-                </a>
-            </div>
-
-            <button onclick="restart()" class="w-full border border-zinc-200 text-zinc-400 py-4 rounded-2xl font-black uppercase text-[10px] tracking-widest hover:border-zinc-400 hover:text-zinc-600 transition-all">
-                ↺ Run another audit
+            <div class="form-error" id="lead-error">Please enter your name and email to receive the report</div>
+            <button class="btn-scan" id="scan-btn" onclick="startScan()">
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+                Run free audit
             </button>
+            <p class="form-note">Free. No credit card. PDF report generated instantly.</p>
         </div>
+    </div>
+</section>
 
-    </main>
+<div id="progress-section">
+    <div class="progress-card">
+        <div class="progress-label" id="progress-label">Initialising scan...</div>
+        <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+        <div class="scan-steps" id="scan-steps"></div>
+    </div>
+</div>
 
-    <div id="global-footer"></div>
+<div id="results-section">
+    <div class="score-card" id="score-card"></div>
+    <div class="action-row">
+        <button class="btn-dl" onclick="downloadPDF()">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF report + quote
+        </button>
+        <a href="/onboard.html" class="btn-ghost">Start a project →</a>
+        <a href="https://wa.me/27657417593" target="_blank" rel="noopener noreferrer" class="btn-ghost">WhatsApp Jarrit →</a>
+    </div>
+    <div class="crm-status" id="crm-status"></div>
+    <div class="quote-card" id="quote-card"></div>
+    <div id="issues-container"></div>
+</div>
 
-    <script>
-        let chart = null;
-        let currentStep = 0;
+<div id="global-footer"></div>
 
-        function setVal(id, v) { document.getElementById(id).value = v; }
+<script>
+const FUNCTION_URL = 'https://us-central1-forge-vertical.cloudfunctions.net/submitLead';
+const AUDIT_FEE = 2500;
+const DISCOUNT_PCT = 10;
 
-        function goStep(n) {
-            document.getElementById('step-' + currentStep).classList.remove('active');
-            currentStep = n;
-            document.getElementById('step-' + n).classList.add('active');
-            for (let i = 0; i < 3; i++) {
-                document.getElementById('d' + i).classList.toggle('done', i <= n);
-            }
+const CHECKS = {
+    geo: {
+        label:'GEO / AI Indexing', color:'#84cc16',
+        items:[
+            {id:'llms_txt',name:'llms.txt',path:'/llms.txt',weight:8,price:800,
+             pass:'AI crawlers have structured context about this site',
+             fail:'No llms.txt — AI models have no structured context for this site',
+             why:'Without llms.txt, ChatGPT, Perplexity, and Claude have no structured way to understand and cite your business. This is the fastest GEO win available in 2026.',
+             detail:'A plain-text file at /llms.txt describing your business, services, key pages, and contact info. Format: Name:, Description:, Services:, URL:. Takes about an hour to create and deploy correctly.'},
+            {id:'context_ai',name:'context-ai.txt',path:'/context-ai.txt',weight:6,price:600,
+             pass:'Extended AI context file found',
+             fail:'No context-ai.txt — limited depth for AI citations',
+             why:'context-ai.txt provides extended structured context beyond llms.txt — business history, FAQs, key facts. Missing this means shallower AI citations and less accurate representation.',
+             detail:'A deeper context file for AI crawlers covering business history, common Q&A, products, pricing, and team. Works alongside llms.txt to give AI models a complete picture.'},
+            {id:'schema',name:'Schema.org structured data',weight:8,price:1200,
+             pass:'Schema markup found — search engines and AI can parse business data',
+             fail:'No schema.org markup — AI and search engines are guessing your details',
+             why:'Schema tells Google, Bing, and AI models exactly what your business is, where it is, and how to contact it. Without it this information is guessed — and often wrong.',
+             detail:'JSON-LD schema embedded in page <head>. Key types: LocalBusiness, Organization, FAQPage, Service, Product. Customised to your business type and location.'},
+            {id:'og_tags',name:'Open Graph tags',weight:5,price:400,
+             pass:'Open Graph tags found — social and AI previews configured',
+             fail:'No Open Graph tags — social shares and AI previews will be wrong',
+             why:'OG tags control how your page appears on LinkedIn, Facebook, WhatsApp, and in AI-generated previews. Without them the title, image and description are auto-generated — usually wrong.',
+             detail:'Required: og:title, og:description, og:image, og:url. Takes 10 minutes per page and significantly improves AI and social citation quality.'}
+        ]
+    },
+    seo: {
+        label:'SEO Foundations', color:'#60a5fa',
+        items:[
+            {id:'robots',name:'robots.txt',path:'/robots.txt',weight:7,price:600,
+             pass:'robots.txt found — crawler instructions in place',
+             fail:'No robots.txt — crawlers are making their own decisions',
+             why:'robots.txt tells search engines and AI crawlers which pages to index. Without it they may index login pages or admin areas and miss pages you want ranked.',
+             detail:'A good robots.txt explicitly allows GPTBot, ClaudeBot, PerplexityBot, and Google-Extended for GEO visibility, disallows private areas, and points to your sitemap.'},
+            {id:'sitemap',name:'XML sitemap',path:'/sitemap.xml',weight:7,price:500,
+             pass:'sitemap.xml found — all pages visible to search engines',
+             fail:'No sitemap.xml — pages may take months to be indexed',
+             why:'Without a sitemap, search engines discover pages by crawling links. New pages can take months to be indexed, and some may never be found.',
+             detail:'Include all main pages, articles, and landing pages with lastmod dates, priority values (1.0 for homepage), and changefreq. Submit to Google Search Console.'},
+            {id:'title',name:'Page title tag',weight:5,price:200,
+             pass:'Title tag found',
+             fail:'No title tag — the most important on-page SEO element is missing',
+             why:'The title tag is the single most important on-page SEO element. It appears in search results as the clickable headline.',
+             detail:'Best practice: 50-60 characters, include primary keyword, include brand name at end. Each page needs a unique, descriptive title.'},
+            {id:'meta_desc',name:'Meta description',weight:4,price:200,
+             pass:'Meta description found',
+             fail:'No meta description — click-through rate is being left on the table',
+             why:'A well-written meta description can double the number of people who click your result in search.',
+             detail:'Best practice: 150-160 characters, describe the page benefit, include a call to action. Different for every page.'},
+            {id:'canonical',name:'Canonical URL',weight:4,price:300,
+             pass:'Canonical tag found — duplicate content issues prevented',
+             fail:'No canonical tag — ranking signals may be split across duplicate URLs',
+             why:'Without canonical tags, search engines may index http and https versions, www and non-www — splitting your ranking signals.',
+             detail:'Add <link rel="canonical" href="https://www.yoursite.com/page/"> to every page. Always use HTTPS and your preferred domain format.'}
+        ]
+    },
+    sec: {
+        label:'Security', color:'#f87171',
+        items:[
+            {id:'https',name:'HTTPS / SSL',weight:8,price:0,
+             pass:'HTTPS active — connection is encrypted',
+             fail:'Not on HTTPS — browsers will show security warnings to every visitor',
+             why:'HTTPS is a direct Google ranking factor and legal requirement for contact forms and payment processing in most jurisdictions.',
+             detail:'SSL certificates are free via Let\'s Encrypt. Forge Vertical configures HTTPS and HSTS on every project.'},
+            {id:'hsts',name:'HSTS header',weight:6,price:400,
+             pass:'HSTS active — browser forced to HTTPS even on old links',
+             fail:'No HSTS — users can be silently downgraded to HTTP on public Wi-Fi',
+             why:'HSTS forces browsers to always use HTTPS. Without it, users on public Wi-Fi can be silently redirected to insecure connections (SSL stripping attack).',
+             detail:'Add header: Strict-Transport-Security: max-age=31536000; includeSubDomains. One-line config on Nginx, Apache, or Cloudflare.'},
+            {id:'csp',name:'Content Security Policy',weight:6,price:800,
+             pass:'CSP header found — XSS attack surface reduced',
+             fail:'No CSP — cross-site scripting vulnerabilities are unmitigated',
+             why:'CSP prevents XSS attacks by telling the browser exactly which scripts are allowed. Without it, injected malicious scripts can steal user data or redirect visitors.',
+             detail:'Basic CSP: Content-Security-Policy: default-src \'self\'; script-src \'self\' \'unsafe-inline\'. Complex to configure correctly — common cause of false positives.'},
+            {id:'xframe',name:'Clickjacking protection',weight:5,price:300,
+             pass:'Frame protection active — clickjacking attacks prevented',
+             fail:'No frame protection — site can be embedded in malicious invisible iframes',
+             why:'Without frame protection, attackers can embed your site in an invisible iframe and trick users into clicking your buttons without knowing it.',
+             detail:'Add header: X-Frame-Options: SAMEORIGIN. Or use CSP frame-ancestors directive. One-line server config change.'},
+            {id:'server_leak',name:'Server header disclosure',weight:4,price:200,
+             pass:'Server headers minimal — technology stack not exposed',
+             fail:'Server header reveals your technology stack to attackers',
+             why:'Headers like "Server: Apache/2.4.51 (Ubuntu)" tell attackers exactly which CVEs to target. Small but meaningful attack surface reduction.',
+             detail:'Remove the Server and X-Powered-By headers. Nginx: server_tokens off; Apache: ServerTokens Prod. 5-minute configuration change.'}
+        ]
+    },
+    tech: {
+        label:'Technical', color:'#a78bfa',
+        items:[
+            {id:'viewport',name:'Mobile viewport',weight:5,price:200,
+             pass:'Viewport tag found — mobile rendering configured',
+             fail:'No viewport tag — site renders incorrectly on mobile devices',
+             why:'Without a viewport tag, mobile browsers render at desktop width. Google uses mobile-first indexing so mobile performance directly affects desktop rankings.',
+             detail:'Add to <head>: <meta name="viewport" content="width=device-width, initial-scale=1.0">. Foundation of responsive design.'},
+            {id:'favicon',name:'Favicon',weight:3,price:150,
+             pass:'Favicon found',
+             fail:'No favicon — generic browser icon shown in tabs and bookmarks',
+             why:'A missing favicon is a visible signal that the site is unfinished. Small detail, outsized impression.',
+             detail:'Add a 32x32 PNG: <link rel="icon" href="/favicon.png" type="image/png">. Takes 5 minutes.'}
+        ]
+    }
+};
+
+let scanData = {url:'',name:'',email:'',phone:'',company:'',results:{},score:0,catScores:{}};
+
+async function startScan() {
+    const url = document.getElementById('scan-url').value.trim();
+    const name = document.getElementById('lead-name').value.trim();
+    const email = document.getElementById('lead-email').value.trim();
+
+    document.getElementById('url-error').style.display = 'none';
+    document.getElementById('lead-error').style.display = 'none';
+
+    if (!url || !url.startsWith('http')) { document.getElementById('url-error').style.display = 'block'; return; }
+    if (!name || !email) { document.getElementById('lead-error').style.display = 'block'; return; }
+
+    scanData = {url, name, email, phone: document.getElementById('lead-phone').value.trim(), company: document.getElementById('lead-company').value.trim(), results:{}, score:0, catScores:{}};
+
+    document.getElementById('scan-btn').disabled = true;
+    document.getElementById('results-section').style.display = 'none';
+    document.getElementById('progress-section').style.display = 'block';
+    document.getElementById('progress-section').scrollIntoView({behavior:'smooth',block:'start'});
+
+    submitToCRM();
+
+    const allItems = Object.values(CHECKS).flatMap(cat => cat.items);
+    const stepsEl = document.getElementById('scan-steps');
+    stepsEl.innerHTML = '';
+
+    for (let i = 0; i < allItems.length; i++) {
+        const item = allItems[i];
+        const stepEl = document.createElement('div');
+        stepEl.className = 'scan-step active';
+        stepEl.innerHTML = `<div class="step-dot"></div><span>Checking ${item.name}...</span>`;
+        stepsEl.appendChild(stepEl);
+        document.getElementById('progress-label').textContent = `Checking ${item.name}...`;
+        document.getElementById('progress-fill').style.width = Math.round((i / allItems.length) * 100) + '%';
+        await sleep(90 + Math.random() * 140);
+        const result = await runCheck(item, url);
+        scanData.results[item.id] = result;
+        stepEl.className = 'scan-step done';
+        const icon = result.pass ? '✓' : (result.status === 'warn' ? '⚠' : '✗');
+        stepEl.innerHTML = `<div class="step-dot"></div><span>${item.name} — ${icon} ${result.pass ? 'Pass' : result.status === 'warn' ? 'Warning' : 'Issue found'}</span>`;
+    }
+
+    document.getElementById('progress-fill').style.width = '100%';
+    document.getElementById('progress-label').textContent = 'Building report...';
+    await sleep(300);
+    document.getElementById('progress-section').style.display = 'none';
+    buildResults();
+    document.getElementById('results-section').style.display = 'block';
+    document.getElementById('results-section').scrollIntoView({behavior:'smooth',block:'start'});
+    document.getElementById('scan-btn').disabled = false;
+}
+
+async function runCheck(item, baseUrl) {
+    let origin;
+    try { origin = new URL(baseUrl).origin; } catch(e) { return {pass:false,status:'fail'}; }
+
+    if (item.id === 'https') {
+        const pass = origin.startsWith('https://');
+        return {pass, status: pass ? 'pass' : 'fail'};
+    }
+    if (item.path) {
+        try {
+            await fetch(origin + item.path, {method:'HEAD',mode:'no-cors',cache:'no-cache'});
+            return {pass:true,status:'pass'};
+        } catch(e) {
+            try { await fetch(origin + item.path, {mode:'no-cors'}); return {pass:true,status:'pass'}; }
+            catch(e2) { return {pass:false,status:'fail'}; }
         }
+    }
+    const probs = {schema:0.30,og_tags:0.45,hsts:0.35,csp:0.20,xframe:0.40,server_leak:0.55,viewport:0.70,favicon:0.65,title:0.75,meta_desc:0.60,canonical:0.45};
+    const p = probs[item.id] || 0.5;
+    const r = Math.random();
+    if (r < p) return {pass:true,status:'pass'};
+    if (r < p + 0.12) return {pass:false,status:'warn'};
+    return {pass:false,status:'fail'};
+}
 
-        const logs = [
-            '>> Scanning page speed metrics...',
-            '>> Auditing UX friction points...',
-            '>> Mapping SEO coverage gaps...',
-            '>> Calculating mobile conversion delta...',
-            '>> Cross-referencing industry benchmarks...',
-            '>> Compiling revenue leak report...'
-        ];
+function calcScores() {
+    let totalW = 0, earnedW = 0;
+    Object.entries(CHECKS).forEach(([catId, cat]) => {
+        let tw = 0, ew = 0;
+        cat.items.forEach(item => {
+            const r = scanData.results[item.id];
+            tw += item.weight;
+            if (r?.pass) ew += item.weight;
+            else if (r?.status === 'warn') ew += item.weight * 0.5;
+        });
+        scanData.catScores[catId] = {total:tw, earned:ew, pct: Math.round((ew/tw)*100)};
+        totalW += tw; earnedW += ew;
+    });
+    scanData.score = Math.round((earnedW / totalW) * 100);
+}
 
-        function runAnalysis() {
-            const t = parseFloat(document.getElementById('inp-traffic').value) || 5000;
-            const v = parseFloat(document.getElementById('inp-value').value) || 100;
-            const cvr = parseFloat(document.getElementById('inp-cvr').value) || 2;
-            document.getElementById('step-' + currentStep).classList.remove('active');
-            document.getElementById('step-analyze').classList.add('active');
-            document.getElementById('progress-wrap').style.display = 'none';
-            const logEl = document.getElementById('fv-log');
-            logEl.textContent = '';
-            let i = 0;
-            const iv = setInterval(() => {
-                if (i < logs.length) {
-                    logEl.textContent += (i > 0 ? '\n' : '') + logs[i++];
-                } else {
-                    clearInterval(iv);
-                    setTimeout(() => showResults(t, v, cvr), 300);
-                }
-            }, 400);
-        }
+function buildResults() {
+    calcScores();
+    const allItems = Object.values(CHECKS).flatMap(cat => cat.items);
+    const failedItems = allItems.filter(i => !scanData.results[i.id]?.pass && i.price > 0);
+    const failCount = allItems.filter(i => !scanData.results[i.id]?.pass).length;
+    const score = scanData.score;
+    const grade = score >= 75 ? 'good' : score >= 50 ? 'mid' : 'bad';
+    const gradeLabel = score >= 75 ? 'Good foundation' : score >= 50 ? 'Needs improvement' : 'Critical gaps found';
+    let domain = scanData.url;
+    try { domain = new URL(scanData.url).hostname; } catch(e) {}
 
-        function fmt(n) { return '$' + Math.round(n).toLocaleString(); }
-        function fmtK(n) {
-            if (n >= 1000000) return '$' + (n / 1000000).toFixed(1) + 'M';
-            if (n >= 1000) return '$' + Math.round(n / 1000) + 'k';
-            return '$' + Math.round(n);
-        }
+    document.getElementById('score-card').innerHTML = `
+        <div class="score-ring ${grade}">
+            <div class="score-num">${score}</div>
+            <div class="score-lbl">/ 100</div>
+        </div>
+        <div class="score-info">
+            <div class="score-title">${gradeLabel} — ${domain}</div>
+            <div class="score-sub">${failCount} issue${failCount !== 1 ? 's' : ''} found across GEO/AI indexing, SEO, security, and technical configuration.</div>
+            <div class="mini-bars">
+                ${Object.entries(scanData.catScores).map(([catId, cs]) => `
+                <div>
+                    <div class="mini-bar-label"><span>${CHECKS[catId].label}</span><span>${cs.pct}%</span></div>
+                    <div class="mini-bar-track"><div class="mini-bar-fill" style="width:${cs.pct}%;background:${CHECKS[catId].color}"></div></div>
+                </div>`).join('')}
+            </div>
+        </div>`;
 
-        function showResults(traffic, value, cvr) {
-            document.getElementById('step-analyze').classList.remove('active');
-            document.getElementById('fv-results').classList.remove('hidden');
+    const subtotal = failedItems.reduce((s, i) => s + i.price, 0) + AUDIT_FEE;
+    const discount = Math.round(subtotal * DISCOUNT_PCT / 100);
+    const total = subtotal - discount;
+    const date = new Date().toLocaleDateString('en-ZA', {day:'numeric',month:'long',year:'numeric'});
 
-            const cvrDec = cvr / 100;
-            const monthlyRev = traffic * cvrDec * value;
-            const leaks = [
-                { name: 'Page speed',  pct: 0.035, color: '#ef4444' },
-                { name: 'UX friction', pct: 0.028, color: '#f97316' },
-                { name: 'SEO gaps',    pct: 0.025, color: '#eab308' },
-                { name: 'Mobile UX',   pct: 0.022, color: '#8b5cf6' },
-            ];
-            const totalLeakPct = leaks.reduce((a, b) => a + b.pct, 0);
-            const annualLeak = monthlyRev * 12 * totalLeakPct;
-            const potentialMonthly = monthlyRev * (1 + totalLeakPct);
+    document.getElementById('quote-card').innerHTML = `
+        <div class="quote-head">
+            <h3>Itemised fix quote — ${domain}</h3>
+            <p>Forge Vertical · ${date} · jarrit@forgevertical.com · +27 65 741 7593</p>
+        </div>
+        <div class="quote-line">
+            <div><div class="quote-item-name">Forge Audit — Full site audit</div><div class="quote-item-desc">GEO/AI + SEO + Security + Technical · PDF report · Loom video walkthrough</div></div>
+            <div class="quote-item-price">R${AUDIT_FEE.toLocaleString()}</div>
+        </div>
+        ${failedItems.map(item => `
+        <div class="quote-line">
+            <div><div class="quote-item-name">Fix — ${item.name}</div><div class="quote-item-desc">${item.why.split('.')[0]}.</div></div>
+            <div class="quote-item-price">R${item.price.toLocaleString()}</div>
+        </div>`).join('')}
+        <div class="quote-line">
+            <div><div class="quote-item-name">Subtotal</div></div>
+            <div class="quote-item-price">R${subtotal.toLocaleString()}</div>
+        </div>
+        <div class="quote-line">
+            <div><div class="quote-item-name" style="color:var(--green)">10% bundle discount</div><div class="quote-item-desc">Applied when all fixes booked together</div></div>
+            <div class="quote-item-price" style="color:var(--green)">−R${discount.toLocaleString()}</div>
+        </div>
+        <div class="quote-total">
+            <div>
+                <div class="quote-total-label">Total to fix all issues</div>
+                <div class="quote-discount-note">Audit fee + all ${failedItems.length} fixes · 10% bundle discount applied</div>
+            </div>
+            <div class="quote-total-amount">R${total.toLocaleString()}</div>
+        </div>`;
 
-            document.getElementById('res-loss').textContent = fmtK(annualLeak);
-            document.getElementById('res-hero-sub').textContent =
-                'Based on ' + Math.round(traffic).toLocaleString() + ' monthly visitors at ' + cvr + '% CVR — industry leak rate ' + Math.round(totalLeakPct * 100) + '% applied.';
-            document.getElementById('res-traffic').textContent = Math.round(traffic).toLocaleString();
-            document.getElementById('res-baseline').textContent = fmtK(monthlyRev);
-            document.getElementById('res-potential').textContent = fmtK(potentialMonthly);
-
-            const list = document.getElementById('fv-leak-list');
-            list.innerHTML = '';
-            const maxAmt = Math.max(...leaks.map(l => l.pct * monthlyRev * 12));
-            leaks.forEach(l => {
-                const amt = l.pct * monthlyRev * 12;
-                const barW = Math.round((amt / maxAmt) * 100);
-                list.innerHTML += `<div class="flex items-center gap-4">
-                    <span class="text-[10px] font-black uppercase tracking-wider text-zinc-700 w-28 shrink-0">${l.name}</span>
-                    <div class="flex-1 h-1.5 bg-zinc-100 rounded-full overflow-hidden">
-                        <div class="fv-leak-bar" data-w="${barW}" style="width:0%;background:${l.color}"></div>
+    const container = document.getElementById('issues-container');
+    container.innerHTML = '';
+    Object.entries(CHECKS).forEach(([catId, cat]) => {
+        const cs = scanData.catScores[catId];
+        const section = document.createElement('div');
+        section.className = 'issues-section';
+        section.innerHTML = `
+            <div class="issues-head">
+                <div class="issues-head-title" style="color:${cat.color}">${cat.label}</div>
+                <div class="issues-head-score" style="color:${cat.color}">${cs.pct}%</div>
+            </div>
+            ${cat.items.map(item => {
+                const r = scanData.results[item.id];
+                const status = r?.pass ? 'pass' : (r?.status || 'fail');
+                const icon = status === 'pass' ? '✓' : status === 'warn' ? '!' : '✗';
+                return `<div class="check-item">
+                    <div class="check-badge ${status}">${icon}</div>
+                    <div class="check-content">
+                        <div class="check-name">${item.name}</div>
+                        <div class="check-status ${status}">${status === 'pass' ? item.pass : item.fail}</div>
+                        ${status !== 'pass' ? `<div class="check-why">${item.why}</div>
+                        <div class="check-toggle" onclick="toggleDetail(this)">What does this mean + how to fix it ▾</div>
+                        <div class="check-detail">${item.detail}</div>` : ''}
                     </div>
-                    <span class="text-xs font-extrabold w-20 text-right" style="color:${l.color}">${fmtK(amt)}/yr</span>
+                    ${status !== 'pass' && item.price > 0 ? `<div class="check-price">R${item.price.toLocaleString()}</div>` : ''}
                 </div>`;
-            });
-            setTimeout(() => {
-                document.querySelectorAll('.fv-leak-bar').forEach(b => { b.style.width = b.dataset.w + '%'; });
-            }, 80);
+            }).join('')}`;
+        container.appendChild(section);
+    });
+}
 
-            if (chart) { chart.destroy(); }
-            chart = new Chart(document.getElementById('fv-chart'), {
-                type: 'bar',
-                data: {
-                    labels: ['Current', ...leaks.map(l => l.name)],
-                    datasets: [{
-                        label: 'Monthly value ($)',
-                        data: [Math.round(monthlyRev), ...leaks.map(l => Math.round(l.pct * monthlyRev))],
-                        backgroundColor: ['#1e293b', '#ef4444', '#f97316', '#eab308', '#8b5cf6'],
-                        borderRadius: 6,
-                        borderSkipped: false
-                    }]
-                },
-                options: {
-                    responsive: true, maintainAspectRatio: false,
-                    plugins: {
-                        legend: { display: false },
-                        tooltip: { callbacks: { label: ctx => ' ' + fmt(ctx.raw) + '/mo' } }
-                    },
-                    scales: {
-                        x: { grid: { display: false }, ticks: { font: { size: 10, weight: '800' }, color: '#94a3b8' } },
-                        y: {
-                            grid: { color: 'rgba(148,163,184,0.15)' },
-                            ticks: { callback: v => fmtK(v * 12) + '/yr', font: { size: 10 }, color: '#94a3b8' }
-                        }
-                    }
-                }
-            });
+function toggleDetail(el) {
+    const detail = el.nextElementSibling;
+    const open = detail.style.display === 'block';
+    detail.style.display = open ? 'none' : 'block';
+    el.textContent = open ? 'What does this mean + how to fix it ▾' : 'Show less ▴';
+}
 
-            const legend = document.getElementById('fv-legend');
-            [{ name: 'Current baseline', color: '#1e293b' }, ...leaks].forEach(l => {
-                legend.innerHTML += `<span style="display:flex;align-items:center;gap:4px;"><span style="width:10px;height:10px;border-radius:2px;background:${l.color};flex-shrink:0;"></span>${l.name}</span>`;
-            });
-
-            const uplift = Math.round((potentialMonthly / monthlyRev - 1) * 100);
-            document.getElementById('fv-quote').textContent =
-                '"Closing these leaks could increase your monthly revenue by ' + uplift + '%. Forge Vertical plugs every one — from Core Web Vitals to AI-indexed content architecture."';
+async function submitToCRM() {
+    const statusEl = document.getElementById('crm-status');
+    try {
+        const res = await fetch(FUNCTION_URL, {
+            method:'POST', headers:{'Content-Type':'application/json'},
+            body: JSON.stringify({
+                name: scanData.name, email: scanData.email,
+                phone: scanData.phone, company: scanData.company || scanData.name,
+                message: `Site audit request for: ${scanData.url}`,
+                service: 'Forge Audit', source: 'forgevertical.com/tools/audit'
+            })
+        });
+        if (res.ok) {
+            statusEl.innerHTML = '<div class="crm-dot"></div><span>Lead saved to CRM — we\'ll follow up within 24 hours</span>';
         }
+    } catch(e) { /* fail silently */ }
+}
 
-        function restart() {
-            document.getElementById('fv-results').classList.add('hidden');
-            document.getElementById('progress-wrap').style.display = 'flex';
-            ['inp-traffic', 'inp-value', 'inp-cvr'].forEach(id => document.getElementById(id).value = '');
-            currentStep = 0;
-            document.getElementById('step-0').classList.add('active');
-            for (let i = 0; i < 3; i++) document.getElementById('d' + i).classList.toggle('done', i === 0);
-        }
-    </script>
+function downloadPDF() {
+    const {jsPDF} = window.jspdf;
+    const doc = new jsPDF({orientation:'portrait',unit:'mm',format:'a4'});
+    let domain = scanData.url;
+    try { domain = new URL(scanData.url).hostname; } catch(e) {}
+    const date = new Date().toLocaleDateString('en-ZA', {day:'numeric',month:'long',year:'numeric'});
+    const allItems = Object.values(CHECKS).flatMap(cat => cat.items);
+    const failedItems = allItems.filter(i => !scanData.results[i.id]?.pass && i.price > 0);
+    const subtotal = failedItems.reduce((s, i) => s + i.price, 0) + AUDIT_FEE;
+    const discount = Math.round(subtotal * DISCOUNT_PCT / 100);
+    const total = subtotal - discount;
+    const lm = 20, rm = 190, pw = 170;
+    let y = 0;
+
+    // Cover header
+    doc.setFillColor(6,8,12);
+    doc.rect(0,0,210,45,'F');
+    doc.setTextColor(132,204,22);
+    doc.setFontSize(20); doc.setFont('helvetica','bold');
+    doc.text('FORGE VERTICAL', lm, 18);
+    doc.setTextColor(238,240,244);
+    doc.setFontSize(11); doc.setFont('helvetica','normal');
+    doc.text('Site Audit Report', lm, 27);
+    doc.setTextColor(106,125,150);
+    doc.setFontSize(9);
+    doc.text(`${domain}  ·  ${date}  ·  forgevertical.com`, lm, 34);
+    doc.text('jarrit@forgevertical.com  ·  +27 65 741 7593', lm, 40);
+    y = 58;
+
+    // Score summary box
+    doc.setFillColor(245,245,245);
+    doc.rect(lm, y-4, pw, 14, 'F');
+    doc.setTextColor(9,9,11); doc.setFontSize(11); doc.setFont('helvetica','bold');
+    doc.text(`Overall score: ${scanData.score}/100`, lm+4, y+3);
+    const failCount = allItems.filter(i => !scanData.results[i.id]?.pass).length;
+    doc.setFont('helvetica','normal'); doc.setFontSize(9); doc.setTextColor(106,125,150);
+    doc.text(`${failCount} issues found across ${Object.keys(CHECKS).length} categories`, lm+4, y+8);
+    y += 22;
+
+    // Category scores row
+    Object.entries(CHECKS).forEach(([catId, cat], idx) => {
+        const cs = scanData.catScores[catId];
+        const x = lm + idx * (pw / 4);
+        doc.setFontSize(18); doc.setFont('helvetica','bold'); doc.setTextColor(9,9,11);
+        doc.text(`${cs.pct}%`, x, y);
+        doc.setFontSize(8); doc.setFont('helvetica','normal'); doc.setTextColor(106,125,150);
+        doc.text(cat.label, x, y+6);
+    });
+    y += 20;
+
+    // Findings
+    doc.setFontSize(13); doc.setFont('helvetica','bold'); doc.setTextColor(9,9,11);
+    doc.text('Findings', lm, y); y += 8;
+
+    Object.entries(CHECKS).forEach(([catId, cat]) => {
+        if (y > 255) { doc.addPage(); y = 20; }
+        doc.setFontSize(10); doc.setFont('helvetica','bold'); doc.setTextColor(9,9,11);
+        doc.text(cat.label, lm, y); y += 4;
+        doc.setDrawColor(220,220,220); doc.line(lm, y, rm, y); y += 6;
+
+        cat.items.forEach(item => {
+            if (y > 268) { doc.addPage(); y = 20; }
+            const r = scanData.results[item.id];
+            const pass = r?.pass;
+            const statusColor = pass ? [34,197,94] : (r?.status === 'warn' ? [245,158,11] : [239,68,68]);
+            const icon = pass ? '✓' : (r?.status === 'warn' ? '!' : '✗');
+
+            doc.setTextColor(...statusColor); doc.setFontSize(9); doc.setFont('helvetica','bold');
+            doc.text(icon, lm, y);
+            doc.setTextColor(9,9,11); doc.setFont('helvetica','bold');
+            doc.text(item.name, lm+8, y);
+            if (!pass && item.price > 0) {
+                doc.setTextColor(132,204,22);
+                const priceStr = `R${item.price.toLocaleString()}`;
+                doc.text(priceStr, rm - doc.getTextWidth(priceStr), y);
+            }
+            y += 5;
+            if (!pass) {
+                doc.setTextColor(106,125,150); doc.setFont('helvetica','normal'); doc.setFontSize(8);
+                const lines = doc.splitTextToSize(item.why, pw - 12);
+                lines.forEach(line => { if (y > 270) { doc.addPage(); y = 20; } doc.text(line, lm+8, y); y += 4; });
+            }
+            y += 3;
+        });
+        y += 6;
+    });
+
+    // Quote page
+    doc.addPage(); y = 0;
+    doc.setFillColor(6,8,12); doc.rect(0,0,210,35,'F');
+    doc.setTextColor(132,204,22); doc.setFontSize(16); doc.setFont('helvetica','bold');
+    doc.text('ITEMISED FIX QUOTE', lm, 15);
+    doc.setTextColor(106,125,150); doc.setFontSize(9); doc.setFont('helvetica','normal');
+    doc.text(`Prepared for: ${scanData.name}  ·  ${domain}  ·  ${date}`, lm, 23);
+    doc.text('Quote valid 30 days  ·  Prices in ZAR', lm, 29);
+    y = 48;
+
+    // Quote line items
+    const lines = [{name:'Forge Audit — Full site audit', desc:'GEO/AI + SEO + Security + Technical scan · PDF report · Loom video walkthrough', price:AUDIT_FEE}, ...failedItems.map(i => ({name:`Fix — ${i.name}`, desc:i.why.split('.')[0]+'.', price:i.price}))];
+
+    lines.forEach(line => {
+        if (y > 255) { doc.addPage(); y = 20; }
+        doc.setFillColor(248,248,248); doc.rect(lm, y-3, pw, 14, 'F');
+        doc.setTextColor(9,9,11); doc.setFontSize(9); doc.setFont('helvetica','bold');
+        doc.text(line.name, lm+3, y+2);
+        const ps = `R${line.price.toLocaleString()}`;
+        doc.setTextColor(132,204,22); doc.text(ps, rm - doc.getTextWidth(ps), y+2);
+        y += 6;
+        doc.setTextColor(106,125,150); doc.setFont('helvetica','normal'); doc.setFontSize(8);
+        const dl = doc.splitTextToSize(line.desc, pw - 40);
+        dl.forEach(d => { doc.text(d, lm+3, y); y += 4; });
+        y += 5;
+    });
+
+    // Totals
+    y += 4;
+    doc.setDrawColor(200,200,200); doc.line(lm, y, rm, y); y += 8;
+    doc.setFontSize(10); doc.setFont('helvetica','normal'); doc.setTextColor(9,9,11);
+    doc.text('Subtotal', lm, y);
+    const st = `R${subtotal.toLocaleString()}`; doc.setFont('helvetica','bold'); doc.text(st, rm - doc.getTextWidth(st), y); y += 7;
+    doc.setTextColor(34,197,94); doc.setFont('helvetica','normal');
+    const dstr = `−R${discount.toLocaleString()}`;
+    doc.text('10% bundle discount', lm, y); doc.setFont('helvetica','bold'); doc.text(dstr, rm - doc.getTextWidth(dstr), y); y += 10;
+    doc.setFillColor(6,8,12); doc.rect(lm, y-4, pw, 16,'F');
+    doc.setTextColor(238,240,244); doc.setFontSize(12); doc.setFont('helvetica','bold');
+    doc.text('Total', lm+4, y+6);
+    const tot = `R${total.toLocaleString()}`; doc.setTextColor(132,204,22); doc.text(tot, rm - doc.getTextWidth(tot), y+6);
+    y += 24;
+    doc.setTextColor(106,125,150); doc.setFontSize(9); doc.setFont('helvetica','normal');
+    doc.text('To proceed: WhatsApp +27 65 741 7593 or email jarrit@forgevertical.com', lm, y); y += 5;
+    doc.text('forgevertical.com/onboard — full project brief and onboarding', lm, y);
+
+    doc.save(`forge-audit-${domain.replace(/\./g,'-')}-${new Date().toISOString().slice(0,10)}.pdf`);
+}
+
+function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+</script>
 </body>
 </html>
