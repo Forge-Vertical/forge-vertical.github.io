@@ -184,7 +184,9 @@
                     <input type="text" id="lead-company" class="fi" placeholder="Your business">
                 </div>
             </div>
+
             <div class="form-error" id="lead-error">Please enter your name and email to receive the report</div>
+            
             <button class="btn-scan" id="scan-btn" onclick="startScan()">
                 <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
                 Run free audit
@@ -214,7 +216,6 @@
     </div>
     <div class="crm-status" id="crm-status"></div>
     
-    <!-- ADDED: The missing platform-note div so JS doesn't crash -->
     <div id="platform-note"></div>
     
     <div class="quote-card" id="quote-card"></div>
@@ -285,8 +286,13 @@ const CHECKS = {
         ]
     },
     sec: {
-        label:'Security', color:'#f87171',
+        label:'Security & Infrastructure', color:'#f87171',
         items:[
+            {id:'cloudflare',name:'Edge Protection & DNS Security',weight:9,price:1500,
+             pass:'Cloudflare edge proxy detected — origin IP shielded',
+             fail:'Highly recommended — Cloudflare setup to secure your site',
+             why:'Your server connects directly to the public internet. This leaves you highly vulnerable to Denial of Service (DoS) attacks, scrapers, and direct server exploits. It usually means your DNS lacks proper email spoofing protection (DMARC) too.',
+             detail:'Fix: Full Cloudflare onboarding. We proxy your traffic, hide your origin IP, deploy a Web Application Firewall (WAF), and secure your DNS records (including DMARC) to protect your domain reputation.'},
             {id:'https',name:'HTTPS / SSL',weight:8,price:0,
              pass:'HTTPS active — connection is encrypted',
              fail:'Not on HTTPS — browsers will show security warnings to every visitor',
@@ -306,12 +312,7 @@ const CHECKS = {
              pass:'Frame protection active — clickjacking attacks prevented',
              fail:'No frame protection — site can be embedded in malicious invisible iframes',
              why:'Without frame protection, attackers can embed your site in an invisible iframe and trick users into clicking your buttons without knowing it.',
-             detail:'Add header: X-Frame-Options: SAMEORIGIN. Or use CSP frame-ancestors directive. One-line server config change.'},
-            {id:'server_leak',name:'Server header disclosure',weight:4,price:200,
-             pass:'Server headers minimal — technology stack not exposed',
-             fail:'Server header reveals your technology stack to attackers',
-             why:'Headers like "Server: Apache/2.4.51 (Ubuntu)" tell attackers exactly which CVEs to target. Small but meaningful attack surface reduction.',
-             detail:'Remove the Server and X-Powered-By headers. Nginx: server_tokens off; Apache: ServerTokens Prod. 5-minute configuration change.'}
+             detail:'Add header: X-Frame-Options: SAMEORIGIN. Or use CSP frame-ancestors directive. One-line server config change.'}
         ]
     },
     tech: {
@@ -331,7 +332,7 @@ const CHECKS = {
     }
 };
 
-let scanData = {url:'',name:'',email:'',phone:'',company:'',results:{},score:0,catScores:{}};
+let scanData = {url:'',name:'',email:'',phone:'',company:'',platform:'',pageCount:'',knownBugs:'',results:{},score:0,catScores:{}};
 
 async function startScan() {
     let url = document.getElementById('scan-url').value.trim();
@@ -390,9 +391,11 @@ async function startScan() {
             stepsEl.appendChild(stepEl);
             document.getElementById('progress-label').textContent = `Checking ${item.name}...`;
             document.getElementById('progress-fill').style.width = Math.round((i / allItems.length) * 100) + '%';
+            
             await sleep(90 + Math.random() * 140);
             const result = await runCheck(item, url);
             scanData.results[item.id] = result;
+            
             stepEl.className = 'scan-step done';
             const icon = result.pass ? '✓' : (result.status === 'warn' ? '⚠' : '✗');
             stepEl.innerHTML = `<div class="step-dot"></div><span>${item.name} — ${icon} ${result.pass ? 'Pass' : result.status === 'warn' ? 'Warning' : 'Issue found'}</span>`;
@@ -418,10 +421,32 @@ async function runCheck(item, baseUrl) {
     let origin;
     try { origin = new URL(baseUrl).origin; } catch(e) { return {pass:false,status:'fail'}; }
 
+    // Real DNS background check for Cloudflare Proxy
+    if (item.id === 'cloudflare') {
+        try {
+            const hostname = new URL(baseUrl).hostname;
+            const res = await fetch(`https://cloudflare-dns.com/dns-query?name=${hostname}&type=A`, {
+                headers: { 'Accept': 'application/dns-json' }
+            });
+            const data = await res.json();
+            let isCf = false;
+            if (data.Answer) {
+                isCf = data.Answer.some(a => {
+                    const ip = a.data;
+                    return ip.startsWith('104.') || ip.startsWith('172.6') || ip.startsWith('172.7') || ip.startsWith('188.114.') || ip.includes('.cloudflare.com');
+                });
+            }
+            return {pass: isCf, status: isCf ? 'pass' : 'fail'};
+        } catch(e) {
+            return {pass: false, status: 'warn'}; // Warn if network lookup fails
+        }
+    }
+
     if (item.id === 'https') {
         const pass = origin.startsWith('https://');
         return {pass, status: pass ? 'pass' : 'fail'};
     }
+    
     if (item.path) {
         try {
             await fetch(origin + item.path, {method:'HEAD',mode:'no-cors',cache:'no-cache'});
@@ -431,6 +456,7 @@ async function runCheck(item, baseUrl) {
             catch(e2) { return {pass:false,status:'fail'}; }
         }
     }
+
     const probs = {schema:0.30,og_tags:0.45,hsts:0.35,csp:0.20,xframe:0.40,server_leak:0.55,viewport:0.70,favicon:0.65,title:0.75,meta_desc:0.60,canonical:0.45};
     const p = probs[item.id] || 0.5;
     const r = Math.random();
@@ -441,7 +467,8 @@ async function runCheck(item, baseUrl) {
 
 function calcScores() {
     let totalW = 0, earnedW = 0;
-    Object.entries(CHECKS).forEach(([catId, cat]) => {
+    Object.keys(CHECKS).forEach(catId => {
+        const cat = CHECKS[catId];
         let tw = 0, ew = 0;
         cat.items.forEach(item => {
             const r = scanData.results[item.id];
@@ -494,7 +521,7 @@ function buildResults() {
             <p>Forge Vertical · ${date} · jarrit@forgevertical.com · +27 65 741 7593</p>
         </div>
         <div class="quote-line">
-            <div><div class="quote-item-name">Forge Audit — Full site audit</div><div class="quote-item-desc">GEO/AI + SEO + Security + Technical · PDF report · Loom video walkthrough</div></div>
+            <div><div class="quote-item-name">Forge Audit — Full site audit</div><div class="quote-item-desc">GEO/AI + SEO + Security + Technical scan · PDF report · Loom video walkthrough</div></div>
             <div class="quote-item-price">R${AUDIT_FEE.toLocaleString()}</div>
         </div>
         ${failedItems.map(item => `
@@ -518,7 +545,6 @@ function buildResults() {
             <div class="quote-total-amount">R${total.toLocaleString()}</div>
         </div>`;
 
-    // Platform-aware fix note (Fixed syntax error with Webflow string)
     const platformNotes = {
         static: {label:'Static HTML / Custom code', note:'All fixes can be applied directly to your source files. Forge Vertical can edit your code directly — fastest resolution for all issues.', color:'var(--green)'},
         wordpress: {label:'WordPress', note:'Most fixes apply via plugin or theme editor. Security headers via Really Simple SSL or Wordfence. Schema via Yoast SEO or Rank Math. llms.txt, sitemap, and robots via file upload or plugin. Some fixes require theme file edits — Forge Vertical handles this safely.', color:'var(--amber)'},
@@ -540,7 +566,6 @@ function buildResults() {
         </div>`;
     }
 
-    // Maintenance recommendation card
     const maintEl = document.createElement('div');
     maintEl.style.cssText = 'background:var(--surface);border:1px solid var(--border2);border-radius:16px;overflow:hidden;margin-bottom:14px;';
     maintEl.innerHTML = `
@@ -560,10 +585,8 @@ function buildResults() {
             </div>
         </div>`;
     
-    // Check if maintEl is already there to prevent duplication on multiple scans
     const existingMaint = document.getElementById('issues-container').previousElementSibling;
     if (existingMaint && !existingMaint.classList.contains('quote-card')) {
-       // Clear old dynamic cards
        let toRemove = [];
        let current = document.getElementById('issues-container').previousElementSibling;
        while (current && current.id !== 'quote-card') {
@@ -575,10 +598,9 @@ function buildResults() {
 
     document.getElementById('issues-container').before(maintEl);
 
-    // Rebuild recommendation card
     const rebuildEl = document.createElement('div');
     rebuildEl.style.cssText = 'background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-bottom:14px;';
-    const issueCount = Object.values(CHECKS).flatMap(c => c.items).filter(i => !scanData.results[i.id]?.pass).length;
+    const issueCount = allItems.filter(i => !scanData.results[i.id]?.pass).length;
     const rebuildThreshold = issueCount >= 8;
     rebuildEl.innerHTML = `
         <div style="padding:20px;border-bottom:1px solid var(--border);background:var(--surface2);">
@@ -602,7 +624,7 @@ function buildResults() {
     document.getElementById('issues-container').before(rebuildEl);
 
     // Submit to CRM with full audit results for Zoho Invoice estimate
-    const auditPayload = Object.values(CHECKS).flatMap(cat => cat.items).map(item => ({
+    const auditPayload = allItems.map(item => ({
         id: item.id,
         name: item.name,
         pass: scanData.results[item.id]?.pass || false,
@@ -615,7 +637,9 @@ function buildResults() {
 
     const container = document.getElementById('issues-container');
     container.innerHTML = '';
-    Object.entries(CHECKS).forEach(([catId, cat]) => {
+    
+    Object.keys(CHECKS).forEach((catId) => {
+        const cat = CHECKS[catId];
         const cs = scanData.catScores[catId];
         const section = document.createElement('div');
         section.className = 'issues-section';
@@ -680,7 +704,9 @@ function downloadPDF() {
     let domain = scanData.url;
     try { domain = new URL(scanData.url).hostname; } catch(e) {}
     const date = new Date().toLocaleDateString('en-ZA', {day:'numeric',month:'long',year:'numeric'});
-    const allItems = Object.values(CHECKS).flatMap(cat => cat.items);
+    
+    const activeCatIds = Object.keys(scanData.catScores);
+    const allItems = activeCatIds.flatMap(catId => CHECKS[catId].items);
     const failedItems = allItems.filter(i => !scanData.results[i.id]?.pass && i.price > 0);
     const subtotal = failedItems.reduce((s, i) => s + i.price, 0) + AUDIT_FEE;
     const discount = Math.round(subtotal * DISCOUNT_PCT / 100);
@@ -712,16 +738,17 @@ function downloadPDF() {
     doc.text(`Overall score: ${scanData.score}/100`, lm+4, y+3);
     const failCount = allItems.filter(i => !scanData.results[i.id]?.pass).length;
     doc.setFont('helvetica','normal'); doc.setFontSize(9); doc.setTextColor(106,125,150);
-    doc.text(`${failCount} issues found across ${Object.keys(CHECKS).length} categories`, lm+4, y+8);
+    doc.text(`${failCount} issues found across ${activeCatIds.length} categories`, lm+4, y+8);
     y += 22;
 
     // Category scores row
-    Object.entries(CHECKS).forEach(([catId, cat], idx) => {
+    activeCatIds.forEach((catId, idx) => {
+        const cat = CHECKS[catId];
         const cs = scanData.catScores[catId];
-        const x = lm + idx * (pw / 4);
-        doc.setFontSize(18); doc.setFont('helvetica','bold'); doc.setTextColor(9,9,11);
+        const x = lm + idx * (pw / activeCatIds.length);
+        doc.setFontSize(16); doc.setFont('helvetica','bold'); doc.setTextColor(9,9,11);
         doc.text(`${cs.pct}%`, x, y);
-        doc.setFontSize(8); doc.setFont('helvetica','normal'); doc.setTextColor(106,125,150);
+        doc.setFontSize(7); doc.setFont('helvetica','normal'); doc.setTextColor(106,125,150);
         doc.text(cat.label, x, y+6);
     });
     y += 20;
@@ -730,7 +757,8 @@ function downloadPDF() {
     doc.setFontSize(13); doc.setFont('helvetica','bold'); doc.setTextColor(9,9,11);
     doc.text('Findings', lm, y); y += 8;
 
-    Object.entries(CHECKS).forEach(([catId, cat]) => {
+    activeCatIds.forEach(catId => {
+        const cat = CHECKS[catId];
         if (y > 255) { doc.addPage(); y = 20; }
         doc.setFontSize(10); doc.setFont('helvetica','bold'); doc.setTextColor(9,9,11);
         doc.text(cat.label, lm, y); y += 4;
