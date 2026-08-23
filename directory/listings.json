@@ -1,6 +1,6 @@
 {
   "meta": {
-    "total_listings": 23,
+    "total_listings": 24,
     "sources": [
       "forge-vertical",
       "sitebuild-studio"
@@ -509,6 +509,26 @@
         "Roadside Assistance & Towing"
       ],
       "logo_initial": "TW"
+    },
+    {
+      "id": "investorlist",
+      "name": "InvestorList",
+      "category": "investor dat",
+      "location": "Global",
+      "address": "",
+      "phone": "",
+      "whatsapp": "",
+      "description": "A platform to discover and connect with a global network of investors \u2014 VCs, private equity firms, angel investors, and family offices \u2014 with curated, downloadable investor lists to help accelerate fundraising.",
+      "logo": "https://www.sitebuildstudio.co.za/directory/images/logo_investor_list_inversed.svg",
+      "website": "https://investorlist.com/",
+      "_source": "sitebuild",
+      "tagline": "Investor Database & Fundraising",
+      "verified": true,
+      "featured": false,
+      "tags": [
+        "Investor Database & Fundraising"
+      ],
+      "logo_initial": "IN"
     }
   ]
 }
