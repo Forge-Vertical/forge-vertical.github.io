@@ -131,7 +131,7 @@
             <div class="url-row">
                 <label class="form-label" for="scan-url">Website to audit</label>
                 <input type="url" id="scan-url" class="fi" placeholder="https://yourbusiness.com">
-                <div class="form-error" id="url-error">Please enter a valid URL starting with https://</div>
+                <div class="form-error" id="url-error">Please enter a valid URL (e.g., https://yourbusiness.com)</div>
             </div>
             <div style="margin-bottom:20px;">
                 <label class="form-label" for="platform">Website platform</label>
@@ -213,6 +213,10 @@
         <a href="https://wa.me/27657417593" target="_blank" rel="noopener noreferrer" class="btn-ghost">WhatsApp Jarrit →</a>
     </div>
     <div class="crm-status" id="crm-status"></div>
+    
+    <!-- ADDED: The missing platform-note div so JS doesn't crash -->
+    <div id="platform-note"></div>
+    
     <div class="quote-card" id="quote-card"></div>
     <div id="issues-container"></div>
 </div>
@@ -330,53 +334,84 @@ const CHECKS = {
 let scanData = {url:'',name:'',email:'',phone:'',company:'',results:{},score:0,catScores:{}};
 
 async function startScan() {
-    const url = document.getElementById('scan-url').value.trim();
+    let url = document.getElementById('scan-url').value.trim();
     const name = document.getElementById('lead-name').value.trim();
     const email = document.getElementById('lead-email').value.trim();
 
     document.getElementById('url-error').style.display = 'none';
     document.getElementById('lead-error').style.display = 'none';
 
-    if (!url || !url.startsWith('http')) { document.getElementById('url-error').style.display = 'block'; return; }
-    if (!name || !email) { document.getElementById('lead-error').style.display = 'block'; return; }
-
-    scanData = {url, name, email, phone: document.getElementById('lead-phone').value.trim(), company: document.getElementById('lead-company').value.trim(), platform: document.getElementById('platform').value, pageCount: document.getElementById('page-count').value, knownBugs: document.getElementById('known-bugs').value.trim(), results:{}, score:0, catScores:{}};
-
-    document.getElementById('scan-btn').disabled = true;
-    document.getElementById('results-section').style.display = 'none';
-    document.getElementById('progress-section').style.display = 'block';
-    document.getElementById('progress-section').scrollIntoView({behavior:'smooth',block:'start'});
-
-    // CRM submitted after scan with full results — called in buildResults
-
-    const allItems = Object.values(CHECKS).flatMap(cat => cat.items);
-    const stepsEl = document.getElementById('scan-steps');
-    stepsEl.innerHTML = '';
-
-    for (let i = 0; i < allItems.length; i++) {
-        const item = allItems[i];
-        const stepEl = document.createElement('div');
-        stepEl.className = 'scan-step active';
-        stepEl.innerHTML = `<div class="step-dot"></div><span>Checking ${item.name}...</span>`;
-        stepsEl.appendChild(stepEl);
-        document.getElementById('progress-label').textContent = `Checking ${item.name}...`;
-        document.getElementById('progress-fill').style.width = Math.round((i / allItems.length) * 100) + '%';
-        await sleep(90 + Math.random() * 140);
-        const result = await runCheck(item, url);
-        scanData.results[item.id] = result;
-        stepEl.className = 'scan-step done';
-        const icon = result.pass ? '✓' : (result.status === 'warn' ? '⚠' : '✗');
-        stepEl.innerHTML = `<div class="step-dot"></div><span>${item.name} — ${icon} ${result.pass ? 'Pass' : result.status === 'warn' ? 'Warning' : 'Issue found'}</span>`;
+    // Auto-prefix https:// to help users
+    if (url && !/^https?:\/\//i.test(url)) {
+        url = 'https://' + url;
+        document.getElementById('scan-url').value = url;
     }
 
-    document.getElementById('progress-fill').style.width = '100%';
-    document.getElementById('progress-label').textContent = 'Building report...';
-    await sleep(300);
-    document.getElementById('progress-section').style.display = 'none';
-    buildResults();
-    document.getElementById('results-section').style.display = 'block';
-    document.getElementById('results-section').scrollIntoView({behavior:'smooth',block:'start'});
-    document.getElementById('scan-btn').disabled = false;
+    if (!url || !url.startsWith('http')) { 
+        document.getElementById('url-error').style.display = 'block'; 
+        return; 
+    }
+    if (!name || !email) { 
+        document.getElementById('lead-error').style.display = 'block'; 
+        return; 
+    }
+
+    const btn = document.getElementById('scan-btn');
+    btn.disabled = true;
+
+    try {
+        scanData = {
+            url, 
+            name, 
+            email, 
+            phone: document.getElementById('lead-phone').value.trim(), 
+            company: document.getElementById('lead-company').value.trim(), 
+            platform: document.getElementById('platform').value, 
+            pageCount: document.getElementById('page-count').value, 
+            knownBugs: document.getElementById('known-bugs').value.trim(), 
+            results:{}, 
+            score:0, 
+            catScores:{}
+        };
+
+        document.getElementById('results-section').style.display = 'none';
+        document.getElementById('progress-section').style.display = 'block';
+        document.getElementById('progress-section').scrollIntoView({behavior:'smooth',block:'start'});
+
+        const allItems = Object.values(CHECKS).flatMap(cat => cat.items);
+        const stepsEl = document.getElementById('scan-steps');
+        stepsEl.innerHTML = '';
+
+        for (let i = 0; i < allItems.length; i++) {
+            const item = allItems[i];
+            const stepEl = document.createElement('div');
+            stepEl.className = 'scan-step active';
+            stepEl.innerHTML = `<div class="step-dot"></div><span>Checking ${item.name}...</span>`;
+            stepsEl.appendChild(stepEl);
+            document.getElementById('progress-label').textContent = `Checking ${item.name}...`;
+            document.getElementById('progress-fill').style.width = Math.round((i / allItems.length) * 100) + '%';
+            await sleep(90 + Math.random() * 140);
+            const result = await runCheck(item, url);
+            scanData.results[item.id] = result;
+            stepEl.className = 'scan-step done';
+            const icon = result.pass ? '✓' : (result.status === 'warn' ? '⚠' : '✗');
+            stepEl.innerHTML = `<div class="step-dot"></div><span>${item.name} — ${icon} ${result.pass ? 'Pass' : result.status === 'warn' ? 'Warning' : 'Issue found'}</span>`;
+        }
+
+        document.getElementById('progress-fill').style.width = '100%';
+        document.getElementById('progress-label').textContent = 'Building report...';
+        await sleep(300);
+        document.getElementById('progress-section').style.display = 'none';
+        
+        buildResults();
+        
+        document.getElementById('results-section').style.display = 'block';
+        document.getElementById('results-section').scrollIntoView({behavior:'smooth',block:'start'});
+    } catch (err) {
+        console.error('Scan execution error:', err);
+    } finally {
+        btn.disabled = false;
+    }
 }
 
 async function runCheck(item, baseUrl) {
@@ -483,7 +518,7 @@ function buildResults() {
             <div class="quote-total-amount">R${total.toLocaleString()}</div>
         </div>`;
 
-    // Platform-aware fix note
+    // Platform-aware fix note (Fixed syntax error with Webflow string)
     const platformNotes = {
         static: {label:'Static HTML / Custom code', note:'All fixes can be applied directly to your source files. Forge Vertical can edit your code directly — fastest resolution for all issues.', color:'var(--green)'},
         wordpress: {label:'WordPress', note:'Most fixes apply via plugin or theme editor. Security headers via Really Simple SSL or Wordfence. Schema via Yoast SEO or Rank Math. llms.txt, sitemap, and robots via file upload or plugin. Some fixes require theme file edits — Forge Vertical handles this safely.', color:'var(--amber)'},
@@ -491,10 +526,11 @@ function buildResults() {
         wix: {label:'Wix', note:'Wix controls most server headers — CSP, HSTS, X-Frame are platform-managed. Schema, OG tags, and meta data editable in Wix SEO settings. llms.txt and context-ai.txt can be added as static files. robots.txt editable in Wix settings panel.', color:'var(--red)'},
         squarespace: {label:'Squarespace', note:'Most security headers are platform-controlled. Schema and OG tags available via Squarespace SEO settings and code injection. robots.txt editable in settings. llms.txt via file storage. Limited server-level control.', color:'var(--red)'},
         mobirise: {label:'Mobirise', note:'Exported static HTML — all fixes apply directly to exported code before upload. Forge Vertical can rewrite your index.html with all fixes applied. Security headers require hosting-level configuration (Cloudflare recommended).', color:'var(--lime)'},
-        webflow: {label:'Webflow', note:'Meta tags, OG tags, schema injectable via Webflow custom code. robots.txt and sitemap manageable via Webflow settings. Security headers via Cloudflare proxy. llms.txt via Webflow's asset hosting.', color:'var(--amber)'},
+        webflow: {label:'Webflow', note:'Meta tags, OG tags, schema injectable via Webflow custom code. robots.txt and sitemap manageable via Webflow settings. Security headers via Cloudflare proxy. llms.txt via Webflow\'s asset hosting.', color:'var(--amber)'},
         aibuilder: {label:'AI-generated / WYSIWYG builder', note:'Fix approach depends on whether you have access to the exported HTML. If yes: send Forge Vertical your index.html and we rewrite it clean with all fixes applied. If platform-locked: Cloudflare proxy handles server-level security headers without touching your code.', color:'var(--amber)'},
         other: {label:'Platform unknown', note:'Send Forge Vertical your index.html source and we will assess what is directly fixable versus what requires a hosting-level solution via Cloudflare.', color:'var(--muted2)'},
     };
+    
     const pn = platformNotes[scanData.platform];
     const platformNoteEl = document.getElementById('platform-note');
     if (pn && platformNoteEl) {
@@ -523,6 +559,20 @@ function buildResults() {
                 <div style="font-size:12px;color:var(--muted2);line-height:1.6;">GEO indexing degrades as AI crawlers update standards · Security vulnerabilities accumulate · Rankings drop as competitors update · New Google requirements missed.</div>
             </div>
         </div>`;
+    
+    // Check if maintEl is already there to prevent duplication on multiple scans
+    const existingMaint = document.getElementById('issues-container').previousElementSibling;
+    if (existingMaint && !existingMaint.classList.contains('quote-card')) {
+       // Clear old dynamic cards
+       let toRemove = [];
+       let current = document.getElementById('issues-container').previousElementSibling;
+       while (current && current.id !== 'quote-card') {
+           toRemove.push(current);
+           current = current.previousElementSibling;
+       }
+       toRemove.forEach(el => el.remove());
+    }
+
     document.getElementById('issues-container').before(maintEl);
 
     // Rebuild recommendation card
@@ -548,6 +598,7 @@ function buildResults() {
                 <a href="https://wa.me/27657417593" target="_blank" rel="noopener noreferrer" style="display:inline-block;margin-top:10px;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted2);text-decoration:none;">WhatsApp Jarrit →</a>
             </div>
         </div>`;
+    
     document.getElementById('issues-container').before(rebuildEl);
 
     // Submit to CRM with full audit results for Zoho Invoice estimate
@@ -559,6 +610,7 @@ function buildResults() {
         price: item.price,
         why: item.why || '',
     }));
+    
     submitToCRM(auditPayload);
 
     const container = document.getElementById('issues-container');
@@ -599,19 +651,24 @@ function toggleDetail(el) {
     el.textContent = open ? 'What does this mean + how to fix it ▾' : 'Show less ▴';
 }
 
-async function submitToCRM() {
+async function submitToCRM(auditItems = []) {
     const statusEl = document.getElementById('crm-status');
     try {
         const res = await fetch(FUNCTION_URL, {
-            method:'POST', headers:{'Content-Type':'application/json'},
+            method:'POST', 
+            headers:{'Content-Type':'application/json'},
             body: JSON.stringify({
-                name: scanData.name, email: scanData.email,
-                phone: scanData.phone, company: scanData.company || scanData.name,
+                name: scanData.name, 
+                email: scanData.email,
+                phone: scanData.phone, 
+                company: scanData.company || scanData.name,
                 message: `Site audit request for: ${scanData.url}\nPlatform: ${scanData.platform || 'not specified'}\nPages: ${scanData.pageCount || 'unknown'}\nKnown issues: ${scanData.knownBugs || 'none reported'}`,
-                service: 'Forge Audit', source: 'forgevertical.com/tools/audit'
+                audit: auditItems,
+                service: 'Forge Audit', 
+                source: 'forgevertical.com/tools/audit'
             })
         });
-        if (res.ok) {
+        if (res.ok && statusEl) {
             statusEl.innerHTML = '<div class="crm-dot"></div><span>Lead saved to CRM — we\'ll follow up within 24 hours</span>';
         }
     } catch(e) { /* fail silently */ }
