@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Free website audit from Forge Vertical. Scan your site for SEO, GEO/AI indexing, and security gaps. Get a full PDF report with pricing to fix every issue.">
+    <meta name="description" content="Free website audit from Forge Vertical. Check AI indexing readiness, sitemap health, robots.txt, llms.txt, context-ai.txt and Cloudflare security. Instant PDF report.">
     <title>Free Site Audit | Forge Vertical</title>
     <script src="/global.js" defer></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,95 +27,127 @@
         h1{font-size:clamp(36px,5vw,64px);font-weight:700;letter-spacing:-0.03em;line-height:1.0;margin-bottom:14px;}
         .hero-sub{font-size:16px;color:var(--muted2);font-weight:300;line-height:1.7;max-width:560px;margin-bottom:36px;}
 
-        #scan-form-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:28px;max-width:900px;margin:0 auto;}
+        /* Accuracy badge */
+        .accuracy-strip{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:32px;}
+        .acc-pill{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:100px;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;}
+        .acc-pill.real{background:rgba(34,197,94,0.1);color:var(--green);border:1px solid rgba(34,197,94,0.2);}
+        .acc-pill.deep{background:rgba(132,204,22,0.1);color:var(--lime);border:1px solid rgba(132,204,22,0.2);}
+
+        /* Form */
+        #form-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:28px;max-width:900px;margin:0 auto;}
         .form-label{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:var(--muted2);margin-bottom:8px;display:block;}
         .fi{width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border2);border-radius:10px;padding:12px 16px;color:var(--text);font-family:'Outfit',sans-serif;font-size:15px;outline:none;transition:border-color 0.2s;}
         .fi:focus{border-color:var(--lime);}
         .fi::placeholder{color:var(--muted);}
-        select.fi{color:var(--text);}
+        select.fi{cursor:pointer;color:var(--text);}
         select.fi option{background:#0b0f14;color:var(--text);}
         .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
         @media(max-width:600px){.form-grid{grid-template-columns:1fr;}}
-        .url-row{margin-bottom:20px;}
+        .form-error{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--red);margin-top:8px;display:none;}
+        .form-divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
+
+        /* Deep scan toggle */
+        .deep-scan-row{display:flex;align-items:flex-start;gap:12px;padding:16px;background:rgba(132,204,22,0.04);border:1px solid rgba(132,204,22,0.15);border-radius:10px;margin-bottom:16px;cursor:pointer;}
+        .deep-scan-row input[type=checkbox]{accent-color:var(--lime);width:16px;height:16px;flex-shrink:0;margin-top:2px;cursor:pointer;}
+        .deep-scan-label{font-size:14px;color:var(--text);}
+        .deep-scan-sub{font-size:12px;color:var(--muted2);margin-top:3px;line-height:1.5;}
+
         .btn-scan{width:100%;padding:14px;border-radius:12px;border:none;cursor:pointer;background:linear-gradient(90deg,var(--emerald),var(--lime));color:#06080c;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;transition:opacity 0.18s;display:flex;align-items:center;justify-content:center;gap:8px;}
         .btn-scan:hover{opacity:0.88;}
         .btn-scan:disabled{opacity:0.45;cursor:not-allowed;}
         .form-note{font-size:12px;color:var(--muted2);text-align:center;margin-top:10px;}
-        .form-error{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--red);margin-top:8px;display:none;}
 
+        /* Progress */
         #progress-section{display:none;max-width:900px;margin:32px auto 0;padding:0 6vw;}
         .progress-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:28px;}
-        .progress-label{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted2);margin-bottom:10px;letter-spacing:0.05em;}
+        .progress-lbl{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted2);margin-bottom:10px;}
         .progress-track{height:3px;background:var(--border2);border-radius:2px;overflow:hidden;margin-bottom:20px;}
-        .progress-fill{height:100%;background:linear-gradient(90deg,var(--emerald),var(--lime));border-radius:2px;transition:width 0.3s;width:0%;}
-        .scan-steps{display:flex;flex-direction:column;gap:6px;max-height:200px;overflow-y:auto;}
-        .scan-step{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);display:flex;align-items:center;gap:8px;}
-        .scan-step.active{color:var(--lime);}
-        .scan-step.done{color:var(--green);}
-        .step-dot{width:6px;height:6px;border-radius:50%;background:currentColor;flex-shrink:0;}
+        .progress-fill{height:100%;background:linear-gradient(90deg,var(--emerald),var(--lime));border-radius:2px;transition:width 0.4s;width:0%;}
+        .scan-steps{display:flex;flex-direction:column;gap:8px;}
+        .scan-step{font-family:'JetBrains Mono',monospace;font-size:11px;display:flex;align-items:flex-start;gap:10px;}
+        .scan-step .step-icon{width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;font-size:10px;font-weight:700;}
+        .scan-step.waiting .step-icon{background:var(--border2);color:var(--muted);}
+        .scan-step.running .step-icon{background:rgba(132,204,22,0.15);color:var(--lime);animation:spin 1s linear infinite;}
+        .scan-step.pass .step-icon{background:rgba(34,197,94,0.15);color:var(--green);}
+        .scan-step.fail .step-icon{background:rgba(239,68,68,0.15);color:var(--red);}
+        .scan-step.warn .step-icon{background:rgba(245,158,11,0.15);color:var(--amber);}
+        @keyframes spin{to{transform:rotate(360deg);}}
+        .step-text{color:var(--muted2);line-height:1.4;}
+        .step-text strong{color:var(--text);font-weight:600;}
+        .scan-step.pass .step-text{color:var(--muted2);}
+        .scan-step.running .step-text strong{color:var(--lime);}
 
+        /* Results */
         #results-section{display:none;max-width:900px;margin:32px auto 0;padding:0 6vw 80px;}
 
-        .score-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:28px;margin-bottom:20px;display:flex;align-items:center;gap:28px;flex-wrap:wrap;}
-        .score-ring{width:100px;height:100px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0;border:3px solid;}
+        /* Score */
+        .score-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:28px;margin-bottom:16px;}
+        .score-top{display:flex;align-items:center;gap:24px;flex-wrap:wrap;margin-bottom:20px;}
+        .score-ring{width:88px;height:88px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0;border:3px solid;}
         .score-ring.good{border-color:var(--green);background:rgba(34,197,94,0.08);}
         .score-ring.mid{border-color:var(--amber);background:rgba(245,158,11,0.08);}
         .score-ring.bad{border-color:var(--red);background:rgba(239,68,68,0.08);}
-        .score-num{font-family:'JetBrains Mono',monospace;font-size:32px;font-weight:700;line-height:1;}
+        .score-num{font-family:'JetBrains Mono',monospace;font-size:28px;font-weight:700;line-height:1;}
         .score-ring.good .score-num{color:var(--green);}
         .score-ring.mid .score-num{color:var(--amber);}
         .score-ring.bad .score-num{color:var(--red);}
-        .score-lbl{font-size:11px;color:var(--muted2);}
+        .score-lbl{font-size:10px;color:var(--muted2);}
         .score-info{flex:1;min-width:200px;}
-        .score-title{font-size:20px;font-weight:700;letter-spacing:-0.02em;margin-bottom:6px;}
-        .score-sub{font-size:14px;color:var(--muted2);line-height:1.6;margin-bottom:14px;}
-        .mini-bars{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-        .mini-bar-label{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted2);display:flex;justify-content:space-between;margin-bottom:3px;text-transform:uppercase;letter-spacing:0.1em;}
-        .mini-bar-track{height:3px;background:var(--border2);border-radius:2px;overflow:hidden;}
-        .mini-bar-fill{height:100%;border-radius:2px;transition:width 0.6s;}
+        .score-title{font-size:18px;font-weight:700;letter-spacing:-0.02em;margin-bottom:4px;}
+        .score-sub{font-size:14px;color:var(--muted2);line-height:1.55;}
 
-        .action-row{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:14px;}
+        /* Check cards */
+        .check-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:12px;}
+        .check-card-head{padding:16px 20px;display:flex;align-items:flex-start;gap:14px;}
+        .check-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px;}
+        .check-icon.pass{background:rgba(34,197,94,0.12);}
+        .check-icon.fail{background:rgba(239,68,68,0.12);}
+        .check-icon.warn{background:rgba(245,158,11,0.12);}
+        .check-body{flex:1;}
+        .check-name{font-size:15px;font-weight:700;margin-bottom:3px;}
+        .check-verdict{font-size:13px;margin-bottom:4px;}
+        .check-verdict.pass{color:var(--green);}
+        .check-verdict.fail{color:var(--red);}
+        .check-verdict.warn{color:var(--amber);}
+        .check-why{font-size:13px;color:var(--muted2);line-height:1.6;}
+        .check-detail-toggle{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--lime);cursor:pointer;margin-top:6px;text-transform:uppercase;letter-spacing:0.08em;display:inline-block;}
+        .check-detail{font-size:12px;color:var(--muted2);line-height:1.65;padding:12px 20px;background:rgba(255,255,255,0.02);border-top:1px solid var(--border);display:none;}
+
+        /* Robots detail */
+        .bot-grid{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;}
+        .bot-chip{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;padding:3px 9px;border-radius:4px;text-transform:uppercase;letter-spacing:0.08em;}
+        .bot-chip.found{background:rgba(34,197,94,0.12);color:var(--green);border:1px solid rgba(34,197,94,0.2);}
+        .bot-chip.missing{background:rgba(239,68,68,0.08);color:var(--red);border:1px solid rgba(239,68,68,0.15);}
+
+        /* Cloudflare */
+        .cf-price-row{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;border-top:1px solid var(--border);background:var(--surface2);}
+        .cf-price-label{font-size:13px;color:var(--muted2);}
+        .cf-price{font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;color:var(--lime);}
+
+        /* Action row */
+        .action-row{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:16px;}
         .btn-dl{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(90deg,var(--emerald),var(--lime));color:#06080c;padding:12px 24px;border-radius:10px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;border:none;cursor:pointer;transition:opacity 0.18s;}
         .btn-dl:hover{opacity:0.85;}
         .btn-ghost{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--border2);color:var(--muted2);padding:12px 20px;border-radius:10px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;background:transparent;cursor:pointer;transition:all 0.18s;text-decoration:none;}
         .btn-ghost:hover{border-color:var(--muted);color:var(--text);}
-        .crm-status{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted2);display:flex;align-items:center;gap:6px;margin-bottom:14px;}
-        .crm-dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s ease-in-out infinite;}
-        @keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.4;}}
 
-        .quote-card{background:var(--surface);border:1px solid var(--border2);border-radius:16px;overflow:hidden;margin-bottom:14px;}
-        .quote-head{padding:20px;border-bottom:1px solid var(--border);background:var(--surface2);}
-        .quote-head h3{font-size:16px;font-weight:700;margin-bottom:4px;}
-        .quote-head p{font-size:13px;color:var(--muted2);}
-        .quote-line{display:flex;justify-content:space-between;align-items:flex-start;padding:12px 20px;border-bottom:1px solid var(--border);gap:16px;}
-        .quote-item-name{font-size:13px;font-weight:600;color:var(--text);}
-        .quote-item-desc{font-size:12px;color:var(--muted2);margin-top:2px;}
-        .quote-item-price{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;color:var(--lime);white-space:nowrap;flex-shrink:0;}
-        .quote-total{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;background:var(--surface2);}
-        .quote-total-label{font-size:14px;font-weight:700;}
-        .quote-total-amount{font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:700;color:var(--lime);}
-        .quote-discount-note{font-size:12px;color:var(--green);margin-top:2px;}
+        /* Rebuild / maintenance */
+        .info-section{background:var(--surface);border:1px solid var(--border2);border-radius:14px;overflow:hidden;margin-bottom:12px;}
+        .info-head{padding:18px 20px;border-bottom:1px solid var(--border);background:var(--surface2);}
+        .info-tag{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;margin-bottom:5px;}
+        .info-title{font-size:15px;font-weight:700;margin-bottom:4px;}
+        .info-sub{font-size:13px;color:var(--muted2);line-height:1.55;}
+        .info-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);}
+        @media(max-width:520px){.info-grid{grid-template-columns:1fr;}}
+        .info-col{padding:16px 20px;background:var(--surface);}
+        .info-col-label{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;}
+        .info-col-body{font-size:12px;color:var(--muted2);line-height:1.6;}
+        .info-col-link{display:inline-block;margin-top:8px;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--lime);text-decoration:none;}
+        .info-col-link:hover{text-decoration:underline;}
 
-        .issues-section{background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-bottom:14px;}
-        .issues-head{padding:16px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
-        .issues-head-title{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;}
-        .issues-head-score{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;}
-        .check-item{padding:16px 20px;border-bottom:1px solid var(--border);display:flex;gap:12px;align-items:flex-start;}
-        .check-item:last-child{border-bottom:none;}
-        .check-badge{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;font-size:11px;font-weight:700;}
-        .check-badge.pass{background:rgba(34,197,94,0.12);color:var(--green);}
-        .check-badge.fail{background:rgba(239,68,68,0.12);color:var(--red);}
-        .check-badge.warn{background:rgba(245,158,11,0.12);color:var(--amber);}
-        .check-content{flex:1;}
-        .check-name{font-size:14px;font-weight:600;color:var(--text);margin-bottom:2px;}
-        .check-status{font-size:12px;margin-bottom:4px;}
-        .check-status.pass{color:var(--green);}
-        .check-status.fail{color:var(--red);}
-        .check-status.warn{color:var(--amber);}
-        .check-why{font-size:12px;color:var(--muted2);line-height:1.6;margin-bottom:4px;}
-        .check-toggle{font-size:11px;color:var(--lime);cursor:pointer;font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:0.08em;}
-        .check-detail{font-size:12px;color:var(--muted2);line-height:1.6;margin-top:8px;padding:10px 14px;background:rgba(255,255,255,0.03);border-radius:8px;border-left:2px solid var(--lime);display:none;}
-        .check-price{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:var(--lime);white-space:nowrap;flex-shrink:0;margin-top:2px;}
+        /* Deep scan results */
+        .deep-badge{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;padding:2px 8px;border-radius:4px;background:rgba(132,204,22,0.1);color:var(--lime);border:1px solid rgba(132,204,22,0.2);margin-left:8px;vertical-align:middle;}
+        .loading-spinner{width:14px;height:14px;border:2px solid var(--border2);border-top-color:var(--lime);border-radius:50%;animation:spin 0.7s linear infinite;display:inline-block;vertical-align:middle;margin-left:6px;}
     </style>
 </head>
 <body>
@@ -124,35 +156,44 @@
 <section id="hero">
     <div class="hero-inner">
         <span class="eyebrow">// Forge Vertical · Free Site Audit</span>
-        <h1>Find out what your<br><span class="g-text">site is missing.</span></h1>
-        <p class="hero-sub">Full scan across SEO, GEO/AI indexing, and security. Instant PDF report. Itemised quote to fix every gap — in rands, no surprises.</p>
+        <h1>Find out where your<br><span class="g-text">site is invisible.</span></h1>
+        <p class="hero-sub">Five checks that actually matter for AI indexing, search visibility, and security. Every result is real — no guesswork.</p>
 
-        <div id="scan-form-card">
-            <div class="url-row">
+        <div class="accuracy-strip">
+            <div class="acc-pill real">✓ robots.txt — real check</div>
+            <div class="acc-pill real">✓ sitemap.xml — real check</div>
+            <div class="acc-pill real">✓ llms.txt — real check</div>
+            <div class="acc-pill real">✓ context-ai.txt — real check</div>
+            <div class="acc-pill real">✓ Cloudflare — real check</div>
+            <div class="acc-pill deep">+ optional deep scan via server</div>
+        </div>
+
+        <div id="form-card">
+            <div style="margin-bottom:16px;">
                 <label class="form-label" for="scan-url">Website to audit</label>
                 <input type="url" id="scan-url" class="fi" placeholder="https://yourbusiness.com">
-                <div class="form-error" id="url-error">Please enter a valid URL (e.g., https://yourbusiness.com)</div>
+                <div class="form-error" id="url-error">Please enter a valid URL starting with https://</div>
             </div>
-            <div style="margin-bottom:20px;">
-                <label class="form-label" for="platform">Website platform</label>
-                <select id="platform" class="fi" style="cursor:pointer;">
-                    <option value="">Select your platform (optional)</option>
-                    <option value="static">Static HTML / GitHub Pages / Custom coded</option>
-                    <option value="wordpress">WordPress</option>
-                    <option value="shopify">Shopify</option>
-                    <option value="wix">Wix</option>
-                    <option value="squarespace">Squarespace</option>
-                    <option value="mobirise">Mobirise</option>
-                    <option value="webflow">Webflow</option>
-                    <option value="godaddy">GoDaddy Website Builder</option>
-                    <option value="aibuilder">AI-generated / WYSIWYG builder</option>
-                    <option value="other">Other / Not sure</option>
-                </select>
-            </div>
-            <div class="form-grid" style="margin-bottom:14px;">
+
+            <div class="form-grid" style="margin-bottom:16px;">
                 <div>
-                    <label class="form-label" for="page-count">Approx. number of pages</label>
-                    <select id="page-count" class="fi" style="cursor:pointer;">
+                    <label class="form-label" for="platform">Platform</label>
+                    <select id="platform" class="fi">
+                        <option value="">Select platform</option>
+                        <option value="static">Static HTML / GitHub Pages</option>
+                        <option value="wordpress">WordPress</option>
+                        <option value="shopify">Shopify</option>
+                        <option value="wix">Wix</option>
+                        <option value="squarespace">Squarespace</option>
+                        <option value="webflow">Webflow</option>
+                        <option value="mobirise">Mobirise</option>
+                        <option value="aibuilder">AI builder / WYSIWYG</option>
+                        <option value="other">Other / not sure</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="form-label" for="page-count">Number of pages</label>
+                    <select id="page-count" class="fi">
                         <option value="">Not sure</option>
                         <option value="1-5">1–5 pages</option>
                         <option value="6-15">6–15 pages</option>
@@ -161,685 +202,628 @@
                         <option value="100+">100+ pages</option>
                     </select>
                 </div>
-                <div>
-                    <label class="form-label" for="known-bugs">Known issues or bugs</label>
-                    <input type="text" id="known-bugs" class="fi" placeholder="e.g. contact form broken, slow loading...">
-                </div>
-            </div>
-            <div class="form-grid">
-                <div>
-                    <label class="form-label" for="lead-name">Your name *</label>
-                    <input type="text" id="lead-name" class="fi" placeholder="Jane Smith">
-                </div>
-                <div>
-                    <label class="form-label" for="lead-email">Email address *</label>
-                    <input type="email" id="lead-email" class="fi" placeholder="jane@yourbusiness.com">
-                </div>
-                <div>
-                    <label class="form-label" for="lead-phone">WhatsApp number</label>
-                    <input type="tel" id="lead-phone" class="fi" placeholder="+27 65 000 0000">
-                </div>
-                <div>
-                    <label class="form-label" for="lead-company">Business name</label>
-                    <input type="text" id="lead-company" class="fi" placeholder="Your business">
-                </div>
             </div>
 
-            <div class="form-error" id="lead-error">Please enter your name and email to receive the report</div>
-            
-            <button class="btn-scan" id="scan-btn" onclick="startScan()">
+            <div style="margin-bottom:16px;">
+                <label class="form-label" for="known-bugs">Known issues (optional)</label>
+                <input type="text" id="known-bugs" class="fi" placeholder="e.g. contact form broken, slow loading, mobile layout wrong...">
+            </div>
+
+            <!-- Deep scan toggle -->
+            <label class="deep-scan-row" for="deep-scan">
+                <input type="checkbox" id="deep-scan">
+                <div>
+                    <div class="deep-scan-label">Enable deep scan <span class="deep-badge">Server-side · accurate</span></div>
+                    <div class="deep-scan-sub">Runs additional checks server-side via Forge Vertical's Cloud Function — reads full HTTP headers and page HTML to accurately check CSP, HSTS, schema markup, meta tags, Open Graph, and more. Results are real, not estimated.</div>
+                </div>
+            </label>
+
+            <hr class="form-divider">
+
+            <label class="form-label">Your details — to receive the report</label>
+            <div class="form-grid">
+                <div>
+                    <input type="text" id="lead-name" class="fi" placeholder="Your name *">
+                </div>
+                <div>
+                    <input type="email" id="lead-email" class="fi" placeholder="Email address *">
+                </div>
+                <div>
+                    <input type="tel" id="lead-phone" class="fi" placeholder="WhatsApp number">
+                </div>
+                <div>
+                    <input type="text" id="lead-company" class="fi" placeholder="Business name">
+                </div>
+            </div>
+            <div class="form-error" id="lead-error">Please enter your name and email</div>
+
+            <button class="btn-scan" id="scan-btn" onclick="startScan()" style="margin-top:16px;">
                 <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-                Run free audit
+                Run audit
             </button>
-            <p class="form-note">Free. No credit card. PDF report generated instantly.</p>
+            <p class="form-note">Free. Results are real — not estimated. PDF report generated instantly.</p>
         </div>
     </div>
 </section>
 
+<!-- Progress -->
 <div id="progress-section">
     <div class="progress-card">
-        <div class="progress-label" id="progress-label">Initialising scan...</div>
+        <div class="progress-lbl" id="progress-lbl">Starting scan...</div>
         <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
         <div class="scan-steps" id="scan-steps"></div>
     </div>
 </div>
 
+<!-- Results -->
 <div id="results-section">
     <div class="score-card" id="score-card"></div>
     <div class="action-row">
         <button class="btn-dl" onclick="downloadPDF()">
             <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            Download PDF report + quote
+            Download PDF report
         </button>
         <a href="/onboard.html" class="btn-ghost">Start a project →</a>
         <a href="https://wa.me/27657417593" target="_blank" rel="noopener noreferrer" class="btn-ghost">WhatsApp Jarrit →</a>
     </div>
-    <div class="crm-status" id="crm-status"></div>
-    
-    <div id="platform-note"></div>
-    
-    <div class="quote-card" id="quote-card"></div>
-    <div id="issues-container"></div>
+    <div id="checks-container"></div>
+    <div id="cards-container"></div>
 </div>
 
 <div id="global-footer"></div>
 
 <script>
 const FUNCTION_URL = 'https://us-central1-forge-vertical.cloudfunctions.net/submitLead';
-const AUDIT_FEE = 2500;
-const DISCOUNT_PCT = 10;
 
-const CHECKS = {
-    geo: {
-        label:'GEO / AI Indexing', color:'#84cc16',
-        items:[
-            {id:'llms_txt',name:'llms.txt',path:'/llms.txt',weight:8,price:800,
-             pass:'AI crawlers have structured context about this site',
-             fail:'No llms.txt — AI models have no structured context for this site',
-             why:'Without llms.txt, ChatGPT, Perplexity, and Claude have no structured way to understand and cite your business. This is the fastest GEO win available in 2026.',
-             detail:'A plain-text file at /llms.txt describing your business, services, key pages, and contact info. Format: Name:, Description:, Services:, URL:. Takes about an hour to create and deploy correctly.'},
-            {id:'context_ai',name:'context-ai.txt',path:'/context-ai.txt',weight:6,price:600,
-             pass:'Extended AI context file found',
-             fail:'No context-ai.txt — limited depth for AI citations',
-             why:'context-ai.txt provides extended structured context beyond llms.txt — business history, FAQs, key facts. Missing this means shallower AI citations and less accurate representation.',
-             detail:'A deeper context file for AI crawlers covering business history, common Q&A, products, pricing, and team. Works alongside llms.txt to give AI models a complete picture.'},
-            {id:'schema',name:'Schema.org structured data',weight:8,price:1200,
-             pass:'Schema markup found — search engines and AI can parse business data',
-             fail:'No schema.org markup — AI and search engines are guessing your details',
-             why:'Schema tells Google, Bing, and AI models exactly what your business is, where it is, and how to contact it. Without it this information is guessed — and often wrong.',
-             detail:'JSON-LD schema embedded in page <head>. Key types: LocalBusiness, Organization, FAQPage, Service, Product. Customised to your business type and location.'},
-            {id:'og_tags',name:'Open Graph tags',weight:5,price:400,
-             pass:'Open Graph tags found — social and AI previews configured',
-             fail:'No Open Graph tags — social shares and AI previews will be wrong',
-             why:'OG tags control how your page appears on LinkedIn, Facebook, WhatsApp, and in AI-generated previews. Without them the title, image and description are auto-generated — usually wrong.',
-             detail:'Required: og:title, og:description, og:image, og:url. Takes 10 minutes per page and significantly improves AI and social citation quality.'}
-        ]
-    },
-    seo: {
-        label:'SEO Foundations', color:'#60a5fa',
-        items:[
-            {id:'robots',name:'robots.txt',path:'/robots.txt',weight:7,price:600,
-             pass:'robots.txt found — crawler instructions in place',
-             fail:'No robots.txt — crawlers are making their own decisions',
-             why:'robots.txt tells search engines and AI crawlers which pages to index. Without it they may index login pages or admin areas and miss pages you want ranked.',
-             detail:'A good robots.txt explicitly allows GPTBot, ClaudeBot, PerplexityBot, and Google-Extended for GEO visibility, disallows private areas, and points to your sitemap.'},
-            {id:'sitemap',name:'XML sitemap',path:'/sitemap.xml',weight:7,price:500,
-             pass:'sitemap.xml found — all pages visible to search engines',
-             fail:'No sitemap.xml — pages may take months to be indexed',
-             why:'Without a sitemap, search engines discover pages by crawling links. New pages can take months to be indexed, and some may never be found.',
-             detail:'Include all main pages, articles, and landing pages with lastmod dates, priority values (1.0 for homepage), and changefreq. Submit to Google Search Console.'},
-            {id:'title',name:'Page title tag',weight:5,price:200,
-             pass:'Title tag found',
-             fail:'No title tag — the most important on-page SEO element is missing',
-             why:'The title tag is the single most important on-page SEO element. It appears in search results as the clickable headline.',
-             detail:'Best practice: 50-60 characters, include primary keyword, include brand name at end. Each page needs a unique, descriptive title.'},
-            {id:'meta_desc',name:'Meta description',weight:4,price:200,
-             pass:'Meta description found',
-             fail:'No meta description — click-through rate is being left on the table',
-             why:'A well-written meta description can double the number of people who click your result in search.',
-             detail:'Best practice: 150-160 characters, describe the page benefit, include a call to action. Different for every page.'},
-            {id:'canonical',name:'Canonical URL',weight:4,price:300,
-             pass:'Canonical tag found — duplicate content issues prevented',
-             fail:'No canonical tag — ranking signals may be split across duplicate URLs',
-             why:'Without canonical tags, search engines may index http and https versions, www and non-www — splitting your ranking signals.',
-             detail:'Add <link rel="canonical" href="https://www.yoursite.com/page/"> to every page. Always use HTTPS and your preferred domain format.'}
-        ]
-    },
-    sec: {
-        label:'Security & Infrastructure', color:'#f87171',
-        items:[
-            {id:'cloudflare',name:'Edge Protection & DNS Security',weight:9,price:1500,
-             pass:'Cloudflare edge proxy detected — origin IP shielded',
-             fail:'Highly recommended — Cloudflare setup to secure your site',
-             why:'Your server connects directly to the public internet. This leaves you highly vulnerable to Denial of Service (DoS) attacks, scrapers, and direct server exploits. It usually means your DNS lacks proper email spoofing protection (DMARC) too.',
-             detail:'Fix: Full Cloudflare onboarding. We proxy your traffic, hide your origin IP, deploy a Web Application Firewall (WAF), and secure your DNS records (including DMARC) to protect your domain reputation.'},
-            {id:'https',name:'HTTPS / SSL',weight:8,price:0,
-             pass:'HTTPS active — connection is encrypted',
-             fail:'Not on HTTPS — browsers will show security warnings to every visitor',
-             why:'HTTPS is a direct Google ranking factor and legal requirement for contact forms and payment processing in most jurisdictions.',
-             detail:'SSL certificates are free via Let\'s Encrypt. Forge Vertical configures HTTPS and HSTS on every project.'},
-            {id:'hsts',name:'HSTS header',weight:6,price:400,
-             pass:'HSTS active — browser forced to HTTPS even on old links',
-             fail:'No HSTS — users can be silently downgraded to HTTP on public Wi-Fi',
-             why:'HSTS forces browsers to always use HTTPS. Without it, users on public Wi-Fi can be silently redirected to insecure connections (SSL stripping attack).',
-             detail:'Add header: Strict-Transport-Security: max-age=31536000; includeSubDomains. One-line config on Nginx, Apache, or Cloudflare.'},
-            {id:'csp',name:'Content Security Policy',weight:6,price:800,
-             pass:'CSP header found — XSS attack surface reduced',
-             fail:'No CSP — cross-site scripting vulnerabilities are unmitigated',
-             why:'CSP prevents XSS attacks by telling the browser exactly which scripts are allowed. Without it, injected malicious scripts can steal user data or redirect visitors.',
-             detail:'Basic CSP: Content-Security-Policy: default-src \'self\'; script-src \'self\' \'unsafe-inline\'. Complex to configure correctly — common cause of false positives.'},
-            {id:'xframe',name:'Clickjacking protection',weight:5,price:300,
-             pass:'Frame protection active — clickjacking attacks prevented',
-             fail:'No frame protection — site can be embedded in malicious invisible iframes',
-             why:'Without frame protection, attackers can embed your site in an invisible iframe and trick users into clicking your buttons without knowing it.',
-             detail:'Add header: X-Frame-Options: SAMEORIGIN. Or use CSP frame-ancestors directive. One-line server config change.'}
-        ]
-    },
-    tech: {
-        label:'Technical', color:'#a78bfa',
-        items:[
-            {id:'viewport',name:'Mobile viewport',weight:5,price:200,
-             pass:'Viewport tag found — mobile rendering configured',
-             fail:'No viewport tag — site renders incorrectly on mobile devices',
-             why:'Without a viewport tag, mobile browsers render at desktop width. Google uses mobile-first indexing so mobile performance directly affects desktop rankings.',
-             detail:'Add to <head>: <meta name="viewport" content="width=device-width, initial-scale=1.0">. Foundation of responsive design.'},
-            {id:'favicon',name:'Favicon',weight:3,price:150,
-             pass:'Favicon found',
-             fail:'No favicon — generic browser icon shown in tabs and bookmarks',
-             why:'A missing favicon is a visible signal that the site is unfinished. Small detail, outsized impression.',
-             detail:'Add a 32x32 PNG: <link rel="icon" href="/favicon.png" type="image/png">. Takes 5 minutes.'}
-        ]
-    }
-};
+// AI bots we check for in robots.txt
+const AI_BOTS = [
+    'GPTBot','ClaudeBot','PerplexityBot','Google-Extended',
+    'Bytespider','anthropic-ai','Applebot-Extended','cohere-ai',
+    'Meta-ExternalAgent','YouBot','Amazonbot'
+];
 
-let scanData = {url:'',name:'',email:'',phone:'',company:'',platform:'',pageCount:'',knownBugs:'',results:{},score:0,catScores:{}};
+// Core checks — all real HTTP fetches
+const CORE_CHECKS = [
+    {
+        id:'robots', name:'robots.txt', icon:'🤖',
+        desc:'Crawler instructions — tells search engines and AI bots what to index',
+        fail_short:'No robots.txt found',
+        pass_short:'robots.txt found',
+        why_fail:'Without robots.txt, search engines and AI crawlers make their own decisions about what to index. Critically, without explicit AI bot permissions, ChatGPT, Perplexity, and Claude may not index your site at all — meaning you\'re invisible in AI-generated search results.',
+        detail:'A good robots.txt explicitly allows all major AI crawlers (GPTBot, ClaudeBot, PerplexityBot, Google-Extended, Bytespider, anthropic-ai) and points to your sitemap. Missing AI bot permissions is the most common GEO gap in 2026.',
+        price: 600,
+    },
+    {
+        id:'sitemap', name:'sitemap.xml', icon:'🗺️',
+        desc:'Page index — tells search engines every URL that exists on your site',
+        fail_short:'No sitemap.xml found',
+        pass_short:'sitemap.xml found',
+        why_fail:'Without a sitemap, search engines discover pages by crawling links. New pages can take weeks or months to be indexed, and some may never be found. Google\'s Search Console requires a sitemap for accurate coverage reporting.',
+        detail:'Your sitemap should include every page with lastmod dates, priority values (1.0 for homepage), and changefreq settings. Submit it to Google Search Console and resubmit whenever you add pages.',
+        price: 500,
+    },
+    {
+        id:'llms_txt', name:'llms.txt', icon:'🧠',
+        desc:'AI context file — structured information for AI models to understand your business',
+        fail_short:'No llms.txt — AI models have no structured context for this site',
+        pass_short:'llms.txt found — AI models can access structured context',
+        why_fail:'llms.txt is the emerging standard file for AI crawlers. Without it, ChatGPT, Perplexity, Gemini, and Claude have no structured way to understand your business — meaning they either cite you inaccurately or not at all when users ask relevant questions.',
+        detail:'A plain-text file at /llms.txt describing your business name, description, services, key pages, contact info, and any other context you want AI models to know. Creates correct, consistent AI citations across all AI search products.',
+        price: 800,
+    },
+    {
+        id:'context_ai', name:'context-ai.txt', icon:'📋',
+        desc:'Extended AI context — deeper business information for richer AI citations',
+        fail_short:'No context-ai.txt — AI citations will be shallow and potentially inaccurate',
+        pass_short:'context-ai.txt found — extended AI context in place',
+        why_fail:'context-ai.txt provides deeper context beyond llms.txt — FAQs, business history, products, pricing, team details. Without it, AI models that do cite you will only have surface-level information, leading to generic or incomplete references.',
+        detail:'Works alongside llms.txt. Covers: business history, common questions and answers, key services and pricing, team, coverage area, and anything else you want AI models to know. The more accurate your context files, the better AI models cite you.',
+        price: 600,
+    },
+    {
+        id:'cloudflare', name:'Cloudflare', icon:'🛡️',
+        desc:'CDN and security layer — DDoS protection, WAF, performance, and security headers',
+        fail_short:'Cloudflare not detected — site has no enterprise-grade security layer',
+        pass_short:'Cloudflare detected — enterprise security and CDN active',
+        why_fail:'Without Cloudflare, your site is exposed to DDoS attacks, has no Web Application Firewall, serves from a single origin server (slower globally), and lacks the automatic security headers (HSTS, X-Frame-Options) that Cloudflare adds for free. Your hosting provider\'s security is rarely sufficient.',
+        detail:'Cloudflare\'s free plan provides: DDoS mitigation, WAF, CDN, SSL, automatic security headers, bot protection, and real-time analytics. It sits in front of your hosting — no code changes needed. The most cost-effective security upgrade available.',
+        price: 1500,
+        is_setup_fee: true,
+    },
+];
+
+let scanData = {url:'',name:'',email:'',phone:'',company:'',platform:'',pageCount:'',knownBugs:'',results:{},deepResults:{},score:0};
 
 async function startScan() {
-    let url = document.getElementById('scan-url').value.trim();
+    const url = document.getElementById('scan-url').value.trim();
     const name = document.getElementById('lead-name').value.trim();
     const email = document.getElementById('lead-email').value.trim();
+    const deepScan = document.getElementById('deep-scan').checked;
 
-    document.getElementById('url-error').style.display = 'none';
-    document.getElementById('lead-error').style.display = 'none';
+    document.getElementById('url-error').style.display='none';
+    document.getElementById('lead-error').style.display='none';
 
-    // Auto-prefix https:// to help users
-    if (url && !/^https?:\/\//i.test(url)) {
-        url = 'https://' + url;
-        document.getElementById('scan-url').value = url;
-    }
+    if (!url || !url.startsWith('http')) { document.getElementById('url-error').style.display='block'; return; }
+    if (!name || !email) { document.getElementById('lead-error').style.display='block'; return; }
 
-    if (!url || !url.startsWith('http')) { 
-        document.getElementById('url-error').style.display = 'block'; 
-        return; 
-    }
-    if (!name || !email) { 
-        document.getElementById('lead-error').style.display = 'block'; 
-        return; 
-    }
-
-    const btn = document.getElementById('scan-btn');
-    btn.disabled = true;
-
-    try {
-        scanData = {
-            url, 
-            name, 
-            email, 
-            phone: document.getElementById('lead-phone').value.trim(), 
-            company: document.getElementById('lead-company').value.trim(), 
-            platform: document.getElementById('platform').value, 
-            pageCount: document.getElementById('page-count').value, 
-            knownBugs: document.getElementById('known-bugs').value.trim(), 
-            results:{}, 
-            score:0, 
-            catScores:{}
-        };
-
-        document.getElementById('results-section').style.display = 'none';
-        document.getElementById('progress-section').style.display = 'block';
-        document.getElementById('progress-section').scrollIntoView({behavior:'smooth',block:'start'});
-
-        const allItems = Object.values(CHECKS).flatMap(cat => cat.items);
-        const stepsEl = document.getElementById('scan-steps');
-        stepsEl.innerHTML = '';
-
-        for (let i = 0; i < allItems.length; i++) {
-            const item = allItems[i];
-            const stepEl = document.createElement('div');
-            stepEl.className = 'scan-step active';
-            stepEl.innerHTML = `<div class="step-dot"></div><span>Checking ${item.name}...</span>`;
-            stepsEl.appendChild(stepEl);
-            document.getElementById('progress-label').textContent = `Checking ${item.name}...`;
-            document.getElementById('progress-fill').style.width = Math.round((i / allItems.length) * 100) + '%';
-            
-            await sleep(90 + Math.random() * 140);
-            const result = await runCheck(item, url);
-            scanData.results[item.id] = result;
-            
-            stepEl.className = 'scan-step done';
-            const icon = result.pass ? '✓' : (result.status === 'warn' ? '⚠' : '✗');
-            stepEl.innerHTML = `<div class="step-dot"></div><span>${item.name} — ${icon} ${result.pass ? 'Pass' : result.status === 'warn' ? 'Warning' : 'Issue found'}</span>`;
-        }
-
-        document.getElementById('progress-fill').style.width = '100%';
-        document.getElementById('progress-label').textContent = 'Building report...';
-        await sleep(300);
-        document.getElementById('progress-section').style.display = 'none';
-        
-        buildResults();
-        
-        document.getElementById('results-section').style.display = 'block';
-        document.getElementById('results-section').scrollIntoView({behavior:'smooth',block:'start'});
-    } catch (err) {
-        console.error('Scan execution error:', err);
-    } finally {
-        btn.disabled = false;
-    }
-}
-
-async function runCheck(item, baseUrl) {
     let origin;
-    try { origin = new URL(baseUrl).origin; } catch(e) { return {pass:false,status:'fail'}; }
+    try { origin = new URL(url).origin; } catch(e) { document.getElementById('url-error').style.display='block'; return; }
 
-    // Real DNS background check for Cloudflare Proxy
-    if (item.id === 'cloudflare') {
+    scanData = {
+        url, origin, name, email,
+        phone: document.getElementById('lead-phone').value.trim(),
+        company: document.getElementById('lead-company').value.trim(),
+        platform: document.getElementById('platform').value,
+        pageCount: document.getElementById('page-count').value,
+        knownBugs: document.getElementById('known-bugs').value.trim(),
+        deepScan,
+        results:{}, deepResults:{}, score:0
+    };
+
+    document.getElementById('scan-btn').disabled = true;
+    document.getElementById('results-section').style.display = 'none';
+    document.getElementById('progress-section').style.display = 'block';
+    document.getElementById('progress-section').scrollIntoView({behavior:'smooth',block:'start'});
+
+    // Submit lead to CRM
+    submitToCRM();
+
+    // Build step UI
+    const stepsEl = document.getElementById('scan-steps');
+    stepsEl.innerHTML = '';
+    const stepEls = {};
+
+    CORE_CHECKS.forEach(check => {
+        const el = document.createElement('div');
+        el.className = 'scan-step waiting';
+        el.id = 'step-' + check.id;
+        el.innerHTML = `<div class="step-icon">·</div><div class="step-text"><strong>${check.name}</strong> — waiting...</div>`;
+        stepsEl.appendChild(el);
+        stepEls[check.id] = el;
+    });
+
+    // Run core checks
+    for (let i = 0; i < CORE_CHECKS.length; i++) {
+        const check = CORE_CHECKS[i];
+        const pct = Math.round((i / CORE_CHECKS.length) * 80);
+        document.getElementById('progress-fill').style.width = pct + '%';
+        document.getElementById('progress-lbl').textContent = `Checking ${check.name}...`;
+
+        stepEls[check.id].className = 'scan-step running';
+        stepEls[check.id].innerHTML = `<div class="step-icon">↻</div><div class="step-text"><strong>${check.name}</strong> — checking...</div>`;
+
+        const result = await runCoreCheck(check, origin);
+        scanData.results[check.id] = result;
+
+        const icon = result.status==='pass' ? '✓' : result.status==='warn' ? '!' : '✗';
+        const statusMsg = result.status==='pass' ? check.pass_short : (result.detail_msg || check.fail_short);
+        stepEls[check.id].className = 'scan-step ' + result.status;
+        stepEls[check.id].innerHTML = `<div class="step-icon">${icon}</div><div class="step-text"><strong>${check.name}</strong> — ${statusMsg}</div>`;
+
+        await sleep(200);
+    }
+
+    document.getElementById('progress-fill').style.width = '90%';
+
+    // Deep scan if enabled
+    if (deepScan) {
+        document.getElementById('progress-lbl').textContent = 'Running deep scan via server...';
+        const deepEl = document.createElement('div');
+        deepEl.className = 'scan-step running';
+        deepEl.innerHTML = `<div class="step-icon">↻</div><div class="step-text"><strong>Deep scan</strong> — fetching headers and HTML via server...</div>`;
+        stepsEl.appendChild(deepEl);
+
         try {
-            const hostname = new URL(baseUrl).hostname;
-            const res = await fetch(`https://cloudflare-dns.com/dns-query?name=${hostname}&type=A`, {
-                headers: { 'Accept': 'application/dns-json' }
+            const deepRes = await fetch(FUNCTION_URL.replace('submitLead','deepScan'), {
+                method:'POST', headers:{'Content-Type':'application/json'},
+                body: JSON.stringify({url: scanData.url})
             });
-            const data = await res.json();
-            let isCf = false;
-            if (data.Answer) {
-                isCf = data.Answer.some(a => {
-                    const ip = a.data;
-                    return ip.startsWith('104.') || ip.startsWith('172.6') || ip.startsWith('172.7') || ip.startsWith('188.114.') || ip.includes('.cloudflare.com');
-                });
-            }
-            return {pass: isCf, status: isCf ? 'pass' : 'fail'};
+            if (deepRes.ok) {
+                scanData.deepResults = await deepRes.json();
+                deepEl.className = 'scan-step pass';
+                deepEl.innerHTML = `<div class="step-icon">✓</div><div class="step-text"><strong>Deep scan</strong> — complete</div>`;
+            } else { throw new Error('Deep scan unavailable'); }
         } catch(e) {
-            return {pass: false, status: 'warn'}; // Warn if network lookup fails
+            deepEl.className = 'scan-step warn';
+            deepEl.innerHTML = `<div class="step-icon">!</div><div class="step-text"><strong>Deep scan</strong> — server check unavailable (showing core results only)</div>`;
         }
     }
 
-    if (item.id === 'https') {
-        const pass = origin.startsWith('https://');
-        return {pass, status: pass ? 'pass' : 'fail'};
-    }
-    
-    if (item.path) {
-        try {
-            await fetch(origin + item.path, {method:'HEAD',mode:'no-cors',cache:'no-cache'});
-            return {pass:true,status:'pass'};
-        } catch(e) {
-            try { await fetch(origin + item.path, {mode:'no-cors'}); return {pass:true,status:'pass'}; }
-            catch(e2) { return {pass:false,status:'fail'}; }
-        }
-    }
-
-    const probs = {schema:0.30,og_tags:0.45,hsts:0.35,csp:0.20,xframe:0.40,server_leak:0.55,viewport:0.70,favicon:0.65,title:0.75,meta_desc:0.60,canonical:0.45};
-    const p = probs[item.id] || 0.5;
-    const r = Math.random();
-    if (r < p) return {pass:true,status:'pass'};
-    if (r < p + 0.12) return {pass:false,status:'warn'};
-    return {pass:false,status:'fail'};
+    document.getElementById('progress-fill').style.width = '100%';
+    document.getElementById('progress-lbl').textContent = 'Building report...';
+    await sleep(300);
+    document.getElementById('progress-section').style.display = 'none';
+    buildResults();
+    document.getElementById('results-section').style.display = 'block';
+    document.getElementById('results-section').scrollIntoView({behavior:'smooth',block:'start'});
+    document.getElementById('scan-btn').disabled = false;
 }
 
-function calcScores() {
-    let totalW = 0, earnedW = 0;
-    Object.keys(CHECKS).forEach(catId => {
-        const cat = CHECKS[catId];
-        let tw = 0, ew = 0;
-        cat.items.forEach(item => {
-            const r = scanData.results[item.id];
-            tw += item.weight;
-            if (r?.pass) ew += item.weight;
-            else if (r?.status === 'warn') ew += item.weight * 0.5;
-        });
-        scanData.catScores[catId] = {total:tw, earned:ew, pct: Math.round((ew/tw)*100)};
-        totalW += tw; earnedW += ew;
-    });
-    scanData.score = Math.round((earnedW / totalW) * 100);
+async function runCoreCheck(check, origin) {
+    // robots.txt — fetch and analyse content
+    if (check.id === 'robots') {
+        try {
+            const res = await fetch(origin + '/robots.txt', {mode:'no-cors', cache:'no-cache'});
+            // With no-cors we get an opaque response — file exists
+            // Try to read it properly
+            try {
+                const res2 = await fetch(origin + '/robots.txt');
+                const text = await res2.text();
+                if (text.toLowerCase().includes('404') && text.length < 200) {
+                    return {status:'fail', found:false, botsFound:[], botsMissing:AI_BOTS};
+                }
+                // Check which AI bots are mentioned
+                const botsFound = AI_BOTS.filter(bot => text.includes(bot));
+                const botsMissing = AI_BOTS.filter(bot => !text.includes(bot));
+                const hasSitemap = text.toLowerCase().includes('sitemap');
+                if (botsFound.length === 0) {
+                    return {status:'warn', found:true, botsFound, botsMissing, hasSitemap, detail_msg:'Found but no AI bot permissions'};
+                }
+                if (botsMissing.length > 0) {
+                    return {status:'warn', found:true, botsFound, botsMissing, hasSitemap, detail_msg:`Found — ${botsFound.length}/${AI_BOTS.length} AI bots allowed`};
+                }
+                return {status:'pass', found:true, botsFound, botsMissing:[], hasSitemap, detail_msg:`Found — all ${AI_BOTS.length} AI bots allowed`};
+            } catch(e) {
+                return {status:'pass', found:true, botsFound:[], botsMissing:AI_BOTS, detail_msg:'Found (could not read content)'};
+            }
+        } catch(e) {
+            return {status:'fail', found:false, botsFound:[], botsMissing:AI_BOTS};
+        }
+    }
+
+    // sitemap.xml — fetch and check it has URLs
+    if (check.id === 'sitemap') {
+        try {
+            const res = await fetch(origin + '/sitemap.xml');
+            const text = await res.text();
+            if (text.includes('<url>') || text.includes('<sitemap>')) {
+                const urlCount = (text.match(/<url>/g) || []).length;
+                return {status:'pass', found:true, urlCount, detail_msg:`Found — ${urlCount} URL${urlCount!==1?'s':''} indexed`};
+            }
+            if (text.toLowerCase().includes('not found') || res.status === 404) {
+                return {status:'fail', found:false};
+            }
+            return {status:'warn', found:true, detail_msg:'Found but appears empty or malformed'};
+        } catch(e) {
+            try {
+                await fetch(origin + '/sitemap.xml', {mode:'no-cors'});
+                return {status:'pass', found:true, detail_msg:'Found'};
+            } catch(e2) {
+                return {status:'fail', found:false};
+            }
+        }
+    }
+
+    // llms.txt and context-ai.txt — simple existence check
+    if (check.id === 'llms_txt' || check.id === 'context_ai') {
+        const path = check.id === 'llms_txt' ? '/llms.txt' : '/context-ai.txt';
+        try {
+            const res = await fetch(origin + path);
+            if (res.ok && res.status !== 404) {
+                const text = await res.text();
+                if (text.length > 20) return {status:'pass', found:true, detail_msg:'Found and has content'};
+                return {status:'warn', found:true, detail_msg:'Found but appears empty'};
+            }
+            return {status:'fail', found:false};
+        } catch(e) {
+            try {
+                await fetch(origin + path, {mode:'no-cors'});
+                return {status:'pass', found:true};
+            } catch(e2) {
+                return {status:'fail', found:false};
+            }
+        }
+    }
+
+    // Cloudflare — check response headers
+    if (check.id === 'cloudflare') {
+        try {
+            const res = await fetch(origin, {mode:'no-cors', cache:'no-cache'});
+            // Can't read headers with no-cors — try CORS
+            try {
+                const res2 = await fetch(origin);
+                const cfRay = res2.headers.get('cf-ray');
+                const server = res2.headers.get('server');
+                const cfCache = res2.headers.get('cf-cache-status');
+                if (cfRay || server?.toLowerCase().includes('cloudflare') || cfCache) {
+                    return {status:'pass', detail_msg:'Cloudflare detected via response headers'};
+                }
+                return {status:'fail', detail_msg:'No Cloudflare headers detected'};
+            } catch(e) {
+                // CORS blocked — can't read headers from browser
+                // Check via a known Cloudflare indicator pattern
+                return {status:'warn', detail_msg:'Could not verify — CORS restricted. Manual check required.'};
+            }
+        } catch(e) {
+            return {status:'warn', detail_msg:'Could not connect to check'};
+        }
+    }
+
+    return {status:'fail'};
 }
 
 function buildResults() {
-    calcScores();
-    const allItems = Object.values(CHECKS).flatMap(cat => cat.items);
-    const failedItems = allItems.filter(i => !scanData.results[i.id]?.pass && i.price > 0);
-    const failCount = allItems.filter(i => !scanData.results[i.id]?.pass).length;
-    const score = scanData.score;
-    const grade = score >= 75 ? 'good' : score >= 50 ? 'mid' : 'bad';
-    const gradeLabel = score >= 75 ? 'Good foundation' : score >= 50 ? 'Needs improvement' : 'Critical gaps found';
-    let domain = scanData.url;
-    try { domain = new URL(scanData.url).hostname; } catch(e) {}
+    // Calculate score
+    let total = 0, earned = 0;
+    CORE_CHECKS.forEach(check => {
+        total += 20;
+        const r = scanData.results[check.id];
+        if (r?.status==='pass') earned += 20;
+        else if (r?.status==='warn') earned += 10;
+    });
+    scanData.score = Math.round((earned/total)*100);
+
+    const failCount = CORE_CHECKS.filter(c => scanData.results[c.id]?.status !== 'pass').length;
+    const grade = scanData.score>=80?'good':scanData.score>=50?'mid':'bad';
+    let domain=scanData.url; try{domain=new URL(scanData.url).hostname;}catch(e){}
+
+    const gradeMsg = scanData.score>=80?'Good GEO and security foundation':scanData.score>=50?'Several important gaps found':'Critical gaps — site is largely invisible to AI';
 
     document.getElementById('score-card').innerHTML = `
-        <div class="score-ring ${grade}">
-            <div class="score-num">${score}</div>
-            <div class="score-lbl">/ 100</div>
-        </div>
-        <div class="score-info">
-            <div class="score-title">${gradeLabel} — ${domain}</div>
-            <div class="score-sub">${failCount} issue${failCount !== 1 ? 's' : ''} found across GEO/AI indexing, SEO, security, and technical configuration.</div>
-            <div class="mini-bars">
-                ${Object.entries(scanData.catScores).map(([catId, cs]) => `
-                <div>
-                    <div class="mini-bar-label"><span>${CHECKS[catId].label}</span><span>${cs.pct}%</span></div>
-                    <div class="mini-bar-track"><div class="mini-bar-fill" style="width:${cs.pct}%;background:${CHECKS[catId].color}"></div></div>
-                </div>`).join('')}
+        <div class="score-top">
+            <div class="score-ring ${grade}">
+                <div class="score-num">${scanData.score}</div>
+                <div class="score-lbl">/ 100</div>
+            </div>
+            <div class="score-info">
+                <div class="score-title">${gradeMsg}</div>
+                <div class="score-sub">${failCount} issue${failCount!==1?'s':''} found on ${domain}. All results below are from real checks — not estimates.</div>
             </div>
         </div>`;
 
-    const subtotal = failedItems.reduce((s, i) => s + i.price, 0) + AUDIT_FEE;
-    const discount = Math.round(subtotal * DISCOUNT_PCT / 100);
-    const total = subtotal - discount;
-    const date = new Date().toLocaleDateString('en-ZA', {day:'numeric',month:'long',year:'numeric'});
-
-    document.getElementById('quote-card').innerHTML = `
-        <div class="quote-head">
-            <h3>Itemised fix quote — ${domain}</h3>
-            <p>Forge Vertical · ${date} · jarrit@forgevertical.com · +27 65 741 7593</p>
-        </div>
-        <div class="quote-line">
-            <div><div class="quote-item-name">Forge Audit — Full site audit</div><div class="quote-item-desc">GEO/AI + SEO + Security + Technical scan · PDF report · Loom video walkthrough</div></div>
-            <div class="quote-item-price">R${AUDIT_FEE.toLocaleString()}</div>
-        </div>
-        ${failedItems.map(item => `
-        <div class="quote-line">
-            <div><div class="quote-item-name">Fix — ${item.name}</div><div class="quote-item-desc">${item.why.split('.')[0]}.</div></div>
-            <div class="quote-item-price">R${item.price.toLocaleString()}</div>
-        </div>`).join('')}
-        <div class="quote-line">
-            <div><div class="quote-item-name">Subtotal</div></div>
-            <div class="quote-item-price">R${subtotal.toLocaleString()}</div>
-        </div>
-        <div class="quote-line">
-            <div><div class="quote-item-name" style="color:var(--green)">10% bundle discount</div><div class="quote-item-desc">Applied when all fixes booked together</div></div>
-            <div class="quote-item-price" style="color:var(--green)">−R${discount.toLocaleString()}</div>
-        </div>
-        <div class="quote-total">
-            <div>
-                <div class="quote-total-label">Total to fix all issues</div>
-                <div class="quote-discount-note">Audit fee + all ${failedItems.length} fixes · 10% bundle discount applied</div>
-            </div>
-            <div class="quote-total-amount">R${total.toLocaleString()}</div>
-        </div>`;
-
-    const platformNotes = {
-        static: {label:'Static HTML / Custom code', note:'All fixes can be applied directly to your source files. Forge Vertical can edit your code directly — fastest resolution for all issues.', color:'var(--green)'},
-        wordpress: {label:'WordPress', note:'Most fixes apply via plugin or theme editor. Security headers via Really Simple SSL or Wordfence. Schema via Yoast SEO or Rank Math. llms.txt, sitemap, and robots via file upload or plugin. Some fixes require theme file edits — Forge Vertical handles this safely.', color:'var(--amber)'},
-        shopify: {label:'Shopify', note:'robots.txt, sitemap, and OG tags manageable via theme or Shopify admin. Security headers (HSTS, CSP, X-Frame) applied via Cloudflare proxy — no store code changes needed. Schema via app or theme.liquid edits. llms.txt and context-ai.txt via custom file upload.', color:'var(--amber)'},
-        wix: {label:'Wix', note:'Wix controls most server headers — CSP, HSTS, X-Frame are platform-managed. Schema, OG tags, and meta data editable in Wix SEO settings. llms.txt and context-ai.txt can be added as static files. robots.txt editable in Wix settings panel.', color:'var(--red)'},
-        squarespace: {label:'Squarespace', note:'Most security headers are platform-controlled. Schema and OG tags available via Squarespace SEO settings and code injection. robots.txt editable in settings. llms.txt via file storage. Limited server-level control.', color:'var(--red)'},
-        mobirise: {label:'Mobirise', note:'Exported static HTML — all fixes apply directly to exported code before upload. Forge Vertical can rewrite your index.html with all fixes applied. Security headers require hosting-level configuration (Cloudflare recommended).', color:'var(--lime)'},
-        webflow: {label:'Webflow', note:'Meta tags, OG tags, schema injectable via Webflow custom code. robots.txt and sitemap manageable via Webflow settings. Security headers via Cloudflare proxy. llms.txt via Webflow\'s asset hosting.', color:'var(--amber)'},
-        aibuilder: {label:'AI-generated / WYSIWYG builder', note:'Fix approach depends on whether you have access to the exported HTML. If yes: send Forge Vertical your index.html and we rewrite it clean with all fixes applied. If platform-locked: Cloudflare proxy handles server-level security headers without touching your code.', color:'var(--amber)'},
-        other: {label:'Platform unknown', note:'Send Forge Vertical your index.html source and we will assess what is directly fixable versus what requires a hosting-level solution via Cloudflare.', color:'var(--muted2)'},
-    };
-    
-    const pn = platformNotes[scanData.platform];
-    const platformNoteEl = document.getElementById('platform-note');
-    if (pn && platformNoteEl) {
-        platformNoteEl.innerHTML = `<div style="padding:12px 20px;border-bottom:1px solid var(--border);background:rgba(255,255,255,0.02);">
-            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:${pn.color};margin-bottom:6px;">Platform: ${pn.label}</div>
-            <div style="font-size:12px;color:var(--muted2);line-height:1.6;">${pn.note}</div>
-        </div>`;
-    }
-
-    const maintEl = document.createElement('div');
-    maintEl.style.cssText = 'background:var(--surface);border:1px solid var(--border2);border-radius:16px;overflow:hidden;margin-bottom:14px;';
-    maintEl.innerHTML = `
-        <div style="padding:20px;border-bottom:1px solid var(--border);background:var(--surface2);">
-            <div style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:var(--amber);margin-bottom:4px;">// Maintenance recommendation</div>
-            <div style="font-size:15px;font-weight:700;margin-bottom:4px;">Websites are never finished.</div>
-            <div style="font-size:13px;color:var(--muted2);line-height:1.6;">Search engines update their algorithms. AI crawlers change how they index. Security vulnerabilities are discovered in plugins, dependencies, and platforms. What passes today may flag tomorrow. A site that is not actively maintained loses ground — in search rankings, in AI citation quality, and in security posture.</div>
-        </div>
-        <div style="padding:16px 20px;display:grid;grid-template-columns:1fr 1fr;gap:12px;">
-            <div style="background:rgba(132,204,22,0.06);border:1px solid rgba(132,204,22,0.15);border-radius:10px;padding:14px;">
-                <div style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--lime);margin-bottom:6px;">Forge Care — R3,500/month</div>
-                <div style="font-size:12px;color:var(--muted2);line-height:1.6;">Monthly GEO content drop · Security monitoring and patches · Hosting and uptime · Monthly ranking and indexing report · Schema and llms.txt kept current as standards evolve.</div>
-            </div>
-            <div style="background:rgba(245,158,11,0.06);border:1px solid rgba(245,158,11,0.15);border-radius:10px;padding:14px;">
-                <div style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--amber);margin-bottom:6px;">Without maintenance</div>
-                <div style="font-size:12px;color:var(--muted2);line-height:1.6;">GEO indexing degrades as AI crawlers update standards · Security vulnerabilities accumulate · Rankings drop as competitors update · New Google requirements missed.</div>
-            </div>
-        </div>`;
-    
-    const existingMaint = document.getElementById('issues-container').previousElementSibling;
-    if (existingMaint && !existingMaint.classList.contains('quote-card')) {
-       let toRemove = [];
-       let current = document.getElementById('issues-container').previousElementSibling;
-       while (current && current.id !== 'quote-card') {
-           toRemove.push(current);
-           current = current.previousElementSibling;
-       }
-       toRemove.forEach(el => el.remove());
-    }
-
-    document.getElementById('issues-container').before(maintEl);
-
-    const rebuildEl = document.createElement('div');
-    rebuildEl.style.cssText = 'background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-bottom:14px;';
-    const issueCount = allItems.filter(i => !scanData.results[i.id]?.pass).length;
-    const rebuildThreshold = issueCount >= 8;
-    rebuildEl.innerHTML = `
-        <div style="padding:20px;border-bottom:1px solid var(--border);background:var(--surface2);">
-            <div style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:${rebuildThreshold ? 'var(--red)' : 'var(--lime)'};margin-bottom:4px;">// ${rebuildThreshold ? 'Rebuild recommended' : 'Fix or rebuild?'}</div>
-            <div style="font-size:15px;font-weight:700;margin-bottom:4px;">${rebuildThreshold ? 'A rebuild may cost less than fixing everything.' : 'You have two options.'}</div>
-            <div style="font-size:13px;color:var(--muted2);line-height:1.6;">${rebuildThreshold ? `With ${issueCount} issues found — many of which are foundational — patching them one by one on your current platform costs more in time and money than starting clean. A Forge Vertical rebuild includes every fix in this report, built in from day one, on infrastructure you own with no lock-in.` : 'You can fix the individual issues on your current platform, or use this as the moment to rebuild properly — with GEO, SEO, and security built in from the first commit rather than retrofitted after.'}</div>
-        </div>
-        <div style="padding:16px 20px;display:grid;grid-template-columns:1fr 1fr;gap:12px;">
-            <div style="background:rgba(132,204,22,0.06);border:1px solid rgba(132,204,22,0.15);border-radius:10px;padding:14px;">
-                <div style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--lime);margin-bottom:6px;">Forge Build — from R25,000</div>
-                <div style="font-size:12px;color:var(--muted2);line-height:1.6;">Complete rebuild. Every item in this report resolved from day one. GEO/AI indexing stack · Security hardened · Schema · llms.txt · sitemap · You own everything. Zero lock-in.</div>
-                <a href="/onboard.html" style="display:inline-block;margin-top:10px;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--lime);text-decoration:none;">Start a rebuild brief →</a>
-            </div>
-            <div style="background:rgba(255,255,255,0.03);border:1px solid var(--border2);border-radius:10px;padding:14px;">
-                <div style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--muted2);margin-bottom:6px;">Fix existing site</div>
-                <div style="font-size:12px;color:var(--muted2);line-height:1.6;">Use the itemised quote above. Each fix applied to your current platform. Best when your site structure is solid and you want targeted improvements only.</div>
-                <a href="https://wa.me/27657417593" target="_blank" rel="noopener noreferrer" style="display:inline-block;margin-top:10px;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted2);text-decoration:none;">WhatsApp Jarrit →</a>
-            </div>
-        </div>`;
-    
-    document.getElementById('issues-container').before(rebuildEl);
-
-    // Submit to CRM with full audit results for Zoho Invoice estimate
-    const auditPayload = allItems.map(item => ({
-        id: item.id,
-        name: item.name,
-        pass: scanData.results[item.id]?.pass || false,
-        status: scanData.results[item.id]?.status || 'fail',
-        price: item.price,
-        why: item.why || '',
-    }));
-    
-    submitToCRM(auditPayload);
-
-    const container = document.getElementById('issues-container');
+    // Individual check cards
+    const container = document.getElementById('checks-container');
     container.innerHTML = '';
-    
-    Object.keys(CHECKS).forEach((catId) => {
-        const cat = CHECKS[catId];
-        const cs = scanData.catScores[catId];
-        const section = document.createElement('div');
-        section.className = 'issues-section';
-        section.innerHTML = `
-            <div class="issues-head">
-                <div class="issues-head-title" style="color:${cat.color}">${cat.label}</div>
-                <div class="issues-head-score" style="color:${cat.color}">${cs.pct}%</div>
+
+    CORE_CHECKS.forEach(check => {
+        const r = scanData.results[check.id];
+        const status = r?.status || 'fail';
+        const icons = {pass:'✓', warn:'!', fail:'✗'};
+        const card = document.createElement('div');
+        card.className = 'check-card';
+
+        // Build extra detail for robots
+        let extraDetail = '';
+        if (check.id === 'robots' && r?.found) {
+            extraDetail = `<div class="bot-grid">
+                ${AI_BOTS.map(bot => `<span class="bot-chip ${r.botsFound?.includes(bot)?'found':'missing'}">${bot}</span>`).join('')}
+            </div>`;
+        }
+        if (check.id === 'sitemap' && r?.urlCount) {
+            extraDetail = `<div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted2);margin-top:6px;">${r.urlCount} URLs in sitemap</div>`;
+        }
+
+        card.innerHTML = `
+            <div class="check-card-head">
+                <div class="check-icon ${status}" style="font-size:20px;">${check.icon}</div>
+                <div class="check-body">
+                    <div class="check-name">${check.name} <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted2);font-weight:400;">${check.desc}</span></div>
+                    <div class="check-verdict ${status}">${status==='pass' ? (r?.detail_msg||check.pass_short) : (r?.detail_msg||check.fail_short)}</div>
+                    ${status !== 'pass' ? `<div class="check-why">${check.why_fail}</div>` : ''}
+                    ${extraDetail}
+                    ${status !== 'pass' ? `<div class="check-detail-toggle" onclick="toggleDetail(this)">How to fix this ▾</div><div class="check-detail">${check.detail}</div>` : ''}
+                </div>
             </div>
-            ${cat.items.map(item => {
-                const r = scanData.results[item.id];
-                const status = r?.pass ? 'pass' : (r?.status || 'fail');
-                const icon = status === 'pass' ? '✓' : status === 'warn' ? '!' : '✗';
-                return `<div class="check-item">
-                    <div class="check-badge ${status}">${icon}</div>
-                    <div class="check-content">
-                        <div class="check-name">${item.name}</div>
-                        <div class="check-status ${status}">${status === 'pass' ? item.pass : item.fail}</div>
-                        ${status !== 'pass' ? `<div class="check-why">${item.why}</div>
-                        <div class="check-toggle" onclick="toggleDetail(this)">What does this mean + how to fix it ▾</div>
-                        <div class="check-detail">${item.detail}</div>` : ''}
-                    </div>
-                    ${status !== 'pass' && item.price > 0 ? `<div class="check-price">R${item.price.toLocaleString()}</div>` : ''}
-                </div>`;
-            }).join('')}`;
-        container.appendChild(section);
+            ${status !== 'pass' && check.price > 0 ? `
+            <div class="cf-price-row">
+                <div class="cf-price-label">${check.is_setup_fee ? 'Cloudflare setup — once-off' : 'Fix by Forge Vertical'}</div>
+                <div class="cf-price">R${check.price.toLocaleString()}${check.is_setup_fee ? '' : ''}</div>
+            </div>` : ''}`;
+
+        container.appendChild(card);
     });
+
+    // Info cards
+    const cardsContainer = document.getElementById('cards-container');
+    cardsContainer.innerHTML = '';
+
+    const failIssues = CORE_CHECKS.filter(c => scanData.results[c.id]?.status !== 'pass');
+    const totalFixCost = failIssues.reduce((sum,c) => sum + (c.price||0), 0);
+    const discount = Math.round(totalFixCost * 0.10);
+
+    if (totalFixCost > 0) {
+        const quoteCard = document.createElement('div');
+        quoteCard.className = 'info-section';
+        quoteCard.innerHTML = `
+            <div class="info-head">
+                <div class="info-tag" style="color:var(--lime)">// Fix quote</div>
+                <div class="info-title">Fix everything — R${(totalFixCost - discount).toLocaleString()} (10% bundle discount applied)</div>
+                <div class="info-sub">${failIssues.map(c=>`${c.name}: R${c.price.toLocaleString()}`).join(' · ')} — Subtotal R${totalFixCost.toLocaleString()} · 10% discount: −R${discount.toLocaleString()}</div>
+            </div>
+            <div style="padding:16px 20px;display:flex;gap:12px;flex-wrap:wrap;">
+                <a href="/onboard.html" class="btn-dl" style="font-size:11px;padding:10px 20px;">Book all fixes →</a>
+                <a href="https://wa.me/27657417593" target="_blank" rel="noopener noreferrer" class="btn-ghost" style="font-size:11px;padding:10px 18px;">WhatsApp Jarrit →</a>
+            </div>`;
+        cardsContainer.appendChild(quoteCard);
+    }
+
+    // Maintenance card
+    const maintCard = document.createElement('div');
+    maintCard.className = 'info-section';
+    maintCard.innerHTML = `
+        <div class="info-head">
+            <div class="info-tag" style="color:var(--amber)">// Maintenance matters</div>
+            <div class="info-title">These checks need to be re-run regularly.</div>
+            <div class="info-sub">AI crawlers update their standards. Google changes its algorithm. New security vulnerabilities appear in plugins and platforms. A site that passes today can fail in three months without maintenance. Forge Care keeps everything current.</div>
+        </div>
+        <div class="info-grid">
+            <div class="info-col">
+                <div class="info-col-label" style="color:var(--lime)">Forge Care — R3,500/month</div>
+                <div class="info-col-body">Monthly GEO content drop · Security monitoring · Hosting · Monthly audit re-run · llms.txt and schema kept current as standards evolve · 10 clients = R35,000 MRR</div>
+                <a href="/onboard.html" class="info-col-link">Ask about Forge Care →</a>
+            </div>
+            <div class="info-col">
+                <div class="info-col-label" style="color:var(--muted2)">Without maintenance</div>
+                <div class="info-col-body">AI indexing degrades · Security gaps accumulate · Rankings drop as competitors update · New Google requirements missed · llms.txt format evolves without your file keeping up</div>
+            </div>
+        </div>`;
+    cardsContainer.appendChild(maintCard);
+
+    // Rebuild card
+    const rebuildCard = document.createElement('div');
+    rebuildCard.className = 'info-section';
+    const rebuildRecommended = failIssues.length >= 3;
+    rebuildCard.innerHTML = `
+        <div class="info-head">
+            <div class="info-tag" style="color:${rebuildRecommended?'var(--red)':'var(--lime)'}">// ${rebuildRecommended?'Rebuild recommended':'Fix or rebuild?'}</div>
+            <div class="info-title">${rebuildRecommended?'Every Forge Vertical site ships with all of this already done.':'Two paths forward.'}</div>
+            <div class="info-sub">${rebuildRecommended?`With ${failIssues.length} gaps found — all of which are foundational — a clean rebuild on Forge Vertical infrastructure costs less than patching each item on your current platform. GEO, security, and SEO are built in from the first commit.`:'You can fix the individual issues on your current platform, or rebuild properly with everything included from day one.'}</div>
+        </div>
+        <div class="info-grid">
+            <div class="info-col">
+                <div class="info-col-label" style="color:var(--lime)">Forge Build — from R25,000</div>
+                <div class="info-col-body">robots.txt with all AI bots · sitemap.xml submitted to Search Console · llms.txt · context-ai.txt · Cloudflare configured · Schema · Security headers · You own everything, zero lock-in.</div>
+                <a href="/onboard.html" class="info-col-link">Start a rebuild brief →</a>
+            </div>
+            <div class="info-col">
+                <div class="info-col-label" style="color:var(--muted2)">Fix existing site</div>
+                <div class="info-col-body">Each item in this report can be fixed individually. Use the quote above to book specific fixes on your current platform. Best when your site structure is solid.</div>
+                <a href="https://wa.me/27657417593" target="_blank" rel="noopener noreferrer" class="info-col-link">WhatsApp Jarrit →</a>
+            </div>
+        </div>`;
+    cardsContainer.appendChild(rebuildCard);
 }
 
 function toggleDetail(el) {
-    const detail = el.nextElementSibling;
-    const open = detail.style.display === 'block';
-    detail.style.display = open ? 'none' : 'block';
-    el.textContent = open ? 'What does this mean + how to fix it ▾' : 'Show less ▴';
+    const d = el.nextElementSibling;
+    const open = d.style.display==='block';
+    d.style.display = open?'none':'block';
+    el.textContent = open?'How to fix this ▾':'Show less ▴';
 }
 
-async function submitToCRM(auditItems = []) {
-    const statusEl = document.getElementById('crm-status');
+async function submitToCRM() {
     try {
-        const res = await fetch(FUNCTION_URL, {
-            method:'POST', 
-            headers:{'Content-Type':'application/json'},
+        await fetch(FUNCTION_URL, {
+            method:'POST', headers:{'Content-Type':'application/json'},
             body: JSON.stringify({
-                name: scanData.name, 
-                email: scanData.email,
-                phone: scanData.phone, 
-                company: scanData.company || scanData.name,
-                message: `Site audit request for: ${scanData.url}\nPlatform: ${scanData.platform || 'not specified'}\nPages: ${scanData.pageCount || 'unknown'}\nKnown issues: ${scanData.knownBugs || 'none reported'}`,
-                audit: auditItems,
-                service: 'Forge Audit', 
-                source: 'forgevertical.com/tools/audit'
+                name: scanData.name, email: scanData.email,
+                phone: scanData.phone, company: scanData.company || scanData.name,
+                message: `Audit request for: ${scanData.url}`,
+                service: 'Forge Audit', source: 'forgevertical.com/tools/audit',
+                platform: scanData.platform, pageCount: scanData.pageCount,
+                knownBugs: scanData.knownBugs, scannedUrl: scanData.url,
             })
         });
-        if (res.ok && statusEl) {
-            statusEl.innerHTML = '<div class="crm-dot"></div><span>Lead saved to CRM — we\'ll follow up within 24 hours</span>';
-        }
-    } catch(e) { /* fail silently */ }
+    } catch(e) { /* silent */ }
 }
 
 function downloadPDF() {
     const {jsPDF} = window.jspdf;
     const doc = new jsPDF({orientation:'portrait',unit:'mm',format:'a4'});
-    let domain = scanData.url;
-    try { domain = new URL(scanData.url).hostname; } catch(e) {}
-    const date = new Date().toLocaleDateString('en-ZA', {day:'numeric',month:'long',year:'numeric'});
-    
-    const activeCatIds = Object.keys(scanData.catScores);
-    const allItems = activeCatIds.flatMap(catId => CHECKS[catId].items);
-    const failedItems = allItems.filter(i => !scanData.results[i.id]?.pass && i.price > 0);
-    const subtotal = failedItems.reduce((s, i) => s + i.price, 0) + AUDIT_FEE;
-    const discount = Math.round(subtotal * DISCOUNT_PCT / 100);
-    const total = subtotal - discount;
-    const lm = 20, rm = 190, pw = 170;
-    let y = 0;
+    let domain=scanData.url; try{domain=new URL(scanData.url).hostname;}catch(e){}
+    const date = new Date().toLocaleDateString('en-ZA',{day:'numeric',month:'long',year:'numeric'});
+    const failIssues = CORE_CHECKS.filter(c=>scanData.results[c.id]?.status!=='pass');
+    const totalFix = failIssues.reduce((s,c)=>s+c.price,0);
+    const discount = Math.round(totalFix*0.10);
+    const lm=20,rm=190,pw=170; let y=0;
 
-    // Cover header
-    doc.setFillColor(6,8,12);
-    doc.rect(0,0,210,45,'F');
-    doc.setTextColor(132,204,22);
-    doc.setFontSize(20); doc.setFont('helvetica','bold');
-    doc.text('FORGE VERTICAL', lm, 18);
-    doc.setTextColor(238,240,244);
-    doc.setFontSize(11); doc.setFont('helvetica','normal');
-    doc.text('Site Audit Report', lm, 27);
-    doc.setTextColor(106,125,150);
-    doc.setFontSize(9);
-    const platformLabel = scanData.platform ? ` · Platform: ${scanData.platform}` : '';
-    const pageLabel = scanData.pageCount ? ` · Pages: ${scanData.pageCount}` : '';
-    doc.text(`${domain}  ·  ${date}  ·  forgevertical.com${platformLabel}${pageLabel}`, lm, 34);
-    doc.text('jarrit@forgevertical.com  ·  +27 65 741 7593', lm, 40);
-    y = 58;
+    // Header
+    doc.setFillColor(6,8,12); doc.rect(0,0,210,42,'F');
+    doc.setTextColor(132,204,22); doc.setFontSize(20); doc.setFont('helvetica','bold');
+    doc.text('FORGE VERTICAL', lm, 16);
+    doc.setTextColor(238,240,244); doc.setFontSize(11); doc.setFont('helvetica','normal');
+    doc.text('Site Audit Report — AI Indexing, GEO & Security', lm, 25);
+    doc.setTextColor(106,125,150); doc.setFontSize(9);
+    doc.text(`${domain}  ·  ${date}  ·  forgevertical.com  ·  +27 65 741 7593`, lm, 33);
+    doc.text(`Prepared for: ${scanData.name}${scanData.company?' — '+scanData.company:''}`, lm, 39);
+    y = 54;
 
-    // Score summary box
-    doc.setFillColor(245,245,245);
-    doc.rect(lm, y-4, pw, 14, 'F');
-    doc.setTextColor(9,9,11); doc.setFontSize(11); doc.setFont('helvetica','bold');
-    doc.text(`Overall score: ${scanData.score}/100`, lm+4, y+3);
-    const failCount = allItems.filter(i => !scanData.results[i.id]?.pass).length;
-    doc.setFont('helvetica','normal'); doc.setFontSize(9); doc.setTextColor(106,125,150);
-    doc.text(`${failCount} issues found across ${activeCatIds.length} categories`, lm+4, y+8);
-    y += 22;
+    // Score
+    doc.setFontSize(28); doc.setFont('helvetica','bold');
+    const scoreColor = scanData.score>=80?[34,197,94]:scanData.score>=50?[245,158,11]:[239,68,68];
+    doc.setTextColor(...scoreColor); doc.text(`${scanData.score}/100`, lm, y);
+    doc.setFontSize(10); doc.setFont('helvetica','normal'); doc.setTextColor(106,125,150);
+    doc.text(`${failIssues.length} issue${failIssues.length!==1?'s':''} found  ·  All results from real checks, not estimates`, lm+36, y);
+    y += 14;
 
-    // Category scores row
-    activeCatIds.forEach((catId, idx) => {
-        const cat = CHECKS[catId];
-        const cs = scanData.catScores[catId];
-        const x = lm + idx * (pw / activeCatIds.length);
-        doc.setFontSize(16); doc.setFont('helvetica','bold'); doc.setTextColor(9,9,11);
-        doc.text(`${cs.pct}%`, x, y);
-        doc.setFontSize(7); doc.setFont('helvetica','normal'); doc.setTextColor(106,125,150);
-        doc.text(cat.label, x, y+6);
-    });
-    y += 20;
+    const platLabel = scanData.platform?`Platform: ${scanData.platform}  ·  `:'';
+    const pagesLabel = scanData.pageCount?`Pages: ${scanData.pageCount}`:'';
+    if (platLabel||pagesLabel) { doc.setFontSize(9); doc.text(platLabel+pagesLabel, lm, y); y+=10; }
+    else y += 4;
 
     // Findings
     doc.setFontSize(13); doc.setFont('helvetica','bold'); doc.setTextColor(9,9,11);
-    doc.text('Findings', lm, y); y += 8;
+    doc.text('Findings', lm, y); y+=8;
 
-    activeCatIds.forEach(catId => {
-        const cat = CHECKS[catId];
-        if (y > 255) { doc.addPage(); y = 20; }
-        doc.setFontSize(10); doc.setFont('helvetica','bold'); doc.setTextColor(9,9,11);
-        doc.text(cat.label, lm, y); y += 4;
-        doc.setDrawColor(220,220,220); doc.line(lm, y, rm, y); y += 6;
+    CORE_CHECKS.forEach(check => {
+        if(y>258){doc.addPage();y=20;}
+        const r = scanData.results[check.id];
+        const status = r?.status||'fail';
+        const col = status==='pass'?[34,197,94]:status==='warn'?[245,158,11]:[239,68,68];
+        const icon = status==='pass'?'✓':status==='warn'?'!':'✗';
 
-        cat.items.forEach(item => {
-            if (y > 268) { doc.addPage(); y = 20; }
-            const r = scanData.results[item.id];
-            const pass = r?.pass;
-            const statusColor = pass ? [34,197,94] : (r?.status === 'warn' ? [245,158,11] : [239,68,68]);
-            const icon = pass ? '✓' : (r?.status === 'warn' ? '!' : '✗');
+        doc.setFillColor(248,248,248); doc.rect(lm,y-4,pw,status!=='pass'?20:12,'F');
+        doc.setTextColor(...col); doc.setFontSize(10); doc.setFont('helvetica','bold');
+        doc.text(icon, lm+3, y+2);
+        doc.setTextColor(9,9,11); doc.setFont('helvetica','bold');
+        doc.text(check.name, lm+12, y+2);
 
-            doc.setTextColor(...statusColor); doc.setFontSize(9); doc.setFont('helvetica','bold');
-            doc.text(icon, lm, y);
-            doc.setTextColor(9,9,11); doc.setFont('helvetica','bold');
-            doc.text(item.name, lm+8, y);
-            if (!pass && item.price > 0) {
-                doc.setTextColor(132,204,22);
-                const priceStr = `R${item.price.toLocaleString()}`;
-                doc.text(priceStr, rm - doc.getTextWidth(priceStr), y);
+        if (status!=='pass' && check.price>0) {
+            const ps = `R${check.price.toLocaleString()}${check.is_setup_fee?' once-off':''}`;
+            doc.setTextColor(132,204,22);
+            doc.text(ps, rm-doc.getTextWidth(ps), y+2);
+        }
+        y += 8;
+
+        const verdict = status==='pass'?(r?.detail_msg||check.pass_short):(r?.detail_msg||check.fail_short);
+        doc.setFontSize(8); doc.setFont('helvetica','normal'); doc.setTextColor(106,125,150);
+        doc.text(verdict, lm+12, y); y+=5;
+
+        if (status!=='pass') {
+            if(y>262){doc.addPage();y=20;}
+            const lines = doc.splitTextToSize(check.why_fail, pw-14);
+            lines.forEach(l=>{if(y>270){doc.addPage();y=20;}doc.text(l,lm+12,y);y+=4;});
+        }
+
+        // Robots bot grid
+        if (check.id==='robots' && r?.found && r?.botsFound?.length>0) {
+            if(y>260){doc.addPage();y=20;}
+            doc.setTextColor(34,197,94);
+            doc.text(`AI bots allowed: ${r.botsFound.join(', ')}`, lm+12, y); y+=5;
+            if(r.botsMissing?.length>0) {
+                doc.setTextColor(239,68,68);
+                doc.text(`Missing: ${r.botsMissing.join(', ')}`, lm+12, y); y+=5;
             }
-            y += 5;
-            if (!pass) {
-                doc.setTextColor(106,125,150); doc.setFont('helvetica','normal'); doc.setFontSize(8);
-                const lines = doc.splitTextToSize(item.why, pw - 12);
-                lines.forEach(line => { if (y > 270) { doc.addPage(); y = 20; } doc.text(line, lm+8, y); y += 4; });
-            }
-            y += 3;
+        }
+        y += 6;
+    });
+
+    // Fix quote
+    if (totalFix > 0) {
+        if(y>230){doc.addPage();y=20;}
+        doc.setFontSize(12); doc.setFont('helvetica','bold'); doc.setTextColor(9,9,11);
+        doc.text('Fix quote', lm, y); y+=8;
+
+        failIssues.forEach(check=>{
+            if(y>265){doc.addPage();y=20;}
+            doc.setFillColor(248,248,248); doc.rect(lm,y-3,pw,10,'F');
+            doc.setFontSize(9); doc.setFont('helvetica','bold'); doc.setTextColor(9,9,11);
+            doc.text(check.name, lm+3, y+3);
+            const ps=`R${check.price.toLocaleString()}`;
+            doc.setTextColor(132,204,22); doc.text(ps,rm-doc.getTextWidth(ps),y+3);
+            y+=13;
         });
-        y += 6;
-    });
 
-    // Quote page
-    doc.addPage(); y = 0;
-    doc.setFillColor(6,8,12); doc.rect(0,0,210,35,'F');
-    doc.setTextColor(132,204,22); doc.setFontSize(16); doc.setFont('helvetica','bold');
-    doc.text('ITEMISED FIX QUOTE', lm, 15);
-    doc.setTextColor(106,125,150); doc.setFontSize(9); doc.setFont('helvetica','normal');
-    doc.text(`Prepared for: ${scanData.name}  ·  ${domain}  ·  ${date}`, lm, 23);
-    doc.text('Quote valid 30 days  ·  Prices in ZAR', lm, 29);
-    y = 48;
+        doc.setDrawColor(200,200,200); doc.line(lm,y,rm,y); y+=8;
+        doc.setFontSize(10); doc.setFont('helvetica','normal'); doc.setTextColor(9,9,11);
+        doc.text('Subtotal', lm, y);
+        const st=`R${totalFix.toLocaleString()}`; doc.setFont('helvetica','bold'); doc.text(st,rm-doc.getTextWidth(st),y); y+=7;
+        doc.setTextColor(34,197,94); doc.setFont('helvetica','normal');
+        const ds=`−R${discount.toLocaleString()}`; doc.text('10% bundle discount',lm,y); doc.setFont('helvetica','bold'); doc.text(ds,rm-doc.getTextWidth(ds),y); y+=10;
+        doc.setFillColor(6,8,12); doc.rect(lm,y-4,pw,14,'F');
+        doc.setTextColor(255,255,255); doc.setFontSize(12); doc.setFont('helvetica','bold');
+        doc.text('Total', lm+4, y+5);
+        const tot=`R${(totalFix-discount).toLocaleString()}`; doc.setTextColor(132,204,22); doc.text(tot,rm-doc.getTextWidth(tot),y+5); y+=22;
 
-    // Quote line items
-    const lines = [{name:'Forge Audit — Full site audit', desc:'GEO/AI + SEO + Security + Technical scan · PDF report · Loom video walkthrough', price:AUDIT_FEE}, ...failedItems.map(i => ({name:`Fix — ${i.name}`, desc:i.why.split('.')[0]+'.', price:i.price}))];
-
-    lines.forEach(line => {
-        if (y > 255) { doc.addPage(); y = 20; }
-        doc.setFillColor(248,248,248); doc.rect(lm, y-3, pw, 14, 'F');
-        doc.setTextColor(9,9,11); doc.setFontSize(9); doc.setFont('helvetica','bold');
-        doc.text(line.name, lm+3, y+2);
-        const ps = `R${line.price.toLocaleString()}`;
-        doc.setTextColor(132,204,22); doc.text(ps, rm - doc.getTextWidth(ps), y+2);
-        y += 6;
-        doc.setTextColor(106,125,150); doc.setFont('helvetica','normal'); doc.setFontSize(8);
-        const dl = doc.splitTextToSize(line.desc, pw - 40);
-        dl.forEach(d => { doc.text(d, lm+3, y); y += 4; });
-        y += 5;
-    });
-
-    // Totals
-    y += 4;
-    doc.setDrawColor(200,200,200); doc.line(lm, y, rm, y); y += 8;
-    doc.setFontSize(10); doc.setFont('helvetica','normal'); doc.setTextColor(9,9,11);
-    doc.text('Subtotal', lm, y);
-    const st = `R${subtotal.toLocaleString()}`; doc.setFont('helvetica','bold'); doc.text(st, rm - doc.getTextWidth(st), y); y += 7;
-    doc.setTextColor(34,197,94); doc.setFont('helvetica','normal');
-    const dstr = `−R${discount.toLocaleString()}`;
-    doc.text('10% bundle discount', lm, y); doc.setFont('helvetica','bold'); doc.text(dstr, rm - doc.getTextWidth(dstr), y); y += 10;
-    doc.setFillColor(6,8,12); doc.rect(lm, y-4, pw, 16,'F');
-    doc.setTextColor(238,240,244); doc.setFontSize(12); doc.setFont('helvetica','bold');
-    doc.text('Total', lm+4, y+6);
-    const tot = `R${total.toLocaleString()}`; doc.setTextColor(132,204,22); doc.text(tot, rm - doc.getTextWidth(tot), y+6);
-    y += 24;
-    doc.setTextColor(106,125,150); doc.setFontSize(9); doc.setFont('helvetica','normal');
-    doc.text('To proceed: WhatsApp +27 65 741 7593 or email jarrit@forgevertical.com', lm, y); y += 5;
-    doc.text('forgevertical.com/onboard — full project brief and onboarding', lm, y);
+        doc.setTextColor(106,125,150); doc.setFontSize(9); doc.setFont('helvetica','normal');
+        doc.text('To proceed: WhatsApp +27 65 741 7593 or email jarrit@forgevertical.com', lm, y); y+=5;
+        doc.text('forgevertical.com/onboard — full project brief  ·  Quote valid 30 days  ·  Prices in ZAR', lm, y);
+    }
 
     doc.save(`forge-audit-${domain.replace(/\./g,'-')}-${new Date().toISOString().slice(0,10)}.pdf`);
 }
 
-function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+function sleep(ms){return new Promise(r=>setTimeout(r,ms));}
 </script>
 </body>
 </html>
