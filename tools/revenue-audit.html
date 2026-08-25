@@ -273,7 +273,7 @@
 <div id="global-footer"></div>
 
 <script>
-const FUNCTION_URL = 'https://us-central1-forge-vertical.cloudfunctions.net/submitLead';
+const FUNCTION_URL = 'https://submitlead-ozgkkal66a-uc.a.run.app';
 
 // AI bots we check for in robots.txt
 const AI_BOTS = [
@@ -414,7 +414,7 @@ async function startScan() {
         stepsEl.appendChild(deepEl);
 
         try {
-            const deepRes = await fetch(FUNCTION_URL.replace('submitLead','deepScan'), {
+            const deepRes = await fetch('https://deepscan-ozgkkal66a-uc.a.run.app', {
                 method:'POST', headers:{'Content-Type':'application/json'},
                 body: JSON.stringify({url: scanData.url})
             });
