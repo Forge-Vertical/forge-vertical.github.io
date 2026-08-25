@@ -4,7 +4,10 @@ import * as admin from 'firebase-admin';
 admin.initializeApp();
 const db = admin.firestore();
 
-async function getZohoAccessToken(): Promise<string> {
+// ─────────────────────────────────────────────────────────────────
+// ZOHO TOKEN — shared refresh
+// ─────────────────────────────────────────────────────────────────
+async function getZohoToken(): Promise<string> {
     const { default: fetch } = await import('node-fetch');
     const res = await fetch(
         `https://accounts.zoho.com/oauth/v2/token` +
@@ -19,7 +22,10 @@ async function getZohoAccessToken(): Promise<string> {
     return data.access_token;
 }
 
-async function createZohoCRMLead(lead: any, token: string) {
+// ─────────────────────────────────────────────────────────────────
+// ZOHO CRM — create lead
+// ─────────────────────────────────────────────────────────────────
+async function createCRMLead(lead: any, token: string) {
     const { default: fetch } = await import('node-fetch');
     const res = await fetch('https://www.zohoapis.com/crm/v3/Leads', {
         method: 'POST',
@@ -30,8 +36,17 @@ async function createZohoCRMLead(lead: any, token: string) {
                 Email:       lead.email,
                 Phone:       lead.phone || '',
                 Company:     lead.company || lead.name,
-                Description: `Service: ${lead.service}\nPlatform: ${lead.platform || 'unknown'}\nPages: ${lead.pageCount || 'unknown'}\nKnown issues: ${lead.knownBugs || 'none'}\n\n${lead.message}`,
-                Lead_Source: 'Website — Audit Tool',
+                Description: [
+                    `Service: ${lead.service || ''}`,
+                    `Source: ${lead.source || ''}`,
+                    `Platform: ${lead.platform || 'unknown'}`,
+                    `Pages: ${lead.pageCount || 'unknown'}`,
+                    `Known issues: ${lead.knownBugs || 'none'}`,
+                    `Scanned URL: ${lead.scannedUrl || ''}`,
+                    ``,
+                    lead.message || '',
+                ].join('\n'),
+                Lead_Source: 'Website',
             }],
             trigger: ['workflow']
         }),
@@ -41,7 +56,11 @@ async function createZohoCRMLead(lead: any, token: string) {
     throw new Error('CRM lead failed: ' + JSON.stringify(data));
 }
 
-async function createZohoInvoiceEstimate(lead: any, token: string) {
+// ─────────────────────────────────────────────────────────────────
+// ZOHO INVOICE — create estimate (draft quote)
+// Requires scope: ZohoInvoice.estimates.CREATE,ZohoInvoice.settings.READ
+// ─────────────────────────────────────────────────────────────────
+async function createInvoiceEstimate(lead: any, token: string) {
     const { default: fetch } = await import('node-fetch');
 
     // Get org ID
@@ -50,12 +69,12 @@ async function createZohoInvoiceEstimate(lead: any, token: string) {
     });
     const orgData: any = await orgRes.json();
     const orgId = orgData.organizations?.[0]?.organization_id;
-    if (!orgId) throw new Error('No Zoho Invoice org found');
+    if (!orgId) throw new Error(`No Zoho Invoice org. Response: ${JSON.stringify(orgData)}`);
 
-    // Build line items
+    // Build line items from audit results
     const lineItems: any[] = [{
         name: 'Forge Audit — Full site audit',
-        description: `GEO/AI indexing + SEO + Security + Technical · PDF report + Loom walkthrough\nSite: ${lead.scannedUrl || ''} · Platform: ${lead.platform || 'unknown'} · Pages: ${lead.pageCount || 'unknown'}`,
+        description: `GEO/AI indexing + SEO + Security · PDF report + Loom walkthrough\nSite: ${lead.scannedUrl || ''} · Platform: ${lead.platform || 'unknown'} · Pages: ${lead.pageCount || 'unknown'}`,
         rate: 2500,
         quantity: 1,
     }];
@@ -72,29 +91,39 @@ async function createZohoInvoiceEstimate(lead: any, token: string) {
     }
 
     const expiry = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10);
+    const estNum = `FV-${Date.now().toString().slice(-6)}`;
 
-    const estRes = await fetch(`https://invoice.zoho.com/api/v3/estimates?organization_id=${orgId}`, {
-        method: 'POST',
-        headers: { 'Authorization': `Zoho-oauthtoken ${token}`, 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            customer_name: lead.name,
-            customer_email: lead.email,
-            estimate_number: `FV-${Date.now().toString().slice(-6)}`,
-            reference_number: lead.scannedUrl || '',
-            expiry_date: expiry,
-            line_items: lineItems,
-            discount: 10,
-            discount_type: 'entity_level',
-            notes: `Forge Vertical audit for ${lead.scannedUrl || 'your website'}. WhatsApp +27 65 741 7593 or email jarrit@forgevertical.com to proceed. Valid 30 days.`,
-            terms: 'Prices in ZAR. 50% deposit, 50% on completion. 10% bundle discount applied.',
-        }),
-    });
+    const body = {
+        customer_name:    lead.name,
+        customer_email:   lead.email,
+        estimate_number:  estNum,
+        reference_number: lead.scannedUrl || '',
+        expiry_date:      expiry,
+        line_items:       lineItems,
+        discount:         10,
+        discount_type:    'entity_level',
+        notes:            `Forge Vertical audit for ${lead.scannedUrl || 'your website'}.\nContact: jarrit@forgevertical.com · +27 65 741 7593\nValid 30 days. 10% bundle discount applied.`,
+        terms:            'Prices in ZAR. 50% deposit on confirmation, 50% on completion.',
+    };
+
+    const estRes = await fetch(
+        `https://invoice.zoho.com/api/v3/estimates?organization_id=${orgId}`,
+        {
+            method: 'POST',
+            headers: { 'Authorization': `Zoho-oauthtoken ${token}`, 'Content-Type': 'application/json' },
+            body: JSON.stringify(body),
+        }
+    );
 
     const estData: any = await estRes.json();
     if (estData.estimate?.estimate_id) return estData.estimate;
-    throw new Error('Invoice estimate failed: ' + JSON.stringify(estData));
+    throw new Error(`Invoice estimate failed: ${JSON.stringify(estData)}`);
 }
 
+// ─────────────────────────────────────────────────────────────────
+// submitLead — POST
+// Called from onboard.html and audit tool
+// ─────────────────────────────────────────────────────────────────
 export const submitLead = functions.onRequest(
     { secrets: ['ZOHO_CLIENT_ID', 'ZOHO_CLIENT_SECRET', 'ZOHO_REFRESH_TOKEN'] },
     async (req, res) => {
@@ -126,29 +155,36 @@ export const submitLead = functions.onRequest(
             status:       'new',
             zoho_crm_id:  null as string | null,
             zoho_est_id:  null as string | null,
+            zoho_est_num: null as string | null,
         };
 
-        // Always save to Firestore first
+        // Firestore first — lead never lost
         const docRef = await db.collection('leads').add(lead);
         console.log(`[Lead] Firestore: ${docRef.id}`);
 
-        // Zoho — one token for both CRM and Invoice
+        // Zoho — one token refresh for both CRM and Invoice
         try {
-            const token = await getZohoAccessToken();
+            const token = await getZohoToken();
 
-            // CRM
-            const crmId = await createZohoCRMLead(lead, token);
+            // CRM lead
+            const crmId = await createCRMLead(lead, token);
             await docRef.update({ zoho_crm_id: crmId, status: 'crm_synced' });
             console.log(`[Lead] CRM: ${crmId}`);
 
-            // Invoice estimate — only when audit results are present
+            // Invoice estimate — only when audit results present
             if (Array.isArray(lead.auditResults) && lead.auditResults.length > 0) {
                 try {
-                    const est = await createZohoInvoiceEstimate(lead, token);
-                    await docRef.update({ zoho_est_id: est.estimate_id, zoho_est_number: est.estimate_number, status: 'estimate_created' });
+                    const est = await createInvoiceEstimate(lead, token);
+                    await docRef.update({
+                        zoho_est_id:  est.estimate_id,
+                        zoho_est_num: est.estimate_number,
+                        status: 'estimate_created'
+                    });
                     console.log(`[Lead] Invoice estimate: ${est.estimate_number}`);
                 } catch (estErr: any) {
-                    console.error('[Lead] Invoice estimate failed (non-fatal):', estErr.message);
+                    // Log full error so we can diagnose scope issues
+                    console.error('[Lead] Invoice estimate failed:', estErr.message);
+                    await docRef.update({ zoho_est_error: estErr.message });
                 }
             }
 
@@ -165,6 +201,119 @@ export const submitLead = functions.onRequest(
     }
 });
 
+// ─────────────────────────────────────────────────────────────────
+// deepScan — POST { url: string }
+// Server-side fetch of a URL — returns real headers and HTML signals
+// No CORS issues since this runs on the server
+// ─────────────────────────────────────────────────────────────────
+export const deepScan = functions.onRequest(
+    { secrets: [] },
+    async (req, res) => {
+
+    res.set('Access-Control-Allow-Origin', '*');
+    res.set('Access-Control-Allow-Methods', 'POST, OPTIONS');
+    res.set('Access-Control-Allow-Headers', 'Content-Type');
+    if (req.method === 'OPTIONS') { res.status(204).send(''); return; }
+    if (req.method !== 'POST') { res.status(405).json({ error: 'Method not allowed' }); return; }
+
+    const { url } = req.body;
+    if (!url || !url.startsWith('http')) {
+        res.status(400).json({ error: 'Valid URL required' });
+        return;
+    }
+
+    try {
+        const { default: fetch } = await import('node-fetch');
+        const results: any = {};
+
+        // Fetch main page with a browser-like UA
+        let html = '';
+        let headers: any = {};
+        try {
+            const pageRes = await fetch(url, {
+                headers: { 'User-Agent': 'Mozilla/5.0 (compatible; ForgeVerticalAudit/1.0)' },
+                redirect: 'follow',
+                timeout: 10000,
+            } as any);
+
+            html = await pageRes.text();
+
+            // Read headers
+            pageRes.headers.forEach((value: string, key: string) => {
+                headers[key.toLowerCase()] = value;
+            });
+        } catch(e: any) {
+            res.status(200).json({ error: 'Could not fetch URL: ' + e.message, results: {} });
+            return;
+        }
+
+        // ── Security headers ──────────────────────────────────────
+        results.hsts = {
+            pass: !!headers['strict-transport-security'],
+            value: headers['strict-transport-security'] || null,
+        };
+        results.csp = {
+            pass: !!headers['content-security-policy'],
+            value: headers['content-security-policy']?.slice(0, 120) || null,
+        };
+        results.xframe = {
+            pass: !!(headers['x-frame-options'] || headers['content-security-policy']?.includes('frame-ancestors')),
+            value: headers['x-frame-options'] || null,
+        };
+        results.server_leak = {
+            pass: !headers['server'] || headers['server'].toLowerCase() === 'cloudflare',
+            value: headers['server'] || 'not present',
+        };
+        results.cloudflare = {
+            pass: !!(headers['cf-ray'] || headers['server']?.toLowerCase().includes('cloudflare') || headers['cf-cache-status']),
+            cf_ray: headers['cf-ray'] || null,
+            server: headers['server'] || null,
+        };
+
+        // ── HTML meta checks ──────────────────────────────────────
+        results.title = {
+            pass: /<title[^>]*>[^<]+<\/title>/i.test(html),
+            value: html.match(/<title[^>]*>([^<]+)<\/title>/i)?.[1]?.trim().slice(0, 80) || null,
+        };
+        results.meta_desc = {
+            pass: /meta[^>]+name=["']description["'][^>]+content=["'][^"']+["']/i.test(html) ||
+                  /meta[^>]+content=["'][^"']+["'][^>]+name=["']description["']/i.test(html),
+        };
+        results.canonical = {
+            pass: /rel=["']canonical["']/i.test(html),
+            value: html.match(/rel=["']canonical["'][^>]*href=["']([^"']+)["']/i)?.[1] || null,
+        };
+        results.viewport = {
+            pass: /name=["']viewport["']/i.test(html),
+        };
+        results.og_title = {
+            pass: /property=["']og:title["']/i.test(html) || /name=["']og:title["']/i.test(html),
+        };
+        results.og_desc = {
+            pass: /property=["']og:description["']/i.test(html),
+        };
+        results.og_image = {
+            pass: /property=["']og:image["']/i.test(html),
+        };
+        results.schema = {
+            pass: html.includes('application/ld+json') || html.includes('schema.org'),
+            type: html.match(/"@type"\s*:\s*"([^"]+)"/)?.[1] || null,
+        };
+        results.favicon = {
+            pass: /rel=["']icon["']/i.test(html) || /rel=["']shortcut icon["']/i.test(html),
+        };
+
+        res.status(200).json({ results, url });
+
+    } catch (err: any) {
+        console.error('[deepScan]', err);
+        res.status(500).json({ error: err.message });
+    }
+});
+
+// ─────────────────────────────────────────────────────────────────
+// getLeads — GET ?secret=ADMIN_SECRET
+// ─────────────────────────────────────────────────────────────────
 export const getLeads = functions.onRequest(
     { secrets: ['ZOHO_CLIENT_ID', 'ZOHO_CLIENT_SECRET', 'ZOHO_REFRESH_TOKEN'] },
     async (req, res) => {
