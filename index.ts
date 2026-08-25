@@ -315,7 +315,7 @@ export const deepScan = functions.onRequest(
 // getLeads — GET ?secret=ADMIN_SECRET
 // ─────────────────────────────────────────────────────────────────
 export const getLeads = functions.onRequest(
-    { secrets: ['ZOHO_CLIENT_ID', 'ZOHO_CLIENT_SECRET', 'ZOHO_REFRESH_TOKEN'] },
+    { secrets: ['ADMIN_SECRET', 'ZOHO_CLIENT_ID', 'ZOHO_CLIENT_SECRET', 'ZOHO_REFRESH_TOKEN'] },
     async (req, res) => {
     res.set('Access-Control-Allow-Origin', '*');
     if (req.query.secret !== process.env.ADMIN_SECRET) { res.status(401).json({ error: 'Unauthorised' }); return; }
