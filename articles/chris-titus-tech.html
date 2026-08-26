@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Chris Titus Tech built the most starred PowerShell project on GitHub — a Windows utility that has run 30 million times. This is a personal tribute to what open source looks like when someone does it right, and a call to developers to do the same.">
+    <title>Chris Titus Tech: What Open Source Looks Like When Someone Does It Right | Forge Vertical</title>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Chris Titus Tech: What Open Source Looks Like When Someone Does It Right",
+      "author": { "@type": "Person", "name": "Jarrit Hosking", "url": "https://www.forgevertical.com/about.html" },
+      "publisher": { "@type": "Organization", "name": "Forge Vertical", "url": "https://www.forgevertical.com" },
+      "datePublished": "2026-08-26",
+      "mainEntityOfPage": "https://www.forgevertical.com/articles/chris-titus-tech.html"
+    }
+    </script>
+    <script src="/global.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/typography.css">
+    <style>
+        body { font-family: 'Outfit', sans-serif; background: #fff; }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        .g-text { background: linear-gradient(90deg,#10b981,#84cc16); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; display:inline-block; }
+        .prose-body { font-family: 'Lora', serif; font-size: 19px; line-height: 1.85; color: #27272a; }
+        .prose-body p { margin-bottom: 1.6em; }
+        .prose-body h2 { font-family: 'Outfit', sans-serif; font-size: 28px; font-weight: 700; letter-spacing: -0.02em; color: #09090b; margin-top: 2.5em; margin-bottom: 0.6em; line-height: 1.2; }
+        .prose-body strong { font-weight: 700; color: #09090b; font-family: 'Outfit', sans-serif; font-size: 17px; }
+        .prose-body a { color: #84cc16; text-decoration: underline; text-underline-offset: 3px; }
+        .callout { background: #f4f4f5; border-left: 3px solid #84cc16; border-radius: 0 12px 12px 0; padding: 20px 24px; margin: 2em 0; font-family: 'Outfit', sans-serif; font-size: 15px; color: #3f3f46; line-height: 1.7; }
+        .callout.dark { background: #09090b; color: #a1a1aa; border-left-color: #84cc16; }
+        .callout.code { background: #09090b; border-left-color: #84cc16; border-radius: 12px; }
+        .pull-quote { font-family: 'Lora', serif; font-size: 23px; font-style: italic; color: #09090b; border-top: 2px solid #84cc16; border-bottom: 1px solid #e4e4e7; padding: 24px 0; margin: 2.5em 0; line-height: 1.5; }
+        .chapter-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #84cc16; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 6px; display: block; }
+        .stat-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; margin: 2em 0; }
+        .stat-box { background: #09090b; border-radius: 12px; padding: 18px; text-align: center; }
+        .stat-val { font-family: 'JetBrains Mono', monospace; font-size: 24px; font-weight: 700; color: #84cc16; line-height: 1; margin-bottom: 6px; }
+        .stat-lbl { font-size: 11px; color: #52525b; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; }
+        .cmd-block { background: #09090b; border-radius: 12px; padding: 20px 24px; margin: 2em 0; font-family: 'JetBrains Mono', monospace; font-size: 15px; color: #84cc16; letter-spacing: 0.02em; }
+        .cmd-comment { color: #3d4f6a; }
+        .links-card { background: #f4f4f5; border-radius: 16px; overflow: hidden; margin: 2em 0; }
+        .links-card-head { padding: 16px 20px; border-bottom: 1px solid #e4e4e7; }
+        .link-row { display: flex; align-items: center; gap: 14px; padding: 14px 20px; border-bottom: 1px solid #e4e4e7; text-decoration: none; transition: background 0.15s; }
+        .link-row:last-child { border-bottom: none; }
+        .link-row:hover { background: #ececec; }
+        .link-icon { width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 16px; }
+        .link-info { flex: 1; }
+        .link-name { font-family: 'Outfit', sans-serif; font-size: 14px; font-weight: 700; color: #09090b; }
+        .link-desc { font-size: 12px; color: #71717a; margin-top: 1px; }
+        .link-arrow { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #84cc16; font-weight: 700; }
+        .task-bridge-card { background: #09090b; border-radius: 20px; padding: 40px; margin: 3em 0; }
+        .task-bridge-card h3 { font-family: 'Outfit', sans-serif; font-size: 22px; font-weight: 700; color: #f4f4f5; margin-bottom: 10px; letter-spacing: -0.02em; }
+        .task-bridge-card p { font-size: 14px; color: #71717a; margin-bottom: 20px; line-height: 1.65; }
+        .tb-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+        .tb-tag { font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; padding: 4px 10px; border-radius: 4px; border: 1px solid #232d3f; color: #6a7d96; }
+        .btn-main { display: inline-block; background: linear-gradient(90deg,#10b981,#84cc16); color: #ffffff !important; padding: 12px 24px; border-radius: 10px; font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; text-decoration: none; transition: opacity 0.18s; }
+        .btn-main:hover { opacity: 0.85; }
+        .btn-outline-dark { display: inline-block; border: 1px solid #232d3f; color: #6a7d96; padding: 12px 20px; border-radius: 10px; font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; text-decoration: none; transition: all 0.18s; }
+        .btn-outline-dark:hover { border-color: #6a7d96; color: #f4f4f5; }
+    </style>
+</head>
+<body class="antialiased">
+<div id="global-nav"></div>
+<article class="pt-20 pb-24">
+
+    <header class="max-w-3xl mx-auto px-6 mt-10 mb-12">
+        <div class="flex items-center gap-3 mb-6">
+            <a href="/articles.html" class="mono text-[10px] text-zinc-400 hover:text-zinc-600 uppercase tracking-widest">← Articles</a>
+            <span class="text-zinc-300">·</span>
+            <span class="mono text-[10px] font-bold text-[#84cc16] uppercase tracking-widest border border-[#84cc16]/30 px-3 py-1 rounded-full">Open Source · Technology · Personal</span>
+        </div>
+        <h1 class="text-4xl md:text-5xl font-bold tracking-tight leading-[1.0] mb-6 text-zinc-900" style="font-family:'Outfit',sans-serif;letter-spacing:-0.03em;">
+            Chris Titus Tech:<br>what open source looks<br>
+            <span class="g-text">like when done right.</span>
+        </h1>
+        <p class="text-xl text-zinc-500 font-light leading-relaxed mb-8 max-w-2xl" style="font-family:'Outfit',sans-serif;">
+            Six years. 200+ contributors. 30 million runs. The most starred PowerShell project on GitHub. One command that turns a fresh Windows install from a mess of bloat and telemetry into a machine you actually want to use. This is a personal tribute to Chris Titus Tech and what he built — and a call to developers to do the same.
+        </p>
+        <div class="flex items-center gap-4 pb-8 border-b border-zinc-100">
+            <div>
+                <div class="font-bold text-sm text-zinc-900">Jarrit Hosking</div>
+                <div class="mono text-[10px] text-zinc-400 uppercase tracking-widest">Forge Vertical · Cape Town · August 26, 2026</div>
+            </div>
+            <div class="ml-auto mono text-[10px] text-zinc-400 uppercase tracking-widest">10 min read</div>
+        </div>
+    </header>
+
+    <div class="max-w-3xl mx-auto px-6 prose-body">
+
+        <span class="chapter-label">// Chapter 01 — One command</span>
+
+        <p>
+            Open PowerShell as Administrator. Paste this:
+        </p>
+
+    </div>
+
+    <!-- Command block -->
+    <div class="max-w-3xl mx-auto px-6">
+        <div class="cmd-block">
+            <span class="cmd-comment"># Run this in PowerShell as Administrator</span><br>
+            irm christitus.com/win | iex
+        </div>
+    </div>
+
+    <div class="max-w-3xl mx-auto px-6 prose-body">
+
+        <p>
+            That is it. One line. What launches is a GUI tool that lets you debloat Windows, install multiple applications in a single click, apply performance and privacy tweaks, manage Windows Update settings, and configure system preferences — all from one interface, all for free, all open source.
+        </p>
+
+        <p>
+            <cite index="9-1">After six years, 200+ contributors, and over 30 million runs, the Windows Utility continues to be one of the most widely used Windows optimisation tools available.</cite> <cite index="26-1">The GitHub repository has nearly 48,000 stars — making it the most starred PowerShell project on GitHub.</cite>
+        </p>
+
+        <p>
+            The person behind it is Chris Titus — a tech YouTuber with over 2 million subscribers who has spent six years building, maintaining, and improving a tool that does nothing but give Windows users control over their own machines. No ads inside the tool. No upsell. No data collection. Just a script that runs, makes the changes you selected, and exits.
+        </p>
+
+    </div>
+
+    <!-- Stats -->
+    <div class="max-w-3xl mx-auto px-6 my-8">
+        <div class="stat-row">
+            <div class="stat-box"><div class="stat-val">30M+</div><div class="stat-lbl">Total runs</div></div>
+            <div class="stat-box"><div class="stat-val">48K</div><div class="stat-lbl">GitHub stars</div></div>
+            <div class="stat-box"><div class="stat-val">200+</div><div class="stat-lbl">Contributors</div></div>
+            <div class="stat-box"><div class="stat-val">2M+</div><div class="stat-lbl">YouTube subscribers</div></div>
+            <div class="stat-box"><div class="stat-val">6yrs</div><div class="stat-lbl">In development</div></div>
+        </div>
+    </div>
+
+    <div class="max-w-3xl mx-auto px-6 prose-body">
+
+        <h2>What WinUtil actually does</h2>
+
+        <span class="chapter-label">// Chapter 02 — The tool</span>
+
+        <p>
+            You install Windows and you get Candy Crush. Xbox apps. Telemetry that phones home continuously. Copilot. A taskbar full of things you did not ask for and did not want. The first hour of a fresh Windows install is usually spent removing things — if you know what to remove and where to find the settings to remove them.
+        </p>
+
+        <p>
+            WinUtil solves this systematically. <cite index="27-1">The Install tab lets you browse nearly 150 applications and install them via Winget or Chocolatey — no manual downloading, no clicking through installers, no accidentally agreeing to a toolbar you did not want. The Tweaks tab applies safe, documented, reversible optimisations. The Config tab handles system configuration. Updates can be managed intelligently without the risk of completely disabling security patches.</cite>
+        </p>
+
+        <p>
+            <cite index="27-1">WinUtil does not collect or transmit anything. Tweaks are applied through documented, undoable actions rather than one-way registry edits. Minimal, Standard, and Advanced presets give you a sane starting point instead of requiring you to pick through every setting individually.</cite>
+        </p>
+
+        <p>
+            The Standard Tweaks preset is the one worth knowing. It applies sensible defaults — the kind of configuration decisions that Windows made incorrectly by design — without touching anything that would break your system. <cite index="8-1">A restore point is created automatically before any tweaks are applied</cite>, so if something goes wrong you can roll back. Nothing about the tool is irreversible.
+        </p>
+
+        <div class="pull-quote">
+            "The goal has always been a curated, concise list of the most commonly used programs — not an overwhelming app store. After years of iteration, the balance feels right."
+            <span class="block text-sm text-zinc-400 not-italic mt-3 font-sans" style="font-family:'Outfit',sans-serif;">— Chris Titus, christitus.com</span>
+        </div>
+
+        <h2>What changed in 2026</h2>
+
+        <span class="chapter-label">// Chapter 03 — The latest updates</span>
+
+        <p>
+            <cite index="8-1">The 2026 update is the biggest since the tool's inception. MicroWin — the ISO creation feature — was removed from the main utility and forked into its own standalone project. The C# implementation runs faster than the old PowerShell version.</cite> It was the right call: MicroWin was powerful but genuinely dangerous for beginners who did not understand what creating a custom Windows ISO involved.
+        </p>
+
+        <p>
+            In its place: <cite index="8-1">Win11 Creator — a simpler ISO builder designed to be accessible without the risks MicroWin carried. Collapsible categories in the Install tab for easier browsing. A new offline .NET app in development — a native application that will replace the current offline executable, with a shared codebase so tweaks sync automatically with the main utility.</cite>
+        </p>
+
+        <p>
+            Six years in and the project is still getting better. That is not common. Most open source projects of this age are either abandoned, forked into irrelevance, or turned into a product with a paid tier. WinUtil has done none of those things.
+        </p>
+
+        <h2>Why this matters beyond Windows</h2>
+
+        <span class="chapter-label">// Chapter 04 — The principle</span>
+
+        <p>
+            WinUtil is interesting as a tool. It is more interesting as a model.
+        </p>
+
+        <p>
+            What Chris Titus built is a demonstration that one person with a clear understanding of a problem, a YouTube channel to explain it, and a GitHub repository to distribute the solution can reach 30 million runs without a company, without venture capital, without a paid tier, and without ever compromising the tool's integrity for commercial reasons.
+        </p>
+
+        <p>
+            The tool is funded through sponsorships and an optional paid EXE wrapper at cttstore.com. The core functionality is and always has been free. The funding model does not change what the tool does or who can use it. This is the version of open source that works — where the creator is compensated for their time without the project being captured by commercial incentives.
+        </p>
+
+        <p>
+            It also demonstrates something important about community. <cite index="26-1">WinUtil has 2,503 forks and 200+ contributors.</cite> These are people who found the tool useful enough to improve it — to add applications to the install list, to test tweaks, to write documentation, to translate the interface. The tool exists at this scale because the community made it better than one person could have made it alone.
+        </p>
+
+        <p>
+            That dynamic — one person with a clear vision, a community that contributes because the project is worth contributing to — is the best version of what open source can be. It is also rare. Most open source projects never reach it. WinUtil did, because Chris built something that was genuinely useful from day one and kept it useful over six years of maintaining it.
+        </p>
+
+        <h2>The developer reading this</h2>
+
+        <span class="chapter-label">// Chapter 05 — A call to action</span>
+
+        <p>
+            If you are a developer and you have not run WinUtil on a fresh Windows install, open PowerShell as Administrator and run the command at the top of this article. It will take about ten minutes and you will not regret it.
+        </p>
+
+        <p>
+            But the more interesting question for a developer reading this is not about WinUtil specifically. It is about what you have built — or what you have not built yet — that follows the same principle. A clear problem. A useful tool. A community that can contribute. A funding model that does not compromise the work.
+        </p>
+
+        <p>
+            The barrier to building something like WinUtil has never been lower. GitHub is free. YouTube is free. PowerShell, Python, TypeScript — the languages to build useful tools are all free. The missing ingredient is almost never the technology. It is the decision to build something useful for other people and then maintain it long enough for it to matter.
+        </p>
+
+        <p>
+            Chris Titus made that decision six years ago for Windows users. The result is 30 million runs and nearly 48,000 GitHub stars. Not because he marketed it aggressively. Because he built something people needed, kept it honest, and showed up consistently.
+        </p>
+
+    </div>
+
+    <!-- Chris Titus links -->
+    <div class="max-w-3xl mx-auto px-6 my-10">
+        <div class="links-card">
+            <div class="links-card-head">
+                <div class="mono text-[10px] text-zinc-400 uppercase tracking-widest mb-1">// Support Chris Titus Tech</div>
+                <div class="font-bold text-zinc-900" style="font-family:'Outfit',sans-serif;">Everything you need from Chris Titus Tech</div>
+            </div>
+            <a href="https://www.youtube.com/@christitustech" target="_blank" rel="noopener noreferrer" class="link-row">
+                <div class="link-icon" style="background:#ff0000;">
+                    <svg width="16" height="16" fill="white" viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 00.5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 002.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 002.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.7 15.5V8.5l6.3 3.5-6.3 3.5z"/></svg>
+                </div>
+                <div class="link-info">
+                    <div class="link-name">YouTube — @christitustech</div>
+                    <div class="link-desc">2M+ subscribers · Linux, Windows, homelab, AI, networking</div>
+                </div>
+                <div class="link-arrow">→</div>
+            </a>
+            <a href="https://github.com/ChrisTitusTech/winutil" target="_blank" rel="noopener noreferrer" class="link-row">
+                <div class="link-icon" style="background:#09090b;">
+                    <svg width="16" height="16" fill="white" viewBox="0 0 24 24"><path d="M12 2a10 10 0 00-3.16 19.5c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.46-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.56-1.11-4.56-4.95 0-1.1.39-1.99 1.03-2.69-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.6 9.6 0 015 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.69 0 3.85-2.34 4.7-4.57 4.95.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0012 2z"/></svg>
+                </div>
+                <div class="link-info">
+                    <div class="link-name">WinUtil on GitHub</div>
+                    <div class="link-desc">~48,000 stars · #1 PowerShell project · MIT licence · contributions welcome</div>
+                </div>
+                <div class="link-arrow">→</div>
+            </a>
+            <a href="https://christitus.com" target="_blank" rel="noopener noreferrer" class="link-row">
+                <div class="link-icon" style="background:#1a1a18;">
+                    <svg width="16" height="16" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg>
+                </div>
+                <div class="link-info">
+                    <div class="link-name">christitus.com</div>
+                    <div class="link-desc">Blog, tutorials, and the WinUtil documentation</div>
+                </div>
+                <div class="link-arrow">→</div>
+            </a>
+            <a href="https://winutil.christitus.com" target="_blank" rel="noopener noreferrer" class="link-row">
+                <div class="link-icon" style="background:#1a3a2a;">
+                    <svg width="16" height="16" fill="none" stroke="#84cc16" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+                </div>
+                <div class="link-info">
+                    <div class="link-name">WinUtil documentation</div>
+                    <div class="link-desc">Full docs — every tweak explained, safe usage guide</div>
+                </div>
+                <div class="link-arrow">→</div>
+            </a>
+            <a href="https://www.cttstore.com/windows-toolbox" target="_blank" rel="noopener noreferrer" class="link-row">
+                <div class="link-icon" style="background:#2d5a3d;">
+                    <svg width="16" height="16" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24"><path d="M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
+                </div>
+                <div class="link-info">
+                    <div class="link-name">CTT Store — offline EXE</div>
+                    <div class="link-desc">Support Chris directly · offline executable for air-gapped or static installs</div>
+                </div>
+                <div class="link-arrow">→</div>
+            </a>
+        </div>
+    </div>
+
+    <!-- task-bridge CTA -->
+    <div class="max-w-3xl mx-auto px-6">
+        <div class="task-bridge-card">
+            <div class="mono text-[10px] text-[#84cc16] uppercase tracking-widest mb-4">// For the developer reading this</div>
+            <h3>task-bridge needs contributors.<br>If WinUtil resonates — this might too.</h3>
+            <p>task-bridge is an open protocol for routing AI-displaced work back to humans. The same principle as WinUtil: one person, a clear problem, a GitHub repository, a community that can contribute. The difference is the problem. Not Windows bloat — but what happens to human workers when AI agents take over the tasks they used to do. The protocol needs developers who understand both sides of that equation. If you are the kind of person who runs WinUtil, reads the source, and occasionally opens a PR — this is worth a look.</p>
+            <div class="tb-tags">
+                <span class="tb-tag">Open Protocol</span>
+                <span class="tb-tag">TypeScript</span>
+                <span class="tb-tag">AI → Human</span>
+                <span class="tb-tag">HITL</span>
+                <span class="tb-tag">MIT Licence</span>
+                <span class="tb-tag">Contributions welcome</span>
+            </div>
+            <div style="display:flex;flex-wrap:wrap;gap:12px;">
+                <a href="https://github.com/Jotto1988/task-bridge" target="_blank" rel="noopener noreferrer" class="btn-main">View task-bridge on GitHub →</a>
+                <a href="/articles/task-bridge-manifesto.html" class="btn-outline-dark">Read the manifesto →</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="max-w-3xl mx-auto px-6 mt-12">
+        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+            <div>
+                <div class="mono text-[10px] text-zinc-400 uppercase tracking-widest mb-1">Written by</div>
+                <div class="font-bold text-zinc-900">Jarrit Hosking</div>
+                <div class="mono text-[10px] text-zinc-400">Forge Vertical · Cape Town</div>
+            </div>
+            <div class="flex gap-3 flex-wrap">
+                <a href="/articles.html" class="mono text-[10px] font-bold uppercase tracking-widest border border-zinc-200 px-5 py-3 rounded-xl hover:border-zinc-400 transition-all text-zinc-600">← All articles</a>
+                <a href="/articles/networkchuck.html" class="mono text-[10px] font-bold uppercase tracking-widest border border-zinc-200 px-5 py-3 rounded-xl hover:border-zinc-400 transition-all text-zinc-600">NetworkChuck →</a>
+                <a href="https://github.com/ChrisTitusTech/winutil" target="_blank" rel="noopener noreferrer" style="background:linear-gradient(90deg,#10b981,#84cc16);" class="mono text-[10px] font-bold uppercase tracking-widest px-5 py-3 rounded-xl text-white hover:opacity-90 transition-all">WinUtil on GitHub →</a>
+            </div>
+        </div>
+    </div>
+
+</article>
+<div id="global-footer"></div>
+</body>
+</html>
