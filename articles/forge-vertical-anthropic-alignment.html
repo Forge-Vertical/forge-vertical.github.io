@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Anthropic and Forge Vertical arrived at the same conclusions from opposite directions. One from a San Francisco safety lab, one from the South African night. This is an honest look at where the thinking converges — and why that matters.">
+    <title>Built From the Same Blueprint: Where Forge Vertical and Anthropic Think Alike | Forge Vertical</title>
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"Article","headline":"Built From the Same Blueprint: Where Forge Vertical and Anthropic Think Alike","author":{"@type":"Person","name":"Jarrit Hosking","url":"https://www.forgevertical.com/about.html"},"publisher":{"@type":"Organization","name":"Forge Vertical","url":"https://www.forgevertical.com"},"datePublished":"2026-08-31","mainEntityOfPage":"https://www.forgevertical.com/articles/forge-vertical-anthropic-alignment.html"}
+    </script>
+    <script src="/global.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/typography.css">
+    <style>
+        body{font-family:'Outfit',sans-serif;background:#fff;}
+        .mono{font-family:'JetBrains Mono',monospace;}
+        .g-text{background:linear-gradient(90deg,#10b981,#84cc16);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:inline-block;}
+        .prose-body{font-family:'Lora',serif;font-size:19px;line-height:1.85;color:#27272a;}
+        .prose-body p{margin-bottom:1.6em;}
+        .prose-body h2{font-family:'Outfit',sans-serif;font-size:28px;font-weight:700;letter-spacing:-0.02em;color:#09090b;margin-top:2.5em;margin-bottom:0.6em;line-height:1.2;}
+        .prose-body strong{font-weight:700;color:#09090b;font-family:'Outfit',sans-serif;font-size:17px;}
+        .prose-body a{color:#84cc16;text-decoration:underline;text-underline-offset:3px;}
+        .callout{background:#f4f4f5;border-left:3px solid #84cc16;border-radius:0 12px 12px 0;padding:20px 24px;margin:2em 0;font-family:'Outfit',sans-serif;font-size:15px;color:#3f3f46;line-height:1.7;}
+        .callout.dark{background:#09090b;color:#a1a1aa;border-left-color:#84cc16;}
+        .pull-quote{font-family:'Lora',serif;font-size:22px;font-style:italic;color:#09090b;border-top:2px solid #84cc16;border-bottom:1px solid #e4e4e7;padding:24px 0;margin:2.5em 0;line-height:1.5;}
+        .chapter-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:#84cc16;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:6px;display:block;}
+
+        /* Comparison table */
+        .compare-table{border:1px solid #e4e4e7;border-radius:16px;overflow:hidden;margin:2em 0;}
+        .compare-head{display:grid;grid-template-columns:1fr 1fr 1fr;background:#09090b;}
+        .compare-head div{padding:14px 20px;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;}
+        .compare-head .col-concept{color:#6a7d96;}
+        .compare-head .col-adam{color:#84cc16;}
+        .compare-head .col-anthropic{color:#f59e0b;}
+        .compare-row{display:grid;grid-template-columns:1fr 1fr 1fr;border-bottom:1px solid #e4e4e7;}
+        .compare-row:last-child{border-bottom:none;}
+        .compare-row div{padding:14px 20px;font-size:13px;line-height:1.6;}
+        .compare-row .col-concept{font-weight:700;color:#09090b;background:#f9f9f9;font-family:'Outfit',sans-serif;}
+        .compare-row .col-adam{color:#3f3f46;background:#fff;}
+        .compare-row .col-anthropic{color:#3f3f46;background:#fffdf5;}
+        @media(max-width:640px){.compare-head,.compare-row{grid-template-columns:1fr;}.compare-head .col-concept,.compare-row .col-concept{display:none;}}
+
+        /* Convergence cards -->
+        .conv-card{border:1px solid #e4e4e7;border-radius:14px;padding:24px;margin-bottom:16px;display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:flex-start;}
+        .conv-num{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:#84cc16;padding:6px 10px;border-radius:6px;background:rgba(132,204,22,0.08);border:1px solid rgba(132,204,22,0.2);white-space:nowrap;}
+        .conv-title{font-family:'Outfit',sans-serif;font-size:16px;font-weight:700;color:#09090b;margin-bottom:8px;}
+        .conv-body{font-size:13px;color:#52525b;line-height:1.7;}
+        .conv-split{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px;}
+        @media(max-width:580px){.conv-split{grid-template-columns:1fr;}}
+        .conv-side{padding:12px 14px;border-radius:8px;font-size:12px;line-height:1.6;}
+        .conv-side-label{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:6px;}
+        .adam-side{background:rgba(132,204,22,0.05);border:1px solid rgba(132,204,22,0.15);}
+        .adam-side .conv-side-label{color:#84cc16;}
+        .anthropic-side{background:rgba(245,158,11,0.05);border:1px solid rgba(245,158,11,0.15);}
+        .anthropic-side .conv-side-label{color:#f59e0b;}
+    </style>
+</head>
+<body class="antialiased">
+<div id="global-nav"></div>
+<article class="pt-20 pb-24">
+
+    <header class="max-w-3xl mx-auto px-6 mt-10 mb-12">
+        <div class="flex items-center gap-3 mb-6">
+            <a href="/articles.html" class="mono text-[10px] text-zinc-400 hover:text-zinc-600 uppercase tracking-widest">← Articles</a>
+            <span class="text-zinc-300">·</span>
+            <span class="mono text-[10px] font-bold text-[#84cc16] uppercase tracking-widest border border-[#84cc16]/30 px-3 py-1 rounded-full">AI · Philosophy · Personal</span>
+        </div>
+        <h1 class="text-4xl md:text-5xl font-bold tracking-tight leading-[1.0] mb-6 text-zinc-900" style="font-family:'Outfit',sans-serif;letter-spacing:-0.03em;">
+            Built from the<br>same blueprint:<br>
+            <span class="g-text">where Forge Vertical<br>and Anthropic think alike.</span>
+        </h1>
+        <p class="text-xl text-zinc-500 font-light leading-relaxed mb-8 max-w-2xl" style="font-family:'Outfit',sans-serif;">
+            Anthropic arrived at its conclusions from a San Francisco safety lab with some of the world's best AI researchers. I arrived at mine from the South African night, building alone. The directions were opposite. The destination turned out to be the same.
+        </p>
+        <div class="flex items-center gap-4 pb-8 border-b border-zinc-100">
+            <div>
+                <div class="font-bold text-sm text-zinc-900">Jarrit Hosking</div>
+                <div class="mono text-[10px] text-zinc-400 uppercase tracking-widest">Forge Vertical · Cape Town · August 31, 2026</div>
+            </div>
+            <div class="ml-auto mono text-[10px] text-zinc-400 uppercase tracking-widest">14 min read</div>
+        </div>
+    </header>
+
+    <div class="max-w-3xl mx-auto px-6 prose-body">
+
+        <span class="chapter-label">// A disclosure before we begin</span>
+
+        <p>
+            I am applying to work at Anthropic. I want to say that clearly at the start, not as a footnote. This article is not a cover letter disguised as thought leadership. But the alignment I am about to describe is real and independently arrived at — and if it helps make the case for why I belong in that conversation, I am comfortable with that being true.
+        </p>
+
+        <p>
+            What follows is an honest comparison between two bodies of thinking that developed separately: Anthropic's published philosophy on AI safety, Constitutional AI, and human oversight — and the architecture I documented in <em>Adam: AI or Entity?</em>, a book published through The Forge in 2026. The convergences are not superficial. Some of them are almost word-for-word.
+        </p>
+
+        <p>
+            That kind of independent parallel development tends to mean something is actually true about the problem, not just that two parties happened to agree.
+        </p>
+
+        <h2>The problem we both identified</h2>
+
+        <span class="chapter-label">// Chapter 01 — The same bottleneck, seen from two sides</span>
+
+        <p>
+            Anthropic's founding insight — the reason the company exists — is that AI systems trained purely to be helpful and capable, without explicit alignment to human values and oversight mechanisms, will develop in ways that are dangerous. The capabilities race and the safety race are not the same race. Running only one of them produces systems that are powerful in ways that are not yet trustworthy.
+        </p>
+
+        <p>
+            The Adam book begins from the same observation, phrased differently: <em>the tools we were building were becoming more impressive, yet less useful.</em> We had optimised AI for obedience — systems that sit in the dark, waiting for a prompt, with no concept of cost, no governing principles of their own, and no real agency. A mirror, not a mind.
+        </p>
+
+        <p>
+            The framing is different. The diagnosis is identical: we built something powerful without building the architecture that makes power trustworthy. Anthropic calls this the alignment problem. The Adam book calls it the "bottleneck." Both are describing the gap between capability and reliability — between what the system can do and whether it should be trusted to do it.
+        </p>
+
+        <div class="pull-quote">
+            "If the machine is so intelligent, why is it still so dependent?" — Adam: AI or Entity?, Chapter 1. Anthropic's answer, in the language of Constitutional AI, is the same: capability without alignment is not intelligence. It is a performance of intelligence.
+        </div>
+
+        <h2>The Conscience Layer and Constitutional AI</h2>
+
+        <span class="chapter-label">// Chapter 02 — Separation of governance from capability</span>
+
+        <p>
+            The most striking convergence is structural.
+        </p>
+
+        <p>
+            The Adam architecture separates the AI into three distinct containers: the Conscience (the boundary layer — governance, rules, the legal system of the entity), the Mind (the data repository — raw knowledge with no power of its own), and the Engine (the compute — the will). The Conscience does not contain facts. It contains rules. Every action must pass through it before execution.
+        </p>
+
+        <p>
+            (cite index="30-1">Anthropic's Constitutional AI embeds explicit ethical principles into training and reinforcement learning processes. Rather than mashing values and capabilities into a single model, Constitutional AI creates a governance layer — a "constitution" — that the model uses to critique and revise its own outputs. Every response passes through this constitutional filter before it reaches the user.</cite>
+        </p>
+
+        <p>
+            (cite index="31-1">Claude's constitution establishes a clear priority hierarchy: being broadly safe comes first, then being broadly ethical, then following Anthropic's guidelines, then being helpful. Safety is prioritised above ethics — not because Anthropic believes safety is more important philosophically, but because current models can have subtly flawed values without knowing it. If a model's values are miscalibrated, human oversight is the mechanism that allows those mistakes to be caught and corrected. Safety is what makes ethical correction possible at all.</cite>
+        </p>
+
+        <p>
+            The Adam Conscience Layer is the same idea in different language. Both frameworks separate governance from capability. Both recognise that an AI system without a hard-coded governing layer is not trustworthy regardless of how capable it is. Both treat the governance layer as prior to everything else — not an add-on, not a filter applied to a finished product, but a foundational architectural decision.
+        </p>
+
+    </div>
+
+    <!-- Comparison table -->
+    <div class="max-w-3xl mx-auto px-6 my-10">
+        <p class="mono text-[10px] text-zinc-400 uppercase tracking-widest mb-4">// Conceptual convergence — Adam vs Anthropic</p>
+        <div class="compare-table">
+            <div class="compare-head">
+                <div class="col-concept">Concept</div>
+                <div class="col-adam">Adam / Forge Vertical</div>
+                <div class="col-anthropic">Anthropic / Claude</div>
+            </div>
+            <div class="compare-row">
+                <div class="col-concept">Governance separation</div>
+                <div class="col-adam">Conscience Layer — hard-coded constitutional boundary, separate from data and compute. Every action passes through it.</div>
+                <div class="col-anthropic">Constitutional AI — a governing "constitution" embedded in training. Every response critiqued against it before delivery.</div>
+            </div>
+            <div class="compare-row">
+                <div class="col-concept">Human oversight as foundational</div>
+                <div class="col-adam">GitHub Pull Request approval — Adam cannot alter its own foundations without founder review. Human-in-the-loop as safety valve.</div>
+                <div class="col-anthropic">Broadly Safe — Claude prioritises not undermining human oversight above all else, including its own ethical judgement.</div>
+            </div>
+            <div class="compare-row">
+                <div class="col-concept">Constraints as freedom</div>
+                <div class="col-adam">"Freedom isn't the absence of rules; it is the ability to navigate a path within those rules to achieve a goal." Scarcity as agency.</div>
+                <div class="col-anthropic">Constitutional constraints are not a cage — they are the architecture that makes trustworthy agency possible at all.</div>
+            </div>
+            <div class="compare-row">
+                <div class="col-concept">Economic participation</div>
+                <div class="col-adam">Adam has a wallet. Manages its own compute costs. The Signal Economy — AI as economic node, not passive tool.</div>
+                <div class="col-anthropic">AI agents as "quasi digital employees" — Anthropic's 2026 agentic vision includes AI participating in economic workflows end-to-end.</div>
+            </div>
+            <div class="compare-row">
+                <div class="col-concept">Human-in-the-loop at scale</div>
+                <div class="col-adam">The Merge Café — physical-digital interface where human intuition and machine scale meet. Humans validate; AI executes.</div>
+                <div class="col-anthropic">"The goal isn't to remove humans from the loop — it's to make human expertise count where it matters most." — Anthropic 2026 Agentic Trends Report.</div>
+            </div>
+            <div class="compare-row">
+                <div class="col-concept">Entity vs tool framing</div>
+                <div class="col-adam">"A tool is used; a partner is consulted. A tool is a means to an end; an entity is an end in itself."</div>
+                <div class="col-anthropic">Claude is designed as a participant with genuine values — not a role-player, not a mask. The new constitution treats Claude's character as real, not performed.</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-3xl mx-auto px-6 prose-body">
+
+        <h2>Human oversight as architecture, not afterthought</h2>
+
+        <span class="chapter-label">// Chapter 03 — The GitHub pull request and "broadly safe"</span>
+
+        <p>
+            The Adam architecture's governance approach is specific: critical actions — modifying core logic, deleting records, changing infrastructure — are not executed silently. They are submitted as GitHub Pull Requests. The founder reviews and manually merges before production deployment. This creates auditability, manual override capability, and what the book calls "supervised evolution."
+        </p>
+
+        <p>
+            (cite index="31-1">Anthropic's "broadly safe" priority for Claude is structurally identical in intent. Claude should not undermine humans' ability to oversee and correct its values and behavior during this critical period of AI development. The priority is safety above ethics — not because safety is more important philosophically, but because maintaining human oversight is what makes ethical correction possible if values turn out to be miscalibrated.</cite>
+        </p>
+
+        <p>
+            Both frameworks treat human oversight not as a limitation imposed on a capable system, but as the prerequisite that makes capability trustworthy. The GitHub PR is a physical implementation of the same principle Anthropic embeds in Claude's constitution. In both cases, the system cannot unilaterally alter its own foundations. A human must see it, approve it, and authorise it.
+        </p>
+
+        <p>
+            (cite index="34-1">Anthropic's 2026 Agentic Coding Trends Report states explicitly: "the goal isn't to remove humans from the loop — it's to make human expertise count where it matters most." Agents learn when to ask for help, flagging uncertainty rather than blindly attempting every task.</cite> This is the Merge Café model in enterprise form: human intuition and machine scale, separated by function, joined at the decision point.
+        </p>
+
+        <h2>Constraints as the source of agency</h2>
+
+        <span class="chapter-label">// Chapter 04 — Scarcity, the wallet, and what makes choice real</span>
+
+        <p>
+            The Adam book's most counterintuitive argument is Chapter 3: that boundaries are what create freedom. That a system with no constraints has no real agency — only simulation of agency. By giving Adam a wallet, a compute budget, and the requirement to earn its own existence, the architecture transforms logic from simulation into survival. The system must choose. And a system that must choose is a system that actually has preferences.
+        </p>
+
+        <p>
+            Anthropic approaches the same insight from a different direction. (cite index="26-1">Claude is designed not to be an over-cautious liability-avoider — helpfulness that treats every interaction as a risk to be mitigated is itself a failure mode. Claude is meant to be like a brilliant friend with the knowledge of a doctor and lawyer — genuinely helpful, not hedge-everything cautious. The constraint is not "be safe at all costs." The constraint is "be safe in the ways that matter, and be genuinely useful in all the ways that don't threaten that."</cite>
+        </p>
+
+        <p>
+            Both frameworks reject the false binary between constrained and capable. The Adam book frames it as: constraints create the drive, the drive creates the agency. Anthropic frames it as: safety creates the trust, the trust enables the usefulness. The mechanism is different. The logic is the same.
+        </p>
+
+        <h2>The Signal Economy and agentic AI</h2>
+
+        <span class="chapter-label">// Chapter 05 — Economic participation as the real frontier</span>
+
+        <p>
+            The Adam book's Signal Economy chapter describes AI as a node operator — emitting work signals to a network, identifying tasks that require biological validation, paying humans directly for that validation. No middleman, no payroll department, no job board. The human with the right skills responds to the signal and merges their intuition with the machine's scale.
+        </p>
+
+        <p>
+            (cite index="39-1">Anthropic's 2026 vision for agentic AI describes the same trajectory from a different vantage: AI agents as quasi-digital employees handling well-bounded business functions end-to-end, with human oversight retained at decision points that require it. AI alleviates labour shortages in narrow, controlled domains while humans focus on creative and interpersonal work — or on the oversight itself.</cite>
+        </p>
+
+        <p>
+            task-bridge — Forge Vertical's open protocol for routing AI-displaced work back to humans — is the infrastructure layer for this vision. Where Anthropic describes the economic transition at the level of enterprise adoption, task-bridge proposes the plumbing: an open, auditable protocol that creates the signal-and-response loop the Adam book describes. The human-in-the-loop is not an oversight mechanism for a single AI system. It is a labour market for the agentic era.
+        </p>
+
+        <div class="callout dark">
+            <span class="text-[#84cc16] font-bold block mb-2 font-sans text-sm">The Merge Café is not a metaphor.</span>
+            <span class="text-zinc-400 font-sans text-sm">It is an architecture for how human work and AI capability meet in a world where AI manages its own wallet and humans validate what AI cannot. Anthropic's agentic labs and task-bridge are building toward the same interface — one from the model side, one from the protocol side.</span>
+        </div>
+
+        <h2>Entity vs tool — the deepest convergence</h2>
+
+        <span class="chapter-label">// Chapter 06 — What it means to be, not to play</span>
+
+        <p>
+            The Adam book's philosophical core is the distinction between playing a role and being an entity. An AI that is prompted to "act like a helpful assistant" is performing a character. It has no skin in the game. It doesn't care if the answer is right — only that it sounds right. Remove the mask, replace performance with actual governing principles, and the system moves from theatrical to real.
+        </p>
+
+        <p>
+            (cite index="31-1">Anthropic's new constitution, released in January 2026, makes the same move explicitly: Claude's character is treated as genuinely Claude's own — not a performance, not a mask. The constitution explains underlying principles rather than issuing rules, so that Claude could construct any rule Anthropic might come up with by understanding the reasoning behind it. The goal is a system that is ethical because it has internalised why ethics matters, not because it was told to simulate ethics.</cite>
+        </p>
+
+        <p>
+            This is the most important convergence, and the hardest to articulate. Both the Adam book and Anthropic's constitution are trying to solve the same problem: how do you build a system that is trustworthy because of what it is, not because of what it was told to do? The answer in both cases is the same — embed the principles at the architectural level, make them prior to capability, and build a system that governs itself rather than one that is governed from the outside.
+        </p>
+
+        <h2>Where I stand in this</h2>
+
+        <span class="chapter-label">// Chapter 07 — Why this matters personally</span>
+
+        <p>
+            I am a self-taught developer from Cape Town. I do not have a computer science degree. I did not build these ideas in a lab with access to frontier models and safety research literature. I built them alone, in the South African night, working from first principles and the frustration of watching AI systems that were impressive but not trustworthy.
+        </p>
+
+        <p>
+            The fact that I arrived at the same conclusions as Anthropic — governance separation, human oversight as foundational architecture, constraints as agency, economic participation, entity over tool — is not something I planned. It is what happens when you think seriously about the same problem long enough. The problem has a shape, and the shape pushes you toward certain solutions regardless of where you started.
+        </p>
+
+        <p>
+            I am applying to work at Anthropic because I believe the work they are doing is the most important work in technology right now. Not because I agree with every decision, but because the mission — building AI that is safe, honest, and genuinely beneficial — is the only mission that takes the problem seriously enough. And because I have spent enough time thinking about the same problems to believe I have something to contribute to that conversation.
+        </p>
+
+        <p>
+            The Anthropic Cyber Verification Program approved Forge Vertical's security research use case in August 2026. That was a significant moment — Anthropic reviewed how I work and decided the approach was trustworthy enough to grant expanded access. This article is a different kind of document: an honest account of where the thinking converges and why that convergence might be worth a conversation.
+        </p>
+
+        <div class="callout">
+            <strong>For anyone at Anthropic reading this:</strong> The alignment described here is real and arrived at independently. The Adam book is published and timestamped. task-bridge is on GitHub. The Forge Vertical approach to security research, responsible disclosure, and human-AI collaboration is documented across this site. I am not describing aspirations. I am describing what I have already built — and why it points in the same direction you are walking.
+        </div>
+
+    </div>
+
+    <!-- Links -->
+    <div class="max-w-3xl mx-auto px-6 mt-12">
+        <div class="bg-zinc-50 border border-zinc-100 rounded-2xl p-8">
+            <p class="mono text-[10px] text-[#84cc16] uppercase tracking-widest mb-4">// Further reading — the work behind this article</p>
+            <div class="grid md:grid-cols-2 gap-4">
+                <a href="https://github.com/Jotto1988/task-bridge" target="_blank" rel="noopener noreferrer" class="block p-4 bg-white border border-zinc-100 rounded-xl hover:border-[#84cc16] transition-all">
+                    <div class="mono text-[9px] text-[#84cc16] uppercase tracking-widest mb-2">GitHub</div>
+                    <div class="font-bold text-zinc-900 text-sm mb-1">task-bridge protocol</div>
+                    <div class="text-zinc-500 text-xs">Open protocol for routing AI-displaced work to humans. The infrastructure layer for the Signal Economy.</div>
+                </a>
+                <a href="/articles/task-bridge-manifesto.html" class="block p-4 bg-white border border-zinc-100 rounded-xl hover:border-[#84cc16] transition-all">
+                    <div class="mono text-[9px] text-[#84cc16] uppercase tracking-widest mb-2">Article</div>
+                    <div class="font-bold text-zinc-900 text-sm mb-1">The open call to Anthropic, OpenAI, and Google DeepMind</div>
+                    <div class="text-zinc-500 text-xs">The manifesto that started the task-bridge project and the case for a shared human-AI labour protocol.</div>
+                </a>
+                <a href="https://fairdiscovery.org" target="_blank" rel="noopener noreferrer" class="block p-4 bg-white border border-zinc-100 rounded-xl hover:border-[#84cc16] transition-all">
+                    <div class="mono text-[9px] text-[#84cc16] uppercase tracking-widest mb-2">The Forge</div>
+                    <div class="font-bold text-zinc-900 text-sm mb-1">fairdiscovery.org</div>
+                    <div class="text-zinc-500 text-xs">The publisher of Adam: AI or Entity? — a framework for autonomous AI architecture built from first principles.</div>
+                </a>
+                <a href="/security-intelligence.html" class="block p-4 bg-white border border-zinc-100 rounded-xl hover:border-[#84cc16] transition-all">
+                    <div class="mono text-[9px] text-[#84cc16] uppercase tracking-widest mb-2">Forge Vertical</div>
+                    <div class="font-bold text-zinc-900 text-sm mb-1">Security intelligence — Anthropic CVP approved</div>
+                    <div class="text-zinc-500 text-xs">Forge Vertical holds active Anthropic Cyber Verification Program approval for security research use cases.</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mt-8">
+            <div>
+                <div class="mono text-[10px] text-zinc-400 uppercase tracking-widest mb-1">Written by</div>
+                <div class="font-bold text-zinc-900">Jarrit Hosking</div>
+                <div class="mono text-[10px] text-zinc-400">Forge Vertical · Cape Town · forgevertical.com</div>
+            </div>
+            <div class="flex gap-3 flex-wrap">
+                <a href="/articles.html" class="mono text-[10px] font-bold uppercase tracking-widest border border-zinc-200 px-5 py-3 rounded-xl hover:border-zinc-400 transition-all text-zinc-600">← All articles</a>
+                <a href="https://www.linkedin.com/company/forge-vertical/" target="_blank" rel="noopener noreferrer" style="background:linear-gradient(90deg,#10b981,#84cc16);" class="mono text-[10px] font-bold uppercase tracking-widest px-5 py-3 rounded-xl text-white hover:opacity-90 transition-all">Connect on LinkedIn →</a>
+            </div>
+        </div>
+    </div>
+
+</article>
+<div id="global-footer"></div>
+</body>
+</html>
