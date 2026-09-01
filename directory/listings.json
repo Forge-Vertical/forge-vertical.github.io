@@ -1,6 +1,6 @@
 {
   "meta": {
-    "total_listings": 24,
+    "total_listings": 25,
     "sources": [
       "forge-vertical",
       "sitebuild-studio"
@@ -509,6 +509,26 @@
         "Roadside Assistance & Towing"
       ],
       "logo_initial": "TW"
+    },
+    {
+      "id": "allpro-handyman-services",
+      "name": "Allpro Handyman Services",
+      "category": "handyman",
+      "location": "Wynberg, Cape Town",
+      "address": "",
+      "phone": "068 164 1883",
+      "whatsapp": "068 164 1883",
+      "description": "Tiling, painting, fire-rated and non fire-rated drywall, and general handyman services across Cape Town, with a strong focus on quality workmanship and on-site health and safety.",
+      "logo": "https://www.sitebuildstudio.co.za/directory/images/logo_handyman.png",
+      "website": "https://www.allprohandymancapetown.co.za",
+      "_source": "sitebuild",
+      "tagline": "Handyman & Renovations",
+      "verified": true,
+      "featured": false,
+      "tags": [
+        "Handyman & Renovations"
+      ],
+      "logo_initial": "AL"
     },
     {
       "id": "investorlist",
