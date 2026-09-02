@@ -3,8 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Forge Vertical Articles — technology, AI, open source, business, and South Africa. Real research, real data, real perspective.">
-    <title>Articles | Forge Vertical</title>
+    <meta name="description" content="Forge Vertical Tech Hub — 23 articles covering AI job displacement, GEO optimisation, Cape Town tech, open source, cybersecurity, and South African business. Real research, no filler.">
+    <title>Forge Vertical Tech Hub — AI, Open Source, South Africa, Security, Business | Forge Vertical</title>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Blog",
+      "name": "Forge Vertical Tech Hub",
+      "description": "Technology, AI, open source, cybersecurity, and South African business. Real research, real data.",
+      "url": "https://www.forgevertical.com/articles.html",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Forge Vertical",
+        "url": "https://www.forgevertical.com",
+        "logo": {"@type": "ImageObject", "url": "https://www.forgevertical.com/assets/fvlogo.png"}
+      },
+      "author": {"@type": "Person", "name": "Jarrit Hosking", "url": "https://www.forgevertical.com"},
+      "keywords": "AI job displacement, GEO optimisation Cape Town, open source tools, cybersecurity South Africa, Linus Tech Tips, Chris Titus WinUtil, Cape Town tech hub, AI indexing website"
+    }
+    </script>
     <script src="/global.js" defer></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -57,7 +74,15 @@
         .hl-read{color:var(--lime);font-weight:700;}
 
         /* Filter */
-        #filter-bar{padding:16px 6vw;border-bottom:1px solid var(--border);background:var(--surface);display:flex;align-items:center;gap:8px;flex-wrap:wrap;position:sticky;top:0;z-index:40;}
+        /* Search */
+        #search-bar{padding:16px 6vw;border-bottom:1px solid var(--border);background:var(--surface2);display:flex;align-items:center;gap:12px;}
+        #search-input{flex:1;max-width:440px;background:rgba(255,255,255,0.05);border:1px solid var(--border2);border-radius:8px;padding:9px 14px 9px 36px;color:var(--text);font-family:'Outfit',sans-serif;font-size:14px;outline:none;transition:border-color 0.2s;}
+        #search-input:focus{border-color:var(--lime);}
+        #search-input::placeholder{color:var(--muted);}
+        .search-wrap{position:relative;flex:1;max-width:440px;}
+        .search-icon{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--muted);pointer-events:none;}
+        #search-count{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted2);}
+        #filter-bar{padding:12px 6vw;border-bottom:1px solid var(--border);background:var(--surface);display:flex;align-items:center;gap:8px;flex-wrap:wrap;position:sticky;top:0;z-index:40;}
         .fbtn{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;padding:6px 14px;border-radius:6px;border:1px solid var(--border2);color:var(--muted2);background:transparent;cursor:pointer;transition:all 0.15s;}
         .fbtn:hover{border-color:var(--muted);color:var(--text);}
         .fbtn.active{border-color:var(--lime);color:var(--lime);background:rgba(132,204,22,0.08);}
@@ -161,6 +186,15 @@
         </a>
     </div>
 </section>
+
+<!-- Search bar -->
+<div id="search-bar">
+    <div class="search-wrap">
+        <svg class="search-icon" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="text" id="search-input" placeholder="Search articles..." oninput="searchArticles(this.value)">
+    </div>
+    <span id="search-count" class="mono text-[10px]">23 articles</span>
+</div>
 
 <!-- Filter bar -->
 <div id="filter-bar">
@@ -418,23 +452,75 @@
         </a>
 
     </div>
+    <!-- Affiliate strip -->
+    <div style="background:var(--surface);border:1px solid var(--border2);border-radius:16px;overflow:hidden;margin-top:28px;">
+        <div style="padding:20px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;">
+            <div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:var(--lime);margin-bottom:4px;">// Tools we use and recommend</div>
+                <div style="font-size:13px;color:var(--muted2);">Affiliate links — helps keep Forge Vertical running at no cost to you.</div>
+            </div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:0;">
+            <a href="https://get.surfshark.net/aff_c?offer_id=6&aff_id=4160" target="_blank" rel="noopener noreferrer" style="padding:16px 20px;border-right:1px solid var(--border);border-bottom:1px solid var(--border);text-decoration:none;transition:background 0.15s;display:block;" onmouseover="this.style.background='var(--surface2)'" onmouseout="this.style.background='transparent'">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--lime);margin-bottom:5px;">Surfshark VPN</div>
+                <div style="font-size:12px;color:var(--muted2);line-height:1.5;margin-bottom:6px;">Privacy and security on every network. Essential for remote work and security research.</div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:var(--lime);">Try Surfshark →</div>
+            </a>
+            <a href="https://go.nordvpn.net/aff_c?offer_id=15&aff_id=145959&url_id=902" target="_blank" rel="noopener noreferrer" style="padding:16px 20px;border-right:1px solid var(--border);border-bottom:1px solid var(--border);text-decoration:none;transition:background 0.15s;display:block;" onmouseover="this.style.background='var(--surface2)'" onmouseout="this.style.background='transparent'">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--lime);margin-bottom:5px;">NordVPN</div>
+                <div style="font-size:12px;color:var(--muted2);line-height:1.5;margin-bottom:6px;">Industry-leading VPN with threat protection and Meshnet for secure device linking.</div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:var(--lime);">Try NordVPN →</div>
+            </a>
+            <a href="https://portal.webway.host/aff.php?aff=353" target="_blank" rel="noopener noreferrer" style="padding:16px 20px;border-right:1px solid var(--border);border-bottom:1px solid var(--border);text-decoration:none;transition:background 0.15s;display:block;" onmouseover="this.style.background='var(--surface2)'" onmouseout="this.style.background='transparent'">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--lime);margin-bottom:5px;">WebWay — SA Hosting</div>
+                <div style="font-size:12px;color:var(--muted2);line-height:1.5;margin-bottom:6px;">South African hosting, domains and business email. Local infrastructure, local support.</div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:var(--lime);">WebWay.co.za →</div>
+            </a>
+            <a href="https://github.com/Jotto1988/task-bridge" target="_blank" rel="noopener noreferrer" style="padding:16px 20px;border-bottom:1px solid var(--border);text-decoration:none;transition:background 0.15s;display:block;" onmouseover="this.style.background='var(--surface2)'" onmouseout="this.style.background='transparent'">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--lime);margin-bottom:5px;">task-bridge — Open Source</div>
+                <div style="font-size:12px;color:var(--muted2);line-height:1.5;margin-bottom:6px;">Open protocol routing AI-displaced work back to humans. MIT licence. Built by Forge Vertical.</div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:var(--lime);">View on GitHub →</div>
+            </a>
+        </div>
+    </div>
+
+
 </div>
 
 <div id="global-footer"></div>
 
 <script>
+let activeFilter = 'all';
+let activeSearch = '';
+
 function filter(cat, btn) {
     document.querySelectorAll('.fbtn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
+    activeFilter = cat;
+    applyFilters();
+}
+
+function searchArticles(query) {
+    activeSearch = query.toLowerCase().trim();
+    applyFilters();
+}
+
+function applyFilters() {
     const cards = document.querySelectorAll('.ac');
     let visible = 0;
     cards.forEach(card => {
         const cats = card.getAttribute('data-cat') || '';
-        const show = cat === 'all' || cats.includes(cat);
+        const title = card.querySelector('.ac-title')?.textContent.toLowerCase() || '';
+        const desc = card.querySelector('.ac-desc')?.textContent.toLowerCase() || '';
+        const tag = card.querySelector('.ac-tag')?.textContent.toLowerCase() || '';
+        const catMatch = activeFilter === 'all' || cats.includes(activeFilter);
+        const searchMatch = !activeSearch || title.includes(activeSearch) || desc.includes(activeSearch) || tag.includes(activeSearch);
+        const show = catMatch && searchMatch;
         card.style.display = show ? 'flex' : 'none';
         if (show) visible++;
     });
-    document.getElementById('filter-count').textContent = visible + ' article' + (visible !== 1 ? 's' : '');
+    const countEl = document.getElementById('search-count');
+    if (countEl) countEl.textContent = visible + ' article' + (visible !== 1 ? 's' : '');
 }
 </script>
 </body>
