@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="How to use Google Search Console data and Claude to find your best keyword opportunities, fix your titles and meta descriptions, and rank higher every week. The exact workflow I use on forgevertical.com — with real GSC data.">
+    <title>How I Use Google Search Console and Claude to Rank Higher Every Week — The Exact Workflow | Forge Vertical</title>
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"HowTo","name":"How to Use Google Search Console and Claude to Rank Higher Every Week","description":"The exact weekly SEO workflow using GSC data and Claude to find keyword opportunities, fix CTR, and rank higher.","author":{"@type":"Person","name":"Jarrit Hosking","url":"https://www.forgevertical.com"},"publisher":{"@type":"Organization","name":"Forge Vertical","url":"https://www.forgevertical.com"},"datePublished":"2026-09-02","step":[{"@type":"HowToStep","name":"Export GSC data","text":"Go to Google Search Console, Performance, export last 28 days as CSV"},{"@type":"HowToStep","name":"Feed to Claude","text":"Upload the Queries CSV and ask Claude to find high-impression, zero-click opportunities"},{"@type":"HowToStep","name":"Fix titles and meta","text":"Rewrite titles and meta descriptions using Neil Patel long-tail principles"},{"@type":"HowToStep","name":"Request indexing","text":"Go back to GSC URL Inspection and request re-indexing for updated pages"},{"@type":"HowToStep","name":"Repeat weekly","text":"Export new GSC data weekly, compare positions, double down on what is climbing"}]}
+    </script>
+    <script src="/global.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/typography.css">
+    <style>
+        body{font-family:'Outfit',sans-serif;background:#fff;}
+        .mono{font-family:'JetBrains Mono',monospace;}
+        .g-text{background:linear-gradient(90deg,#10b981,#84cc16);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:inline-block;}
+        .prose-body{font-family:'Lora',serif;font-size:19px;line-height:1.85;color:#27272a;}
+        .prose-body p{margin-bottom:1.6em;}
+        .prose-body h2{font-family:'Outfit',sans-serif;font-size:28px;font-weight:700;letter-spacing:-0.02em;color:#09090b;margin-top:2.5em;margin-bottom:0.6em;line-height:1.2;}
+        .prose-body strong{font-weight:700;color:#09090b;font-family:'Outfit',sans-serif;font-size:17px;}
+        .prose-body a{color:#84cc16;text-decoration:underline;text-underline-offset:3px;}
+        .callout{background:#f4f4f5;border-left:3px solid #84cc16;border-radius:0 12px 12px 0;padding:20px 24px;margin:2em 0;font-family:'Outfit',sans-serif;font-size:15px;color:#3f3f46;line-height:1.7;}
+        .callout.dark{background:#09090b;color:#a1a1aa;border-left-color:#84cc16;}
+        .callout.amber{border-left-color:#f59e0b;background:#fffdf5;}
+        .pull-quote{font-family:'Lora',serif;font-size:22px;font-style:italic;color:#09090b;border-top:2px solid #84cc16;border-bottom:1px solid #e4e4e7;padding:24px 0;margin:2.5em 0;line-height:1.5;}
+        .chapter-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:#84cc16;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:6px;display:block;}
+        .step-card{border:1px solid #e4e4e7;border-radius:14px;padding:22px;margin-bottom:12px;display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:flex-start;}
+        .step-num{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:#84cc16;padding:6px 10px;border-radius:6px;background:rgba(132,204,22,0.08);border:1px solid rgba(132,204,22,0.2);white-space:nowrap;}
+        .step-title{font-family:'Outfit',sans-serif;font-size:15px;font-weight:700;color:#09090b;margin-bottom:6px;}
+        .step-body{font-size:13px;color:#52525b;line-height:1.7;}
+        .code-block{background:#09090b;border-radius:12px;padding:18px 22px;margin:1.5em 0;font-family:'JetBrains Mono',monospace;font-size:13px;color:#84cc16;line-height:1.8;overflow-x:auto;}
+        .code-comment{color:#3d4f6a;}
+        .data-table{width:100%;border-collapse:collapse;margin:2em 0;font-size:13px;}
+        .data-table th{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#6a7d96;padding:10px 14px;border-bottom:2px solid #e4e4e7;text-align:left;}
+        .data-table td{padding:10px 14px;border-bottom:1px solid #f0f0f0;color:#3f3f46;vertical-align:top;}
+        .data-table tr:hover td{background:#f9f9f9;}
+        .badge-opp{background:#ecfdf5;color:#059669;border:1px solid #a7f3d0;padding:2px 8px;border-radius:3px;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;}
+        .badge-fix{background:#fffbeb;color:#d97706;border:1px solid #fde68a;padding:2px 8px;border-radius:3px;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;}
+        .aff-footer{background:#09090b;border-radius:16px;padding:28px;margin:3em 0;}
+        .aff-footer h3{font-family:'Outfit',sans-serif;font-size:15px;font-weight:700;color:#f4f4f5;margin-bottom:6px;}
+        .aff-footer p{font-size:13px;color:#6a7d96;margin-bottom:18px;line-height:1.6;}
+        .aff-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;}
+        .aff-tile{background:#111620;border:1px solid #1a2030;border-radius:10px;padding:14px;text-decoration:none;display:block;transition:border-color 0.18s;}
+        .aff-tile:hover{border-color:#84cc16;}
+        .aff-tile-name{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:#84cc16;margin-bottom:4px;}
+        .aff-tile-desc{font-size:11px;color:#6a7d96;line-height:1.5;margin-bottom:6px;}
+        .aff-tile-cta{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:#84cc16;}
+    </style>
+</head>
+<body class="antialiased">
+<div id="global-nav"></div>
+<article class="pt-20 pb-24">
+
+    <header class="max-w-3xl mx-auto px-6 mt-10 mb-12">
+        <div class="flex items-center gap-3 mb-6">
+            <a href="/articles.html" class="mono text-[10px] text-zinc-400 hover:text-zinc-600 uppercase tracking-widest">← Articles</a>
+            <span class="text-zinc-300">·</span>
+            <span class="mono text-[10px] font-bold text-[#84cc16] uppercase tracking-widest border border-[#84cc16]/30 px-3 py-1 rounded-full">SEO · GEO · How-To</span>
+        </div>
+        <h1 class="text-4xl md:text-5xl font-bold tracking-tight leading-[1.05] mb-6 text-zinc-900" style="font-family:'Outfit',sans-serif;letter-spacing:-0.03em;">
+            How I use Google Search<br>Console and Claude to<br>
+            <span class="g-text">rank higher every week.</span>
+        </h1>
+        <p class="text-xl text-zinc-500 font-light leading-relaxed mb-8 max-w-2xl" style="font-family:'Outfit',sans-serif;">
+            No paid tools. No guesswork. Export your GSC data, feed it to Claude, find the pages with 500 impressions and zero clicks, fix the titles and meta descriptions, request re-indexing, and repeat. This is the exact workflow I ran on forgevertical.com this week — with real data and real results.
+        </p>
+        <div class="flex items-center gap-4 pb-8 border-b border-zinc-100">
+            <div>
+                <div class="font-bold text-sm text-zinc-900">Jarrit Hosking</div>
+                <div class="mono text-[10px] text-zinc-400 uppercase tracking-widest">Forge Vertical · Cape Town · September 2, 2026</div>
+            </div>
+            <div class="ml-auto mono text-[10px] text-zinc-400 uppercase tracking-widest">10 min read</div>
+        </div>
+    </header>
+
+    <div class="max-w-3xl mx-auto px-6 prose-body">
+
+        <span class="chapter-label">// Why this works — Neil Patel's principle applied</span>
+
+        <p>
+            Neil Patel built Kissmetrics to millions of visitors and documented the lesson clearly: writing about "marketing funnels" gets you traffic that doesn't convert. Writing about "how to get my first 1000 email subscribers" gets you traffic that buys. The difference is intent. One term is browsed; the other is searched by someone ready to act.
+        </p>
+
+        <p>
+            The same principle applies to every article on your site. If you are writing about "AI" you are competing with every AI company, every journalist, and every researcher on the planet. If you are writing about "why my Cape Town business doesn't appear in ChatGPT results" you are competing with almost nobody — and the person searching that exact phrase has a problem they want solved today.
+        </p>
+
+        <p>
+            Google Search Console tells you what people are actually searching when they find your site. Claude turns that raw data into a specific action plan. Together they form a weekly loop that compounds over time. Here is the exact process.
+        </p>
+
+        <h2>Step 1 — Export your GSC data the right way</h2>
+
+    </div>
+
+    <div class="max-w-3xl mx-auto px-6 my-6 space-y-3">
+        <div class="step-card">
+            <div class="step-num">01</div>
+            <div>
+                <div class="step-title">Go to Google Search Console → Performance → Search Results</div>
+                <div class="step-body">Make sure the date range is set to the last 28 days. Click the Export button top right → Download CSV. You will get a zip file with six CSVs: Chart, Queries, Pages, Countries, Devices, Search Appearance. The two you need are <strong>Queries.csv</strong> and <strong>Pages.csv</strong>.</div>
+            </div>
+        </div>
+        <div class="step-card">
+            <div class="step-num">02</div>
+            <div>
+                <div class="step-title">Upload both CSVs directly to Claude</div>
+                <div class="step-body">Open Claude.ai → new conversation → attach the Queries.csv file. No need to paste or reformat. Claude reads the CSV directly. Do Queries first, then Pages as a second upload in the same conversation.</div>
+            </div>
+        </div>
+        <div class="step-card">
+            <div class="step-num">03</div>
+            <div>
+                <div class="step-title">Ask for the three specific lists</div>
+                <div class="step-body">Use this exact prompt — it gets you the most actionable output immediately.</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-3xl mx-auto px-6">
+        <div class="code-block">
+            <span class="code-comment"># Paste this prompt after uploading your Queries.csv</span><br><br>
+            Analyse this Google Search Console data and give me three lists:<br><br>
+            1. High impression / zero click opportunities — queries with more than 5 impressions and 0 clicks, sorted by impressions descending. These are pages Google is showing but nobody is clicking.<br><br>
+            2. Position 5–15 with impressions — queries where I am ranking page 1 or early page 2 but not top 3. These are the easiest wins to push higher.<br><br>
+            3. My best performing queries with CTR above 5% — so I know what titles and descriptions are actually working and can replicate that pattern.<br><br>
+            For each opportunity in list 1, suggest a new title and meta description using long-tail keyword principles — specific, intent-driven, 50-60 characters for title and 150-160 for meta.
+        </div>
+    </div>
+
+    <div class="max-w-3xl mx-auto px-6 prose-body">
+
+        <h2>What my GSC data actually showed — a real example</h2>
+
+        <span class="chapter-label">// Chapter 02 — Real numbers from forgevertical.com</span>
+
+        <p>
+            Running this workflow on forgevertical.com this week produced immediate, actionable findings. Here is what the data showed — real numbers, not hypothetical.
+        </p>
+
+    </div>
+
+    <div class="max-w-3xl mx-auto px-6 my-6">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Page</th>
+                    <th>Impressions</th>
+                    <th>Clicks</th>
+                    <th>Avg Position</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>chris-titus-tech.html</td><td>810</td><td>0</td><td>4.73</td><td><span class="badge-opp">Fix title + meta</span></td></tr>
+                <tr><td>cape-town-tech.html</td><td>183</td><td>2</td><td>17.3</td><td><span class="badge-fix">Internal links needed</span></td></tr>
+                <tr><td>fable5-here-to-stay.html</td><td>172</td><td>7</td><td>8.56</td><td><span class="badge-fix">Add Fable 5.1 to title</span></td></tr>
+                <tr><td>ai-future-of-work.html</td><td>83</td><td>4</td><td>12.1</td><td><span class="badge-fix">Longer-tail H2s</span></td></tr>
+                <tr><td>cape-town-ai-city.html</td><td>20</td><td>3</td><td>4.35</td><td><span class="badge-opp">Best CTR (15%) — replicate</span></td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="max-w-3xl mx-auto px-6 prose-body">
+
+        <p>
+            The chris-titus-tech article was the headline finding: <strong>810 impressions, position 4.73, zero clicks</strong>. Google is ranking this article on page 1, average position 5, for "chris titus" and related terms — and nobody is clicking. That is a title and meta description problem, not a ranking problem.
+        </p>
+
+        <p>
+            The fix was specific. The original title described what the article was about. The new title leads with what people are searching for: <em>"WinUtil by Chris Titus Tech: 30 Million Runs, 48K GitHub Stars"</em>. That title contains the tool name, two specific numbers, and signals immediately that this is about his actual utility — which is what people searching "chris titus" actually want.
+        </p>
+
+        <div class="pull-quote">
+            810 impressions. Position 4.73. Zero clicks. Google is already ranking the page. The entire problem was the title not matching what the searcher wanted to find. One rewrite. No backlinks needed. No new content.
+        </div>
+
+        <h2>The Neil Patel long-tail principle in practice</h2>
+
+        <span class="chapter-label">// Chapter 03 — Specific beats broad, every time</span>
+
+        <p>
+            Patel's Kissmetrics lesson — that "how marketing funnels work" massively outperformed "marketing funnels" — translates directly to every page title you write. The pattern is: <strong>broad term → specific question or specific outcome</strong>.
+        </p>
+
+    </div>
+
+    <div class="max-w-3xl mx-auto px-6 my-6">
+        <table class="data-table">
+            <thead><tr><th>Broad (losing)</th><th>Long-tail (winning)</th><th>Why</th></tr></thead>
+            <tbody>
+                <tr><td>web design Cape Town</td><td>website with llms.txt and AI indexing Cape Town</td><td>Specific problem + location = buyer intent</td></tr>
+                <tr><td>GEO agency</td><td>how to get my business cited by ChatGPT South Africa</td><td>Question format = someone who wants to act</td></tr>
+                <tr><td>password manager</td><td>NordPass vs browser passwords — which is safer in 2026</td><td>Comparison = high intent, ready to decide</td></tr>
+                <tr><td>AI job loss</td><td>491 people lost their job to AI today — what to do about it</td><td>Specific number + urgency = emotional click trigger</td></tr>
+                <tr><td>Cape Town tech</td><td>why Cape Town is Africa's number one tech city in 2026</td><td>Superlative + year + geography = searchable claim</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="max-w-3xl mx-auto px-6 prose-body">
+
+        <h2>Step 2 — Fix, request indexing, and set the weekly loop</h2>
+
+        <span class="chapter-label">// Chapter 04 — The feedback loop that compounds</span>
+
+        <p>
+            Once Claude gives you the list and the rewritten titles and meta descriptions, the fixes take about 20 minutes per article. Update the <code style="font-family:'JetBrains Mono',monospace;background:#f4f4f5;padding:2px 6px;border-radius:3px;font-size:15px;">&lt;title&gt;</code> tag. Update the <code style="font-family:'JetBrains Mono',monospace;background:#f4f4f5;padding:2px 6px;border-radius:3px;font-size:15px;">&lt;meta name="description"&gt;</code>. If you can, update the H1 and the first H2 to match the new long-tail direction. Push to GitHub. Then:
+        </p>
+
+    </div>
+
+    <div class="max-w-3xl mx-auto px-6 my-6 space-y-3">
+        <div class="step-card">
+            <div class="step-num">04</div>
+            <div>
+                <div class="step-title">Request re-indexing in GSC for every updated page</div>
+                <div class="step-body">Google Search Console → URL Inspection → paste the URL → Request Indexing. GSC allows about 10–12 requests per day. Do your highest-impression pages first. Google usually processes within 24–72 hours for established pages, up to a week for newer ones.</div>
+            </div>
+        </div>
+        <div class="step-card">
+            <div class="step-num">05</div>
+            <div>
+                <div class="step-title">Share the updated article on LinkedIn the same day</div>
+                <div class="step-body">Real human clicks from LinkedIn signal to Google that the page is worth prioritising. One LinkedIn post on a well-written article generates enough clicks to meaningfully bump crawl priority. This is the free equivalent of a paid promotion — and it builds the audience that feeds future traffic.</div>
+            </div>
+        </div>
+        <div class="step-card">
+            <div class="step-num">06</div>
+            <div>
+                <div class="step-title">Export fresh GSC data every 7–14 days and repeat</div>
+                <div class="step-body">The loop compounds. Week 1: find opportunities. Week 2: see which fixes moved. Week 3: double down on what climbed, fix what didn't. Within 60–90 days of consistent iteration, pages that were invisible start showing up on page 1. Pages that were on page 1 with no clicks start converting. This is Cody McDonald's workflow — and it works.</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-3xl mx-auto px-6 prose-body">
+
+        <h2>What Claude is actually good at in this workflow</h2>
+
+        <span class="chapter-label">// Chapter 05 — Where AI earns its place</span>
+
+        <p>
+            Claude does not replace the judgment — you still decide which articles matter, which keywords are worth targeting, and what your audience actually needs. What Claude does is compress the analysis time from hours to minutes and produce specific, usable output rather than generic advice.
+        </p>
+
+        <p>
+            The prompts that produce the best SEO output from Claude are specific about format. Ask for a table. Ask for a character count. Ask for alternatives. Ask it to apply a named principle (Patel's long-tail, SERP intent matching) so it calibrates to a standard rather than making general suggestions. The more specific your prompt, the more specific and useful the output.
+        </p>
+
+        <div class="callout dark">
+            <span class="text-[#84cc16] font-bold block mb-2 font-sans text-sm">The full weekly prompt:</span>
+            <span class="font-sans text-sm text-zinc-400">Upload Queries.csv → "Find queries with 5+ impressions and 0 clicks. For each, write a new title (max 60 chars, includes the exact search query) and meta description (max 160 chars, states the specific benefit of clicking). Format as a table."<br><br>Then upload Pages.csv → "Which pages have the worst impression-to-click ratio? Which have the best? What is different about the best-performing titles?"</span>
+        </div>
+
+        <p>
+            This workflow is free if you are using Claude.ai. It costs a few rands in API tokens if you are using Claude Code or the API directly. Either way it costs less than any SEO tool subscription — and it uses your actual data rather than estimated search volumes.</p>
+
+    </div>
+
+    <!-- Affiliate footer -->
+    <div class="max-w-3xl mx-auto px-6">
+        <div class="aff-footer">
+            <div class="mono text-[10px] text-[#84cc16] uppercase tracking-widest mb-3">// Tools that support this workflow</div>
+            <h3>The stack behind Forge Vertical</h3>
+            <p>Affiliate links — helps keep this site running at no cost to you.</p>
+            <div class="aff-grid">
+                <a href="https://get.surfshark.net/aff_c?offer_id=6&aff_id=4160" target="_blank" rel="noopener noreferrer" class="aff-tile">
+                    <div class="aff-tile-name">Surfshark VPN</div>
+                    <div class="aff-tile-desc">Private browsing for research. Essential when doing competitor analysis or security work.</div>
+                    <span class="aff-tile-cta">Try Surfshark →</span>
+                </a>
+                <a href="https://go.nordvpn.net/aff_c?offer_id=15&aff_id=145959&url_id=902" target="_blank" rel="noopener noreferrer" class="aff-tile">
+                    <div class="aff-tile-name">NordVPN</div>
+                    <div class="aff-tile-desc">Threat protection, Meshnet, and industry-leading privacy. Pairs well with Surfshark for redundancy.</div>
+                    <span class="aff-tile-cta">Try NordVPN →</span>
+                </a>
+                <a href="https://portal.webway.host/aff.php?aff=353" target="_blank" rel="noopener noreferrer" class="aff-tile">
+                    <div class="aff-tile-name">WebWay — SA Hosting</div>
+                    <div class="aff-tile-desc">South African hosting and domains. If your site is on local hosting, WebWay is worth a look.</div>
+                    <span class="aff-tile-cta">WebWay.co.za →</span>
+                </a>
+                <a href="https://github.com/Jotto1988/task-bridge" target="_blank" rel="noopener noreferrer" class="aff-tile">
+                    <div class="aff-tile-name">task-bridge</div>
+                    <div class="aff-tile-desc">Open protocol routing AI-displaced work to humans. MIT licence. Built by Forge Vertical.</div>
+                    <span class="aff-tile-cta">View on GitHub →</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mt-8">
+            <div>
+                <div class="mono text-[10px] text-zinc-400 uppercase tracking-widest mb-1">Written by</div>
+                <div class="font-bold text-zinc-900">Jarrit Hosking</div>
+                <div class="mono text-[10px] text-zinc-400">Forge Vertical · Cape Town · forgevertical.com</div>
+            </div>
+            <div class="flex gap-3 flex-wrap">
+                <a href="/articles.html" class="mono text-[10px] font-bold uppercase tracking-widest border border-zinc-200 px-5 py-3 rounded-xl hover:border-zinc-400 transition-all text-zinc-600">← All articles</a>
+                <a href="/articles/nordpass-vs-browser-passwords.html" class="mono text-[10px] font-bold uppercase tracking-widest border border-zinc-200 px-5 py-3 rounded-xl hover:border-zinc-400 transition-all text-zinc-600">NordPass vs browser passwords →</a>
+                <a href="/tools/audit.html" style="background:linear-gradient(90deg,#10b981,#84cc16);" class="mono text-[10px] font-bold uppercase tracking-widest px-5 py-3 rounded-xl text-white hover:opacity-90 transition-all">Free site audit →</a>
+            </div>
+        </div>
+    </div>
+
+</article>
+<div id="global-footer"></div>
+</body>
+</html>
