@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Booking.com charges hosts 10-25% commission on every booking. TripSpace Global charges 0%. This is an honest comparison of what that difference costs hosts per year — and why a commission-free alternative is the most important thing in hospitality right now.">
+    <title>Booking.com vs TripSpace Global: What 15% Commission Per Booking Actually Costs You as a Host | Forge Vertical</title>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Booking.com vs TripSpace Global: What 15% Commission Per Booking Actually Costs You as a Host",
+      "description": "Booking.com charges hosts 10-25% commission per booking. TripSpace Global charges 0%. An honest breakdown of what that costs hosts annually — and why the commission-free model is the future of accommodation booking.",
+      "author": {"@type": "Person", "name": "Jarrit Hosking", "url": "https://www.forgevertical.com"},
+      "publisher": {"@type": "Organization", "name": "Forge Vertical", "url": "https://www.forgevertical.com"},
+      "datePublished": "2026-09-03",
+      "mainEntityOfPage": "https://www.forgevertical.com/articles/booking-com-vs-tripspace.html",
+      "keywords": "booking.com alternative 2026, booking.com commission percentage, commission free accommodation platform, tripspace global, booking.com vs airbnb commission, how much does booking.com charge hosts, direct booking platform South Africa, OTA commission rate 2026"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How much commission does Booking.com charge hosts?",
+          "acceptedAnswer": {"@type": "Answer", "text": "Booking.com charges hosts 10-25% commission per booking, with a global average of approximately 15%. Additional payment processing fees of 1.1-3.1% apply if you use Payments by Booking.com. The Preferred Partner programme adds approximately 3% extra commission for better visibility."}
+        },
+        {
+          "@type": "Question",
+          "name": "What is a commission-free alternative to Booking.com?",
+          "acceptedAnswer": {"@type": "Answer", "text": "TripSpace Global (tripspaceglobal.com) is a commission-free accommodation marketplace where hosts list for free and keep 100% of their booking revenue. Guests pay only what the host charges — no platform markup, no service fee."}
+        },
+        {
+          "@type": "Question",
+          "name": "How much does Booking.com commission cost a host per year?",
+          "acceptedAnswer": {"@type": "Answer", "text": "A host earning R300,000 per year in bookings on Booking.com at the average 15% commission rate pays R45,000 per year to the platform. At 20% commission, that rises to R60,000. Over five years at 15%, that is R225,000 paid to Booking.com on a single property."}
+        }
+      ]
+    }
+    </script>
+    <script src="/global.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/typography.css">
+    <style>
+        body{font-family:'Outfit',sans-serif;background:#fff;}
+        .mono{font-family:'JetBrains Mono',monospace;}
+        .g-text{background:linear-gradient(90deg,#10b981,#84cc16);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:inline-block;}
+        .prose-body{font-family:'Lora',serif;font-size:19px;line-height:1.85;color:#27272a;}
+        .prose-body p{margin-bottom:1.6em;}
+        .prose-body h2{font-family:'Outfit',sans-serif;font-size:28px;font-weight:700;letter-spacing:-0.02em;color:#09090b;margin-top:2.5em;margin-bottom:0.6em;line-height:1.2;}
+        .prose-body strong{font-weight:700;color:#09090b;font-family:'Outfit',sans-serif;font-size:17px;}
+        .prose-body a{color:#84cc16;text-decoration:underline;text-underline-offset:3px;}
+        .callout{background:#f4f4f5;border-left:3px solid #84cc16;border-radius:0 12px 12px 0;padding:20px 24px;margin:2em 0;font-family:'Outfit',sans-serif;font-size:15px;color:#3f3f46;line-height:1.7;}
+        .callout.red{border-left-color:#ef4444;background:#fef2f2;}
+        .callout.dark{background:#09090b;color:#a1a1aa;border-left-color:#84cc16;}
+        .pull-quote{font-family:'Lora',serif;font-size:22px;font-style:italic;color:#09090b;border-top:2px solid #84cc16;border-bottom:1px solid #e4e4e7;padding:24px 0;margin:2.5em 0;line-height:1.5;}
+        .chapter-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:#84cc16;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:6px;display:block;}
+
+        /* Commission calculator */
+        .calc-box{background:#09090b;border-radius:16px;padding:28px;margin:2em 0;}
+        .calc-title{font-family:'Outfit',sans-serif;font-size:16px;font-weight:700;color:#f4f4f5;margin-bottom:20px;}
+        .calc-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:12px;}
+        @media(max-width:600px){.calc-row{grid-template-columns:1fr;}}
+        .calc-cell{background:#111620;border-radius:10px;padding:16px;}
+        .calc-label{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:#3d4f6a;margin-bottom:6px;}
+        .calc-val{font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:700;line-height:1;}
+        .calc-val.red{color:#ef4444;}
+        .calc-val.green{color:#84cc16;}
+        .calc-val.muted{color:#6a7d96;}
+
+        /* Compare table */
+        .compare-wrap{border:1px solid #e4e4e7;border-radius:16px;overflow:hidden;margin:2em 0;}
+        .compare-head{display:grid;grid-template-columns:1.5fr 1fr 1fr;background:#09090b;}
+        .compare-head div{padding:14px 20px;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;}
+        .ch-label{color:#6a7d96;}
+        .ch-booking{color:#ef4444;}
+        .ch-tripspace{color:#84cc16;}
+        .compare-row{display:grid;grid-template-columns:1.5fr 1fr 1fr;border-bottom:1px solid #e4e4e7;}
+        .compare-row:last-child{border-bottom:none;}
+        .compare-row div{padding:14px 20px;font-size:13px;line-height:1.5;}
+        .cr-label{font-weight:700;color:#09090b;background:#f9f9f9;}
+        .cr-booking{color:#3f3f46;background:#fff;}
+        .cr-tripspace{color:#3f3f46;background:#f0fdf4;}
+        .badge-bad{color:#ef4444;font-weight:700;font-family:'Outfit',sans-serif;}
+        .badge-good{color:#059669;font-weight:700;font-family:'Outfit',sans-serif;}
+        @media(max-width:600px){.compare-head,.compare-row{grid-template-columns:1fr;}.ch-label,.cr-label{display:none;}}
+
+        /* Host CTA */
+        .host-cta{background:linear-gradient(135deg,#09090b,#0f1a0f);border:1px solid rgba(132,204,22,0.2);border-radius:20px;padding:36px;text-align:center;margin:3em 0;}
+        .host-cta h3{font-family:'Outfit',sans-serif;font-size:24px;font-weight:700;color:#f4f4f5;letter-spacing:-0.02em;margin-bottom:10px;}
+        .host-cta p{font-size:15px;color:#6a7d96;margin-bottom:24px;line-height:1.7;}
+        .btn-ts{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(90deg,#10b981,#84cc16);color:#09090b;padding:14px 28px;border-radius:10px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;text-decoration:none;transition:opacity 0.18s;margin:4px;}
+        .btn-ts:hover{opacity:0.88;}
+        .btn-ts-ghost{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(132,204,22,0.3);color:#84cc16;padding:14px 24px;border-radius:10px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;text-decoration:none;transition:all 0.18s;margin:4px;}
+        .btn-ts-ghost:hover{border-color:#84cc16;background:rgba(132,204,22,0.06);}
+
+        /* FAQ section */
+        .faq-item{border-bottom:1px solid #e4e4e7;padding:20px 0;}
+        .faq-item:last-child{border-bottom:none;}
+        .faq-q{font-family:'Outfit',sans-serif;font-size:16px;font-weight:700;color:#09090b;margin-bottom:10px;}
+        .faq-a{font-size:14px;color:#52525b;line-height:1.7;}
+
+        /* Affiliate strip */
+        .aff-footer{background:#09090b;border-radius:16px;padding:28px;margin:3em 0;}
+        .aff-footer h3{font-family:'Outfit',sans-serif;font-size:15px;font-weight:700;color:#f4f4f5;margin-bottom:6px;}
+        .aff-footer p{font-size:13px;color:#6a7d96;margin-bottom:18px;line-height:1.6;}
+        .aff-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;}
+        .aff-tile{background:#111620;border:1px solid #1a2030;border-radius:10px;padding:14px;text-decoration:none;display:block;transition:border-color 0.18s;}
+        .aff-tile:hover{border-color:#84cc16;}
+        .aff-tile-name{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:#84cc16;margin-bottom:4px;}
+        .aff-tile-desc{font-size:11px;color:#6a7d96;line-height:1.5;margin-bottom:6px;}
+        .aff-tile-cta{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:#84cc16;}
+    </style>
+</head>
+<body class="antialiased">
+<div id="global-nav"></div>
+<article class="pt-20 pb-24">
+
+    <header class="max-w-3xl mx-auto px-6 mt-10 mb-12">
+        <div class="flex items-center gap-3 mb-6">
+            <a href="/articles.html" class="mono text-[10px] text-zinc-400 hover:text-zinc-600 uppercase tracking-widest">← Articles</a>
+            <span class="text-zinc-300">·</span>
+            <span class="mono text-[10px] font-bold text-[#84cc16] uppercase tracking-widest border border-[#84cc16]/30 px-3 py-1 rounded-full">Hospitality · OTA · TripSpace</span>
+        </div>
+        <h1 class="text-4xl md:text-5xl font-bold tracking-tight leading-[1.05] mb-6 text-zinc-900" style="font-family:'Outfit',sans-serif;letter-spacing:-0.03em;">
+            Booking.com charges hosts<br>up to 25% commission.<br>
+            <span class="g-text">TripSpace Global charges 0%.</span>
+        </h1>
+        <p class="text-xl text-zinc-500 font-light leading-relaxed mb-8 max-w-2xl" style="font-family:'Outfit',sans-serif;">
+            Booking.com has 4.7 million properties and billions in annual revenue. Most of that revenue comes directly from hosts — 10% to 25% of every booking they receive, before payment processing fees. Here is an honest breakdown of what that commission costs a property host per year, what the alternatives look like, and why commission-free is the most important shift in hospitality right now.
+        </p>
+        <div class="flex items-center gap-4 pb-8 border-b border-zinc-100">
+            <div>
+                <div class="font-bold text-sm text-zinc-900">Jarrit Hosking</div>
+                <div class="mono text-[10px] text-zinc-400 uppercase tracking-widest">Forge Vertical / TripSpace Global · Cape Town · September 3, 2026</div>
+            </div>
+            <div class="ml-auto mono text-[10px] text-zinc-400 uppercase tracking-widest">11 min read</div>
+        </div>
+    </header>
+
+    <div class="max-w-3xl mx-auto px-6 prose-body">
+
+        <span class="chapter-label">// The number Booking.com does not advertise</span>
+
+        <p>
+            Booking.com is the world's largest accommodation marketplace. <strong>4.7 million properties. Over 500 million registered users. Used by travellers in every country on earth.</strong> It is extraordinary infrastructure and it deserves credit for what it built.
+        </p>
+
+        <p>
+            It is also a machine that extracts 10–25% of every booking from the people who actually own and operate the properties. (cite index="52-1">Booking.com charges hosts a commission of 10-25% per booking, with a global average of approximately 15%. Additional payment processing fees of 1.1-3.1% apply if you use Payments by Booking.com. The Preferred Partner programme — which gives properties better visibility — adds approximately 3% extra commission on top of that.</cite>
+        </p>
+
+        <p>
+            That means a host participating in Preferred Partner, using Booking's payment processing, paying at the average commission rate, is handing over approximately 19–21% of every booking to the platform. Not 15%. Nineteen to twenty-one percent.
+        </p>
+
+        <p>
+            Let that number sit for a moment. For every R10,000 booking, the host keeps roughly R7,900 to R8,100 — before their own operational costs.
+        </p>
+
+        <h2>What Booking.com commission actually costs per year</h2>
+
+        <span class="chapter-label">// Chapter 01 — Real numbers, real scale</span>
+
+        <p>
+            The commission percentage is easier to understand when you calculate what it means annually for a property at different revenue levels.
+        </p>
+
+    </div>
+
+    <!-- Commission calculator display -->
+    <div class="max-w-3xl mx-auto px-6 my-8">
+        <div class="calc-box">
+            <div class="calc-title">// What Booking.com commission costs you annually</div>
+            <div class="calc-row">
+                <div class="calc-cell">
+                    <div class="calc-label">Annual booking revenue</div>
+                    <div class="calc-val muted">R150,000</div>
+                </div>
+                <div class="calc-cell">
+                    <div class="calc-label">Commission paid (15%)</div>
+                    <div class="calc-val red">R22,500</div>
+                </div>
+                <div class="calc-cell">
+                    <div class="calc-label">You keep</div>
+                    <div class="calc-val green">R127,500</div>
+                </div>
+            </div>
+            <div class="calc-row">
+                <div class="calc-cell">
+                    <div class="calc-label">Annual booking revenue</div>
+                    <div class="calc-val muted">R300,000</div>
+                </div>
+                <div class="calc-cell">
+                    <div class="calc-label">Commission paid (15%)</div>
+                    <div class="calc-val red">R45,000</div>
+                </div>
+                <div class="calc-cell">
+                    <div class="calc-label">You keep</div>
+                    <div class="calc-val green">R255,000</div>
+                </div>
+            </div>
+            <div class="calc-row">
+                <div class="calc-cell">
+                    <div class="calc-label">Annual booking revenue</div>
+                    <div class="calc-val muted">R600,000</div>
+                </div>
+                <div class="calc-cell">
+                    <div class="calc-label">Commission paid (15%)</div>
+                    <div class="calc-val red">R90,000</div>
+                </div>
+                <div class="calc-cell">
+                    <div class="calc-label">You keep</div>
+                    <div class="calc-val green">R510,000</div>
+                </div>
+            </div>
+            <div class="calc-row">
+                <div class="calc-cell">
+                    <div class="calc-label">Annual booking revenue</div>
+                    <div class="calc-val muted">R1,000,000</div>
+                </div>
+                <div class="calc-cell">
+                    <div class="calc-label">Commission paid (15%)</div>
+                    <div class="calc-val red">R150,000</div>
+                </div>
+                <div class="calc-cell">
+                    <div class="calc-label">You keep</div>
+                    <div class="calc-val green">R850,000</div>
+                </div>
+            </div>
+            <p style="font-size:11px;color:#3d4f6a;margin-top:12px;font-family:'JetBrains Mono',monospace;">Base 15% commission only. Add payment processing (1.1–3.1%) and Preferred Partner programme (~3%) for the real effective rate.</p>
+        </div>
+    </div>
+
+    <div class="max-w-3xl mx-auto px-6 prose-body">
+
+        <p>
+            A host generating R300,000 per year in bookings is paying R45,000 to Booking.com. That is a full month's revenue — gone before a single operational cost is accounted for. Over five years at that level: R225,000 paid to a platform. For a single property.
+        </p>
+
+        <div class="pull-quote">
+            R45,000 per year. R225,000 over five years. For a single property at average commission rates. That is not a platform fee. That is a business partner with the worst deal in the room.
+        </div>
+
+        <h2>The full comparison — Booking.com vs TripSpace Global</h2>
+
+        <span class="chapter-label">// Chapter 02 — What 0% commission looks like</span>
+
+        <p>
+            <a href="https://tripspaceglobal.com" target="_blank" rel="noopener noreferrer">TripSpace Global</a> is a commission-free accommodation marketplace. Hosts list their properties for free. Guests book directly. The host keeps 100% of the booking revenue. No platform commission. No service fee added to the guest's price. No payment processing cut extracted by the marketplace.
+        </p>
+
+        <p>
+            The model is simple because it should be simple. A marketplace's job is to connect the guest with the property. When it also becomes the mechanism that extracts a fifth of the host's income, it has stopped being a marketplace and become a tax.
+        </p>
+
+    </div>
+
+    <!-- Comparison table -->
+    <div class="max-w-3xl mx-auto px-6 my-8">
+        <div class="compare-wrap">
+            <div class="compare-head">
+                <div class="ch-label">Feature</div>
+                <div class="ch-booking">Booking.com</div>
+                <div class="ch-tripspace">TripSpace Global</div>
+            </div>
+            <div class="compare-row">
+                <div class="cr-label">Host commission</div>
+                <div class="cr-booking"><span class="badge-bad">10–25% per booking</span><br><span style="font-size:11px;color:#6a7d96;">Global average 15%</span></div>
+                <div class="cr-tripspace"><span class="badge-good">0% — zero commission</span><br><span style="font-size:11px;color:#6a7d96;">Host keeps 100%</span></div>
+            </div>
+            <div class="compare-row">
+                <div class="cr-label">Payment processing fee</div>
+                <div class="cr-booking"><span class="badge-bad">1.1–3.1% extra</span><br><span style="font-size:11px;color:#6a7d96;">If using Payments by Booking</span></div>
+                <div class="cr-tripspace"><span class="badge-good">Not extracted by platform</span></div>
+            </div>
+            <div class="compare-row">
+                <div class="cr-label">Visibility boost cost</div>
+                <div class="cr-booking"><span class="badge-bad">~3% extra (Preferred Partner)</span><br><span style="font-size:11px;color:#6a7d96;">Pay more to be seen</span></div>
+                <div class="cr-tripspace"><span class="badge-good">No tiered visibility system</span></div>
+            </div>
+            <div class="compare-row">
+                <div class="cr-label">Guest relationship</div>
+                <div class="cr-booking"><span class="badge-bad">Mediated by platform</span><br><span style="font-size:11px;color:#6a7d96;">Limited direct contact pre-arrival</span></div>
+                <div class="cr-tripspace"><span class="badge-good">Direct host-guest contact</span><br><span style="font-size:11px;color:#6a7d96;">Own your relationship</span></div>
+            </div>
+            <div class="compare-row">
+                <div class="cr-label">No-show commission</div>
+                <div class="cr-booking"><span class="badge-bad">Charged even on no-shows</span><br><span style="font-size:11px;color:#6a7d96;">Unless marked in extranet</span></div>
+                <div class="cr-tripspace"><span class="badge-good">Not applicable</span></div>
+            </div>
+            <div class="compare-row">
+                <div class="cr-label">Listing fee</div>
+                <div class="cr-booking">Free to list</div>
+                <div class="cr-tripspace"><span class="badge-good">Free to list</span></div>
+            </div>
+            <div class="compare-row">
+                <div class="cr-label">Audience size</div>
+                <div class="cr-booking"><span class="badge-good">500M+ registered users</span></div>
+                <div class="cr-tripspace">Growing — direct booking focus</div>
+            </div>
+            <div class="compare-row">
+                <div class="cr-label">Business model</div>
+                <div class="cr-booking">Commission on every booking</div>
+                <div class="cr-tripspace"><span class="badge-good">Platform fee model — not per booking</span></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-3xl mx-auto px-6 prose-body">
+
+        <h2>Why OTA commission is the hospitality industry's biggest unspoken problem</h2>
+
+        <span class="chapter-label">// Chapter 03 — The structural issue</span>
+
+        <p>
+            The OTA commission model has been normalised over two decades to the point where many hosts consider it the cost of doing business. It is not. It is a structural extraction that compounds over time and limits what hospitality operators can reinvest in their properties, their staff, and their guests.
+        </p>
+
+        <p>
+            (cite index="57-1">In 2026, property owners using Booking.com face 15–23% commission, additional 1.1–3.1% payment processing fees, and the impact of the new relevance-based Genius algorithm, which can require paying more to maintain previous visibility levels.</cite> The algorithm change is the tell. The platform is not just taking commission — it is increasingly structuring the system so that maintaining visibility requires paying more commission. Pay to be found, then pay when you are found.
+        </p>
+
+        <p>
+            (cite index="50-1">Booking.com's own SEC filing for Q2 2026 acknowledges that SEO traffic is declining and that this may lead to increased spend in paid marketing channels.</cite> Read that clearly: Booking.com is telling investors that organic search traffic is falling and they plan to spend more on paid advertising to compensate. That paid advertising spend is funded by host commissions. Hosts are paying for Booking.com's Google ads. Not hypothetically — structurally.
+        </p>
+
+        <div class="callout red">
+            <strong>The Genius algorithm change — what it actually means for hosts:</strong> Booking.com's Genius loyalty programme was overhauled in early 2026. Previously, properties received guaranteed visibility benefits from participation. After the overhaul, visibility became relevance-based — meaning the platform now controls what "relevant" means, and paying more commission is one of the factors that influences it. Hosts are being asked to pay more to maintain the same position they previously had.
+        </div>
+
+        <h2>The commission-free argument — why it is not just about saving money</h2>
+
+        <span class="chapter-label">// Chapter 04 — What 0% enables</span>
+
+        <p>
+            The financial argument for commission-free booking is obvious. The strategic argument is more important.
+        </p>
+
+        <p>
+            When a host books through Booking.com, the platform owns the guest relationship. Booking.com has the guest's email address, payment details, travel history, and booking preferences. The host gets a name and a check-in date. When that guest wants to book again, they go back to Booking.com — not back to the host. The commission is not just a fee. It is the price of renting access to your own guests.
+        </p>
+
+        <p>
+            Commission-free direct booking — whether through a platform like TripSpace Global or a host's own website — returns that relationship to the host. A guest who books direct is a guest the host can contact, retain, and build loyalty with. Over time, a direct booking database is worth more than any individual booking commission saved. It is the difference between renting customers and owning them.
+        </p>
+
+        <p>
+            (cite index="59-1">Your own direct booking channel is the ultimate alternative for achieving 100% control, building your brand, and eliminating commission fees.</cite> TripSpace Global is the marketplace layer that sits between "Booking.com" and "build your own booking website" — a commission-free platform with direct host-guest relationships and no per-booking extraction.
+        </p>
+
+        <h2>The honest position — you probably still need Booking.com</h2>
+
+        <span class="chapter-label">// Chapter 05 — A fair take</span>
+
+        <p>
+            Booking.com's reach is real. 500 million registered users. Dominant search presence. Deep trust from international travellers. A property that relies entirely on direct bookings and zero OTA presence is leaving significant occupancy on the table, particularly for guests booking internationally where they do not know local platforms.
+        </p>
+
+        <p>
+            The smart strategy is not abandonment — it is balance. Use Booking.com for the volume and the international reach. Use TripSpace Global and your own direct booking channel to own the relationships that volume generates. Every guest who books through Booking.com and then books direct the second time is a guest you converted from 15% cost to 0% cost. That conversion compounds.
+        </p>
+
+        <p>
+            The hospitality operators who will win the next decade are not the ones who are most visible on Booking.com. They are the ones who use Booking.com's visibility to acquire guests, and then convert those guests into direct relationships that the platform cannot touch.
+        </p>
+
+        <div class="callout dark">
+            <span class="text-[#84cc16] font-bold block mb-2 font-sans text-sm">// The OTA commission article we published earlier:</span>
+            <span class="text-zinc-400 font-sans text-sm">The real cost of OTA distribution — including commission stacking, payment fees, and the long-term cost of not owning your guest relationships — is covered in detail in the <a href="/articles/ota-commission.html" style="color:#84cc16;">OTA commission trap article</a>. The data is significant. The hospitality industry has been calling 20% "the cost of doing business" for too long.</span>
+        </div>
+
+    </div>
+
+    <!-- FAQ section -->
+    <div class="max-w-3xl mx-auto px-6 my-10">
+        <div class="mono text-[10px] text-zinc-400 uppercase tracking-widest mb-6">// Frequently asked questions</div>
+        <div class="faq-item">
+            <div class="faq-q">How much commission does Booking.com charge hosts?</div>
+            <div class="faq-a">(cite index="52-1">Booking.com charges hosts a commission of 10-25% per booking, with a global average of approximately 15%.</cite> Additional payment processing fees of 1.1-3.1% apply if you use Payments by Booking.com. The Preferred Partner programme adds approximately 3% extra commission for better listing visibility.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">Does Booking.com charge commission on cancellations and no-shows?</div>
+            <div class="faq-a">(cite index="52-1">Commission is charged even on cancellations and no-shows unless you mark the guest as a no-show in the Extranet within 48 hours of planned check-out.</cite> This is one of the less-discussed costs — hosts pay commission on revenue they never actually received.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">What is the best commission-free alternative to Booking.com?</div>
+            <div class="faq-a"><a href="https://tripspaceglobal.com" target="_blank" rel="noopener noreferrer" class="text-[#84cc16]">TripSpace Global</a> is a commission-free accommodation marketplace where hosts list for free and keep 100% of their booking revenue. No platform commission, no service fee added to the guest price, and direct host-guest relationships. For properties that want to build a direct booking channel alongside their OTA presence, TripSpace is the starting point.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">How does Booking.com compare to Airbnb on commission?</div>
+            <div class="faq-a">(cite index="52-1">Airbnb charges hosts a flat 15.5% fee on every booking — similar to Booking.com's average, but applied transparently rather than baked into listed prices. Vrbo charges approximately 8% in the US and Canada.</cite> Booking.com's model is different in that the guest sees no separate service fee — the commission comes entirely from the host side.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">Can I list on Booking.com and TripSpace Global at the same time?</div>
+            <div class="faq-a">Yes — and the recommended strategy is exactly that. Use Booking.com for global reach and international guests who trust established OTAs. Use TripSpace Global to build direct relationships with repeat guests and reduce your overall commission burden over time. Every guest converted to direct booking is a guest whose future revenue costs you 0% instead of 15%.</div>
+        </div>
+    </div>
+
+    <!-- TripSpace CTA -->
+    <div class="max-w-3xl mx-auto px-6">
+        <div class="host-cta">
+            <div class="mono text-[10px] text-[#84cc16] uppercase tracking-widest mb-3">// Commission-free. Direct bookings. Your guests.</div>
+            <h3>List your property on TripSpace Global — free, forever.</h3>
+            <p>Zero commission on every booking. Direct host-guest relationships. No per-booking extraction. TripSpace Global is being built for accommodation owners who are done paying 15% of their revenue to a platform that owns their guest relationships.</p>
+            <div>
+                <a href="https://tripspaceglobal.com" target="_blank" rel="noopener noreferrer" class="btn-ts">
+                    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                    List on TripSpace Global →
+                </a>
+                <a href="/articles/ota-commission.html" class="btn-ts-ghost">Read: The commission trap →</a>
+            </div>
+        </div>
+
+        <!-- Affiliate strip -->
+        <div class="aff-footer">
+            <div class="mono text-[10px] text-[#84cc16] uppercase tracking-widest mb-3">// Tools for hospitality hosts</div>
+            <h3>The digital stack for property owners</h3>
+            <p>Recommended tools for hosts building direct booking channels. Affiliate links — helps keep Forge Vertical running.</p>
+            <div class="aff-grid">
+                <a href="https://get.surfshark.net/aff_c?offer_id=6&aff_id=4160" target="_blank" rel="noopener noreferrer" class="aff-tile">
+                    <img src="/assets/images/surfshark-vpn-1-year-17236158874633226.webp" alt="Surfshark" style="height:18px;margin-bottom:8px;object-fit:contain;display:block;" onerror="this.style.display='none'">
+                    <div class="aff-tile-name">Surfshark VPN</div>
+                    <div class="aff-tile-desc">Secure your property management systems. Essential for anyone handling guest data.</div>
+                    <span class="aff-tile-cta">Try Surfshark →</span>
+                </a>
+                <a href="https://go.nordvpn.net/aff_c?offer_id=15&aff_id=145959&url_id=902" target="_blank" rel="noopener noreferrer" class="aff-tile">
+                    <img src="/assets/images/NordVPN-vertical.png" alt="NordVPN" style="height:18px;margin-bottom:8px;object-fit:contain;display:block;" onerror="this.style.display='none'">
+                    <div class="aff-tile-name">NordVPN</div>
+                    <div class="aff-tile-desc">VPN with threat protection. Secure your guest communications and booking systems.</div>
+                    <span class="aff-tile-cta">Try NordVPN →</span>
+                </a>
+                <a href="https://nordpass.com" target="_blank" rel="noopener noreferrer" class="aff-tile">
+                    <img src="/assets/images/nord-security_password-management-tools_1739200695312.png" alt="NordPass" style="height:18px;margin-bottom:8px;object-fit:contain;display:block;" onerror="this.style.display='none'">
+                    <div class="aff-tile-name">NordPass</div>
+                    <div class="aff-tile-desc">Password manager. Secure access to your OTA extranets and booking platforms.</div>
+                    <span class="aff-tile-cta">Try NordPass →</span>
+                </a>
+                <a href="https://portal.webway.host/aff.php?aff=353" target="_blank" rel="noopener noreferrer" class="aff-tile">
+                    <img src="/assets/images/webwaylogo.png" alt="WebWay" style="height:18px;margin-bottom:8px;object-fit:contain;display:block;" onerror="this.style.display='none'">
+                    <div class="aff-tile-name">WebWay — SA Hosting</div>
+                    <div class="aff-tile-desc">South African hosting for your direct booking website. Local infrastructure.</div>
+                    <span class="aff-tile-cta">WebWay.co.za →</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mt-8">
+            <div>
+                <div class="mono text-[10px] text-zinc-400 uppercase tracking-widest mb-1">Written by</div>
+                <div class="font-bold text-zinc-900">Jarrit Hosking</div>
+                <div class="mono text-[10px] text-zinc-400">Forge Vertical · TripSpace Global · Cape Town</div>
+            </div>
+            <div class="flex gap-3 flex-wrap">
+                <a href="/articles.html" class="mono text-[10px] font-bold uppercase tracking-widest border border-zinc-200 px-5 py-3 rounded-xl hover:border-zinc-400 transition-all text-zinc-600">← All articles</a>
+                <a href="/articles/ota-commission.html" class="mono text-[10px] font-bold uppercase tracking-widest border border-zinc-200 px-5 py-3 rounded-xl hover:border-zinc-400 transition-all text-zinc-600">OTA commission trap →</a>
+                <a href="https://tripspaceglobal.com" target="_blank" rel="noopener noreferrer" style="background:linear-gradient(90deg,#10b981,#84cc16);" class="mono text-[10px] font-bold uppercase tracking-widest px-5 py-3 rounded-xl text-white hover:opacity-90 transition-all">TripSpace Global →</a>
+            </div>
+        </div>
+    </div>
+
+</article>
+<div id="global-footer"></div>
+</body>
+</html>
