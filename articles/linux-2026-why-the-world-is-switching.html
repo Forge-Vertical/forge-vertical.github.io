@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Linux desktop share hit 5.33% on Steam in March 2026 — surpassing macOS for the first time. Windows 10 is dead. LTT just did a 30-day Linux challenge. Chris Titus lives on it. NetworkChuck teaches it. Here is the honest guide to which distro you should actually use in 2026.">
+    <title>Why the World Is Warming Up to Linux in 2026 — And Which Distro NetworkChuck, Chris Titus, and LTT Actually Use | Forge Vertical</title>
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"Article","headline":"Why the World Is Warming Up to Linux in 2026 — And Which Distro NetworkChuck, Chris Titus, and LTT Actually Use","author":{"@type":"Person","name":"Jarrit Hosking","url":"https://www.forgevertical.com"},"publisher":{"@type":"Organization","name":"Forge Vertical","url":"https://www.forgevertical.com"},"datePublished":"2026-09-03","keywords":"best Linux distro 2026, Linux Mint 2026, switch from Windows to Linux, Chris Titus Tech Linux, NetworkChuck Linux, LTT Linux challenge 2026, Windows 10 end of life Linux, Linux desktop 2026"}
+    </script>
+    <script src="/global.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/typography.css">
+    <style>
+        body{font-family:'Outfit',sans-serif;background:#fff;}
+        .mono{font-family:'JetBrains Mono',monospace;}
+        .g-text{background:linear-gradient(90deg,#10b981,#84cc16);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:inline-block;}
+        .prose-body{font-family:'Lora',serif;font-size:19px;line-height:1.85;color:#27272a;}
+        .prose-body p{margin-bottom:1.6em;}
+        .prose-body h2{font-family:'Outfit',sans-serif;font-size:28px;font-weight:700;letter-spacing:-0.02em;color:#09090b;margin-top:2.5em;margin-bottom:0.6em;line-height:1.2;}
+        .prose-body strong{font-weight:700;color:#09090b;font-family:'Outfit',sans-serif;font-size:17px;}
+        .prose-body a{color:#84cc16;text-decoration:underline;text-underline-offset:3px;}
+        .callout{background:#f4f4f5;border-left:3px solid #84cc16;border-radius:0 12px 12px 0;padding:20px 24px;margin:2em 0;font-family:'Outfit',sans-serif;font-size:15px;color:#3f3f46;line-height:1.7;}
+        .callout.dark{background:#09090b;color:#a1a1aa;border-left-color:#84cc16;}
+        .callout.amber{border-left-color:#f59e0b;background:#fffdf5;}
+        .pull-quote{font-family:'Lora',serif;font-size:22px;font-style:italic;color:#09090b;border-top:2px solid #84cc16;border-bottom:1px solid #e4e4e7;padding:24px 0;margin:2.5em 0;line-height:1.5;}
+        .chapter-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:#84cc16;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:6px;display:block;}
+        .stat-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;margin:2em 0;}
+        .stat-box{background:#09090b;border-radius:12px;padding:18px;text-align:center;}
+        .stat-val{font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:700;color:#84cc16;line-height:1;margin-bottom:6px;}
+        .stat-lbl{font-size:11px;color:#52525b;text-transform:uppercase;letter-spacing:0.08em;font-weight:600;}
+
+        /* Creator cards */
+        .creator-card{border:1px solid #e4e4e7;border-radius:16px;padding:24px;margin-bottom:16px;}
+        .creator-head{display:flex;align-items:center;gap:14px;margin-bottom:14px;}
+        .creator-avatar{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
+        .creator-name{font-family:'Outfit',sans-serif;font-size:16px;font-weight:700;color:#09090b;}
+        .creator-sub{font-family:'JetBrains Mono',monospace;font-size:10px;color:#6a7d96;text-transform:uppercase;letter-spacing:0.1em;}
+        .creator-distro{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;padding:3px 10px;border-radius:4px;background:rgba(132,204,22,0.1);color:#84cc16;border:1px solid rgba(132,204,22,0.2);margin-bottom:10px;}
+        .creator-body{font-size:14px;color:#52525b;line-height:1.7;}
+
+        /* Distro comparison */
+        .distro-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;margin:2em 0;}
+        .distro-card{border:1px solid #e4e4e7;border-radius:14px;padding:20px;transition:border-color 0.15s;}
+        .distro-card:hover{border-color:#84cc16;}
+        .distro-name{font-family:'Outfit',sans-serif;font-size:16px;font-weight:700;color:#09090b;margin-bottom:4px;}
+        .distro-tag{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;padding:2px 8px;border-radius:3px;display:inline-block;margin-bottom:10px;}
+        .distro-tag.beginner{background:#ecfdf5;color:#059669;border:1px solid #a7f3d0;}
+        .distro-tag.dev{background:#eff6ff;color:#3b82f6;border:1px solid #bfdbfe;}
+        .distro-tag.gaming{background:#faf5ff;color:#7c3aed;border:1px solid #ddd6fe;}
+        .distro-tag.security{background:#fef2f2;color:#ef4444;border:1px solid #fecaca;}
+        .distro-tag.power{background:#fffbeb;color:#d97706;border:1px solid #fde68a;}
+        .distro-body{font-size:13px;color:#52525b;line-height:1.65;}
+        .distro-pick{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;color:#84cc16;margin-top:10px;display:block;}
+
+        /* Affiliate footer */
+        .aff-footer{background:#09090b;border-radius:16px;padding:28px;margin:3em 0;}
+        .aff-footer h3{font-family:'Outfit',sans-serif;font-size:15px;font-weight:700;color:#f4f4f5;margin-bottom:6px;}
+        .aff-footer p{font-size:13px;color:#6a7d96;margin-bottom:18px;line-height:1.6;}
+        .aff-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;}
+        .aff-tile{background:#111620;border:1px solid #1a2030;border-radius:10px;padding:14px;text-decoration:none;display:block;transition:border-color 0.18s;}
+        .aff-tile:hover{border-color:#84cc16;}
+        .aff-tile-name{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:#84cc16;margin-bottom:4px;}
+        .aff-tile-desc{font-size:11px;color:#6a7d96;line-height:1.5;margin-bottom:6px;}
+        .aff-tile-cta{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:#84cc16;}
+    </style>
+</head>
+<body class="antialiased">
+<div id="global-nav"></div>
+<article class="pt-20 pb-24">
+
+    <header class="max-w-3xl mx-auto px-6 mt-10 mb-12">
+        <div class="flex items-center gap-3 mb-6">
+            <a href="/articles.html" class="mono text-[10px] text-zinc-400 hover:text-zinc-600 uppercase tracking-widest">← Articles</a>
+            <span class="text-zinc-300">·</span>
+            <span class="mono text-[10px] font-bold text-[#84cc16] uppercase tracking-widest border border-[#84cc16]/30 px-3 py-1 rounded-full">Technology · Linux · Open Source</span>
+        </div>
+        <h1 class="text-4xl md:text-5xl font-bold tracking-tight leading-[1.05] mb-6 text-zinc-900" style="font-family:'Outfit',sans-serif;letter-spacing:-0.03em;">
+            Why the world is warming<br>up to Linux in 2026 —<br>
+            <span class="g-text">and which distro to actually use.</span>
+        </h1>
+        <p class="text-xl text-zinc-500 font-light leading-relaxed mb-8 max-w-2xl" style="font-family:'Outfit',sans-serif;">
+            Linux just surpassed macOS on Steam for the first time. Windows 10 is dead. LTT ran a 30-day Linux challenge in March 2026. Chris Titus has been living on it for years. NetworkChuck teaches thousands of people to use it every week. I just wiped my laptop and installed Linux Mint fresh. Here is the honest picture of where Linux is in 2026 — and which distro actually makes sense for you.
+        </p>
+        <div class="flex items-center gap-4 pb-8 border-b border-zinc-100">
+            <div>
+                <div class="font-bold text-sm text-zinc-900">Jarrit Hosking</div>
+                <div class="mono text-[10px] text-zinc-400 uppercase tracking-widest">Forge Vertical · Cape Town · September 3, 2026</div>
+            </div>
+            <div class="ml-auto mono text-[10px] text-zinc-400 uppercase tracking-widest">12 min read</div>
+        </div>
+    </header>
+
+    <div class="max-w-3xl mx-auto px-6 prose-body">
+
+        <span class="chapter-label">// A personal note before the data</span>
+
+        <p>
+            I just wiped my laptop and installed a fresh version of Linux Mint. Not because I was forced to. Not because Windows failed on me this particular time — though it has before. Because after years of watching Windows slowly turn into an operating system that works for Microsoft first and users second, Mint felt like breathing proper air again.
+        </p>
+
+        <p>
+            The joke for two decades was "this will be the year of the Linux desktop." Everyone laughed. And then, quietly, without a press release or a billion-dollar marketing campaign, 2026 started looking like that year might actually be arriving.
+        </p>
+
+        <h2>The numbers that changed everything</h2>
+
+        <span class="chapter-label">// Chapter 01 — Where Linux actually is in 2026</span>
+
+        <p>
+            <strong>Linux surpassed macOS on Steam in March 2026.</strong> (cite index="20-1">Linux gaming hit 5.33% on Steam in March 2026, with Windows at 89.42% — putting Linux ahead of macOS for the first time in Steam's history.</cite> That single data point tells you more about where we are than any market share report.
+        </p>
+
+        <p>
+            (cite index="19-1">The pace of Linux adoption is accelerating. Reaching 1% desktop share took roughly 20 years. Going from 1% to 2% took another decade. The jump from 2% to 3% happened in 2.2 years. And then 3% to 4% took just 0.7 years.</cite> That compression in timeline is what "accumulation" looks like before it becomes a trend people can no longer ignore.
+        </p>
+
+        <p>
+            Two things drove this specifically in 2025 and 2026. (cite index="15-1">Windows 10 reaching end-of-life in October 2025 pushed many users to evaluate alternatives. And the Steam Deck made Linux-based gaming feel normal to a new audience.</cite> Those two events working together produced the sharpest annual increase Linux has ever recorded on the platform.
+        </p>
+
+    </div>
+
+    <!-- Stats -->
+    <div class="max-w-3xl mx-auto px-6 my-8">
+        <div class="stat-row">
+            <div class="stat-box"><div class="stat-val">5.33%</div><div class="stat-lbl">Linux Steam share Mar 2026</div></div>
+            <div class="stat-box"><div class="stat-val">4.7%</div><div class="stat-lbl">Global desktop share 2025</div></div>
+            <div class="stat-box"><div class="stat-val">78%</div><div class="stat-lbl">Zorin OS Q1 downloads from Windows</div></div>
+            <div class="stat-box"><div class="stat-val">100%</div><div class="stat-lbl">Top 500 supercomputers run Linux</div></div>
+            <div class="stat-box"><div class="stat-val">92%</div><div class="stat-lbl">Cloud VMs run Linux</div></div>
+        </div>
+    </div>
+
+    <div class="max-w-3xl mx-auto px-6 prose-body">
+
+        <h2>Why Windows users are leaving — and it's not Linux's fault</h2>
+
+        <span class="chapter-label">// Chapter 02 — Windows has been working against its users</span>
+
+        <p>
+            The honest story about Linux's growth in 2026 is not that Linux suddenly got dramatically better. It is that Windows has been getting demonstrably worse for the people using it — and more importantly, the people it is supposed to serve.
+        </p>
+
+        <p>
+            (cite index="22-1">Microsoft has implemented Start Menus built with React Native and Control+Alt+Delete menus that are essentially webviews — a fundamental shift away from native system interfaces toward web-based solutions that feel sluggish and disconnected from the operating system.</cite> Every forced update that resets your defaults. Every Copilot integration you did not ask for. Every advertisement served inside an operating system you paid for.
+        </p>
+
+        <p>
+            Windows 10 reached end-of-life in October 2025. Millions of machines that ran it perfectly well were technically "unsupported" by Microsoft — not because the hardware stopped working, but because Microsoft's upgrade requirements excluded them. Those users had three choices: buy new hardware, pay for an extended security update subscription, or find something else. Millions chose something else.
+        </p>
+
+        <div class="pull-quote">
+            Linux did not win users by becoming perfect. It won them by being the version of computing that still respects the person using it. That is a low bar. Microsoft lowered it on their behalf.
+        </div>
+
+        <h2>The three creators who are driving the Linux conversation</h2>
+
+        <span class="chapter-label">// Chapter 03 — NetworkChuck, Chris Titus, and LTT</span>
+
+        <p>
+            Three creators who collectively reach tens of millions of people are not just talking about Linux — they are living it, teaching it, and pulling audiences toward it. What each of them uses and recommends is worth knowing.
+        </p>
+
+    </div>
+
+    <!-- Creator cards -->
+    <div class="max-w-3xl mx-auto px-6 my-8 space-y-4">
+
+        <div class="creator-card">
+            <div class="creator-head">
+                <div class="creator-avatar" style="background:#0a1a0a;">☕</div>
+                <div>
+                    <div class="creator-name">NetworkChuck</div>
+                    <div class="creator-sub">5.3M subscribers · Networking, Linux, hacking, Python</div>
+                </div>
+            </div>
+            <span class="creator-distro">Recommends: Kali Linux for security · Ubuntu for beginners</span>
+            <div class="creator-body">NetworkChuck's approach to Linux is unapologetically beginner-friendly. He teaches it because he believes it is the gateway to understanding how computers actually work — and because the security and networking world runs on it. His recommendation for anyone who wants to learn hacking, networking, or security is consistent: start with Kali Linux in a virtual machine, understand what you are doing before you go further. For general use and beginners, Ubuntu. The reason is simple: the community is massive, the documentation is everywhere, and when something breaks you can find an answer in minutes. His Linux content has millions of views because he makes it feel achievable rather than intimidating — the same energy he brings to every other topic.</div>
+        </div>
+
+        <div class="creator-card">
+            <div class="creator-head">
+                <div class="creator-avatar" style="background:#0a0a1a;">⚡</div>
+                <div>
+                    <div class="creator-name">Chris Titus Tech</div>
+                    <div class="creator-sub">christitus.com · Developer tools, Linux, open source</div>
+                </div>
+            </div>
+            <span class="creator-distro">Uses: Fedora / Arch / Debian — the "Big 3" only</span>
+            <div class="creator-body">(cite index="34-1">Chris runs a stripped-down setup with no bloated desktop environments. His current window manager binary is only 116KB. He sticks strictly to what he calls the "Big 3" — Fedora, Arch, or Debian-based distributions — and recommends that users pick one of those three roots and customise from there.</cite> (cite index="33-1">In April 2026 he published an explicit warning to avoid Pop!_OS 24.04, arguing that the COSMIC desktop is too immature for daily use and that shipping a beta-level desktop as the headline feature of an LTS release was the wrong call.</cite> His recommendation for beginners is Linux Mint — Ubuntu-based, stable, and sane. His recommendation for people who want to understand Linux deeply is Arch, where you build the system yourself and learn by doing. For developers who want current packages without the Arch complexity: Fedora.</div>
+        </div>
+
+        <div class="creator-card">
+            <div class="creator-head">
+                <div class="creator-avatar" style="background:#1a0a00;">🔧</div>
+                <div>
+                    <div class="creator-name">Linus Sebastian — LTT</div>
+                    <div class="creator-sub">16.8M subscribers · Linus Tech Tips · LTT Linux Challenge 2026</div>
+                </div>
+            </div>
+            <span class="creator-distro">2026 challenge: Linux Mint, Pop!_OS, Manjaro</span>
+            <div class="creator-body">(cite index="44-1">In March 2026 Linus, Luke, and Elijah all started a 30-day Linux challenge — "FINE! I'll Try Linux ONE MORE TIME."</cite> LTT's Linux history is instructive. The original Daily Driver Challenge in 2021 was famously painful — Steam errors, terminal confusion, hardware compatibility issues — and became a referendum on how far Linux still had to go for mainstream users. The 2026 challenge landed in a meaningfully different ecosystem. Proton has matured substantially, gaming compatibility has improved dramatically, and the distros themselves have gotten better at handling common hardware. Linus's previous picks have included Linux Mint (the usual beginner recommendation), Pop!_OS (before the COSMIC desktop concerns), and Manjaro. He also interviewed Linus Torvalds — the creator of Linux — in a build session that gave him a perspective on the OS few tech YouTubers have had.</div>
+        </div>
+
+    </div>
+
+    <div class="max-w-3xl mx-auto px-6 prose-body">
+
+        <h2>Which distro should you actually use in 2026</h2>
+
+        <span class="chapter-label">// Chapter 04 — The honest guide by use case</span>
+
+        <p>
+            The distro question is the first thing everyone asks and the thing that matters least once you have been using Linux for a month. (cite index="36-1">Chris Titus makes this point directly: all the recommended distros are based on only three mainline distributions — Arch, Fedora, and Debian/Ubuntu — and you can change any of them to your needs. The distro is a starting point, not a life sentence.</cite>
+        </p>
+
+        <p>
+            That said, the starting point matters. Here is the honest breakdown:
+        </p>
+
+    </div>
+
+    <!-- Distro grid -->
+    <div class="max-w-3xl mx-auto px-6 my-6">
+        <div class="distro-grid">
+
+            <div class="distro-card">
+                <div class="distro-name">Linux Mint</div>
+                <span class="distro-tag beginner">Windows refugee · Beginner</span>
+                <div class="distro-body">(cite index="24-1">Linux Mint 22.3 (Zena) shipped in January 2026 and is the current version. Mint tracks Ubuntu LTS releases rather than the six-month cycle, so a release stays current for years.</cite> The Cinnamon desktop looks familiar to anyone coming from Windows. Everything works out of the box — codecs, drivers, browsers. The community is enormous and the documentation is comprehensive. This is what I installed on my fresh laptop. For first-time Linux users and Windows refugees, this is the right answer.</div>
+                <span class="distro-pick">→ My current daily driver. NetworkChuck and Chris Titus both recommend it for beginners.</span>
+            </div>
+
+            <div class="distro-card">
+                <div class="distro-name">Ubuntu 26.04 LTS</div>
+                <span class="distro-tag beginner">Biggest community · Safe net</span>
+                <div class="distro-body">The largest user base, the biggest forum, and the most documentation of any Linux distro. When something breaks — and it will, eventually — you will find an answer faster with Ubuntu than anything else. The GNOME desktop is less immediately familiar to Windows users than Mint's Cinnamon, but it is clean and functional. Ubuntu 26.04 LTS is the current long-term support release and will be supported until 2031.</div>
+                <span class="distro-pick">→ Best choice if community size and support availability matters most to you.</span>
+            </div>
+
+            <div class="distro-card">
+                <div class="distro-name">Fedora</div>
+                <span class="distro-tag dev">Developer · Current packages</span>
+                <div class="distro-body">Chris Titus uses Fedora when he wants recent toolchains without the bleeding-edge instability of Arch. It ships newer packages than Ubuntu and Mint, runs GNOME cleanly, and has an excellent out-of-the-box developer experience. If you need recent versions of Node, Python, or build tools without manually adding PPAs, Fedora delivers that reliably. (cite index="24-1">Fedora is the right pick for development work when you need recent toolchains.</cite></div>
+                <span class="distro-pick">→ Chris Titus's pick for developers wanting current packages without Arch complexity.</span>
+            </div>
+
+            <div class="distro-card">
+                <div class="distro-name">Bazzite</div>
+                <span class="distro-tag gaming">Gaming · Steam Deck feel</span>
+                <div class="distro-body">(cite index="18-1">Bazzite is a top pick for gaming in 2026, emulating SteamOS for a console-like experience. It holds 5.79% of Linux Steam share.</cite> If your primary use case is gaming and you want the Steam Deck experience on a desktop or laptop, Bazzite is the answer. It is an atomic/immutable distro — you cannot break the base system — which makes it stable in a way that traditional gaming setups on Linux often are not.</div>
+                <span class="distro-pick">→ Chris Titus recommends Bazzite for gamers. Best for Steam-focused setups.</span>
+            </div>
+
+            <div class="distro-card">
+                <div class="distro-name">Kali Linux</div>
+                <span class="distro-tag security">Security · Pentesting · Bug bounty</span>
+                <div class="distro-body">NetworkChuck's consistent recommendation for anyone learning security, hacking, or networking. Kali ships with hundreds of security tools pre-installed — Nmap, Metasploit, Wireshark, Burp Suite, and hundreds more. The right way to start: run Kali in a virtual machine on top of your main OS. Only move to bare metal once you know what you are doing. (cite index="34-1">Chris Titus ran Kali as a daily driver for 2024 and 2025, keeping the rolling release benefits without the pentesting tools.</cite></div>
+                <span class="distro-pick">→ NetworkChuck's security recommendation. Use in a VM first.</span>
+            </div>
+
+            <div class="distro-card">
+                <div class="distro-name">Arch Linux</div>
+                <span class="distro-tag power">Power users · Full control</span>
+                <div class="distro-body">You install only what you choose. You understand your system because you built it. (cite index="35-1">Arch has always been the distro for people who want control, speed, and the newest packages as soon as they land. That is also the tradeoff.</cite> When it breaks — and it will break occasionally on rolling release — you fix it, which means you learn how to fix it. Chris Titus runs Arch for his personal machines. It is not the starting point — it is the destination for people who want to understand Linux at the architecture level.</div>
+                <span class="distro-pick">→ Chris Titus's personal choice. Not for beginners.</span>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="max-w-3xl mx-auto px-6 prose-body">
+
+        <h2>The Linux Mint experience — why I chose it for my fresh install</h2>
+
+        <span class="chapter-label">// Chapter 05 — Personal note from a fresh install</span>
+
+        <p>
+            I wiped my laptop and went with Linux Mint for exactly the reasons everyone recommends it. The install took less time than a Windows 10 install. Everything worked — WiFi, Bluetooth, screen brightness, the touchpad. No searching for drivers. No post-install setup ritual. Cinnamon desktop looked familiar enough that I was productive within an hour.
+        </p>
+
+        <p>
+            The performance difference on the same hardware is immediate. Linux Mint on a mid-range laptop feels faster than Windows on the same machine. Not because of any dramatic optimisation — but because it is not spending background cycles on telemetry, Cortana, automatic updates that restart your machine, and a dozen other Windows services that exist for Microsoft's benefit rather than yours.
+        </p>
+
+        <p>
+            The terminal is not as scary as it used to be. Most things can be done through the Software Manager GUI. When you do need the terminal, the commands are consistent and the documentation is excellent. If you have been on Windows your whole life, there is a learning curve — but it is measured in days, not months.
+        </p>
+
+        <div class="callout dark">
+            <span class="text-[#84cc16] font-bold block mb-2 font-sans text-sm">// What to do in your first week on Linux Mint:</span>
+            <span class="font-sans text-sm text-zinc-400 block space-y-2">
+                <span class="block">→ Run <code class="text-[#84cc16] bg-zinc-800 px-1 rounded text-xs">sudo apt update && sudo apt upgrade</code> first thing. Update everything.</span>
+                <span class="block">→ Install your browser — Firefox is pre-installed, Brave and Chrome install cleanly.</span>
+                <span class="block">→ If you need Microsoft Office compatibility — LibreOffice is pre-installed and handles most things. WPS Office is a closer visual match if you need it.</span>
+                <span class="block">→ For gaming: install Steam, then ProtonDB to check your game list.</span>
+                <span class="block">→ Chris Titus's WinUtil equivalent for Linux is his ChrisTitus Linux scripts — worth a look for setting up a clean system fast.</span>
+            </span>
+        </div>
+
+        <h2>VPN on Linux — why it matters more here</h2>
+
+        <span class="chapter-label">// Chapter 06 — The security layer Linux still needs</span>
+
+        <p>
+            One thing Linux does not solve on its own is network-level privacy. The operating system is more secure than Windows by default — no telemetry, no hidden data collection, open source so anyone can inspect what it is doing. But your ISP still sees your traffic. Public WiFi is still public. Your DNS requests still go somewhere.
+        </p>
+
+        <p>
+            Both NordVPN and Surfshark have native Linux clients that install cleanly via the terminal and run well on all major distros. For security researchers using Kali, a VPN is not optional — it is the first layer of operational security. For developers and general users, it protects the traffic that Linux's security model cannot touch.
+        </p>
+
+    </div>
+
+    <!-- Affiliate footer -->
+    <div class="max-w-3xl mx-auto px-6">
+        <div class="aff-footer">
+            <div class="mono text-[10px] text-[#84cc16] uppercase tracking-widest mb-3">// Tools that work well on Linux</div>
+            <h3>The stack that runs on Linux</h3>
+            <p>Everything below installs cleanly on Linux Mint, Ubuntu, Fedora, and most major distros. Affiliate links — helps keep Forge Vertical running.</p>
+            <div class="aff-grid">
+                <a href="https://get.surfshark.net/aff_c?offer_id=6&aff_id=4160" target="_blank" rel="noopener noreferrer" class="aff-tile">
+                    <img src="/assets/images/surfshark-vpn-1-year-17236158874633226.webp" alt="Surfshark" style="height:18px;margin-bottom:8px;object-fit:contain;display:block;" onerror="this.style.display='none'">
+                    <div class="aff-tile-name">Surfshark VPN</div>
+                    <div class="aff-tile-desc">Native Linux client. Installs via terminal. Essential for security researchers and developers.</div>
+                    <span class="aff-tile-cta">Try Surfshark →</span>
+                </a>
+                <a href="https://go.nordvpn.net/aff_c?offer_id=15&aff_id=145959&url_id=902" target="_blank" rel="noopener noreferrer" class="aff-tile">
+                    <img src="/assets/images/NordVPN-vertical.png" alt="NordVPN" style="height:18px;margin-bottom:8px;object-fit:contain;display:block;" onerror="this.style.display='none'">
+                    <div class="aff-tile-name">NordVPN</div>
+                    <div class="aff-tile-desc">Linux CLI client + GUI. Meshnet works on Linux. Threat protection on the network layer.</div>
+                    <span class="aff-tile-cta">Try NordVPN →</span>
+                </a>
+                <a href="https://nordpass.com" target="_blank" rel="noopener noreferrer" class="aff-tile">
+                    <img src="/assets/images/nord-security_password-management-tools_1739200695312.png" alt="NordPass" style="height:18px;margin-bottom:8px;object-fit:contain;display:block;" onerror="this.style.display='none'">
+                    <div class="aff-tile-name">NordPass</div>
+                    <div class="aff-tile-desc">Password manager with Linux browser extension. Works on all major distros.</div>
+                    <span class="aff-tile-cta">Try NordPass →</span>
+                </a>
+                <a href="https://portal.webway.host/aff.php?aff=353" target="_blank" rel="noopener noreferrer" class="aff-tile">
+                    <img src="/assets/images/webwaylogo.png" alt="WebWay" style="height:18px;margin-bottom:8px;object-fit:contain;display:block;" onerror="this.style.display='none'">
+                    <div class="aff-tile-name">WebWay — SA Hosting</div>
+                    <div class="aff-tile-desc">South African hosting and domains. Their servers run Linux. Your site should too.</div>
+                    <span class="aff-tile-cta">WebWay.co.za →</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mt-8">
+            <div>
+                <div class="mono text-[10px] text-zinc-400 uppercase tracking-widest mb-1">Written by</div>
+                <div class="font-bold text-zinc-900">Jarrit Hosking</div>
+                <div class="mono text-[10px] text-zinc-400">Forge Vertical · Cape Town · Running Linux Mint</div>
+            </div>
+            <div class="flex gap-3 flex-wrap">
+                <a href="/articles.html" class="mono text-[10px] font-bold uppercase tracking-widest border border-zinc-200 px-5 py-3 rounded-xl hover:border-zinc-400 transition-all text-zinc-600">← All articles</a>
+                <a href="/articles/chris-titus-tech.html" class="mono text-[10px] font-bold uppercase tracking-widest border border-zinc-200 px-5 py-3 rounded-xl hover:border-zinc-400 transition-all text-zinc-600">Chris Titus Tech →</a>
+                <a href="/articles/networkchuck.html" style="background:linear-gradient(90deg,#10b981,#84cc16);" class="mono text-[10px] font-bold uppercase tracking-widest px-5 py-3 rounded-xl text-white hover:opacity-90 transition-all">NetworkChuck →</a>
+            </div>
+        </div>
+    </div>
+
+</article>
+<div id="global-footer"></div>
+</body>
+</html>
