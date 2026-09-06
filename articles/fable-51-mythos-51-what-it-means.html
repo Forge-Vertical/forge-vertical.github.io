@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Claude Fable 5.1 and Mythos 5.1 launched September 1, 2026. Same model weights — different safeguards. Dario Amodei published his policy essay the same day Fable 5 launched. Mythos is the strongest AI model ever made publicly accessible. Here is what it means when it finds its way into the hands of ordinary people — and why task-bridge matters now more than ever.">
+    <title>Fable 5.1 and Mythos 5.1: The World's Most Capable AI Just Got Closer to Ordinary People — And What That Changes | Forge Vertical</title>
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"Article","headline":"Fable 5.1 and Mythos 5.1: The World's Most Capable AI Just Got Closer to Ordinary People","description":"Claude Fable 5.1 and Mythos 5.1 launched September 1, 2026. Same weights, different safeguards. What Dario Amodei's policy essay says about public access to frontier AI — and what happens when Mythos-class capability reaches the public sector.","author":{"@type":"Person","name":"Jarrit Hosking","url":"https://www.forgevertical.com"},"publisher":{"@type":"Organization","name":"Forge Vertical","url":"https://www.forgevertical.com"},"datePublished":"2026-09-03","keywords":"Claude Fable 5.1 2026, Claude Mythos 5.1, Anthropic Fable 5.1 release, Project Glasswing, Dario Amodei policy AI exponential, Mythos public access, task-bridge AI, Anthropic AI public sector"}
+    </script>
+    <script src="/global.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/typography.css">
+    <style>
+        body{font-family:'Outfit',sans-serif;background:#fff;}
+        .mono{font-family:'JetBrains Mono',monospace;}
+        .g-text{background:linear-gradient(90deg,#10b981,#84cc16);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:inline-block;}
+        .prose-body{font-family:'Lora',serif;font-size:19px;line-height:1.85;color:#27272a;}
+        .prose-body p{margin-bottom:1.6em;}
+        .prose-body h2{font-family:'Outfit',sans-serif;font-size:28px;font-weight:700;letter-spacing:-0.02em;color:#09090b;margin-top:2.5em;margin-bottom:0.6em;line-height:1.2;}
+        .prose-body strong{font-weight:700;color:#09090b;font-family:'Outfit',sans-serif;font-size:17px;}
+        .prose-body a{color:#84cc16;text-decoration:underline;text-underline-offset:3px;}
+        .callout{background:#f4f4f5;border-left:3px solid #84cc16;border-radius:0 12px 12px 0;padding:20px 24px;margin:2em 0;font-family:'Outfit',sans-serif;font-size:15px;color:#3f3f46;line-height:1.7;}
+        .callout.dark{background:#09090b;color:#a1a1aa;border-left-color:#84cc16;}
+        .callout.amber{border-left-color:#f59e0b;background:#fffdf5;}
+        .callout.blue{border-left-color:#3b82f6;background:#eff6ff;color:#3f3f46;}
+        .pull-quote{font-family:'Lora',serif;font-size:22px;font-style:italic;color:#09090b;border-top:2px solid #84cc16;border-bottom:1px solid #e4e4e7;padding:24px 0;margin:2.5em 0;line-height:1.5;}
+        .chapter-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:#84cc16;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:6px;display:block;}
+        .stat-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;margin:2em 0;}
+        .stat-box{background:#09090b;border-radius:12px;padding:18px;text-align:center;}
+        .stat-val{font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:700;color:#84cc16;line-height:1;margin-bottom:6px;}
+        .stat-lbl{font-size:11px;color:#52525b;text-transform:uppercase;letter-spacing:0.08em;font-weight:600;}
+        .model-compare{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:2em 0;}
+        @media(max-width:600px){.model-compare{grid-template-columns:1fr;}}
+        .model-card{border-radius:14px;padding:22px;}
+        .model-card.fable{background:#f0fdf4;border:1px solid #a7f3d0;}
+        .model-card.mythos{background:#09090b;border:1px solid #1a2030;}
+        .model-name{font-family:'Outfit',sans-serif;font-size:18px;font-weight:700;margin-bottom:4px;}
+        .model-name.fable{color:#059669;}
+        .model-name.mythos{color:#84cc16;}
+        .model-tag{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;padding:2px 8px;border-radius:3px;display:inline-block;margin-bottom:10px;}
+        .model-tag.fable{background:rgba(5,150,105,0.1);color:#059669;border:1px solid rgba(5,150,105,0.2);}
+        .model-tag.mythos{background:rgba(132,204,22,0.1);color:#84cc16;border:1px solid rgba(132,204,22,0.2);}
+        .model-body{font-size:13px;line-height:1.7;}
+        .model-body.fable{color:#065f46;}
+        .model-body.mythos{color:#a1a1aa;}
+        .model-spec{font-family:'JetBrains Mono',monospace;font-size:10px;margin-top:10px;padding-top:10px;}
+        .model-spec.fable{border-top:1px solid rgba(5,150,105,0.2);color:#6a7d96;}
+        .model-spec.mythos{border-top:1px solid #1a2030;color:#3d4f6a;}
+        .timeline{position:relative;padding-left:28px;margin:2em 0;}
+        .timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:#e4e4e7;}
+        .tl-item{position:relative;margin-bottom:24px;}
+        .tl-dot{position:absolute;left:-24px;top:4px;width:14px;height:14px;border-radius:50%;background:#84cc16;border:2px solid #fff;box-shadow:0 0 0 2px #84cc16;}
+        .tl-dot.red{background:#ef4444;box-shadow:0 0 0 2px #ef4444;}
+        .tl-dot.amber{background:#f59e0b;box-shadow:0 0 0 2px #f59e0b;}
+        .tl-time{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#84cc16;margin-bottom:4px;}
+        .tl-time.red{color:#ef4444;}
+        .tl-time.amber{color:#f59e0b;}
+        .tl-title{font-family:'Outfit',sans-serif;font-size:15px;font-weight:700;color:#09090b;margin-bottom:4px;}
+        .tl-body{font-size:13px;color:#52525b;line-height:1.65;}
+        .aff-footer{background:#09090b;border-radius:16px;padding:28px;margin:3em 0;}
+        .aff-footer h3{font-family:'Outfit',sans-serif;font-size:15px;font-weight:700;color:#f4f4f5;margin-bottom:6px;}
+        .aff-footer p{font-size:13px;color:#6a7d96;margin-bottom:18px;line-height:1.6;}
+        .aff-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;}
+        .aff-tile{background:#111620;border:1px solid #1a2030;border-radius:10px;padding:14px;text-decoration:none;display:block;transition:border-color 0.18s;}
+        .aff-tile:hover{border-color:#84cc16;}
+        .aff-tile-name{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:#84cc16;margin-bottom:4px;}
+        .aff-tile-desc{font-size:11px;color:#6a7d96;line-height:1.5;margin-bottom:6px;}
+        .aff-tile-cta{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:#84cc16;}
+    </style>
+</head>
+<body class="antialiased">
+<div id="global-nav"></div>
+<article class="pt-20 pb-24">
+
+    <header class="max-w-3xl mx-auto px-6 mt-10 mb-12">
+        <div class="flex items-center gap-3 mb-6">
+            <a href="/articles.html" class="mono text-[10px] text-zinc-400 hover:text-zinc-600 uppercase tracking-widest">← Articles</a>
+            <span class="text-zinc-300">·</span>
+            <span class="mono text-[10px] font-bold text-[#84cc16] uppercase tracking-widest border border-[#84cc16]/30 px-3 py-1 rounded-full">AI · Anthropic · Policy</span>
+        </div>
+        <h1 class="text-4xl md:text-5xl font-bold tracking-tight leading-[1.05] mb-6 text-zinc-900" style="font-family:'Outfit',sans-serif;letter-spacing:-0.03em;">
+            Fable 5.1 and Mythos 5.1:<br>the world's most capable AI<br>
+            <span class="g-text">just got closer to ordinary people.</span>
+        </h1>
+        <p class="text-xl text-zinc-500 font-light leading-relaxed mb-8 max-w-2xl" style="font-family:'Outfit',sans-serif;">
+            On September 1, 2026, Anthropic released Claude Fable 5.1 and Mythos 5.1 — the same model shipped under two different safeguard regimes. One for everyone. One for vetted researchers and defenders only. The same day Dario Amodei published an essay calling for FAA-style regulation of frontier AI. This is the honest picture of where the most powerful AI ever built sits right now — and what it means when capability like this starts reaching ordinary hands.
+        </p>
+        <div class="flex items-center gap-4 pb-8 border-b border-zinc-100">
+            <div>
+                <div class="font-bold text-sm text-zinc-900">Jarrit Hosking</div>
+                <div class="mono text-[10px] text-zinc-400 uppercase tracking-widest">Forge Vertical · Cape Town · September 3, 2026 · Anthropic CVP Approved</div>
+            </div>
+            <div class="ml-auto mono text-[10px] text-zinc-400 uppercase tracking-widest">13 min read</div>
+        </div>
+    </header>
+
+    <div class="max-w-3xl mx-auto px-6 prose-body">
+
+        <span class="chapter-label">// What actually launched on September 1, 2026</span>
+
+        <p>
+            <strong>Fable 5.1 and Mythos 5.1 are the same model.</strong> Same weights. Same architecture. Same underlying capability. <cite index="22-1">Fable 5.1 is available to everyone. Mythos 5.1 is available only to approved organisations in Project Glasswing, through verification programmes for cybersecurity and life sciences.</cite> What separates them is not intelligence — it is safeguards. And that distinction tells you something important about where Anthropic believes AI capability sits right now.
+        </p>
+
+        <p>
+            <cite index="28-1">On September 1, 2026, Anthropic released Claude Fable 5.1 together with its restricted twin Claude Mythos 5.1. Fable 5.1 is generally available across the Claude API, claude.ai, Claude Code, and every major cloud, while Mythos 5.1 is confined to vetted organisations through the Cyber Verification Programme, the new Life Sciences Verification Programme, and Project Glasswing.</cite>
+        </p>
+
+        <p>
+            <cite index="20-1">Fable 5.1 and Mythos 5.1 each support one million tokens in context, with output capacity reaching 128,000 tokens per response. The model ID on the Claude API is claude-fable-5-1. Cache read costs have dropped to 25% of prior levels — Anthropic estimates that cut alone makes typical workloads about 25% cheaper and highly agentic workloads up to about 45% cheaper.</cite>
+        </p>
+
+        <p>
+            The benchmark gap between the two versions is what the research community is calling the "safeguard tax." <cite index="20-1">On Anthropic's Terminal-Bench 4.0 evaluation, Fable 5.1 scored 55.8% and Mythos 5.1 scored 60.9% — a difference of 5.1 percentage points. Fable 5.1's cyber-safeguard system intervened on some tasks, sometimes producing a zero score or triggering fallback to an Opus model.</cite> The safeguards cost performance. Anthropic decided that cost is worth paying for broad public access.
+        </p>
+
+    </div>
+
+    <!-- Model compare cards -->
+    <div class="max-w-3xl mx-auto px-6 my-8">
+        <div class="model-compare">
+            <div class="model-card fable">
+                <div class="model-name fable">Claude Fable 5.1</div>
+                <span class="model-tag fable">Generally available</span>
+                <div class="model-body fable">The public-facing Mythos-class model. Full safeguard system active — classifiers route high-risk queries to Opus fallback. Available to anyone on the Claude API, claude.ai, Claude Code, AWS, Google Cloud, and Azure. This is the model you can use today.</div>
+                <div class="model-spec fable">1M context · 128K output · $10/$50 per MTok · Cache reads $0.25/MTok · claude-fable-5-1</div>
+            </div>
+            <div class="model-card mythos">
+                <div class="model-name mythos">Claude Mythos 5.1</div>
+                <span class="model-tag mythos">Project Glasswing only</span>
+                <div class="model-body mythos">Same weights as Fable 5.1. Safeguard classifiers removed for approved use cases. Available only to vetted cyberdefenders and life scientists through the Cyber Verification Programme, Life Sciences Verification Programme, and Project Glasswing. Invitation-only. Signed NDA. Government-approved.</div>
+                <div class="model-spec mythos">Same specs as Fable 5.1 · claude-mythos-5-1 · Not generally available</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-3xl mx-auto px-6 prose-body">
+
+        <h2>The timeline that explains everything</h2>
+
+        <span class="chapter-label">// Chapter 01 — From Mythos leak to Fable 5.1 in six months</span>
+
+    </div>
+
+    <div class="max-w-3xl mx-auto px-6 my-8">
+        <div class="timeline">
+            <div class="tl-item">
+                <div class="tl-dot amber"></div>
+                <div class="tl-time amber">March 26, 2026</div>
+                <div class="tl-title">Claude Mythos leaks via draft blog post</div>
+                <div class="tl-body">The existence of a model named Claude Mythos became publicly known through leaked blog post drafts. Anthropic had not planned to announce it yet. The leak forced their hand — and revealed that the most capable AI model ever built was already real and already being internally evaluated.</div>
+            </div>
+            <div class="tl-item">
+                <div class="tl-dot amber"></div>
+                <div class="tl-time amber">April 7, 2026</div>
+                <div class="tl-title">Anthropic officially discloses Mythos</div>
+                <div class="tl-body">Anthropic acknowledged Mythos to Fortune magazine and confirmed the model presented significant risks to cybersecurity. Government officials had already been briefed. Project Glasswing — controlled access for vetted cyberdefenders — was announced as the framework for responsible access.</div>
+            </div>
+            <div class="tl-item">
+                <div class="tl-dot"></div>
+                <div class="tl-time">June 9, 2026</div>
+                <div class="tl-title">Fable 5 launches publicly. Dario publishes his policy essay. Same day.</div>
+                <div class="tl-body"><cite index="11-1">On the same day Dario Amodei called for FAA-style mandatory testing of frontier AI, Anthropic shipped Fable 5 — the public face of Mythos — with classifier guardrails routing high-risk queries away from the model entirely. The timing is either a perfect illustration of the argument or a live contradiction of it.</cite> Possibly both.</div>
+            </div>
+            <div class="tl-item">
+                <div class="tl-dot red"></div>
+                <div class="tl-time red">June 12, 2026</div>
+                <div class="tl-title">US government pulls Fable 5 and Mythos 5 worldwide</div>
+                <div class="tl-body"><cite index="13-1">Anthropic announced it disabled access to Fable 5 and Mythos 5 to comply with an export control directive from the US government citing national security authorities. The company received an order instructing it to suspend all access to the models by any foreign national, whether inside or outside the United States, including foreign national Anthropic employees.</cite> The models went dark for every user on earth.</div>
+            </div>
+            <div class="tl-item">
+                <div class="tl-dot"></div>
+                <div class="tl-time">Late June, 2026</div>
+                <div class="tl-title">Access restored. Export controls negotiated.</div>
+                <div class="tl-body">Anthropic worked with the US government to resolve the export control concerns. Access to Fable 5 was restored by the end of June. The episode had revealed exactly how seriously both Anthropic and the government took the capabilities of Mythos-class models — and how fast the policy apparatus could move when it decided to.</div>
+            </div>
+            <div class="tl-item">
+                <div class="tl-dot"></div>
+                <div class="tl-time">September 1, 2026</div>
+                <div class="tl-title">Fable 5.1 and Mythos 5.1 launch — five days ago</div>
+                <div class="tl-body"><cite index="21-1">The release landed on September 1, 2026, and builds directly on the Fable 5 and Mythos 5 lineage. Fable 5.1 and Mythos 5.1 each support one million tokens in context, with output capacity reaching 128,000 tokens per response.</cite> The most capable AI model publicly available just got an upgrade. And the framework for who gets Mythos access just got two new channels — cybersecurity and life sciences verification programmes.</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-3xl mx-auto px-6 prose-body">
+
+        <h2>Dario Amodei's policy essay — the most important thing he published this year</h2>
+
+        <span class="chapter-label">// Chapter 02 — What the CEO of Anthropic actually said</span>
+
+        <p>
+            On June 9, 2026 — the same day Fable 5 launched — <cite index="11-1">Dario Amodei published "Policy on the AI Exponential," a sweeping essay calling for mandatory third-party testing of frontier models, government power to block deployments, and an FAA-style regulatory framework for AI systems above certain compute thresholds.</cite>
+        </p>
+
+        <p>
+            The FAA comparison is specific and deliberate. The Federal Aviation Administration does not allow aircraft manufacturers to self-certify their planes as airworthy. An independent body tests, certifies, and monitors. Amodei is arguing that AI frontier models — specifically those with Mythos-class capabilities — should operate under the same logic. You do not get to ship something with the capability to find vulnerabilities in every major operating system and simply tell the world it is safe. An independent party verifies that.
+        </p>
+
+        <p>
+            <cite index="16-1">His evidence: AI went from "barely writing coherent code" to "writing most of the code at major AI companies" in four years. Scaling laws have 10+ years of empirical evidence. Claude Mythos demonstrated real cybersecurity vulnerabilities in every major operating system.</cite> This is not a hypothetical capability. It is a documented one. And Amodei is saying: that level of capability requires a governance framework that does not yet exist.
+        </p>
+
+        <p>
+            <cite index="19-1">The essay represents a maturation of Anthropic's public policy posture — from "help us build transparency frameworks" to "here is the legislation we think should pass, and here is the money to back it."</cite> Anthropic is no longer asking to be part of the conversation. It is writing the agenda.
+        </p>
+
+        <div class="pull-quote">
+            Dario published the case for AI regulation and shipped the most powerful AI model ever released to the public on the same day. That is not hypocrisy. That is the argument in action: capability this significant needs governance architecture around it — and Fable 5 is what governance architecture looks like in product form.
+        </div>
+
+        <h2>What happens when Mythos-class capability reaches ordinary people</h2>
+
+        <span class="chapter-label">// Chapter 03 — The public sector question</span>
+
+        <p>
+            Mythos 5.1 is not for the public yet. It sits behind Project Glasswing, the Cyber Verification Programme, and the Life Sciences Verification Programme — three access channels that all require vetting, NDAs, and government approval. <cite index="29-1">Mythos 5.1 is offered only to "vetted cyberdefenders and life scientists" — US organisations only, access granted through programmes run in partnership with the US government.</cite>
+        </p>
+
+        <p>
+            But Fable 5.1 is for the public. And Fable 5.1 is a Mythos-class model. The same underlying intelligence, constrained by safeguards that route the most dangerous queries elsewhere. What the public has access to right now — today, on claude.ai — is the most capable AI system ever made available to a general user. Not a restricted preview. Not a research beta. The actual product.
+        </p>
+
+        <p>
+            The question worth asking is not whether Mythos will eventually reach the public sector — it is what happens to work, productivity, and human labour when it does. A Mythos-class model, properly deployed in a hospital system, a legal firm, a local government department, or a small business, would not augment the work. It would transform it. The gap between "AI assists the human" and "AI does the work while humans validate" compresses sharply at Mythos-class capability levels.
+        </p>
+
+        <div class="callout amber">
+            <strong>The public sector is not the same as government.</strong> Government use means classified contracts, national security applications, and intelligence capability. The public sector means hospitals, schools, municipalities, housing departments, social services, and the thousands of institutions that serve ordinary people. The distinction matters because public sector access to Mythos-class AI is not a national security question — it is a service delivery question. And it is one nobody is seriously planning for yet.
+        </div>
+
+        <h2>What this has to do with task-bridge</h2>
+
+        <span class="chapter-label">// Chapter 04 — The protocol that the capability advancement demands</span>
+
+        <p>
+            Every step up in AI capability produces the same downstream effect: tasks that humans were previously paid to do become tasks that AI can do better, faster, and for less. The progression from GPT-3 to GPT-4 to Claude 3 to Fable 5.1 is not a linear improvement in a narrow domain. It is a broadening of the range of work that AI can handle at or above human level.
+        </p>
+
+        <p>
+            Mythos-class capability in the public sector means: AI that can process planning applications, triage insurance claims, review contracts, analyse medical records, generate educational content, and manage procurement workflows — not as a tool that assists a human operator but as the primary system with humans validating outputs at decision points.
+        </p>
+
+        <p>
+            That is not a dystopian scenario. It is an efficiency scenario. And it is also a labour displacement scenario. The question task-bridge is designed to answer is: when AI generates work signals that require human judgment, creativity, or accountability — how does that work find the right human, and how does that human get paid for doing it?
+        </p>
+
+        <p>
+            As Fable 5.1 reaches ordinary users and Mythos 5.1 reaches vetted institutions, the signal economy described in the task-bridge manifesto becomes less theoretical and more urgent. The AI is already emitting work signals. The infrastructure to route those signals back to humans — fairly, efficiently, transparently — does not yet exist at scale. That is the gap task-bridge is trying to fill.
+        </p>
+
+        <div class="callout dark">
+            <span class="text-[#84cc16] font-bold block mb-2 font-sans text-sm">// A note on Forge Vertical's CVP approval</span>
+            <span class="text-zinc-400 font-sans text-sm">Forge Vertical holds active Anthropic Cyber Verification Programme approval — the same programme that governs access to Mythos 5.1. This means the security research work documented on this site operates with expanded access to Claude's capabilities in the dual-use cybersecurity domain. Not Mythos access — but the framework that governs who gets Mythos access is the same one that approved Forge Vertical's security research use cases. Reference: TS-01a047e2 · Issued August 28, 2026.</span>
+        </div>
+
+        <h2>The Dario paradox — and why it is not actually a paradox</h2>
+
+        <span class="chapter-label">// Chapter 05 — Shipping it and calling for its regulation</span>
+
+        <p>
+            The critique levelled at Amodei in June 2026 was consistent: if you believe this model is dangerous enough to require FAA-style regulation, why did you ship it? The question sounds sharp. It misses the actual argument.
+        </p>
+
+        <p>
+            Anthropic's position — articulated in the essay and in Fable 5.1's architecture — is that the choice is not between "safe AI" and "dangerous AI." It is between "AI with governance architecture" and "AI without it." Fable 5.1 is what governance architecture looks like in product form. The classifier system that routes dangerous queries to Opus fallback is an implementation of the regulatory principle Amodei was calling for — applied at the model level rather than the government level, because the government framework does not yet exist.
+        </p>
+
+        <p>
+            The essay is the argument. The product is the proof of concept. Amodei is not saying "don't build powerful AI." He is saying "build it with this architecture, test it with this rigour, and create the governance structures that can handle it responsibly when it gets more powerful." Fable 5.1 and the Project Glasswing framework for Mythos 5.1 are Anthropic's attempt to demonstrate what that looks like before legislation demands it.
+        </p>
+
+        <p>
+            Whether that is enough — whether the governance architecture inside a single company's product is an adequate substitute for independent regulatory oversight — is the real question Amodei's essay raises. He would say no. Which is why he is calling for the legislation.
+        </p>
+
+    </div>
+
+    <!-- Affiliate footer -->
+    <div class="max-w-3xl mx-auto px-6">
+        <div class="aff-footer">
+            <div class="mono text-[10px] text-[#84cc16] uppercase tracking-widest mb-3">// Tools for the Fable 5.1 era</div>
+            <h3>Security and privacy in a world of Mythos-class AI</h3>
+            <p>As AI capability advances, the security and privacy layer around your digital life matters more, not less. Affiliate links — helps keep Forge Vertical running.</p>
+            <div class="aff-grid">
+                <a href="https://get.surfshark.net/aff_c?offer_id=6&aff_id=4160" target="_blank" rel="noopener noreferrer" class="aff-tile">
+                    <img src="/assets/images/surfshark-vpn-1-year-17236158874633226.webp" alt="Surfshark" style="height:18px;margin-bottom:8px;object-fit:contain;display:block;" onerror="this.style.display='none'">
+                    <div class="aff-tile-name">Surfshark VPN</div>
+                    <div class="aff-tile-desc">Network-level privacy. Essential in an era of AI-powered threat detection and credential harvesting.</div>
+                    <span class="aff-tile-cta">Try Surfshark →</span>
+                </a>
+                <a href="https://go.nordvpn.net/aff_c?offer_id=15&aff_id=145959&url_id=902" target="_blank" rel="noopener noreferrer" class="aff-tile">
+                    <img src="/assets/images/NordVPN-vertical.png" alt="NordVPN" style="height:18px;margin-bottom:8px;object-fit:contain;display:block;" onerror="this.style.display='none'">
+                    <div class="aff-tile-name">NordVPN</div>
+                    <div class="aff-tile-desc">Threat protection and Meshnet. The security layer that AI cannot replace — network-level defence.</div>
+                    <span class="aff-tile-cta">Try NordVPN →</span>
+                </a>
+                <a href="https://nordpass.com" target="_blank" rel="noopener noreferrer" class="aff-tile">
+                    <img src="/assets/images/nord-security_password-management-tools_1739200695312.png" alt="NordPass" style="height:18px;margin-bottom:8px;object-fit:contain;display:block;" onerror="this.style.display='none'">
+                    <div class="aff-tile-name">NordPass</div>
+                    <div class="aff-tile-desc">Password manager. As Mythos-class AI makes credential attacks more sophisticated, dedicated management matters.</div>
+                    <span class="aff-tile-cta">Try NordPass →</span>
+                </a>
+                <a href="https://github.com/Jotto1988/task-bridge" target="_blank" rel="noopener noreferrer" class="aff-tile">
+                    <div class="aff-tile-name">task-bridge</div>
+                    <div class="aff-tile-desc">Open protocol routing AI-displaced work to humans. The infrastructure layer the Fable 5.1 era demands.</div>
+                    <span class="aff-tile-cta">View on GitHub →</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mt-8">
+            <div>
+                <div class="mono text-[10px] text-zinc-400 uppercase tracking-widest mb-1">Written by</div>
+                <div class="font-bold text-zinc-900">Jarrit Hosking</div>
+                <div class="mono text-[10px] text-zinc-400">Forge Vertical · Cape Town · Anthropic CVP Approved · forgevertical.com</div>
+            </div>
+            <div class="flex gap-3 flex-wrap">
+                <a href="/articles.html" class="mono text-[10px] font-bold uppercase tracking-widest border border-zinc-200 px-5 py-3 rounded-xl hover:border-zinc-400 transition-all text-zinc-600">← All articles</a>
+                <a href="/articles/fable5-here-to-stay.html" class="mono text-[10px] font-bold uppercase tracking-widest border border-zinc-200 px-5 py-3 rounded-xl hover:border-zinc-400 transition-all text-zinc-600">Fable 5 backstory →</a>
+                <a href="/articles/task-bridge-manifesto.html" style="background:linear-gradient(90deg,#10b981,#84cc16);" class="mono text-[10px] font-bold uppercase tracking-widest px-5 py-3 rounded-xl text-white hover:opacity-90 transition-all">task-bridge →</a>
+            </div>
+        </div>
+    </div>
+
+</article>
+<div id="global-footer"></div>
+</body>
+</html>
