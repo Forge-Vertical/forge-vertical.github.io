@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Forge Vertical — independent technology journalism covering AI, cybersecurity, open source, hardware, and South African business. 34 articles. Real research. No filler. Publish your story with us.">
-    <title>Forge Vertical — Tech News, AI Research, and Independent Journalism | 34 Articles</title>
+    <meta name="description" content="Forge Vertical — independent technology journalism covering AI, cybersecurity, open source, hardware, and South African business. 36 articles. Real research. No filler. Publish your story with us.">
+    <title>Forge Vertical — Tech News, AI Research, and Independent Journalism | 36 Articles</title>
     <link rel="canonical" href="https://www.forgevertical.com/articles.html">
     <script type="application/ld+json">
     {
@@ -32,7 +32,7 @@
           "@type": "CollectionPage",
           "@id": "https://www.forgevertical.com/articles.html",
           "name": "Forge Vertical — Tech News and AI Research",
-          "description": "34 articles covering AI, cybersecurity, autonomous vehicles, open source, hardware, and South African business.",
+          "description": "36 articles covering AI, cybersecurity, autonomous vehicles, open source, hardware, and South African business.",
           "url": "https://www.forgevertical.com/articles.html",
           "publisher": {"@id": "https://www.forgevertical.com/#newsorg"},
           "about": [
@@ -262,7 +262,7 @@
 <!-- Stats bar -->
 <div class="stats-bar">
     <div class="stats-inner">
-        <div class="stat-item"><div class="stat-n">35</div><div class="stat-l">Articles published</div></div>
+        <div class="stat-item"><div class="stat-n">36</div><div class="stat-l">Articles published</div></div>
         <div class="stats-bar-rule"></div>
         <div class="stat-item"><div class="stat-n">9</div><div class="stat-l">Topics covered</div></div>
         <div class="stats-bar-rule"></div>
@@ -280,7 +280,7 @@
         <svg class="search-icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
         <input type="search" class="search-input" id="search-input" placeholder="Search articles — AI, cybersecurity, open source, South Africa..." autocomplete="off">
     </div>
-    <div class="result-count" id="result-count">34 articles</div>
+    <div class="result-count" id="result-count">36 articles</div>
 </div>
 
 <!-- Lead stories -->
@@ -390,7 +390,7 @@
 <div class="section-header">
     <span class="section-label">// All articles</span>
     <div class="section-rule"></div>
-    <span class="section-count" id="section-count">35 published</span>
+    <span class="section-count" id="section-count">36 showing</span>
 </div>
 
 <div id="ac-grid">
@@ -431,6 +431,16 @@
                 <div class="ac-title">Windows 12 in 2026: what is real, what is rumour, and why the OS war just got interesting</div>
                 <div class="ac-desc">Windows 12 is not coming this year — Microsoft confirmed it. But Project Hudson Valley is real. Apple ships iOS 27 this week. Linux surpassed macOS on Steam. Here is where every OS stands right now.</div>
                 <div class="ac-foot"><span class="ac-date">Sep 7, 2026</span><span class="ac-read">Read →</span></div>
+            </div>
+        </a>
+
+<a href="/articles/mrwhostheboss.html" class="ac" data-cat="tech">
+            <div class="ac-img"><img src="https://images.pexels.com/photos/1779487/pexels-photo-1779487.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy"><div class="ac-ov"></div></div>
+            <div class="ac-body">
+                <span class="ac-tag ac-new">New · YouTube · Creators · Tech</span>
+                <div class="ac-title">Mrwhosetheboss: how Arun Maini built a tech empire of 20M+ subscribers</div>
+                <div class="ac-desc">From a Birmingham bedroom to the top of global tech YouTube. The production scale, the studio evolution, and why honest tech storytelling still wins.</div>
+                <div class="ac-foot"><span class="ac-date">Sep 6, 2026</span><span class="ac-read">Read →</span></div>
             </div>
         </a>
 
@@ -879,7 +889,7 @@ searchInput.addEventListener('input', function() {
         card.style.display = show ? '' : 'none';
         if (show) visible++;
     });
-    updateCount(q ? visible : 35);
+    updateCount(q ? visible : 36);
 });
 
 // Category filter
@@ -946,7 +956,7 @@ document.getElementById('pub-form').addEventListener('submit', async function(e)
             headers: {Accept: 'application/json'}
         });
         if (res.ok) {
-            this.innerHTML = '<div style="text-align:center;padding:24px;"><div style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;color:#84cc16;text-transform:uppercase;letter-spacing:0.15em;margin-bottom:8px;">Brief received.</div><div style="font-size:13px;color:#5c7494;line-height:1.6;">We will review your brief and come back within 24 hours with scope and pricing. For urgent requests WhatsApp +27 65 741 7593.</div></div>';
+            this.innerHTML = '<div style="text-align:center;padding:24px;"><div style="font-family:\'JetBrains Mono\',monospace;font-size:10px;font-weight:700;color:#84cc16;text-transform:uppercase;letter-spacing:0.15em;margin-bottom:8px;">Brief received.</div><div style="font-size:13px;color:#5c7494;line-height:1.6;">We will review your brief and come back within 24 hours with scope and pricing. For urgent requests WhatsApp +27 65 741 7593.</div></div>';
         } else {
             throw new Error();
         }
