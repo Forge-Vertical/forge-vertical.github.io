@@ -103,22 +103,30 @@
 
         /* ── Lead story (full-width hero) ── */
         .lead-wrap{padding:24px 6vw 0;max-width:1400px;margin:0 auto;}
-        .lead-story{display:grid;grid-template-columns:1.8fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-bottom:1px;}
+        .lead-story{display:grid;grid-template-columns:1.8fr 1fr;gap:1px;background:var(--border2);border:1px solid var(--border2);border-radius:16px;overflow:hidden;margin-bottom:24px;}
         @media(max-width:900px){.lead-story{grid-template-columns:1fr;}}
         .lead-main{position:relative;overflow:hidden;min-height:420px;display:flex;flex-direction:column;justify-content:flex-end;text-decoration:none;}
-        .lead-main img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 0.4s ease;}
-        .lead-main:hover img{transform:scale(1.04);}
+        .hero-slide{position:absolute;inset:0;opacity:0;transition:opacity 0.8s ease;display:flex;flex-direction:column;justify-content:flex-end;}
+        .hero-slide.active{opacity:1;position:relative;}
+        .hero-slide img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 0.8s ease;}
+        .hero-slide.active img{transform:scale(1.02);}
+        .hero-slide::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(6,8,12,0.95) 0%,rgba(6,8,12,0.4) 60%,transparent 100%);}
+        .hero-dots{position:absolute;bottom:18px;right:20px;display:flex;gap:7px;z-index:10;}
+        .hero-dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,0.3);cursor:pointer;transition:all 0.2s;border:none;}
+        .hero-dot.active{background:var(--lime);transform:scale(1.3);}
+        .lead-main-body{position:relative;z-index:1;padding:28px;}
+        /* hero images handled by .hero-slide */
         .lead-main::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(6,8,12,0.95) 0%,rgba(6,8,12,0.4) 60%,transparent 100%);}
         .lead-main-body{position:relative;z-index:1;padding:28px;}
         .lead-badge{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:var(--lime);margin-bottom:8px;display:block;}
         .lead-badge.breaking{color:var(--red);}
         .lead-title{font-size:clamp(20px,2.5vw,30px);font-weight:800;letter-spacing:-0.02em;color:var(--text);line-height:1.15;margin-bottom:10px;}
-        .lead-main:hover .lead-title{color:var(--lime);}
+        .hero-slide.active .lead-title:hover{color:var(--lime);}
         .lead-desc{font-size:14px;color:rgba(238,240,244,0.7);line-height:1.6;margin-bottom:12px;}
         .lead-meta{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted2);text-transform:uppercase;letter-spacing:0.1em;}
 
         /* Secondary lead stories */
-        .lead-secondary{display:flex;flex-direction:column;gap:1px;background:var(--border);}
+        .lead-secondary{display:flex;flex-direction:column;gap:1px;background:var(--border2);}
         .lead-sec-item{background:var(--surface);padding:20px;text-decoration:none;display:flex;gap:14px;align-items:flex-start;transition:background 0.15s;flex:1;}
         .lead-sec-item:hover{background:var(--surface2);}
         .lead-sec-img{width:80px;height:80px;border-radius:8px;object-fit:cover;flex-shrink:0;}
@@ -135,7 +143,7 @@
         .section-count{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted2);white-space:nowrap;}
 
         /* ── Article cards grid ── */
-        #ac-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1px;background:var(--border);padding:0 6vw 28px;max-width:1400px;margin:0 auto;}
+        #ac-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1px;background:var(--border2);border:1px solid var(--border2);border-radius:12px;overflow:hidden;padding:0;margin:0 6vw 28px;max-width:calc(1400px - 12vw);}
         .ac{background:var(--surface);text-decoration:none;display:flex;flex-direction:column;transition:background 0.15s;}
         .ac:hover{background:var(--surface2);}
         .ac-img{height:180px;overflow:hidden;position:relative;flex-shrink:0;}
@@ -252,7 +260,7 @@
 <!-- Stats bar -->
 <div class="stats-bar">
     <div class="stats-inner">
-        <div class="stat-item"><div class="stat-n">34</div><div class="stat-l">Articles published</div></div>
+        <div class="stat-item"><div class="stat-n">35</div><div class="stat-l">Articles published</div></div>
         <div class="stats-bar-rule"></div>
         <div class="stat-item"><div class="stat-n">9</div><div class="stat-l">Topics covered</div></div>
         <div class="stats-bar-rule"></div>
@@ -276,16 +284,67 @@
 <!-- Lead stories -->
 <div class="lead-wrap">
     <div class="lead-story">
-        <!-- Main lead -->
-        <a href="/articles/gpt6-astra-agi-era.html" class="lead-main">
-            <img src="/assets/images/gptastra.png" alt="GPT-6 Astra AGI" loading="eager">
-            <div class="lead-main-body speakable-lead">
-                <span class="lead-badge breaking">Breaking · AI · September 7, 2026</span>
-                <div class="lead-title">GPT-6 Astra dropped. OpenAI declared AGI. Jensen Huang agreed. Here is what actually happened.</div>
-                <div class="lead-desc">100,000+ Nvidia GPUs. 100% on ExploitBench. Greg Brockman: "Welcome to the AGI era." Three days later Jensen Huang: "AGI has arrived." The honest breakdown.</div>
-                <div class="lead-meta">Jarrit Hosking · 12 min read · Sep 7, 2026</div>
+        <!-- Cycling hero lead -->
+        <div class="lead-main" id="hero-cycle" style="cursor:pointer;">
+            <!-- Slide 1 -->
+            <div class="hero-slide active" data-href="/articles/gpt6-astra-agi-era.html">
+                <img src="/assets/images/gptastra.png" alt="GPT-6 Astra AGI" loading="eager">
+                <div class="lead-main-body speakable-lead">
+                    <span class="lead-badge breaking">Breaking · AI · September 7, 2026</span>
+                    <div class="lead-title">GPT-6 Astra dropped. OpenAI declared AGI. Jensen Huang agreed. Here is what actually happened.</div>
+                    <div class="lead-desc">100,000+ Nvidia GPUs. 100% on ExploitBench. Greg Brockman: "Welcome to the AGI era." Three days later Jensen Huang: "AGI has arrived."</div>
+                    <div class="lead-meta">Jarrit Hosking · 12 min read · Sep 7, 2026</div>
+                </div>
             </div>
-        </a>
+            <!-- Slide 2 -->
+            <div class="hero-slide" data-href="/articles/tesla-cybercab-nhtsa-probe.html">
+                <img src="/assets/images/cybercab.png" alt="Tesla Cybercab" loading="lazy">
+                <div class="lead-main-body">
+                    <span class="lead-badge breaking">Breaking · Tesla · September 7, 2026</span>
+                    <div class="lead-title">Tesla launched Cybercab in Austin. NHTSA opened a federal probe the next day.</div>
+                    <div class="lead-desc">No steering wheel. No pedals. No mirrors. Tesla self-certified rather than seeking federal approval. The same process took Amazon's Zoox four years.</div>
+                    <div class="lead-meta">Jarrit Hosking · 10 min read · Sep 7, 2026</div>
+                </div>
+            </div>
+            <!-- Slide 3 -->
+            <div class="hero-slide" data-href="/articles/apple-event-september-2026.html">
+                <img src="/assets/images/mac.png" alt="Apple September 2026" loading="lazy">
+                <div class="lead-main-body">
+                    <span class="lead-badge">Apple · Hardware · September 7, 2026</span>
+                    <div class="lead-title">Foldable iPhone, new CEO, iOS 27 — Apple's September 9 event explained in full.</div>
+                    <div class="lead-desc">Tim Cook is out after 15 years. John Ternus is in. The first foldable iPhone, iPhone 18 Pro with A20 Pro 2nm chip, iOS 27, macOS Golden Gate.</div>
+                    <div class="lead-meta">Jarrit Hosking · 9 min read · Sep 7, 2026</div>
+                </div>
+            </div>
+            <!-- Slide 4 -->
+            <div class="hero-slide" data-href="/articles/fable-51-mythos-51-what-it-means.html">
+                <img src="https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Fable 5.1" loading="lazy">
+                <div class="lead-main-body">
+                    <span class="lead-badge">Anthropic · AI · September 3, 2026</span>
+                    <div class="lead-title">Fable 5.1 and Mythos 5.1 — the world's most capable AI just got closer to ordinary people.</div>
+                    <div class="lead-desc">Same model weights, different safeguards. Daniela Amodei announces Enterprise Frontier Safeguards alongside the launch. What it means for the public sector.</div>
+                    <div class="lead-meta">Jarrit Hosking · 13 min read · Sep 3, 2026</div>
+                </div>
+            </div>
+            <!-- Slide 5 -->
+            <div class="hero-slide" data-href="/articles/rank-on-google-in-hours-case-study.html">
+                <img src="https://images.pexels.com/photos/905163/pexels-photo-905163.jpeg?auto=compress&cs=tinysrgb&w=800" alt="GEO SEO" loading="lazy">
+                <div class="lead-main-body">
+                    <span class="lead-badge">GEO · SEO · Case Study</span>
+                    <div class="lead-title">How to rank on Google in hours, not months — a real case study.</div>
+                    <div class="lead-desc">A new page outranked established companies in hours. Google's AI Overview cited the content as its primary source. Full technical breakdown — six ingredients, all replicable.</div>
+                    <div class="lead-meta">Jarrit Hosking · 15 min read · Sep 3, 2026</div>
+                </div>
+            </div>
+            <!-- Dot indicators -->
+            <div class="hero-dots">
+                <span class="hero-dot active" onclick="goSlide(0)"></span>
+                <span class="hero-dot" onclick="goSlide(1)"></span>
+                <span class="hero-dot" onclick="goSlide(2)"></span>
+                <span class="hero-dot" onclick="goSlide(3)"></span>
+                <span class="hero-dot" onclick="goSlide(4)"></span>
+            </div>
+        </div>
 
         <!-- Secondary leads -->
         <div class="lead-secondary">
@@ -329,7 +388,7 @@
 <div class="section-header">
     <span class="section-label">// All articles</span>
     <div class="section-rule"></div>
-    <span class="section-count" id="section-count">34 published</span>
+    <span class="section-count" id="section-count">35 published</span>
 </div>
 
 <div id="ac-grid">
@@ -818,7 +877,7 @@ searchInput.addEventListener('input', function() {
         card.style.display = show ? '' : 'none';
         if (show) visible++;
     });
-    updateCount(q ? visible : 34);
+    updateCount(q ? visible : 35);
 });
 
 // Category filter
@@ -835,6 +894,47 @@ function filterArticles(cat, btn) {
     });
     updateCount(visible);
 }
+
+// Hero cycle
+const slides = document.querySelectorAll('.hero-slide');
+const dots = document.querySelectorAll('.hero-dot');
+let current = 0;
+let cycleTimer;
+
+function goSlide(n) {
+    slides[current].classList.remove('active');
+    dots[current].classList.remove('active');
+    current = n;
+    slides[current].classList.add('active');
+    dots[current].classList.add('active');
+    resetTimer();
+}
+
+function nextSlide() {
+    goSlide((current + 1) % slides.length);
+}
+
+function resetTimer() {
+    clearInterval(cycleTimer);
+    cycleTimer = setInterval(nextSlide, 6000);
+}
+
+// Click hero to navigate to article
+document.getElementById('hero-cycle').addEventListener('click', function(e) {
+    if (e.target.classList.contains('hero-dot')) return;
+    const href = slides[current].getAttribute('data-href');
+    if (href) window.location.href = href;
+});
+
+// Position non-active slides absolutely
+slides.forEach((s, i) => {
+    if (i !== 0) {
+        s.style.position = 'absolute';
+        s.style.inset = '0';
+    }
+});
+
+resetTimer();
 
 // Publish form
 document.getElementById('pub-form').addEventListener('submit', async function(e) {
