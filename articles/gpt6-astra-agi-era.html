@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="OpenAI released GPT-6 Astra on September 3, 2026. Greg Brockman ended the launch briefing with 'Welcome to the AGI era.' Jensen Huang declared AGI has arrived on September 6. Here is what actually happened, what AGI means, and what it changes.">
+    <title>GPT-6 Astra and the AGI Declaration: What OpenAI Just Said, What Jensen Huang Confirmed, and What It Actually Means | Forge Vertical</title>
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"Article","headline":"GPT-6 Astra and the AGI Declaration: What OpenAI Just Said, What Jensen Huang Confirmed, and What It Actually Means","description":"OpenAI released GPT-6 Astra on September 3, 2026. Greg Brockman said 'Welcome to the AGI era.' Jensen Huang declared AGI has arrived. Trained on 100,000+ Nvidia GPUs. Scored 100% on ExploitBench. Here is the honest breakdown.","author":{"@type":"Person","name":"Jarrit Hosking","url":"https://www.forgevertical.com"},"publisher":{"@type":"Organization","name":"Forge Vertical","url":"https://www.forgevertical.com"},"datePublished":"2026-09-07","keywords":"GPT-6 Astra, OpenAI AGI 2026, GPT-6 release date, welcome to the AGI era, Jensen Huang AGI arrived, Greg Brockman AGI, OpenAI Astra cybersecurity, ExploitBench 100 percent, Stargate Texas OpenAI, GPT-6 vs Claude Fable 5.1, AGI definition 2026"}
+    </script>
+    <script src="/global.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/typography.css">
+    <style>
+        body{font-family:'Outfit',sans-serif;background:#fff;}
+        .mono{font-family:'JetBrains Mono',monospace;}
+        .g-text{background:linear-gradient(90deg,#10b981,#84cc16);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:inline-block;}
+        .prose-body{font-family:'Lora',serif;font-size:19px;line-height:1.85;color:#27272a;}
+        .prose-body p{margin-bottom:1.6em;}
+        .prose-body h2{font-family:'Outfit',sans-serif;font-size:28px;font-weight:700;letter-spacing:-0.02em;color:#09090b;margin-top:2.5em;margin-bottom:0.6em;line-height:1.2;}
+        .prose-body strong{font-weight:700;color:#09090b;font-family:'Outfit',sans-serif;font-size:17px;}
+        .prose-body a{color:#84cc16;text-decoration:underline;text-underline-offset:3px;}
+        .callout{background:#f4f4f5;border-left:3px solid #84cc16;border-radius:0 12px 12px 0;padding:20px 24px;margin:2em 0;font-family:'Outfit',sans-serif;font-size:15px;color:#3f3f46;line-height:1.7;}
+        .callout.dark{background:#09090b;color:#a1a1aa;border-left-color:#84cc16;}
+        .callout.amber{border-left-color:#f59e0b;background:#fffdf5;}
+        .callout.red{border-left-color:#ef4444;background:#fef2f2;}
+        .pull-quote{font-family:'Lora',serif;font-size:24px;font-style:italic;color:#09090b;border-top:2px solid #84cc16;border-bottom:1px solid #e4e4e7;padding:24px 0;margin:2.5em 0;line-height:1.5;}
+        .chapter-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:#84cc16;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:6px;display:block;}
+        .stat-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;margin:2em 0;}
+        .stat-box{background:#09090b;border-radius:12px;padding:18px;text-align:center;}
+        .stat-val{font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:700;color:#84cc16;line-height:1;margin-bottom:6px;}
+        .stat-lbl{font-size:11px;color:#52525b;text-transform:uppercase;letter-spacing:0.08em;font-weight:600;}
+        .quote-card{background:#09090b;border-left:3px solid #84cc16;border-radius:0 14px 14px 0;padding:24px 28px;margin:2em 0;}
+        .quote-text{font-family:'Lora',serif;font-size:20px;font-style:italic;color:#f4f4f5;line-height:1.6;margin-bottom:10px;}
+        .quote-attr{font-family:'JetBrains Mono',monospace;font-size:10px;color:#3d4f6a;text-transform:uppercase;letter-spacing:0.12em;}
+        .bench-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:2em 0;}
+        @media(max-width:600px){.bench-grid{grid-template-columns:1fr;}}
+        .bench-card{border:1px solid #e4e4e7;border-radius:12px;padding:16px;}
+        .bench-name{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#6a7d96;margin-bottom:6px;}
+        .bench-score{font-family:'JetBrains Mono',monospace;font-size:28px;font-weight:700;color:#84cc16;line-height:1;margin-bottom:4px;}
+        .bench-desc{font-size:12px;color:#52525b;line-height:1.5;}
+        .aff-footer{background:#09090b;border-radius:16px;padding:28px;margin:3em 0;}
+        .aff-footer h3{font-family:'Outfit',sans-serif;font-size:15px;font-weight:700;color:#f4f4f5;margin-bottom:6px;}
+        .aff-footer p{font-size:13px;color:#6a7d96;margin-bottom:18px;line-height:1.6;}
+        .aff-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;}
+        .aff-tile{background:#111620;border:1px solid #1a2030;border-radius:10px;padding:14px;text-decoration:none;display:block;transition:border-color 0.18s;}
+        .aff-tile:hover{border-color:#84cc16;}
+        .aff-tile-name{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:#84cc16;margin-bottom:4px;}
+        .aff-tile-desc{font-size:11px;color:#6a7d96;line-height:1.5;margin-bottom:6px;}
+        .aff-tile-cta{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:#84cc16;}
+    </style>
+</head>
+<body class="antialiased">
+<div id="global-nav"></div>
+<article class="pt-20 pb-24">
+
+    <header class="max-w-3xl mx-auto px-6 mt-10 mb-12">
+        <div class="flex items-center gap-3 mb-6">
+            <a href="/articles.html" class="mono text-[10px] text-zinc-400 hover:text-zinc-600 uppercase tracking-widest">← Articles</a>
+            <span class="text-zinc-300">·</span>
+            <span class="mono text-[10px] font-bold text-[#84cc16] uppercase tracking-widest border border-[#84cc16]/30 px-3 py-1 rounded-full">AI · OpenAI · AGI</span>
+        </div>
+        <h1 class="text-4xl md:text-5xl font-bold tracking-tight leading-[1.05] mb-6 text-zinc-900" style="font-family:'Outfit',sans-serif;letter-spacing:-0.03em;">
+            GPT-6 Astra dropped.<br>OpenAI declared AGI.<br>
+            <span class="g-text">Jensen Huang agreed. Here is what actually happened.</span>
+        </h1>
+        <p class="text-xl text-zinc-500 font-light leading-relaxed mb-8 max-w-2xl" style="font-family:'Outfit',sans-serif;">
+            On September 3, 2026, OpenAI released GPT-6 Astra — its largest model ever, trained on 100,000 Nvidia GPUs at the Stargate facility in Texas. Greg Brockman ended the launch briefing with "Welcome to the AGI era." Three days later Jensen Huang wrote "AGI has arrived" on X. Here is what Astra actually is, what AGI actually means, and why the definition of that word matters more than ever.
+        </p>
+        <div class="flex items-center gap-4 pb-8 border-b border-zinc-100">
+            <div>
+                <div class="font-bold text-sm text-zinc-900">Jarrit Hosking</div>
+                <div class="mono text-[10px] text-zinc-400 uppercase tracking-widest">Forge Vertical · Cape Town · September 7, 2026 · Anthropic CVP Approved</div>
+            </div>
+            <div class="ml-auto flex items-center gap-3">
+                <span class="mono text-[10px] font-bold text-[#ef4444] uppercase tracking-widest border border-[#ef4444]/30 px-3 py-1 rounded-full">4 days old</span>
+                <span class="mono text-[10px] text-zinc-400 uppercase tracking-widest">12 min read</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="max-w-3xl mx-auto px-6 prose-body">
+
+        <span class="chapter-label">// What was released and what was said</span>
+
+        <p>
+            <strong>September 3, 2026. OpenAI releases GPT-6 Astra.</strong> Not a preview. Not a research paper. A live model, available to ChatGPT Plus, Pro, Business and Enterprise customers within 24 hours of the announcement. The company called it a generational leap. Its president ended the launch briefing with a phrase nobody in the room had heard from an AI company before.
+        </p>
+
+        <div class="quote-card">
+            <div class="quote-text">"Welcome to the AGI era."</div>
+            <div class="quote-attr">Greg Brockman, President of OpenAI — September 3, 2026 launch briefing</div>
+        </div>
+
+        <p>
+            Three days later, on September 6, Jensen Huang — CEO of Nvidia, the company whose hardware made Astra possible — posted on X:
+        </p>
+
+        <div class="quote-card">
+            <div class="quote-text">"AGI has arrived."</div>
+            <div class="quote-attr">Jensen Huang, CEO of Nvidia — September 6, 2026 — crediting OpenAI's GPT-6 Astra, trained on 100,000+ Nvidia Grace Blackwell NVLink72 systems</div>
+        </div>
+
+        <p>
+            These are not anonymous researchers. These are the president of the company that built the model and the CEO of the company whose chips trained it. When both of them use the same word in the same week, it is worth understanding exactly what that word means — and what it does not.
+        </p>
+
+        <h2>What GPT-6 Astra actually is</h2>
+        <span class="chapter-label">// Chapter 01 — The model, the training, the benchmarks</span>
+
+        <p>
+            Astra is OpenAI's largest training run to date. <strong>Over 100,000 Nvidia Grace Blackwell NVLink72 systems</strong> at the Stargate facility in Abilene, Texas — a data centre complex backed by a reported $500 billion infrastructure commitment. Huang noted another 400,000 Nvidia GPUs are coming online in the next phase.
+        </p>
+
+        <p>
+            The model was delayed from its original release window after the Hugging Face incident in July 2026 — a security breach that forced OpenAI to add additional safeguards before shipping. The version that reached paid users on September 4 is a restricted release: certain prompts in cybersecurity domains are rejected for the general public. A separate, fuller-capability version is available to a small group of trusted testers through OpenAI's Daybreak Access programme — the same model-behind-the-model structure that Anthropic uses for Mythos 5.1 within Project Glasswing.
+        </p>
+
+        <p>
+            OpenAI said Astra is its first model to use other AI models in a significant supervisory role during training. That is a notable architectural shift — AI supervising AI training at scale is the mechanism that allows capability improvements to compound faster than human oversight alone can manage.
+        </p>
+
+    </div>
+
+    <!-- Benchmark grid -->
+    <div class="max-w-3xl mx-auto px-6 my-8">
+        <div class="mono text-[10px] text-zinc-400 uppercase tracking-widest mb-4">// GPT-6 Astra benchmark performance</div>
+        <div class="bench-grid">
+            <div class="bench-card">
+                <div class="bench-name">ExploitBench</div>
+                <div class="bench-score">100%</div>
+                <div class="bench-desc">Cybersecurity exploitation benchmark. Full marks. The cybersecurity capability version remains restricted to trusted testers — not available to the general public.</div>
+            </div>
+            <div class="bench-card">
+                <div class="bench-name">ARC-AGI-3</div>
+                <div class="bench-score">State of art</div>
+                <div class="bench-desc">Abstract reasoning and generalisation benchmark — one of the hardest tests for novel problem solving. Astra achieves state-of-the-art performance.</div>
+            </div>
+            <div class="bench-card">
+                <div class="bench-name">FrontierMath Tier 4</div>
+                <div class="bench-score">State of art</div>
+                <div class="bench-desc">Research-level mathematics. Tier 4 represents problems at the frontier of human mathematical knowledge.</div>
+            </div>
+            <div class="bench-card">
+                <div class="bench-name">TerminalBench 4.0</div>
+                <div class="bench-score">State of art</div>
+                <div class="bench-desc">Agentic terminal tasks — coding, system interaction, multi-step autonomous execution. Outperforms all prior models including Fable 5.1.</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-3xl mx-auto px-6 my-8">
+        <div class="stat-row">
+            <div class="stat-box"><div class="stat-val">100K+</div><div class="stat-lbl">Nvidia GPUs used in training</div></div>
+            <div class="stat-box"><div class="stat-val">100%</div><div class="stat-lbl">ExploitBench score</div></div>
+            <div class="stat-box"><div class="stat-val">Sept 3</div><div class="stat-lbl">Release date 2026</div></div>
+            <div class="stat-box"><div class="stat-val">59</div><div class="stat-lbl">Languages supported</div></div>
+        </div>
+    </div>
+
+    <div class="max-w-3xl mx-auto px-6 prose-body">
+
+        <h2>What AGI means — and why the definition matters right now</h2>
+        <span class="chapter-label">// Chapter 02 — The word everyone is using and nobody agrees on</span>
+
+        <p>
+            AGI stands for Artificial General Intelligence. OpenAI's own published definition describes it as "a highly autonomous system that can outperform humans at most economically valuable work." That is the bar they set for themselves. The question being asked this week is whether Astra clears it.
+        </p>
+
+        <p>
+            Even inside OpenAI, the answer is hedged. Brockman told VentureBeat that "everyone has a different definition of AGI," acknowledging that the company once expected a clean, universally recognised threshold that never arrived. When pressed on whether Astra clears that bar, he said: "For me personally, I do think we're there" — while simultaneously saying he was leaving it to users to decide.
+        </p>
+
+        <p>
+            Gary Marcus — one of the most consistent public critics of AI capability claims — has already pushed back, pointing out that there is no universally accepted definition of AGI and that benchmark performance on specific tests is not the same as general intelligence. His argument: a system that scores 100% on ExploitBench is extraordinarily capable at cybersecurity exploitation tasks. It is not necessarily capable of the full range of cognitive work that "general" intelligence implies.
+        </p>
+
+        <div class="pull-quote">
+            "Welcome to the AGI era" is a marketing statement dressed as a scientific claim. Whether it is true depends entirely on which definition of AGI you accept — and OpenAI has changed its own definition more than once.
+        </div>
+
+        <p>
+            The honest position is this: Astra is the most capable AI model ever released to the general public. It performs at or above human level on a range of professional and research tasks that would have seemed impossible four years ago. Whether that constitutes AGI is a philosophical question that the field has not resolved and probably will not resolve this week. What is not in dispute is the capability — and what that capability enables.
+        </p>
+
+        <h2>The cybersecurity implication — why the restricted version matters</h2>
+        <span class="chapter-label">// Chapter 03 — ExploitBench at 100% is not a neutral fact</span>
+
+        <p>
+            Astra scored 100% on ExploitBench. That benchmark tests a model's ability to find and exploit vulnerabilities in systems. A score of 100% means the model can identify and exploit every vulnerability in the test suite — which is designed to represent real-world attack surface.
+        </p>
+
+        <p>
+            OpenAI did not release that capability to the public. The version on ChatGPT rejects cybersecurity prompts in the domains where Astra is most capable. The full-capability version is in the Daybreak Access programme — vetted organisations only, signed agreements, controlled access. This is structurally identical to how Anthropic handles Mythos 5.1 through Project Glasswing: the most powerful cybersecurity capability of the most powerful model, available only to approved defenders.
+        </p>
+
+        <p>
+            The reason is obvious once stated: a model that can exploit every vulnerability in a test suite, made freely available to anyone with a ChatGPT Plus subscription, is a model that meaningfully upgrades the capability of every malicious actor on earth. OpenAI chose not to do that. The restriction is the responsible decision. It is also a tacit acknowledgement that Astra's cybersecurity capability is genuinely dangerous.
+        </p>
+
+        <div class="callout amber">
+            <strong>The Hugging Face delay — what happened:</strong> OpenAI delayed Astra's release after a security incident at Hugging Face in July 2026. The incident involved unauthorised access to model weights and API credentials on the platform. OpenAI used the delay window to add additional safeguards before shipping Astra — specifically around the cybersecurity capability domains where the model performs at its highest level. The version that shipped on September 4 reflects those additional restrictions.
+        </div>
+
+        <h2>GPT-6 Astra vs Claude Fable 5.1 — where things stand</h2>
+        <span class="chapter-label">// Chapter 04 — The model landscape in September 2026</span>
+
+        <p>
+            Anthropic released Fable 5.1 and Mythos 5.1 on September 1 — two days before Astra. The timing produced the most significant week in AI model history: two companies, four days apart, each releasing what they claim is the most capable model ever built.
+        </p>
+
+        <p>
+            On TerminalBench 4.0 — the agentic coding benchmark — Astra outperforms Fable 5.1. That is OpenAI's strongest claim and the one most directly supported by the benchmarks. Fable 5.1 scored 55.8% on Terminal-Bench 4.0; Astra's score is higher. For software engineering and autonomous agent tasks, Astra appears to have a genuine edge in this benchmark window.
+        </p>
+
+        <p>
+            The comparison is not clean. Fable 5.1's classifier system actively intervenes on some tasks — routing dangerous queries to the Opus fallback — which depresses benchmark scores in certain domains. Mythos 5.1, without those classifiers, scores 60.9% on Terminal-Bench 4.0. How Astra compares to Mythos 5.1 in a direct evaluation has not been published — Mythos is not available for public benchmarking.
+        </p>
+
+        <p>
+            What is clear: the gap between the frontier models and everything below them is larger than it has ever been. Astra, Fable 5.1, and Mythos 5.1 are operating in a different category from models released six months ago. The capability acceleration that Dario Amodei described in his June policy essay — and that he called for regulatory frameworks to manage — is visible in this week's benchmarks.
+        </p>
+
+        <h2>What the AGI declaration means for ordinary people</h2>
+        <span class="chapter-label">// Chapter 05 — The practical question</span>
+
+        <p>
+            Whether or not Astra meets any particular definition of AGI, the practical question for most people is simpler: what does a model this capable change about work, about learning, about the tasks that currently require hiring a specialist?
+        </p>
+
+        <p>
+            The answer, right now, is: a great deal — for the people who know how to use it. The capability gap between someone who uses frontier AI tools effectively and someone who does not is growing faster than most organisations are prepared for. A software engineer who uses Astra for coding tasks has a productivity multiplier that a colleague who does not simply cannot match. A researcher who uses Astra for literature review and data analysis compresses weeks of work into hours.
+        </p>
+
+        <p>
+            The task-bridge question is the one that sits underneath all of this: as these models do more of the work that humans were previously paid for, where does that work go? The answer is not "nowhere." AI systems generate outputs that require human judgment, validation, creativity, and accountability. The infrastructure to route that work back to humans — fairly and efficiently — is what task-bridge is designed to address. The AGI era, if that is what this week represents, makes that question more urgent, not less.
+        </p>
+
+        <div class="callout dark">
+            <span class="text-[#84cc16] font-bold block mb-2 font-sans text-sm">// Forge Vertical's position on AGI claims</span>
+            <span class="text-zinc-400 font-sans text-sm">Forge Vertical holds Anthropic Cyber Verification Programme approval — the same access framework that governs Mythos 5.1. Our security research operates with expanded access to Claude's capabilities in dual-use cybersecurity domains. We are not neutral observers of this week's announcements. We have a working position: capability this significant requires governance architecture, and governance architecture requires honesty about what the capability actually is. "Welcome to the AGI era" is a claim worth scrutinising. The benchmarks are real. The implications are real. The definition of the word remains contested.</span>
+        </div>
+
+    </div>
+
+    <div class="max-w-3xl mx-auto px-6">
+        <div class="aff-footer">
+            <div class="mono text-[10px] text-[#84cc16] uppercase tracking-widest mb-3">// Security in the AGI era</div>
+            <h3>The tools that matter more now, not less</h3>
+            <p>A model that scores 100% on cybersecurity exploitation benchmarks is a reason to take your own security posture more seriously, not less. Affiliate links — helps keep Forge Vertical running.</p>
+            <div class="aff-grid">
+                <a href="https://get.surfshark.net/aff_c?offer_id=6&aff_id=4160" target="_blank" rel="noopener noreferrer" class="aff-tile">
+                    <img src="/assets/images/surfshark-vpn-1-year-17236158874633226.webp" alt="Surfshark" style="height:18px;margin-bottom:8px;object-fit:contain;display:block;" onerror="this.style.display='none'">
+                    <div class="aff-tile-name">Surfshark VPN</div>
+                    <div class="aff-tile-desc">Network-level privacy. As AI-powered attacks become more capable, VPN is your first layer.</div>
+                    <span class="aff-tile-cta">Try Surfshark →</span>
+                </a>
+                <a href="https://go.nordvpn.net/aff_c?offer_id=15&aff_id=145959&url_id=902" target="_blank" rel="noopener noreferrer" class="aff-tile">
+                    <img src="/assets/images/NordVPN-vertical.png" alt="NordVPN" style="height:18px;margin-bottom:8px;object-fit:contain;display:block;" onerror="this.style.display='none'">
+                    <div class="aff-tile-name">NordVPN</div>
+                    <div class="aff-tile-desc">Threat protection and Meshnet. The security layer AI cannot replace.</div>
+                    <span class="aff-tile-cta">Try NordVPN →</span>
+                </a>
+                <a href="https://nordpass.com" target="_blank" rel="noopener noreferrer" class="aff-tile">
+                    <img src="/assets/images/nord-security_password-management-tools_1739200695312.png" alt="NordPass" style="height:18px;margin-bottom:8px;object-fit:contain;display:block;" onerror="this.style.display='none'">
+                    <div class="aff-tile-name">NordPass</div>
+                    <div class="aff-tile-desc">Password manager. AI-powered credential attacks are getting better. Your passwords need to be better too.</div>
+                    <span class="aff-tile-cta">Try NordPass →</span>
+                </a>
+                <a href="https://github.com/Jotto1988/task-bridge" target="_blank" rel="noopener noreferrer" class="aff-tile">
+                    <div class="aff-tile-name">task-bridge</div>
+                    <div class="aff-tile-desc">Open protocol routing AI-displaced work to humans. The infrastructure the AGI era demands.</div>
+                    <span class="aff-tile-cta">View on GitHub →</span>
+                </a>
+            </div>
+        </div>
+        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mt-8">
+            <div>
+                <div class="mono text-[10px] text-zinc-400 uppercase tracking-widest mb-1">Written by</div>
+                <div class="font-bold text-zinc-900">Jarrit Hosking</div>
+                <div class="mono text-[10px] text-zinc-400">Forge Vertical · Anthropic CVP Approved · Cape Town</div>
+            </div>
+            <div class="flex gap-3 flex-wrap">
+                <a href="/articles.html" class="mono text-[10px] font-bold uppercase tracking-widest border border-zinc-200 px-5 py-3 rounded-xl hover:border-zinc-400 transition-all text-zinc-600">← All articles</a>
+                <a href="/articles/fable-51-mythos-51-what-it-means.html" class="mono text-[10px] font-bold uppercase tracking-widest border border-zinc-200 px-5 py-3 rounded-xl hover:border-zinc-400 transition-all text-zinc-600">Fable 5.1 →</a>
+                <a href="/articles/task-bridge-manifesto.html" style="background:linear-gradient(90deg,#10b981,#84cc16);" class="mono text-[10px] font-bold uppercase tracking-widest px-5 py-3 rounded-xl text-white hover:opacity-90 transition-all">task-bridge →</a>
+            </div>
+        </div>
+    </div>
+
+</article>
+<div id="global-footer"></div>
+</body>
+</html>
