@@ -729,22 +729,44 @@ document.getElementById('onboard-form').addEventListener('submit', async (e) => 
         source:  'forgevertical.com/onboard',
     };
 
-    try {
-        const res  = await fetch(FUNCTION_URL, {
-            method:  'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body:    JSON.stringify(payload),
-        });
-        const data = await res.json();
+    // Try Cloud Function first, fall back to Formspree if it fails
+    const FALLBACK_URL = 'https://formspree.io/f/xpwzgvbj';
 
-        if (res.ok && data.success) {
-            document.getElementById('form-wrap').style.display    = 'none';
-            document.getElementById('success-state').style.display = 'block';
-        } else {
-            throw new Error(data.error || 'Submission failed');
-        }
-    } catch (error) {
-        err.textContent = error.message || 'Something went wrong. Please try WhatsApp instead.';
+    const trySubmit = async () => {
+        // Attempt 1 — Cloud Function
+        try {
+            const res = await fetch(FUNCTION_URL, {
+                method:  'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body:    JSON.stringify(payload),
+            });
+            if (res.ok) {
+                const data = await res.json();
+                if (data.success) return true;
+            }
+        } catch (_) {}
+
+        // Attempt 2 — Formspree fallback
+        try {
+            const fd = new FormData();
+            Object.entries(payload).forEach(([k, v]) => fd.append(k, v));
+            const res = await fetch(FALLBACK_URL, {
+                method: 'POST',
+                body: fd,
+                headers: { 'Accept': 'application/json' },
+            });
+            if (res.ok) return true;
+        } catch (_) {}
+
+        return false;
+    };
+
+    const success = await trySubmit();
+    if (success) {
+        document.getElementById('form-wrap').style.display     = 'none';
+        document.getElementById('success-state').style.display = 'block';
+    } else {
+        err.textContent = 'Something went wrong — please WhatsApp Jarrit directly on +27 65 741 7593.';
         err.style.display = 'block';
         btn.disabled    = false;
         btn.textContent = 'Send brief — get a quote in 24 hours →';
