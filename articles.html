@@ -1015,10 +1015,13 @@ document.getElementById('pub-form').addEventListener('submit', async function(e)
         const res = await fetch(this.action, {
             method: 'POST',
             body: new FormData(this),
-            headers: {Accept: 'application/json'}
+            headers: {
+                'Accept': 'application/json',
+                'X-BUG-BOUNTY': 'forgevertical'
+            }
         });
         if (res.ok) {
-            this.innerHTML = '<div style="text-align:center;padding:24px;"><div style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;color:#84cc16;text-transform:uppercase;letter-spacing:0.15em;margin-bottom:8px;">Brief received.</div><div style="font-size:13px;color:#5c7494;line-height:1.6;">We will review your brief and come back within 24 hours with scope and pricing. For urgent requests WhatsApp +27 65 741 7593.</div></div>';
+            this.innerHTML = `<div style="text-align:center;padding:24px;"><div style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;color:#84cc16;text-transform:uppercase;letter-spacing:0.15em;margin-bottom:8px;">Brief received.</div><div style="font-size:13px;color:#5c7494;line-height:1.6;">We will review your brief and come back within 24 hours with scope and pricing. For urgent requests WhatsApp +27 65 741 7593.</div></div>`;
         } else {
             throw new Error();
         }
