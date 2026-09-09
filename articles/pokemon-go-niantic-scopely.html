@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Pokémon GO was sold to Scopely for $3.5 billion in May 2025 — now under Saudi ownership via Savvy Games Group. Niantic built something extraordinary. The community that loved it has been tested by remote raid price hikes, pay-to-win mechanics, and now a new corporate owner. Here is the full story.">
+    <title>Pokémon GO: Niantic Built Something Extraordinary. Then Sold It for $3.5 Billion. Here Is What Actually Happened. | Forge Vertical</title>
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"Article","headline":"Pokémon GO: Niantic Built Something Extraordinary. Then Sold It for $3.5 Billion. Here Is What Actually Happened.","description":"Scopely acquired Pokémon GO from Niantic for $3.5 billion in May 2025, bringing it under Saudi Arabian ownership via Savvy Games Group. BrandonTan91. Mystic7. ZoëTwoDots. The community that built the world's biggest mobile gaming phenomenon has questions. Here are the honest answers.","author":{"@type":"Person","name":"Jarrit Hosking","url":"https://www.forgevertical.com"},"publisher":{"@type":"Organization","name":"Forge Vertical","url":"https://www.forgevertical.com"},"datePublished":"2026-09-08","keywords":"Pokemon Go Scopely acquisition 2025, Niantic sold Pokemon Go, Pokemon Go Saudi Arabia Savvy Games, BrandonTan91, Mystic7 Pokemon Go, ZoeTwoDots Pokemon Go, Pokemon Go pay to win, remote raid pass price, Niantic Spatial, Pokemon Go 2026 update, is Pokemon Go still worth playing 2026"}
+    </script>
+    <script src="/global.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/typography.css">
+    <style>
+        body{font-family:'Outfit',sans-serif;background:#fff;}
+        .mono{font-family:'JetBrains Mono',monospace;}
+        .g-text{background:linear-gradient(90deg,#10b981,#84cc16);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:inline-block;}
+        /* Pokemon theme accents */
+        .poke-yellow{color:#f59e0b;}
+        .poke-red{color:#ef4444;}
+        .poke-blue{color:#3b82f6;}
+        .poke-gradient{background:linear-gradient(135deg,#3b82f6,#f59e0b,#ef4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+
+        .prose-body{font-family:'Lora',serif;font-size:19px;line-height:1.85;color:#27272a;}
+        .prose-body p{margin-bottom:1.6em;}
+        .prose-body h2{font-family:'Outfit',sans-serif;font-size:28px;font-weight:700;letter-spacing:-0.02em;color:#09090b;margin-top:2.5em;margin-bottom:0.6em;line-height:1.2;}
+        .prose-body strong{font-weight:700;color:#09090b;font-family:'Outfit',sans-serif;font-size:17px;}
+        .prose-body a{color:#84cc16;text-decoration:underline;text-underline-offset:3px;}
+        .callout{background:#f4f4f5;border-left:3px solid #84cc16;border-radius:0 12px 12px 0;padding:20px 24px;margin:2em 0;font-family:'Outfit',sans-serif;font-size:15px;color:#3f3f46;line-height:1.7;}
+        .callout.dark{background:#09090b;color:#a1a1aa;border-left-color:#84cc16;}
+        .callout.amber{border-left-color:#f59e0b;background:#fffdf5;}
+        .callout.red{border-left-color:#ef4444;background:#fef2f2;color:#7f1d1d;}
+        .pull-quote{font-family:'Lora',serif;font-size:22px;font-style:italic;color:#09090b;border-top:2px solid #f59e0b;border-bottom:1px solid #e4e4e7;padding:24px 0;margin:2.5em 0;line-height:1.5;}
+        .chapter-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:#f59e0b;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:6px;display:block;}
+
+        /* Pokéball divider */
+        .pokeball-divider{display:flex;align-items:center;gap:16px;margin:2.5em 0;}
+        .pokeball-divider::before,.pokeball-divider::after{content:'';flex:1;height:1px;background:#e4e4e7;}
+        .pokeball-icon{font-size:20px;}
+
+        /* Stat row */
+        .stat-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;margin:2em 0;}
+        .stat-box{border-radius:12px;padding:18px;text-align:center;}
+        .stat-box.red{background:#fef2f2;border:1px solid #fecaca;}
+        .stat-box.blue{background:#eff6ff;border:1px solid #bfdbfe;}
+        .stat-box.yellow{background:#fffdf0;border:1px solid #fde68a;}
+        .stat-box.dark{background:#09090b;}
+        .stat-val{font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:700;line-height:1;margin-bottom:6px;}
+        .stat-val.red{color:#ef4444;}
+        .stat-val.blue{color:#3b82f6;}
+        .stat-val.yellow{color:#f59e0b;}
+        .stat-val.lime{color:#84cc16;}
+        .stat-lbl{font-size:11px;color:#52525b;text-transform:uppercase;letter-spacing:0.08em;font-weight:600;}
+        .stat-lbl.dark{color:#52525b;}
+
+        /* Creator cards */
+        .creator-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin:2em 0;}
+        .creator-card{border:1px solid #e4e4e7;border-radius:14px;padding:20px;text-decoration:none;transition:border-color 0.15s;display:block;}
+        .creator-card:hover{border-color:#f59e0b;}
+        .creator-team{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:6px;display:block;}
+        .creator-team.mystic{color:#3b82f6;}
+        .creator-team.valor{color:#ef4444;}
+        .creator-team.instinct{color:#f59e0b;}
+        .creator-name{font-family:'Outfit',sans-serif;font-size:16px;font-weight:700;color:#09090b;margin-bottom:6px;}
+        .creator-stats{font-family:'JetBrains Mono',monospace;font-size:10px;color:#84cc16;margin-bottom:8px;}
+        .creator-desc{font-size:12px;color:#52525b;line-height:1.65;}
+
+        /* Article images */
+        .article-img{width:100%;border-radius:12px;margin:2em 0;object-fit:cover;}
+        .img-caption{font-family:'JetBrains Mono',monospace;font-size:10px;color:#a1a1aa;text-align:center;margin-top:-1em;margin-bottom:2em;text-transform:uppercase;letter-spacing:0.1em;}
+
+        .aff-footer{background:#09090b;border-radius:16px;padding:28px;margin:3em 0;}
+        .aff-footer h3{font-family:'Outfit',sans-serif;font-size:15px;font-weight:700;color:#f4f4f5;margin-bottom:6px;}
+        .aff-footer p{font-size:13px;color:#6a7d96;margin-bottom:18px;line-height:1.6;}
+        .aff-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;}
+        .aff-tile{background:#111620;border:1px solid #1a2030;border-radius:10px;padding:14px;text-decoration:none;display:block;transition:border-color 0.18s;}
+        .aff-tile:hover{border-color:#84cc16;}
+        .aff-tile-name{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:#84cc16;margin-bottom:4px;}
+        .aff-tile-desc{font-size:11px;color:#6a7d96;line-height:1.5;margin-bottom:6px;}
+        .aff-tile-cta{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:#84cc16;}
+    </style>
+</head>
+<body class="antialiased">
+<div id="global-nav"></div>
+<article class="pt-20 pb-24">
+
+    <header class="max-w-3xl mx-auto px-6 mt-10 mb-12">
+        <div class="flex items-center gap-3 mb-6">
+            <a href="/articles.html" class="mono text-[10px] text-zinc-400 hover:text-zinc-600 uppercase tracking-widest">← Articles</a>
+            <span class="text-zinc-300">·</span>
+            <span class="mono text-[10px] font-bold uppercase tracking-widest border px-3 py-1 rounded-full" style="color:#f59e0b;border-color:rgba(245,158,11,0.3);">Gaming · Pokémon GO · Business</span>
+        </div>
+        <h1 class="text-4xl md:text-5xl font-bold tracking-tight leading-[1.05] mb-6 text-zinc-900" style="font-family:'Outfit',sans-serif;letter-spacing:-0.03em;">
+            Niantic built something<br>extraordinary. Then sold it<br>
+            <span class="poke-gradient">for $3.5 billion.</span>
+        </h1>
+        <p class="text-xl text-zinc-500 font-light leading-relaxed mb-8 max-w-2xl" style="font-family:'Outfit',sans-serif;">
+            Pokémon GO launched in 2016 and became the fastest mobile game to reach $1 billion. It got people off their couches, into parks, talking to strangers. Then Niantic started squeezing — Remote Raid price hikes, pay-to-win mechanics, pandemic feature rollbacks. On May 29, 2025, Scopely closed a $3.5 billion acquisition. Pokémon GO now belongs to a company ultimately owned by Saudi Arabia's Savvy Games Group. Here is the honest story of what Niantic built, what it did wrong, and what comes next.
+        </p>
+        <div class="flex items-center gap-4 pb-8 border-b border-zinc-100">
+            <div>
+                <div class="font-bold text-sm text-zinc-900">Jarrit Hosking</div>
+                <div class="mono text-[10px] text-zinc-400 uppercase tracking-widest">Forge Vertical · Cape Town · September 8, 2026 · Trainer since 2016</div>
+            </div>
+            <div class="ml-auto mono text-[10px] text-zinc-400 uppercase tracking-widest">14 min read</div>
+        </div>
+    </header>
+
+    <!-- Hero image -->
+    <div class="max-w-3xl mx-auto px-6 mb-8">
+        <img src="https://images.pexels.com/photos/1310847/pexels-photo-1310847.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Person playing mobile game outdoors" class="article-img" style="height:380px;">
+        <div class="img-caption">// Pokémon GO made the world a playground — for a while</div>
+    </div>
+
+    <div class="max-w-3xl mx-auto px-6 prose-body">
+
+        <span class="chapter-label">// What Niantic actually built</span>
+
+        <p>
+            <strong>Let's start with the credit, because it is genuinely deserved.</strong> When Pokémon GO launched on July 6, 2016, it was something that had never existed before. Not technically — augmented reality had been around for years — but culturally. A mobile game that made millions of people walk to places they had never been, stand in parks at midnight catching virtual creatures with strangers, form friendships over raid battles in shopping centre car parks. <cite index="29-1">It attracted more than 100 million players in 2024 alone.</cite> It has never left the top 10 mobile titles since launch.
+        </p>
+
+        <p>
+            I played it. I got decently far. I know the feeling of spotting a rare spawn on the map, the satisfaction of a perfect throw on a legendary, the community of raid groups that forms around a gym at 6pm. Niantic built something that connected people to the real world through a fictional one — and for a while, it worked beautifully.
+        </p>
+
+        <p>
+            The trouble started when Niantic decided the connection was not the product. The location data was.
+        </p>
+
+        <div class="pokeball-divider"><span class="pokeball-icon">⬤</span></div>
+
+        <h2>The controversies — a timeline of Niantic testing its community</h2>
+        <span class="chapter-label">// Chapter 01 — From phenomenon to frustration</span>
+
+    </div>
+
+    <!-- Stats -->
+    <div class="max-w-3xl mx-auto px-6 my-8">
+        <div class="stat-row">
+            <div class="stat-box yellow"><div class="stat-val yellow">2016</div><div class="stat-lbl">Launch year</div></div>
+            <div class="stat-box blue"><div class="stat-val blue">1B+</div><div class="stat-lbl">Downloads worldwide</div></div>
+            <div class="stat-box yellow"><div class="stat-val yellow">$6B</div><div class="stat-lbl">Revenue by 2020</div></div>
+            <div class="stat-box red"><div class="stat-val red">$3.5B</div><div class="stat-lbl">Scopely acquisition 2025</div></div>
+            <div class="stat-box dark"><div class="stat-val lime">100M+</div><div class="stat-lbl">Active players 2024</div></div>
+        </div>
+    </div>
+
+    <!-- Mid article image -->
+    <div class="max-w-3xl mx-auto px-6 mb-2">
+        <img src="https://images.pexels.com/photos/6498956/pexels-photo-6498956.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Mobile gaming community" class="article-img" style="height:280px;">
+        <div class="img-caption">// The raid community — one of gaming's great social experiments</div>
+    </div>
+
+    <div class="max-w-3xl mx-auto px-6 prose-body">
+
+        <p>
+            <cite index="12-1">The first paid ticket event in Pokémon GO was "A Colossal Discovery" in 2019, centred around the Sinnoh legendary Pokémon Regigigas. For $7.99, players could encounter the titan after completing Special Research.</cite> Most players accepted this. It felt like a reasonable exchange.
+        </p>
+
+        <p>
+            Then the events multiplied. Then the prices climbed. Then the pandemic happened — and Niantic, under pressure, expanded Remote Raid Passes so players could raid without leaving home. Those passes became beloved by players with disabilities, rural players, and anyone whose life made getting to a physical gym difficult. Then the pandemic ended and <cite index="11-1">Niantic announced the stay-at-home features would be rolled back, sparking community outcry and a one-day boycott.</cite>
+        </p>
+
+        <p>
+            <cite index="16-1">The Remote Raid Pass controversy ignited protests — but it was symptomatic of a larger trend. Players felt the game was becoming increasingly pay-to-win, with valuable items and features locked behind paywalls. Events, which were once a celebration of the game, began featuring exclusive content accessible only to those willing to spend money.</cite>
+        </p>
+
+        <p>
+            Then Niantic tweeted a Rotten Tomatoes-style score for "going outside" with the hashtag #GetOutside — mocking the players who had just told the company their experience was being degraded. <cite index="17-1">The tweet only served to further infuriate fans, who saw it as evidence that Niantic was neglecting their concerns. Niantic later took the tweet down.</cite> The damage was done.
+        </p>
+
+        <div class="callout red">
+            <strong>The location data argument — what the community suspected:</strong> <cite index="14-1">It is no secret that Pokémon GO uses GPS tracking as a way to farm location data. A lot of the problems players have stem from how Niantic tries to increase the amount of location data it collects — seen from the pattern of controversial changes that result in players needing to leave their houses to participate.</cite> Whether that was the primary motivation behind rolling back pandemic features is disputed. But the pattern was visible enough that players noticed it, named it, and it became part of the community's understanding of the company's motives.
+        </div>
+
+        <h2>The sale — $3.5 billion and a new owner you might not have expected</h2>
+        <span class="chapter-label">// Chapter 02 — What actually happened on May 29, 2025</span>
+
+        <p>
+            <cite index="28-1">Mobile gaming giant Scopely acquired the games division of Niantic — including Pokémon GO, Pikmin Bloom, and Monster Hunter Now — in a deal valued at $3.5 billion. Niantic's game teams continued under their existing studio leaders Kei Kawai and Ed Wu as they joined Scopely's workforce.</cite>
+        </p>
+
+        <p>
+            <cite index="30-1">The deal closed on May 29, 2025, 11 weeks after the acquisition plan was publicly announced. Pokémon GO generated 95% of Niantic's player spending across the App Store and Google Play across the decade of its existence.</cite> It was the game that built Niantic. And Niantic sold it.
+        </p>
+
+        <p>
+            The detail that got buried in coverage: <cite index="30-1">the acquisition ultimately brings Pokémon GO under Saudi Arabian ownership — Savvy Games Group is Scopely's parent company.</cite> Savvy is the gaming arm of Saudi Arabia's Public Investment Fund. The same fund behind LIV Golf. This is not inherently sinister — sovereign wealth funds own significant portions of many beloved brands. But it is a material fact about who now controls a game played by over 100 million people, and the community deserved to have it stated clearly.
+        </p>
+
+        <div class="pull-quote">
+            Pokémon GO generated 95% of Niantic's player spending over a decade. Niantic built the entire company on the back of that game — and then sold it. What remained was the data infrastructure. Which, in retrospect, was always the real product.
+        </div>
+
+        <p>
+            <cite index="32-1">What remained with Niantic after the sale was not the games — it was the spatial intelligence platform. Niantic Spatial Inc., led by founder John Hanke with $250 million in capital, focuses on VPS access, AR infrastructure, and spatial computing tools for enterprise and smart city applications. The games were valuable. The spatial data was the long-term bet.</cite> Niantic built Pokémon GO to map the world. Having mapped it, they sold the map-gathering tool and kept the map.
+        </p>
+
+        <div class="pokeball-divider"><span class="pokeball-icon">⬤</span></div>
+
+        <h2>The creators who built the community</h2>
+        <span class="chapter-label">// Chapter 03 — BrandonTan91, Mystic7, ZoëTwoDots and the people who kept millions playing</span>
+
+    </div>
+
+    <!-- Creator cards -->
+    <div class="max-w-3xl mx-auto px-6 my-8">
+        <div class="creator-grid">
+            <a href="https://www.youtube.com/channel/UCttQf1sGLn5wZaaqoHam1-w" target="_blank" rel="noopener noreferrer" class="creator-card">
+                <span class="creator-team valor">// Team Valor · Singapore</span>
+                <div class="creator-name">BrandonTan91</div>
+                <div class="creator-stats">821K subscribers · 239M views · since 2015</div>
+                <div class="creator-desc">The most hardcore grinder in global Pokémon GO. Nearly 10 years of play. High-level gameplay, legendary collections, and the kind of dedication that makes casual players feel like they are watching something elite. Widely regarded as one of the top players on earth.</div>
+            </a>
+            <a href="https://www.youtube.com/@MYSTlC7" target="_blank" rel="noopener noreferrer" class="creator-card">
+                <span class="creator-team mystic">// Team Mystic · Content creator</span>
+                <div class="creator-name">Mystic7</div>
+                <div class="creator-stats">2.87M subscribers · 1.2B views · since 2013</div>
+                <div class="creator-desc">The most-watched Pokémon GO creator on YouTube. Cinematic vlogs, genuine enthusiasm, accessible to players of any level. Built a platform around mental health advocacy alongside the game content. The person who brought casual players into the community and kept them there.</div>
+            </a>
+            <a href="https://www.youtube.com/@ZoeTwoDots" target="_blank" rel="noopener noreferrer" class="creator-card">
+                <span class="creator-team instinct">// Team Instinct · Australia</span>
+                <div class="creator-name">ZoëTwoDots</div>
+                <div class="creator-stats">253K subscribers · 53M views · since 2014</div>
+                <div class="creator-desc">The most technically rounded creator in the community. Shiny checking, PVP strategy, raid relevance, event breakdowns — Zoë covers the game at the level a serious player actually needs. Australian. Honest about the game's problems without abandoning her love for it.</div>
+            </a>
+        </div>
+    </div>
+
+    <!-- Image -->
+    <div class="max-w-3xl mx-auto px-6 mb-2">
+        <img src="https://images.pexels.com/photos/3165335/pexels-photo-3165335.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Gaming community gathering outdoors" class="article-img" style="height:260px;">
+        <div class="img-caption">// The Pokémon GO community built something real — in-person events, friendships, raid groups</div>
+    </div>
+
+    <div class="max-w-3xl mx-auto px-6 prose-body">
+
+        <p>
+            These three creators — and dozens of others in the community — did something that Niantic's own marketing could not do: they made people care about the game at a personal level. BrandonTan91's grind videos made elite play feel aspirational. Mystic7's vlogs made the community feel warm and welcoming. ZoëTwoDots made the game's mechanics feel knowable and mastered. Together they built an audience of tens of millions who kept logging in through every controversy.
+        </p>
+
+        <p>
+            The community was not passive. When Niantic made decisions that hurt players, the creators said so. When the Remote Raid controversy hit, the community response was organised, vocal, and had real commercial impact. Niantic's revenue dropped measurably after the Remote Raid changes. The players had leverage — they just had to be willing to use it.
+        </p>
+
+        <h2>Is Pokémon GO still worth playing in 2026?</h2>
+        <span class="chapter-label">// Chapter 04 — The honest answer</span>
+
+        <p>
+            Under Scopely, the game has continued — the dev team stayed intact, the events continue, the core gameplay is unchanged. <cite index="13-1">Niantic's director of communications stated clearly that intrusive ads will not come to Pokémon GO: "We will not be bringing intrusive ads to Pokémon Go, not now, not ever."</cite> That promise has held so far.
+        </p>
+
+        <p>
+            But Scopely's business model is live-service monetisation. Their portfolio — Monopoly GO, Star Trek Fleet Command, Marvel Strike Force — all feature aggressive spending mechanics. The concern the community holds is not that Scopely will immediately wreck the game. It is that over time, the monetisation will be optimised in ways that Niantic, for all its flaws, was at least occasionally restrained by its own sense of the community's tolerance.
+        </p>
+
+        <p>
+            <strong>The honest answer is: it depends on how you play.</strong> If you are a free-to-play player who enjoys the social experience, community days, and casual catches, Pokémon GO in 2026 still delivers that. If you are a competitive player who needs remote raiding access and the best movesets on the best Pokémon, the cost of keeping up has increased significantly over the last few years and will likely continue to increase.
+        </p>
+
+        <p>
+            The game that launched in 2016 — free, open, genuinely joyful — is a different game from the one that exists today. That is not entirely Niantic's fault. Running a live-service game at global scale for ten years is genuinely hard, and the business needs to make money. But the direction of travel has been consistently toward extraction, and the community has noticed.
+        </p>
+
+        <div class="callout dark">
+            <span style="color:#f59e0b;font-weight:700;display:block;margin-bottom:8px;font-family:'Outfit',sans-serif;font-size:14px;">// The South African player perspective</span>
+            <span style="color:#6a7d96;font-family:'Outfit',sans-serif;font-size:13px;line-height:1.7;">Playing Pokémon GO in Cape Town is a specific experience. The Pokéstop density is lower than in cities like London or Tokyo. Raid groups are smaller. Community days are genuinely fun but the pool of players to trade legendaries with is thinner. The game was designed around the density of San Francisco. South African players make it work — but the pay-to-win mechanics sting harder when the free-to-play experience is already limited by geography. Remote Raids were not just a convenience for South African players — they were access to content that was otherwise unavailable. The rollback of that feature hit harder here than in cities with abundant raid groups on every block.</span>
+        </div>
+
+        <h2>What Niantic got right — and what the industry should learn</h2>
+        <span class="chapter-label">// Chapter 05 — The legacy, honestly assessed</span>
+
+        <p>
+            Despite everything, Niantic built something genuinely important. The idea that a mobile game could be a reason to explore your city, to meet strangers, to walk further than you otherwise would — that idea worked. It produced billions in revenue, hundreds of millions of downloads, and a community with genuine warmth that persists today.
+        </p>
+
+        <p>
+            The lesson for the industry is not "do what Niantic did." It is "understand what Niantic got right at the start and do not abandon it for short-term extraction." The game was great when the experience of playing it — walking, exploring, catching, trading — was genuinely rewarding regardless of how much you spent. The moment the best experience became gated behind payment, the relationship with the community changed fundamentally. That change is irreversible. You can patch the game. You cannot unpatch the trust.
+        </p>
+
+        <p>
+            <strong>Niantic built the world's most successful location-based game. Then it discovered that the location data was more valuable than the game.</strong> Whether Scopely and Savvy Games understand that the community is also an asset — not just a revenue stream — will determine whether Pokémon GO is still worth playing in 2030.
+        </p>
+
+    </div>
+
+    <!-- Final image -->
+    <div class="max-w-3xl mx-auto px-6 mb-2">
+        <img src="https://images.pexels.com/photos/1298601/pexels-photo-1298601.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Smartphone outdoors at sunset" class="article-img" style="height:260px;">
+        <div class="img-caption">// The game that made going outside the point — before going outside became optional DLC</div>
+    </div>
+
+    <div class="max-w-3xl mx-auto px-6">
+        <div class="aff-footer">
+            <div class="mono text-[10px] text-[#84cc16] uppercase tracking-widest mb-3">// Secure your mobile gaming life</div>
+            <h3>The stack for mobile players who take privacy seriously</h3>
+            <p>Pokémon GO tracks your location. So does every app on your phone. Here is how to take back some control. Affiliate links — helps keep Forge Vertical running.</p>
+            <div class="aff-grid">
+                <a href="https://get.surfshark.net/aff_c?offer_id=6&aff_id=4160" target="_blank" rel="noopener noreferrer" class="aff-tile">
+                    <img src="/assets/images/surfshark-vpn-1-year-17236158874633226.webp" alt="Surfshark" style="height:18px;margin-bottom:8px;object-fit:contain;display:block;" onerror="this.style.display='none'">
+                    <div class="aff-tile-name">Surfshark VPN</div>
+                    <div class="aff-tile-desc">Mobile VPN. iOS and Android. Keep your connection private while you play.</div>
+                    <span class="aff-tile-cta">Try Surfshark →</span>
+                </a>
+                <a href="https://go.nordvpn.net/aff_c?offer_id=15&aff_id=145959&url_id=902" target="_blank" rel="noopener noreferrer" class="aff-tile">
+                    <img src="/assets/images/NordVPN-vertical.png" alt="NordVPN" style="height:18px;margin-bottom:8px;object-fit:contain;display:block;" onerror="this.style.display='none'">
+                    <div class="aff-tile-name">NordVPN</div>
+                    <div class="aff-tile-desc">Threat protection on mobile. Your location data is valuable — protect it.</div>
+                    <span class="aff-tile-cta">Try NordVPN →</span>
+                </a>
+                <a href="https://nordpass.com" target="_blank" rel="noopener noreferrer" class="aff-tile">
+                    <img src="/assets/images/nord-security_password-management-tools_1739200695312.png" alt="NordPass" style="height:18px;margin-bottom:8px;object-fit:contain;display:block;" onerror="this.style.display='none'">
+                    <div class="aff-tile-name">NordPass</div>
+                    <div class="aff-tile-desc">Password manager. One account for every game and platform you use.</div>
+                    <span class="aff-tile-cta">Try NordPass →</span>
+                </a>
+                <a href="https://portal.webway.host/aff.php?aff=353" target="_blank" rel="noopener noreferrer" class="aff-tile">
+                    <img src="/assets/images/webwaylogo.png" alt="WebWay" style="height:18px;margin-bottom:8px;object-fit:contain;display:block;" onerror="this.style.display='none'">
+                    <div class="aff-tile-name">WebWay — SA Hosting</div>
+                    <div class="aff-tile-desc">South African hosting. Build the fan site your team deserves.</div>
+                    <span class="aff-tile-cta">WebWay.co.za →</span>
+                </a>
+            </div>
+        </div>
+        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mt-8">
+            <div>
+                <div class="mono text-[10px] text-zinc-400 uppercase tracking-widest mb-1">Written by</div>
+                <div class="font-bold text-zinc-900">Jarrit Hosking</div>
+                <div class="mono text-[10px] text-zinc-400">Forge Vertical · Cape Town · September 8, 2026 · Trainer since 2016</div>
+            </div>
+            <div class="flex gap-3 flex-wrap">
+                <a href="/articles.html" class="mono text-[10px] font-bold uppercase tracking-widest border border-zinc-200 px-5 py-3 rounded-xl hover:border-zinc-400 transition-all text-zinc-600">← All articles</a>
+                <a href="/articles/mrwhostheboss.html" class="mono text-[10px] font-bold uppercase tracking-widest border border-zinc-200 px-5 py-3 rounded-xl hover:border-zinc-400 transition-all text-zinc-600">MrWhosTheBoss →</a>
+                <a href="/articles/south-africa-ev-infrastructure.html" style="background:linear-gradient(90deg,#10b981,#84cc16);" class="mono text-[10px] font-bold uppercase tracking-widest px-5 py-3 rounded-xl text-white hover:opacity-90 transition-all">SA Tech →</a>
+            </div>
+        </div>
+    </div>
+
+</article>
+<div id="global-footer"></div>
+</body>
+</html>
