@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Forge Vertical — independent technology journalism covering AI, cybersecurity, open source, hardware, and South African business. 34 articles. Real research. No filler. Publish your story with us.">
-    <title>Forge Vertical — Tech News & AI Research | 38 Articles</title>
+    <title>Forge Vertical — Tech News, AI Research, and Independent Journalism | 34 Articles</title>
     <link rel="canonical" href="https://www.forgevertical.com/articles.html">
     <script type="application/ld+json">
     {
@@ -32,7 +32,7 @@
           "@type": "CollectionPage",
           "@id": "https://www.forgevertical.com/articles.html",
           "name": "Forge Vertical — Tech News and AI Research",
-          "description": "38 articles covering AI, cybersecurity, autonomous vehicles, open source, hardware, and South African business.",
+          "description": "34 articles covering AI, cybersecurity, autonomous vehicles, open source, hardware, and South African business.",
           "url": "https://www.forgevertical.com/articles.html",
           "publisher": {"@id": "https://www.forgevertical.com/#newsorg"},
           "about": [
@@ -93,263 +93,166 @@
         .cat-btn:hover,.cat-btn.active{color:var(--lime);border-bottom-color:var(--lime);}
 
         /* ── Search bar ── */
-        .search-bar{background:var(--bg);border-bottom:1px solid var(--border);padding:14px 6vw;display:flex;align-items:center;gap:12px;}
+        .search-bar{background:var(--surface2);border-bottom:1px solid var(--border);padding:10px 6vw;display:flex;align-items:center;gap:12px;}
         .search-wrap{position:relative;flex:1;max-width:500px;}
-        .search-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--muted2);}
-        .search-input{width:100%;background:rgba(255,255,255,0.03);border:1px solid var(--border2);border-radius:8px;padding:10px 14px 10px 42px;color:var(--text);font-family:'Outfit',sans-serif;font-size:14px;outline:none;transition:border-color 0.2s;}
-        .search-input:focus{border-color:var(--lime);background:rgba(255,255,255,0.05);}
+        .search-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--muted2);}
+        .search-input{width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border2);border-radius:8px;padding:9px 14px 9px 38px;color:var(--text);font-family:'Outfit',sans-serif;font-size:13px;outline:none;transition:border-color 0.2s;}
+        .search-input:focus{border-color:var(--lime);}
         .search-input::placeholder{color:var(--muted);}
         .result-count{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted2);white-space:nowrap;}
 
         /* ── Lead story (full-width hero) ── */
-        .lead-wrap{padding:40px 6vw 0;max-width:1400px;margin:0 auto;}
-        .lead-story{display:grid;grid-template-columns:2fr 1fr;gap:40px;margin-bottom:32px;}
-        @media(max-width:1000px){.lead-story{grid-template-columns:1fr;gap:32px;}}
-        
+        .lead-wrap{padding:24px 6vw 0;max-width:1400px;margin:0 auto;}
+        .lead-story{display:grid;grid-template-columns:1.8fr 1fr;gap:1px;background:var(--border2);border:1px solid var(--border2);border-radius:16px;overflow:hidden;margin-bottom:24px;}
+        @media(max-width:900px){.lead-story{grid-template-columns:1fr;}}
+        .lead-main{position:relative;overflow:hidden;min-height:420px;display:block;text-decoration:none;cursor:pointer;}
         /* ── Hero Cycle ── */
-        .lead-main{
+        #hero-cycle{
             position:relative;
+            width:100%;
+            height:480px;
             overflow:hidden;
+            cursor:pointer;
+            background:var(--surface2);
+        }
+        @media(max-width:700px){#hero-cycle{height:320px;}}
+        .hero-slide{
+            position:absolute;
+            top:0;left:0;right:0;bottom:0;
+            opacity:0;
+            transition:opacity 1s ease;
             display:flex;
             flex-direction:column;
             justify-content:flex-end;
-            min-height:520px;
-            cursor:pointer;
-            text-decoration:none;
-            background:var(--surface);
-            border-radius:16px;
         }
-        @media(max-width:700px){.lead-main{min-height:380px;}}
-        
-        .hero-slide{
-            position:absolute;
-            inset:0;
-            opacity:0;
-            transition:opacity 0.8s ease;
-            z-index:1;
-        }
-        .hero-slide.active{opacity:1;z-index:2;}
+        .hero-slide.active{opacity:1;}
         .hero-slide img{
             position:absolute;
-            inset:0;
-            width:100%;
-            height:100%;
+            top:0;left:0;
+            width:100%;height:100%;
             object-fit:cover;
-            transition:transform 8s ease;
+            transition:transform 7s ease;
             transform:scale(1);
         }
-        .hero-slide.active img{transform:scale(1.04);}
+        .hero-slide.active img{transform:scale(1.07);}
         .hero-slide::after{
             content:'';
             position:absolute;
-            inset:0;
-            background:linear-gradient(to top, rgba(6,8,12,0.95) 0%, rgba(6,8,12,0.4) 50%, transparent 100%);
-            z-index:1;
+            top:0;left:0;right:0;bottom:0;
+            background:linear-gradient(to top,rgba(6,8,12,0.97) 0%,rgba(6,8,12,0.5) 50%,transparent 100%);
         }
-        
         .lead-main-body{
             position:relative;
-            z-index:3;
-            padding:40px;
-            width:100%;
-            max-width:850px;
+            z-index:2;
+            padding:24px 28px 32px;
         }
         .hero-dots{
             position:absolute;
-            bottom:24px;right:32px;
+            bottom:16px;right:20px;
             display:flex;gap:8px;
             z-index:10;
         }
         .hero-dot{
-            width:24px;height:4px;
-            background:rgba(255,255,255,0.2);
-            border-radius:4px;
+            width:8px;height:8px;
+            border-radius:50%;
+            background:rgba(255,255,255,0.3);
             cursor:pointer;
             border:none;padding:0;
-            transition:background 0.3s;
+            transition:background 0.2s, transform 0.2s;
         }
-        .hero-dot.active{background:var(--lime);}
+        .hero-dot.active{background:var(--lime);transform:scale(1.5);}
         
-        .lead-badge{font-family:'Outfit',sans-serif;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;color:var(--lime);margin-bottom:12px;display:block;}
+        .lead-badge{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:var(--lime);margin-bottom:8px;display:block;}
         .lead-badge.breaking{color:var(--red);}
-        .lead-title{font-size:clamp(24px,3vw,36px);font-weight:800;letter-spacing:-0.02em;color:var(--text);line-height:1.2;margin-bottom:14px;}
+        .lead-title{font-size:clamp(20px,2.5vw,30px);font-weight:800;letter-spacing:-0.02em;color:var(--text);line-height:1.15;margin-bottom:10px;}
         .hero-slide.active .lead-title:hover{color:var(--lime);}
-        .lead-desc{font-size:16px;color:rgba(238,240,244,0.8);line-height:1.6;margin-bottom:16px;font-weight:300;}
-        .lead-meta{font-family:'Outfit',sans-serif;font-size:13px;color:var(--muted2);font-weight:400;}
-        .lead-meta span{color:var(--muted);margin:0 6px;}
+        .lead-desc{font-size:14px;color:rgba(238,240,244,0.7);line-height:1.6;margin-bottom:12px;}
+        .lead-meta{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted2);text-transform:uppercase;letter-spacing:0.1em;}
 
         /* Secondary lead stories */
-        .lead-secondary{display:flex;flex-direction:column;gap:24px;}
-        .lead-sec-item{text-decoration:none;display:flex;gap:20px;align-items:center;transition:transform 0.2s ease;}
-        .lead-sec-item:hover{transform:translateX(6px);}
-        .lead-sec-img{width:140px;height:100px;border-radius:12px;object-fit:cover;flex-shrink:0;}
-        .lead-sec-content{display:flex;flex-direction:column;justify-content:center;}
-        .lead-sec-badge{font-family:'Outfit',sans-serif;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;color:var(--lime);margin-bottom:6px;display:block;}
+        .lead-secondary{display:flex;flex-direction:column;gap:1px;background:var(--border2);}
+        .lead-sec-item{background:var(--surface);padding:20px;text-decoration:none;display:flex;gap:14px;align-items:flex-start;transition:background 0.15s;flex:1;}
+        .lead-sec-item:hover{background:var(--surface2);}
+        .lead-sec-img{width:80px;height:80px;border-radius:8px;object-fit:cover;flex-shrink:0;}
+        .lead-sec-badge{font-family:'JetBrains Mono',monospace;font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--lime);margin-bottom:5px;display:block;}
         .lead-sec-badge.breaking{color:var(--red);}
-        .lead-sec-title{font-size:16px;font-weight:700;color:var(--text);line-height:1.4;margin-bottom:8px;transition:color 0.2s;}
+        .lead-sec-title{font-size:14px;font-weight:700;color:var(--text);line-height:1.35;margin-bottom:5px;}
         .lead-sec-item:hover .lead-sec-title{color:var(--lime);}
-        .lead-sec-meta{font-family:'Outfit',sans-serif;font-size:13px;color:var(--muted2);}
+        .lead-sec-meta{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted2);text-transform:uppercase;letter-spacing:0.08em;}
 
         /* ── Section divider ── */
-        .section-header{display:flex;align-items:center;gap:14px;padding:40px 6vw 24px;max-width:1400px;margin:0 auto;}
+        .section-header{display:flex;align-items:center;gap:14px;padding:28px 6vw 14px;max-width:1400px;margin:0 auto;}
         .section-label{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.2em;color:var(--lime);white-space:nowrap;}
         .section-rule{flex:1;height:1px;background:var(--border2);}
         .section-count{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted2);white-space:nowrap;}
 
-        /* ── Editorial Newsroom Cards Grid ── */
-        #ac-grid{
-            display:grid;
-            grid-template-columns:repeat(auto-fill,minmax(340px,1fr));
-            gap:56px 32px; /* Huge vertical spacing per Engadget reference */
-            margin:0 6vw 80px;
-            max-width:calc(1400px - 12vw);
-        }
-        .ac{
-            text-decoration:none;
-            display:flex;
-            flex-direction:column;
-            position:relative;
-            transition:transform 0.2s ease;
-        }
-        .ac:hover{
-            transform:translateY(-4px);
-        }
-        
-        .ac-img{
-            height:220px;
-            position:relative;
-            overflow:hidden;
-            border-radius:12px; /* Soft Engadget corners */
-            margin-bottom:20px;
-            background:var(--surface);
-            border:1px solid rgba(255,255,255,0.03);
-        }
-        .ac-img img{
-            width:100%;height:100%;
-            object-fit:cover;
-            transition:transform 0.6s ease;
-        }
-        .ac:hover .ac-img img{
-            transform:scale(1.04);
-        }
-        
-        .ac-tag{
-            position:absolute;
-            top:14px;left:14px;
-            font-family:'Outfit',sans-serif;
-            font-size:11px;
-            font-weight:600;
-            color:var(--text);
-            background:rgba(11,15,20,0.65);
-            backdrop-filter:blur(8px);
-            -webkit-backdrop-filter:blur(8px);
-            padding:6px 16px;
-            border-radius:24px;
-            border:1px solid rgba(255,255,255,0.08);
-            z-index:2;
-            text-transform:capitalize;
-        }
-        .ac-new{color:var(--bg);background:var(--text);border-color:var(--text);}
-        
-        .ac-body{
-            display:flex;
-            flex-direction:column;
-            flex:1;
-        }
-        .ac-title{
-            font-size:22px;
-            font-weight:700;
-            color:var(--text);
-            line-height:1.35;
-            margin-bottom:8px;
-            transition:color 0.2s;
-        }
-        .ac:hover .ac-title{
-            color:var(--lime);
-        }
-        .ac-meta{
-            font-family:'Outfit',sans-serif;
-            font-size:13px;
-            color:var(--muted2);
-            margin-bottom:14px;
-            font-weight:400;
-        }
-        .ac-meta span{color:var(--muted);margin:0 6px;}
-        
-        .ac-desc{
-            font-size:15px;
-            color:rgba(238,240,244,0.7);
-            line-height:1.6;
-            flex:1;
-            margin-bottom:24px;
-            font-weight:300;
-        }
-        .ac-foot{
-            display:flex;
-            align-items:center;
-            justify-content:flex-end;
-            margin-top:auto;
-        }
-        .ac-read{
-            font-family:'Outfit',sans-serif;
-            font-size:13px;
-            font-weight:600;
-            color:var(--muted2);
-            transition:color 0.2s ease;
-        }
-        .ac:hover .ac-read{
-            color:var(--lime);
-        }
+        /* ── Article cards grid ── */
+        #ac-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1px;background:var(--border2);border:1px solid var(--border2);border-radius:12px;overflow:hidden;padding:0;margin:0 6vw 28px;max-width:calc(1400px - 12vw);}
+        .ac{background:var(--surface);text-decoration:none;display:flex;flex-direction:column;transition:background 0.15s;}
+        .ac:hover{background:var(--surface2);}
+        .ac-img{height:180px;overflow:hidden;position:relative;flex-shrink:0;}
+        .ac-img img{width:100%;height:100%;object-fit:cover;transition:transform 0.3s ease;}
+        .ac:hover .ac-img img{transform:scale(1.05);}
+        .ac-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(6,8,12,0.6) 0%,transparent 60%);}
+        .ac-body{padding:16px;display:flex;flex-direction:column;flex:1;}
+        .ac-tag{font-family:'JetBrains Mono',monospace;font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--lime);margin-bottom:7px;display:block;}
+        .ac-new{color:var(--red);}
+        .ac-title{font-size:15px;font-weight:700;color:var(--text);line-height:1.4;margin-bottom:7px;}
+        .ac:hover .ac-title{color:var(--lime);}
+        .ac-desc{font-size:12px;color:var(--muted2);line-height:1.6;flex:1;margin-bottom:10px;}
+        .ac-foot{display:flex;align-items:center;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;}
+        .ac-read{color:var(--lime);}
 
         /* ── Publish CTA strip ── */
-        .publish-strip{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:60px 6vw;}
-        .publish-inner{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
-        @media(max-width:900px){.publish-inner{grid-template-columns:1fr;gap:40px;}}
-        .publish-eyebrow{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.2em;color:var(--lime);margin-bottom:12px;display:block;}
-        .publish-title{font-size:clamp(28px,3.5vw,40px);font-weight:800;letter-spacing:-0.02em;color:var(--text);line-height:1.15;margin-bottom:16px;}
+        .publish-strip{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:40px 6vw;}
+        .publish-inner{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;}
+        @media(max-width:700px){.publish-inner{grid-template-columns:1fr;gap:28px;}}
+        .publish-left{}
+        .publish-eyebrow{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.2em;color:var(--lime);margin-bottom:10px;display:block;}
+        .publish-title{font-size:clamp(22px,3vw,34px);font-weight:800;letter-spacing:-0.02em;color:var(--text);line-height:1.15;margin-bottom:12px;}
         .publish-title span{color:var(--lime);}
-        .publish-desc{font-size:16px;color:var(--muted2);line-height:1.7;margin-bottom:28px;font-weight:300;}
-        .publish-features{display:flex;flex-direction:column;gap:12px;}
-        .publish-feat{display:flex;align-items:center;gap:12px;font-size:14px;color:var(--muted2);}
+        .publish-desc{font-size:14px;color:var(--muted2);line-height:1.7;margin-bottom:20px;}
+        .publish-features{display:flex;flex-direction:column;gap:8px;}
+        .publish-feat{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--muted2);}
         .publish-feat-icon{width:20px;height:20px;background:rgba(132,204,22,0.1);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-        .publish-right{background:var(--bg);border:1px solid var(--border2);border-radius:16px;padding:32px;}
-        .publish-form-title{font-family:'Outfit',sans-serif;font-size:18px;font-weight:700;color:var(--text);margin-bottom:8px;}
-        .publish-form-sub{font-size:14px;color:var(--muted2);margin-bottom:24px;line-height:1.6;}
-        .pub-field{margin-bottom:16px;}
-        .pub-label{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--muted2);margin-bottom:8px;display:block;}
-        .pub-input{width:100%;background:rgba(255,255,255,0.03);border:1px solid var(--border2);border-radius:8px;padding:12px 16px;color:var(--text);font-family:'Outfit',sans-serif;font-size:14px;outline:none;transition:border-color 0.2s;}
+        .publish-right{background:var(--surface2);border:1px solid var(--border2);border-radius:16px;padding:28px;}
+        .publish-form-title{font-family:'Outfit',sans-serif;font-size:16px;font-weight:700;color:var(--text);margin-bottom:6px;}
+        .publish-form-sub{font-size:12px;color:var(--muted2);margin-bottom:20px;line-height:1.6;}
+        .pub-field{margin-bottom:14px;}
+        .pub-label{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--muted2);margin-bottom:6px;display:block;}
+        .pub-input{width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border2);border-radius:8px;padding:9px 14px;color:var(--text);font-family:'Outfit',sans-serif;font-size:13px;outline:none;transition:border-color 0.2s;}
         .pub-input:focus{border-color:var(--lime);}
         .pub-input::placeholder{color:var(--muted);}
-        .pub-select{width:100%;background:var(--surface);border:1px solid var(--border2);border-radius:8px;padding:12px 16px;color:var(--text);font-family:'Outfit',sans-serif;font-size:14px;outline:none;appearance:none;}
-        .pub-submit{width:100%;background:linear-gradient(90deg,var(--emerald),var(--lime));color:var(--bg);padding:14px;border-radius:8px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;border:none;cursor:pointer;transition:opacity 0.15s;margin-top:8px;}
+        .pub-select{width:100%;background:var(--surface);border:1px solid var(--border2);border-radius:8px;padding:9px 14px;color:var(--text);font-family:'Outfit',sans-serif;font-size:13px;outline:none;appearance:none;}
+        .pub-submit{width:100%;background:linear-gradient(90deg,var(--emerald),var(--lime));color:var(--bg);padding:12px;border-radius:8px;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;border:none;cursor:pointer;transition:opacity 0.15s;margin-top:6px;}
         .pub-submit:hover{opacity:0.88;}
-        .pub-note{font-size:12px;color:var(--muted2);text-align:center;margin-top:16px;line-height:1.5;}
+        .pub-note{font-size:11px;color:var(--muted2);text-align:center;margin-top:10px;line-height:1.5;}
 
         /* ── Stats bar ── */
-        .stats-bar{border-bottom:1px solid var(--border);background:var(--bg);}
-        .stats-inner{max-width:1400px;margin:0 auto;padding:20px 6vw;display:flex;align-items:center;gap:40px;flex-wrap:wrap;}
+        .stats-bar{border-bottom:1px solid var(--border);background:var(--surface);}
+        .stats-inner{max-width:1400px;margin:0 auto;padding:14px 6vw;display:flex;align-items:center;gap:32px;flex-wrap:wrap;}
         .stat-item{display:flex;align-items:baseline;gap:8px;}
-        .stat-n{font-family:'Outfit',sans-serif;font-size:24px;font-weight:700;color:var(--lime);line-height:1;}
-        .stat-l{font-size:12px;color:var(--muted2);text-transform:uppercase;letter-spacing:0.05em;font-weight:600;}
-        .stats-bar-rule{width:1px;height:24px;background:var(--border2);}
+        .stat-n{font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:700;color:var(--lime);line-height:1;}
+        .stat-l{font-size:11px;color:var(--muted2);text-transform:uppercase;letter-spacing:0.08em;font-weight:600;}
+        .stats-bar-rule{width:1px;height:28px;background:var(--border2);}
 
         /* ── Affiliate strip ── */
-        .aff-strip{background:var(--surface);border-top:1px solid var(--border);padding:40px 6vw;}
+        .aff-strip{background:var(--surface2);border-top:1px solid var(--border);padding:28px 6vw;}
         .aff-strip-inner{max-width:1400px;margin:0 auto;}
-        .aff-strip-head{display:flex;align-items:center;gap:16px;margin-bottom:24px;}
-        .aff-strip-label{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.18em;color:var(--muted2);}
-        .aff-strip-rule{flex:1;height:1px;background:var(--border2);}
-        .aff-strip-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;}
-        @media(max-width:1000px){.aff-strip-grid{grid-template-columns:repeat(3,1fr);}}
-        @media(max-width:600px){.aff-strip-grid{grid-template-columns:1fr;}}
-        .aff-tile{background:var(--bg);border:1px solid var(--border2);border-radius:12px;padding:20px;text-decoration:none;display:block;transition:border-color 0.2s;}
+        .aff-strip-head{display:flex;align-items:center;gap:14px;margin-bottom:16px;}
+        .aff-strip-label{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.18em;color:var(--muted2);}
+        .aff-strip-rule{flex:1;height:1px;background:var(--border);}
+        .aff-strip-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;}
+        @media(max-width:900px){.aff-strip-grid{grid-template-columns:repeat(3,1fr);}}
+        @media(max-width:600px){.aff-strip-grid{grid-template-columns:1fr 1fr;}}
+        .aff-tile{background:var(--surface);border:1px solid var(--border2);border-radius:10px;padding:14px;text-decoration:none;display:block;transition:border-color 0.15s;}
         .aff-tile:hover{border-color:var(--lime);}
-        .aff-tile-name{font-family:'Outfit',sans-serif;font-size:13px;font-weight:700;color:var(--text);margin-bottom:6px;}
-        .aff-tile-desc{font-size:13px;color:var(--muted2);line-height:1.5;margin-bottom:12px;font-weight:300;}
-        .aff-tile-cta{font-family:'Outfit',sans-serif;font-size:12px;font-weight:600;color:var(--lime);}
+        .aff-tile-name{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--lime);margin-bottom:4px;}
+        .aff-tile-desc{font-size:11px;color:var(--muted2);line-height:1.5;margin-bottom:6px;}
+        .aff-tile-cta{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:var(--lime);}
 
         /* ── Responsive ── */
-        @media(max-width:700px){.masthead-meta{flex-direction:column;align-items:flex-end;gap:8px;}.section-header,.lead-wrap,#ac-grid,.publish-strip,.stats-bar,.aff-strip{padding-left:5vw;padding-right:5vw;}}
+        @media(max-width:700px){.masthead-meta{flex-direction:column;align-items:flex-end;gap:8px;}.lead-story{grid-template-columns:1fr;}.lead-main{min-height:280px;}.section-header,.lead-wrap,#ac-grid,.publish-strip,.stats-bar,.aff-strip{padding-left:4vw;padding-right:4vw;}}
     </style>
 </head>
 <body>
@@ -358,14 +261,27 @@
 <!-- Breaking ticker -->
 <div class="ticker-bar">
     <div class="ticker-inner">
-        <span class="ticker-item"><span class="ticker-sep">·</span><a href="/articles/ai-kids-networkchuck.html">NetworkChuck took AI from his kids — NYC bans it for 600K students <span style="background:#84cc16;color:#06080c;font-size:9px;padding:2px 6px;border-radius:4px;margin-left:6px;">NEW</span></a></span>
+        <span class="ticker-item"><span class="ticker-sep">·</span>        <a href="/articles/vibe-coder-deployment-rules.html" class="ac" data-cat="tech ai security">
+            <div class="ac-img">
+                <span class="ac-tag ac-new">Security</span>
+                <img src="https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy">
+            </div>
+            <div class="ac-body">
+                <div class="ac-title">The vibe coder's deployment checklist: 10 rules before you go live</div>
+                <div class="ac-meta">Jarrit Hosking <span>·</span> Sep 8, 2026</div>
+                <div class="ac-desc">Security, race conditions, payment handling, Cloudflare setup, privacy law, royalty-free assets, pen testing — and the truth nobody tells you: "Claude built it" is not a legal defence.</div>
+                <div class="ac-foot"><span class="ac-read">Read More ▸</span></div>
+            </div>
+        </a>
+
+        <a href="/articles/ai-kids-networkchuck.html">NetworkChuck took AI from his kids — NYC bans it for 600K students <span style="background:#84cc16;color:#06080c;font-size:8px;padding:1px 5px;border-radius:2px;margin-left:4px;">NEW</span></a></span>
         <span class="ticker-item"><span style="font-weight:900;letter-spacing:0.2em;">BREAKING</span><span class="ticker-sep">|</span><a href="/articles/gpt6-astra-agi-era.html">OpenAI GPT-6 Astra — "Welcome to the AGI era" — Jensen Huang agrees</a></span>
         <span class="ticker-item"><span class="ticker-sep">·</span><a href="/articles/tesla-cybercab-nhtsa-probe.html">Tesla Cybercab launches Austin — NHTSA opens probe AQ26002 the next day</a></span>
         <span class="ticker-item"><span class="ticker-sep">·</span><a href="/articles/apple-event-september-2026.html">Apple September 9 — foldable iPhone, new CEO John Ternus, iOS 27</a></span>
         <span class="ticker-item"><span class="ticker-sep">·</span><a href="/articles/windows-12-ai-os-2026.html">Windows 12 — what is real, what is rumour, Project Hudson Valley</a></span>
         <span class="ticker-item"><span class="ticker-sep">·</span><a href="/articles/fable-51-mythos-51-what-it-means.html">Fable 5.1 and Mythos 5.1 — Daniela Amodei announces Enterprise Frontier Safeguards</a></span>
         <!-- duplicate for seamless loop -->
-        <span class="ticker-item"><span class="ticker-sep">·</span><a href="/articles/ai-kids-networkchuck.html">NetworkChuck took AI from his kids — NYC bans it for 600K students <span style="background:#84cc16;color:#06080c;font-size:9px;padding:2px 6px;border-radius:4px;margin-left:6px;">NEW</span></a></span>
+        <span class="ticker-item"><span class="ticker-sep">·</span><a href="/articles/ai-kids-networkchuck.html">NetworkChuck took AI from his kids — NYC bans it for 600K students <span style="background:#84cc16;color:#06080c;font-size:8px;padding:1px 5px;border-radius:2px;margin-left:4px;">NEW</span></a></span>
         <span class="ticker-item"><span style="font-weight:900;letter-spacing:0.2em;">BREAKING</span><span class="ticker-sep">|</span><a href="/articles/gpt6-astra-agi-era.html">OpenAI GPT-6 Astra — "Welcome to the AGI era" — Jensen Huang agrees</a></span>
         <span class="ticker-item"><span class="ticker-sep">·</span><a href="/articles/tesla-cybercab-nhtsa-probe.html">Tesla Cybercab launches Austin — NHTSA opens probe AQ26002 the next day</a></span>
         <span class="ticker-item"><span class="ticker-sep">·</span><a href="/articles/apple-event-september-2026.html">Apple September 9 — foldable iPhone, new CEO John Ternus, iOS 27</a></span>
@@ -379,7 +295,7 @@
     <div class="masthead-top">
         <div class="masthead-brand speakable-masthead">
             <div class="masthead-name">Forge <span>Vertical</span></div>
-            <div class="masthead-tagline">Technology Articles · Cape Town · Est. 2024</div>
+            <div class="masthead-tagline">Independent Technology Journalism · Cape Town · Est. 2024</div>
         </div>
         <div class="masthead-meta">
             <div class="masthead-date" id="live-date"></div>
@@ -403,15 +319,15 @@
 <!-- Stats bar -->
 <div class="stats-bar">
     <div class="stats-inner">
-        <div class="stat-item"><div class="stat-n">38</div><div class="stat-l">Articles published</div></div>
+        <div class="stat-item"><div class="stat-n">39</div><div class="stat-l">Articles published</div></div>
         <div class="stats-bar-rule"></div>
         <div class="stat-item"><div class="stat-n">9</div><div class="stat-l">Topics covered</div></div>
         <div class="stats-bar-rule"></div>
         <div class="stat-item"><div class="stat-n">100%</div><div class="stat-l">Real research</div></div>
         <div class="stats-bar-rule"></div>
-        <div class="stat-item"><div class="stat-n" style="font-size:16px;padding-top:4px;">Cape Town</div><div class="stat-l">Based</div></div>
+        <div class="stat-item"><div class="stat-n" style="font-size:14px;">Cape Town</div><div class="stat-l">Based</div></div>
         <div class="stats-bar-rule"></div>
-        <div class="stat-item"><div class="stat-n" style="font-size:16px;padding-top:4px;">Worldwide</div><div class="stat-l">Coverage</div></div>
+        <div class="stat-item"><div class="stat-n" style="font-size:14px;">Worldwide</div><div class="stat-l">Coverage</div></div>
     </div>
 </div>
 
@@ -421,65 +337,65 @@
         <svg class="search-icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
         <input type="search" class="search-input" id="search-input" placeholder="Search articles — AI, cybersecurity, open source, South Africa..." autocomplete="off">
     </div>
-    <div class="result-count" id="result-count">38 articles</div>
+    <div class="result-count" id="result-count">34 articles</div>
 </div>
 
 <!-- Lead stories -->
 <div class="lead-wrap">
     <div class="lead-story">
         <!-- Cycling hero lead -->
-        <div class="lead-main" id="hero-cycle">
+        <div class="lead-main" id="hero-cycle" style="cursor:pointer;">
             <!-- Slide 1 -->
             <div class="hero-slide active" data-href="/articles/gpt6-astra-agi-era.html">
                 <img src="/assets/images/gptastra.png" alt="GPT-6 Astra AGI" loading="eager">
                 <div class="lead-main-body speakable-lead">
-                    <span class="lead-badge breaking">Breaking · AI</span>
+                    <span class="lead-badge breaking">Breaking · AI · September 7, 2026</span>
                     <div class="lead-title">GPT-6 Astra dropped. OpenAI declared AGI. Jensen Huang agreed. Here is what actually happened.</div>
                     <div class="lead-desc">100,000+ Nvidia GPUs. 100% on ExploitBench. Greg Brockman: "Welcome to the AGI era." Three days later Jensen Huang: "AGI has arrived."</div>
-                    <div class="lead-meta">Jarrit Hosking <span>·</span> 12 min read <span>·</span> Sep 7, 2026</div>
+                    <div class="lead-meta">Jarrit Hosking · 12 min read · Sep 7, 2026</div>
                 </div>
             </div>
             <!-- Slide 2 -->
             <div class="hero-slide" data-href="/articles/tesla-cybercab-nhtsa-probe.html">
                 <img src="/assets/images/cybercab.png" alt="Tesla Cybercab" loading="lazy">
                 <div class="lead-main-body">
-                    <span class="lead-badge breaking">Breaking · Tesla</span>
+                    <span class="lead-badge breaking">Breaking · Tesla · September 7, 2026</span>
                     <div class="lead-title">Tesla launched Cybercab in Austin. NHTSA opened a federal probe the next day.</div>
                     <div class="lead-desc">No steering wheel. No pedals. No mirrors. Tesla self-certified rather than seeking federal approval. The same process took Amazon's Zoox four years.</div>
-                    <div class="lead-meta">Jarrit Hosking <span>·</span> 10 min read <span>·</span> Sep 7, 2026</div>
+                    <div class="lead-meta">Jarrit Hosking · 10 min read · Sep 7, 2026</div>
                 </div>
             </div>
             <!-- Slide 3 -->
             <div class="hero-slide" data-href="/articles/apple-event-september-2026.html">
                 <img src="/assets/images/mac.png" alt="Apple September 2026" loading="lazy">
                 <div class="lead-main-body">
-                    <span class="lead-badge">Apple · Hardware</span>
+                    <span class="lead-badge">Apple · Hardware · September 7, 2026</span>
                     <div class="lead-title">Foldable iPhone, new CEO, iOS 27 — Apple's September 9 event explained in full.</div>
                     <div class="lead-desc">Tim Cook is out after 15 years. John Ternus is in. The first foldable iPhone, iPhone 18 Pro with A20 Pro 2nm chip, iOS 27, macOS Golden Gate.</div>
-                    <div class="lead-meta">Jarrit Hosking <span>·</span> 9 min read <span>·</span> Sep 7, 2026</div>
+                    <div class="lead-meta">Jarrit Hosking · 9 min read · Sep 7, 2026</div>
                 </div>
             </div>
             <!-- Slide 4 -->
             <div class="hero-slide" data-href="/articles/fable-51-mythos-51-what-it-means.html">
                 <img src="https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Fable 5.1" loading="lazy">
                 <div class="lead-main-body">
-                    <span class="lead-badge">Anthropic · AI</span>
+                    <span class="lead-badge">Anthropic · AI · September 3, 2026</span>
                     <div class="lead-title">Fable 5.1 and Mythos 5.1 — the world's most capable AI just got closer to ordinary people.</div>
                     <div class="lead-desc">Same model weights, different safeguards. Daniela Amodei announces Enterprise Frontier Safeguards alongside the launch. What it means for the public sector.</div>
-                    <div class="lead-meta">Jarrit Hosking <span>·</span> 13 min read <span>·</span> Sep 3, 2026</div>
+                    <div class="lead-meta">Jarrit Hosking · 13 min read · Sep 3, 2026</div>
                 </div>
             </div>
             <!-- Slide 5 -->
             <div class="hero-slide" data-href="/articles/rank-on-google-in-hours-case-study.html">
                 <img src="https://images.pexels.com/photos/905163/pexels-photo-905163.jpeg?auto=compress&cs=tinysrgb&w=800" alt="GEO SEO" loading="lazy">
                 <div class="lead-main-body">
-                    <span class="lead-badge">GEO · SEO</span>
+                    <span class="lead-badge">GEO · SEO · Case Study</span>
                     <div class="lead-title">How to rank on Google in hours, not months — a real case study.</div>
                     <div class="lead-desc">A new page outranked established companies in hours. Google's AI Overview cited the content as its primary source. Full technical breakdown — six ingredients, all replicable.</div>
-                    <div class="lead-meta">Jarrit Hosking <span>·</span> 15 min read <span>·</span> Sep 3, 2026</div>
+                    <div class="lead-meta">Jarrit Hosking · 15 min read · Sep 3, 2026</div>
                 </div>
             </div>
-            <!-- Dash indicators -->
+            <!-- Dot indicators -->
             <div class="hero-dots">
                 <span class="hero-dot active" onclick="goSlide(0)"></span>
                 <span class="hero-dot" onclick="goSlide(1)"></span>
@@ -493,32 +409,32 @@
         <div class="lead-secondary">
             <a href="/articles/tesla-cybercab-nhtsa-probe.html" class="lead-sec-item">
                 <img src="/assets/images/cybercab.png" alt="" class="lead-sec-img">
-                <div class="lead-sec-content">
-                    <span class="lead-sec-badge breaking">Breaking</span>
+                <div>
+                    <span class="lead-sec-badge breaking">Breaking · Tesla</span>
                     <div class="lead-sec-title">Tesla Cybercab launches. NHTSA opens a federal probe the next day.</div>
                     <div class="lead-sec-meta">Sep 7 · 10 min read</div>
                 </div>
             </a>
             <a href="/articles/apple-event-september-2026.html" class="lead-sec-item">
                 <img src="/assets/images/mac.png" alt="" class="lead-sec-img">
-                <div class="lead-sec-content">
-                    <span class="lead-sec-badge">Apple</span>
+                <div>
+                    <span class="lead-sec-badge">Apple · Hardware</span>
                     <div class="lead-sec-title">Foldable iPhone, new CEO, iOS 27 — Apple's September 9 event in full.</div>
                     <div class="lead-sec-meta">Sep 7 · 9 min read</div>
                 </div>
             </a>
             <a href="/articles/windows-12-ai-os-2026.html" class="lead-sec-item">
                 <img src="/assets/images/windows.png" alt="" class="lead-sec-img">
-                <div class="lead-sec-content">
-                    <span class="lead-sec-badge">Windows</span>
+                <div>
+                    <span class="lead-sec-badge">Windows · Microsoft</span>
                     <div class="lead-sec-title">Windows 12 — what is real, what is rumour, and why the OS war matters.</div>
                     <div class="lead-sec-meta">Sep 7 · 11 min read</div>
                 </div>
             </a>
             <a href="/articles/fable-51-mythos-51-what-it-means.html" class="lead-sec-item">
                 <img src="https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=200" alt="" class="lead-sec-img">
-                <div class="lead-sec-content">
-                    <span class="lead-sec-badge">Anthropic</span>
+                <div>
+                    <span class="lead-sec-badge">Anthropic · AI</span>
                     <div class="lead-sec-title">Fable 5.1 and Mythos 5.1 — the world's most capable AI gets closer to ordinary people.</div>
                     <div class="lead-sec-meta">Sep 3 · 13 min read</div>
                 </div>
@@ -531,501 +447,383 @@
 <div class="section-header">
     <span class="section-label">// All articles</span>
     <div class="section-rule"></div>
-    <span class="section-count" id="section-count">38 published</span>
+    <span class="section-count" id="section-count">39 published</span>
 </div>
 
 <div id="ac-grid">
         <a href="/articles/pokemon-go-niantic-scopely.html" class="ac" data-cat="tech business">
-            <div class="ac-img">
-                <span class="ac-tag ac-new">Gaming</span>
-                <img src="https://images.pexels.com/photos/1310847/pexels-photo-1310847.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy">
-            </div>
+            <div class="ac-img"><img src="https://images.pexels.com/photos/1310847/pexels-photo-1310847.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy"><div class="ac-ov"></div></div>
             <div class="ac-body">
+                <span class="ac-tag ac-new">New · Gaming · Pokémon GO · Business</span>
                 <div class="ac-title">Niantic built something extraordinary. Then sold it for $3.5 billion. Here is what actually happened.</div>
-                <div class="ac-meta">Jarrit Hosking <span>·</span> Sep 8, 2026</div>
                 <div class="ac-desc">Scopely acquired Pokémon GO in May 2025 — now under Saudi ownership via Savvy Games Group. BrandonTan91, Mystic7, ZoëTwoDots. Remote Raid controversies. Is it still worth playing in 2026? The honest story.</div>
-                <div class="ac-foot"><span class="ac-read">Read More ▸</span></div>
+                <div class="ac-foot"><span class="ac-date">Sep 8, 2026</span><span class="ac-read">Read →</span></div>
             </div>
         </a>
-
         <a href="/articles/vibe-coding-toxicity.html" class="ac" data-cat="ai tech">
-            <div class="ac-img">
-                <span class="ac-tag ac-new">AI</span>
-                <img src="https://images.pexels.com/photos/4974912/pexels-photo-4974912.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy">
-            </div>
+            <div class="ac-img"><img src="https://images.pexels.com/photos/4974912/pexels-photo-4974912.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy"><div class="ac-ov"></div></div>
             <div class="ac-body">
+                <span class="ac-tag ac-new">New · AI · Community · Opinion</span>
                 <div class="ac-title">The toxicity in vibe coding and AI communities is killing innovation — and someone needs to say it.</div>
-                <div class="ac-meta">Jarrit Hosking <span>·</span> Sep 8, 2026</div>
                 <div class="ac-desc">"This is garbage." "That's not real coding." Anonymous contempt aimed at people building their first apps. The platforms enabling it. The legal case for accountability. And what constructive actually looks like.</div>
-                <div class="ac-foot"><span class="ac-read">Read More ▸</span></div>
+                <div class="ac-foot"><span class="ac-date">Sep 8, 2026</span><span class="ac-read">Read →</span></div>
             </div>
         </a>
-
         <a href="/articles/ai-kids-networkchuck.html" class="ac" data-cat="ai tech">
-            <div class="ac-img">
-                <span class="ac-tag ac-new">Education</span>
-                <img src="https://images.pexels.com/photos/8364026/pexels-photo-8364026.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy">
-            </div>
+            <div class="ac-img"><img src="https://images.pexels.com/photos/8364026/pexels-photo-8364026.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy"><div class="ac-ov"></div></div>
             <div class="ac-body">
+                <span class="ac-tag ac-new">New · AI · Education · Parenting</span>
                 <div class="ac-title">NetworkChuck took AI away from his kids. New York City banned it for 600,000 students. Here is why they are both right.</div>
-                <div class="ac-meta">Jarrit Hosking <span>·</span> Sep 8, 2026</div>
                 <div class="ac-desc">NetworkChuck: "They are still learning how to think." Physical books. Self-hosted Wikipedia. No spell check. 2,951 reactions. NYC bans AI for 600K students. The cognitive case — and what to do instead.</div>
-                <div class="ac-foot"><span class="ac-read">Read More ▸</span></div>
+                <div class="ac-foot"><span class="ac-date">Sep 8, 2026</span><span class="ac-read">Read →</span></div>
             </div>
         </a>
-
         <a href="/articles/mrwhostheboss.html" class="ac" data-cat="tech ai">
-            <div class="ac-img">
-                <span class="ac-tag ac-new">YouTube</span>
-                <img src="https://images.pexels.com/photos/4974912/pexels-photo-4974912.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy">
-            </div>
+            <div class="ac-img"><img src="https://images.pexels.com/photos/4974912/pexels-photo-4974912.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy"><div class="ac-ov"></div></div>
             <div class="ac-body">
+                <span class="ac-tag ac-new">New · Tech Creator · YouTube</span>
                 <div class="ac-title">MrWhosTheBoss: 22.8M subscribers, a Guinness World Record, and a US border detention story</div>
-                <div class="ac-meta">Jarrit Hosking <span>·</span> Sep 7, 2026</div>
                 <div class="ac-desc">Arun Maini started in an attic in 2011. Now he has 8.9 billion views, two Streamy Awards, a winning penalty at the Sidemen Charity Match, and a US immigration flag. The full story.</div>
-                <div class="ac-foot"><span class="ac-read">Read More ▸</span></div>
+                <div class="ac-foot"><span class="ac-date">Sep 7, 2026</span><span class="ac-read">Read →</span></div>
             </div>
         </a>
-
-        <a href="/articles/gpt6-astra-agi-era.html" class="ac" data-cat="ai">
-            <div class="ac-img">
-                <span class="ac-tag ac-new">OpenAI</span>
-                <img src="/assets/images/gptastra.png" alt="" loading="lazy">
-            </div>
+<a href="/articles/gpt6-astra-agi-era.html" class="ac" data-cat="ai">
+            <div class="ac-img"><img src="/assets/images/gptastra.png" alt="" loading="lazy" style="object-fit:cover;width:100%;height:100%;"><div class="ac-ov"></div></div>
             <div class="ac-body">
+                <span class="ac-tag ac-new">New · AI · OpenAI · AGI</span>
                 <div class="ac-title">GPT-6 Astra dropped. OpenAI declared AGI. Jensen Huang agreed. Here is what actually happened.</div>
-                <div class="ac-meta">Jarrit Hosking <span>·</span> Sep 7, 2026</div>
                 <div class="ac-desc">September 3: OpenAI releases Astra — 100,000+ Nvidia GPUs, 100% on ExploitBench. Greg Brockman: "Welcome to the AGI era." September 6: Jensen Huang: "AGI has arrived." The honest breakdown of what it means.</div>
-                <div class="ac-foot"><span class="ac-read">Read More ▸</span></div>
+                <div class="ac-foot"><span class="ac-date">Sep 7, 2026</span><span class="ac-read">Read →</span></div>
             </div>
         </a>
 
-        <a href="/articles/tesla-cybercab-nhtsa-probe.html" class="ac" data-cat="tech">
-            <div class="ac-img">
-                <span class="ac-tag ac-new">Tesla</span>
-                <img src="/assets/images/cybercab.png" alt="" loading="lazy">
-            </div>
+<a href="/articles/tesla-cybercab-nhtsa-probe.html" class="ac" data-cat="tech">
+            <div class="ac-img"><img src="/assets/images/cybercab.png" alt="" loading="lazy" style="object-fit:cover;width:100%;height:100%;"><div class="ac-ov"></div></div>
             <div class="ac-body">
+                <span class="ac-tag ac-new">New · Tesla · Autonomous · Regulation</span>
                 <div class="ac-title">Tesla launched Cybercab in Austin. NHTSA opened a federal probe the next day.</div>
-                <div class="ac-meta">Jarrit Hosking <span>·</span> Sep 7, 2026</div>
                 <div class="ac-desc">No steering wheel. No pedals. No mirrors. September 3: Tesla puts paying passengers in a fully autonomous Cybercab. September 4: NHTSA opens probe AQ26002. Tesla self-certified rather than seeking approval — the same process took Amazon's Zoox four years.</div>
-                <div class="ac-foot"><span class="ac-read">Read More ▸</span></div>
+                <div class="ac-foot"><span class="ac-date">Sep 7, 2026</span><span class="ac-read">Read →</span></div>
             </div>
         </a>
 
-        <a href="/articles/apple-event-september-2026.html" class="ac" data-cat="tech">
-            <div class="ac-img">
-                <span class="ac-tag ac-new">Apple</span>
-                <img src="/assets/images/mac.png" alt="" loading="lazy">
-            </div>
+<a href="/articles/apple-event-september-2026.html" class="ac" data-cat="tech">
+            <div class="ac-img"><img src="/assets/images/mac.png" alt="" loading="lazy" style="object-fit:cover;width:100%;height:100%;"><div class="ac-ov"></div></div>
             <div class="ac-body">
+                <span class="ac-tag ac-new">New · Apple · iOS 27 · Hardware</span>
                 <div class="ac-title">Apple September 9 2026: foldable iPhone, new CEO, and everything that changes this week</div>
-                <div class="ac-meta">Jarrit Hosking <span>·</span> Sep 7, 2026</div>
                 <div class="ac-desc">Tim Cook is out after 15 years. John Ternus is in. The first foldable iPhone, iPhone 18 Pro with A20 Pro 2nm chip, iOS 27, and macOS Golden Gate all drop this week. Full breakdown of what matters.</div>
-                <div class="ac-foot"><span class="ac-read">Read More ▸</span></div>
+                <div class="ac-foot"><span class="ac-date">Sep 7, 2026</span><span class="ac-read">Read →</span></div>
             </div>
         </a>
 
-        <a href="/articles/windows-12-ai-os-2026.html" class="ac" data-cat="tech">
-            <div class="ac-img">
-                <span class="ac-tag ac-new">Microsoft</span>
-                <img src="/assets/images/windows.png" alt="" loading="lazy">
-            </div>
+<a href="/articles/windows-12-ai-os-2026.html" class="ac" data-cat="tech">
+            <div class="ac-img"><img src="/assets/images/windows.png" alt="" loading="lazy" style="object-fit:cover;width:100%;height:100%;"><div class="ac-ov"></div></div>
             <div class="ac-body">
+                <span class="ac-tag ac-new">New · Windows · Microsoft · OS War</span>
                 <div class="ac-title">Windows 12 in 2026: what is real, what is rumour, and why the OS war just got interesting</div>
-                <div class="ac-meta">Jarrit Hosking <span>·</span> Sep 7, 2026</div>
                 <div class="ac-desc">Windows 12 is not coming this year — Microsoft confirmed it. But Project Hudson Valley is real. Apple ships iOS 27 this week. Linux surpassed macOS on Steam. Here is where every OS stands right now.</div>
-                <div class="ac-foot"><span class="ac-read">Read More ▸</span></div>
+                <div class="ac-foot"><span class="ac-date">Sep 7, 2026</span><span class="ac-read">Read →</span></div>
             </div>
         </a>
 
-        <a href="/articles/tripspace-commission-free-booking.html" class="ac" data-cat="business">
-            <div class="ac-img">
-                <span class="ac-tag ac-new">Business</span>
-                <img src="https://images.pexels.com/photos/1001965/pexels-photo-1001965.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy">
-            </div>
+<a href="/articles/tripspace-commission-free-booking.html" class="ac" data-cat="business">
+            <div class="ac-img"><img src="https://images.pexels.com/photos/1001965/pexels-photo-1001965.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy"><div class="ac-ov"></div></div>
             <div class="ac-body">
+                <span class="ac-tag ac-new">New · TripSpace · Hospitality · Commission-Free</span>
                 <div class="ac-title">TripSpace Global review 2026: the commission-free alternative where hosts keep 100% of every booking</div>
-                <div class="ac-meta">Jarrit Hosking <span>·</span> Sep 6, 2026</div>
                 <div class="ac-desc">R450/month flat versus 15% per booking. The full comparison — what each platform actually costs per year at different revenue levels, who TripSpace suits best, and how to use it alongside Booking.com.</div>
-                <div class="ac-foot"><span class="ac-read">Read More ▸</span></div>
+                <div class="ac-foot"><span class="ac-date">Sep 6, 2026</span><span class="ac-read">Read →</span></div>
             </div>
         </a>
 
-        <a href="/articles/fable-51-mythos-51-what-it-means.html" class="ac" data-cat="ai">
-            <div class="ac-img">
-                <span class="ac-tag ac-new">Anthropic</span>
-                <img src="https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy">
-            </div>
+<a href="/articles/fable-51-mythos-51-what-it-means.html" class="ac" data-cat="ai">
+            <div class="ac-img"><img src="https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy"><div class="ac-ov"></div></div>
             <div class="ac-body">
+                <span class="ac-tag ac-new">New · AI · Anthropic · Policy</span>
                 <div class="ac-title">Fable 5.1 and Mythos 5.1: the world's most capable AI just got closer to ordinary people</div>
-                <div class="ac-meta">Jarrit Hosking <span>·</span> Sep 3, 2026</div>
                 <div class="ac-desc">Same weights, different safeguards. Dario Amodei published a policy essay calling for FAA-style AI regulation the same day Fable 5 launched. What happens when Mythos-class capability reaches the public sector — and why task-bridge matters now more than ever.</div>
-                <div class="ac-foot"><span class="ac-read">Read More ▸</span></div>
+                <div class="ac-foot"><span class="ac-date">Sep 3, 2026</span><span class="ac-read">Read →</span></div>
             </div>
         </a>
 
-        <a href="/articles/rank-on-google-in-hours-case-study.html" class="ac" data-cat="geo tech">
-            <div class="ac-img">
-                <span class="ac-tag ac-new">SEO</span>
-                <img src="https://images.pexels.com/photos/905163/pexels-photo-905163.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy">
-            </div>
+<a href="/articles/rank-on-google-in-hours-case-study.html" class="ac" data-cat="geo tech">
+            <div class="ac-img"><img src="https://images.pexels.com/photos/905163/pexels-photo-905163.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy"><div class="ac-ov"></div></div>
             <div class="ac-body">
+                <span class="ac-tag ac-new">New · GEO · SEO · Case Study</span>
                 <div class="ac-title">How to rank on Google in hours, not months — a real case study with screenshots</div>
-                <div class="ac-meta">Jarrit Hosking <span>·</span> Sep 3, 2026</div>
                 <div class="ac-desc">A page built in one afternoon outranked a professional brokerage and an older domain in hours. Google's AI Overview pulled our content as the primary source. Full technical breakdown of exactly what happened and why.</div>
-                <div class="ac-foot"><span class="ac-read">Read More ▸</span></div>
+                <div class="ac-foot"><span class="ac-date">Sep 3, 2026</span><span class="ac-read">Read →</span></div>
             </div>
         </a>
 
-        <a href="/articles/booking-com-vs-tripspace-global.html" class="ac" data-cat="business">
-            <div class="ac-img">
-                <span class="ac-tag ac-new">Business</span>
-                <img src="https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy">
-            </div>
+<a href="/articles/booking-com-vs-tripspace-global.html" class="ac" data-cat="business">
+            <div class="ac-img"><img src="https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy"><div class="ac-ov"></div></div>
             <div class="ac-body">
+                <span class="ac-tag ac-new">New · Hospitality · TripSpace · OTA</span>
                 <div class="ac-title">Booking.com charges hosts up to 25% commission. TripSpace Global charges 0%.</div>
-                <div class="ac-meta">Jarrit Hosking <span>·</span> Sep 3, 2026</div>
                 <div class="ac-desc">What 15% commission actually costs per year in real numbers. The Genius algorithm change. Why the commission-free model wins. And why you probably still need Booking.com — and how to use it smarter.</div>
-                <div class="ac-foot"><span class="ac-read">Read More ▸</span></div>
+                <div class="ac-foot"><span class="ac-date">Sep 3, 2026</span><span class="ac-read">Read →</span></div>
             </div>
         </a>
 
-        <a href="/articles/linux-2026-why-the-world-is-switching.html" class="ac" data-cat="tech opensource">
-            <div class="ac-img">
-                <span class="ac-tag ac-new">Linux</span>
-                <img src="https://images.pexels.com/photos/207580/pexels-photo-207580.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy">
-            </div>
+<a href="/articles/linux-2026-why-the-world-is-switching.html" class="ac" data-cat="tech opensource">
+            <div class="ac-img"><img src="https://images.pexels.com/photos/207580/pexels-photo-207580.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy"><div class="ac-ov"></div></div>
             <div class="ac-body">
+                <span class="ac-tag ac-new">New · Linux · Open Source · Technology</span>
                 <div class="ac-title">Why the world is warming up to Linux in 2026 — and which distro NetworkChuck, Chris Titus, and LTT actually use</div>
-                <div class="ac-meta">Jarrit Hosking <span>·</span> Sep 3, 2026</div>
                 <div class="ac-desc">Linux surpassed macOS on Steam. Windows 10 is dead. LTT ran a 30-day Linux challenge. I just installed Linux Mint fresh. Here is the honest guide to which distro actually makes sense for you.</div>
-                <div class="ac-foot"><span class="ac-read">Read More ▸</span></div>
+                <div class="ac-foot"><span class="ac-date">Sep 3, 2026</span><span class="ac-read">Read →</span></div>
             </div>
         </a>
 
-        <a href="/articles/gsc-claude-seo-workflow.html" class="ac" data-cat="geo tech">
-            <div class="ac-img">
-                <span class="ac-tag ac-new">SEO</span>
-                <img src="https://images.pexels.com/photos/186461/pexels-photo-186461.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy">
-            </div>
+<a href="/articles/gsc-claude-seo-workflow.html" class="ac" data-cat="geo tech">
+            <div class="ac-img"><img src="https://images.pexels.com/photos/186461/pexels-photo-186461.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy"><div class="ac-ov"></div></div>
             <div class="ac-body">
+                <span class="ac-tag ac-new">New · SEO · GEO · How-To</span>
                 <div class="ac-title">How I use Google Search Console and Claude to rank higher every week — the exact workflow</div>
-                <div class="ac-meta">Jarrit Hosking <span>·</span> Sep 2, 2026</div>
                 <div class="ac-desc">No paid tools. Export your GSC data, feed it to Claude, find 500-impression zero-click pages, fix the titles, request re-indexing, repeat. Real data from forgevertical.com included.</div>
-                <div class="ac-foot"><span class="ac-read">Read More ▸</span></div>
+                <div class="ac-foot"><span class="ac-date">Sep 2, 2026</span><span class="ac-read">Read →</span></div>
             </div>
         </a>
 
-        <a href="/articles/nordpass-vs-browser-passwords.html" class="ac" data-cat="tech">
-            <div class="ac-img">
-                <span class="ac-tag ac-new">Security</span>
-                <img src="https://images.pexels.com/photos/60504/security-protection-anti-virus-software-60504.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy">
-            </div>
+<a href="/articles/nordpass-vs-browser-passwords.html" class="ac" data-cat="tech">
+            <div class="ac-img"><img src="https://images.pexels.com/photos/60504/security-protection-anti-virus-software-60504.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy"><div class="ac-ov"></div></div>
             <div class="ac-body">
+                <span class="ac-tag ac-new">New · Security · Tools</span>
                 <div class="ac-title">NordPass vs 1Password vs browser passwords — which actually keeps you safe in 2026?</div>
-                <div class="ac-meta">Jarrit Hosking <span>·</span> Sep 2, 2026</div>
                 <div class="ac-desc">Two malware strains bypassed Chrome and Edge encryption in 2026. 124 million passwords harvested from infected PCs. An honest comparison with real attack data — not a marketing page.</div>
-                <div class="ac-foot"><span class="ac-read">Read More ▸</span></div>
+                <div class="ac-foot"><span class="ac-date">Sep 2, 2026</span><span class="ac-read">Read →</span></div>
             </div>
         </a>
 
-        <a href="/articles/linus-tech-tips.html" class="ac" data-cat="tech opensource">
-            <div class="ac-img">
-                <span class="ac-tag ac-new">YouTube</span>
-                <img src="https://images.pexels.com/photos/4974912/pexels-photo-4974912.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy">
-            </div>
+<a href="/articles/linus-tech-tips.html" class="ac" data-cat="tech opensource">
+            <div class="ac-img"><img src="https://images.pexels.com/photos/4974912/pexels-photo-4974912.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy"><div class="ac-ov"></div></div>
             <div class="ac-body">
+                <span class="ac-tag ac-new">New · Technology · Personal</span>
                 <div class="ac-title">Linus Tech Tips: 16.8M subscribers, one controversy, and what the tech community can learn from it</div>
-                <div class="ac-meta">Jarrit Hosking <span>·</span> Sep 2, 2026</div>
                 <div class="ac-desc">LTT built something remarkable over 18 years. In 2023 a very public controversy tested it. Here is what happened, what was fair, and why the tech community is stronger when it guides rather than breaks.</div>
-                <div class="ac-foot"><span class="ac-read">Read More ▸</span></div>
+                <div class="ac-foot"><span class="ac-date">Sep 2, 2026</span><span class="ac-read">Read →</span></div>
             </div>
         </a>
 
-        <a href="/articles/ai-job-displacement.html" class="ac" data-cat="ai">
-            <div class="ac-img">
-                <span class="ac-tag ac-new">Future of Work</span>
-                <img src="https://images.pexels.com/photos/5473955/pexels-photo-5473955.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy">
-            </div>
+<a href="/articles/ai-job-displacement.html" class="ac" data-cat="ai">
+            <div class="ac-img"><img src="https://images.pexels.com/photos/5473955/pexels-photo-5473955.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy"><div class="ac-ov"></div></div>
             <div class="ac-body">
+                <span class="ac-tag ac-new">New · AI · Future of Work</span>
                 <div class="ac-title">491 people lost their job to AI today. What are you going to do about it?</div>
-                <div class="ac-meta">Jarrit Hosking <span>·</span> Sep 1, 2026</div>
                 <div class="ac-desc">165,000 AI layoffs in seven months. 491 tech jobs gone every day. The numbers are already here. The only real answer is to start building something. Not tomorrow. Now.</div>
-                <div class="ac-foot"><span class="ac-read">Read More ▸</span></div>
+                <div class="ac-foot"><span class="ac-date">Sep 1, 2026</span><span class="ac-read">Read →</span></div>
             </div>
         </a>
 
-        <a href="/articles/cape-town-ai-unemployment.html" class="ac" data-cat="sa ai">
-            <div class="ac-img">
-                <span class="ac-tag ac-new">Cape Town</span>
-                <img src="https://images.pexels.com/photos/259447/pexels-photo-259447.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy">
-            </div>
+<a href="/articles/cape-town-ai-unemployment.html" class="ac" data-cat="sa ai">
+            <div class="ac-img"><img src="https://images.pexels.com/photos/259447/pexels-photo-259447.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy"><div class="ac-ov"></div></div>
             <div class="ac-body">
+                <span class="ac-tag ac-new">New · Cape Town · AI · Public Policy</span>
                 <div class="ac-title">The Mayor's two letters: AI adoption, unemployment, and Cape Town's wager on the future</div>
-                <div class="ac-meta">Jarrit Hosking <span>·</span> Sep 1, 2026</div>
                 <div class="ac-desc">Same week. Same man. One letter about 33.6% unemployment demanding urgency. One policy tying salary increases to AI adoption. Both defensible. The tension between them deserves more than a headline.</div>
-                <div class="ac-foot"><span class="ac-read">Read More ▸</span></div>
+                <div class="ac-foot"><span class="ac-date">Sep 1, 2026</span><span class="ac-read">Read →</span></div>
             </div>
         </a>
 
-        <a href="/articles/dstv-piracy.html" class="ac" data-cat="sa tech">
-            <div class="ac-img">
-                <span class="ac-tag ac-new">Media</span>
-                <img src="https://images.pexels.com/photos/7430/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy">
-            </div>
+<a href="/articles/dstv-piracy.html" class="ac" data-cat="sa tech">
+            <div class="ac-img"><img src="https://images.pexels.com/photos/7430/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy"><div class="ac-ov"></div></div>
             <div class="ac-body">
+                <span class="ac-tag ac-new">New · Technology · Media · SA</span>
                 <div class="ac-title">DStv is fighting pirates with serious technology. Here's why people became pirates.</div>
-                <div class="ac-meta">Jarrit Hosking <span>·</span> Aug 29, 2026</div>
                 <div class="ac-desc">Forensic watermarking, ISP blocking, a French court ruling against Google and Cloudflare. Canal+ deployed real technology. The root cause question matters more.</div>
-                <div class="ac-foot"><span class="ac-read">Read More ▸</span></div>
+                <div class="ac-foot"><span class="ac-date">Aug 29, 2026</span><span class="ac-read">Read →</span></div>
             </div>
         </a>
 
-        <a href="/articles/south-africa-ev-infrastructure.html" class="ac" data-cat="sa tech">
-            <div class="ac-img">
-                <span class="ac-tag ac-new">Energy</span>
-                <img src="https://images.pexels.com/photos/110844/pexels-photo-110844.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy">
-            </div>
+<a href="/articles/south-africa-ev-infrastructure.html" class="ac" data-cat="sa tech">
+            <div class="ac-img"><img src="https://images.pexels.com/photos/110844/pexels-photo-110844.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy"><div class="ac-ov"></div></div>
             <div class="ac-body">
+                <span class="ac-tag ac-new">New · Technology · Energy · SA</span>
                 <div class="ac-title">Electric vehicles in South Africa: the infrastructure problem nobody is solving fast enough</div>
-                <div class="ac-meta">Jarrit Hosking <span>·</span> Aug 29, 2026</div>
                 <div class="ac-desc">445 charging sites. 10,000 EVs. Eskom. A Chinese bakkie at R612,000. An honest look at who should actually buy an EV right now.</div>
-                <div class="ac-foot"><span class="ac-read">Read More ▸</span></div>
+                <div class="ac-foot"><span class="ac-date">Aug 29, 2026</span><span class="ac-read">Read →</span></div>
             </div>
         </a>
 
-        <a href="/articles/chris-titus-tech.html" class="ac" data-cat="tech opensource">
-            <div class="ac-img">
-                <span class="ac-tag ac-new">Open Source</span>
-                <img src="https://images.pexels.com/photos/2115217/pexels-photo-2115217.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy">
-            </div>
+<a href="/articles/chris-titus-tech.html" class="ac" data-cat="tech opensource">
+            <div class="ac-img"><img src="https://images.pexels.com/photos/2115217/pexels-photo-2115217.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy"><div class="ac-ov"></div></div>
             <div class="ac-body">
+                <span class="ac-tag ac-new">New · Open Source · Technology</span>
                 <div class="ac-title">Chris Titus Tech: what open source looks like when done right</div>
-                <div class="ac-meta">Jarrit Hosking <span>·</span> Aug 26, 2026</div>
                 <div class="ac-desc">Six years. 200+ contributors. 30 million runs. The most starred PowerShell project on GitHub. A tribute and a call to developers.</div>
-                <div class="ac-foot"><span class="ac-read">Read More ▸</span></div>
+                <div class="ac-foot"><span class="ac-date">Aug 26, 2026</span><span class="ac-read">Read →</span></div>
             </div>
         </a>
 
-        <a href="/articles/cape-town-ai-city.html" class="ac" data-cat="sa ai">
-            <div class="ac-img">
-                <span class="ac-tag">Cape Town</span>
-                <img src="https://images.pexels.com/photos/1142950/pexels-photo-1142950.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy">
-            </div>
+<a href="/articles/cape-town-ai-city.html" class="ac" data-cat="sa ai">
+            <div class="ac-img"><img src="https://images.pexels.com/photos/1142950/pexels-photo-1142950.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy"><div class="ac-ov"></div></div>
             <div class="ac-body">
+                <span class="ac-tag">AI · Cape Town · Public Interest</span>
                 <div class="ac-title">Cape Town's AI ambition — the questions nobody is asking</div>
-                <div class="ac-meta">Jarrit Hosking <span>·</span> Aug 20, 2026</div>
                 <div class="ac-desc">The Mayor won't approve salary budgets without AI adoption plans. Seven uncomfortable questions about what this means for City workers.</div>
-                <div class="ac-foot"><span class="ac-read">Read More ▸</span></div>
+                <div class="ac-foot"><span class="ac-date">Aug 20, 2026</span><span class="ac-read">Read →</span></div>
             </div>
         </a>
 
-        <a href="/articles/investor-list.html" class="ac" data-cat="business">
-            <div class="ac-img">
-                <span class="ac-tag">Startups</span>
-                <img src="https://images.pexels.com/photos/7681091/pexels-photo-7681091.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy">
-            </div>
+<a href="/articles/investor-list.html" class="ac" data-cat="business">
+            <div class="ac-img"><img src="https://images.pexels.com/photos/7681091/pexels-photo-7681091.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy"><div class="ac-ov"></div></div>
             <div class="ac-body">
+                <span class="ac-tag">Startups · Funding · Business</span>
                 <div class="ac-title">Stop hunting for investors. Start finding them.</div>
-                <div class="ac-meta">Jarrit Hosking <span>·</span> Aug 20, 2026</div>
                 <div class="ac-desc">Finding investors yourself is a full-time job that almost never works. The honest cost of the DIY approach and what InvestorList.com changes.</div>
-                <div class="ac-foot"><span class="ac-read">Read More ▸</span></div>
+                <div class="ac-foot"><span class="ac-date">Aug 20, 2026</span><span class="ac-read">Read →</span></div>
             </div>
         </a>
 
-        <a href="/articles/streaming-fatigue.html" class="ac" data-cat="tech opensource">
-            <div class="ac-img">
-                <span class="ac-tag">Technology</span>
-                <img src="https://images.pexels.com/photos/1201996/pexels-photo-1201996.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy">
-            </div>
+<a href="/articles/streaming-fatigue.html" class="ac" data-cat="tech opensource">
+            <div class="ac-img"><img src="https://images.pexels.com/photos/1201996/pexels-photo-1201996.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy"><div class="ac-ov"></div></div>
             <div class="ac-body">
+                <span class="ac-tag">Technology · Open Source</span>
                 <div class="ac-title">I cancelled Netflix. Here's what I built instead.</div>
-                <div class="ac-meta">Jarrit Hosking <span>·</span> Aug 19, 2026</div>
                 <div class="ac-desc">R10,000+ per year for content you mostly don't want. One developer's honest experience building a personal alternative on GCP for almost nothing.</div>
-                <div class="ac-foot"><span class="ac-read">Read More ▸</span></div>
+                <div class="ac-foot"><span class="ac-date">Aug 19, 2026</span><span class="ac-read">Read →</span></div>
             </div>
         </a>
 
-        <a href="/articles/networkchuck.html" class="ac" data-cat="tech opensource">
-            <div class="ac-img">
-                <span class="ac-tag">YouTube</span>
-                <img src="https://images.pexels.com/photos/4974915/pexels-photo-4974915.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy">
-            </div>
+<a href="/articles/networkchuck.html" class="ac" data-cat="tech opensource">
+            <div class="ac-img"><img src="https://images.pexels.com/photos/4974915/pexels-photo-4974915.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy"><div class="ac-ov"></div></div>
             <div class="ac-body">
+                <span class="ac-tag">Technology · Personal</span>
                 <div class="ac-title">NetworkChuck: why building cool stuff is enough of a reason</div>
-                <div class="ac-meta">Jarrit Hosking <span>·</span> Aug 19, 2026</div>
                 <div class="ac-desc">5.3 million subscribers. 400 million views. A beard, a coffee, and a genuine love of technology. A tribute — with a prayer at the end.</div>
-                <div class="ac-foot"><span class="ac-read">Read More ▸</span></div>
+                <div class="ac-foot"><span class="ac-date">Aug 19, 2026</span><span class="ac-read">Read →</span></div>
             </div>
         </a>
 
-        <a href="/articles/webuycars-is-a-tech-company.html" class="ac" data-cat="business tech sa">
-            <div class="ac-img">
-                <span class="ac-tag">Business</span>
-                <img src="https://images.pexels.com/photos/1592384/pexels-photo-1592384.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy">
-            </div>
+<a href="/articles/webuycars-is-a-tech-company.html" class="ac" data-cat="business tech sa">
+            <div class="ac-img"><img src="https://images.pexels.com/photos/1592384/pexels-photo-1592384.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy"><div class="ac-ov"></div></div>
             <div class="ac-body">
+                <span class="ac-tag">Technology · Business · SA</span>
                 <div class="ac-title">WeBuyCars is a tech company. Here's what your business can learn from it.</div>
-                <div class="ac-meta">Jarrit Hosking <span>·</span> Aug 19, 2026</div>
                 <div class="ac-desc">Two brothers built an R25 billion business from a backyard operation. An AI model has now bought 2,800 vehicles autonomously. Six lessons.</div>
-                <div class="ac-foot"><span class="ac-read">Read More ▸</span></div>
+                <div class="ac-foot"><span class="ac-date">Aug 19, 2026</span><span class="ac-read">Read →</span></div>
             </div>
         </a>
 
-        <a href="/articles/international-panel-shop.html" class="ac" data-cat="business sa">
-            <div class="ac-img">
-                <span class="ac-tag">Business</span>
-                <img src="https://images.pexels.com/photos/3807517/pexels-photo-3807517.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy">
-            </div>
+<a href="/articles/international-panel-shop.html" class="ac" data-cat="business sa">
+            <div class="ac-img"><img src="https://images.pexels.com/photos/3807517/pexels-photo-3807517.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy"><div class="ac-ov"></div></div>
             <div class="ac-body">
+                <span class="ac-tag">Business · Automotive · Cape Town</span>
                 <div class="ac-title">Built from a garage, forged over 23 years: International Panel Shop</div>
-                <div class="ac-meta">Jarrit Hosking <span>·</span> Aug 2026</div>
                 <div class="ac-desc">It started with a Ford Fairlane. Twenty-three years later — R2.23M in assets, 4.8 stars, Goodwood institution. Now for sale via Aldes.</div>
-                <div class="ac-foot"><span class="ac-read">Read More ▸</span></div>
+                <div class="ac-foot"><span class="ac-date">Aug 2026</span><span class="ac-read">Read →</span></div>
             </div>
         </a>
 
-        <a href="/articles/google-ai-owns-your-story.html" class="ac" data-cat="geo ai">
-            <div class="ac-img">
-                <span class="ac-tag">SEO</span>
-                <img src="https://images.pexels.com/photos/1148820/pexels-photo-1148820.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy">
-            </div>
+<a href="/articles/google-ai-owns-your-story.html" class="ac" data-cat="geo ai">
+            <div class="ac-img"><img src="https://images.pexels.com/photos/1148820/pexels-photo-1148820.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy"><div class="ac-ov"></div></div>
             <div class="ac-body">
+                <span class="ac-tag">GEO · SEO · AEO</span>
                 <div class="ac-title">Google now writes your story. Here's how to take it back.</div>
-                <div class="ac-meta">Jarrit Hosking <span>·</span> Aug 2026</div>
                 <div class="ac-desc">Google is testing AI summaries under paid ads. Seven actions to shape what AI says about your business before anyone clicks.</div>
-                <div class="ac-foot"><span class="ac-read">Read More ▸</span></div>
+                <div class="ac-foot"><span class="ac-date">Aug 2026</span><span class="ac-read">Read →</span></div>
             </div>
         </a>
 
-        <a href="/articles/task-bridge-manifesto.html" class="ac" data-cat="ai opensource">
-            <div class="ac-img">
-                <span class="ac-tag">Open Source</span>
-                <img src="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy">
-            </div>
+<a href="/articles/task-bridge-manifesto.html" class="ac" data-cat="ai opensource">
+            <div class="ac-img"><img src="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy"><div class="ac-ov"></div></div>
             <div class="ac-body">
+                <span class="ac-tag">Open Call · AI · Open Source</span>
                 <div class="ac-title">The missing protocol — an open call to Anthropic, OpenAI, and Google DeepMind</div>
-                <div class="ac-meta">Jarrit Hosking <span>·</span> Aug 2026</div>
                 <div class="ac-desc">If AI displaces human work, we need an open protocol to route that work back to humans. task-bridge is the proposal.</div>
-                <div class="ac-foot"><span class="ac-read">Read More ▸</span></div>
+                <div class="ac-foot"><span class="ac-date">Aug 2026</span><span class="ac-read">Read →</span></div>
             </div>
         </a>
 
-        <a href="/articles/fable5-here-to-stay.html" class="ac" data-cat="ai">
-            <div class="ac-img">
-                <span class="ac-tag">Anthropic</span>
-                <img src="https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy">
-            </div>
+<a href="/articles/fable5-here-to-stay.html" class="ac" data-cat="ai">
+            <div class="ac-img"><img src="https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy"><div class="ac-ov"></div></div>
             <div class="ac-body">
+                <span class="ac-tag">AI · Anthropic</span>
                 <div class="ac-title">Fable 5 is here to stay — and what Anthropic has planned next</div>
-                <div class="ac-meta">Jarrit Hosking <span>·</span> Aug 2026</div>
                 <div class="ac-desc">Survived a 19-day government shutdown, returned with stronger safeguards, now permanently in the lineup. The full roadmap.</div>
-                <div class="ac-foot"><span class="ac-read">Read More ▸</span></div>
+                <div class="ac-foot"><span class="ac-date">Aug 2026</span><span class="ac-read">Read →</span></div>
             </div>
         </a>
 
-        <a href="/articles/ai-future-of-work.html" class="ac" data-cat="ai">
-            <div class="ac-img">
-                <span class="ac-tag">Future of Work</span>
-                <img src="https://images.pexels.com/photos/8386434/pexels-photo-8386434.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy">
-            </div>
+<a href="/articles/ai-future-of-work.html" class="ac" data-cat="ai">
+            <div class="ac-img"><img src="https://images.pexels.com/photos/8386434/pexels-photo-8386434.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy"><div class="ac-ov"></div></div>
             <div class="ac-body">
+                <span class="ac-tag">AI · Future of Work</span>
                 <div class="ac-title">After Work: what the world looks like when AI does everything</div>
-                <div class="ac-meta">Jarrit Hosking <span>·</span> Aug 2026</div>
                 <div class="ac-desc">Musk, Amodei, Hawking. What 2030 and 2040 look like for human employment. The IMF numbers. The honest picture.</div>
-                <div class="ac-foot"><span class="ac-read">Read More ▸</span></div>
+                <div class="ac-foot"><span class="ac-date">Aug 2026</span><span class="ac-read">Read →</span></div>
             </div>
         </a>
 
-        <a href="/articles/cape-town-tech.html" class="ac" data-cat="sa tech">
-            <div class="ac-img">
-                <span class="ac-tag">Cape Town</span>
-                <img src="https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy">
-            </div>
+<a href="/articles/cape-town-tech.html" class="ac" data-cat="sa tech">
+            <div class="ac-img"><img src="https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy"><div class="ac-ov"></div></div>
             <div class="ac-body">
+                <span class="ac-tag">Technology · Cape Town</span>
                 <div class="ac-title">Silicon Cape: Inside Africa's most surprising tech capital</div>
-                <div class="ac-meta">Jarrit Hosking <span>·</span> Aug 2026</div>
                 <div class="ac-desc">Cape Town climbed 24 places in the 2026 Global Startup Ecosystem Index. The full picture of what is being built here.</div>
-                <div class="ac-foot"><span class="ac-read">Read More ▸</span></div>
+                <div class="ac-foot"><span class="ac-date">Aug 2026</span><span class="ac-read">Read →</span></div>
             </div>
         </a>
 
-        <a href="/articles/ota-commission.html" class="ac" data-cat="business">
-            <div class="ac-img">
-                <span class="ac-tag">Business</span>
-                <img src="https://images.pexels.com/photos/279746/pexels-photo-279746.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy">
-            </div>
+<a href="/articles/ota-commission.html" class="ac" data-cat="business">
+            <div class="ac-img"><img src="https://images.pexels.com/photos/279746/pexels-photo-279746.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy"><div class="ac-ov"></div></div>
             <div class="ac-body">
+                <span class="ac-tag">Hospitality · Business</span>
                 <div class="ac-title">The commission trap: why 20% is a choice, not a requirement</div>
-                <div class="ac-meta">Jarrit Hosking <span>·</span> Aug 2026</div>
                 <div class="ac-desc">The real cost of OTA distribution is 30–35%. The data, the alternatives, and the movement away from platform dependency.</div>
-                <div class="ac-foot"><span class="ac-read">Read More ▸</span></div>
+                <div class="ac-foot"><span class="ac-date">Aug 2026</span><span class="ac-read">Read →</span></div>
             </div>
         </a>
 
-        <a href="/articles/number-recycling.html" class="ac" data-cat="tech sa">
-            <div class="ac-img">
-                <span class="ac-tag">Security</span>
-                <img src="https://images.pexels.com/photos/699122/pexels-photo-699122.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy">
-            </div>
+<a href="/articles/number-recycling.html" class="ac" data-cat="tech sa">
+            <div class="ac-img"><img src="https://images.pexels.com/photos/699122/pexels-photo-699122.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy"><div class="ac-ov"></div></div>
             <div class="ac-body">
+                <span class="ac-tag">Security · Public Interest · SA</span>
                 <div class="ac-title">Your phone number is not yours</div>
-                <div class="ac-meta">Jarrit Hosking <span>·</span> Aug 2026</div>
                 <div class="ac-desc">SA networks recycle numbers after 90 days. The new owner inherits your bank OTPs and 2FA codes. What that means and what to do about it.</div>
-                <div class="ac-foot"><span class="ac-read">Read More ▸</span></div>
+                <div class="ac-foot"><span class="ac-date">Aug 2026</span><span class="ac-read">Read →</span></div>
             </div>
         </a>
 
-        <a href="/articles/geo-is-real.html" class="ac" data-cat="geo ai">
-            <div class="ac-img">
-                <span class="ac-tag">SEO</span>
-                <img src="https://images.pexels.com/photos/1181271/pexels-photo-1181271.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy">
-            </div>
+<a href="/articles/geo-is-real.html" class="ac" data-cat="geo ai">
+            <div class="ac-img"><img src="https://images.pexels.com/photos/1181271/pexels-photo-1181271.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy"><div class="ac-ov"></div></div>
             <div class="ac-body">
+                <span class="ac-tag">GEO · AI Indexing</span>
                 <div class="ac-title">GEO is real — and Cloudflare just proved it</div>
-                <div class="ac-meta">Jarrit Hosking <span>·</span> Jul 2026</div>
                 <div class="ac-desc">Cloudflare's VP sent an email to millions of website owners about AI bots. Here's what Generative Engine Optimisation actually is.</div>
-                <div class="ac-foot"><span class="ac-read">Read More ▸</span></div>
+                <div class="ac-foot"><span class="ac-date">Jul 2026</span><span class="ac-read">Read →</span></div>
             </div>
         </a>
 
-        <a href="/articles/founder-story.html" class="ac" data-cat="business">
-            <div class="ac-img">
-                <span class="ac-tag">Founder</span>
-                <img src="https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy">
-            </div>
+<a href="/articles/founder-story.html" class="ac" data-cat="business">
+            <div class="ac-img"><img src="https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy"><div class="ac-ov"></div></div>
             <div class="ac-body">
+                <span class="ac-tag">Founder · Cape Town</span>
                 <div class="ac-title">The founder story — how Forge Vertical got here</div>
-                <div class="ac-meta">Jarrit Hosking <span>·</span> Jul 2026</div>
                 <div class="ac-desc">No CS degree. No formal funding. No agency background. How a self-taught developer from Cape Town built a digital agency from scratch.</div>
-                <div class="ac-foot"><span class="ac-read">Read More ▸</span></div>
+                <div class="ac-foot"><span class="ac-date">Jul 2026</span><span class="ac-read">Read →</span></div>
             </div>
         </a>
 
-        <a href="/articles/fable5-affair.html" class="ac" data-cat="ai">
-            <div class="ac-img">
-                <span class="ac-tag">Anthropic</span>
-                <img src="https://images.pexels.com/photos/373543/pexels-photo-373543.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy">
-            </div>
+<a href="/articles/fable5-affair.html" class="ac" data-cat="ai">
+            <div class="ac-img"><img src="https://images.pexels.com/photos/373543/pexels-photo-373543.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy"><div class="ac-ov"></div></div>
             <div class="ac-body">
+                <span class="ac-tag">AI · Anthropic · Investigation</span>
                 <div class="ac-title">The Fable 5 affair — what happened and what it means</div>
-                <div class="ac-meta">Jarrit Hosking <span>·</span> Jul 2026</div>
                 <div class="ac-desc">The model that briefly went dark, the government involvement, and what Anthropic's response tells us about AI governance.</div>
-                <div class="ac-foot"><span class="ac-read">Read More ▸</span></div>
+                <div class="ac-foot"><span class="ac-date">Jul 2026</span><span class="ac-read">Read →</span></div>
             </div>
         </a>
 
-        <a href="/articles/forge-vertical-anthropic-alignment.html" class="ac" data-cat="ai">
-            <div class="ac-img">
-                <span class="ac-tag">Philosophy</span>
-                <img src="https://images.pexels.com/photos/2599244/pexels-photo-2599244.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy">
-            </div>
+<a href="/articles/forge-vertical-anthropic-alignment.html" class="ac" data-cat="ai">
+            <div class="ac-img"><img src="https://images.pexels.com/photos/2599244/pexels-photo-2599244.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy"><div class="ac-ov"></div></div>
             <div class="ac-body">
+                <span class="ac-tag">AI · Philosophy · Personal</span>
                 <div class="ac-title">Built from the same blueprint: where Forge Vertical and Anthropic think alike</div>
-                <div class="ac-meta">Jarrit Hosking <span>·</span> Aug 31, 2026</div>
                 <div class="ac-desc">Anthropic arrived from a San Francisco lab. I arrived from the South African night. The directions were opposite. The destination turned out to be the same.</div>
-                <div class="ac-foot"><span class="ac-read">Read More ▸</span></div>
+                <div class="ac-foot"><span class="ac-date">Aug 31, 2026</span><span class="ac-read">Read →</span></div>
             </div>
         </a>
 </div>
@@ -1174,7 +972,7 @@ searchInput.addEventListener('input', function() {
         card.style.display = show ? '' : 'none';
         if (show) visible++;
     });
-    updateCount(q ? visible : 38);
+    updateCount(q ? visible : 39);
 });
 
 // Category filter
@@ -1249,13 +1047,10 @@ document.getElementById('pub-form').addEventListener('submit', async function(e)
         const res = await fetch(this.action, {
             method: 'POST',
             body: new FormData(this),
-            headers: {
-                'Accept': 'application/json',
-                'X-BUG-BOUNTY': 'forgevertical'
-            }
+            headers: {Accept: 'application/json'}
         });
         if (res.ok) {
-            this.innerHTML = `<div style="text-align:center;padding:24px;"><div style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;color:#84cc16;text-transform:uppercase;letter-spacing:0.15em;margin-bottom:8px;">Brief received.</div><div style="font-size:14px;color:#5c7494;line-height:1.6;">We will review your brief and come back within 24 hours with scope and pricing. For urgent requests WhatsApp +27 65 741 7593.</div></div>`;
+            this.innerHTML = '<div style="text-align:center;padding:24px;"><div style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;color:#84cc16;text-transform:uppercase;letter-spacing:0.15em;margin-bottom:8px;">Brief received.</div><div style="font-size:13px;color:#5c7494;line-height:1.6;">We will review your brief and come back within 24 hours with scope and pricing. For urgent requests WhatsApp +27 65 741 7593.</div></div>';
         } else {
             throw new Error();
         }
