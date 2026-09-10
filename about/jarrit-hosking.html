@@ -16,7 +16,7 @@
       "url": "https://www.forgevertical.com/about/jarrit-hosking.html",
       "image": "https://www.forgevertical.com/assets/images/jarrit.jpg",
       "jobTitle": ["Systems Engineer", "Principal Architect", "Independent Security Researcher"],
-      "description": "Jarrit Hosking is a self-taught systems builder and independent cybersecurity researcher based in Cape Town, South Africa. He holds active Anthropic Cyber Verification Programme approval and conducts security research focused on CI/CD poisoning and cryptographic exposures.",
+      "description": "Jarrit Hosking is a self-taught systems builder and independent cybersecurity researcher based in Cape Town, South Africa. He holds active Anthropic Cyber Verification Programme approval and conducts security research focused on infrastructure perimeter bypasses, mTLS isolation flaws, and cryptographic exposures.",
       "nationality": {"@type": "Country", "name": "South Africa"},
       "homeLocation": {
         "@type": "Place",
@@ -142,7 +142,7 @@
             <span>Serverless Architecture</span> · <span>Applied AI Alignment</span> · <span>Anthropic CVP Approved</span>
         </div>
         <p class="bio">
-            Self-taught systems builder and independent security researcher based in South Africa. Operating with formal schooling up to Grade 6, I taught myself to code through relentless execution and now design highly concurrent, serverless architectures on GCP. I treat AI as a co-worker rather than a tool — owning the structural judgment, auditing, and deployment safety. I have a massive amount to learn about frontier models and enterprise scaling, but my foundation is built on deep system respect and high-output execution.
+            Self-taught systems builder and independent security researcher based in South Africa. Operating with formal schooling up to Grade 6, I taught myself to code through relentless execution and now design highly concurrent architectures on GCP. I excel at finding logic flaws in complex infrastructure—probing boundary perimeters, WAF rules, and cryptographic implementations. I treat AI as a co-worker rather than a tool—owning the structural judgment and auditing. I have a massive amount to learn about formal enterprise scaling inside a frontier lab, but my foundation is built on deep system intuition and high-output execution.
         </p>
         <div class="contact-row">
             <a href="mailto:jarrit@forgevertical.com" class="btn btn-primary">
@@ -200,13 +200,19 @@
     <span class="section-label">// Security research & Verification</span>
     <h2>Cybersecurity Work</h2>
     <p class="section-body">
-        Active independent security researcher focused on infrastructure vulnerability, Poisoned Pipeline Execution (PPE), and CI/CD attack vectors across GitHub Actions and Maven/Node.js ecosystems. I operate across HackerOne, Bugcrowd, and YesWeHack.
+        Active independent security researcher focusing on complex infrastructure logic flaws, network perimeter bypasses, and access control subversion. I operate across HackerOne, Bugcrowd, and YesWeHack. My core strength lies in analyzing edge-case logic and protocol de-synchronization.
     </p>
     <p class="section-body">
-        <strong>Cryptographic Discovery:</strong> Recently awarded a discretionary bounty by a major global payment processor for identifying an exposed internal RSA private/public cryptographic key pair within their public Git commit history. Delivered a deep impact analysis that proved systemic infrastructure risk, resulting in a payout despite a prior generic duplicate filing.
+        <strong>WAF Bypass & Origin Probing:</strong> Identified a critical path normalization de-synchronization (`%2e`) vulnerability on an enterprise Web Application Firewall protecting a major cryptocurrency exchange. Established an unauthenticated WebSocket connection that bypassed edge security entirely, allowing direct interaction with the Origin Logic Layer to extract internal financial ledger errors.
+    </p>
+    <p class="section-body">
+        <strong>mTLS Service Isolation Flaw:</strong> Uncovered a broken mutual TLS (mTLS) architecture within a major blockchain network. Demonstrated that backend RPC listeners failed to validate service-scoped certificates, allowing any process holding any valid network certificate to terminate core data layers and bypass intended identity boundaries.
+    </p>
+    <p class="section-body">
+        <strong>Cryptographic Discovery:</strong> Awarded a discretionary bounty by a global payment processor for identifying an exposed internal RSA private/public cryptographic key pair within their public Git commit history. Delivered a deep impact analysis proving systemic infrastructure risk, overriding a prior generic duplicate filing.
     </p>
     <p class="section-body" style="margin-bottom:0;">
-        <strong>Anthropic CVP:</strong> Forge Vertical holds active Anthropic Cyber Verification Programme approval (Ref: TS-01a047e2). This authorization allows me expanded access to Claude models for dual-use cybersecurity research, advanced adversarial simulations, and red-teaming within formal safe harbour agreements.
+        <strong>Anthropic CVP:</strong> Forge Vertical holds active Anthropic Cyber Verification Programme approval (Ref: TS-01a047e2). This allows expanded access to Claude models for dual-use cybersecurity research and adversarial simulations within formal safe harbour agreements.
     </p>
 </div>
 
@@ -264,8 +270,9 @@
         <span class="skill-tag">Node.js</span>
         <span class="skill-tag">Linux (Mint / Kali)</span>
         <span class="skill-tag">Penetration Testing</span>
-        <span class="skill-tag">Bug Bounty</span>
-        <span class="skill-tag">CI/CD Security</span>
+        <span class="skill-tag">mTLS / PKI Logic</span>
+        <span class="skill-tag">WAF Bypass Techniques</span>
+        <span class="skill-tag">WebSocket Security</span>
         <span class="skill-tag">Cryptography</span>
         <span class="skill-tag">Claude API</span>
         <span class="skill-tag">Gemini API</span>
