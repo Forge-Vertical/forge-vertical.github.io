@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="You built it with AI. Now you want to ship it. Before you point a domain at it, read this. Security, race conditions, payments, privacy law, royalty-free assets, Cloudflare, pen testing — the rules every vibe coder needs before going live.">
+    <title>The Vibe Coder's Deployment Checklist: 10 Rules Before You Go Live | Forge Vertical</title>
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"Article","headline":"The Vibe Coder's Deployment Checklist: 10 Rules Before You Go Live","description":"You built it with AI. Now you want to ship it. Before you point a domain at it — security, race conditions, payment handling, privacy law, Cloudflare configuration, royalty-free assets, pen testing, and the one truth nobody tells you: it is still your responsibility. Claude cannot testify on your behalf.","author":{"@type":"Person","name":"Jarrit Hosking","url":"https://www.forgevertical.com"},"publisher":{"@type":"Organization","name":"Forge Vertical","url":"https://www.forgevertical.com"},"datePublished":"2026-09-08","keywords":"vibe coding deployment checklist, vibe coder security, Cloudflare setup vibe coding, race condition explained, vibe coded website security, privacy policy vibe coder, GDPR vibe coding, POPIA vibe coding, pen test website free, royalty free images vibe coder, vibe coding payments security, AI built website go live checklist"}
+    </script>
+    <script src="/global.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/typography.css">
+    <style>
+        body{font-family:'Outfit',sans-serif;background:#fff;}
+        .mono{font-family:'JetBrains Mono',monospace;}
+        .g-text{background:linear-gradient(90deg,#10b981,#84cc16);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:inline-block;}
+        .prose-body{font-family:'Lora',serif;font-size:19px;line-height:1.85;color:#27272a;}
+        .prose-body p{margin-bottom:1.6em;}
+        .prose-body h2{font-family:'Outfit',sans-serif;font-size:26px;font-weight:700;letter-spacing:-0.02em;color:#09090b;margin-top:2.2em;margin-bottom:0.6em;line-height:1.2;}
+        .prose-body strong{font-weight:700;color:#09090b;font-family:'Outfit',sans-serif;font-size:17px;}
+        .prose-body a{color:#84cc16;text-decoration:underline;text-underline-offset:3px;}
+        .prose-body code{font-family:'JetBrains Mono',monospace;font-size:14px;background:#f4f4f5;padding:2px 6px;border-radius:4px;color:#09090b;}
+        .callout{background:#f4f4f5;border-left:3px solid #84cc16;border-radius:0 12px 12px 0;padding:20px 24px;margin:2em 0;font-family:'Outfit',sans-serif;font-size:15px;color:#3f3f46;line-height:1.7;}
+        .callout.dark{background:#09090b;color:#a1a1aa;border-left-color:#84cc16;}
+        .callout.red{border-left-color:#ef4444;background:#fef2f2;color:#7f1d1d;}
+        .callout.amber{border-left-color:#f59e0b;background:#fffdf5;color:#78350f;}
+        .chapter-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:#84cc16;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:6px;display:block;}
+
+        /* Rule cards */
+        .rule-card{border:1px solid #e4e4e7;border-radius:16px;padding:28px;margin:2.5em 0;position:relative;overflow:hidden;}
+        .rule-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:linear-gradient(180deg,#10b981,#84cc16);}
+        .rule-number{font-family:'JetBrains Mono',monospace;font-size:48px;font-weight:700;color:#f4f4f5;position:absolute;top:16px;right:24px;line-height:1;user-select:none;}
+        .rule-label{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.18em;color:#84cc16;margin-bottom:8px;display:block;}
+        .rule-title{font-family:'Outfit',sans-serif;font-size:20px;font-weight:800;color:#09090b;margin-bottom:12px;letter-spacing:-0.01em;line-height:1.2;}
+        .rule-body{font-family:'Outfit',sans-serif;font-size:14px;color:#52525b;line-height:1.8;}
+        .rule-body strong{color:#09090b;font-weight:700;}
+        .rule-tip{background:#f0fdf4;border:1px solid #a7f3d0;border-radius:8px;padding:12px 16px;margin-top:14px;font-family:'JetBrains Mono',monospace;font-size:11px;color:#065f46;line-height:1.6;}
+        .rule-tip::before{content:'→ ';font-weight:700;}
+        .rule-warn{background:#fef2f2;border:1px solid #fecaca;border-radius:8px;padding:12px 16px;margin-top:14px;font-family:'JetBrains Mono',monospace;font-size:11px;color:#991b1b;line-height:1.6;}
+        .rule-warn::before{content:'⚠ ';font-weight:700;}
+
+        /* Cloudflare settings list */
+        .cf-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px;}
+        @media(max-width:600px){.cf-grid{grid-template-columns:1fr;}}
+        .cf-item{background:#f4f4f5;border-radius:8px;padding:12px 14px;display:flex;align-items:flex-start;gap:10px;}
+        .cf-dot{width:8px;height:8px;border-radius:50%;background:#84cc16;flex-shrink:0;margin-top:5px;}
+        .cf-name{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:#09090b;margin-bottom:3px;}
+        .cf-desc{font-size:11px;color:#52525b;line-height:1.5;}
+
+        /* Checklist */
+        .checklist{list-style:none;padding:0;margin:1.5em 0;}
+        .checklist li{display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px solid #f4f4f5;font-family:'Outfit',sans-serif;font-size:14px;color:#3f3f46;line-height:1.6;}
+        .checklist li:last-child{border-bottom:none;}
+        .check-box{width:20px;height:20px;border-radius:4px;background:#09090b;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
+
+        .aff-footer{background:#09090b;border-radius:16px;padding:28px;margin:3em 0;}
+        .aff-footer h3{font-family:'Outfit',sans-serif;font-size:15px;font-weight:700;color:#f4f4f5;margin-bottom:6px;}
+        .aff-footer p{font-size:13px;color:#6a7d96;margin-bottom:18px;line-height:1.6;}
+        .aff-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;}
+        .aff-tile{background:#111620;border:1px solid #1a2030;border-radius:10px;padding:14px;text-decoration:none;display:block;transition:border-color 0.18s;}
+        .aff-tile:hover{border-color:#84cc16;}
+        .aff-tile-name{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:#84cc16;margin-bottom:4px;}
+        .aff-tile-desc{font-size:11px;color:#6a7d96;line-height:1.5;margin-bottom:6px;}
+        .aff-tile-cta{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:#84cc16;}
+    </style>
+</head>
+<body class="antialiased">
+<div id="global-nav"></div>
+<article class="pt-20 pb-24">
+
+    <header class="max-w-3xl mx-auto px-6 mt-10 mb-12">
+        <div class="flex items-center gap-3 mb-6">
+            <a href="/articles.html" class="mono text-[10px] text-zinc-400 hover:text-zinc-600 uppercase tracking-widest">← Articles</a>
+            <span class="text-zinc-300">·</span>
+            <span class="mono text-[10px] font-bold text-[#84cc16] uppercase tracking-widest border border-[#84cc16]/30 px-3 py-1 rounded-full">Vibe Coding · Security · Deployment</span>
+        </div>
+        <h1 class="text-4xl md:text-5xl font-bold tracking-tight leading-[1.05] mb-6 text-zinc-900" style="font-family:'Outfit',sans-serif;letter-spacing:-0.03em;">
+            The vibe coder's<br>deployment checklist.<br>
+            <span class="g-text">10 rules before you go live.</span>
+        </h1>
+        <p class="text-xl text-zinc-500 font-light leading-relaxed mb-8 max-w-2xl" style="font-family:'Outfit',sans-serif;">
+            You built it with AI. It works on localhost. You are ready to ship. Before you point a domain at it and tell people about it — read this. Security holes, race conditions, privacy laws, stolen images, payment handling nightmares. The things the AI will not warn you about unless you ask. And one truth that nobody tells you: when something goes wrong, it is still your name on it.
+        </p>
+        <div class="flex items-center gap-4 pb-8 border-b border-zinc-100">
+            <div>
+                <div class="font-bold text-sm text-zinc-900">Jarrit Hosking</div>
+                <div class="mono text-[10px] text-zinc-400 uppercase tracking-widest">Forge Vertical · Cape Town · September 8, 2026 · Ships with AI daily</div>
+            </div>
+            <div class="ml-auto mono text-[10px] text-zinc-400 uppercase tracking-widest">15 min read</div>
+        </div>
+    </header>
+
+    <div class="max-w-3xl mx-auto px-6 prose-body">
+        <span class="chapter-label">// Before we start</span>
+        <p>
+            I build with AI. Forge Vertical runs on systems I directed Claude, Gemini, and GPT to build. I have shipped production software, processed real payments, handled real user data, and been responsible for real security. I am not writing this to gatekeep vibe coding — I am writing it because I have made some of these mistakes, caught others before they became problems, and watched third-party vibe-coded projects fail in ways that were entirely avoidable.
+        </p>
+        <p>
+            The AI will build what you ask it to build. It will not automatically include what you did not know to ask for. That gap — between what got built and what a production system actually needs — is what this article is about.
+        </p>
+    </div>
+
+    <!-- Rule 01 -->
+    <div class="max-w-3xl mx-auto px-6">
+        <div class="rule-card">
+            <div class="rule-number">01</div>
+            <span class="rule-label">// Foundation rule</span>
+            <div class="rule-title">Know exactly what you are building before you write a single prompt</div>
+            <div class="rule-body">
+                The single biggest source of broken vibe-coded projects is not bad AI output — it is unclear requirements. If you cannot explain in plain language what your product does, who it is for, what data it handles, and what happens when things go wrong, the AI will fill in the gaps with assumptions. Those assumptions will not match your business logic.
+                <br><br>
+                Before you open any AI tool: write down what the product does in one paragraph. Write down who uses it. Write down what data it stores. Write down what happens when a user's action fails. Write down what countries it operates in. <strong>If you cannot answer those questions, you are not ready to build yet.</strong>
+                <br><br>
+                Research the market. Research the laws. Research what competitors have built and what they got wrong. The AI cannot research your specific competitive landscape for you. The thinking that happens before the first prompt is where good products start.
+            </div>
+            <div class="rule-tip">Include your answers to these questions in your first prompt. The AI will build a much better system when it understands the context, not just the feature list.</div>
+        </div>
+    </div>
+
+    <!-- Rule 02 -->
+    <div class="max-w-3xl mx-auto px-6">
+        <div class="rule-card">
+            <div class="rule-number">02</div>
+            <span class="rule-label">// Security rule</span>
+            <div class="rule-title">Security is not a feature — prompt for it from the first message</div>
+            <div class="rule-body">
+                The AI will not automatically include security hardening unless you ask for it. "Build me a user authentication system" and "Build me a user authentication system with bcrypt password hashing, rate limiting on login attempts, CSRF protection, input sanitisation on all fields, and parameterised queries on all database calls" produce very different code.
+                <br><br>
+                Every prompt involving user input, authentication, data storage, or external API calls should explicitly request security considerations. Add this to your system prompt or context when starting any project:
+            </div>
+            <div class="rule-tip">Add to every project context: "For all code you generate, include input validation, sanitise user inputs, use parameterised queries for any database calls, rate-limit sensitive endpoints, and flag any security considerations I should be aware of."</div>
+            <div class="rule-warn">Do NOT deploy a user authentication system, admin panel, or any data-handling feature without explicitly asking the AI to review it for common vulnerabilities — SQL injection, XSS, CSRF, broken access control, and insecure direct object references at minimum.</div>
+        </div>
+    </div>
+
+    <!-- Rule 03 -->
+    <div class="max-w-3xl mx-auto px-6">
+        <div class="rule-card">
+            <div class="rule-number">03</div>
+            <span class="rule-label">// Infrastructure rule</span>
+            <div class="rule-title">Run everything through Cloudflare — and turn on the right settings</div>
+            <div class="rule-body">
+                Cloudflare's free tier is one of the most powerful security tools available to any developer. It sits between your server and the internet, filtering malicious traffic before it reaches your code. For a vibe-coded project that may have unknown vulnerabilities, this is not optional — it is your first real defence layer.
+                <br><br>
+                Point your domain's nameservers to Cloudflare when you buy the domain. Do not skip this step. Then in the Cloudflare dashboard, enable these settings specifically:
+            </div>
+            <div class="cf-grid">
+                <div class="cf-item"><div class="cf-dot"></div><div><div class="cf-name">SSL/TLS → Full (strict)</div><div class="cf-desc">Never run on HTTP. Force HTTPS always. Your users' data is transmitted encrypted.</div></div></div>
+                <div class="cf-item"><div class="cf-dot"></div><div><div class="cf-name">Always Use HTTPS</div><div class="cf-desc">Redirect all HTTP requests to HTTPS automatically.</div></div></div>
+                <div class="cf-item"><div class="cf-dot"></div><div><div class="cf-name">Bot Fight Mode</div><div class="cf-desc">Blocks known malicious bots from hitting your endpoints. Free tier included.</div></div></div>
+                <div class="cf-item"><div class="cf-dot"></div><div><div class="cf-name">Security Level → Medium</div><div class="cf-desc">Challenges suspicious visitors. Adjust to High if you are under active attack.</div></div></div>
+                <div class="cf-item"><div class="cf-dot"></div><div><div class="cf-name">WAF → Managed Rules</div><div class="cf-desc">Web Application Firewall. Blocks common exploit patterns — SQLi, XSS, and more.</div></div></div>
+                <div class="cf-item"><div class="cf-dot"></div><div><div class="cf-name">Rate Limiting</div><div class="cf-desc">Set rate limits on your login, signup, and API endpoints. Stops brute force.</div></div></div>
+                <div class="cf-item"><div class="cf-dot"></div><div><div class="cf-name">HSTS</div><div class="cf-desc">Tells browsers to always use HTTPS for your domain. Enable under SSL → Edge Certificates.</div></div></div>
+                <div class="cf-item"><div class="cf-dot"></div><div><div class="cf-name">Hide Server Header</div><div class="cf-desc">Cloudflare strips your server technology from HTTP headers so attackers cannot fingerprint your stack.</div></div></div>
+            </div>
+            <div class="rule-tip">Cloudflare's free tier covers all of the above. There is no reason not to use it. Set it up before you launch, not after the first attack.</div>
+        </div>
+    </div>
+
+    <!-- Rule 04 — Race conditions -->
+    <div class="max-w-3xl mx-auto px-6">
+        <div class="rule-card">
+            <div class="rule-number">04</div>
+            <span class="rule-label">// The bug you don't know you have</span>
+            <div class="rule-title">Race conditions — what they are and why vibe-coded apps are especially vulnerable</div>
+            <div class="rule-body">
+                <strong>A race condition happens when two operations run simultaneously and each assumes it is the only one running.</strong> The classic example: a user clicks "Buy" twice in quick succession. Your app checks the inventory, sees 1 item available, and both requests pass the check at the same time. Both orders go through. You have sold the same item twice and your stock count shows -1.
+                <br><br>
+                Here is a simpler one you might not think about: a user clicks a payment button twice because the page was slow to respond. Two payment requests hit your backend simultaneously. Both charge the card. You have charged your customer twice and now need to refund one — assuming you catch it.
+                <br><br>
+                Race conditions are extremely common in vibe-coded projects because the AI will often generate the happy path — "user clicks button, thing happens" — without automatically handling concurrent requests. The fix requires specific patterns: database-level locking, atomic operations, idempotency keys on payment requests, and UI-level button disabling after the first click.
+            </div>
+            <div class="rule-tip">Ask your AI specifically: "Review this code for race conditions. For any endpoint that modifies data, add idempotency protection and database-level locking where needed." For payment endpoints specifically, always ask about idempotency keys.</div>
+            <div class="rule-warn">If your app handles inventory, payments, bookings, ticket sales, or any finite resource — test race conditions explicitly. Open your app in two tabs, trigger the same action simultaneously, and see what happens. If you can break it, your users will too.</div>
+        </div>
+    </div>
+
+    <!-- Rule 05 -->
+    <div class="max-w-3xl mx-auto px-6">
+        <div class="rule-card">
+            <div class="rule-number">05</div>
+            <span class="rule-label">// Money rule</span>
+            <div class="rule-title">If it handles money — get help or get educated. Non-negotiable.</div>
+            <div class="rule-body">
+                Payment processing is not a feature. It is a discipline. PCI-DSS compliance, fraud detection, chargeback handling, refund logic, failed payment retries, webhook verification, subscription lifecycle management — these are entire fields of expertise. A vibe-coded payment system built without understanding these requirements is a liability.
+                <br><br>
+                <strong>The practical rule:</strong> Never store card numbers yourself. Ever. Use Stripe, PayFast, Yoco, or another PCI-compliant payment processor and let them handle the card data. Your code should never touch the raw card number — only tokens and payment intents provided by the processor.
+                <br><br>
+                If you are building anything beyond simple one-off payments — subscriptions, marketplaces, split payments, escrow — seriously consider partnering with a developer who has done it before, or taking a course specifically on payment systems before you direct the AI to build it. The AI will build what you describe. If you do not understand what needs to be described, the gaps will cost you.
+            </div>
+            <div class="rule-tip">Prompt specifically: "I am integrating Stripe. Verify that my implementation uses payment intents, not charges directly. Add webhook signature verification. Add idempotency keys to all API calls. Do not store any card data in my database."</div>
+            <div class="rule-warn">A payment bug is not just a technical problem. It is a financial, legal, and reputational problem simultaneously. "Claude built it" is not a defence when a customer is double-charged or a regulator asks why card data was stored insecurely.</div>
+        </div>
+    </div>
+
+    <!-- Rule 06 -->
+    <div class="max-w-3xl mx-auto px-6">
+        <div class="rule-card">
+            <div class="rule-number">06</div>
+            <span class="rule-label">// Legal rule</span>
+            <div class="rule-title">Know your local laws — and build them in from the start</div>
+            <div class="rule-body">
+                Every country with a digital economy has privacy laws. South Africa has POPIA. The EU has GDPR. California has CCPA. Brazil has LGPD. If your product is accessible to users in those jurisdictions — and a website is accessible everywhere — those laws apply to you.
+                <br><br>
+                At minimum, before you launch, you need: a Privacy Policy that accurately describes what data you collect and why, a Cookie Consent mechanism if you use tracking or analytics cookies, a Terms of Service, and a Data Retention policy. These are not optional box-ticking exercises — they are legal requirements in most jurisdictions that expose you to real fines if ignored.
+                <br><br>
+                <strong>Cookie consent specifically:</strong> If your site uses Google Analytics, Facebook Pixel, or any third-party tracking script, you need a cookie banner that allows users to accept or reject non-essential cookies before those scripts fire. Most vibe-coded sites have analytics loaded in the `&lt;head&gt;` unconditionally. That is a GDPR violation for any EU visitor.
+            </div>
+            <div class="rule-tip">Ask your AI: "Generate a GDPR and POPIA compliant cookie consent implementation. Analytics scripts should not load until the user accepts. Include a cookie banner with accept/reject options and remember the user's choice in localStorage."</div>
+            <div class="rule-tip">If you serve multiple countries: "I serve users in South Africa, the EU, and the US. Generate a privacy policy template that addresses POPIA, GDPR, and CCPA requirements. Flag any sections I need to customise for my specific data practices."</div>
+        </div>
+    </div>
+
+    <!-- Rule 07 -->
+    <div class="max-w-3xl mx-auto px-6">
+        <div class="rule-card">
+            <div class="rule-number">07</div>
+            <span class="rule-label">// Responsibility rule</span>
+            <div class="rule-title">"The AI built it" is not a legal defence. Double-check the plumbing.</div>
+            <div class="rule-body">
+                This is the most important mindset shift for any vibe coder going to production. The code runs under your domain, on your servers, with your business name attached. When it fails — and at some point it will fail — the responsibility is yours. Not Claude's, not OpenAI's, not Google's.
+                <br><br>
+                <strong>Double-check the plumbing means:</strong> Go through every form on your site and submit garbage data — what happens? Go through every authenticated endpoint and try accessing it without being logged in — what happens? Go through every email your system sends and verify it actually arrives with the right content. Go through every error state and confirm it shows something useful rather than a raw stack trace. Check that environment variables and API keys are not exposed in client-side code. Check that your database is not publicly accessible.
+                <br><br>
+                Ask the AI to audit itself. Seriously. "Review this codebase and flag any security vulnerabilities, exposed credentials, missing authentication checks, or unhandled error states." The AI that built it can also review it — and it will find things you missed.
+            </div>
+            <div class="rule-warn">Never commit API keys, database credentials, or secret tokens to a public GitHub repository. Use environment variables. Add `.env` to your `.gitignore` before your first commit. After that is too late — GitHub's history is permanent and scrapers watch for exposed credentials in real time.</div>
+        </div>
+    </div>
+
+    <!-- Rule 08 -->
+    <div class="max-w-3xl mx-auto px-6">
+        <div class="rule-card">
+            <div class="rule-number">08</div>
+            <span class="rule-label">// Assets rule</span>
+            <div class="rule-title">Use only royalty-free images and video. Every single one.</div>
+            <div class="rule-body">
+                Using a Google Images result on your commercial website is copyright infringement. Full stop. It does not matter that the image was easy to find. It does not matter that you are a small startup. Copyright holders — and more commonly, the licensing agencies that represent them — actively search for unlicensed commercial use and send invoices. Those invoices are legally enforceable.
+                <br><br>
+                <strong>The safe sources:</strong>
+                <br><br>
+                <strong>Pexels</strong> (pexels.com) — completely free for commercial use, no attribution required. High quality. Enormous library. Use this first.
+                <br><br>
+                <strong>Pixabay</strong> (pixabay.com) — same model as Pexels. Free for commercial use, no attribution.
+                <br><br>
+                <strong>Unsplash</strong> (unsplash.com) — free for commercial use, attribution appreciated but not required.
+                <br><br>
+                <strong>AI-generated images</strong> — ask the AI to generate a completely original image for your specific need. No copyright issues because it is a new creation. For South African and African imagery specifically, this is often the best option since stock libraries are thin on local content.
+                <br><br>
+                For video: Pexels also has free stock video. Pixabay does too. For anything more specific, Mixkit (mixkit.co) offers free commercial video footage.
+            </div>
+            <div class="rule-tip">When in doubt, generate it. Ask the AI: "Generate an image for [specific use case] that I can use commercially on my website." That image is original. No licensing issues. No unexpected invoices.</div>
+        </div>
+    </div>
+
+    <!-- Rule 09 -->
+    <div class="max-w-3xl mx-auto px-6">
+        <div class="rule-card">
+            <div class="rule-number">09</div>
+            <span class="rule-label">// The app store test</span>
+            <div class="rule-title">If it can't pass a Google Play or App Store review, it needs more work</div>
+            <div class="rule-body">
+                The Google Play Store and Apple App Store review processes are effectively free quality and compliance audits. They check for: broken functionality, crash on launch, missing privacy policy, data collection without disclosure, deceptive UI patterns, intellectual property violations, and content policy violations. If your app would fail their review, those are real problems — not bureaucratic obstacles.
+                <br><br>
+                Even if you are building a web app rather than a mobile app, run your project through their mental checklist. Ask yourself honestly: Does this app crash or behave unexpectedly in any flow I have tested? Does it have a privacy policy that accurately describes what it collects? Does it have terms of service? Does it do what it says it does? Does it handle errors gracefully or just crash? If the answer to any of those is no — fix it before you launch, not after.
+                <br><br>
+                Google's Play Store policies are publicly available and more detailed than most compliance checklists you will find elsewhere. Reading the <a href="https://play.google.com/about/developer-content-policy/" target="_blank" rel="noopener noreferrer">Play Store Developer Content Policy</a> is genuinely useful even for web-only projects.
+            </div>
+            <div class="rule-tip">Ask the AI: "Review my app against Google Play Store review criteria. Flag any issues that would likely result in a rejection — broken flows, missing legal pages, data collection without disclosure, or content policy concerns."</div>
+        </div>
+    </div>
+
+    <!-- Rule 10 -->
+    <div class="max-w-3xl mx-auto px-6">
+        <div class="rule-card">
+            <div class="rule-number">10</div>
+            <span class="rule-label">// Final rule — pen test and test everything</span>
+            <div class="rule-title">Test every feature as an adversary, not as the developer who built it</div>
+            <div class="rule-body">
+                You know how your app is supposed to work. Your users — and attackers — do not. Test it as someone who is actively trying to break it.
+                <br><br>
+                <strong>Basic pen testing you can do yourself:</strong> Try submitting forms with script tags in text fields (`&lt;script&gt;alert('xss')&lt;/script&gt;`). Try accessing `/admin` without being logged in. Try changing a URL parameter from your user ID to someone else's. Try uploading a file with a `.php` or `.exe` extension where the form expects an image. Try submitting a payment form twice in rapid succession. Try making an API request without the authentication token.
+                <br><br>
+                <strong>Free automated scanning:</strong> Run your live URL through <a href="https://observatory.mozilla.org" target="_blank" rel="noopener noreferrer">Mozilla Observatory</a> (free, checks HTTP headers and security config). Use <a href="https://www.ssllabs.com/ssltest/" target="_blank" rel="noopener noreferrer">SSL Labs</a> to verify your HTTPS configuration. Use <a href="https://securityheaders.com" target="_blank" rel="noopener noreferrer">securityheaders.com</a> to check your response headers.
+                <br><br>
+                <strong>AI-assisted pen testing:</strong> For deeper security analysis, Claude (with Anthropic CVP approval for security research contexts) can assist with identifying vulnerability patterns, reviewing authentication logic, and generating test cases for common attack vectors. Describe your architecture and ask it to identify the most likely attack surfaces. It will flag things you did not think to test.
+                <br><br>
+                <strong>Test the features, not just the happy path.</strong> What happens when a user enters 10,000 characters into a text field? What happens when they submit the form with JavaScript disabled? What happens when their session expires mid-flow? What happens when the external API your app depends on returns an error? These are the edge cases that produce support tickets, data corruption, and security vulnerabilities.
+            </div>
+            <div class="rule-tip">Run Mozilla Observatory on your domain before launch. A score below B is a sign that your security headers need work. It will tell you exactly what to fix and how.</div>
+            <div class="rule-warn">Never run penetration testing tools against systems you do not own or have explicit written permission to test. Test only your own projects, within safe harbour agreements where applicable.</div>
+        </div>
+    </div>
+
+    <!-- Final checklist -->
+    <div class="max-w-3xl mx-auto px-6 my-8">
+        <div style="background:#09090b;border-radius:16px;padding:28px;">
+            <div class="mono text-[10px] font-bold uppercase tracking-widest mb-4" style="color:#84cc16;">// Pre-launch checklist — print this</div>
+            <ul class="checklist" style="border-color:#1c2638;">
+                <li style="border-color:#1c2638;color:#a1a1aa;">
+                    <div class="check-box"><svg width="12" height="12" fill="none" stroke="#84cc16" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+                    Requirements documented before first prompt — what, who, what data, what countries
+                </li>
+                <li style="border-color:#1c2638;color:#a1a1aa;">
+                    <div class="check-box"><svg width="12" height="12" fill="none" stroke="#84cc16" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+                    Security explicitly prompted — input validation, parameterised queries, rate limiting
+                </li>
+                <li style="border-color:#1c2638;color:#a1a1aa;">
+                    <div class="check-box"><svg width="12" height="12" fill="none" stroke="#84cc16" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+                    Cloudflare set up — SSL Full Strict, Bot Fight Mode, WAF, Rate Limiting, HSTS
+                </li>
+                <li style="border-color:#1c2638;color:#a1a1aa;">
+                    <div class="check-box"><svg width="12" height="12" fill="none" stroke="#84cc16" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+                    Race conditions tested — concurrent requests on all state-modifying endpoints
+                </li>
+                <li style="border-color:#1c2638;color:#a1a1aa;">
+                    <div class="check-box"><svg width="12" height="12" fill="none" stroke="#84cc16" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+                    Payment handling uses PCI-compliant processor — no card data stored
+                </li>
+                <li style="border-color:#1c2638;color:#a1a1aa;">
+                    <div class="check-box"><svg width="12" height="12" fill="none" stroke="#84cc16" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+                    Privacy policy, cookie consent, and terms of service — live before launch
+                </li>
+                <li style="border-color:#1c2638;color:#a1a1aa;">
+                    <div class="check-box"><svg width="12" height="12" fill="none" stroke="#84cc16" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+                    No credentials in code — .env file, .gitignore confirmed, no secrets on GitHub
+                </li>
+                <li style="border-color:#1c2638;color:#a1a1aa;">
+                    <div class="check-box"><svg width="12" height="12" fill="none" stroke="#84cc16" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+                    All images and video are royalty-free — Pexels, Pixabay, Unsplash, or AI-generated
+                </li>
+                <li style="border-color:#1c2638;color:#a1a1aa;">
+                    <div class="check-box"><svg width="12" height="12" fill="none" stroke="#84cc16" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+                    Mozilla Observatory score B or above — security headers verified
+                </li>
+                <li style="border-color:#1c2638;color:#a1a1aa;">
+                    <div class="check-box"><svg width="12" height="12" fill="none" stroke="#84cc16" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+                    Every feature tested as an adversary — broken flows, bad input, concurrent actions
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="max-w-3xl mx-auto px-6 prose-body">
+        <p>
+            Shipping is the goal. Getting to shipped is the process. None of these rules exist to slow you down — they exist because the problems they prevent are much slower to fix after launch than before it. A security breach, a copyright claim, a payment dispute, a regulatory fine — any one of these costs more time, money, and reputation than the checklist above.
+        </p>
+        <p>
+            Build the thing. Check the list. Ship it. Then build the next one better because you already know this stuff.
+        </p>
+    </div>
+
+    <div class="max-w-3xl mx-auto px-6">
+        <div class="aff-footer">
+            <div class="mono text-[10px] text-[#84cc16] uppercase tracking-widest mb-3">// The stack behind this checklist</div>
+            <h3>What Forge Vertical actually uses</h3>
+            <p>These are in the stack for every project we ship. Affiliate links — helps keep Forge Vertical independent.</p>
+            <div class="aff-grid">
+                <a href="https://get.surfshark.net/aff_c?offer_id=6&aff_id=4160" target="_blank" rel="noopener noreferrer" class="aff-tile">
+                    <img src="/assets/images/surfshark-vpn-1-year-17236158874633226.webp" alt="Surfshark" style="height:18px;margin-bottom:8px;object-fit:contain;display:block;" onerror="this.style.display='none'">
+                    <div class="aff-tile-name">Surfshark VPN</div>
+                    <div class="aff-tile-desc">Test your own site from different IPs. Essential for security testing.</div>
+                    <span class="aff-tile-cta">Try Surfshark →</span>
+                </a>
+                <a href="https://go.nordvpn.net/aff_c?offer_id=15&aff_id=145959&url_id=902" target="_blank" rel="noopener noreferrer" class="aff-tile">
+                    <img src="/assets/images/NordVPN-vertical.png" alt="NordVPN" style="height:18px;margin-bottom:8px;object-fit:contain;display:block;" onerror="this.style.display='none'">
+                    <div class="aff-tile-name">NordVPN</div>
+                    <div class="aff-tile-desc">Threat protection on every device you develop and test from.</div>
+                    <span class="aff-tile-cta">Try NordVPN →</span>
+                </a>
+                <a href="https://nordpass.com" target="_blank" rel="noopener noreferrer" class="aff-tile">
+                    <img src="/assets/images/nord-security_password-management-tools_1739200695312.png" alt="NordPass" style="height:18px;margin-bottom:8px;object-fit:contain;display:block;" onerror="this.style.display='none'">
+                    <div class="aff-tile-name">NordPass</div>
+                    <div class="aff-tile-desc">Store API keys, database credentials, and passwords securely — not in a text file.</div>
+                    <span class="aff-tile-cta">Try NordPass →</span>
+                </a>
+                <a href="https://portal.webway.host/aff.php?aff=353" target="_blank" rel="noopener noreferrer" class="aff-tile">
+                    <img src="/assets/images/webwaylogo.png" alt="WebWay" style="height:18px;margin-bottom:8px;object-fit:contain;display:block;" onerror="this.style.display='none'">
+                    <div class="aff-tile-name">WebWay — SA Hosting</div>
+                    <div class="aff-tile-desc">South African hosting. Local support when your Cloudflare config needs help.</div>
+                    <span class="aff-tile-cta">WebWay.co.za →</span>
+                </a>
+            </div>
+        </div>
+        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mt-8">
+            <div>
+                <div class="mono text-[10px] text-zinc-400 uppercase tracking-widest mb-1">Written by</div>
+                <div class="font-bold text-zinc-900">Jarrit Hosking</div>
+                <div class="mono text-[10px] text-zinc-400">Forge Vertical · Cape Town · September 8, 2026</div>
+            </div>
+            <div class="flex gap-3 flex-wrap">
+                <a href="/articles.html" class="mono text-[10px] font-bold uppercase tracking-widest border border-zinc-200 px-5 py-3 rounded-xl hover:border-zinc-400 transition-all text-zinc-600">← All articles</a>
+                <a href="/articles/vibe-coding-toxicity.html" class="mono text-[10px] font-bold uppercase tracking-widest border border-zinc-200 px-5 py-3 rounded-xl hover:border-zinc-400 transition-all text-zinc-600">Vibe coding →</a>
+                <a href="/articles/nordpass-vs-browser-passwords.html" style="background:linear-gradient(90deg,#10b981,#84cc16);" class="mono text-[10px] font-bold uppercase tracking-widest px-5 py-3 rounded-xl text-white hover:opacity-90 transition-all">Security →</a>
+            </div>
+        </div>
+    </div>
+
+</article>
+<div id="global-footer"></div>
+</body>
+</html>
