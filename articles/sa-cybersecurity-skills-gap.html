@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Two-thirds of South African government departments are vulnerable to cyberattacks. The World Bank says the digital skills pipeline is not meeting demand. Cybersecurity experts cannot be hired fast enough. The practical answer for SA businesses is not to wait — it is to outsource to people who already have the skills.">
+    <title>South Africa Has a Cybersecurity Crisis and Not Enough Developers to Fix It. Here Is What to Do. | Forge Vertical</title>
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"Article","headline":"South Africa Has a Cybersecurity Crisis and Not Enough Developers to Fix It. Here Is What to Do.","description":"Two-thirds of South African government departments are vulnerable to cyberattacks. The World Bank warns the digital skills pipeline is not meeting demand. SABS was shut down by a ransomware attack. Cybercrime costs SA billions annually. The practical answer is not to wait for the education system to catch up — it is to outsource to businesses that already have the skills.","author":{"@type":"Person","name":"Jarrit Hosking","url":"https://www.forgevertical.com"},"publisher":{"@type":"Organization","name":"Forge Vertical","url":"https://www.forgevertical.com"},"datePublished":"2026-09-09","keywords":"South Africa cybersecurity skills gap, SA developer shortage 2026, World Bank digital skills South Africa, South Africa ransomware government, SABS cyberattack, outsource cybersecurity South Africa, South Africa IT outsourcing, Forge Vertical cybersecurity, SA digital skills shortage, cybercrime South Africa billions"}
+    </script>
+    <script src="/global.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/typography.css">
+    <style>
+        body{font-family:'Outfit',sans-serif;background:#fff;}
+        .mono{font-family:'JetBrains Mono',monospace;}
+        .g-text{background:linear-gradient(90deg,#10b981,#84cc16);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:inline-block;}
+        .prose-body{font-family:'Lora',serif;font-size:19px;line-height:1.85;color:#27272a;}
+        .prose-body p{margin-bottom:1.6em;}
+        .prose-body h2{font-family:'Outfit',sans-serif;font-size:28px;font-weight:700;letter-spacing:-0.02em;color:#09090b;margin-top:2.5em;margin-bottom:0.6em;line-height:1.2;}
+        .prose-body strong{font-weight:700;color:#09090b;font-family:'Outfit',sans-serif;font-size:17px;}
+        .prose-body a{color:#84cc16;text-decoration:underline;text-underline-offset:3px;}
+        .callout{background:#f4f4f5;border-left:3px solid #84cc16;border-radius:0 12px 12px 0;padding:20px 24px;margin:2em 0;font-family:'Outfit',sans-serif;font-size:15px;color:#3f3f46;line-height:1.7;}
+        .callout.dark{background:#09090b;color:#a1a1aa;border-left-color:#84cc16;}
+        .callout.red{border-left-color:#ef4444;background:#fef2f2;color:#7f1d1d;}
+        .callout.amber{border-left-color:#f59e0b;background:#fffdf5;}
+        .pull-quote{font-family:'Lora',serif;font-size:22px;font-style:italic;color:#09090b;border-top:2px solid #84cc16;border-bottom:1px solid #e4e4e7;padding:24px 0;margin:2.5em 0;line-height:1.5;}
+        .chapter-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:#84cc16;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:6px;display:block;}
+        .stat-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;margin:2em 0;}
+        .stat-box{background:#09090b;border-radius:12px;padding:18px;text-align:center;}
+        .stat-val{font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:700;color:#84cc16;line-height:1;margin-bottom:6px;}
+        .stat-val.red{color:#ef4444;}
+        .stat-lbl{font-size:11px;color:#52525b;text-transform:uppercase;letter-spacing:0.08em;font-weight:600;}
+        .problem-stack{display:flex;flex-direction:column;gap:14px;margin:2em 0;}
+        .ps-item{border:1px solid #e4e4e7;border-radius:12px;padding:20px;display:flex;gap:16px;align-items:flex-start;}
+        .ps-item.critical{border-color:#fecaca;background:#fef2f2;}
+        .ps-icon{font-size:22px;flex-shrink:0;margin-top:2px;}
+        .ps-title{font-family:'Outfit',sans-serif;font-size:15px;font-weight:700;color:#09090b;margin-bottom:5px;}
+        .ps-title.red{color:#dc2626;}
+        .ps-body{font-size:13px;color:#52525b;line-height:1.65;}
+        .outsource-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;margin:2em 0;}
+        .os-card{border:1px solid #e4e4e7;border-radius:14px;padding:20px;transition:border-color 0.15s;}
+        .os-card:hover{border-color:#84cc16;}
+        .os-num{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;color:#84cc16;text-transform:uppercase;letter-spacing:0.15em;margin-bottom:8px;}
+        .os-title{font-family:'Outfit',sans-serif;font-size:15px;font-weight:700;color:#09090b;margin-bottom:8px;}
+        .os-body{font-size:13px;color:#52525b;line-height:1.7;}
+        .fv-cta{background:linear-gradient(135deg,rgba(16,185,129,0.08),rgba(132,204,22,0.08));border:1px solid rgba(132,204,22,0.3);border-radius:16px;padding:28px;margin:2em 0;}
+        .fv-cta-label{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.18em;color:#84cc16;margin-bottom:10px;display:block;}
+        .fv-cta-title{font-family:'Outfit',sans-serif;font-size:20px;font-weight:800;color:#09090b;margin-bottom:10px;letter-spacing:-0.01em;}
+        .fv-cta-body{font-size:14px;color:#52525b;line-height:1.7;margin-bottom:18px;}
+        .fv-cta-links{display:flex;gap:12px;flex-wrap:wrap;}
+        .fv-btn{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;padding:10px 18px;border-radius:8px;text-decoration:none;transition:opacity 0.15s;}
+        .fv-btn:hover{opacity:0.85;}
+        .fv-btn.primary{background:linear-gradient(90deg,#10b981,#84cc16);color:#06080c;}
+        .fv-btn.ghost{border:1px solid rgba(132,204,22,0.4);color:#84cc16;}
+        .aff-footer{background:#09090b;border-radius:16px;padding:28px;margin:3em 0;}
+        .aff-footer h3{font-family:'Outfit',sans-serif;font-size:15px;font-weight:700;color:#f4f4f5;margin-bottom:6px;}
+        .aff-footer p{font-size:13px;color:#6a7d96;margin-bottom:18px;line-height:1.6;}
+        .aff-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;}
+        .aff-tile{background:#111620;border:1px solid #1a2030;border-radius:10px;padding:14px;text-decoration:none;display:block;transition:border-color 0.18s;}
+        .aff-tile:hover{border-color:#84cc16;}
+        .aff-tile-name{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:#84cc16;margin-bottom:4px;}
+        .aff-tile-desc{font-size:11px;color:#6a7d96;line-height:1.5;margin-bottom:6px;}
+        .aff-tile-cta{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:#84cc16;}
+    </style>
+</head>
+<body class="antialiased">
+<div id="global-nav"></div>
+<article class="pt-20 pb-24">
+
+    <header class="max-w-3xl mx-auto px-6 mt-10 mb-12">
+        <div class="flex items-center gap-3 mb-6">
+            <a href="/articles.html" class="mono text-[10px] text-zinc-400 hover:text-zinc-600 uppercase tracking-widest">← Articles</a>
+            <span class="text-zinc-300">·</span>
+            <span class="mono text-[10px] font-bold text-[#84cc16] uppercase tracking-widest border border-[#84cc16]/30 px-3 py-1 rounded-full">Cybersecurity · South Africa · Skills Gap</span>
+        </div>
+        <h1 class="text-4xl md:text-5xl font-bold tracking-tight leading-[1.05] mb-6 text-zinc-900" style="font-family:'Outfit',sans-serif;letter-spacing:-0.03em;">
+            South Africa has a<br>cybersecurity crisis and<br>
+            <span class="g-text">not enough developers to fix it. Here is what to do.</span>
+        </h1>
+        <p class="text-xl text-zinc-500 font-light leading-relaxed mb-8 max-w-2xl" style="font-family:'Outfit',sans-serif;">
+            Two-thirds of South African government departments are vulnerable to cyberattacks right now. The World Bank says the digital skills pipeline is not meeting demand. SABS was shut down by a ransomware attack. Cybercrime costs South Africa billions annually. The education system cannot fix this fast enough. The practical answer for SA businesses is not to wait — it is to outsource to organisations that already have the expertise.
+        </p>
+        <div class="flex items-center gap-4 pb-8 border-b border-zinc-100">
+            <div>
+                <div class="font-bold text-sm text-zinc-900">Jarrit Hosking</div>
+                <div class="mono text-[10px] text-zinc-400 uppercase tracking-widest">Forge Vertical · Cape Town · September 9, 2026 · Active HackerOne researcher</div>
+            </div>
+            <div class="ml-auto mono text-[10px] text-zinc-400 uppercase tracking-widest">12 min read</div>
+        </div>
+    </header>
+
+    <div class="max-w-3xl mx-auto px-6 prose-body">
+
+        <span class="chapter-label">// The scale of what South Africa is facing</span>
+
+        <p>
+            <strong>Let us start with the number that should be in every boardroom in South Africa right now: two-thirds.</strong> Two-thirds of assessed South African government departments are vulnerable to cyberattacks — not because of sophisticated nation-state adversaries exploiting zero-days, but because of missing backup systems and disaster recovery plans that have never been tested. Basic. Foundational. Missing.
+        </p>
+
+        <p>
+            The South African Bureau of Standards (SABS) found this out the hard way. A ransomware attack caused major operational shutdowns and data encryption — forcing a public entity responsible for national standards to halt operations while attackers held its data. That is not an edge case. That is what happens when cybersecurity is treated as a budget line rather than an operational requirement.
+        </p>
+
+        <p>
+            The World Bank's September 2026 report on South Africa's digital skills pipeline is equally direct: the education system is producing graduates, but not the graduates the economy needs. There is a structural mismatch between what employers require — software developers, network engineers, cybersecurity specialists — and what the pipeline delivers. High unemployment coexists with critical skill shortages because the unemployment is in categories the economy is moving away from, and the shortage is in categories the economy is moving toward.
+        </p>
+
+    </div>
+
+    <!-- Stats -->
+    <div class="max-w-3xl mx-auto px-6 my-8">
+        <div class="stat-row">
+            <div class="stat-box"><div class="stat-val red">66%</div><div class="stat-lbl">Govt depts vulnerable to attack</div></div>
+            <div class="stat-box"><div class="stat-val red">Billions</div><div class="stat-lbl">Cybercrime cost annually</div></div>
+            <div class="stat-box"><div class="stat-val">Critical</div><div class="stat-lbl">Shortage: developers + security</div></div>
+            <div class="stat-box"><div class="stat-val">88.1%</div><div class="stat-lbl">WC internet access — most exposed</div></div>
+        </div>
+    </div>
+
+    <div class="max-w-3xl mx-auto px-6 prose-body">
+
+        <h2>The three problems that compound each other</h2>
+        <span class="chapter-label">// Chapter 01 — Why this is harder than it looks</span>
+
+    </div>
+
+    <!-- Problem stack -->
+    <div class="max-w-3xl mx-auto px-6 my-8">
+        <div class="problem-stack">
+            <div class="ps-item critical">
+                <div class="ps-icon">🔓</div>
+                <div>
+                    <div class="ps-title red">The skills gap is structural, not temporary</div>
+                    <div class="ps-body">The World Bank report does not describe a short-term mismatch that will resolve as graduates enter the market. It describes a structural pipeline failure — unequal device access in schools, unreliable internet in educational institutions, and foundational digital training gaps that mean students arrive at tertiary level without the prerequisites for technology careers. Fixing this takes a decade of sustained investment. South African businesses do not have a decade to wait.</div>
+                </div>
+            </div>
+            <div class="ps-item critical">
+                <div class="ps-icon">⚡</div>
+                <div>
+                    <div class="ps-title red">Legacy systems cannot be secured with modern tools</div>
+                    <div class="ps-body">Many South African public and private sector organisations are running legacy systems that predate modern security architecture. These systems were not designed to integrate with cloud security tools, AI-powered threat detection, or modern authentication frameworks. Securing them requires specialist knowledge of both the legacy environment and the modern security landscape — a combination that is exceptionally rare and expensive to hire permanently.</div>
+                </div>
+            </div>
+            <div class="ps-item critical">
+                <div class="ps-icon">🌐</div>
+                <div>
+                    <div class="ps-title red">Higher connectivity = higher attack surface</div>
+                    <div class="ps-body">The Western Cape's 88.1% internet access rate — the highest in South Africa — is a development achievement and a security liability simultaneously. More connected systems, more exposed endpoints, more remote access, more cloud-hosted data. The attack surface grows proportionally with connectivity. The security investment has not kept pace. The organisations with the most to protect have often invested the least in protecting it.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-3xl mx-auto px-6 prose-body">
+
+        <h2>What the attack landscape actually looks like for SA businesses</h2>
+        <span class="chapter-label">// Chapter 02 — What you are up against</span>
+
+        <p>
+            The cybercrime targeting South African businesses is not primarily sophisticated. It is opportunistic — and opportunistic attacks succeed because of the exact vulnerabilities the World Bank and the Auditor General have documented: missing backups, untested recovery plans, unpatched systems, weak authentication, and staff who have not been trained to recognise phishing attempts.
+        </p>
+
+        <p>
+            <strong>Ransomware</strong> is the most common and most damaging. An attacker gains access — often through a phishing email that a staff member clicks — encrypts the organisation's data, and demands payment for the decryption key. If backups exist and are current and tested, the organisation recovers. If they do not — as is the case for two-thirds of assessed government departments — the choice is between paying criminals and losing data permanently.
+        </p>
+
+        <p>
+            <strong>Business email compromise</strong> is the financial category. An attacker gains access to or spoofs a senior employee's email account and instructs the finance department to transfer funds to a fraudulent account. South African businesses have lost hundreds of millions of rands to this attack type. It requires no technical sophistication — just a convincing email and an absence of verification protocols.
+        </p>
+
+        <p>
+            <strong>Supply chain attacks</strong> are growing. Your organisation may have reasonable security — but if your software supplier, your cloud provider, or your managed service partner does not, their compromise becomes your exposure. The 2025 Hugging Face breach that delayed GPT-6 Astra's release is a global example of exactly this attack type at scale.
+        </p>
+
+        <div class="callout red">
+            <strong>The accountability gap:</strong> South African cybercrime costs billions annually, worsened by a lack of accountability and slow implementation of security recommendations. Auditor General reports have flagged missing disaster recovery plans repeatedly. The same vulnerabilities appear in consecutive annual reports. The problem is not that South Africa does not know what needs to be done — it is that implementation is not happening. For private sector businesses, waiting for the government to set the standard is not a strategy.
+        </div>
+
+        <div class="pull-quote">
+            The most common cybersecurity failures in South Africa are not sophisticated. They are basic. Missing backups. Untested recovery plans. Unpatched systems. Weak passwords. Staff who clicked a link. Every one of these is preventable with the right expertise applied before the attack, not after.
+        </div>
+
+        <h2>The outsourcing case — why it is the practical answer</h2>
+        <span class="chapter-label">// Chapter 03 — What to do when you cannot hire what you need</span>
+
+        <p>
+            A senior cybersecurity specialist in South Africa commands a salary that most SMEs and even many mid-sized enterprises cannot sustain as a permanent hire. The skills are scarce. The market rate reflects that scarcity. And a single hired expert covers one specialisation — you need penetration testing expertise, incident response capability, infrastructure hardening knowledge, and ongoing monitoring. That is four roles in a market where one is already difficult to fill.
+        </p>
+
+        <p>
+            Outsourcing to specialist organisations solves this at a fraction of the cost of hiring. You get access to a team rather than an individual, expertise across the full security stack rather than one specialisation, and a working relationship that adapts as your needs change rather than a fixed headcount that either under-delivers during quiet periods or is overwhelmed during incidents.
+        </p>
+
+        <p>
+            The businesses that should be considering outsourcing are not just enterprises. They are any South African organisation that:
+        </p>
+
+    </div>
+
+    <!-- Outsource grid -->
+    <div class="max-w-3xl mx-auto px-6 my-8">
+        <div class="outsource-grid">
+            <div class="os-card">
+                <div class="os-num">// Profile 01</div>
+                <div class="os-title">SMEs with customer data</div>
+                <div class="os-body">Any business holding customer personal information is subject to POPIA. A data breach is not just a reputational problem — it is a regulatory liability. SMEs are disproportionately targeted because attackers know their security posture is typically weaker than enterprises. Outsourced security is affordable at SME scale. A breach is not.</div>
+            </div>
+            <div class="os-card">
+                <div class="os-num">// Profile 02</div>
+                <div class="os-title">Businesses with online payment systems</div>
+                <div class="os-body">Any organisation processing payments online has PCI-DSS obligations and a payment system that is actively targeted. A vibe-coded checkout, an unaudited payment integration, or an e-commerce platform running on an outdated plugin set is a liability. Outsourced security review and hardening of payment infrastructure is not optional — it is the cost of doing business online responsibly.</div>
+            </div>
+            <div class="os-card">
+                <div class="os-num">// Profile 03</div>
+                <div class="os-title">Organisations on legacy systems</div>
+                <div class="os-body">Legacy systems cannot be secured by generalist IT staff who have not worked with them specifically. And they cannot simply be replaced overnight. A specialist who understands the security boundaries of legacy South African government and corporate systems — and knows how to harden them without breaking the business processes that depend on them — is a scarce resource that outsourcing makes accessible.</div>
+            </div>
+            <div class="os-card">
+                <div class="os-num">// Profile 04</div>
+                <div class="os-title">Growing businesses adding digital services</div>
+                <div class="os-body">A business that is adding an app, a client portal, or an API integration is adding attack surface simultaneously. Security built into the development process costs a fraction of security added after a breach. Outsourcing security review during development — not just after launch — is the correct sequencing.</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-3xl mx-auto px-6 prose-body">
+
+        <h2>What outsourced security should actually include</h2>
+        <span class="chapter-label">// Chapter 04 — What to look for and what to ask</span>
+
+        <p>
+            Not all outsourced security services are equivalent. The market includes genuine expertise and it includes resellers of automated scanning tools that produce reports without producing security. When evaluating an outsourced security partner for your South African business, ask specifically for:
+        </p>
+
+        <p>
+            <strong>Penetration testing with human analysis.</strong> Automated scanners find known vulnerabilities. Human penetration testers find the vulnerabilities that scanners miss — the logic flaws, the authentication bypasses, the business-specific attack paths. Ask whether the test is fully automated, partially automated with human review, or fully manual. The answer tells you a great deal about the quality of the engagement.
+        </p>
+
+        <p>
+            <strong>Backup verification — not just backup existence.</strong> Having a backup is not the same as having a working backup. The two-thirds of government departments with missing or untested disaster recovery plans almost certainly believe they have backups. The test is whether those backups can be restored, how long restoration takes, and whether the restored system works. An outsourced security review should include verification that your backups actually restore — not just that they run.
+        </p>
+
+        <p>
+            <strong>Staff phishing simulation.</strong> The most sophisticated security infrastructure fails when a staff member clicks the wrong link. Simulated phishing campaigns — where the security partner sends realistic phishing emails to your staff and measures click rates — are the only honest assessment of your human attack surface. The results are often uncomfortable. They are always useful.
+        </p>
+
+        <p>
+            <strong>POPIA compliance review.</strong> South Africa's Protection of Personal Information Act imposes specific obligations on how personal data is stored, processed, and protected. A security review that does not include POPIA compliance assessment is incomplete for any South African organisation handling customer data.
+        </p>
+
+        <div class="callout dark">
+            <span class="text-[#84cc16] font-bold block mb-2 font-sans text-sm">// Forge Vertical's security research credentials</span>
+            <span class="text-zinc-400 font-sans text-sm">Forge Vertical operates as an active security researcher on HackerOne, Bugcrowd, and YesWeHack. We hold active Anthropic Cyber Verification Programme (CVP) approval — one of a small number of organisations globally with expanded AI capability access for dual-use cybersecurity research. Our security work covers CI/CD vulnerabilities, web application security, and penetration testing within safe harbour agreements. We are not just building websites — we are actively finding vulnerabilities in production systems and reporting them responsibly. That hands-on research is what informs the security advice we give to clients.</span>
+        </div>
+
+    </div>
+
+    <!-- Forge Vertical CTA -->
+    <div class="max-w-3xl mx-auto px-6 my-8">
+        <div class="fv-cta">
+            <span class="fv-cta-label">// Work with Forge Vertical</span>
+            <div class="fv-cta-title">Security-first development and cybersecurity outsourcing for South African businesses</div>
+            <div class="fv-cta-body">Forge Vertical builds websites, SaaS platforms, and AI-integrated systems with security hardened from the first commit — not bolted on after launch. We also provide security review services, penetration testing for web applications, POPIA compliance assessment, and Cloudflare configuration for South African businesses that need expertise they cannot justify hiring full-time. Active HackerOne researcher. Anthropic CVP approved. Cape Town based, global scope.</div>
+            <div class="fv-cta-links">
+                <a href="https://www.forgevertical.com/onboard.html" class="fv-btn primary">Get a security review →</a>
+                <a href="mailto:jarrit@forgevertical.com?subject=Security review enquiry" class="fv-btn ghost">Email Jarrit →</a>
+                <a href="https://wa.me/27657417593" target="_blank" rel="noopener noreferrer" class="fv-btn ghost">WhatsApp →</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-3xl mx-auto px-6 prose-body">
+
+        <h2>The skills gap is real — but it is not your problem to solve alone</h2>
+        <span class="chapter-label">// Chapter 05 — The conclusion</span>
+
+        <p>
+            South Africa's digital skills shortage is a systemic problem that will take years to address through education reform, infrastructure investment, and coordinated policy. None of that happens fast enough to protect your business from the ransomware campaign that is running right now, the phishing attempt that will land in your staff's inbox next week, or the unpatched vulnerability in your legacy system that an attacker will find before you do.
+        </p>
+
+        <p>
+            The practical response to a systemic problem is not to wait for the system to fix itself. It is to access the expertise that exists — through outsourcing relationships with specialist organisations that have already done the work of building the skills the market cannot hire fast enough.
+        </p>
+
+        <p>
+            There are genuinely good cybersecurity businesses operating in South Africa. Forge Vertical is one of them, with active researcher credentials and production security work to back the claim. There are others. Find one. Engage them before an incident forces the conversation. The cost of prevention is always smaller than the cost of recovery — especially in a country where two-thirds of government departments cannot recover at all.
+        </p>
+
+    </div>
+
+    <div class="max-w-3xl mx-auto px-6">
+        <div class="aff-footer">
+            <div class="mono text-[10px] text-[#84cc16] uppercase tracking-widest mb-3">// Start with the basics — the tools that cost nothing to implement</div>
+            <h3>Foundational security tools for South African businesses</h3>
+            <p>These do not replace a proper security engagement — but they are the baseline every business should have before the conversation about anything more advanced. Affiliate links help keep Forge Vertical running.</p>
+            <div class="aff-grid">
+                <a href="https://get.surfshark.net/aff_c?offer_id=6&aff_id=4160" target="_blank" rel="noopener noreferrer" class="aff-tile">
+                    <img src="/assets/images/surfshark-vpn-1-year-17236158874633226.webp" alt="Surfshark" style="height:18px;margin-bottom:8px;object-fit:contain;display:block;" onerror="this.style.display='none'">
+                    <div class="aff-tile-name">Surfshark VPN</div>
+                    <div class="aff-tile-desc">Network-level privacy for remote staff. Stop traffic interception on public and home networks.</div>
+                    <span class="aff-tile-cta">Try Surfshark →</span>
+                </a>
+                <a href="https://go.nordvpn.net/aff_c?offer_id=15&aff_id=145959&url_id=902" target="_blank" rel="noopener noreferrer" class="aff-tile">
+                    <img src="/assets/images/NordVPN-vertical.png" alt="NordVPN" style="height:18px;margin-bottom:8px;object-fit:contain;display:block;" onerror="this.style.display='none'">
+                    <div class="aff-tile-name">NordVPN</div>
+                    <div class="aff-tile-desc">Threat protection and Meshnet for distributed teams. Business-grade VPN.</div>
+                    <span class="aff-tile-cta">Try NordVPN →</span>
+                </a>
+                <a href="https://nordpass.com" target="_blank" rel="noopener noreferrer" class="aff-tile">
+                    <img src="/assets/images/nord-security_password-management-tools_1739200695312.png" alt="NordPass" style="height:18px;margin-bottom:8px;object-fit:contain;display:block;" onerror="this.style.display='none'">
+                    <div class="aff-tile-name">NordPass Business</div>
+                    <div class="aff-tile-desc">Team password manager. Stop staff reusing passwords across systems. Business plan available.</div>
+                    <span class="aff-tile-cta">Try NordPass →</span>
+                </a>
+                <a href="https://portal.webway.host/aff.php?aff=353" target="_blank" rel="noopener noreferrer" class="aff-tile">
+                    <img src="/assets/images/webwaylogo.png" alt="WebWay" style="height:18px;margin-bottom:8px;object-fit:contain;display:block;" onerror="this.style.display='none'">
+                    <div class="aff-tile-name">WebWay — SA Hosting</div>
+                    <div class="aff-tile-desc">South African hosting with local support. Your data stays in South Africa.</div>
+                    <span class="aff-tile-cta">WebWay.co.za →</span>
+                </a>
+            </div>
+        </div>
+        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mt-8">
+            <div>
+                <div class="mono text-[10px] text-zinc-400 uppercase tracking-widest mb-1">Written by</div>
+                <div class="font-bold text-zinc-900">Jarrit Hosking</div>
+                <div class="mono text-[10px] text-zinc-400">Forge Vertical · Cape Town · September 9, 2026 · Active HackerOne researcher</div>
+            </div>
+            <div class="flex gap-3 flex-wrap">
+                <a href="/articles.html" class="mono text-[10px] font-bold uppercase tracking-widest border border-zinc-200 px-5 py-3 rounded-xl hover:border-zinc-400 transition-all text-zinc-600">← All articles</a>
+                <a href="/articles/nordpass-vs-browser-passwords.html" class="mono text-[10px] font-bold uppercase tracking-widest border border-zinc-200 px-5 py-3 rounded-xl hover:border-zinc-400 transition-all text-zinc-600">Passwords →</a>
+                <a href="/articles/vibe-coder-deployment-rules.html" style="background:linear-gradient(90deg,#10b981,#84cc16);" class="mono text-[10px] font-bold uppercase tracking-widest px-5 py-3 rounded-xl text-white hover:opacity-90 transition-all">Deploy rules →</a>
+            </div>
+        </div>
+    </div>
+
+</article>
+<div id="global-footer"></div>
+</body>
+</html>
