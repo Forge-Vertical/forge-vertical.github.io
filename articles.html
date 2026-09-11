@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Forge Vertical — independent technology journalism covering AI, cybersecurity, open source, hardware, and South African business. 34 articles. Real research. No filler. Publish your story with us.">
-    <title>Forge Vertical — Tech News & AI Research | 43 Articles</title>
+    <title>Forge Vertical — Tech News & AI Research | 44 Articles</title>
     <link rel="canonical" href="https://www.forgevertical.com/articles.html">
     <script type="application/ld+json">
     {
@@ -321,7 +321,7 @@
 <!-- Stats bar -->
 <div class="stats-bar">
     <div class="stats-inner">
-        <div class="stat-item"><div class="stat-n">43</div><div class="stat-l">Articles published</div></div>
+        <div class="stat-item"><div class="stat-n">44</div><div class="stat-l">Articles published</div></div>
         <div class="stats-bar-rule"></div>
         <div class="stat-item"><div class="stat-n">9</div><div class="stat-l">Topics covered</div></div>
         <div class="stats-bar-rule"></div>
@@ -339,7 +339,7 @@
         <svg class="search-icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
         <input type="search" class="search-input" id="search-input" placeholder="Search articles — AI, cybersecurity, open source, South Africa..." autocomplete="off">
     </div>
-    <div class="result-count" id="result-count">43 articles</div>
+    <div class="result-count" id="result-count">44 articles</div>
 </div>
 
 <!-- Lead stories -->
@@ -440,11 +440,24 @@
 <div class="section-header">
     <span class="section-label">// All articles</span>
     <div class="section-rule"></div>
-    <span class="section-count" id="section-count">43 published</span>
+    <span class="section-count" id="section-count">44 published</span>
 </div>
 
 <div id="ac-grid">
-                                <a href="/articles/sa-cybersecurity-skills-gap.html" class="ac" data-cat="security sa tech">
+                                        <a href="/articles/sa-waf-security-infrastructure.html" class="ac" data-cat="security tech sa">
+            <div class="ac-img">
+                <span class="ac-tag ac-new">Security</span>
+                <img src="https://images.pexels.com/photos/60504/security-protection-anti-virus-software-60504.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy">
+            </div>
+            <div class="ac-body">
+                <div class="ac-title">"We have strong infrastructure." Did you battle test it, or just put it on AWS?</div>
+                <div class="ac-meta">Sep 9, 2026</div>
+                <div class="ac-desc">LVMH, PayPal, Robinhood — all share hardened WAFs, DataDome, layered bot detection. SA businesses that can afford DataDome don't have it. Free Cloudflare features are half-configured. Here is what strong infrastructure actually means when tested.</div>
+                <div class="ac-foot"><span class="ac-read">Read More ▸</span></div>
+            </div>
+        </a>
+
+<a href="/articles/sa-cybersecurity-skills-gap.html" class="ac" data-cat="security sa tech">
             <div class="ac-img">
                 <span class="ac-tag ac-new">Security</span>
                 <img src="https://images.pexels.com/photos/5380664/pexels-photo-5380664.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy">
@@ -1077,7 +1090,7 @@ searchInput.addEventListener('input', function() {
         card.style.display = show ? '' : 'none';
         if (show) visible++;
     });
-    updateCount(q ? visible : 43);
+    updateCount(q ? visible : 44);
 });
 
 function filterArticles(cat, btn) {
