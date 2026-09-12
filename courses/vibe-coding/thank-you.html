@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>You're in — Download Your Course | Forge Vertical</title>
+    <script src="/global.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root{--bg:#06080c;--surface:#0b0f14;--border:#161e2a;--border2:#1c2638;--text:#eef0f4;--muted:#3a4d66;--muted2:#5c7494;--lime:#84cc16;--emerald:#10b981;}
+        *{box-sizing:border-box;margin:0;padding:0;}
+        body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;min-height:100vh;display:flex;flex-direction:column;}
+        .mono{font-family:'JetBrains Mono',monospace;}
+        .g-text{background:linear-gradient(90deg,var(--emerald),var(--lime));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:inline-block;}
+
+        .wrap{flex:1;display:flex;align-items:center;justify-content:center;padding:60px 6vw;}
+        .card{max-width:680px;width:100%;text-align:center;}
+
+        /* Success animation */
+        .success-ring{
+            width:100px;height:100px;
+            border-radius:50%;
+            background:rgba(132,204,22,0.08);
+            border:2px solid rgba(132,204,22,0.3);
+            display:flex;align-items:center;justify-content:center;
+            margin:0 auto 32px;
+            font-size:44px;
+            animation:pulse 2s ease infinite;
+        }
+        @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(132,204,22,0.2);}50%{box-shadow:0 0 0 20px rgba(132,204,22,0);}}
+
+        .eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.25em;color:var(--lime);margin-bottom:16px;display:block;}
+        .headline{font-family:'Outfit',sans-serif;font-size:clamp(32px,5vw,52px);font-weight:800;letter-spacing:-0.03em;line-height:1.05;margin-bottom:16px;}
+        .subline{font-size:17px;color:var(--muted2);line-height:1.7;margin-bottom:48px;font-weight:300;}
+
+        /* Download button */
+        .download-btn{
+            display:inline-flex;align-items:center;justify-content:center;gap:12px;
+            background:linear-gradient(90deg,var(--emerald),var(--lime));
+            color:#06080c;
+            padding:20px 48px;border-radius:14px;
+            font-family:'JetBrains Mono',monospace;
+            font-size:13px;font-weight:700;
+            text-transform:uppercase;letter-spacing:0.14em;
+            text-decoration:none;transition:opacity 0.18s;
+            display:block;width:100%;max-width:480px;margin:0 auto 16px;
+        }
+        .download-btn:hover{opacity:0.88;}
+
+        .download-note{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted2);text-align:center;line-height:1.7;max-width:480px;margin:0 auto 48px;}
+
+        /* What's next */
+        .next-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:48px;text-align:left;}
+        @media(max-width:500px){.next-grid{grid-template-columns:1fr;}}
+        .next-card{background:var(--surface);border:1px solid var(--border2);border-radius:12px;padding:18px;}
+        .next-num{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;color:var(--lime);margin-bottom:8px;}
+        .next-title{font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px;}
+        .next-desc{font-size:12px;color:var(--muted2);line-height:1.6;}
+
+        /* Footer links */
+        .footer-links{display:flex;flex-wrap:wrap;justify-content:center;gap:16px;}
+        .footer-link{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted2);text-decoration:none;transition:color 0.15s;}
+        .footer-link:hover{color:var(--lime);}
+
+        .divider{height:1px;background:var(--border);margin:40px 0;}
+    </style>
+</head>
+<body>
+<div id="global-nav"></div>
+
+<div class="wrap">
+    <div class="card">
+
+        <div class="success-ring">🚀</div>
+
+        <span class="eyebrow">// Payment confirmed · You're in</span>
+        <h1 class="headline">
+            Welcome to the<br>
+            <span class="g-text">Vibe Coder's Playbook.</span>
+        </h1>
+        <p class="subline">
+            Your purchase is confirmed. Click the button below to access your course. The link opens in Google Drive — bookmark it for lifetime access. Check your PayPal receipt for the transaction record.
+        </p>
+
+        <!-- THE GOOGLE DRIVE LINK GOES HERE -->
+        <a href="GOOGLE_DRIVE_VIEW_LINK_HERE" target="_blank" rel="noopener noreferrer" class="download-btn">
+            📘 &nbsp; Open your course — Build With AI
+        </a>
+        <div class="download-note">
+            Opens in Google Drive · View and read in browser · Bookmark for lifetime access<br>
+            Issues? Email jarrit@forgevertical.com with your PayPal receipt
+        </div>
+
+        <div class="divider"></div>
+
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.2em;color:var(--lime);margin-bottom:20px;text-align:left;">// Start here — your reading order</div>
+
+        <div class="next-grid">
+            <div class="next-card">
+                <div class="next-num">// Start</div>
+                <div class="next-title">Module 01 — What vibe coding actually is</div>
+                <div class="next-desc">Read this first. Sets the foundation for everything that follows.</div>
+            </div>
+            <div class="next-card">
+                <div class="next-num">// Before you build</div>
+                <div class="next-title">Module 03 — Research and requirements</div>
+                <div class="next-desc">Read this before starting any new project — even mid-build.</div>
+            </div>
+            <div class="next-card">
+                <div class="next-num">// Most important</div>
+                <div class="next-title">Module 08 — The responsibility rule</div>
+                <div class="next-desc">"Claude built it" is not a legal defence. Read this before you go live.</div>
+            </div>
+            <div class="next-card">
+                <div class="next-num">// Checklist</div>
+                <div class="next-title">Appendix — Pre-launch checklist</div>
+                <div class="next-desc">Print this. Check every box before pointing a domain at anything.</div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.2em;color:var(--muted2);margin-bottom:20px;">// While you are here</div>
+
+        <div class="footer-links">
+            <a href="/articles.html" class="footer-link">44 free articles →</a>
+            <a href="/courses/courses.html" class="footer-link">More courses →</a>
+            <a href="/onboard.html" class="footer-link">Work with Forge Vertical →</a>
+            <a href="https://tripspaceglobal.com" target="_blank" rel="noopener noreferrer" class="footer-link">TripSpace Global →</a>
+        </div>
+
+    </div>
+</div>
+
+<div id="global-footer"></div>
+</body>
+</html>
