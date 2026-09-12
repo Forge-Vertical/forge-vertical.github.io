@@ -7,7 +7,240 @@
     <title>Forge Vertical Courses | Learn to Build, Secure, and Ship</title>
     <link rel="canonical" href="https://www.forgevertical.com/courses/courses.html">
     <script type="application/ld+json">
-    {"@context":"https://schema.org","@type":"EducationalOrganization","name":"Forge Vertical Courses","url":"https://www.forgevertical.com/courses/courses.html","description":"Practical written courses on vibe coding, cybersecurity, AI communication, and development by Jarrit Hosking — Forge Vertical, Cape Town.","provider":{"@type":"Person","name":"Jarrit Hosking","url":"https://www.forgevertical.com/about/jarrit-hosking.html"}}
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "EducationalOrganization",
+          "@id": "https://www.forgevertical.com/#edu",
+          "name": "Forge Vertical Courses",
+          "url": "https://www.forgevertical.com/courses/courses.html",
+          "description": "Practical written courses on vibe coding, cybersecurity, AI communication, and development fundamentals. Built by a solo Cape Town founder who ships real systems with AI daily. No video — written guides designed for reference, not passive watching.",
+          "address": {"@type": "PostalAddress", "addressLocality": "Cape Town", "addressCountry": "ZA"},
+          "sameAs": [
+            "https://www.forgevertical.com",
+            "https://www.linkedin.com/company/forge-vertical",
+            "https://github.com/Jotto1988"
+          ],
+          "founder": {
+            "@type": "Person",
+            "name": "Jarrit Hosking",
+            "url": "https://www.forgevertical.com/about/jarrit-hosking.html",
+            "jobTitle": "Founder, Principal Architect, Independent Security Researcher",
+            "knowsAbout": ["Vibe Coding", "AI Communication", "Cybersecurity", "Web Development", "Cloudflare", "POPIA", "GDPR", "Payment Systems", "Prompt Engineering"]
+          }
+        },
+        {
+          "@type": "ItemList",
+          "@id": "https://www.forgevertical.com/courses/courses.html#courselist",
+          "name": "Forge Vertical Course Catalogue",
+          "description": "Written courses covering vibe coding, AI communication, cybersecurity, and development by Jarrit Hosking — Cape Town.",
+          "url": "https://www.forgevertical.com/courses/courses.html",
+          "numberOfItems": 5,
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "item": {
+                "@type": "Course",
+                "@id": "https://www.forgevertical.com/courses/vibe-coding/index.html",
+                "name": "Build With AI: The Complete Vibe Coder's Playbook",
+                "description": "Everything nobody tells you before you ship your first AI-built product. 9 modules covering AI communication, security, race conditions, Cloudflare setup, payment handling, privacy law (POPIA and GDPR), royalty-free assets, penetration testing basics, and the 2030 AI outlook. Written by a solo Cape Town founder who builds real production systems with AI daily.",
+                "url": "https://www.forgevertical.com/courses/vibe-coding/index.html",
+                "image": "https://www.forgevertical.com/assets/images/og-vibe-course.jpg",
+                "provider": {
+                  "@type": "Person",
+                  "name": "Jarrit Hosking",
+                  "url": "https://www.forgevertical.com/about/jarrit-hosking.html"
+                },
+                "author": {
+                  "@type": "Person",
+                  "name": "Jarrit Hosking"
+                },
+                "publisher": {
+                  "@type": "Organization",
+                  "name": "Forge Vertical",
+                  "url": "https://www.forgevertical.com"
+                },
+                "courseMode": ["self-paced", "online"],
+                "educationalLevel": "Beginner",
+                "inLanguage": "en",
+                "teaches": [
+                  "Vibe coding fundamentals",
+                  "AI prompt communication",
+                  "Web security basics",
+                  "Cloudflare configuration",
+                  "Race condition prevention",
+                  "Payment system integration",
+                  "POPIA and GDPR compliance",
+                  "Cookie consent implementation",
+                  "Royalty-free asset sourcing",
+                  "Pre-launch security testing"
+                ],
+                "hasCourseInstance": {
+                  "@type": "CourseInstance",
+                  "courseMode": "online",
+                  "courseWorkload": "PT3H",
+                  "offers": {
+                    "@type": "Offer",
+                    "price": "497",
+                    "priceCurrency": "ZAR",
+                    "availability": "https://schema.org/InStock",
+                    "validFrom": "2026-09-12",
+                    "seller": {
+                      "@type": "Organization",
+                      "name": "Forge Vertical",
+                      "url": "https://www.forgevertical.com"
+                    }
+                  }
+                },
+                "aggregateRating": {
+                  "@type": "AggregateRating",
+                  "ratingValue": "5",
+                  "ratingCount": "1",
+                  "bestRating": "5"
+                },
+                "keywords": "vibe coding course, AI coding course South Africa, how to build with AI, vibe coder deployment, AI communication course, Claude course, ChatGPT course, vibe coding security, vibe coding checklist, build with AI Cape Town"
+              }
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "item": {
+                "@type": "Course",
+                "name": "Cybersecurity Fundamentals for Non-Technical Founders",
+                "description": "WAFs, DataDome, Cloudflare configuration, penetration testing basics, phishing simulation, POPIA compliance, and what strong infrastructure actually means when someone tests it. For business owners and founders who need to understand what protects their digital products.",
+                "url": "https://www.forgevertical.com/courses/courses.html",
+                "provider": {"@type": "Person", "name": "Jarrit Hosking"},
+                "courseMode": ["self-paced", "online"],
+                "educationalLevel": "Beginner",
+                "inLanguage": "en",
+                "offers": {"@type": "Offer", "availability": "https://schema.org/PreOrder", "priceCurrency": "ZAR"}
+              }
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "item": {
+                "@type": "Course",
+                "name": "Coding Basics — Understanding What the AI Actually Built",
+                "description": "HTML, CSS, JavaScript, and Python explained for people who use AI to write code but want to understand what they are deploying. Read the output, spot mistakes, and direct AI with precision.",
+                "url": "https://www.forgevertical.com/courses/courses.html",
+                "provider": {"@type": "Person", "name": "Jarrit Hosking"},
+                "courseMode": ["self-paced", "online"],
+                "educationalLevel": "Beginner",
+                "inLanguage": "en",
+                "offers": {"@type": "Offer", "availability": "https://schema.org/PreOrder", "priceCurrency": "ZAR"}
+              }
+            },
+            {
+              "@type": "ListItem",
+              "position": 4,
+              "item": {
+                "@type": "Course",
+                "name": "AI Conversational Basics — Brief, Direct, and Get Results",
+                "description": "The skill that separates vibe coders who ship from those who get slop. How to write prompts that produce exactly what you need, maintain context across long sessions, and use AI as a genuine collaborator.",
+                "url": "https://www.forgevertical.com/courses/courses.html",
+                "provider": {"@type": "Person", "name": "Jarrit Hosking"},
+                "courseMode": ["self-paced", "online"],
+                "educationalLevel": "Beginner",
+                "inLanguage": "en",
+                "offers": {"@type": "Offer", "availability": "https://schema.org/PreOrder", "priceCurrency": "ZAR"}
+              }
+            },
+            {
+              "@type": "ListItem",
+              "position": 5,
+              "item": {
+                "@type": "Course",
+                "name": "Launch Your First Digital Product — From Idea to R497",
+                "description": "The exact process to build and sell digital products without an agency, team, or big budget. Pricing strategy, landing pages, PayPal payment links, Google Drive delivery, GEO indexing, and building a waitlist before the product exists.",
+                "url": "https://www.forgevertical.com/courses/courses.html",
+                "provider": {"@type": "Person", "name": "Jarrit Hosking"},
+                "courseMode": ["self-paced", "online"],
+                "educationalLevel": "Beginner",
+                "inLanguage": "en",
+                "offers": {"@type": "Offer", "availability": "https://schema.org/PreOrder", "priceCurrency": "ZAR"}
+              }
+            }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://www.forgevertical.com/courses/courses.html#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What is the best vibe coding course for beginners in South Africa?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Build With AI: The Complete Vibe Coder's Playbook by Jarrit Hosking at Forge Vertical covers everything a beginner needs — from AI communication and security to payment handling, privacy law, and the pre-launch checklist. Written in plain language, no video required, R497 lifetime access."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What does the vibe coding course cover?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "9 modules covering: what vibe coding is and is not, communicating with AI correctly, research and requirements before building, security from the first prompt, race conditions, payment handling, POPIA and GDPR compliance, royalty-free assets and the responsibility rule, and the 2030 AI outlook. Includes a full pre-launch checklist."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Do I need coding experience for the vibe coding course?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. The course is written for people who use AI to build — not people who write code manually. If you can use Claude, ChatGPT, or any AI tool, you have the prerequisite."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How much does the vibe coding course cost?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "R497 — one-time payment, lifetime access. No subscription. Debit card, credit card, and PayPal accepted."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Why is this a written course and not video?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Written courses are better for reference. You do not rewatch a video to find the section on cookie consent — you search the PDF. Written content is also more precise and stays current. Every module is designed to be referenced repeatedly throughout your projects."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Is this course relevant outside South Africa?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. The perspective is South African — POPIA is covered, Rand pricing is used — but everything applies globally. Cloudflare works everywhere. Race conditions do not care what country you are in. GDPR, CCPA, and POPIA share the same core principles."
+              }
+            }
+          ]
+        },
+        {
+          "@type": "WebPage",
+          "@id": "https://www.forgevertical.com/courses/courses.html",
+          "name": "Forge Vertical Courses — Learn to Build, Secure, and Ship",
+          "description": "Practical written courses on vibe coding, cybersecurity, AI communication, and development. By Jarrit Hosking, Cape Town. No video. Lifetime access.",
+          "url": "https://www.forgevertical.com/courses/courses.html",
+          "inLanguage": "en",
+          "isPartOf": {"@id": "https://www.forgevertical.com"},
+          "about": [
+            {"@type": "Thing", "name": "Vibe Coding"},
+            {"@type": "Thing", "name": "Artificial Intelligence"},
+            {"@type": "Thing", "name": "Cybersecurity"},
+            {"@type": "Thing", "name": "Web Development"},
+            {"@type": "Thing", "name": "Prompt Engineering"}
+          ],
+          "speakable": {
+            "@type": "SpeakableSpecification",
+            "cssSelector": [".masthead-name", ".masthead-tagline"]
+          }
+        }
+      ]
+    }
     </script>
     <script src="/global.js" defer></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
