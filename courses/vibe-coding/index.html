@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Build With AI: The Complete Vibe Coder's Playbook — R497. 9 modules. Written by a solo Cape Town founder who ships real systems with AI daily. Security, race conditions, Cloudflare, payments, privacy law, royalty-free assets, pen testing, and the 2030 outlook.">
+    <title>Build With AI: The Complete Vibe Coder's Playbook | Forge Vertical Courses</title>
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"Course","name":"Build With AI: The Complete Vibe Coder's Playbook","description":"9 modules covering vibe coding communication, security, race conditions, Cloudflare, payment handling, privacy law, royalty-free assets, pen testing, and the 2030 AI outlook. Written by Jarrit Hosking, solo founder of Forge Vertical.","provider":{"@type":"Person","name":"Jarrit Hosking","url":"https://www.forgevertical.com/about/jarrit-hosking.html"},"offers":{"@type":"Offer","price":"27","priceCurrency":"USD","availability":"https://schema.org/InStock"},"courseMode":"self-paced","educationalLevel":"Beginner","inLanguage":"en"}
+    </script>
+    <script src="/global.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/typography.css">
+    <style>
+        :root{--bg:#06080c;--surface:#0b0f14;--surface2:#0f141c;--border:#161e2a;--border2:#1c2638;--text:#eef0f4;--muted:#3a4d66;--muted2:#5c7494;--lime:#84cc16;--emerald:#10b981;--red:#ef4444;}
+        *{box-sizing:border-box;margin:0;padding:0;}
+        body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;overflow-x:hidden;}
+        .mono{font-family:'JetBrains Mono',monospace;}
+        .g-text{background:linear-gradient(90deg,var(--emerald),var(--lime));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:inline-block;}
+
+        /* Hero */
+        .hero{
+            position:relative;
+            padding:120px 6vw 80px;
+            overflow:hidden;
+            border-bottom:1px solid var(--border);
+        }
+        .hero::before{
+            content:'';position:absolute;inset:0;
+            background:
+                radial-gradient(ellipse 70% 60% at 0% 0%,rgba(16,185,129,0.12) 0%,transparent 60%),
+                radial-gradient(ellipse 50% 50% at 100% 100%,rgba(132,204,22,0.08) 0%,transparent 60%);
+        }
+        .hero-inner{max-width:900px;margin:0 auto;position:relative;z-index:1;}
+        .hero-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.25em;color:var(--lime);margin-bottom:20px;display:flex;align-items:center;gap:12px;}
+        .hero-eyebrow::before{content:'';width:28px;height:1px;background:var(--lime);flex-shrink:0;}
+        .hero-h1{font-family:'Outfit',sans-serif;font-size:clamp(36px,5vw,68px);font-weight:800;letter-spacing:-0.03em;line-height:1.05;margin-bottom:24px;}
+        .hero-sub{font-family:'Lora',serif;font-size:19px;line-height:1.75;color:rgba(238,240,244,0.7);max-width:680px;margin-bottom:48px;font-weight:300;}
+
+        /* Price card */
+        .price-card{display:flex;flex-wrap:wrap;gap:20px;align-items:center;padding:28px 32px;background:rgba(132,204,22,0.05);border:1px solid rgba(132,204,22,0.2);border-radius:16px;margin-bottom:48px;}
+        .price-main{font-family:'Outfit',sans-serif;font-size:52px;font-weight:800;color:var(--lime);line-height:1;letter-spacing:-0.03em;}
+        .price-label{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:var(--muted2);}
+        .price-includes{display:flex;flex-direction:column;gap:6px;}
+        .price-item{display:flex;align-items:center;gap:10px;font-size:14px;color:rgba(238,240,244,0.8);}
+        .price-dot{width:6px;height:6px;border-radius:50%;background:var(--lime);flex-shrink:0;}
+
+        /* Buy button */
+        .buy-btn{
+            display:inline-flex;align-items:center;justify-content:center;gap:12px;
+            background:linear-gradient(90deg,var(--emerald),var(--lime));
+            color:#06080c;
+            padding:18px 40px;border-radius:12px;
+            font-family:'JetBrains Mono',monospace;
+            font-size:12px;font-weight:700;
+            text-transform:uppercase;letter-spacing:0.14em;
+            text-decoration:none;transition:opacity 0.18s;
+            border:none;cursor:pointer;width:100%;max-width:420px;
+        }
+        .buy-btn:hover{opacity:0.88;}
+        .buy-note{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted2);text-align:center;margin-top:12px;max-width:420px;line-height:1.6;}
+
+        /* What you get pills */
+        .pills-row{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:48px;}
+        .pill{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--border2);border-radius:999px;padding:6px 16px;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted2);}
+        .pill-dot{width:5px;height:5px;border-radius:50%;background:var(--lime);flex-shrink:0;}
+
+        /* Main content */
+        .content-wrap{max-width:900px;margin:0 auto;padding:80px 6vw;}
+
+        /* Who it's for */
+        .for-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;margin:2em 0;}
+        .for-card{background:var(--surface);border:1px solid var(--border2);border-radius:12px;padding:18px 20px;}
+        .for-icon{font-size:24px;margin-bottom:10px;}
+        .for-title{font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;color:var(--text);margin-bottom:6px;}
+        .for-desc{font-size:13px;color:var(--muted2);line-height:1.6;}
+
+        /* Module list */
+        .module-list{display:flex;flex-direction:column;gap:0;border:1px solid var(--border2);border-radius:16px;overflow:hidden;margin:2em 0;}
+        .module{display:flex;align-items:flex-start;gap:20px;padding:20px 24px;border-bottom:1px solid var(--border);transition:background 0.15s;}
+        .module:last-child{border-bottom:none;}
+        .module:hover{background:var(--surface);}
+        .mod-num{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;color:var(--lime);background:rgba(132,204,22,0.08);border:1px solid rgba(132,204,22,0.15);border-radius:6px;padding:4px 10px;white-space:nowrap;flex-shrink:0;margin-top:2px;}
+        .mod-body{}
+        .mod-title{font-family:'Outfit',sans-serif;font-size:16px;font-weight:700;color:var(--text);margin-bottom:4px;}
+        .mod-desc{font-size:13px;color:var(--muted2);line-height:1.6;}
+
+        /* Section headers */
+        .section-h{font-family:'Outfit',sans-serif;font-size:28px;font-weight:700;letter-spacing:-0.02em;color:var(--text);margin-bottom:8px;margin-top:60px;}
+        .section-sub{font-size:15px;color:var(--muted2);line-height:1.7;margin-bottom:24px;}
+
+        /* Author card */
+        .author-card{background:var(--surface);border:1px solid var(--border2);border-radius:16px;padding:28px;display:flex;gap:24px;align-items:flex-start;margin:2em 0;}
+        .author-avatar{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,var(--emerald),var(--lime));display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0;}
+        .author-name{font-family:'Outfit',sans-serif;font-size:18px;font-weight:700;color:var(--text);margin-bottom:4px;}
+        .author-title{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:var(--lime);margin-bottom:10px;}
+        .author-bio{font-size:13px;color:var(--muted2);line-height:1.7;}
+
+        /* Bottom CTA */
+        .bottom-cta{background:rgba(132,204,22,0.04);border:1px solid rgba(132,204,22,0.15);border-radius:20px;padding:48px;text-align:center;margin-top:60px;}
+        .bottom-cta-h{font-family:'Outfit',sans-serif;font-size:32px;font-weight:800;letter-spacing:-0.02em;margin-bottom:12px;}
+        .bottom-cta-sub{font-size:16px;color:var(--muted2);margin-bottom:32px;font-weight:300;}
+
+        /* FAQ */
+        .faq-list{display:flex;flex-direction:column;gap:0;border:1px solid var(--border2);border-radius:16px;overflow:hidden;margin:2em 0;}
+        .faq{padding:20px 24px;border-bottom:1px solid var(--border);}
+        .faq:last-child{border-bottom:none;}
+        .faq-q{font-family:'Outfit',sans-serif;font-size:15px;font-weight:700;color:var(--text);margin-bottom:8px;}
+        .faq-a{font-size:14px;color:var(--muted2);line-height:1.7;}
+
+        @media(max-width:700px){.hero{padding:80px 5vw 60px;}.content-wrap{padding:60px 5vw;}.price-card{flex-direction:column;}.author-card{flex-direction:column;}.bottom-cta{padding:32px 24px;}}
+    </style>
+</head>
+<body>
+<div id="global-nav"></div>
+
+<!-- Hero -->
+<div class="hero">
+    <div class="hero-inner">
+        <div class="hero-eyebrow">
+            <a href="/courses/courses.html" style="color:var(--muted2);text-decoration:none;font-size:9px;">← All courses</a>
+        </div>
+        <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(132,204,22,0.08);border:1px solid rgba(132,204,22,0.2);border-radius:6px;padding:4px 12px;margin-bottom:20px;">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:var(--lime);">AI · Vibe Coding · 9 Modules</span>
+        </div>
+        <h1 class="hero-h1">
+            Build With AI:<br>
+            <span class="g-text">The Complete Vibe<br>Coder's Playbook.</span>
+        </h1>
+        <p class="hero-sub">
+            Everything nobody tells you before you ship your first AI-built product. Written by a solo Cape Town founder who builds real production systems with AI daily — not theory, not tutorials, not repackaged YouTube content. The stuff that matters when it is your name on the domain and your users' data in the database.
+        </p>
+
+        <div class="pills-row">
+            <span class="pill"><span class="pill-dot"></span>9 modules</span>
+            <span class="pill"><span class="pill-dot"></span>Written — no video</span>
+            <span class="pill"><span class="pill-dot"></span>Lifetime access</span>
+            <span class="pill"><span class="pill-dot"></span>PDF download</span>
+            <span class="pill"><span class="pill-dot"></span>Cape Town perspective</span>
+            <span class="pill"><span class="pill-dot"></span>Includes checklist</span>
+        </div>
+
+        <!-- Price card -->
+        <div class="price-card">
+            <div>
+                <div class="price-label">One-time payment</div>
+                <div class="price-main">R497</div>
+                <div class="price-label" style="margin-top:4px;">Lifetime access · No subscription</div>
+            </div>
+            <div class="price-includes">
+                <div class="price-item"><span class="price-dot"></span>Complete 9-module written course</div>
+                <div class="price-item"><span class="price-dot"></span>Pre-launch deployment checklist</div>
+                <div class="price-item"><span class="price-dot"></span>Cloudflare security configuration guide</div>
+                <div class="price-item"><span class="price-dot"></span>AI communication prompt templates</div>
+                <div class="price-item"><span class="price-dot"></span>POPIA + GDPR checklist for SA builders</div>
+            </div>
+        </div>
+
+        <a href="PAYPAL_PAYMENT_LINK_HERE" class="buy-btn" target="_blank" rel="noopener noreferrer">
+            🔒 &nbsp; Enrol now — R497 · Pay securely with PayPal
+        </a>
+        <div class="buy-note">Debit card, credit card, and PayPal accepted · Secure PayPal checkout · After payment you will be redirected to your download page</div>
+    </div>
+</div>
+
+<!-- Content -->
+<div class="content-wrap">
+
+    <div class="section-h">Who this course is for</div>
+    <div class="section-sub">If any of these sound like you, this is your course.</div>
+    <div class="for-grid">
+        <div class="for-card"><div class="for-icon">🛠️</div><div class="for-title">You are already vibe coding</div><div class="for-desc">You have built something with AI and want to ship it properly without breaking things you do not know are there.</div></div>
+        <div class="for-card"><div class="for-icon">💡</div><div class="for-title">You have an idea and a tool</div><div class="for-desc">You have Claude, ChatGPT, or Cursor open and an idea ready. You want to know what to do before you write the first prompt.</div></div>
+        <div class="for-card"><div class="for-icon">😬</div><div class="for-title">You shipped something and it worries you</div><div class="for-desc">Your site is live but you are not sure what is exposed, what is missing, or what could go wrong. This course tells you.</div></div>
+        <div class="for-card"><div class="for-icon">🏢</div><div class="for-title">You run a small business</div><div class="for-desc">You are using AI to build tools for your business and want to make sure they are safe, legal, and actually working correctly.</div></div>
+    </div>
+
+    <div class="section-h" style="margin-top:60px;">What you will learn — all 9 modules</div>
+    <div class="section-sub">Written. Practical. No padding. Every module covers something that has broken a real project.</div>
+
+    <div class="module-list">
+        <div class="module">
+            <span class="mod-num">01</span>
+            <div class="mod-body">
+                <div class="mod-title">What vibe coding actually is — and what it is not</div>
+                <div class="mod-desc">The honest definition. Where it works brilliantly and where it will burn you. The difference between shipping a landing page and shipping a payment system. Setting your expectations correctly before you spend a week building the wrong thing.</div>
+            </div>
+        </div>
+        <div class="module">
+            <span class="mod-num">02</span>
+            <div class="mod-body">
+                <div class="mod-title">Communicating with AI correctly — the slop problem</div>
+                <div class="mod-desc">AI slop is a communication problem, not an AI problem. The exact same relationship rules that apply between humans apply here — vague brief, vague output. This module gives you the prompting discipline that separates builders who ship from builders who restart constantly.</div>
+            </div>
+        </div>
+        <div class="module">
+            <span class="mod-num">03</span>
+            <div class="mod-body">
+                <div class="mod-title">Before you build — research, requirements, and knowing your laws</div>
+                <div class="mod-desc">The thinking that happens before the first prompt is where good products start. What does it do. Who uses it. What data does it hold. What countries does it operate in. What laws apply. If you cannot answer these, you are not ready to build yet.</div>
+            </div>
+        </div>
+        <div class="module">
+            <span class="mod-num">04</span>
+            <div class="mod-body">
+                <div class="mod-title">Security from the first prompt — not the last</div>
+                <div class="mod-desc">Input validation, parameterised queries, rate limiting, CSRF protection. What to add to every project prompt. The specific security instruction template that catches the majority of vulnerabilities before they exist. Cloudflare setup — the eight settings that matter on the free tier.</div>
+            </div>
+        </div>
+        <div class="module">
+            <span class="mod-num">05</span>
+            <div class="mod-body">
+                <div class="mod-title">Race conditions — the bug you do not know you have</div>
+                <div class="mod-desc">Two users clicking simultaneously. A payment button clicked twice. Inventory sold to two buyers. Race conditions are the most common invisible bug in vibe-coded projects. What they are, how to find them, and what to ask the AI to add to prevent them.</div>
+            </div>
+        </div>
+        <div class="module">
+            <span class="mod-num">06</span>
+            <div class="mod-body">
+                <div class="mod-title">Payments, money, and when to get help</div>
+                <div class="mod-desc">PCI-DSS in plain language. Why you never store card numbers. How to use Stripe, PayFast, or PayPal correctly. Idempotency keys. Webhook verification. The specific questions to ask the AI when building any payment flow. And when to bring in a professional rather than prompt your way through it.</div>
+            </div>
+        </div>
+        <div class="module">
+            <span class="mod-num">07</span>
+            <div class="mod-body">
+                <div class="mod-title">Privacy law, cookie consent, and POPIA for South African builders</div>
+                <div class="mod-desc">POPIA. GDPR. CCPA. What each requires. The cookie consent implementation that loads analytics only after the user accepts. The privacy policy template checklist. What "I collect email addresses" actually means legally in South Africa. Written in plain language, not legalese.</div>
+            </div>
+        </div>
+        <div class="module">
+            <span class="mod-num">08</span>
+            <div class="mod-body">
+                <div class="mod-title">Royalty-free assets, testing, and the responsibility rule</div>
+                <div class="mod-desc">Using a Google Images result on a commercial site is copyright infringement. The safe sources — Pexels, Pixabay, Unsplash, and AI-generated images. The pre-launch test checklist. And the rule that every vibe coder needs tattooed somewhere visible: "Claude built it" is not a legal defence.</div>
+            </div>
+        </div>
+        <div class="module">
+            <span class="mod-num">09</span>
+            <div class="mod-body">
+                <div class="mod-title">The 2030 outlook — where this is all going</div>
+                <div class="mod-desc">GPT-6 Astra. Fable 5.1. The leap from 2022 to 2026 in four years. What the next four years look like. Dario Amodei's honest prediction. Why the communication skill you are building now compounds into the most valuable professional skill of the next decade. And why the people doubting AI capability are making the same mistake they made in 2022.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Author -->
+    <div class="section-h">Written by someone who actually ships</div>
+    <div class="author-card">
+        <div class="author-avatar">🛠</div>
+        <div>
+            <div class="author-name">Jarrit Hosking</div>
+            <div class="author-title">Forge Vertical · Cape Town · Solo founder · Active HackerOne researcher</div>
+            <div class="author-bio">I build with AI every day. TripSpace Global — a commission-free travel marketplace — was built on Claude Sonnet at medium tokens. Not Opus. Not unlimited access. Sonnet, at the same tier most people have. Forge Vertical itself, the articles hub, the onboarding system, the Cloud Functions — all directed through AI, all in production, all ranking on Google. I am writing this course on Sonnet right now. This is not a theory course from someone who read the documentation. It is the course I wish had existed when I started.</div>
+        </div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="section-h">Frequently asked</div>
+    <div class="faq-list">
+        <div class="faq">
+            <div class="faq-q">Do I need coding experience?</div>
+            <div class="faq-a">No. This course is written for people who use AI to build — not people who write code manually. If you can use Claude, ChatGPT, or any AI tool, you have the prerequisite.</div>
+        </div>
+        <div class="faq">
+            <div class="faq-q">Why written instead of video?</div>
+            <div class="faq-a">Written courses are better for reference. You do not rewatch a video to find the section on cookie consent — you search the PDF. Written content is also faster to produce correctly, which means the information is more current and more precise.</div>
+        </div>
+        <div class="faq">
+            <div class="faq-q">Is this specific to South Africa?</div>
+            <div class="faq-a">The perspective is South African — POPIA is covered, Rand pricing is used, the examples are local. But everything applies globally. GDPR, CCPA, and POPIA share the same principles. Cloudflare works everywhere. Race conditions do not care what country you are in.</div>
+        </div>
+        <div class="faq">
+            <div class="faq-q">How do I get the course after paying?</div>
+            <div class="faq-a">PayPal redirects you to a download page immediately after payment. You get a view-only Google Drive link to the PDF. If anything goes wrong with the redirect, email jarrit@forgevertical.com with your PayPal receipt and you will get the link within 24 hours.</div>
+        </div>
+        <div class="faq">
+            <div class="faq-q">Can I pay with a debit card?</div>
+            <div class="faq-a">Yes. The PayPal checkout accepts debit cards, credit cards, and PayPal balance. You do not need a PayPal account.</div>
+        </div>
+        <div class="faq">
+            <div class="faq-q">Is there a refund policy?</div>
+            <div class="faq-a">Digital products are final sale once downloaded. If you have a genuine issue — wrong file, corrupted download, redirect failed — contact jarrit@forgevertical.com and it will be sorted out.</div>
+        </div>
+    </div>
+
+    <!-- Bottom CTA -->
+    <div class="bottom-cta">
+        <div class="bottom-cta-h">Ready to ship something<br><span class="g-text">that actually holds up?</span></div>
+        <div class="bottom-cta-sub">R497 · Lifetime access · Instant download · No subscription</div>
+        <a href="PAYPAL_PAYMENT_LINK_HERE" class="buy-btn" target="_blank" rel="noopener noreferrer" style="margin:0 auto;">
+            🔒 &nbsp; Enrol now — R497 · Pay securely with PayPal
+        </a>
+        <div class="buy-note" style="margin:12px auto 0;">After payment you will be redirected to your download page · jarrit@forgevertical.com for any issues</div>
+    </div>
+
+</div>
+
+<div id="global-footer"></div>
+<script src="https://cdn.tailwindcss.com"></script>
+</body>
+</html>
