@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Forge Vertical Courses — practical, written guides on vibe coding, cybersecurity, AI communication, and development fundamentals. Built by someone who ships real systems. Cape Town.">
+    <title>Forge Vertical Courses | Learn to Build, Secure, and Ship</title>
+    <link rel="canonical" href="https://www.forgevertical.com/courses/courses.html">
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"EducationalOrganization","name":"Forge Vertical Courses","url":"https://www.forgevertical.com/courses/courses.html","description":"Practical written courses on vibe coding, cybersecurity, AI communication, and development by Jarrit Hosking — Forge Vertical, Cape Town.","provider":{"@type":"Person","name":"Jarrit Hosking","url":"https://www.forgevertical.com/about/jarrit-hosking.html"}}
+    </script>
+    <script src="/global.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/typography.css">
+    <style>
+        :root{--bg:#06080c;--surface:#0b0f14;--surface2:#0f141c;--border:#161e2a;--border2:#1c2638;--text:#eef0f4;--muted:#3a4d66;--muted2:#5c7494;--lime:#84cc16;--emerald:#10b981;--red:#ef4444;--amber:#f59e0b;}
+        *{box-sizing:border-box;margin:0;padding:0;}
+        html{scroll-behavior:smooth;}
+        body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;overflow-x:hidden;}
+        .mono{font-family:'JetBrains Mono',monospace;}
+        .g-text{background:linear-gradient(90deg,var(--emerald),var(--lime));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+
+        /* Masthead */
+        .masthead{border-bottom:1px solid var(--border);padding:0 6vw;}
+        .masthead-top{display:flex;align-items:center;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--border);}
+        .masthead-name{font-family:'Outfit',sans-serif;font-size:26px;font-weight:800;letter-spacing:-0.03em;color:var(--text);}
+        .masthead-name span{color:var(--lime);}
+        .masthead-tagline{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.18em;color:var(--muted2);}
+        .masthead-date{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted2);text-transform:uppercase;letter-spacing:0.1em;}
+
+        /* Category nav */
+        .cat-nav{display:flex;align-items:center;gap:0;overflow-x:auto;scrollbar-width:none;padding:0;}
+        .cat-nav::-webkit-scrollbar{display:none;}
+        .cat-btn{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted2);background:none;border:none;border-bottom:2px solid transparent;padding:12px 18px;cursor:pointer;white-space:nowrap;transition:all 0.15s;}
+        .cat-btn:hover,.cat-btn.active{color:var(--lime);border-bottom-color:var(--lime);}
+
+        /* Stats bar */
+        .stats-bar{border-bottom:1px solid var(--border);background:var(--bg);}
+        .stats-inner{max-width:1400px;margin:0 auto;padding:20px 6vw;display:flex;align-items:center;gap:40px;flex-wrap:wrap;}
+        .stat-item{display:flex;align-items:baseline;gap:8px;}
+        .stat-n{font-family:'Outfit',sans-serif;font-size:24px;font-weight:700;color:var(--lime);line-height:1;}
+        .stat-l{font-size:12px;color:var(--muted2);text-transform:uppercase;letter-spacing:0.05em;font-weight:600;}
+        .stats-bar-rule{width:1px;height:24px;background:var(--border2);}
+
+        /* Section header */
+        .section-header{display:flex;align-items:center;gap:14px;padding:40px 6vw 24px;max-width:1400px;margin:0 auto;}
+        .section-label{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.2em;color:var(--lime);white-space:nowrap;}
+        .section-rule{flex:1;height:1px;background:var(--border2);}
+
+        /* Course grid */
+        #course-grid{
+            display:grid;
+            grid-template-columns:repeat(auto-fill,minmax(340px,1fr));
+            gap:56px 32px;
+            margin:0 6vw 80px;
+            max-width:calc(1400px - 12vw);
+        }
+
+        /* Live course card */
+        .course-card{
+            text-decoration:none;
+            display:flex;
+            flex-direction:column;
+            position:relative;
+            transition:transform 0.2s ease;
+            cursor:pointer;
+        }
+        .course-card:hover{transform:translateY(-4px);}
+        .course-img{
+            height:220px;
+            position:relative;
+            overflow:hidden;
+            border-radius:12px;
+            margin-bottom:20px;
+            background:var(--surface);
+            border:1px solid rgba(255,255,255,0.03);
+        }
+        .course-img-inner{
+            width:100%;height:100%;
+            background:linear-gradient(135deg,#0c1a0c 0%,#0a1f0a 40%,#061206 100%);
+            display:flex;align-items:center;justify-content:center;
+            position:relative;overflow:hidden;
+        }
+        .course-img-inner::before{
+            content:'';position:absolute;inset:0;
+            background:
+                radial-gradient(ellipse 60% 60% at 20% 30%,rgba(16,185,129,0.2) 0%,transparent 60%),
+                radial-gradient(ellipse 40% 40% at 80% 70%,rgba(132,204,22,0.12) 0%,transparent 60%);
+        }
+        .course-icon{font-size:56px;position:relative;z-index:1;filter:drop-shadow(0 0 20px rgba(132,204,22,0.4));}
+        .course-img:hover .course-img-inner{background:linear-gradient(135deg,#0f2010 0%,#0d2a0d 40%,#091a09 100%);}
+
+        .course-tag{position:absolute;top:14px;left:14px;font-family:'Outfit',sans-serif;font-size:11px;font-weight:600;color:var(--bg);background:var(--lime);padding:6px 16px;border-radius:24px;z-index:2;text-transform:capitalize;}
+        .course-price-tag{position:absolute;top:14px;right:14px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;color:var(--lime);background:rgba(11,15,20,0.85);border:1px solid rgba(132,204,22,0.3);padding:6px 14px;border-radius:8px;z-index:2;}
+
+        .course-body{display:flex;flex-direction:column;flex:1;}
+        .course-title{font-size:22px;font-weight:700;color:var(--text);line-height:1.35;margin-bottom:8px;transition:color 0.2s;}
+        .course-card:hover .course-title{color:var(--lime);}
+        .course-meta{font-family:'Outfit',sans-serif;font-size:13px;color:var(--muted2);margin-bottom:14px;}
+        .course-desc{font-size:15px;color:rgba(238,240,244,0.7);line-height:1.6;flex:1;margin-bottom:24px;font-weight:300;}
+        .course-foot{display:flex;align-items:center;justify-content:space-between;margin-top:auto;}
+        .course-read{font-family:'Outfit',sans-serif;font-size:13px;font-weight:600;color:var(--lime);transition:color 0.2s ease;}
+        .course-card:hover .course-read{color:var(--emerald);}
+        .course-modules{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted2);}
+
+        /* Coming soon cards */
+        .coming-card{
+            display:flex;flex-direction:column;
+            position:relative;opacity:0.55;
+            cursor:default;
+        }
+        .coming-img{height:220px;position:relative;overflow:hidden;border-radius:12px;margin-bottom:20px;background:var(--surface);border:1px solid rgba(255,255,255,0.03);}
+        .coming-img-inner{width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:var(--surface2);}
+        .coming-icon{font-size:48px;filter:grayscale(1);opacity:0.4;}
+        .coming-tag{position:absolute;top:14px;left:14px;font-family:'Outfit',sans-serif;font-size:11px;font-weight:600;color:var(--muted2);background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.08);padding:6px 16px;border-radius:24px;z-index:2;}
+        .coming-lock{position:absolute;top:14px;right:14px;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;color:var(--muted2);background:rgba(11,15,20,0.85);border:1px solid var(--border2);padding:6px 14px;border-radius:8px;z-index:2;}
+        .coming-title{font-size:22px;font-weight:700;color:var(--muted2);line-height:1.35;margin-bottom:8px;}
+        .coming-desc{font-size:15px;color:rgba(90,110,130,0.7);line-height:1.6;flex:1;margin-bottom:24px;font-weight:300;}
+
+        /* Notify form */
+        .notify-form{display:flex;gap:8px;margin-top:4px;}
+        .notify-input{flex:1;background:rgba(255,255,255,0.03);border:1px solid var(--border2);border-radius:8px;padding:9px 14px;color:var(--text);font-family:'Outfit',sans-serif;font-size:13px;outline:none;transition:border-color 0.2s;}
+        .notify-input:focus{border-color:var(--muted2);}
+        .notify-input::placeholder{color:var(--muted);}
+        .notify-btn{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;padding:9px 16px;border-radius:8px;border:1px solid var(--border2);background:none;color:var(--muted2);cursor:pointer;white-space:nowrap;transition:all 0.15s;}
+        .notify-btn:hover{border-color:var(--muted2);color:var(--text);}
+
+        /* Section coming */
+        .section-coming{padding:0 6vw 100px;max-width:calc(1400px - 12vw);margin:0 auto;}
+
+        @media(max-width:700px){#course-grid{margin:0 5vw 60px;}.section-coming{padding:0 5vw 60px;}}
+    </style>
+</head>
+<body>
+<div id="global-nav"></div>
+
+<!-- Masthead -->
+<div class="masthead">
+    <div class="masthead-top">
+        <div>
+            <div class="masthead-name">Forge <span>Vertical</span></div>
+            <div class="masthead-tagline">Courses · Cape Town · Built by someone who ships</div>
+        </div>
+        <div class="masthead-date" id="live-date"></div>
+    </div>
+    <div class="cat-nav">
+        <button class="cat-btn active" onclick="filterCourses('all',this)">All</button>
+        <button class="cat-btn" onclick="filterCourses('ai',this)">AI & Vibe Coding</button>
+        <button class="cat-btn" onclick="filterCourses('security',this)">Security</button>
+        <button class="cat-btn" onclick="filterCourses('development',this)">Development</button>
+        <button class="cat-btn" onclick="filterCourses('business',this)">Business</button>
+    </div>
+</div>
+
+<!-- Stats bar -->
+<div class="stats-bar">
+    <div class="stats-inner">
+        <div class="stat-item"><div class="stat-n">1</div><div class="stat-l">Live course</div></div>
+        <div class="stats-bar-rule"></div>
+        <div class="stat-item"><div class="stat-n">4</div><div class="stat-l">Coming soon</div></div>
+        <div class="stats-bar-rule"></div>
+        <div class="stat-item"><div class="stat-n">R497</div><div class="stat-l">Starting price</div></div>
+        <div class="stats-bar-rule"></div>
+        <div class="stat-item"><div class="stat-n" style="font-size:16px;padding-top:4px;">Written</div><div class="stat-l">No video required</div></div>
+        <div class="stats-bar-rule"></div>
+        <div class="stat-item"><div class="stat-n" style="font-size:16px;padding-top:4px;">Lifetime</div><div class="stat-l">Access on purchase</div></div>
+    </div>
+</div>
+
+<!-- Live courses -->
+<div class="section-header">
+    <span class="section-label">// Available now</span>
+    <div class="section-rule"></div>
+</div>
+
+<div id="course-grid">
+    <a href="/courses/vibe-coding/index.html" class="course-card" data-cat="ai">
+        <div class="course-img">
+            <div class="course-img-inner">
+                <div class="course-icon">🚀</div>
+            </div>
+            <span class="course-tag">AI · Vibe Coding</span>
+            <span class="course-price-tag">R497</span>
+        </div>
+        <div class="course-body">
+            <div class="course-title">Build With AI: The Complete Vibe Coder's Playbook</div>
+            <div class="course-meta">Jarrit Hosking · 9 modules · Lifetime access</div>
+            <div class="course-desc">Everything nobody tells you before you ship your first AI-built product. Communication, security, race conditions, Cloudflare, payments, privacy law, royalty-free assets, pen testing, and the 2030 outlook. Written by a solo founder who builds real systems with AI daily.</div>
+            <div class="course-foot">
+                <span class="course-read">Enrol now ▸</span>
+                <span class="course-modules">9 modules · PDF</span>
+            </div>
+        </div>
+    </a>
+</div>
+
+<!-- Coming soon -->
+<div class="section-header" style="margin-top:20px;">
+    <span class="section-label">// Coming soon</span>
+    <div class="section-rule"></div>
+    <span class="mono text-[9px]" style="color:var(--muted2);white-space:nowrap;">Join the waitlist</span>
+</div>
+
+<div class="section-coming">
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:56px 32px;">
+
+        <div class="coming-card" data-cat="security">
+            <div class="coming-img">
+                <div class="coming-img-inner"><div class="coming-icon">🔐</div></div>
+                <span class="coming-tag">Security</span>
+                <span class="coming-lock">// Soon</span>
+            </div>
+            <div>
+                <div class="coming-title">Cybersecurity Fundamentals for Non-Technical Founders</div>
+                <div class="coming-desc">WAFs, DataDome, Cloudflare configuration, penetration testing basics, phishing simulation, POPIA compliance, and what strong infrastructure actually means when someone tests it. No jargon. Just what you need to protect what you built.</div>
+                <div class="notify-form">
+                    <input type="email" class="notify-input" placeholder="your@email.com">
+                    <button class="notify-btn" onclick="notifyMe(this)">Notify me</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="coming-card" data-cat="development">
+            <div class="coming-img">
+                <div class="coming-img-inner"><div class="coming-icon">💻</div></div>
+                <span class="coming-tag">Development</span>
+                <span class="coming-lock">// Soon</span>
+            </div>
+            <div>
+                <div class="coming-title">Coding Basics — Understanding What the AI Actually Built</div>
+                <div class="coming-desc">HTML, CSS, JavaScript, and Python explained for people who use AI to write code but want to understand what they are deploying. Read the output, spot the mistakes, and direct the AI with precision rather than hope.</div>
+                <div class="notify-form">
+                    <input type="email" class="notify-input" placeholder="your@email.com">
+                    <button class="notify-btn" onclick="notifyMe(this)">Notify me</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="coming-card" data-cat="ai">
+            <div class="coming-img">
+                <div class="coming-img-inner"><div class="coming-icon">🤖</div></div>
+                <span class="coming-tag">AI · Communication</span>
+                <span class="coming-lock">// Soon</span>
+            </div>
+            <div>
+                <div class="coming-title">AI Conversational Basics — Brief, Direct, and Get Results</div>
+                <div class="coming-desc">The skill that separates vibe coders who ship from those who get slop. How to write prompts that produce exactly what you need, maintain context across long sessions, give corrections that stick, and use AI as a genuine collaborator rather than a guessing game.</div>
+                <div class="notify-form">
+                    <input type="email" class="notify-input" placeholder="your@email.com">
+                    <button class="notify-btn" onclick="notifyMe(this)">Notify me</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="coming-card" data-cat="business">
+            <div class="coming-img">
+                <div class="coming-img-inner"><div class="coming-icon">📈</div></div>
+                <span class="coming-tag">Business</span>
+                <span class="coming-lock">// Soon</span>
+            </div>
+            <div>
+                <div class="coming-title">Launch Your First Digital Product — From Idea to R497</div>
+                <div class="coming-desc">The exact process used to build and sell digital products without an agency, a team, or a big budget. Pricing strategy, landing pages, PayPal payment links, Google Drive delivery, GEO indexing, and building a waitlist before the product exists.</div>
+                <div class="notify-form">
+                    <input type="email" class="notify-input" placeholder="your@email.com">
+                    <button class="notify-btn" onclick="notifyMe(this)">Notify me</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="global-footer"></div>
+
+<script>
+document.getElementById('live-date').textContent = new Date().toLocaleDateString('en-ZA',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+
+function filterCourses(cat, btn) {
+    document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.course-card,.coming-card').forEach(card => {
+        const cats = card.getAttribute('data-cat') || '';
+        card.style.display = (cat === 'all' || cats.includes(cat)) ? '' : 'none';
+    });
+}
+
+function notifyMe(btn) {
+    const input = btn.previousElementSibling;
+    const email = input.value.trim();
+    if (!email || !email.includes('@')) { input.style.borderColor='#ef4444'; return; }
+    input.style.borderColor = '#84cc16';
+    btn.textContent = 'On the list ✓';
+    btn.style.color = '#84cc16';
+    btn.style.borderColor = '#84cc16';
+    btn.disabled = true;
+    // Send to Formspree
+    fetch('https://formspree.io/f/xpwzgvbj', {
+        method:'POST',
+        headers:{'Content-Type':'application/json','Accept':'application/json'},
+        body: JSON.stringify({email, source:'course-waitlist', button: btn.closest('.coming-card').querySelector('.coming-title').textContent})
+    });
+}
+</script>
+<script src="https://cdn.tailwindcss.com"></script>
+</body>
+</html>
