@@ -32,12 +32,13 @@
     }
     </script>
 
-    <script src="/global.js" defer></script>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FIX 1: preconnect FIRST before any other external resource -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/typography.css">
+    <script src="/global.js" defer></script>
+    <!-- Tailwind moved to bottom of body — no longer render-blocking -->
 
     <style>
         :root {
@@ -64,12 +65,6 @@
         }
         .mono { font-family: 'JetBrains Mono', monospace; }
 
-        /* ── GLASS MARBLE BACKDROP ──────────────────────────────
-           Layered radial gradients creating a deep teal/midnight
-           marble effect. A bright gloss streak cuts diagonally
-           across the hero like light bouncing off polished stone.
-           No grain, no grid — pure refracted colour depth.
-        ──────────────────────────────────────────────────────── */
         .marble-bg {
             position: absolute;
             inset: 0;
@@ -81,27 +76,22 @@
             position: absolute;
             inset: 0;
             background:
-                /* Deep teal pool — top left */
                 radial-gradient(ellipse 80% 60% at -5% 10%,
                     rgba(16,185,129,0.18) 0%,
                     rgba(16,185,129,0.06) 40%,
                     transparent 70%),
-                /* Midnight navy — centre */
                 radial-gradient(ellipse 100% 80% at 50% 50%,
                     rgba(15,30,60,0.9) 0%,
                     rgba(10,20,40,0.6) 60%,
                     transparent 100%),
-                /* Lime bloom — bottom right */
                 radial-gradient(ellipse 60% 50% at 100% 90%,
                     rgba(132,204,22,0.10) 0%,
                     rgba(132,204,22,0.03) 50%,
                     transparent 80%),
-                /* Slate base — far right */
                 radial-gradient(ellipse 50% 100% at 110% 50%,
                     rgba(30,50,90,0.5) 0%,
                     transparent 70%);
         }
-        /* The gloss streak — diagonal highlight like marble veining */
         .marble-bg::after {
             content: '';
             position: absolute;
@@ -120,7 +110,6 @@
             pointer-events: none;
         }
 
-        /* ── GRADIENT TEXT ─────────────────────────────────── */
         .g-text {
             background: linear-gradient(100deg, var(--emerald) 0%, var(--lime) 100%);
             -webkit-background-clip: text;
@@ -129,7 +118,6 @@
             display: inline-block;
         }
 
-        /* ── EYEBROW ─────────────────────────────────────── */
         .eyebrow {
             font-family: 'JetBrains Mono', monospace;
             font-size: 10px;
@@ -149,7 +137,6 @@
             flex-shrink: 0;
         }
 
-        /* ── SECTION EYEBROW ──────────────────────────────── */
         .s-eye {
             font-family: 'JetBrains Mono', monospace;
             font-size: 10px;
@@ -169,7 +156,6 @@
             background: var(--border2);
         }
 
-        /* ── HERO ────────────────────────────────────────── */
         #hero {
             position: relative;
             min-height: 92vh;
@@ -192,7 +178,6 @@
             padding: 60px 7vw 60px 32px;
         }
 
-        /* Hero bottom line */
         #hero::after {
             content: '';
             position: absolute;
@@ -223,7 +208,6 @@
             margin-bottom: 44px;
         }
 
-        /* ── BUTTONS ─────────────────────────────────────── */
         .btn-p {
             display: inline-flex; align-items: center; gap: 8px;
             background: linear-gradient(90deg, var(--emerald), var(--lime));
@@ -248,7 +232,6 @@
         }
         .btn-g:hover { border-color: var(--muted2); color: var(--text); }
 
-        /* ── STATUS PILLS ────────────────────────────────── */
         .pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 40px; }
         .pill {
             display: inline-flex; align-items: center; gap: 7px;
@@ -262,7 +245,6 @@
         }
         .pdot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
 
-        /* ── TERMINAL ────────────────────────────────────── */
         .terminal {
             width: 100%; max-width: 500px;
             background: rgba(6,8,12,0.75);
@@ -298,10 +280,8 @@
         }
         @keyframes blink { 50% { opacity: 0; } }
 
-        /* ── SECTION WRAPPER ─────────────────────────────── */
         .wrap { max-width: 1280px; margin: 0 auto; padding: 0 6vw; }
 
-        /* ── SECTION HEADINGS ────────────────────────────── */
         .sh {
             font-family: 'Outfit', sans-serif;
             font-size: clamp(30px, 4vw, 52px);
@@ -316,7 +296,6 @@
             max-width: 540px; margin-bottom: 52px;
         }
 
-        /* ── TOOL LOGOS STRIP ────────────────────────────── */
         #tools {
             border-top: 1px solid var(--border);
             border-bottom: 1px solid var(--border);
@@ -344,7 +323,6 @@
         .tn { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700; color: var(--muted2); white-space: nowrap; }
         .tico { width: 20px; height: 20px; flex-shrink: 0; }
 
-        /* ── IMAGE CARDS ─────────────────────────────────── */
         .img-card {
             border-radius: 16px; overflow: hidden;
             border: 1px solid var(--border2);
@@ -365,7 +343,6 @@
             padding: 4px 9px; border-radius: 4px;
         }
 
-        /* ── AI MODEL CARDS ──────────────────────────────── */
         .ai-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -396,7 +373,6 @@
             background: rgba(132,204,22,0.06);
         }
 
-        /* ── SERVICES ────────────────────────────────────── */
         .svc-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
@@ -418,7 +394,6 @@
         .tag.b { background: rgba(96,165,250,0.07); color:#60a5fa; border-color:rgba(96,165,250,0.14); }
         .tag.v { background: rgba(167,139,250,0.07); color:#a78bfa; border-color:rgba(167,139,250,0.14); }
 
-        /* ── COMPARE TABLE ───────────────────────────────── */
         .cmp-table { border: 1px solid var(--border); border-radius: 18px; overflow: hidden; margin-top: 52px; }
         .cmp-head { display: grid; grid-template-columns: 1fr 1fr 1fr; background: var(--surface2); border-bottom: 1px solid var(--border); }
         .cmp-hc { padding: 14px 22px; font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; border-right: 1px solid var(--border); }
@@ -428,7 +403,6 @@
         .cmp-c { padding: 13px 22px; font-size: 13px; display: flex; align-items: center; border-right: 1px solid var(--border); }
         .cmp-c:last-child { border-right: none; }
 
-        /* ── PROCESS ─────────────────────────────────────── */
         .proc-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 18px; overflow: hidden; margin-top: 52px; }
         @media (max-width: 768px) { .proc-grid { grid-template-columns: 1fr 1fr; } }
         .ps { background: var(--bg); padding: 34px 26px; }
@@ -436,14 +410,12 @@
         .pst { font-family: 'Outfit', sans-serif; font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
         .psd { font-size: 13px; color: var(--muted2); line-height: 1.65; }
 
-        /* ── PROOF STRIP ─────────────────────────────────── */
         .proof { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
         @media (max-width: 768px) { .proof { grid-template-columns: repeat(2, 1fr); } }
         .pf-cell { background: var(--surface); padding: 34px 20px; text-align: center; }
         .pf-val { font-family: 'Outfit', sans-serif; font-size: 44px; font-weight: 700; line-height: 1; margin-bottom: 6px; }
         .pf-lbl { font-size: 12px; color: var(--muted2); line-height: 1.4; }
 
-        /* ── ARTICLE CARDS ───────────────────────────────── */
         .art-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; margin-top: 48px; }
         .art-card { border: 1px solid var(--border); border-radius: 14px; padding: 24px; background: var(--surface); text-decoration: none; display: block; transition: border-color 0.18s, background 0.18s; }
         .art-card:hover { border-color: var(--border2); background: var(--surface2); }
@@ -451,7 +423,6 @@
         .art-t { font-family: 'Outfit', sans-serif; font-size: 15px; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 8px; }
         .art-x { font-size: 12px; color: var(--muted2); line-height: 1.6; }
 
-        /* ── FINAL CTA ───────────────────────────────────── */
         #cta {
             padding: 130px 6vw;
             text-align: center;
@@ -475,60 +446,30 @@
         .wa { display: inline-flex; align-items: center; gap: 9px; border: 1px solid var(--border2); color: var(--muted2); padding: 13px 24px; border-radius: 10px; font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; text-decoration: none; transition: all 0.18s; }
         .wa:hover { border-color: #25D366; color: #25D366; }
 
-        /* ── REVEAL ──────────────────────────────────────── */
         .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.6s ease, transform 0.6s ease; }
         .reveal.up { opacity: 1; transform: none; }
 
         #global-nav { position: relative; z-index: 100; }
 
-        /* ── MOBILE RESPONSIVE FIXES ─────────────────────── */
         @media (max-width: 768px) {
-            .two-col-grid {
-                grid-template-columns: 1fr !important;
-            }
-            .img-card {
-                height: 220px !important;
-            }
-            /* Proof strip: 2 columns on mobile */
-            .proof {
-                grid-template-columns: repeat(2, 1fr) !important;
-            }
-            /* Services & AI grids: single column on mobile */
-            .svc-grid, .ai-grid {
-                grid-template-columns: 1fr !important;
-            }
-            /* Process: 2 col on mobile */
-            .proc-grid {
-                grid-template-columns: 1fr 1fr !important;
-            }
-            /* Tool logos: ensure they scroll properly */
-            .tools-row {
-                padding-bottom: 4px;
-            }
-            /* Section padding reduction */
-            section[style*="padding:100px 0"] {
-                padding: 64px 0 !important;
-            }
+            .two-col-grid { grid-template-columns: 1fr !important; }
+            .img-card { height: 220px !important; }
+            .proof { grid-template-columns: repeat(2, 1fr) !important; }
+            .svc-grid, .ai-grid { grid-template-columns: 1fr !important; }
+            .proc-grid { grid-template-columns: 1fr 1fr !important; }
+            .tools-row { padding-bottom: 4px; }
+            section[style*="padding:100px 0"] { padding: 64px 0 !important; }
         }
 
-        /* ── IMAGE QUALITY IMPROVEMENTS ─────────────────── */
-        .img-card img {
-            transition: transform 0.4s ease;
-        }
-        .img-card:hover img {
-            transform: scale(1.02);
-        }
+        .img-card img { transition: transform 0.4s ease; }
+        .img-card:hover img { transform: scale(1.02); }
     </style>
 </head>
 <body>
 <div id="global-nav"></div>
 
-<!-- ══════════════════════════════════════════
-     HERO
-═══════════════════════════════════════════ -->
 <section id="hero">
     <div class="marble-bg"></div>
-
     <div id="hero-left">
         <div class="eyebrow">Forge Vertical · Cape Town · Est. 2020</div>
         <h1 class="hero-h1">
@@ -547,7 +488,6 @@
             <span class="pill"><span class="pdot" style="background:#a78bfa"></span>Cape Town based</span>
         </div>
     </div>
-
     <div id="hero-right">
         <div class="terminal">
             <div class="t-bar">
@@ -564,9 +504,6 @@
     </div>
 </section>
 
-<!-- ══════════════════════════════════════════
-     TOOL LOGOS
-═══════════════════════════════════════════ -->
 <section id="tools">
     <div class="tools-lbl">// Full-stack toolchain</div>
     <div class="tools-row">
@@ -585,9 +522,6 @@
     </div>
 </section>
 
-<!-- ══════════════════════════════════════════
-     WHAT WE BUILD — with image
-═══════════════════════════════════════════ -->
 <section style="padding:100px 0; background:var(--bg);">
 <div class="wrap">
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;" class="reveal two-col-grid">
@@ -597,14 +531,14 @@
             <p class="ss">Security, GEO indexing, AEO, and AI discoverability are standard in every Forge Vertical build. Not premium add-ons. Not retrofits. Standard. Every project leaves your business discoverable by search engines, crawlable by AI models, and protected against common attack vectors from day one.</p>
             <a href="/onboard.html" class="btn-p" style="margin-top:8px;">Start a project →</a>
         </div>
+        <!-- FIX 3: fetchpriority="high" loading="eager" width/height on first above-fold image -->
         <div class="img-card" style="height:400px;">
-            <img src="https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Professional developer coding — Cape Town full-stack development" loading="lazy">
+            <img src="https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Professional developer coding — Cape Town full-stack development" loading="eager" fetchpriority="high" width="1200" height="800">
             <div class="img-overlay"></div>
             <div class="img-label">Infrastructure-first builds</div>
         </div>
     </div>
 
-    <!-- Comparison table -->
     <div class="cmp-table reveal" style="margin-top:80px;">
         <div class="cmp-head">
             <div class="cmp-hc" style="color:var(--muted2);">Feature</div>
@@ -616,9 +550,6 @@
 </div>
 </section>
 
-<!-- ══════════════════════════════════════════
-     AI MODELS — with image
-═══════════════════════════════════════════ -->
 <section style="padding:100px 0; background:var(--surface); border-top:1px solid var(--border);">
 <div class="wrap">
     <div class="reveal">
@@ -627,24 +558,17 @@
         <p class="ss">Not every model does every job well. These four are chosen deliberately — each for where they actually excel. No hype. No single-vendor lock-in.</p>
     </div>
 
-    <!-- Image above cards -->
     <div class="img-card reveal" style="height:280px;margin-bottom:20px;">
-        <img src="https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="AI-powered development and technology — Forge Vertical" loading="lazy">
+        <img src="https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="AI-powered development and technology — Forge Vertical" loading="lazy" width="1200" height="800">
         <div class="img-overlay"></div>
         <div class="img-label">AI-powered development · 2026</div>
     </div>
 
     <div class="ai-grid reveal">
-
-        <!-- Claude — PRIMARY -->
         <div class="ai-card featured">
             <div class="primary-badge">Primary</div>
-            <!-- Anthropic diamond logo -->
             <div class="ai-logo" style="background:rgba(205,147,88,0.1);border:1px solid rgba(205,147,88,0.2);">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                    <path d="M12 2L4 8.5v7L12 22l8-6.5v-7L12 2z" fill="none" stroke="#CD9458" stroke-width="1.5"/>
-                    <path d="M12 6l4 3.5v5L12 18l-4-3.5v-5L12 6z" fill="#CD9458" opacity="0.7"/>
-                </svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 2L4 8.5v7L12 22l8-6.5v-7L12 2z" fill="none" stroke="#CD9458" stroke-width="1.5"/><path d="M12 6l4 3.5v5L12 18l-4-3.5v-5L12 6z" fill="#CD9458" opacity="0.7"/></svg>
             </div>
             <div class="ai-name">Claude</div>
             <div class="ai-maker">Anthropic · Sonnet / Opus</div>
@@ -655,21 +579,9 @@
                 <span class="at" style="color:#CD9458;border-color:rgba(205,147,88,0.25);background:rgba(205,147,88,0.08);">Tool building</span>
             </div>
         </div>
-
-        <!-- Gemini -->
         <div class="ai-card">
-            <!-- Real Gemini logo — the star/diamond shape -->
             <div class="ai-logo" style="background:rgba(66,133,244,0.1);border:1px solid rgba(66,133,244,0.2);">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                    <path d="M12 2C10 7 7 10 2 12c5 2 8 5 10 10 2-5 5-8 10-10-5-2-8-5-10-10z" fill="url(#gm-logo)"/>
-                    <defs>
-                        <linearGradient id="gm-logo" x1="2" y1="2" x2="22" y2="22">
-                            <stop offset="0%" stop-color="#4285F4"/>
-                            <stop offset="50%" stop-color="#EA4335"/>
-                            <stop offset="100%" stop-color="#FBBC04"/>
-                        </linearGradient>
-                    </defs>
-                </svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 2C10 7 7 10 2 12c5 2 8 5 10 10 2-5 5-8 10-10-5-2-8-5-10-10z" fill="url(#gm-logo)"/><defs><linearGradient id="gm-logo" x1="2" y1="2" x2="22" y2="22"><stop offset="0%" stop-color="#4285F4"/><stop offset="50%" stop-color="#EA4335"/><stop offset="100%" stop-color="#FBBC04"/></linearGradient></defs></svg>
             </div>
             <div class="ai-name">Gemini 2.5 Flash</div>
             <div class="ai-maker">Google · gemini-2.5-flash API</div>
@@ -680,14 +592,9 @@
                 <span class="at" style="color:#4285F4;border-color:rgba(66,133,244,0.25);background:rgba(66,133,244,0.08);">Heavy lifting</span>
             </div>
         </div>
-
-        <!-- ChatGPT -->
         <div class="ai-card">
-            <!-- OpenAI logo — the bloom shape -->
             <div class="ai-logo" style="background:rgba(16,163,127,0.1);border:1px solid rgba(16,163,127,0.2);">
-                <svg width="22" height="22" viewBox="0 0 41 41" fill="none">
-                    <path d="M37.532 16.87a9.963 9.963 0 00-.856-8.184 10.078 10.078 0 00-10.855-4.835 9.964 9.964 0 00-7.505-3.35 10.079 10.079 0 00-9.612 6.967 9.967 9.967 0 00-6.664 4.834 10.08 10.08 0 001.24 11.817 9.965 9.965 0 00.856 8.185 10.079 10.079 0 0010.855 4.835 9.965 9.965 0 007.504 3.35 10.078 10.078 0 009.617-6.981 9.967 9.967 0 006.663-4.834 10.079 10.079 0 00-1.243-11.804zM22.498 37.886a7.474 7.474 0 01-4.799-1.735c.061-.033.168-.091.237-.134l7.964-4.6a1.294 1.294 0 00.655-1.134V19.054l3.366 1.944a.12.12 0 01.066.092v9.299a7.505 7.505 0 01-7.49 7.496zM6.392 31.006a7.471 7.471 0 01-.894-5.023c.06.036.162.099.237.141l7.964 4.6a1.297 1.297 0 001.308 0l9.724-5.614v3.888a.12.12 0 01-.048.103l-8.051 4.649a7.504 7.504 0 01-10.24-2.744zM4.297 13.62A7.469 7.469 0 018.2 10.333c0 .068-.004.19-.004.274v9.201a1.294 1.294 0 00.654 1.132l9.723 5.614-3.366 1.944a.12.12 0 01-.114.012L7.044 23.86a7.504 7.504 0 01-2.747-10.24zm27.658 6.437l-9.724-5.615 3.367-1.943a.121.121 0 01.114-.012l8.048 4.648a7.498 7.498 0 01-1.158 13.528v-9.476a1.293 1.293 0 00-.647-1.13zm3.35-5.043c-.059-.037-.162-.099-.236-.141l-7.965-4.6a1.298 1.298 0 00-1.308 0l-9.723 5.614v-3.888a.12.12 0 01.048-.103l8.05-4.645a7.497 7.497 0 0111.135 7.763zm-21.063 6.929l-3.367-1.944a.12.12 0 01-.065-.092v-9.299a7.497 7.497 0 0112.293-5.756 6.94 6.94 0 00-.236.134l-7.965 4.6a1.294 1.294 0 00-.654 1.132l-.006 11.225zm1.829-3.943l4.33-2.501 4.332 2.5v4.999l-4.331 2.5-4.331-2.5V18z" fill="#10A37F"/>
-                </svg>
+                <svg width="22" height="22" viewBox="0 0 41 41" fill="none"><path d="M37.532 16.87a9.963 9.963 0 00-.856-8.184 10.078 10.078 0 00-10.855-4.835 9.964 9.964 0 00-7.505-3.35 10.079 10.079 0 00-9.612 6.967 9.967 9.967 0 00-6.664 4.834 10.08 10.08 0 001.24 11.817 9.965 9.965 0 00.856 8.185 10.079 10.079 0 0010.855 4.835 9.965 9.965 0 007.504 3.35 10.078 10.078 0 009.617-6.981 9.967 9.967 0 006.663-4.834 10.079 10.079 0 00-1.243-11.804zM22.498 37.886a7.474 7.474 0 01-4.799-1.735c.061-.033.168-.091.237-.134l7.964-4.6a1.294 1.294 0 00.655-1.134V19.054l3.366 1.944a.12.12 0 01.066.092v9.299a7.505 7.505 0 01-7.49 7.496zM6.392 31.006a7.471 7.471 0 01-.894-5.023c.06.036.162.099.237.141l7.964 4.6a1.297 1.297 0 001.308 0l9.724-5.614v3.888a.12.12 0 01-.048.103l-8.051 4.649a7.504 7.504 0 01-10.24-2.744zM4.297 13.62A7.469 7.469 0 018.2 10.333c0 .068-.004.19-.004.274v9.201a1.294 1.294 0 00.654 1.132l9.723 5.614-3.366 1.944a.12.12 0 01-.114.012L7.044 23.86a7.504 7.504 0 01-2.747-10.24zm27.658 6.437l-9.724-5.615 3.367-1.943a.121.121 0 01.114-.012l8.048 4.648a7.498 7.498 0 01-1.158 13.528v-9.476a1.293 1.293 0 00-.647-1.13zm3.35-5.043c-.059-.037-.162-.099-.236-.141l-7.965-4.6a1.298 1.298 0 00-1.308 0l-9.723 5.614v-3.888a.12.12 0 01.048-.103l8.05-4.645a7.497 7.497 0 0111.135 7.763zm-21.063 6.929l-3.367-1.944a.12.12 0 01-.065-.092v-9.299a7.497 7.497 0 0112.293-5.756 6.94 6.94 0 00-.236.134l-7.965 4.6a1.294 1.294 0 00-.654 1.132l-.006 11.225zm1.829-3.943l4.33-2.501 4.332 2.5v4.999l-4.331 2.5-4.331-2.5V18z" fill="#10A37F"/></svg>
             </div>
             <div class="ai-name">ChatGPT</div>
             <div class="ai-maker">OpenAI · GPT-4o</div>
@@ -698,14 +605,9 @@
                 <span class="at" style="color:#10A37F;border-color:rgba(16,163,127,0.25);background:rgba(16,163,127,0.08);">Prototyping</span>
             </div>
         </div>
-
-        <!-- Grok -->
         <div class="ai-card">
-            <!-- xAI / Grok logo — the X mark -->
             <div class="ai-logo" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);">
-                <svg width="20" height="20" viewBox="0 0 300 300" fill="none">
-                    <path d="M178.57 127.15L290.27 0h-26.46l-97.03 110.38L89.34 0H0l117.13 166.93L0 300.1h26.46l102.4-116.59 81.8 116.59h89.34L178.57 127.15zm-36.32 41.38l-11.87-16.61L36.16 19.59h40.71l76.17 106.49 11.87 16.61 99.04 138.6h-40.71l-80.99-113.25z" fill="#e4e4e7"/>
-                </svg>
+                <svg width="20" height="20" viewBox="0 0 300 300" fill="none"><path d="M178.57 127.15L290.27 0h-26.46l-97.03 110.38L89.34 0H0l117.13 166.93L0 300.1h26.46l102.4-116.59 81.8 116.59h89.34L178.57 127.15zm-36.32 41.38l-11.87-16.61L36.16 19.59h40.71l76.17 106.49 11.87 16.61 99.04 138.6h-40.71l-80.99-113.25z" fill="#e4e4e7"/></svg>
             </div>
             <div class="ai-name">Grok</div>
             <div class="ai-maker">xAI · Grok-3</div>
@@ -720,9 +622,6 @@
 </div>
 </section>
 
-<!-- ══════════════════════════════════════════
-     SERVICES — with image
-═══════════════════════════════════════════ -->
 <section style="padding:100px 0; background:var(--bg); border-top:1px solid var(--border);">
 <div class="wrap">
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;margin-bottom:60px;" class="reveal two-col-grid">
@@ -732,75 +631,23 @@
             <p class="ss">From a single landing page to a full SaaS platform with AI integrations, payment infrastructure, and admin dashboards. Every project ships to production.</p>
         </div>
         <div class="img-card" style="height:280px;margin-top:8px;">
-            <img src="https://images.pexels.com/photos/3183153/pexels-photo-3183153.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="SaaS platform development — Cape Town technology" loading="lazy">
+            <img src="https://images.pexels.com/photos/3183153/pexels-photo-3183153.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="SaaS platform development — Cape Town technology" loading="lazy" width="1200" height="800">
             <div class="img-overlay"></div>
             <div class="img-label">Full-stack builds · Cape Town</div>
         </div>
     </div>
 
     <div class="svc-grid reveal">
-
-        <div class="svc">
-            <span class="svc-num">01 · Websites & Web Apps</span>
-            <div class="svc-t">High-performance web presence</div>
-            <div class="svc-d">Mobile-first websites and web applications built for speed, search engines, and AI crawlers simultaneously. Includes full SEO foundation — Core Web Vitals tuned, JSON-LD Schema, canonical tags, sitemap, and robots.txt. From a five-section landing page to a multi-route marketing site with CMS integration. Every site is GEO-indexed and AEO-ready before it ships.</div>
-            <div class="svc-tags">
-                <span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">PWA</span><span class="tag b">Core Web Vitals</span><span class="tag b">Schema</span>
-            </div>
-        </div>
-
-        <div class="svc">
-            <span class="svc-num">02 · SaaS & Platform Builds</span>
-            <div class="svc-t">Full-stack product engineering</div>
-            <div class="svc-d">Complete SaaS products with multi-role authentication, Firestore data architecture, real-time subscriptions, payment integration, email notification pipelines, admin dashboards, and Cloud Function business logic. Built solo means no sprint planning overhead — you get decisions made fast, architecture documented, and a platform that scales without refactoring. Examples: TripSpace Global, Aurora Repair, Sure Drive.</div>
-            <div class="svc-tags">
-                <span class="tag">Firebase</span><span class="tag">Cloud Functions</span><span class="tag b">PayFast</span><span class="tag b">PayPal</span><span class="tag b">Real-time</span>
-            </div>
-        </div>
-
-        <div class="svc">
-            <span class="svc-num">03 · AI Tool Integration</span>
-            <div class="svc-t">AI that solves real problems</div>
-            <div class="svc-d">Real AI integrations — not chatbot wrappers. Gemini 2.5 Flash for production tools at scale. Claude for reasoning, code generation, and agentic workflows. Custom AI tools wired into your existing platform: damage assessment engines, pricing assistants, AI travel companions, content generation pipelines, and document analysis systems. The model is selected for the task, not the trend.</div>
-            <div class="svc-tags">
-                <span class="tag v">Gemini 2.5 Flash</span><span class="tag v">Claude API</span><span class="tag v">Agentic flows</span><span class="tag v">RAG</span>
-            </div>
-        </div>
-
-        <div class="svc">
-            <span class="svc-num">04 · SEO · GEO · AEO</span>
-            <div class="svc-t">Found by people and AI models</div>
-            <div class="svc-d">Three distinct but connected disciplines. SEO gets you on Page 1 of Google. GEO (Generative Engine Optimisation) gets your brand cited by AI models like ChatGPT, Claude, and Perplexity when users ask relevant questions. AEO (Answer Engine Optimisation) structures your content to appear in AI-generated answers and featured snippets. All three built into the project architecture from day one — llms.txt, context-ai.txt, JSON-LD entity graphs, and content authority networks.</div>
-            <div class="svc-tags">
-                <span class="tag">JSON-LD</span><span class="tag">llms.txt</span><span class="tag b">GEO indexing</span><span class="tag b">AEO</span><span class="tag b">Entity graph</span>
-            </div>
-        </div>
-
-        <div class="svc">
-            <span class="svc-num">05 · Security Research & Audits</span>
-            <div class="svc-t">Built by someone who finds the gaps</div>
-            <div class="svc-d">Active bug bounty researcher on HackerOne, Bugcrowd, and YesWeHack. Practical experience finding IDOR, SQL injection, XSS, SSRF, authentication bypass, insecure direct object references, subdomain enumeration vulnerabilities, and broken access control in production systems. That knowledge is applied directly to every platform built — Firestore security rules are audited, API routes are hardened, and authentication flows are reviewed before any code ships.</div>
-            <div class="svc-tags">
-                <span class="tag r">HackerOne</span><span class="tag r">Bugcrowd</span><span class="tag r">YesWeHack</span><span class="tag r">Pentest</span><span class="tag r">OWASP</span>
-            </div>
-        </div>
-
-        <div class="svc">
-            <span class="svc-num">06 · Content Authority Networks</span>
-            <div class="svc-t">Expertise that gets cited</div>
-            <div class="svc-d">Long-form editorial content built to rank, index, and be cited by AI models — not AI-generated filler that Google filters out. Industry analysis, public interest reporting, founder narratives, and technical explainers written with real expertise and sourced from primary data. Each article builds the entity graph that tells search engines and AI models who you are, what you know, and why your domain deserves authority. Includes internal link architecture and structured citation systems.</div>
-            <div class="svc-tags">
-                <span class="tag">Editorial content</span><span class="tag">Entity authority</span><span class="tag b">AI citations</span><span class="tag b">Link architecture</span>
-            </div>
-        </div>
-
+        <div class="svc"><span class="svc-num">01 · Websites & Web Apps</span><div class="svc-t">High-performance web presence</div><div class="svc-d">Mobile-first websites and web applications built for speed, search engines, and AI crawlers simultaneously. Includes full SEO foundation — Core Web Vitals tuned, JSON-LD Schema, canonical tags, sitemap, and robots.txt. From a five-section landing page to a multi-route marketing site with CMS integration. Every site is GEO-indexed and AEO-ready before it ships.</div><div class="svc-tags"><span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">PWA</span><span class="tag b">Core Web Vitals</span><span class="tag b">Schema</span></div></div>
+        <div class="svc"><span class="svc-num">02 · SaaS & Platform Builds</span><div class="svc-t">Full-stack product engineering</div><div class="svc-d">Complete SaaS products with multi-role authentication, Firestore data architecture, real-time subscriptions, payment integration, email notification pipelines, admin dashboards, and Cloud Function business logic. Built solo means no sprint planning overhead — you get decisions made fast, architecture documented, and a platform that scales without refactoring. Examples: TripSpace Global, Aurora Repair, Sure Drive.</div><div class="svc-tags"><span class="tag">Firebase</span><span class="tag">Cloud Functions</span><span class="tag b">PayFast</span><span class="tag b">PayPal</span><span class="tag b">Real-time</span></div></div>
+        <div class="svc"><span class="svc-num">03 · AI Tool Integration</span><div class="svc-t">AI that solves real problems</div><div class="svc-d">Real AI integrations — not chatbot wrappers. Gemini 2.5 Flash for production tools at scale. Claude for reasoning, code generation, and agentic workflows. Custom AI tools wired into your existing platform: damage assessment engines, pricing assistants, AI travel companions, content generation pipelines, and document analysis systems. The model is selected for the task, not the trend.</div><div class="svc-tags"><span class="tag v">Gemini 2.5 Flash</span><span class="tag v">Claude API</span><span class="tag v">Agentic flows</span><span class="tag v">RAG</span></div></div>
+        <div class="svc"><span class="svc-num">04 · SEO · GEO · AEO</span><div class="svc-t">Found by people and AI models</div><div class="svc-d">Three distinct but connected disciplines. SEO gets you on Page 1 of Google. GEO (Generative Engine Optimisation) gets your brand cited by AI models like ChatGPT, Claude, and Perplexity when users ask relevant questions. AEO (Answer Engine Optimisation) structures your content to appear in AI-generated answers and featured snippets. All three built into the project architecture from day one — llms.txt, context-ai.txt, JSON-LD entity graphs, and content authority networks.</div><div class="svc-tags"><span class="tag">JSON-LD</span><span class="tag">llms.txt</span><span class="tag b">GEO indexing</span><span class="tag b">AEO</span><span class="tag b">Entity graph</span></div></div>
+        <div class="svc"><span class="svc-num">05 · Security Research & Audits</span><div class="svc-t">Built by someone who finds the gaps</div><div class="svc-d">Active bug bounty researcher on HackerOne, Bugcrowd, and YesWeHack. Practical experience finding IDOR, SQL injection, XSS, SSRF, authentication bypass, insecure direct object references, subdomain enumeration vulnerabilities, and broken access control in production systems. That knowledge is applied directly to every platform built — Firestore security rules are audited, API routes are hardened, and authentication flows are reviewed before any code ships.</div><div class="svc-tags"><span class="tag r">HackerOne</span><span class="tag r">Bugcrowd</span><span class="tag r">YesWeHack</span><span class="tag r">Pentest</span><span class="tag r">OWASP</span></div></div>
+        <div class="svc"><span class="svc-num">06 · Content Authority Networks</span><div class="svc-t">Expertise that gets cited</div><div class="svc-d">Long-form editorial content built to rank, index, and be cited by AI models — not AI-generated filler that Google filters out. Industry analysis, public interest reporting, founder narratives, and technical explainers written with real expertise and sourced from primary data. Each article builds the entity graph that tells search engines and AI models who you are, what you know, and why your domain deserves authority. Includes internal link architecture and structured citation systems.</div><div class="svc-tags"><span class="tag">Editorial content</span><span class="tag">Entity authority</span><span class="tag b">AI citations</span><span class="tag b">Link architecture</span></div></div>
     </div>
 </div>
 </section>
 
-<!-- ══════════════════════════════════════════
-     PROCESS
-═══════════════════════════════════════════ -->
 <section style="padding:100px 0; background:var(--surface); border-top:1px solid var(--border);">
 <div class="wrap">
     <div class="reveal">
@@ -817,7 +664,6 @@
 </div>
 </section>
 
-<!-- PROOF STRIP -->
 <section style="padding:60px 0; background:var(--bg); border-top:1px solid var(--border);">
 <div class="wrap">
     <div class="proof reveal">
@@ -829,9 +675,6 @@
 </div>
 </section>
 
-<!-- ══════════════════════════════════════════
-     ARTICLES
-═══════════════════════════════════════════ -->
 <section style="padding:100px 0; background:var(--surface); border-top:1px solid var(--border);">
 <div class="wrap">
     <div class="reveal" style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:20px;margin-bottom:0;">
@@ -851,25 +694,16 @@
 </div>
 </section>
 
-<!-- ══════════════════════════════════════════
-     FINAL CTA — with Cape Town image
-═══════════════════════════════════════════ -->
 <section id="cta">
     <div class="marble-bg"></div>
-
-    <!-- Cape Town aerial image strip above CTA -->
     <div style="max-width:1280px;margin:0 auto 60px;padding:0 6vw;position:relative;z-index:1;" class="reveal">
         <div class="img-card" style="height:260px;">
-            <img src="https://images.pexels.com/photos/259447/pexels-photo-259447.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Cape Town aerial night view — Africa's technology and innovation capital" loading="lazy">
+            <img src="https://images.pexels.com/photos/259447/pexels-photo-259447.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Cape Town aerial night view — Africa's technology and innovation capital" loading="lazy" width="1200" height="800">
             <div class="img-overlay"></div>
             <div class="img-label">Cape Town · Africa's tech capital</div>
         </div>
     </div>
-
-    <div class="cta-h reveal">
-        Ready to build<br>
-        <span class="g-text">something that lasts?</span>
-    </div>
+    <div class="cta-h reveal">Ready to build<br><span class="g-text">something that lasts?</span></div>
     <p class="cta-s reveal">Tell us what you need. We'll tell you exactly what it costs and when it ships.</p>
     <div class="cta-btns reveal">
         <a href="/onboard.html" class="btn-p">Start the brief →</a>
@@ -880,93 +714,49 @@
     </div>
 </section>
 
-
-    <!-- Approvals & Recognition -->
-    <section style="padding:60px 6vw;background:var(--surface);border-top:1px solid var(--border);">
-        <div style="max-width:1100px;margin:0 auto;">
-            <div class="eyebrow" style="margin-bottom:8px;">// Approvals & Recognition</div>
-            <h2 style="font-size:clamp(24px,3vw,40px);font-weight:700;letter-spacing:-0.03em;margin-bottom:8px;">Verified. Approved. <span style="background:linear-gradient(90deg,#10b981,#84cc16);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Recognised.</span></h2>
-            <p style="font-size:15px;color:var(--muted2);font-weight:300;margin-bottom:36px;max-width:540px;line-height:1.7;">Forge Vertical holds active approvals and recognition from leading platforms and organisations in technology, security, and AI.</p>
-
-            <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;">
-
-                <!-- Anthropic Cyber Verification Program -->
-                <div style="background:var(--surface2);border:1px solid var(--border2);border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:16px;">
-                    <div style="display:flex;align-items:center;gap:14px;">
-                        <div style="width:44px;height:44px;border-radius:12px;background:#1a0a00;border:1px solid #3d1a00;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-                            <!-- Anthropic asterisk logo -->
-                            <svg width="22" height="22" viewBox="0 0 100 100" fill="none">
-                                <path d="M50 5 L50 95 M5 50 L95 50 M20 20 L80 80 M80 20 L20 80" stroke="#d97706" stroke-width="10" stroke-linecap="round"/>
-                            </svg>
-                        </div>
-                        <div>
-                            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:#d97706;margin-bottom:3px;">Anthropic · Claude</div>
-                            <div style="font-size:14px;font-weight:700;color:var(--text);">Cyber Verification Program</div>
-                        </div>
-                        <div style="margin-left:auto;">
-                            <span style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;padding:3px 10px;border-radius:4px;background:rgba(132,204,22,0.1);color:#84cc16;border:1px solid rgba(132,204,22,0.2);">Active</span>
-                        </div>
-                    </div>
-                    <div style="font-size:13px;color:var(--muted2);line-height:1.65;">Approved by Anthropic's Safeguards Team for dual-use cybersecurity activities including penetration testing, red teaming, and bug bounty research. Forge Vertical is one of a limited number of organisations granted this approval — enabling advanced security research with Claude's full capability set.</div>
-                    <div style="padding:12px 14px;background:rgba(132,204,22,0.04);border:1px solid rgba(132,204,22,0.12);border-radius:8px;">
-                        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#84cc16;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:4px;">Approved use cases</div>
-                        <div style="font-size:12px;color:var(--muted2);line-height:1.6;">Basic pentesting · Red teaming · Bug bounty research · Vulnerability assessment · PoC development within safe harbor</div>
-                    </div>
-                    <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);border-top:1px solid var(--border);padding-top:12px;">Ref: TS-01a047e2 · Issued Aug 28, 2026 · Org: d1777766</div>
+<section style="padding:60px 6vw;background:var(--surface);border-top:1px solid var(--border);">
+    <div style="max-width:1100px;margin:0 auto;">
+        <div class="eyebrow" style="margin-bottom:8px;">// Approvals & Recognition</div>
+        <h2 style="font-size:clamp(24px,3vw,40px);font-weight:700;letter-spacing:-0.03em;margin-bottom:8px;">Verified. Approved. <span style="background:linear-gradient(90deg,#10b981,#84cc16);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Recognised.</span></h2>
+        <p style="font-size:15px;color:var(--muted2);font-weight:300;margin-bottom:36px;max-width:540px;line-height:1.7;">Forge Vertical holds active approvals and recognition from leading platforms and organisations in technology, security, and AI.</p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;">
+            <div style="background:var(--surface2);border:1px solid var(--border2);border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:16px;">
+                <div style="display:flex;align-items:center;gap:14px;">
+                    <div style="width:44px;height:44px;border-radius:12px;background:#1a0a00;border:1px solid #3d1a00;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><svg width="22" height="22" viewBox="0 0 100 100" fill="none"><path d="M50 5 L50 95 M5 50 L95 50 M20 20 L80 80 M80 20 L20 80" stroke="#d97706" stroke-width="10" stroke-linecap="round"/></svg></div>
+                    <div><div style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:#d97706;margin-bottom:3px;">Anthropic · Claude</div><div style="font-size:14px;font-weight:700;color:var(--text);">Cyber Verification Program</div></div>
+                    <div style="margin-left:auto;"><span style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;padding:3px 10px;border-radius:4px;background:rgba(132,204,22,0.1);color:#84cc16;border:1px solid rgba(132,204,22,0.2);">Active</span></div>
                 </div>
-
-                <!-- HackerOne -->
-                <div style="background:var(--surface2);border:1px solid var(--border2);border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:16px;">
-                    <div style="display:flex;align-items:center;gap:14px;">
-                        <div style="width:44px;height:44px;border-radius:12px;background:#0a1a0a;border:1px solid #1a3a1a;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="#84cc16"><path d="M4 3h4l4 9 4-9h4L12 21 4 3z"/></svg>
-                        </div>
-                        <div>
-                            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:#84cc16;margin-bottom:3px;">HackerOne</div>
-                            <div style="font-size:14px;font-weight:700;color:var(--text);">Bug Bounty Researcher</div>
-                        </div>
-                        <div style="margin-left:auto;">
-                            <span style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;padding:3px 10px;border-radius:4px;background:rgba(132,204,22,0.1);color:#84cc16;border:1px solid rgba(132,204,22,0.2);">Active</span>
-                        </div>
-                    </div>
-                    <div style="font-size:13px;color:var(--muted2);line-height:1.65;">Active researcher on HackerOne's platform. Forge Vertical conducts ethical security research across public and private bug bounty programmes, reporting findings directly to programme owners. All research conducted within safe harbor agreements and responsible disclosure frameworks.</div>
-                    <div style="padding:12px 14px;background:rgba(132,204,22,0.04);border:1px solid rgba(132,204,22,0.12);border-radius:8px;">
-                        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#84cc16;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:4px;">Research focus</div>
-                        <div style="font-size:12px;color:var(--muted2);line-height:1.6;">IDOR · Authentication bypass · Business logic flaws · API vulnerabilities · XSS · SSRF · Broken access control</div>
-                    </div>
-                    <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);border-top:1px solid var(--border);padding-top:12px;">forgevertical@wearehackerone.com · Also active on Bugcrowd · YesWeHack</div>
+                <div style="font-size:13px;color:var(--muted2);line-height:1.65;">Approved by Anthropic's Safeguards Team for dual-use cybersecurity activities including penetration testing, red teaming, and bug bounty research. Forge Vertical is one of a limited number of organisations granted this approval — enabling advanced security research with Claude's full capability set.</div>
+                <div style="padding:12px 14px;background:rgba(132,204,22,0.04);border:1px solid rgba(132,204,22,0.12);border-radius:8px;"><div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#84cc16;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:4px;">Approved use cases</div><div style="font-size:12px;color:var(--muted2);line-height:1.6;">Basic pentesting · Red teaming · Bug bounty research · Vulnerability assessment · PoC development within safe harbor</div></div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);border-top:1px solid var(--border);padding-top:12px;">Ref: TS-01a047e2 · Issued Aug 28, 2026 · Org: d1777766</div>
+            </div>
+            <div style="background:var(--surface2);border:1px solid var(--border2);border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:16px;">
+                <div style="display:flex;align-items:center;gap:14px;">
+                    <div style="width:44px;height:44px;border-radius:12px;background:#0a1a0a;border:1px solid #1a3a1a;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><svg width="22" height="22" viewBox="0 0 24 24" fill="#84cc16"><path d="M4 3h4l4 9 4-9h4L12 21 4 3z"/></svg></div>
+                    <div><div style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:#84cc16;margin-bottom:3px;">HackerOne</div><div style="font-size:14px;font-weight:700;color:var(--text);">Bug Bounty Researcher</div></div>
+                    <div style="margin-left:auto;"><span style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;padding:3px 10px;border-radius:4px;background:rgba(132,204,22,0.1);color:#84cc16;border:1px solid rgba(132,204,22,0.2);">Active</span></div>
                 </div>
-
-                <!-- Forge Vertical Security Policy -->
-                <div style="background:var(--surface2);border:1px solid var(--border2);border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:16px;">
-                    <div style="display:flex;align-items:center;gap:14px;">
-                        <div style="width:44px;height:44px;border-radius:12px;background:#0a0a1a;border:1px solid #1a1a3a;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-                            <svg width="22" height="22" fill="none" stroke="#6a7d96" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                        </div>
-                        <div>
-                            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:var(--muted2);margin-bottom:3px;">Forge Vertical</div>
-                            <div style="font-size:14px;font-weight:700;color:var(--text);">Responsible Disclosure Policy</div>
-                        </div>
-                        <div style="margin-left:auto;">
-                            <span style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;padding:3px 10px;border-radius:4px;background:rgba(255,255,255,0.05);color:var(--muted2);border:1px solid var(--border2);">Policy</span>
-                        </div>
-                    </div>
-                    <div style="font-size:13px;color:var(--muted2);line-height:1.65;">Forge Vertical operates under a strict responsible disclosure framework. No published exploits. No public disclosure of company names. Findings go directly to programme owners via official channels. Client infrastructure built by Forge Vertical is not tested without explicit written authorisation.</div>
-                    <div style="padding:12px 14px;background:rgba(255,255,255,0.03);border:1px solid var(--border2);border-radius:8px;">
-                        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted2);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:4px;">Commitments</div>
-                        <div style="font-size:12px;color:var(--muted2);line-height:1.6;">Find and report only · No public naming · Safe harbor respected · X-Bug-Bounty headers on all research traffic · PoC shared privately with programme owners</div>
-                    </div>
-                    <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);border-top:1px solid var(--border);padding-top:12px;">Security intelligence page → <a href="/security-intelligence.html" style="color:#84cc16;text-decoration:none;">forgevertical.com/security-intelligence</a></div>
+                <div style="font-size:13px;color:var(--muted2);line-height:1.65;">Active researcher on HackerOne's platform. Forge Vertical conducts ethical security research across public and private bug bounty programmes, reporting findings directly to programme owners. All research conducted within safe harbor agreements and responsible disclosure frameworks.</div>
+                <div style="padding:12px 14px;background:rgba(132,204,22,0.04);border:1px solid rgba(132,204,22,0.12);border-radius:8px;"><div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#84cc16;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:4px;">Research focus</div><div style="font-size:12px;color:var(--muted2);line-height:1.6;">IDOR · Authentication bypass · Business logic flaws · API vulnerabilities · XSS · SSRF · Broken access control</div></div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);border-top:1px solid var(--border);padding-top:12px;">forgevertical@wearehackerone.com · Also active on Bugcrowd · YesWeHack</div>
+            </div>
+            <div style="background:var(--surface2);border:1px solid var(--border2);border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:16px;">
+                <div style="display:flex;align-items:center;gap:14px;">
+                    <div style="width:44px;height:44px;border-radius:12px;background:#0a0a1a;border:1px solid #1a1a3a;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><svg width="22" height="22" fill="none" stroke="#6a7d96" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+                    <div><div style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:var(--muted2);margin-bottom:3px;">Forge Vertical</div><div style="font-size:14px;font-weight:700;color:var(--text);">Responsible Disclosure Policy</div></div>
+                    <div style="margin-left:auto;"><span style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;padding:3px 10px;border-radius:4px;background:rgba(255,255,255,0.05);color:var(--muted2);border:1px solid var(--border2);">Policy</span></div>
                 </div>
-
+                <div style="font-size:13px;color:var(--muted2);line-height:1.65;">Forge Vertical operates under a strict responsible disclosure framework. No published exploits. No public disclosure of company names. Findings go directly to programme owners via official channels. Client infrastructure built by Forge Vertical is not tested without explicit written authorisation.</div>
+                <div style="padding:12px 14px;background:rgba(255,255,255,0.03);border:1px solid var(--border2);border-radius:8px;"><div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted2);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:4px;">Commitments</div><div style="font-size:12px;color:var(--muted2);line-height:1.6;">Find and report only · No public naming · Safe harbor respected · X-Bug-Bounty headers on all research traffic · PoC shared privately with programme owners</div></div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);border-top:1px solid var(--border);padding-top:12px;">Security intelligence page → <a href="/security-intelligence.html" style="color:#84cc16;text-decoration:none;">forgevertical.com/security-intelligence</a></div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
 <div id="global-footer"></div>
 
 <script>
-// ── Terminal ──────────────────────────────────────────────────────
 const lines = [
     { t:'✓ Security rules hardened',       c:'tg', d:500  },
     { t:'✓ Firestore ACL locked',          c:'tg', d:1050 },
@@ -1003,7 +793,6 @@ lines.forEach(({ t, c, d }) => {
     }, d);
 });
 
-// ── Comparison table ──────────────────────────────────────────────
 const rows = [
     ['JSON-LD Schema markup',      '✗ Rarely included',   '✓ Every build'],
     ['llms.txt & GEO indexing',    '✗ Unknown to most',   '✓ Every build'],
@@ -1019,18 +808,17 @@ rows.forEach(([feat, them, us]) => {
     const tc = them.startsWith('✗') ? '#f87171' : them.startsWith('~') ? '#fbbf24' : '#6b7585';
     const el = document.createElement('div');
     el.className = 'cmp-row';
-    el.innerHTML = `
-        <div class="cmp-c" style="color:var(--muted2);">${feat}</div>
-        <div class="cmp-c" style="color:${tc};">${them}</div>
-        <div class="cmp-c" style="color:var(--lime);font-weight:600;">${us}</div>`;
+    el.innerHTML = `<div class="cmp-c" style="color:var(--muted2);">${feat}</div><div class="cmp-c" style="color:${tc};">${them}</div><div class="cmp-c" style="color:var(--lime);font-weight:600;">${us}</div>`;
     body.appendChild(el);
 });
 
-// ── Scroll reveal ─────────────────────────────────────────────────
 const obs = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('up'); });
 }, { threshold: 0.08 });
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 </script>
+
+<!-- FIX 2: Tailwind at bottom of body — no longer render-blocking -->
+<script src="https://cdn.tailwindcss.com"></script>
 </body>
 </html>
