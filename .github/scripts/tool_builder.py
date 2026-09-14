@@ -149,25 +149,4 @@ def forge_vertical_asset():
 """
     with open(tool_path, 'w') as f:
         f.write(roi_template)
-
-    # --- PART 3: SEO AUTOMATION ---
-    with open("robots.txt", "w") as f:
-        f.write("User-agent: *\nAllow: /\n\nSitemap: https://forgevertical.com/sitemap.xml")
-
-    now = datetime.now().strftime("%Y-%m-%d")
-    sitemap_content = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
-    pages = ["https://forgevertical.com/", "https://forgevertical.com/tools/roi-calculator.html"]
-    if os.path.exists("intel"):
-        for file in os.listdir("intel"):
-            if file.endswith(".html"):
-                pages.append(f"https://forgevertical.com/intel/{file}")
-
-    for page in pages:
-        sitemap_content += f'  <url>\n    <loc>{page}</loc>\n    <lastmod>{now}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>0.8</priority>\n  </url>\n'
-    sitemap_content += '</urlset>'
-    
-    with open("sitemap.xml", "w") as f:
-        f.write(sitemap_content)
-
-if __name__ == "__main__":
-    forge_vertical_asset()
+        
