@@ -31,10 +31,10 @@ def forge_vertical_asset():
             <section class="mt-20 border-t border-slate-100 pt-10">
                 <h4 class="text-sm font-black uppercase tracking-widest text-slate-900 mb-6">Discuss Your Infrastructure</h4>
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                    <a href="https://wa.me/27661180036" class="flex items-center justify-center bg-[#25D366] text-white px-6 py-4 rounded-xl font-bold uppercase text-[10px] tracking-widest hover:opacity-90 transition-all">
+                    <a href="https://wa.me/27657417593" class="flex items-center justify-center bg-[#25D366] text-white px-6 py-4 rounded-xl font-bold uppercase text-[10px] tracking-widest hover:opacity-90 transition-all">
                         WhatsApp Direct
                     </a>
-                    <a href="https://fiverr.com/YOUR_PROFILE" class="flex items-center justify-center bg-[#1dbf73] text-white px-6 py-4 rounded-xl font-bold uppercase text-[10px] tracking-widest hover:opacity-90 transition-all">
+                    <a href="https://fiverr.com/jarrithosking" class="flex items-center justify-center bg-[#1dbf73] text-white px-6 py-4 rounded-xl font-bold uppercase text-[10px] tracking-widest hover:opacity-90 transition-all">
                         Hire on Fiverr
                     </a>
                     <a href="mailto:jarrit@forgevertical.com" class="flex items-center justify-center bg-slate-900 text-white px-6 py-4 rounded-xl font-bold uppercase text-[10px] tracking-widest hover:bg-lime-600 transition-all">
@@ -44,7 +44,6 @@ def forge_vertical_asset():
             </section>
     """
 
-    # NOTE: We use {{ }} for CSS and {variable} for Python data
     html_template = f"""
 <!DOCTYPE html>
 <html lang="en">
@@ -81,7 +80,6 @@ def forge_vertical_asset():
 </body>
 </html>
 """
-    # This manually maps the keys to avoid the .format() confusion
     final_html = html_template.replace("{{title}}", selected['title'])\
                               .replace("{{tag}}", selected['tag'])\
                               .replace("{{headline}}", selected['headline'])\
@@ -94,7 +92,7 @@ def forge_vertical_asset():
     # --- PART 2: INTERACTIVE TOOL FORGE ---
     os.makedirs("tools", exist_ok=True)
     tool_path = "tools/roi-calculator.html"
-    
+
     roi_template = f"""
 <!DOCTYPE html>
 <html lang="en">
@@ -112,7 +110,6 @@ def forge_vertical_asset():
     <div class="max-w-xl mx-auto bg-white p-10 rounded-[3rem] shadow-2xl border border-slate-100">
         <h2 class="text-3xl font-extrabold text-slate-900 mb-2">Revenue <span class="text-lime-500">Leakage</span></h2>
         <p class="text-slate-500 text-[10px] mb-8 uppercase tracking-widest font-black">Neil Patel Grade SEO Utility</p>
-        
         <div class="space-y-6">
             <div>
                 <label class="block text-[10px] font-black uppercase text-slate-400 mb-2">Monthly Traffic</label>
@@ -124,13 +121,12 @@ def forge_vertical_asset():
             </div>
             <button onclick="calc()" class="w-full bg-lime-500 text-white p-5 rounded-2xl font-black uppercase tracking-widest text-xs shadow-lg shadow-lime-500/30 hover:bg-slate-900 transition-all">Analyze My Data</button>
         </div>
-        
         <div id="result" class="mt-10 p-8 bg-slate-900 rounded-[2rem] text-white hidden">
             <p class="text-slate-400 text-[10px] uppercase font-black tracking-widest mb-2">Annual Revenue at Risk</p>
             <span id="loss" class="text-4xl font-black text-lime-400">$0</span>
             <p class="mt-6 text-xs text-slate-400 leading-relaxed italic">"Slow load times and poor UX typically leak 7-12% of annual revenue. We plug those holes."</p>
             <div class="mt-8 grid grid-cols-1 gap-3">
-                <a href="https://wa.me/27661180036" class="flex items-center justify-center bg-[#25D366] text-white p-4 rounded-xl font-black uppercase text-[10px] tracking-widest">Chat on WhatsApp</a>
+                <a href="https://wa.me/27657417593" class="flex items-center justify-center bg-[#25D366] text-white p-4 rounded-xl font-black uppercase text-[10px] tracking-widest">Chat on WhatsApp</a>
                 <a href="mailto:jarrit@forgevertical.com" class="flex items-center justify-center bg-white text-slate-900 p-4 rounded-xl font-black uppercase text-[10px] tracking-widest">Email Principal Architect</a>
             </div>
         </div>
@@ -138,7 +134,7 @@ def forge_vertical_asset():
     <script>
         function calc() {{
             const t = document.getElementById('traffic').value;
-            const v = document.getElementById('orderValue').value || document.getElementById('value').value;
+            const v = document.getElementById('value').value;
             const leakage = (t * 0.10) * v * 12;
             document.getElementById('loss').innerText = '$' + Math.floor(leakage).toLocaleString();
             document.getElementById('result').classList.remove('hidden');
@@ -149,4 +145,15 @@ def forge_vertical_asset():
 """
     with open(tool_path, 'w') as f:
         f.write(roi_template)
-        
+
+    # --- PART 3: SEO AUTOMATION REMOVED ---
+    # sitemap.xml and robots.txt are now maintained by FORGE_ARCHITECT.yml
+    # directly — do not regenerate them here. The workflow restores the
+    # canonical 47-article sitemap and full AI-bot robots.txt after this
+    # script runs, so any changes here would be overwritten anyway.
+    print("✓ Intel page generated:", intel_path)
+    print("✓ ROI calculator refreshed:", tool_path)
+    print("✓ sitemap.xml and robots.txt managed by FORGE_ARCHITECT.yml — skipping")
+
+if __name__ == "__main__":
+    forge_vertical_asset()
