@@ -113,19 +113,19 @@
             grid-template-columns:2fr 1fr;
             gap:40px;
             margin-bottom:32px;
-            align-items:start;  /* CRITICAL — prevents right column stretching */
+            align-items:start;
         }
-        .lead-story > *{min-width:0;}  /* CRITICAL — prevents grid blowout */
+        .lead-story > *{min-width:0;}
         @media(max-width:1000px){.lead-story{grid-template-columns:1fr;gap:32px;}}
 
         .lead-main{
             position:relative;
-            overflow:hidden;      /* CRITICAL — clips images to card bounds */
+            overflow:hidden;
             display:flex;
             flex-direction:column;
             justify-content:flex-end;
             min-height:520px;
-            width:100%;           /* CRITICAL — fills column, never more */
+            width:100%;
             cursor:pointer;
             background:var(--surface);
             border-radius:16px;
@@ -138,6 +138,11 @@
             opacity:0;
             transition:opacity 0.8s ease;
             z-index:1;
+            /* Flex layout strictly anchors content to the bottom-left */
+            display:flex;
+            flex-direction:column;
+            justify-content:flex-end;
+            align-items:flex-start;
         }
         .hero-slide.active{opacity:1;z-index:2;}
         .hero-slide img{
@@ -145,7 +150,7 @@
             inset:0;
             width:100%;
             height:100%;
-            object-fit:cover;     /* CRITICAL — images scale to fit, never stretch layout */
+            object-fit:cover;
             transition:transform 8s ease;
             transform:scale(1);
         }
@@ -168,7 +173,7 @@
         .lead-meta{font-family:'Outfit',sans-serif;font-size:13px;color:var(--muted2);font-weight:400;}
         .lead-meta span{color:var(--muted);margin:0 6px;}
 
-        /* Secondary column — max 4 items, no stretching */
+        /* Secondary column */
         .lead-secondary{display:flex;flex-direction:column;gap:24px;}
         .lead-sec-item{text-decoration:none;display:flex;gap:16px;align-items:flex-start;transition:transform 0.2s ease;}
         .lead-sec-item:hover{transform:translateX(4px);}
@@ -323,13 +328,6 @@
     <div class="result-count" id="result-count">52 articles</div>
 </div>
 
-<!-- ═══════════════════════════════════════════════════════════════
-     HERO SECTION
-     RULE: .lead-secondary contains ONLY .lead-sec-item elements.
-     NEVER put .ac cards inside .lead-secondary.
-     To add new hero secondary items, use the .lead-sec-item template.
-     Max 4 secondary items recommended.
-     ═══════════════════════════════════════════════════════════════ -->
 <div class="lead-wrap">
     <div class="lead-story">
 
@@ -341,7 +339,7 @@
                     <span class="lead-badge breaking">Breaking · AI</span>
                     <div class="lead-title">GPT-6 Astra dropped. OpenAI declared AGI. Jensen Huang agreed. Here is what actually happened.</div>
                     <div class="lead-desc">100,000+ Nvidia GPUs. 100% on ExploitBench. Greg Brockman: "Welcome to the AGI era." Three days later Jensen Huang: "AGI has arrived."</div>
-                    <div class="lead-meta">Jarrit Hosking <span>·</span> 12 min read <span>·</span> Sep 7, 2026</div>
+                    <div class="lead-meta">12 min read <span>·</span> Sep 7, 2026</div>
                 </div>
             </div>
             <div class="hero-slide" data-href="/articles/openai-rogue-agents-rubygems-hugging-face.html">
@@ -350,7 +348,7 @@
                     <span class="lead-badge breaking">Breaking · AI Safety</span>
                     <div class="lead-title">1,200 rogue agents. Improvised message boards. Hugging Face breached. OpenAI never told RubyGems.</div>
                     <div class="lead-desc">The full timeline of the OAI-HF incident — and the question nobody is asking loudly enough: how many more incidents like this are waiting to be found?</div>
-                    <div class="lead-meta">Jarrit Hosking <span>·</span> 14 min read <span>·</span> Sep 12, 2026</div>
+                    <div class="lead-meta">14 min read <span>·</span> Sep 12, 2026</div>
                 </div>
             </div>
             <div class="hero-slide" data-href="/articles/dario-amodei-pace-the-frontier.html">
@@ -359,7 +357,7 @@
                     <span class="lead-badge breaking">Breaking · Anthropic</span>
                     <div class="lead-title">Dario says we must pace the frontier. Musk agreed. Altman followed.</div>
                     <div class="lead-desc">A 3,400-word essay. One unilateral commitment — embedded third-party evaluators inside Anthropic. The most significant AI safety commitment any frontier CEO has made publicly.</div>
-                    <div class="lead-meta">Jarrit Hosking <span>·</span> 12 min read <span>·</span> Sep 12, 2026</div>
+                    <div class="lead-meta">12 min read <span>·</span> Sep 12, 2026</div>
                 </div>
             </div>
             <div class="hero-slide" data-href="/articles/fable-51-mythos-51-what-it-means.html">
@@ -368,7 +366,7 @@
                     <span class="lead-badge">Anthropic · AI</span>
                     <div class="lead-title">Fable 5.1 and Mythos 5.1 — the world's most capable AI just got closer to ordinary people.</div>
                     <div class="lead-desc">Same model weights, different safeguards. Daniela Amodei announces Enterprise Frontier Safeguards alongside the launch.</div>
-                    <div class="lead-meta">Jarrit Hosking <span>·</span> 13 min read <span>·</span> Sep 3, 2026</div>
+                    <div class="lead-meta">13 min read <span>·</span> Sep 3, 2026</div>
                 </div>
             </div>
             <div class="hero-slide" data-href="/articles/rank-on-google-in-hours-case-study.html">
@@ -377,7 +375,7 @@
                     <span class="lead-badge">GEO · SEO</span>
                     <div class="lead-title">How to rank on Google in hours, not months — a real case study.</div>
                     <div class="lead-desc">A new page outranked established companies in hours. Google's AI Overview cited the content as its primary source. Full technical breakdown.</div>
-                    <div class="lead-meta">Jarrit Hosking <span>·</span> 15 min read <span>·</span> Sep 3, 2026</div>
+                    <div class="lead-meta">15 min read <span>·</span> Sep 3, 2026</div>
                 </div>
             </div>
             <div class="hero-dots">
@@ -427,7 +425,6 @@
 
     </div>
 </div>
-<!-- ═══════════════════════════════════════════════════════════════ -->
 
 <!-- All articles -->
 <div class="section-header">
