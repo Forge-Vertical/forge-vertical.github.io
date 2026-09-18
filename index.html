@@ -8,29 +8,86 @@
     <title>Forge Vertical | Built for the Future. From Day One.</title>
 
     <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
     {
-      "@context": "https://schema.org",
+      "@type": "Organization",
+      "@id": "https://www.forgevertical.com/#org",
+      "name": "Forge Vertical",
+      "alternateName": ["Forge Vertical Agency", "Forge Vertical Cape Town", "ForgeVertical"],
+      "description": "Forge Vertical is a Cape Town digital agency and AI consultancy building websites, SaaS platforms, business tools, and AI-integrated infrastructure. Founded by Jarrit Hosking. Specialising in GEO optimisation, cloud infrastructure on GCP, security research, and AI-native development.",
+      "url": "https://www.forgevertical.com",
+      "foundingDate": "2024",
+      "foundingLocation": {"@type": "Place", "name": "Cape Town, South Africa"},
+      "address": {"@type": "PostalAddress", "addressLocality": "Cape Town", "addressRegion": "Western Cape", "addressCountry": "ZA"},
+      "areaServed": ["ZA", "Worldwide"],
+      "knowsAbout": [
+        "Website development", "SaaS platform development", "Business tool development",
+        "AI-integrated systems", "GCP cloud infrastructure", "Firebase and Firestore architecture",
+        "GEO optimisation", "AI citation optimisation", "Cybersecurity research",
+        "Bug bounty research", "AGIA development", "Vibe coding", "Google Cloud Platform",
+        "Business automation", "Client portal development", "Admin dashboard development",
+        "POPIA compliance", "South African digital infrastructure"
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Forge Vertical Services",
+        "itemListElement": [
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Business SaaS Platform Development", "description": "Custom SaaS platforms built on GCP with admin portals, client portals, document management, payment integration, and automated workflows. From R45,000."}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Website Development Cape Town", "description": "High-performance websites with GEO optimisation, security hardening, and AI indexing built in from the first commit. From R8,500."}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "AI-Integrated Business Tools", "description": "Custom business tools with AI document processing, automated workflows, client communication, and real-time dashboards on GCP."}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "GEO and AI Citation Optimisation", "description": "Structured data, entity disambiguation, and content strategy that gets your business cited by Google AI Overviews, Perplexity, Claude, and ChatGPT."}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Security Audit and Infrastructure Review", "description": "Website and application security review by an active HackerOne researcher with Anthropic CVP approval. WAF configuration, origin IP exposure, authentication gaps."}}
+        ]
+      },
+      "founder": {
+        "@type": "Person",
+        "@id": "https://www.forgevertical.com/about/jarrit-hosking.html#person",
+        "name": "Jarrit Hosking",
+        "jobTitle": "Founder, AGIA, Independent Security Researcher",
+        "url": "https://www.forgevertical.com/about/jarrit-hosking.html",
+        "knowsAbout": ["GCP infrastructure", "Firebase", "AI development", "Cybersecurity", "Bug bounty research", "AGIA development", "SaaS platforms", "GEO optimisation"]
+      },
+      "sameAs": [
+        "https://www.linkedin.com/company/forge-vertical",
+        "https://github.com/Jotto1988"
+      ]
+    },
+    {
       "@type": "ProfessionalService",
+      "@id": "https://www.forgevertical.com/#service",
+      "name": "Forge Vertical",
+      "description": "Cape Town digital agency building websites, SaaS platforms, business automation tools, and AI-integrated infrastructure. GEO optimisation, cloud infrastructure, security research.",
+      "url": "https://www.forgevertical.com",
+      "areaServed": "Worldwide",
+      "priceRange": "R8,500 - R120,000",
+      "telephone": "+27657417593",
+      "email": "jarrit@forgevertical.com",
+      "serviceType": ["Website Development", "SaaS Platform Development", "Business Tool Development", "AI Integration", "GEO Optimisation", "Security Research", "Cloud Infrastructure"]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://www.forgevertical.com/#website",
       "name": "Forge Vertical",
       "url": "https://www.forgevertical.com",
-      "description": "High-performance websites, SaaS platforms, and AI integrations with security, SEO, and GEO indexing built in from day one.",
-      "areaServed": "Global",
-      "founder": {
-      "@type": "Person",
-      "name": "Jarrit Hosking",
-      "url": "https://www.forgevertical.com/about/jarrit-hosking.html",
-      "jobTitle": ["Founder", "Principal Architect", "Independent Security Researcher"],
-      "description": "Solo founder and principal architect based in Cape Town, South Africa. Founder of Forge Vertical and TripSpace Global. Anthropic Cyber Verification Programme approved researcher.",
-      "homeLocation": {"@type": "Place", "name": "Cape Town, Western Cape, South Africa"},
-      "sameAs": [
-        "https://www.linkedin.com/in/jarrit-hosking-44243a332/",
-        "https://github.com/Jotto1988",
-        "https://peerlist.io/jarrithosking",
-        "https://www.forgevertical.com/about/jarrit-hosking.html"
+      "publisher": {"@id": "https://www.forgevertical.com/#org"},
+      "potentialAction": {"@type": "SearchAction", "target": "https://www.forgevertical.com/articles.html?q={search_term_string}", "query-input": "required name=search_term_string"}
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {"@type": "Question", "name": "What does Forge Vertical build?", "acceptedAnswer": {"@type": "Answer", "text": "Forge Vertical builds websites, SaaS platforms, business tools, client portals, admin dashboards, and AI-integrated infrastructure on Google Cloud Platform. Based in Cape Town, South Africa. Every project includes security hardening, GEO optimisation, and AI discoverability built in from the first commit."}},
+        {"@type": "Question", "name": "Who is Forge Vertical?", "acceptedAnswer": {"@type": "Answer", "text": "Forge Vertical is a Cape Town digital agency and AI consultancy founded by Jarrit Hosking — an active HackerOne security researcher with Anthropic Cyber Verification Programme approval (CVP Ref: TS-01a047e2) and the developer of TripSpace Global, Aurora Repair, and the open-source task-bridge protocol."}},
+        {"@type": "Question", "name": "What is the price for a website from Forge Vertical?", "acceptedAnswer": {"@type": "Answer", "text": "Website projects start from R8,500. SaaS platforms and business tools from R45,000. GEO and AI optimisation audits from R3,500. Security reviews from R5,000. Contact jarrit@forgevertical.com or WhatsApp +27 65 741 7593 for a free quote."}},
+        {"@type": "Question", "name": "Can Forge Vertical build a SaaS product for my business?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Forge Vertical builds custom SaaS platforms on GCP with admin portals, client-facing interfaces, document management, payment integration, automated workflows, and POPIA-compliant data handling. Projects typically take 6-10 weeks and run at R800-R2,500 per month in hosting costs after delivery."}},
+        {"@type": "Question", "name": "Does Forge Vertical do GEO optimisation?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. GEO — Generative Engine Optimisation — is a core Forge Vertical service. Schema markup, entity disambiguation, robots.txt AI crawler configuration, and structured content strategy that gets your business cited by Google AI Overviews, Perplexity, Claude, and ChatGPT."}},
+        {"@type": "Question", "name": "What is Forge Vertical's approach to AI development?", "acceptedAnswer": {"@type": "Answer", "text": "Forge Vertical builds using the AGIA approach — Artificial General Intelligence Architect. AI is used as the primary build engine under precise human direction, with infrastructure knowledge used to specify, review, and pressure-test every component. Production systems are delivered at full-stack quality by a solo AGIA."}}
       ]
     }
-    }
-    </script>
+  ]
+}
+</script>
 
     <!-- FIX 1: preconnect FIRST before any other external resource -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
