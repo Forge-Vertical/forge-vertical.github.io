@@ -224,16 +224,65 @@
         .proj{text-decoration:none;display:flex;flex-direction:column;position:relative;transition:transform 0.2s ease;}
         .proj:hover{transform:translateY(-4px);}
 
-        /* Preview image area */
-        .proj-img{height:220px;position:relative;overflow:hidden;border-radius:12px;margin-bottom:20px;background:var(--surface);border:1px solid rgba(255,255,255,0.03);}
-        .proj-img-inner{width:100%;height:100%;display:flex;align-items:center;justify-content:center;position:relative;}
-        .proj-img-inner img{width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease;}
-        .proj:hover .proj-img-inner img{transform:scale(1.04);}
+        /* Live iframe preview */
+        .proj-img{
+            height:220px;
+            position:relative;
+            overflow:hidden;
+            border-radius:12px;
+            margin-bottom:20px;
+            background:var(--surface);
+            border:1px solid rgba(255,255,255,0.06);
+        }
+        /* Iframe scales the live site down to fit the preview */
+        .proj-iframe{
+            position:absolute;
+            top:0;
+            left:0;
+            width:200%;          /* render at 2x width */
+            height:200%;         /* render at 2x height */
+            transform:scale(0.5);
+            transform-origin:0 0;
+            border:none;
+            pointer-events:none; /* card click handles navigation */
+            background:#fff;
+        }
+        /* Clickable overlay — captures hover and click, lets iframe render beneath */
+        .proj-overlay{
+            position:absolute;
+            inset:0;
+            background:linear-gradient(to top,rgba(6,8,12,0.55) 0%,transparent 60%);
+            z-index:2;
+            cursor:pointer;
+            transition:background 0.2s;
+        }
+        .proj:hover .proj-overlay{background:linear-gradient(to top,rgba(6,8,12,0.3) 0%,transparent 50%);}
 
-        /* Static logo preview for projects without screenshot */
-        .proj-logo-preview{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;background:radial-gradient(ellipse 70% 60% at 50% 50%,rgba(132,204,22,0.06) 0%,transparent 70%);}
-        .proj-logo-name{font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:700;color:var(--muted2);letter-spacing:0.08em;text-align:center;line-height:1.3;}
-        .proj-logo-url{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:0.05em;}
+        /* Overlay — captures pointer events, allows gradient */
+        .proj-overlay{
+            position:absolute;
+            inset:0;
+            background:linear-gradient(to top,rgba(6,8,12,0.5) 0%,transparent 55%);
+            z-index:3;
+            pointer-events:none;
+            transition:background 0.2s;
+        }
+        .proj:hover .proj-overlay{background:linear-gradient(to top,rgba(6,8,12,0.25) 0%,transparent 45%);}
+
+        /* Fallback for sites that block iframes */
+        .proj-fallback{
+            position:absolute;
+            inset:0;
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            justify-content:center;
+            gap:10px;
+            background:radial-gradient(ellipse 70% 60% at 50% 50%,rgba(132,204,22,0.05) 0%,transparent 70%);
+            z-index:1;
+        }
+        .proj-fallback-name{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;color:var(--muted2);letter-spacing:0.08em;text-align:center;line-height:1.4;}
+        .proj-fallback-url{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:0.05em;}
 
         /* Tag pill */
         .proj-tag{position:absolute;top:14px;left:14px;font-family:'Outfit',sans-serif;font-size:11px;font-weight:600;color:var(--text);background:rgba(11,15,20,0.75);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);padding:6px 16px;border-radius:24px;border:1px solid rgba(255,255,255,0.08);z-index:2;text-transform:capitalize;}
@@ -329,9 +378,20 @@
     <!-- TripSpace Global -->
     <a href="https://tripspaceglobal.com" target="_blank" rel="noopener noreferrer" class="proj" data-cat="saas hospitality ai">
         <div class="proj-img">
-            <div class="proj-img-inner">
-                <img src="https://images.pexels.com/photos/1001965/pexels-photo-1001965.jpeg?auto=compress&cs=tinysrgb&w=800" alt="TripSpace Global — commission-free travel marketplace">
-            </div>
+                <iframe
+                    class="proj-iframe"
+                    src="https://tripspaceglobal.com"
+                    title="TripSpace Global — live preview"
+                    loading="lazy"
+                    sandbox="allow-scripts allow-same-origin"
+                    onload="this.style.display='block';this.parentNode.querySelector('.proj-fallback').style.display='none';"
+                    onerror="this.style.display='none';"
+                ></iframe>
+                <div class="proj-fallback">
+                    <div class="proj-fallback-name">TripSpace Global</div>
+                    <div class="proj-fallback-url">tripspaceglobal.com</div>
+                </div>
+                <div class="proj-overlay"></div>
             <span class="proj-tag saas">SaaS · Hospitality</span>
             <span class="proj-visit">Visit →</span>
         </div>
@@ -353,9 +413,20 @@
     <!-- Aurora Repair -->
     <a href="https://aurora-repair.com" target="_blank" rel="noopener noreferrer" class="proj" data-cat="ai automotive saas">
         <div class="proj-img">
-            <div class="proj-img-inner">
-                <img src="https://images.pexels.com/photos/3807517/pexels-photo-3807517.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Aurora Repair — AI vehicle damage assessment">
-            </div>
+                <iframe
+                    class="proj-iframe"
+                    src="https://aurora-repair.com"
+                    title="Aurora Repair — live preview"
+                    loading="lazy"
+                    sandbox="allow-scripts allow-same-origin"
+                    onload="this.style.display='block';this.parentNode.querySelector('.proj-fallback').style.display='none';"
+                    onerror="this.style.display='none';"
+                ></iframe>
+                <div class="proj-fallback">
+                    <div class="proj-fallback-name">Aurora Repair</div>
+                    <div class="proj-fallback-url">aurora-repair.com</div>
+                </div>
+                <div class="proj-overlay"></div>
             <span class="proj-tag ai">AI · Automotive</span>
             <span class="proj-visit">Visit →</span>
         </div>
@@ -375,9 +446,20 @@
     <!-- Princess Vlei Lodge -->
     <a href="https://test-space-global.github.io/princessvleilodge/" target="_blank" rel="noopener noreferrer" class="proj" data-cat="hospitality">
         <div class="proj-img">
-            <div class="proj-img-inner">
-                <img src="https://images.pexels.com/photos/338504/pexels-photo-338504.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Princess Vlei Lodge — Cape Town nature lodge">
-            </div>
+                <iframe
+                    class="proj-iframe"
+                    src="https://test-space-global.github.io/princessvleilodge/"
+                    title="Princess Vlei Lodge — live preview"
+                    loading="lazy"
+                    sandbox="allow-scripts allow-same-origin"
+                    onload="this.style.display='block';this.parentNode.querySelector('.proj-fallback').style.display='none';"
+                    onerror="this.style.display='none';"
+                ></iframe>
+                <div class="proj-fallback">
+                    <div class="proj-fallback-name">Princess Vlei Lodge</div>
+                    <div class="proj-fallback-url">princessvleilodge</div>
+                </div>
+                <div class="proj-overlay"></div>
             <span class="proj-tag">Hospitality</span>
             <span class="proj-visit">Visit →</span>
         </div>
@@ -397,9 +479,20 @@
     <!-- IPS Promotions Hub -->
     <a href="https://promo.intpanelshop.co.za" target="_blank" rel="noopener noreferrer" class="proj" data-cat="automotive">
         <div class="proj-img">
-            <div class="proj-img-inner">
-                <img src="https://images.pexels.com/photos/1149831/pexels-photo-1149831.jpeg?auto=compress&cs=tinysrgb&w=800" alt="IPS Promotions Hub — International Panel Shop">
-            </div>
+                <iframe
+                    class="proj-iframe"
+                    src="https://promo.intpanelshop.co.za"
+                    title="IPS Promotions Hub — live preview"
+                    loading="lazy"
+                    sandbox="allow-scripts allow-same-origin"
+                    onload="this.style.display='block';this.parentNode.querySelector('.proj-fallback').style.display='none';"
+                    onerror="this.style.display='none';"
+                ></iframe>
+                <div class="proj-fallback">
+                    <div class="proj-fallback-name">IPS Promotions Hub</div>
+                    <div class="proj-fallback-url">promo.intpanelshop.co.za</div>
+                </div>
+                <div class="proj-overlay"></div>
             <span class="proj-tag">Automotive · SEO</span>
             <span class="proj-visit">Visit →</span>
         </div>
@@ -418,9 +511,20 @@
     <!-- International Panel Shop -->
     <a href="https://www.intpanelshop.co.za" target="_blank" rel="noopener noreferrer" class="proj" data-cat="automotive">
         <div class="proj-img">
-            <div class="proj-img-inner">
-                <img src="https://images.pexels.com/photos/1409999/pexels-photo-1409999.jpeg?auto=compress&cs=tinysrgb&w=800" alt="International Panel Shop — Cape Town panel beating">
-            </div>
+                <iframe
+                    class="proj-iframe"
+                    src="https://www.intpanelshop.co.za"
+                    title="International Panel Shop — live preview"
+                    loading="lazy"
+                    sandbox="allow-scripts allow-same-origin"
+                    onload="this.style.display='block';this.parentNode.querySelector('.proj-fallback').style.display='none';"
+                    onerror="this.style.display='none';"
+                ></iframe>
+                <div class="proj-fallback">
+                    <div class="proj-fallback-name">International Panel Shop</div>
+                    <div class="proj-fallback-url">intpanelshop.co.za</div>
+                </div>
+                <div class="proj-overlay"></div>
             <span class="proj-tag">Automotive</span>
             <span class="proj-visit">Visit →</span>
         </div>
@@ -439,12 +543,20 @@
     <!-- Sure Drive -->
     <a href="https://sure-drive-9a8c9.web.app/" target="_blank" rel="noopener noreferrer" class="proj" data-cat="saas automotive">
         <div class="proj-img">
-            <div class="proj-img-inner">
-                <div class="proj-logo-preview">
-                    <div class="proj-logo-name">SURE DRIVE<br>DRIVER REWARDS</div>
-                    <div class="proj-logo-url">sure-drive-9a8c9.web.app</div>
+                <iframe
+                    class="proj-iframe"
+                    src="https://sure-drive-9a8c9.web.app/"
+                    title="Sure Drive — live preview"
+                    loading="lazy"
+                    sandbox="allow-scripts allow-same-origin"
+                    onload="this.style.display='block';this.parentNode.querySelector('.proj-fallback').style.display='none';"
+                    onerror="this.style.display='none';"
+                ></iframe>
+                <div class="proj-fallback">
+                    <div class="proj-fallback-name">SURE DRIVE<br>DRIVER REWARDS</div>
+                    <div class="proj-fallback-url">sure-drive-9a8c9.web.app</div>
                 </div>
-            </div>
+                <div class="proj-overlay"></div>
             <span class="proj-tag saas">SaaS · Rewards</span>
             <span class="proj-visit">Visit →</span>
         </div>
@@ -463,12 +575,20 @@
     <!-- task-bridge -->
     <a href="https://www.forgevertical.com/subdomains/task-bridge/" class="proj" data-cat="opensource ai">
         <div class="proj-img">
-            <div class="proj-img-inner">
-                <div class="proj-logo-preview">
-                    <div class="proj-logo-name">task-bridge<br><span style="font-size:11px;color:#10b981;">OPEN PROTOCOL · GITHUB</span></div>
-                    <div class="proj-logo-url">github.com/Jotto1988/task-bridge</div>
+                <iframe
+                    class="proj-iframe"
+                    src="https://www.forgevertical.com/subdomains/task-bridge/"
+                    title="task-bridge — live preview"
+                    loading="lazy"
+                    sandbox="allow-scripts allow-same-origin"
+                    onload="this.style.display='block';this.parentNode.querySelector('.proj-fallback').style.display='none';"
+                    onerror="this.style.display='none';"
+                ></iframe>
+                <div class="proj-fallback">
+                    <div class="proj-fallback-name">task-bridge<br><span style="font-size:11px;color:#10b981;">OPEN PROTOCOL</span></div>
+                    <div class="proj-fallback-url">forgevertical.com/subdomains/task-bridge</div>
                 </div>
-            </div>
+                <div class="proj-overlay"></div>
             <span class="proj-tag open">Open Source</span>
             <span class="proj-visit">View →</span>
         </div>
@@ -489,9 +609,20 @@
     <!-- Seriti Skills -->
     <a href="https://www.forgevertical.com/subdomains/seriti-pbo/" class="proj" data-cat="nonprofit">
         <div class="proj-img">
-            <div class="proj-img-inner">
-                <img src="https://images.pexels.com/photos/6646918/pexels-photo-6646918.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Seriti Skills Development PBO — Cape Town nonprofit">
-            </div>
+                <iframe
+                    class="proj-iframe"
+                    src="https://www.forgevertical.com/subdomains/seriti-pbo/"
+                    title="Seriti Skills Development PBO — live preview"
+                    loading="lazy"
+                    sandbox="allow-scripts allow-same-origin"
+                    onload="this.style.display='block';this.parentNode.querySelector('.proj-fallback').style.display='none';"
+                    onerror="this.style.display='none';"
+                ></iframe>
+                <div class="proj-fallback">
+                    <div class="proj-fallback-name">Seriti Skills Development PBO</div>
+                    <div class="proj-fallback-url">forgevertical.com/subdomains/seriti-pbo</div>
+                </div>
+                <div class="proj-overlay"></div>
             <span class="proj-tag">Nonprofit</span>
             <span class="proj-visit">Visit →</span>
         </div>
@@ -510,9 +641,20 @@
     <!-- Auto Digital Solutions -->
     <a href="https://autods.co.za" target="_blank" rel="noopener noreferrer" class="proj" data-cat="automotive">
         <div class="proj-img">
-            <div class="proj-img-inner">
-                <img src="https://images.pexels.com/photos/3807386/pexels-photo-3807386.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Auto Digital Solutions — Cape Town car services">
-            </div>
+                <iframe
+                    class="proj-iframe"
+                    src="https://autods.co.za"
+                    title="Auto Digital Solutions — live preview"
+                    loading="lazy"
+                    sandbox="allow-scripts allow-same-origin"
+                    onload="this.style.display='block';this.parentNode.querySelector('.proj-fallback').style.display='none';"
+                    onerror="this.style.display='none';"
+                ></iframe>
+                <div class="proj-fallback">
+                    <div class="proj-fallback-name">Auto Digital Solutions</div>
+                    <div class="proj-fallback-url">autods.co.za</div>
+                </div>
+                <div class="proj-overlay"></div>
             <span class="proj-tag">Automotive</span>
             <span class="proj-visit">Visit →</span>
         </div>
@@ -531,9 +673,20 @@
     <!-- Sky Rope Specialist -->
     <a href="https://skyropespecialist.co.za" target="_blank" rel="noopener noreferrer" class="proj" data-cat="trades">
         <div class="proj-img">
-            <div class="proj-img-inner">
-                <img src="https://images.pexels.com/photos/2219024/pexels-photo-2219024.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Sky Rope Specialist — rope access Cape Town">
-            </div>
+                <iframe
+                    class="proj-iframe"
+                    src="https://skyropespecialist.co.za"
+                    title="Sky Rope Specialist — live preview"
+                    loading="lazy"
+                    sandbox="allow-scripts allow-same-origin"
+                    onload="this.style.display='block';this.parentNode.querySelector('.proj-fallback').style.display='none';"
+                    onerror="this.style.display='none';"
+                ></iframe>
+                <div class="proj-fallback">
+                    <div class="proj-fallback-name">Sky Rope Specialist</div>
+                    <div class="proj-fallback-url">skyropespecialist.co.za</div>
+                </div>
+                <div class="proj-overlay"></div>
             <span class="proj-tag">Trades</span>
             <span class="proj-visit">Visit →</span>
         </div>
@@ -552,9 +705,20 @@
     <!-- Ship Chandlers SA -->
     <a href="https://forge-vertical-projects.github.io/ship-chandlers-sa/" target="_blank" rel="noopener noreferrer" class="proj" data-cat="maritime">
         <div class="proj-img">
-            <div class="proj-img-inner">
-                <img src="https://images.pexels.com/photos/1546901/pexels-photo-1546901.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Ship Chandlers SA — maritime supply Cape Town">
-            </div>
+                <iframe
+                    class="proj-iframe"
+                    src="https://forge-vertical-projects.github.io/ship-chandlers-sa/"
+                    title="Ship Chandlers SA — live preview"
+                    loading="lazy"
+                    sandbox="allow-scripts allow-same-origin"
+                    onload="this.style.display='block';this.parentNode.querySelector('.proj-fallback').style.display='none';"
+                    onerror="this.style.display='none';"
+                ></iframe>
+                <div class="proj-fallback">
+                    <div class="proj-fallback-name">Ship Chandlers SA</div>
+                    <div class="proj-fallback-url">ship-chandlers-sa</div>
+                </div>
+                <div class="proj-overlay"></div>
             <span class="proj-tag">Maritime · Logistics</span>
             <span class="proj-visit">Visit →</span>
         </div>
@@ -573,9 +737,20 @@
     <!-- Handyman CT -->
     <a href="https://project-builds.github.io/handyman-ct/" target="_blank" rel="noopener noreferrer" class="proj" data-cat="trades">
         <div class="proj-img">
-            <div class="proj-img-inner">
-                <img src="https://images.pexels.com/photos/1249611/pexels-photo-1249611.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Handyman CT — Cape Town property maintenance">
-            </div>
+                <iframe
+                    class="proj-iframe"
+                    src="https://project-builds.github.io/handyman-ct/"
+                    title="Handyman CT — live preview"
+                    loading="lazy"
+                    sandbox="allow-scripts allow-same-origin"
+                    onload="this.style.display='block';this.parentNode.querySelector('.proj-fallback').style.display='none';"
+                    onerror="this.style.display='none';"
+                ></iframe>
+                <div class="proj-fallback">
+                    <div class="proj-fallback-name">Handyman CT</div>
+                    <div class="proj-fallback-url">handyman-ct</div>
+                </div>
+                <div class="proj-overlay"></div>
             <span class="proj-tag">Trades · Local</span>
             <span class="proj-visit">Visit →</span>
         </div>
@@ -610,6 +785,7 @@
 <div id="global-footer"></div>
 
 <script>
+// ── Filter ──────────────────────────────────────────
 function filterProjects(cat, btn) {
     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
@@ -623,6 +799,77 @@ function filterProjects(cat, btn) {
     });
     document.getElementById('proj-count').textContent = visible + (visible === 1 ? ' project' : ' projects');
 }
+
+// ── Smart iframe loader ───────────────────────────────
+// Sites with X-Frame-Options: SAMEORIGIN or DENY will fail to load.
+// We detect this via a timeout — if the iframe hasn't triggered onload
+// within 6 seconds, we assume it was blocked and show the fallback cleanly.
+document.addEventListener('DOMContentLoaded', function() {
+    const iframes = document.querySelectorAll('.proj-iframe');
+
+    iframes.forEach(iframe => {
+        const fallback = iframe.parentNode.querySelector('.proj-fallback');
+        
+        // Initially hide the fallback — show iframe attempt first
+        // fallback stays visible as background until iframe confirms load
+        let loaded = false;
+
+        // If iframe loads successfully, hide fallback
+        iframe.addEventListener('load', function() {
+            // Detect blocked iframes — some render a blank page instead of erroring
+            try {
+                // If we can access contentDocument it loaded on same origin
+                // Cross-origin will throw — but that means it DID load (just restricted)
+                // So a successful cross-origin load still shows the iframe
+                loaded = true;
+                if (fallback) fallback.style.display = 'none';
+                iframe.style.opacity = '1';
+            } catch(e) {
+                // Cross-origin — iframe loaded, we just can't read it. That is fine.
+                loaded = true;
+                if (fallback) fallback.style.display = 'none';
+                iframe.style.opacity = '1';
+            }
+        });
+
+        // Timeout fallback — if iframe didn't load in 7s, show fallback
+        setTimeout(function() {
+            if (!loaded) {
+                iframe.style.display = 'none';
+                if (fallback) {
+                    fallback.style.display = 'flex';
+                    fallback.style.background = 'radial-gradient(ellipse 70% 60% at 50% 50%,rgba(132,204,22,0.05) 0%,transparent 70%)';
+                }
+            }
+        }, 7000);
+    });
+
+    // Intersection Observer — only load iframes when card scrolls into view
+    // Prevents 12 simultaneous network requests on page load
+    if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const iframe = entry.target;
+                    const dataSrc = iframe.getAttribute('data-src');
+                    if (dataSrc && !iframe.src) {
+                        iframe.src = dataSrc;
+                    }
+                    observer.unobserve(iframe);
+                }
+            });
+        }, {rootMargin: '200px'});
+
+        iframes.forEach(iframe => {
+            // Move src to data-src for lazy loading
+            if (iframe.src && iframe.src !== window.location.href) {
+                iframe.setAttribute('data-src', iframe.src);
+                iframe.removeAttribute('src');
+                observer.observe(iframe);
+            }
+        });
+    }
+});
 </script>
 </body>
 </html>
