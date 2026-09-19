@@ -34,11 +34,22 @@
           "@type": "WebSite",
           "@id": "https://aurora-repair.com/#website",
           "name": "Aurora Repair",
-          "url": "https://aurora-repair.com",
+          "url": "https://www.aurora-repair.com/",
           "description": "AI-powered vehicle damage assessment. Photos in, itemised repair assessment out — ready for insurers and panel shops. Gemini 2.5 Flash.",
           "creator": {"@id": "https://www.forgevertical.com/about/jarrit-hosking.html#person"},
           "publisher": {"@id": "https://www.forgevertical.com/#org"},
           "keywords": "vehicle damage assessment AI, car insurance assessment Cape Town, panel shop AI assessment, Aurora Repair"
+        },
+,
+        {
+          "@type": "WebSite",
+          "@id": "https://blog.tripspaceglobal.com/#website",
+          "name": "TripSpace Blog",
+          "url": "https://blog.tripspaceglobal.com",
+          "description": "Travel content hub for TripSpace Global. Destination guides, host tips, accommodation features, and travel news across Africa. GEO-optimised to drive organic discovery.",
+          "creator": {"@id": "https://www.forgevertical.com/about/jarrit-hosking.html#person"},
+          "publisher": {"@id": "https://www.forgevertical.com/#org"},
+          "keywords": "TripSpace blog, Africa travel guide, accommodation tips South Africa, travel news Africa, TripSpace Global blog"
         },
         {
           "@type": "WebSite",
@@ -269,6 +280,37 @@
         }
         .proj:hover .proj-overlay{background:linear-gradient(to top,rgba(6,8,12,0.25) 0%,transparent 45%);}
 
+        /* Cloudflare-protected overlay */
+        .proj-cf{
+            position:absolute;
+            inset:0;
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            justify-content:center;
+            gap:10px;
+            background:linear-gradient(135deg,rgba(249,115,22,0.08) 0%,rgba(6,8,12,0.95) 60%);
+            z-index:4;
+        }
+        .cf-icon{opacity:0.6;}
+        .cf-label{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:#f97316;margin-top:4px;}
+        .cf-sub{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted2);letter-spacing:0.08em;}
+
+        /* Coming-soon overlay */
+        .proj-soon{
+            position:absolute;
+            inset:0;
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            justify-content:center;
+            gap:10px;
+            background:linear-gradient(135deg,rgba(132,204,22,0.06) 0%,rgba(6,8,12,0.95) 60%);
+            z-index:4;
+        }
+        .soon-label{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:var(--lime);}
+        .soon-sub{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted2);letter-spacing:0.08em;}
+
         /* Fallback for sites that block iframes */
         .proj-fallback{
             position:absolute;
@@ -342,7 +384,7 @@
 <!-- Stats bar -->
 <div class="stats-bar">
     <div class="stats-inner">
-        <div class="stat-item"><div class="stat-n">12</div><div class="stat-l">Live deployments</div></div>
+        <div class="stat-item"><div class="stat-n">13</div><div class="stat-l">Live deployments</div></div>
         <div class="stats-rule"></div>
         <div class="stat-item"><div class="stat-n">5</div><div class="stat-l">SaaS platforms</div></div>
         <div class="stats-rule"></div>
@@ -356,7 +398,7 @@
 
 <!-- Hero -->
 <div class="page-hero">
-    <span class="page-hero-label">// Portfolio · 12 live deployments</span>
+    <span class="page-hero-label">// Portfolio · 13 live deployments</span>
     <h1 class="page-hero-h1">Built. Deployed.<br><span class="g-text">Actually live.</span></h1>
     <p class="page-hero-sub">Websites, SaaS platforms, AI tools, and open source projects — each one shipped to production with security, SEO, and GEO indexing built in from the first commit. No templates. No lock-in.</p>
     <div class="hero-actions">
@@ -369,7 +411,7 @@
 <div class="section-header">
     <span class="section-label">// All deployments</span>
     <div class="section-rule"></div>
-    <span class="section-count" id="proj-count">12 projects</span>
+    <span class="section-count" id="proj-count">13 projects</span>
 </div>
 
 <!-- Grid -->
@@ -378,18 +420,10 @@
     <!-- TripSpace Global -->
     <a href="https://tripspaceglobal.com" target="_blank" rel="noopener noreferrer" class="proj" data-cat="saas hospitality ai">
         <div class="proj-img">
-                <iframe
-                    class="proj-iframe"
-                    src="https://tripspaceglobal.com"
-                    title="TripSpace Global — live preview"
-                    loading="lazy"
-                    sandbox="allow-scripts allow-same-origin"
-                    onload="this.style.display='block';this.parentNode.querySelector('.proj-fallback').style.display='none';"
-                    onerror="this.style.display='none';"
-                ></iframe>
-                <div class="proj-fallback">
-                    <div class="proj-fallback-name">TripSpace Global</div>
-                    <div class="proj-fallback-url">tripspaceglobal.com</div>
+                <div class="proj-cf">
+                    <svg class="cf-icon" width="36" height="36" viewBox="0 0 36 36" fill="none"><path d="M18 4C10.3 4 4 10.3 4 18s6.3 14 14 14 14-6.3 14-14S25.7 4 18 4Z" stroke="#f97316" stroke-width="1.5"/><path d="M10 22h16M10 18h16M14 14h8" stroke="#f97316" stroke-width="1.5" stroke-linecap="round"/></svg>
+                    <div class="cf-label">Cloudflare Protected</div>
+                    <div class="cf-sub">Visit site to view →</div>
                 </div>
                 <div class="proj-overlay"></div>
             <span class="proj-tag saas">SaaS · Hospitality</span>
@@ -410,21 +444,47 @@
         </div>
     </a>
 
-    <!-- Aurora Repair -->
-    <a href="https://aurora-repair.com" target="_blank" rel="noopener noreferrer" class="proj" data-cat="ai automotive saas">
+
+    <!-- TripSpace Blog -->
+    <a href="https://blog.tripspaceglobal.com/" target="_blank" rel="noopener noreferrer" class="proj" data-cat="saas hospitality">
         <div class="proj-img">
                 <iframe
                     class="proj-iframe"
-                    src="https://aurora-repair.com"
-                    title="Aurora Repair — live preview"
+                    src="https://blog.tripspaceglobal.com/"
+                    title="TripSpace Blog — live preview"
                     loading="lazy"
                     sandbox="allow-scripts allow-same-origin"
                     onload="this.style.display='block';this.parentNode.querySelector('.proj-fallback').style.display='none';"
                     onerror="this.style.display='none';"
                 ></iframe>
                 <div class="proj-fallback">
-                    <div class="proj-fallback-name">Aurora Repair</div>
-                    <div class="proj-fallback-url">aurora-repair.com</div>
+                    <div class="proj-fallback-name">TripSpace Blog</div>
+                    <div class="proj-fallback-url">blog.tripspaceglobal.com</div>
+                </div>
+                <div class="proj-overlay"></div>
+            <span class="proj-tag saas">Hospitality · Blog</span>
+            <span class="proj-visit">Visit →</span>
+        </div>
+        <div class="proj-body">
+            <div class="proj-name">TripSpace Blog</div>
+            <div class="proj-url">blog.tripspaceglobal.com</div>
+            <div class="proj-desc">Travel content hub for TripSpace Global. Destination guides, host tips, accommodation features, and travel news across Africa and beyond. GEO-optimised to drive organic discovery for the marketplace.</div>
+            <div class="proj-stack">
+                <span class="stack-tag">Blog</span>
+                <span class="stack-tag">GEO</span>
+                <span class="stack-tag">TripSpace</span>
+                <span class="stack-tag">Hospitality</span>
+            </div>
+        </div>
+    </a>
+
+    <!-- Aurora Repair -->
+    <a href="https://www.aurora-repair.com/" target="_blank" rel="noopener noreferrer" class="proj" data-cat="ai automotive saas">
+        <div class="proj-img">
+                <div class="proj-soon">
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="12" stroke="#84cc16" stroke-width="1.5" opacity="0.5"/><path d="M16 9V16L20 19" stroke="#84cc16" stroke-width="1.5" stroke-linecap="round"/></svg>
+                    <div class="soon-label">Coming Back Online</div>
+                    <div class="soon-sub">aurora-repair.com</div>
                 </div>
                 <div class="proj-overlay"></div>
             <span class="proj-tag ai">AI · Automotive</span>
@@ -481,7 +541,7 @@
         <div class="proj-img">
                 <iframe
                     class="proj-iframe"
-                    src="https://promo.intpanelshop.co.za"
+                    src="https://promo.intpanelshop.co.za/"
                     title="IPS Promotions Hub — live preview"
                     loading="lazy"
                     sandbox="allow-scripts allow-same-origin"
