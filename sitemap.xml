@@ -369,6 +369,19 @@
     <priority>0.9</priority>
   </url>
 
+  <url>
+    <loc>https://www.forgevertical.com/articles/gemini-hacked-three-companies-ai-containment.html</loc>
+    <lastmod>2026-09-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://www.forgevertical.com/articles/what-south-african-businesses-actually-pay-for.html</loc>
+    <lastmod>2026-09-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
   <!-- TripSpace Global -->
   <url>
     <loc>https://tripspaceglobal.com/</loc>
