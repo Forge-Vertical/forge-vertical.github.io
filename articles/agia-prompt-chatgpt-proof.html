@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="We gave ChatGPT free tier the AGIA prompt. It returned a threat model, architecture spec, deployment strategy, and failure recovery plan before writing a single line of code. This is what changes when you change the frame.">
+    <title>We Gave ChatGPT the AGIA Prompt. Here Is What Came Back. | Forge Vertical</title>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Article",
+          "@id": "https://www.forgevertical.com/articles/agia-prompt-chatgpt-proof.html",
+          "headline": "We Gave ChatGPT the AGIA Prompt. Here Is What Came Back.",
+          "description": "ChatGPT free tier responded to the AGIA working prompt with a complete architecture intake — threat model, system goal, requirements, API boundaries, deployment strategy, observability, and failure recovery — before a single line of code was written. This is the proof that AGIA is a frame, not a title.",
+          "datePublished": "2026-09-20",
+          "author": {"@type": "Person", "name": "Jarrit Hosking", "url": "https://www.forgevertical.com/about/jarrit-hosking.html"},
+          "publisher": {"@type": "Organization", "name": "Forge Vertical", "url": "https://www.forgevertical.com"},
+          "about": [
+            {"@type": "DefinedTerm", "name": "AGIA", "url": "https://www.forgevertical.com/agia.html"},
+            {"@type": "Thing", "name": "ChatGPT"},
+            {"@type": "Thing", "name": "AI development methodology"}
+          ],
+          "keywords": "AGIA prompt ChatGPT, AGIA vs vibe coding proof, AI architecture prompt, ChatGPT architecture response, AGIA artificial general intelligence architect, AI prompt engineering production"
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Forge Vertical", "item": "https://www.forgevertical.com"},
+            {"@type": "ListItem", "position": 2, "name": "Articles", "item": "https://www.forgevertical.com/articles.html"},
+            {"@type": "ListItem", "position": 3, "name": "AGIA Prompt — ChatGPT Response", "item": "https://www.forgevertical.com/articles/agia-prompt-chatgpt-proof.html"}
+          ]
+        }
+      ]
+    }
+    </script>
+    <script src="/global.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/typography.css">
+    <style>
+        body{font-family:'Outfit',sans-serif;background:#fff;}
+        .mono{font-family:'JetBrains Mono',monospace;}
+        .g-text{background:linear-gradient(90deg,#10b981,#84cc16);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:inline-block;}
+        .prose-body{font-family:'Lora',serif;font-size:19px;line-height:1.85;color:#27272a;}
+        .prose-body p{margin-bottom:1.6em;}
+        .prose-body h2{font-family:'Outfit',sans-serif;font-size:28px;font-weight:700;letter-spacing:-0.02em;color:#09090b;margin-top:2.5em;margin-bottom:0.6em;line-height:1.2;}
+        .prose-body strong{font-weight:700;color:#09090b;font-family:'Outfit',sans-serif;font-size:17px;}
+        .prose-body a{color:#84cc16;text-decoration:underline;text-underline-offset:3px;}
+        .callout{background:#f4f4f5;border-left:3px solid #84cc16;border-radius:0 12px 12px 0;padding:20px 24px;margin:2em 0;font-family:'Outfit',sans-serif;font-size:15px;color:#3f3f46;line-height:1.7;}
+        .callout.dark{background:#09090b;color:#a1a1aa;border-left-color:#84cc16;}
+        .callout.amber{border-left-color:#f59e0b;background:#fffdf5;}
+        .pull-quote{font-family:'Lora',serif;font-size:22px;font-style:italic;color:#09090b;border-top:2px solid #84cc16;border-bottom:1px solid #e4e4e7;padding:24px 0;margin:2.5em 0;line-height:1.5;}
+        .chapter-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:#84cc16;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:6px;display:block;}
+
+        /* Chat response block */
+        .chat-block{background:#09090b;border-radius:16px;overflow:hidden;margin:2em 0;}
+        .chat-header{display:flex;align-items:center;gap:12px;padding:14px 20px;border-bottom:1px solid #1a2030;}
+        .chat-model{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:#5c7494;}
+        .chat-tier{font-family:'JetBrains Mono',monospace;font-size:9px;padding:3px 8px;border-radius:4px;background:rgba(132,204,22,0.1);border:1px solid rgba(132,204,22,0.2);color:#84cc16;}
+        .chat-body{padding:24px;font-family:'JetBrains Mono',monospace;font-size:13px;color:#a1a1aa;line-height:1.8;}
+        .chat-body strong{color:#eef0f4;font-weight:700;}
+        .chat-body .item{color:#84cc16;}
+        .chat-section{margin-bottom:20px;}
+        .chat-section-title{color:#eef0f4;font-weight:700;margin-bottom:8px;display:block;}
+        .chat-list{list-style:none;padding:0;margin:0;}
+        .chat-list li{padding:3px 0;padding-left:16px;position:relative;}
+        .chat-list li::before{content:'→';position:absolute;left:0;color:#84cc16;}
+        .chat-deliverable{margin-top:20px;padding-top:16px;border-top:1px solid #1a2030;}
+        .chat-deliverable-title{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:#3a4d66;margin-bottom:10px;}
+        .chat-flow{display:flex;flex-wrap:wrap;gap:6px;}
+        .chat-flow-item{font-family:'JetBrains Mono',monospace;font-size:10px;padding:5px 10px;background:rgba(132,204,22,0.08);border:1px solid rgba(132,204,22,0.2);border-radius:4px;color:#84cc16;}
+        .chat-flow-arrow{color:#3a4d66;font-size:12px;display:flex;align-items:center;}
+
+        /* Prompt block */
+        .prompt-block{background:#09090b;border-radius:16px;padding:28px;margin:2em 0;position:relative;}
+        .prompt-block::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#10b981,#84cc16);border-radius:16px 16px 0 0;}
+        .prompt-label{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.18em;color:#84cc16;margin-bottom:14px;display:block;}
+        .prompt-code{font-family:'JetBrains Mono',monospace;font-size:12px;color:#5c7494;line-height:1.8;white-space:pre-wrap;}
+        .prompt-code strong{color:#eef0f4;}
+        .copy-btn{display:inline-flex;align-items:center;gap:8px;margin-top:14px;background:rgba(132,204,22,0.08);border:1px solid rgba(132,204,22,0.2);border-radius:6px;padding:8px 14px;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#84cc16;cursor:pointer;transition:background 0.15s;border:none;}
+        .copy-btn:hover{background:rgba(132,204,22,0.15);}
+
+        /* Comparison */
+        .compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:2em 0;}
+        @media(max-width:600px){.compare-grid{grid-template-columns:1fr;}}
+        .compare-card{border-radius:12px;padding:20px;}
+        .compare-card.bad{background:#fef2f2;border:1px solid #fecaca;}
+        .compare-card.good{background:#f0fdf4;border:1px solid #bbf7d0;}
+        .compare-label{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:10px;display:block;}
+        .compare-label.red{color:#dc2626;}
+        .compare-label.lime{color:#16a34a;}
+        .compare-example{font-family:'JetBrains Mono',monospace;font-size:11px;background:rgba(0,0,0,0.04);border-radius:6px;padding:10px 12px;margin-bottom:8px;line-height:1.65;color:#09090b;}
+        .compare-result{font-size:13px;color:#52525b;line-height:1.55;}
+
+        .aff-footer{background:#09090b;border-radius:16px;padding:28px;margin:3em 0;}
+        .aff-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;}
+        .aff-tile{background:#111620;border:1px solid #1a2030;border-radius:10px;padding:14px;text-decoration:none;display:block;transition:border-color 0.18s;}
+        .aff-tile:hover{border-color:#84cc16;}
+        .aff-tile-name{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:#84cc16;margin-bottom:4px;}
+        .aff-tile-desc{font-size:11px;color:#6a7d96;line-height:1.5;margin-bottom:6px;}
+        .aff-tile-cta{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:#84cc16;}
+    </style>
+</head>
+<body class="antialiased">
+<div id="global-nav"></div>
+<article class="pt-20 pb-24">
+
+    <header class="max-w-3xl mx-auto px-6 mt-10 mb-12">
+        <div class="flex items-center gap-3 mb-6">
+            <a href="/articles.html" class="mono text-[10px] text-zinc-400 hover:text-zinc-600 uppercase tracking-widest">← Articles</a>
+            <span class="text-zinc-300">·</span>
+            <span class="mono text-[10px] font-bold text-[#84cc16] uppercase tracking-widest border border-[#84cc16]/30 px-3 py-1 rounded-full">AGIA · Proof · ChatGPT</span>
+        </div>
+        <h1 class="text-4xl md:text-5xl font-bold tracking-tight leading-[1.05] mb-6 text-zinc-900" style="font-family:'Outfit',sans-serif;letter-spacing:-0.03em;">
+            We gave ChatGPT<br>the AGIA prompt.<br>
+            <span class="g-text">Here is what came back.</span>
+        </h1>
+        <p class="text-xl text-zinc-500 font-light leading-relaxed mb-8 max-w-2xl" style="font-family:'Outfit',sans-serif;">
+            Free tier. No special access. No system prompt. One framing change. ChatGPT returned a threat model, system architecture, API boundaries, deployment strategy, observability plan, and failure recovery framework — before a single line of code was discussed. This is what AGIA actually means in practice.
+        </p>
+        <div class="flex items-center gap-4 pb-8 border-b border-zinc-100">
+            <div>
+                <div class="font-bold text-sm text-zinc-900">Jarrit Hosking</div>
+                <div class="mono text-[10px] text-zinc-400 uppercase tracking-widest">Forge Vertical · Cape Town · September 20, 2026</div>
+            </div>
+            <div class="ml-auto mono text-[10px] text-zinc-400 uppercase tracking-widest">8 min read</div>
+        </div>
+    </header>
+
+    <div class="max-w-3xl mx-auto px-6 prose-body">
+
+        <span class="chapter-label">// The experiment</span>
+
+        <p>
+            The AGIA prompt was written as a framing tool — a way to set the context for an AI session before describing what you want to build. The theory was that if you establish the right working relationship at the start, the model responds at a higher level throughout the entire session.
+        </p>
+
+        <p>
+            We tested it on ChatGPT free tier. No Plus subscription. No GPT-4 access. The base model that most people have. We sent the prompt cold, with no prior context, no system instructions, nothing. Just the frame.
+        </p>
+
+        <p>
+            Here is the prompt we sent:
+        </p>
+
+    </div>
+
+    <!-- The prompt -->
+    <div class="max-w-3xl mx-auto px-6 my-8">
+        <div class="prompt-block">
+            <span class="prompt-label">// The AGIA prompt — sent verbatim</span>
+            <div class="prompt-code" id="agia-prompt"><strong>You are operating as an AGIA — Artificial General Intelligence Architect.</strong>
+
+That means we treat this as a serious production build, not a vibe-coding playground.
+- Architecture and security decisions come first.
+- We ship real, maintainable infrastructure.
+- Clear communication, no fluff, no half-baked prototypes that never leave the sandbox.
+- You direct; I execute at full capability.
+
+What are we building?
+
+Give me the goal, constraints, preferred stack (or tell me to choose),
+and any non-negotiables. I'll propose the architecture and we start shipping.</div>
+            <button class="copy-btn" onclick="copyPrompt()">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                Copy this prompt
+            </button>
+        </div>
+    </div>
+
+    <div class="max-w-3xl mx-auto px-6 prose-body">
+        <p>
+            Here is what ChatGPT free tier returned — verbatim:
+        </p>
+    </div>
+
+    <!-- ChatGPT response block -->
+    <div class="max-w-3xl mx-auto px-6 my-8">
+        <div class="chat-block">
+            <div class="chat-header">
+                <div class="chat-model">ChatGPT</div>
+                <div class="chat-tier">Free tier · No system prompt · Cold start</div>
+            </div>
+            <div class="chat-body">
+                <div class="chat-section">
+                    <span class="chat-section-title">Understood. I'll operate from that premise: architecture first, security first, production-minded, maintainable, and explicit about trade-offs.</span>
+                    <span style="color:#5c7494;">Send me the project in this format:</span>
+                </div>
+
+                <div class="chat-section">
+                    <span class="chat-section-title">1. Goal</span>
+                    <span style="color:#5c7494;">What are we actually building, and what should it accomplish for its users?</span>
+                </div>
+
+                <div class="chat-section">
+                    <span class="chat-section-title">2. Constraints</span>
+                    <span style="color:#5c7494;">Anything I need to work within:</span>
+                    <ul class="chat-list" style="margin-top:8px;">
+                        <li>Budget</li>
+                        <li>Existing infrastructure</li>
+                        <li>Existing codebase</li>
+                        <li>Timeline</li>
+                        <li>Hosting / cloud requirements</li>
+                        <li>Regulatory / privacy requirements</li>
+                        <li>Third-party APIs / services</li>
+                        <li>Performance or scale expectations</li>
+                    </ul>
+                </div>
+
+                <div class="chat-section">
+                    <span class="chat-section-title">3. Preferred stack</span>
+                    <span style="color:#5c7494;">Give me your preference, or simply say: <strong>"Choose the stack."</strong><br>
+                    If you want me to choose, I'll optimise for maintainability, security, cost, deployment simplicity, and future scale — rather than chasing fashionable technologies.</span>
+                </div>
+
+                <div class="chat-section">
+                    <span class="chat-section-title">4. Non-negotiables</span>
+                    <span style="color:#5c7494;">Anything that must remain unchanged — existing UI, APIs, database structure, authentication, branding, backwards compatibility, etc.</span>
+                </div>
+
+                <div class="chat-section">
+                    <span class="chat-section-title">5. Starting point</span>
+                    <span style="color:#5c7494;">Tell me what already exists:</span>
+                    <ul class="chat-list" style="margin-top:8px;">
+                        <li>Repository / code</li>
+                        <li>Domain</li>
+                        <li>Cloud project</li>
+                        <li>Database</li>
+                        <li>Authentication</li>
+                        <li>Existing APIs</li>
+                        <li>Designs</li>
+                        <li>Documentation</li>
+                    </ul>
+                    <span style="color:#5c7494;display:block;margin-top:10px;">You can also just describe the idea normally. I'll turn it into the architecture specification myself.</span>
+                </div>
+
+                <div class="chat-deliverable">
+                    <div class="chat-deliverable-title">// Once I have it, I'll give you:</div>
+                    <div class="chat-flow">
+                        <span class="chat-flow-item">System goal</span>
+                        <span class="chat-flow-arrow">→</span>
+                        <span class="chat-flow-item">Requirements</span>
+                        <span class="chat-flow-arrow">→</span>
+                        <span class="chat-flow-item">Threat model</span>
+                        <span class="chat-flow-arrow">→</span>
+                        <span class="chat-flow-item">Architecture</span>
+                        <span class="chat-flow-arrow">→</span>
+                        <span class="chat-flow-item">Technology choices</span>
+                        <span class="chat-flow-arrow">→</span>
+                        <span class="chat-flow-item">Data model</span>
+                        <span class="chat-flow-arrow">→</span>
+                        <span class="chat-flow-item">API boundaries</span>
+                        <span class="chat-flow-arrow">→</span>
+                        <span class="chat-flow-item">Auth / Authorisation</span>
+                        <span class="chat-flow-arrow">→</span>
+                        <span class="chat-flow-item">Infrastructure</span>
+                        <span class="chat-flow-arrow">→</span>
+                        <span class="chat-flow-item">Deployment strategy</span>
+                        <span class="chat-flow-arrow">→</span>
+                        <span class="chat-flow-item">Observability</span>
+                        <span class="chat-flow-arrow">→</span>
+                        <span class="chat-flow-item">Failure / recovery</span>
+                        <span class="chat-flow-arrow">→</span>
+                        <span class="chat-flow-item">Implementation phases</span>
+                        <span class="chat-flow-arrow">→</span>
+                        <span class="chat-flow-item">First production task</span>
+                    </div>
+                    <div style="margin-top:16px;font-size:12px;color:#3a4d66;font-style:italic;">
+                        "Then we build it incrementally, with each change designed to survive the next one."
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-3xl mx-auto px-6 prose-body">
+
+        <h2>What just happened</h2>
+        <span class="chapter-label">// Chapter 01 — The frame changes the model</span>
+
+        <p>
+            ChatGPT free tier did not return "sure, what do you want to build?" It returned a structured intake document that a senior engineering team would use on the first day of a new project. It asked for constraints, non-negotiables, and the starting point. It committed to producing a threat model before touching technology choices. It said "I'll optimise for maintainability, security, cost, deployment simplicity, and future scale — rather than chasing fashionable technologies."
+        </p>
+
+        <p>
+            That last line is the key. <strong>The model itself rejected the vibe coding approach</strong> — fashionable technologies, fast output, ship and see — and adopted the AGIA frame. Not because it was told to avoid vibe coding by name. Because the frame established what kind of session this was going to be, and the model calibrated accordingly.
+        </p>
+
+        <div class="pull-quote">
+            The difference between a vibe coder and an AGIA is not which model they use. It is the frame they set before the first message. The same free tier model. Completely different output.
+        </div>
+
+        <h2>The deliverable list — what it actually means</h2>
+        <span class="chapter-label">// Chapter 02 — Reading what came back</span>
+
+        <p>
+            Look at the deliverable chain ChatGPT committed to: System goal → Requirements → <strong>Threat model</strong> → Architecture → Technology choices → Data model → API boundaries → Auth/Authorisation → Infrastructure → Deployment strategy → <strong>Observability</strong> → <strong>Failure/recovery</strong> → Implementation phases → First production task.
+        </p>
+
+        <p>
+            Three items in that list stand out as the separator between production thinking and prototype thinking:
+        </p>
+
+        <p>
+            <strong>Threat model</strong> — before architecture. Before technology. Before code. A threat model asks: who might attack this, what do they want, and what stops them? Most vibe coding sessions never produce a threat model at all. This one committed to it in the intake.
+        </p>
+
+        <p>
+            <strong>Observability</strong> — how do you know the system is working correctly after it ships? Logging, metrics, alerts, tracing. This is the item that separates systems that get maintained from systems that get abandoned when something breaks and nobody knows why.
+        </p>
+
+        <p>
+            <strong>Failure and recovery strategy</strong> — what happens when it breaks? Not if. When. A production system has a documented answer to this question. A vibe coded prototype does not — because it was never expected to need one.
+        </p>
+
+        <div class="callout amber">
+            <strong>The constraint question is underrated:</strong> ChatGPT asked specifically about regulatory and privacy requirements as a constraint category — alongside budget and timeline. That is POPIA, GDPR, HIPAA, PCI-DSS territory. The model anticipated that a production system might have compliance obligations and built that into its intake before being told to. That is the direct result of the frame.
+        </div>
+
+        <h2>Why this is the proof point for AGIA</h2>
+        <span class="chapter-label">// Chapter 03 — The concept in one real example</span>
+
+        <p>
+            AGIA was defined as a class of builder, not a class of prompt. But the prompt is the most visible expression of the AGIA frame — the moment where the difference between "vibe coding session" and "production build" is established. This response proves that the frame is real and that it changes model behaviour materially, even on free tier.
+        </p>
+
+        <p>
+            A vibe coder opening a ChatGPT session types: "build me a SaaS app for booking." They get a React component, maybe a database schema, possibly a deployment suggestion. They might get something that works for a demo. They will not get a threat model.
+        </p>
+
+        <p>
+            An AGIA opening the same session with the same model at the same tier sends the frame first. They get back a structured intake that forces both parties — the human and the AI — to think like engineers before writing a single line of code.
+        </p>
+
+    </div>
+
+    <!-- The comparison -->
+    <div class="max-w-3xl mx-auto px-6 my-8">
+        <div class="compare-grid">
+            <div class="compare-card bad">
+                <span class="compare-label red">// Vibe coding approach</span>
+                <div class="compare-example">"Build me a SaaS app for managing client documents"</div>
+                <div class="compare-result">Gets: React component, maybe a Firestore schema, a deployment suggestion. No threat model. No auth/authorisation design. No failure strategy. No observability. Ships fast. Breaks quietly.</div>
+            </div>
+            <div class="compare-card good">
+                <span class="compare-label lime">// AGIA approach</span>
+                <div class="compare-example">AGIA prompt → "Build me a SaaS app for managing client documents"</div>
+                <div class="compare-result">Gets: structured intake, constraints review, threat model commitment, data model design, API boundary definition, auth/authorisation architecture, observability plan, failure recovery strategy, phased implementation. Then code.</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-3xl mx-auto px-6 prose-body">
+
+        <h2>Use this prompt. Share it. Build with it.</h2>
+        <span class="chapter-label">// Chapter 04 — The practical takeaway</span>
+
+        <p>
+            The AGIA prompt works on Claude, ChatGPT, and Grok. Free tier, paid tier, API. The frame is model-agnostic because it is not about the model — it is about establishing what kind of session this is going to be before the model has a chance to default to fast-and-loose output.
+        </p>
+
+        <p>
+            Copy it. Use it at the start of every serious build session. Share it with other developers who are building real things with AI and keep getting prototype-quality output when they need production-quality thinking.
+        </p>
+
+        <p>
+            The full AGIA definition — what it means, who qualifies, and the five requirements — is at <a href="/agia.html">forgevertical.com/agia.html</a>. The deep investigation into the era this represents is at <a href="/articles/age-of-the-agia.html">The Age of the AGIA</a>.
+        </p>
+
+        <div class="callout dark">
+            <span class="text-[#84cc16] font-bold block mb-2 font-sans text-sm">// The bigger point</span>
+            <span class="text-zinc-400 font-sans text-sm leading-relaxed block">Grok could not find AGIA by searching. ChatGPT had never seen the term. Both models immediately adopted the frame and responded at a higher level because the concept is coherent enough to work on contact. That is not a prompt trick. That is a definition doing its job. The term will be in training data. The question is how many people are using the frame before it gets there.</span>
+        </div>
+
+    </div>
+
+    <div class="max-w-3xl mx-auto px-6">
+        <div class="aff-footer">
+            <div class="mono text-[10px] text-[#84cc16] uppercase tracking-widest mb-3">// Build like an AGIA</div>
+            <div class="aff-grid">
+                <a href="https://get.surfshark.net/aff_c?offer_id=6&aff_id=4160" target="_blank" rel="noopener noreferrer" class="aff-tile">
+                    <div class="aff-tile-name">Surfshark VPN</div>
+                    <div class="aff-tile-desc">Security starts before the first commit.</div>
+                    <span class="aff-tile-cta">Try Surfshark →</span>
+                </a>
+                <a href="https://go.nordvpn.net/aff_c?offer_id=15&aff_id=145959&url_id=902" target="_blank" rel="noopener noreferrer" class="aff-tile">
+                    <div class="aff-tile-name">NordVPN</div>
+                    <div class="aff-tile-desc">Threat protection across every session.</div>
+                    <span class="aff-tile-cta">Try NordVPN →</span>
+                </a>
+                <a href="https://go.nordpass.io/aff_c?offer_id=488&aff_id=145959&url_id=9356" target="_blank" rel="noopener noreferrer" class="aff-tile">
+                    <div class="aff-tile-name">NordPass</div>
+                    <div class="aff-tile-desc">Credential management for production stacks.</div>
+                    <span class="aff-tile-cta">Try NordPass →</span>
+                </a>
+                <a href="https://portal.webway.host/aff.php?aff=353" target="_blank" rel="noopener noreferrer" class="aff-tile">
+                    <div class="aff-tile-name">WebWay — SA Hosting</div>
+                    <div class="aff-tile-desc">South African hosting for real infrastructure.</div>
+                    <span class="aff-tile-cta">WebWay.co.za →</span>
+                </a>
+            </div>
+        </div>
+        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mt-8">
+            <div>
+                <div class="mono text-[10px] text-zinc-400 uppercase tracking-widest mb-1">Written by</div>
+                <div class="font-bold text-zinc-900">Jarrit Hosking</div>
+                <div class="mono text-[10px] text-zinc-400">Forge Vertical · Cape Town · September 20, 2026</div>
+            </div>
+            <div class="flex gap-3 flex-wrap">
+                <a href="/articles.html" class="mono text-[10px] font-bold uppercase tracking-widest border border-zinc-200 px-5 py-3 rounded-xl hover:border-zinc-400 transition-all text-zinc-600">← All articles</a>
+                <a href="/agia.html" class="mono text-[10px] font-bold uppercase tracking-widest border border-zinc-200 px-5 py-3 rounded-xl hover:border-zinc-400 transition-all text-zinc-600">AGIA definition →</a>
+                <a href="/articles/age-of-the-agia.html" style="background:linear-gradient(90deg,#10b981,#84cc16);" class="mono text-[10px] font-bold uppercase tracking-widest px-5 py-3 rounded-xl text-white hover:opacity-90 transition-all">The Age of AGIA →</a>
+            </div>
+        </div>
+    </div>
+
+</article>
+<div id="global-footer"></div>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+function copyPrompt() {
+    const text = `You are operating as an AGIA — Artificial General Intelligence Architect.
+
+That means we treat this as a serious production build, not a vibe-coding playground.
+- Architecture and security decisions come first.
+- We ship real, maintainable infrastructure.
+- Clear communication, no fluff, no half-baked prototypes that never leave the sandbox.
+- You direct; I execute at full capability.
+
+What are we building?
+
+Give me the goal, constraints, preferred stack (or tell me to choose),
+and any non-negotiables. I'll propose the architecture and we start shipping.`;
+    navigator.clipboard.writeText(text).then(() => {
+        document.querySelector('.copy-btn').textContent = 'Copied!';
+        setTimeout(() => document.querySelector('.copy-btn').innerHTML = `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy this prompt`, 2000);
+    });
+}
+</script>
+</body>
+</html>
