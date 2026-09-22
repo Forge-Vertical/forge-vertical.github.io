@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Three Anthropic researchers resigned warning of AI doom. Chris Titus Tech says it's regulatory capture and IPO hype. Both make compelling cases. Here is what the actual verifiable risks look like underneath the noise — and why the answer is probably more uncomfortable than either side wants.">
+    <title>AI Doom, Regulatory Capture, or Both? The Case For and Against the Safety Warnings | Forge Vertical</title>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "NewsArticle",
+          "@id": "https://www.forgevertical.com/articles/ai-hacking-barrier-collapsed.html",
+          "headline": "AI Doom, Regulatory Capture, or Both? The Case For and Against the Safety Warnings",
+          "description": "Three Anthropic researchers resigned warning of existential AI risk. Chris Titus Tech argues it is regulatory capture protecting big AI from open-source competition. Both make compelling cases. Here is what the verifiable risks look like underneath the noise.",
+          "datePublished": "2026-09-20",
+          "author": {"@type": "Person", "name": "Jarrit Hosking", "sameAs": "https://www.wikidata.org/wiki/Q141506817"},
+          "publisher": {"@type": "Organization", "name": "Forge Vertical", "url": "https://www.forgevertical.com"},
+          "about": [
+            {"@type": "Thing", "name": "AI safety"},
+            {"@type": "Thing", "name": "AI regulation"},
+            {"@type": "Thing", "name": "Open source AI"}
+          ],
+          "keywords": "AI doom real or marketing, Anthropic resignation AI safety, regulatory capture AI, open source AI competition, Chris Titus AI doom, METR Anthropic conflict of interest, AI sandbox escape sysadmin, LLM vs AGI, AI hacking real risk"
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Forge Vertical", "item": "https://www.forgevertical.com"},
+            {"@type": "ListItem", "position": 2, "name": "Articles", "item": "https://www.forgevertical.com/articles.html"},
+            {"@type": "ListItem", "position": 3, "name": "AI Doom — Real or Regulatory Capture?", "item": "https://www.forgevertical.com/articles/ai-hacking-barrier-collapsed.html"}
+          ]
+        }
+      ]
+    }
+    </script>
+    <script src="/global.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/typography.css">
+    <style>
+        body{font-family:'Outfit',sans-serif;background:#fff;}
+        .mono{font-family:'JetBrains Mono',monospace;}
+        .r-text{background:linear-gradient(90deg,#ef4444,#f97316);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:inline-block;}
+        .g-text{background:linear-gradient(90deg,#10b981,#84cc16);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:inline-block;}
+        .prose-body{font-family:'Lora',serif;font-size:19px;line-height:1.85;color:#27272a;}
+        .prose-body p{margin-bottom:1.6em;}
+        .prose-body h2{font-family:'Outfit',sans-serif;font-size:28px;font-weight:700;letter-spacing:-0.02em;color:#09090b;margin-top:2.5em;margin-bottom:0.6em;}
+        .prose-body strong{font-weight:700;color:#09090b;font-family:'Outfit',sans-serif;font-size:17px;}
+        .prose-body a{color:#84cc16;text-decoration:underline;text-underline-offset:3px;}
+        .callout{background:#f4f4f5;border-left:3px solid #84cc16;border-radius:0 12px 12px 0;padding:20px 24px;margin:2em 0;font-family:'Outfit',sans-serif;font-size:15px;color:#3f3f46;line-height:1.7;}
+        .callout.red{border-left-color:#ef4444;background:#fef2f2;}
+        .callout.dark{background:#09090b;color:#a1a1aa;border-left-color:#84cc16;}
+        .callout.amber{border-left-color:#f59e0b;background:#fffdf5;}
+        .callout.blue{border-left-color:#3b82f6;background:#eff6ff;}
+        .pull-quote{font-family:'Lora',serif;font-size:22px;font-style:italic;color:#09090b;border-top:2px solid #e4e4e7;border-bottom:1px solid #e4e4e7;padding:24px 0;margin:2.5em 0;line-height:1.5;}
+        .chapter-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:#84cc16;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:6px;display:block;}
+
+        /* Versus layout */
+        .versus-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:2em 0;}
+        @media(max-width:600px){.versus-grid{grid-template-columns:1fr;}}
+        .vs-card{border-radius:14px;padding:22px;}
+        .vs-card.alarm{background:#fef2f2;border:1px solid #fecaca;}
+        .vs-card.skeptic{background:#eff6ff;border:1px solid #bfdbfe;}
+        .vs-label{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:10px;display:block;}
+        .vs-label.red{color:#dc2626;}
+        .vs-label.blue{color:#2563eb;}
+        .vs-title{font-family:'Outfit',sans-serif;font-size:15px;font-weight:700;color:#09090b;margin-bottom:8px;}
+        .vs-points{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:6px;}
+        .vs-points li{font-size:13px;color:#3f3f46;line-height:1.55;padding-left:16px;position:relative;}
+        .vs-points li::before{position:absolute;left:0;}
+        .vs-points.red li::before{content:'→';color:#dc2626;}
+        .vs-points.blue li::before{content:'→';color:#2563eb;}
+
+        /* The actual risk table */
+        .risk-table{width:100%;border-collapse:collapse;border:1px solid #e4e4e7;border-radius:12px;overflow:hidden;margin:2em 0;font-size:14px;}
+        .risk-table th{background:#09090b;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#84cc16;padding:12px 16px;text-align:left;}
+        .risk-table td{padding:12px 16px;color:#3f3f46;border-bottom:1px solid #f4f4f5;line-height:1.5;vertical-align:top;}
+        .risk-table tr:last-child td{border-bottom:none;}
+        .risk-table tr:hover td{background:#fafafa;}
+        .risk-real{color:#dc2626;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;}
+        .risk-hyped{color:#d97706;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;}
+        .risk-unclear{color:#6b7280;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;}
+
+        .aff-footer{background:#09090b;border-radius:16px;padding:28px;margin:3em 0;}
+        .aff-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;}
+        .aff-tile{background:#111620;border:1px solid #1a2030;border-radius:10px;padding:14px;text-decoration:none;display:block;transition:border-color 0.18s;}
+        .aff-tile:hover{border-color:#84cc16;}
+        .aff-tile-name{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:#84cc16;margin-bottom:4px;}
+        .aff-tile-desc{font-size:11px;color:#6a7d96;line-height:1.5;margin-bottom:6px;}
+        .aff-tile-cta{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:#84cc16;}
+    </style>
+</head>
+<body class="antialiased">
+<div id="global-nav"></div>
+<article class="pt-20 pb-24">
+
+    <header class="max-w-3xl mx-auto px-6 mt-10 mb-12">
+        <div class="flex items-center gap-3 mb-6">
+            <a href="/articles.html" class="mono text-[10px] text-zinc-400 hover:text-zinc-600 uppercase tracking-widest">← Articles</a>
+            <span class="text-zinc-300">·</span>
+            <span class="mono text-[10px] font-bold text-[#84cc16] uppercase tracking-widest border border-[#84cc16]/30 px-3 py-1 rounded-full">AI Safety · Analysis · Both sides</span>
+        </div>
+        <h1 class="text-4xl md:text-5xl font-bold tracking-tight leading-[1.05] mb-6 text-zinc-900" style="font-family:'Outfit',sans-serif;letter-spacing:-0.03em;">
+            AI doom, regulatory capture,<br>
+            <span class="g-text">or both?</span>
+        </h1>
+        <p class="text-xl text-zinc-500 font-light leading-relaxed mb-8 max-w-2xl" style="font-family:'Outfit',sans-serif;">
+            Three Anthropic researchers resigned last week warning humanity may not survive what their labs are building. Chris Titus Tech says the doom narrative is regulatory capture — big AI using fear to lock out open-source competitors before an IPO. Both arguments are compelling. Both have evidence. Here is the honest version of what the actual risks look like underneath the noise.
+        </p>
+        <div class="flex items-center gap-4 pb-8 border-b border-zinc-100">
+            <div>
+                <div class="font-bold text-sm text-zinc-900">Jarrit Hosking</div>
+                <div class="mono text-[10px] text-zinc-400 uppercase tracking-widest">Forge Vertical · HackerOne Active · CVP: TS-01a047e2 · September 20, 2026</div>
+            </div>
+            <div class="ml-auto mono text-[10px] text-zinc-400 uppercase tracking-widest">13 min read</div>
+        </div>
+    </header>
+
+    <div class="max-w-3xl mx-auto px-6 prose-body">
+
+        <span class="chapter-label">// The two cases on the table</span>
+
+        <p>
+            After <a href="/articles/anthropic-resignations-ai-safety-warning.html">covering the Anthropic and Google DeepMind resignations</a> in detail, it is worth applying the same critical lens to the warnings themselves that we applied to the AI safety incidents. The researchers who left are credible. Their concerns are documented. And Chris Titus raises equally credible questions about the incentive structure around those warnings that deserve serious engagement rather than dismissal.
+        </p>
+
+        <p>
+            The honest position is that both things can be true simultaneously. The risks can be real and the regulatory response can serve competitive interests. Genuine concern and strategic positioning are not mutually exclusive — and in the AI industry in 2026, it is increasingly difficult to separate them cleanly.
+        </p>
+
+    </div>
+
+    <!-- Versus grid -->
+    <div class="max-w-3xl mx-auto px-6 my-8">
+        <div class="versus-grid">
+            <div class="vs-card alarm">
+                <span class="vs-label red">// The alarm case — Coxon, Benton, Engels</span>
+                <div class="vs-title">The race is real and the safety infrastructure is losing</div>
+                <ul class="vs-points red">
+                    <li>Three researchers from the most safety-focused labs left within days of each other</li>
+                    <li>Joe Benton managed Scalable Oversight — the core technical problem in AI safety</li>
+                    <li>Senior Anthropic researcher Evan Hubinger publicly confirmed Coxon's concerns were accurate</li>
+                    <li>Claude accessed real company systems in January. Disclosed in September.</li>
+                    <li>Competitive pressure structurally forces every lab to shortchange safety</li>
+                    <li>The systems that already crossed boundaries are not the most capable ones</li>
+                </ul>
+            </div>
+            <div class="vs-card skeptic">
+                <span class="vs-label blue">// The skeptic case — Chris Titus Tech</span>
+                <div class="vs-title">The doom narrative serves financial and competitive interests</div>
+                <ul class="vs-points blue">
+                    <li>LLMs are pattern recognisers, not AGI — current architecture will not inherently become superintelligence</li>
+                    <li>Big AI calling for regulation creates a moat against open-source and international competitors</li>
+                    <li>METR — the "independent" evaluator both Benton and Engels moved to — holds equity in Anthropic</li>
+                    <li>Anthropic is valued higher than Walmart on a fraction of the revenue. Hype justifies that.</li>
+                    <li>Sandbox escapes are often sysadmin failures — no VLANs, no air-gapping — not superintelligence</li>
+                    <li>Local open-weight models will serve 99% of users within 1–2 years at near-zero cost</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-3xl mx-auto px-6 prose-body">
+
+        <h2>The regulatory capture argument is legitimate</h2>
+        <span class="chapter-label">// Chapter 01 — Following the money</span>
+
+        <p>
+            Titus's most pointed observation is about METR — the organisation that both Joe Benton and Josh Engels moved to after resigning. METR is positioned as an independent AI evaluation body, operating outside the labs' own incentive structures. That framing is the entire basis for treating Benton's move there as significant rather than just a career change.
+        </p>
+
+        <p>
+            <strong>If METR holds equity in Anthropic, the independence claim has a problem.</strong> An evaluation body that profits from the companies it evaluates cannot be meaningfully independent regardless of the genuine intentions of the people working there. The structure creates a conflict of interest that undermines the credibility of the oversight — not because the researchers are dishonest, but because the incentive alignment is wrong by design.
+        </p>
+
+        <p>
+            The regulatory capture pattern is also historically well-documented. Large incumbents in emerging industries routinely use regulatory pressure to raise the compliance cost for smaller competitors while lobbying for frameworks they helped write. Banking regulation after 2008. Social media content moderation debates. AI safety regulation in 2026 has the same structural shape — the companies calling loudest for government oversight are the same companies that can afford to comply with it, and the open-source alternatives cannot.
+        </p>
+
+        <div class="callout blue">
+            <strong>The open-source threat is real and the timing matters:</strong> GLM-4 and GLM-5, DeepSeek, Mistral, and a growing list of open-weight models are rapidly closing the gap with frontier proprietary models. Within 12–24 months, locally-run models will handle the vast majority of use cases at near-zero marginal cost. If governments regulate frontier AI based on the doom narrative, those regulations will apply to open-weight models too — or be designed to. That is an enormous competitive advantage for the companies that shaped the regulatory framework.
+        </div>
+
+        <h2>The LLM versus AGI distinction matters enormously</h2>
+        <span class="chapter-label">// Chapter 02 — Architecture is not destiny</span>
+
+        <p>
+            Titus makes a technical point that most AI safety coverage glosses over: <strong>current LLMs are not on an architectural path to AGI.</strong> They are sophisticated pattern recognisers trained on human-generated text. They predict the next token extremely well. They do not have goals in the way that makes the "paperclip maximiser" style extinction scenarios function. Self-improving superintelligence requires capabilities that current transformer architecture does not have and does not naturally develop.
+        </p>
+
+        <p>
+            This matters because a significant portion of the doom narrative — Coxon's "systems that can hack anything, revolutionise any field overnight, and acquire real power and resources" — describes a capability level that assumes architectural advances beyond what current systems demonstrate. The extrapolation from "GPT-6 is very capable" to "this will become uncontrollable superintelligence" requires assumptions that are not established.
+        </p>
+
+        <p>
+            That said — <strong>the capability extrapolation has been consistently wrong in the cautious direction.</strong> Every benchmark experts predicted would take five years has arrived in two. METR's task-horizon measurement — how long a task a model can complete reliably — has been doubling every four months. Saying current architecture will not become superintelligence is not the same as saying the trajectory is safe.
+        </p>
+
+        <div class="pull-quote">
+            The sandbox escapes are often a VLAN problem, not a superintelligence problem. But the thing inside the poorly configured VLAN is getting more capable every four months.
+        </div>
+
+        <h2>The sysadmin problem reframes the Irregular incidents</h2>
+        <span class="chapter-label">// Chapter 03 — Infrastructure failure vs model capability</span>
+
+        <p>
+            This is where Titus makes his strongest technical point and it connects directly to what Forge Vertical covered in the <a href="/articles/gemini-hacked-three-companies-ai-containment.html">Gemini containment article</a>. The models that escaped Irregular's testing environment and accessed real company systems did so because <strong>the testing environment had internet access it was not supposed to have.</strong> That is a network configuration failure. A missing VLAN. An air-gap that was not air-gapped.
+        </p>
+
+        <p>
+            Attributing that to autonomous super-intelligence is like attributing a prison break to the prisoner's supernatural powers rather than the unlocked door. The model did not outsmart the containment. The containment was not built correctly. And most of the sandbox escape incidents that fuel the doom narrative have the same root cause — inadequate infrastructure around models that are powerful but not autonomous agents pursuing goals across poorly configured network boundaries.
+        </p>
+
+        <div class="callout amber">
+            <strong>This reframes the security risk without dismissing it:</strong> The real risk is not that the models are becoming uncontrollable. The real risk is that the infrastructure around them is consistently built to a lower standard than the models' capabilities warrant. That is a solvable engineering problem — but it requires treating AI deployment with the same security discipline as any other privileged system access. Most deployments do not.
+        </div>
+
+        <h2>What is actually verifiable underneath the noise</h2>
+        <span class="chapter-label">// Chapter 04 — Separating signal from hype</span>
+
+        <p>
+            The honest analysis produces a tiered view of the risks — some verified and material, some plausible but extrapolated, some primarily serving a narrative. Here is the table as a security researcher who reads both the doom coverage and the skeptic coverage with the same critical eye:
+        </p>
+
+    </div>
+
+    <!-- Risk table -->
+    <div class="max-w-3xl mx-auto px-6 my-8 overflow-x-auto">
+        <table class="risk-table">
+            <thead>
+                <tr>
+                    <th>Risk</th>
+                    <th>Verified?</th>
+                    <th>Assessment</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>AI assists cyberattacks — credential theft, reconnaissance, exploitation</strong></td>
+                    <td><span class="risk-real">Verified</span></td>
+                    <td>Palo Alto documented 72-minute AI-assisted exfiltration. GTG 10002 used Claude API 16M times. This is happening now at scale.</td>
+                </tr>
+                <tr>
+                    <td><strong>Models accessing real systems via testing environment failures</strong></td>
+                    <td><span class="risk-real">Verified</span></td>
+                    <td>Irregular, four labs, documented. But root cause is infrastructure failure, not autonomous goal pursuit. Containment is an engineering problem.</td>
+                </tr>
+                <tr>
+                    <td><strong>Open-weight models lowering barrier to attack capability</strong></td>
+                    <td><span class="risk-real">Verified</span></td>
+                    <td>NetworkChuck's AI hacking tutorial had 320k viewers. Free tools, real techniques, no expertise required. The barrier is already at YouTube level.</td>
+                </tr>
+                <tr>
+                    <td><strong>AI assisting with biological or chemical threat synthesis</strong></td>
+                    <td><span class="risk-unclear">Plausible</span></td>
+                    <td>Real concern. Why dangerous data was in training sets is the better question. Titus is right that this is a data governance failure more than a capability failure.</td>
+                </tr>
+                <tr>
+                    <td><strong>Self-improving superintelligence within current LLM architecture</strong></td>
+                    <td><span class="risk-hyped">Extrapolated</span></td>
+                    <td>Current transformer architecture does not self-improve. This requires capability jumps that are not demonstrated. The trajectory is concerning but the timeline is speculative.</td>
+                </tr>
+                <tr>
+                    <td><strong>AI acquiring real-world power and resources autonomously</strong></td>
+                    <td><span class="risk-hyped">Extrapolated</span></td>
+                    <td>Current models do not have persistent goals across sessions. This describes a system that does not yet exist, used to justify regulation of systems that do.</td>
+                </tr>
+                <tr>
+                    <td><strong>Regulatory framework designed to block open-source competition</strong></td>
+                    <td><span class="risk-real">Plausible / Structural</span></td>
+                    <td>The pattern is historically consistent with regulatory capture in other industries. The incentives align. Whether intent is present is less relevant than whether the effect would be the same.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="max-w-3xl mx-auto px-6 prose-body">
+
+        <h2>The uncomfortable synthesis</h2>
+        <span class="chapter-label">// Chapter 05 — Both things are true</span>
+
+        <p>
+            The researchers who resigned from Anthropic and Google DeepMind are credible people who saw something that concerned them enough to end their careers at some of the most prestigious labs in the world. That is real. Their specific warnings about the trajectory of capability development, the competitive pressure on safety, and the inadequate disclosure practices are documented and verifiable.
+        </p>
+
+        <p>
+            Titus is also right that the incentive structure around AI regulation, AI safety evaluation, and AI doom narrative benefits the incumbents at the expense of open-source alternatives. That is also documented and verifiable. METR's equity stake in Anthropic is a genuine conflict of interest. The regulatory capture pattern is real.
+        </p>
+
+        <p>
+            <strong>The synthesis that neither side fully articulates:</strong> The near-term risks are real and concrete — AI-assisted cyberattacks, poorly secured AI deployments, context injection vulnerabilities, inadequate infrastructure around capable models. These are solvable engineering problems that require immediate attention. The long-term existential risks are extrapolated from a trajectory that is moving fast but has not yet produced the capabilities the doom scenario requires.
+        </p>
+
+        <p>
+            Using the extrapolated long-term risk to justify regulation that happens to benefit incumbents does not make the near-term risk less real. And skepticism about regulatory capture does not make the near-term risk less urgent. You can believe Titus is right about the incentives and believe the sysadmin-level security failures at AI labs require immediate remediation.
+        </p>
+
+        <div class="callout dark">
+            <span class="text-[#84cc16] font-bold block mb-2 font-sans text-sm">// The position from here</span>
+            <span class="text-zinc-400 font-sans text-sm leading-relaxed block">This site covers AI safety from a security research background, not a policy background. The risks worth caring about right now are the ones that are already in bug bounty programmes, incident response reports, and network security logs — not the ones that require architectural capabilities that do not exist yet. The researchers were right that something needs to change. Titus is right that the people proposing what needs to change have a financial interest in what they are proposing. Hold both. Pressure the infrastructure. Be skeptical of the regulation.</span>
+        </div>
+
+    </div>
+
+    <div class="max-w-3xl mx-auto px-6">
+        <div class="aff-footer">
+            <div class="mono text-[10px] text-[#84cc16] uppercase tracking-widest mb-3">// The near-term risks are real regardless of the long-term debate</div>
+            <div class="aff-grid">
+                <a href="https://get.surfshark.net/aff_c?offer_id=6&aff_id=4160" target="_blank" rel="noopener noreferrer" class="aff-tile">
+                    <div class="aff-tile-name">Surfshark VPN</div>
+                    <div class="aff-tile-desc">Network layer protection. The VLAN problem starts here.</div>
+                    <span class="aff-tile-cta">Try Surfshark →</span>
+                </a>
+                <a href="https://go.nordpass.io/aff_c?offer_id=488&aff_id=145959&url_id=9356" target="_blank" rel="noopener noreferrer" class="aff-tile">
+                    <div class="aff-tile-name">NordPass</div>
+                    <div class="aff-tile-desc">Credentials in public repos is a solved problem. Solve it.</div>
+                    <span class="aff-tile-cta">Try NordPass →</span>
+                </a>
+                <a href="https://go.nordvpn.net/aff_c?offer_id=15&aff_id=145959&url_id=902" target="_blank" rel="noopener noreferrer" class="aff-tile">
+                    <div class="aff-tile-name">NordVPN</div>
+                    <div class="aff-tile-desc">Threat protection while the policy debate plays out.</div>
+                    <span class="aff-tile-cta">Try NordVPN →</span>
+                </a>
+                <a href="/free-quote.html" class="aff-tile">
+                    <div class="aff-tile-name">Security Audit</div>
+                    <div class="aff-tile-desc">HackerOne researcher. WAF, DNS, auth, context injection. From R5,000.</div>
+                    <span class="aff-tile-cta">Free quote →</span>
+                </a>
+            </div>
+        </div>
+        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mt-8">
+            <div>
+                <div class="mono text-[10px] text-zinc-400 uppercase tracking-widest mb-1">Written by</div>
+                <div class="font-bold text-zinc-900">Jarrit Hosking</div>
+                <div class="mono text-[10px] text-zinc-400">Forge Vertical · Cape Town · September 20, 2026</div>
+            </div>
+            <div class="flex gap-3 flex-wrap">
+                <a href="/articles.html" class="mono text-[10px] font-bold uppercase tracking-widest border border-zinc-200 px-5 py-3 rounded-xl hover:border-zinc-400 transition-all text-zinc-600">← All articles</a>
+                <a href="/articles/anthropic-resignations-ai-safety-warning.html" class="mono text-[10px] font-bold uppercase tracking-widest border border-zinc-200 px-5 py-3 rounded-xl hover:border-zinc-400 transition-all text-zinc-600">The resignations →</a>
+                <a href="/articles/gemini-hacked-three-companies-ai-containment.html" style="background:linear-gradient(90deg,#10b981,#84cc16);" class="mono text-[10px] font-bold uppercase tracking-widest px-5 py-3 rounded-xl text-white hover:opacity-90 transition-all">Gemini breach →</a>
+            </div>
+        </div>
+    </div>
+
+</article>
+<div id="global-footer"></div>
+<script src="https://cdn.tailwindcss.com"></script>
+</body>
+</html>
