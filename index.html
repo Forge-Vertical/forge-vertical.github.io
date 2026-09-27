@@ -672,6 +672,18 @@
         .wa { display: inline-flex; align-items: center; gap: 9px; border: 1px solid var(--border2); color: var(--muted2); padding: 13px 24px; border-radius: 10px; font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; text-decoration: none; transition: all 0.18s; }
         .wa:hover { border-color: #25D366; color: #25D366; }
 
+        .rtiers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 40px; }
+        @media (max-width: 760px) { .rtiers { grid-template-columns: 1fr; } }
+        .rtier { background: var(--surface); border: 1px solid var(--border2); border-radius: 16px; padding: 28px; }
+        .rtier.feature { border-color: #f59e0b; box-shadow: 0 0 0 1px rgba(245,158,11,0.12); }
+        .rtier .tt { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.16em; color: var(--muted2); margin-bottom: 12px; display: flex; justify-content: space-between; }
+        .rtier.feature .tt { color: #f59e0b; }
+        .rtier .price { font-family: 'Outfit', sans-serif; font-size: 32px; font-weight: 700; letter-spacing: -0.02em; }
+        .rtier .per { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); margin-bottom: 16px; }
+        .rtier ul { list-style: none; }
+        .rtier li { font-size: 13.5px; color: var(--muted2); padding: 8px 0 8px 20px; position: relative; line-height: 1.5; }
+        .rtier li::before { content: ''; position: absolute; left: 0; top: 13px; width: 7px; height: 7px; border-radius: 2px; background: var(--lime); }
+
         .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.6s ease, transform 0.6s ease; }
         .reveal.up { opacity: 1; transform: none; }
 
@@ -886,6 +898,55 @@
         <div class="ps"><div class="psn">02</div><div class="pst">Architecture first</div><div class="psd">Data model, security rules, SEO structure, and AI indexing layer designed before any visual work starts. Infrastructure-first, always.</div></div>
         <div class="ps"><div class="psn">03</div><div class="pst">Build to production</div><div class="psd">We build directly toward the live environment. No throwaway prototypes. No rebuilds. What you see is what ships.</div></div>
         <div class="ps"><div class="psn">04</div><div class="pst">Deliver & hand over</div><div class="psd">Live deployment, documentation, walkthrough. You own everything — code, domain, hosting credentials. Zero lock-in.</div></div>
+    </div>
+</div>
+</section>
+
+<section style="padding:100px 0; background:var(--bg); border-top:1px solid var(--border);">
+<div class="wrap">
+    <div class="reveal">
+        <div class="s-eye">// AI visibility retainer</div>
+        <h2 class="sh">Get found. <span class="g-text">Stay found.</span></h2>
+        <p class="ss">An audit and build get you cited by ChatGPT, Perplexity and Gemini. The monthly retainer keeps you there — a weekly performance report, a site kept fast and monitored, and content that compounds. The models move constantly; this is how you stay in the answer.</p>
+    </div>
+    <div class="rtiers reveal">
+        <div class="rtier">
+            <div class="tt"><span>Audit</span></div>
+            <div class="price">R4,500</div>
+            <div class="per">one-off</div>
+            <ul>
+                <li>Full AI-visibility diagnosis</li>
+                <li>Competitor citation gap</li>
+                <li>Fix roadmap you keep</li>
+            </ul>
+        </div>
+        <div class="rtier feature">
+            <div class="tt"><span>Growth retainer</span><span>Popular</span></div>
+            <div class="price">R10,500</div>
+            <div class="per">per month · 12-month agreement</div>
+            <ul>
+                <li>Everything in Core</li>
+                <li>Weekly SEO / GEO / AEO report</li>
+                <li>Weekly Lighthouse audit + fixes</li>
+                <li>Week-over-week traffic tracking</li>
+                <li>Ongoing citation content</li>
+                <li>Scalability recommendations</li>
+            </ul>
+        </div>
+        <div class="rtier">
+            <div class="tt"><span>Core retainer</span></div>
+            <div class="price">R6,500</div>
+            <div class="per">per month</div>
+            <ul>
+                <li>Citation monitoring</li>
+                <li>Entity graph upkeep</li>
+                <li>Monthly report</li>
+            </ul>
+        </div>
+    </div>
+    <div class="cta-btns reveal" style="justify-content:flex-start;margin-top:36px;">
+        <a href="/onboard.html" class="btn-p">Start with an audit →</a>
+        <a href="https://wa.me/27657417593" target="_blank" rel="noopener noreferrer" class="btn-g">Talk it through</a>
     </div>
 </div>
 </section>
