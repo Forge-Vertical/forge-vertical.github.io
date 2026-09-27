@@ -145,8 +145,18 @@
               <label for="googleApiKey" class="block text-sm font-medium text-slate-700">Google Places API key <span class="text-slate-400 font-normal text-xs">(optional)</span></label>
               <button type="button" id="clearKeyBtn" class="text-[11px] text-slate-400 hover:text-red-500 font-medium">Forget key</button>
             </div>
-            <input type="password" id="googleApiKey" autocomplete="off" placeholder="AIzaSy…  (blank = demo)" class="block w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 text-sm mono">
-            <p class="text-[11px] text-slate-500 mt-1 leading-relaxed">The tool runs without a key — you'll just see demo data. To pull <b>real</b> businesses, paste your own key (Places API (New) + billing on). It's used only for your search, <b>never stored and never sent to us</b>. When it's brought you value, hit <b>Forget key</b> and revoke it in Google Cloud.</p>
+            <input type="password" id="googleApiKey" autocomplete="off" placeholder="AIzaSy…  (blank = use Google search)" class="block w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 text-sm mono">
+            <p class="text-[11px] text-slate-500 mt-1 leading-relaxed">Add your own key to pull <b>real</b> businesses straight into the table (name, phone, website, rating, address). It's used only for your search, <b>never stored and never sent to us</b> — when it's done its job, hit <b>Forget key</b> and revoke it in Google Cloud. No key? Use <b>Google Business Search</b> below.</p>
+            <details class="mt-2 rounded-lg border border-slate-200 bg-slate-50">
+              <summary class="cursor-pointer px-3 py-2 text-xs font-semibold text-emerald-700 select-none"><i class="fa-solid fa-circle-info mr-1"></i> How to get a free Google key (~5 min)</summary>
+              <div class="px-3 pb-3 pt-1 text-[11px] text-slate-600 leading-relaxed space-y-1.5">
+                <p><b>1.</b> Open <span class="mono">console.cloud.google.com</span> and create a project (free).</p>
+                <p><b>2.</b> Under APIs &amp; Services, enable <b>“Places API (New)”</b>.</p>
+                <p><b>3.</b> Under Credentials, create an <b>API key</b> and restrict it to the Places API + your own site.</p>
+                <p><b>4.</b> Turn on billing (Google requires it). New accounts get <b>$300 free credit</b> plus a monthly free allowance — light use is typically $0.</p>
+                <p><b>5.</b> Paste the key above, search, then <b>Forget key</b> &amp; revoke it when done.</p>
+              </div>
+            </details>
           </div>
           <div>
             <label for="searchDepth" class="block text-sm font-medium text-slate-700 mb-1">Results</label>
@@ -160,6 +170,12 @@
             <i class="fa-solid fa-bolt"></i> Search leads
           </button>
           <p id="statusMsg" class="text-xs text-slate-500 hidden"></p>
+          <div class="pt-3 border-t border-slate-100">
+            <button id="googleSearchBtn" class="w-full bg-white border border-slate-300 text-slate-700 font-semibold py-2 px-4 rounded-lg hover:border-emerald-400 hover:text-emerald-700 transition flex justify-center items-center gap-2 text-sm">
+              <i class="fa-brands fa-google"></i> Google Business Search <span class="text-[10px] text-slate-400 font-normal">no key</span>
+            </button>
+            <p class="text-[11px] text-slate-400 mt-1 leading-relaxed">Opens a real Google Maps search for your niche + location in a new tab — genuine public listings you browse yourself. Nothing is invented, scraped or stored.</p>
+          </div>
         </div>
       </div>
 
@@ -321,18 +337,7 @@ async function fetchPlaces(query, apiKey, depth){
   return out.slice(0, depth);
 }
 
-// ---- demo data (clearly labelled) ----
-function demoLeads(industry, location, n){
-  const pre=['Elite','Apex','Premier','Hometown','Reliable','Pro','Local'];
-  const suf=['Services','Solutions','Co.','Group','Partners'];
-  const out=[]; const ind=industry||'Business'; const loc=location||'Your City';
-  for(let i=0;i<Math.min(n,20);i++){
-    const name = pre[i%pre.length]+' '+ind+' '+suf[i%suf.length];
-    out.push({ name, phone:'(555) '+(100+i)+'-'+(1000+i*7%9000), website: name.toLowerCase().replace(/[^a-z]/g,'')+'.example',
-      rating:(3.8+(i%12)/10).toFixed(1)+' ('+(10+i*3)+')', address:(100+i)+' Main St, '+loc, maps:'' });
-  }
-  return out;
-}
+// ---- no fake data: results come only from the real Places API or Google search ----
 
 // ---- render ----
 function render(){
@@ -364,25 +369,30 @@ btnSearch.addEventListener('click', async ()=>{
   const ind=$('industry').value.trim(), loc=$('location').value.trim();
   const key=$('googleApiKey').value.trim(), depth=parseInt($('searchDepth').value,10)||20;
   if(!ind||!loc){ setStatus('Enter both an industry and a location.', false); return; }
-  isSearching=true; btnSearch.innerHTML='<div class="spinner mr-2"></div> Searching…';
-  setStatus('');
-  const query = ind + ' in ' + loc;
+  if(!key){
+    setStatus('No API key yet — grab a free one using the guide above to pull real businesses into the table, or use “Google Business Search” below to browse real listings now. This tool never invents data.', false);
+    return;
+  }
+  isSearching=true; btnSearch.innerHTML='<div class="spinner mr-2"></div> Searching…'; setStatus('');
   try{
-    if(key){
-      const leads = await fetchPlaces(query, key, depth);
-      currentLeads = leads; isDemo=false;
-      setStatus(leads.length ? leads.length+' real businesses found.' : 'No results — try a broader search.');
-    }else{
-      currentLeads = demoLeads(ind, loc, depth); isDemo=true;
-      setStatus('Showing demo data. Add your Google Places API key for real results.');
-    }
+    const leads = await fetchPlaces(ind + ' in ' + loc, key, depth);
+    currentLeads = leads; isDemo=false;
+    setStatus(leads.length ? leads.length+' real businesses found.' : 'No results — try a broader search.');
     save(); render();
   }catch(err){
-    setStatus('Live search failed — showing demo instead. ('+err.message+')', false);
-    currentLeads = demoLeads(ind, loc, depth); isDemo=true; save(); render();
+    setStatus('Live search failed. Check the key has Places API (New) + billing enabled and allows this site — or use “Google Business Search”. ('+err.message+')', false);
   }finally{
     isSearching=false; btnSearch.innerHTML='<i class="fa-solid fa-bolt"></i> Search leads';
   }
+});
+
+// Google Business Search — opens a real Google Maps search. No key, no scraping, no fake data.
+$('googleSearchBtn').addEventListener('click', ()=>{
+  const ind=$('industry').value.trim(), loc=$('location').value.trim();
+  if(!ind||!loc){ setStatus('Enter an industry and a location first.', false); return; }
+  const url = 'https://www.google.com/maps/search/' + encodeURIComponent(ind + ' in ' + loc);
+  window.open(url, '_blank', 'noopener');
+  setStatus('Opened a real Google Maps search in a new tab — browse genuine listings there.');
 });
 
 btnClear.addEventListener('click', ()=>{ currentLeads=[]; isDemo=false; save(); render(); setStatus(''); });
