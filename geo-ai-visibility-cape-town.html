@@ -179,20 +179,14 @@ section{position:relative}
     </div>
   </div>
   <div id="hero-right">
-    <div class="terminal">
-      <div class="t-bar"><span class="tdot" style="background:#ef4444"></span><span class="tdot" style="background:#f59e0b"></span><span class="tdot" style="background:#22c55e"></span><span class="mono" style="font-size:11px;color:#1e2a3a;margin-left:6px">geo-scan · your-business</span></div>
-      <div class="t-body">
-        <div><span class="td">// Running AI-visibility scan...</span></div>
-        <div><span class="tw">? "best [your service] in Cape Town"</span></div>
-        <div><span class="tr">✗ your business — not cited</span></div>
-        <div><span class="tw">&nbsp;</span></div>
-        <div><span class="te">→ Building entity graph...</span></div>
-        <div><span class="tg">✓ JSON-LD + llms.txt deployed</span></div>
-        <div><span class="tg">✓ Off-site corroboration live</span></div>
-        <div><span class="te">→ Re-indexing for AI models...</span></div>
-        <div><span class="tg">✓ Now cited · ChatGPT · Perplexity</span></div>
-      </div>
-    </div>
+    <lottie-player
+      src="https://lottie.host/fc70435d-0e3d-4fd2-aa5d-878492b0dc69/JjdHhEHkan.json"
+      background="transparent"
+      speed="1"
+      style="width:100%;max-width:480px;"
+      loop
+      autoplay>
+    </lottie-player>
   </div>
 </section>
 
@@ -309,6 +303,7 @@ section{position:relative}
 </section>
 
 <div id="global-footer"></div>
+<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 <script>
 const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('up')})},{threshold:.08});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
