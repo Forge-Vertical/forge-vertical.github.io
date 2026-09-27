@@ -89,9 +89,37 @@
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-6 relative z-10">
   <div class="rounded-xl border border-amber-300 bg-amber-50 text-amber-900 px-5 py-4 shadow-sm text-sm leading-relaxed">
     <p class="font-semibold flex items-center gap-2"><i class="fa-solid fa-triangle-exclamation"></i> Use your Google Places API key at your own risk</p>
-    <p class="mt-1 text-amber-800">A key entered into any browser-based tool can be read from the page. Use a key <b>restricted to the Places API and to your own domain</b>, keep an eye on your Google billing, and revoke it if in doubt. For production use, a server-side proxy is the safer approach — a browser tool like this is <b>not recommended</b> for high-volume or shared use. Contacting the businesses you find must comply with POPIA / GDPR / CAN-SPAM.</p>
+    <p class="mt-1 text-amber-800">A key entered into any browser-based tool can be read from the page. Use a key <b>restricted to the Places API and to your own domain</b>, keep an eye on your Google billing, and revoke it if in doubt. The key is <b>optional and never stored</b> — use it for a search, then delete it and revoke it. For production use, a server-side proxy is the safer approach — a browser tool like this is <b>not recommended</b> for high-volume or shared use. Contacting the businesses you find must comply with POPIA / GDPR / CAN-SPAM.</p>
   </div>
 </div>
+
+<!-- Prominent affiliate band -->
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
+  <div class="rounded-2xl bg-white border border-slate-200 shadow-sm p-5">
+    <div class="flex items-center justify-between flex-wrap gap-2 mb-4">
+      <p class="text-sm font-bold text-slate-800"><i class="fa-solid fa-gift mr-2" style="color:var(--lime)"></i> Free forever — powered by these partners</p>
+      <span class="text-[10px] text-slate-400 mono uppercase tracking-widest">Affiliate · no cost to you</span>
+    </div>
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-3">
+      <a href="https://go.nordvpn.net/aff_c?offer_id=15&aff_id=145959&url_id=902" target="_blank" rel="noopener sponsored" class="group flex items-center gap-3 rounded-xl border border-slate-200 p-4 hover:border-emerald-400 hover:shadow-sm transition no-underline">
+        <i class="fa-solid fa-shield-halved text-2xl w-7 text-center" style="color:var(--emerald)"></i>
+        <div><div class="font-bold text-slate-800 text-sm">NordVPN</div><div class="text-[11px] text-slate-500 group-hover:text-emerald-600">Secure your prospecting →</div></div>
+      </a>
+      <a href="https://get.surfshark.net/aff_c?offer_id=6&aff_id=4160" target="_blank" rel="noopener sponsored" class="group flex items-center gap-3 rounded-xl border border-slate-200 p-4 hover:border-emerald-400 hover:shadow-sm transition no-underline">
+        <i class="fa-solid fa-user-secret text-2xl w-7 text-center" style="color:var(--emerald)"></i>
+        <div><div class="font-bold text-slate-800 text-sm">Surfshark</div><div class="text-[11px] text-slate-500 group-hover:text-emerald-600">Unlimited devices →</div></div>
+      </a>
+      <a href="https://go.nordpass.io/aff_c?offer_id=488&aff_id=145959&url_id=9356" target="_blank" rel="noopener sponsored" class="group flex items-center gap-3 rounded-xl border border-slate-200 p-4 hover:border-emerald-400 hover:shadow-sm transition no-underline">
+        <i class="fa-solid fa-key text-2xl w-7 text-center" style="color:var(--emerald)"></i>
+        <div><div class="font-bold text-slate-800 text-sm">NordPass</div><div class="text-[11px] text-slate-500 group-hover:text-emerald-600">Vault your API keys →</div></div>
+      </a>
+      <a href="https://portal.webway.host/aff.php?aff=353" target="_blank" rel="noopener sponsored" class="group flex items-center gap-3 rounded-xl border border-slate-200 p-4 hover:border-emerald-400 hover:shadow-sm transition no-underline">
+        <i class="fa-solid fa-server text-2xl w-7 text-center" style="color:var(--emerald)"></i>
+        <div><div class="font-bold text-slate-800 text-sm">WebWay Hosting</div><div class="text-[11px] text-slate-500 group-hover:text-emerald-600">Fast, affordable hosting →</div></div>
+      </a>
+    </div>
+  </div>
+</section>
 
 <!-- Main -->
 <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -113,9 +141,12 @@
             <input type="text" id="location" placeholder="e.g. Cape Town, or Austin TX" class="block w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 text-sm">
           </div>
           <div>
-            <label for="googleApiKey" class="block text-sm font-medium text-slate-700 mb-1">Google Places API key <span class="text-slate-400 font-normal text-xs">(for live data)</span></label>
-            <input type="password" id="googleApiKey" placeholder="AIzaSy…" class="block w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 text-sm mono">
-            <p class="text-[11px] text-slate-400 mt-1">Leave blank to see demo data. Requires <b>Places API (New)</b> enabled.</p>
+            <div class="flex items-center justify-between mb-1">
+              <label for="googleApiKey" class="block text-sm font-medium text-slate-700">Google Places API key <span class="text-slate-400 font-normal text-xs">(optional)</span></label>
+              <button type="button" id="clearKeyBtn" class="text-[11px] text-slate-400 hover:text-red-500 font-medium">Forget key</button>
+            </div>
+            <input type="password" id="googleApiKey" autocomplete="off" placeholder="AIzaSy…  (blank = demo)" class="block w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 text-sm mono">
+            <p class="text-[11px] text-slate-500 mt-1 leading-relaxed">The tool runs without a key — you'll just see demo data. To pull <b>real</b> businesses, paste your own key (Places API (New) + billing on). It's used only for your search, <b>never stored and never sent to us</b>. When it's brought you value, hit <b>Forget key</b> and revoke it in Google Cloud.</p>
           </div>
           <div>
             <label for="searchDepth" class="block text-sm font-medium text-slate-700 mb-1">Results</label>
@@ -377,6 +408,8 @@ btnPdf.addEventListener('click', ()=>{
     html2canvas:{scale:2,useCORS:true}, jsPDF:{unit:'in',format:'a4',orientation:'landscape'} })
     .from($('pdfExportArea')).save().then(()=>{ btnPdf.innerHTML=orig; });
 });
+
+$('clearKeyBtn').addEventListener('click', ()=>{ $('googleApiKey').value=''; setStatus('Key cleared. Revoke it in Google Cloud if you\u2019re done with it.'); });
 
 load();
 </script>
