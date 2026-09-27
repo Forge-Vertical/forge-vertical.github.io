@@ -1,7 +1,37 @@
+<style>
+/* ── Forge Vertical footer effect (scoped to #contact) ──
+   Replaces the old footer.jpg photo. A quiet dot-grid + corner glows,
+   kept to the edges so nothing crowds the logo or copy. Pure CSS. */
+#contact { position: relative; }
+#contact .fv-fx {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+}
+/* faint lime dot-grid, faded toward the centre/bottom so it stays ambient */
+#contact .fv-fx-dots {
+    background-image: radial-gradient(circle, rgba(132, 204, 22, 0.06) 1px, transparent 1.5px);
+    background-size: 26px 26px;
+    -webkit-mask-image: radial-gradient(ellipse 120% 90% at 50% 0%, #000 45%, transparent 92%);
+            mask-image: radial-gradient(ellipse 120% 90% at 50% 0%, #000 45%, transparent 92%);
+}
+/* soft brand glows tucked into opposite corners only */
+#contact .fv-fx-glow {
+    background:
+        radial-gradient(ellipse 48% 55% at 0% 0%, rgba(16, 185, 129, 0.10), transparent 62%),
+        radial-gradient(ellipse 42% 50% at 100% 100%, rgba(132, 204, 22, 0.07), transparent 62%);
+}
+@media (prefers-reduced-motion: no-preference) {
+    #contact .fv-fx-dots { transition: opacity .4s ease; }
+}
+</style>
+
 <footer id="contact" class="bg-[#06080c] text-white rounded-t-2xl md:rounded-t-[3rem] mx-4 border-t border-zinc-900 relative z-50 overflow-hidden">
 
-    <!-- Background Image -->
-    <div class="absolute inset-0 z-0 pointer-events-none" style="background: url('/assets/images/footer.jpg') center/cover no-repeat; opacity: 0.25;"></div>
+    <!-- Background effect (dot-grid + corner glows) -->
+    <div class="fv-fx fv-fx-glow"></div>
+    <div class="fv-fx fv-fx-dots"></div>
 
     <!-- Top accent line -->
     <div class="h-1 w-full vibrant-gradient relative z-10"></div>
@@ -29,37 +59,37 @@
 
             <!-- Col 2: Services -->
             <div>
-                <p class="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-500 mb-6 drop-shadow-md">Services</p>
+                <p class="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-500 mb-6">Services</p>
                 <ul class="space-y-3">
-                    <li><a href="/index.html#services" class="text-zinc-300 text-xs hover:text-[#84cc16] transition-colors font-medium drop-shadow-md">Domain & Hosting</a></li>
-                    <li><a href="/index.html#services" class="text-zinc-300 text-xs hover:text-[#84cc16] transition-colors font-medium drop-shadow-md">Custom Web Architecture</a></li>
-                    <li><a href="/index.html#services" class="text-zinc-300 text-xs hover:text-[#84cc16] transition-colors font-medium drop-shadow-md">Performance UI/UX</a></li>
-                    <li><a href="/index.html#services" class="text-zinc-300 text-xs hover:text-[#84cc16] transition-colors font-medium drop-shadow-md">SEO & GEO Optimization</a></li>
-                    <li><a href="/index.html#services" class="text-zinc-300 text-xs hover:text-[#84cc16] transition-colors font-medium drop-shadow-md">AI Workflow Automation</a></li>
-                    <li><a href="/index.html#services" class="text-zinc-300 text-xs hover:text-[#84cc16] transition-colors font-medium drop-shadow-md">PWA & TWA Builds</a></li>
-                    <li><a href="/index.html#services" class="text-zinc-300 text-xs hover:text-[#84cc16] transition-colors font-medium drop-shadow-md">SaaS & Custom Tools</a></li>
+                    <li><a href="/index.html#services" class="text-zinc-300 text-xs hover:text-[#84cc16] transition-colors font-medium">Domain & Hosting</a></li>
+                    <li><a href="/index.html#services" class="text-zinc-300 text-xs hover:text-[#84cc16] transition-colors font-medium">Custom Web Architecture</a></li>
+                    <li><a href="/index.html#services" class="text-zinc-300 text-xs hover:text-[#84cc16] transition-colors font-medium">Performance UI/UX</a></li>
+                    <li><a href="/index.html#services" class="text-zinc-300 text-xs hover:text-[#84cc16] transition-colors font-medium">SEO & GEO Optimization</a></li>
+                    <li><a href="/index.html#services" class="text-zinc-300 text-xs hover:text-[#84cc16] transition-colors font-medium">AI Workflow Automation</a></li>
+                    <li><a href="/index.html#services" class="text-zinc-300 text-xs hover:text-[#84cc16] transition-colors font-medium">PWA & TWA Builds</a></li>
+                    <li><a href="/index.html#services" class="text-zinc-300 text-xs hover:text-[#84cc16] transition-colors font-medium">SaaS & Custom Tools</a></li>
                 </ul>
             </div>
 
             <!-- Col 3: Company -->
             <div>
-                <p class="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-500 mb-6 drop-shadow-md">Company</p>
+                <p class="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-500 mb-6">Company</p>
                 <ul class="space-y-3">
-                    <li><a href="/about.html" class="text-zinc-300 text-xs hover:text-[#84cc16] transition-colors font-medium drop-shadow-md">About</a></li>
-                    <li><a href="/portfolio.html" class="text-zinc-300 text-xs hover:text-[#84cc16] transition-colors font-medium drop-shadow-md">Portfolio</a></li>
-                    <li><a href="/security-intelligence.html" class="text-zinc-300 text-xs hover:text-[#84cc16] transition-colors font-medium drop-shadow-md">Security Intelligence</a></li>
-                    <li><a href="/tools/roi-calculator.html" class="text-zinc-300 text-xs hover:text-[#84cc16] transition-colors font-medium flex items-center gap-2 drop-shadow-md">
+                    <li><a href="/about.html" class="text-zinc-300 text-xs hover:text-[#84cc16] transition-colors font-medium">About</a></li>
+                    <li><a href="/portfolio.html" class="text-zinc-300 text-xs hover:text-[#84cc16] transition-colors font-medium">Portfolio</a></li>
+                    <li><a href="/security-intelligence.html" class="text-zinc-300 text-xs hover:text-[#84cc16] transition-colors font-medium">Security Intelligence</a></li>
+                    <li><a href="/tools/roi-calculator.html" class="text-zinc-300 text-xs hover:text-[#84cc16] transition-colors font-medium flex items-center gap-2">
                         Audit Tool
                         <span class="w-1.5 h-1.5 bg-lime-500 rounded-full animate-pulse"></span>
                     </a></li>
-                    <li><a href="/onboard.html" class="text-zinc-300 text-xs hover:text-[#84cc16] transition-colors font-medium drop-shadow-md">Start a Project</a></li>
+                    <li><a href="/onboard.html" class="text-zinc-300 text-xs hover:text-[#84cc16] transition-colors font-medium">Start a Project</a></li>
                 </ul>
             </div>
 
             <!-- Col 4: CTA -->
             <div>
-                <p class="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-500 mb-6 drop-shadow-md">Deploy Now</p>
-                <p class="text-zinc-400 text-xs leading-relaxed mb-6 drop-shadow-md">Ready to out-build the competition? Let's architect something that lasts.</p>
+                <p class="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-500 mb-6">Deploy Now</p>
+                <p class="text-zinc-400 text-xs leading-relaxed mb-6">Ready to out-build the competition? Let's architect something that lasts.</p>
                 <a href="/onboard.html" class="block w-full text-center vibrant-gradient text-black py-4 rounded-xl font-black uppercase tracking-widest text-[10px] hover:opacity-90 transition-all mb-3 shadow-lg">
                     Commence Build Sequence
                 </a>
@@ -71,7 +101,7 @@
 
         <!-- Partner Network -->
         <div class="border-t border-zinc-900/80 pt-12 mb-12">
-            <p class="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-500 mb-8 drop-shadow-md">Global Partner Network & Affiliates</p>
+            <p class="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-500 mb-8">Global Partner Network & Affiliates</p>
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <a href="https://go.nordvpn.net/aff_c?offer_id=15&aff_id=145959&url_id=902" target="_blank" rel="noopener noreferrer" class="group flex items-center gap-4 border border-zinc-900 p-5 rounded-2xl hover:border-[#84cc16] transition-all bg-[#06080c]/60 backdrop-blur-sm">
                     <img src="/assets/Logo-NordVPN.png" alt="NordVPN" class="h-5 grayscale group-hover:grayscale-0 transition-all object-contain flex-shrink-0">
@@ -100,16 +130,16 @@
         <!-- Bottom bar -->
         <div class="border-t border-zinc-900/80 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
             <div>
-                <p class="text-white font-black tracking-tighter text-lg drop-shadow-md">Forge <span class="text-[#84cc16]">Vertical_</span></p>
-                <p class="text-zinc-400 text-[10px] uppercase font-bold tracking-[0.2em] mt-0.5 drop-shadow-md">Sovereign Web Architecture · Cape Town, ZA</p>
+                <p class="text-white font-black tracking-tighter text-lg">Forge <span class="text-[#84cc16]">Vertical_</span></p>
+                <p class="text-zinc-400 text-[10px] uppercase font-bold tracking-[0.2em] mt-0.5">Sovereign Web Architecture · Cape Town, ZA</p>
             </div>
             <div class="flex flex-wrap gap-x-6 gap-y-2 justify-center">
-                <a href="/about.html" class="text-zinc-400 text-[10px] uppercase font-bold tracking-widest hover:text-[#84cc16] transition-colors drop-shadow-md">About</a>
-                <a href="/portfolio.html" class="text-zinc-400 text-[10px] uppercase font-bold tracking-widest hover:text-[#84cc16] transition-colors drop-shadow-md">Portfolio</a>
-                <a href="/security-intelligence.html" class="text-zinc-400 text-[10px] uppercase font-bold tracking-widest hover:text-[#84cc16] transition-colors drop-shadow-md">Intelligence</a>
-                <a href="/onboard.html" class="text-zinc-400 text-[10px] uppercase font-bold tracking-widest hover:text-[#84cc16] transition-colors drop-shadow-md">Onboard</a>
+                <a href="/about.html" class="text-zinc-400 text-[10px] uppercase font-bold tracking-widest hover:text-[#84cc16] transition-colors">About</a>
+                <a href="/portfolio.html" class="text-zinc-400 text-[10px] uppercase font-bold tracking-widest hover:text-[#84cc16] transition-colors">Portfolio</a>
+                <a href="/security-intelligence.html" class="text-zinc-400 text-[10px] uppercase font-bold tracking-widest hover:text-[#84cc16] transition-colors">Intelligence</a>
+                <a href="/onboard.html" class="text-zinc-400 text-[10px] uppercase font-bold tracking-widest hover:text-[#84cc16] transition-colors">Onboard</a>
             </div>
-            <p class="text-zinc-500 text-[10px] font-bold uppercase tracking-[0.3em] drop-shadow-md">© 2026 // Forge Vertical</p>
+            <p class="text-zinc-500 text-[10px] font-bold uppercase tracking-[0.3em]">© 2026 // Forge Vertical</p>
         </div>
 
     </div>
