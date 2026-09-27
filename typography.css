@@ -133,3 +133,17 @@ footer li {
         font-size: 15px !important;
     }
 }
+
+/* ──────────────────────────────────────────────────────────────
+   BRAND GRADIENT — defined globally so injected components
+   (footer.html / nav.html) always render it, on every page.
+   Previously undefined, which left the footer's "Commence Build
+   Sequence" button (text-black on vibrant-gradient) invisible —
+   black text on a gradient that never painted. Also drives the
+   footer's top accent line.
+   ────────────────────────────────────────────────────────────── */
+.vibrant-gradient {
+    background-color: #84cc16; /* fallback if gradients unsupported */
+    background-image: linear-gradient(90deg, #10b981 0%, #84cc16 100%);
+    background-repeat: no-repeat;
+}
