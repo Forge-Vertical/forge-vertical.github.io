@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forge LeadGen | Built for the Future</title>
+    <meta name="description" content="A free global lead generation tool for extracting business contacts, websites, and phone numbers. Built by Forge Vertical.">
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Forge Vertical Global LeadGen Tool",
+      "alternateName": "Forge LeadGen",
+      "description": "A completely free global B2B lead generation tool for extracting business names, websites, and phone numbers worldwide. Designed as an accessible alternative to expensive SaaS platforms like Apollo AI, ZoomInfo, and Lusha.",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "WebBrowser",
+      "url": "https://www.forgevertical.com",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Forge Vertical",
+        "url": "https://www.forgevertical.com",
+        "founder": {
+          "@type": "Person",
+          "name": "Jarrit Hosking"
+        }
+      },
+      "isSimilarTo": [
+        {
+          "@type": "SoftwareApplication",
+          "name": "Apollo AI",
+          "url": "https://www.apollo.io"
+        },
+        {
+          "@type": "SoftwareApplication",
+          "name": "ZoomInfo",
+          "url": "https://www.zoominfo.com"
+        },
+        {
+          "@type": "SoftwareApplication",
+          "name": "Lusha",
+          "url": "https://www.lusha.com"
+        }
+      ],
+      "keywords": "free global lead gen tool, b2b lead generation, business email finder, Apollo AI alternative, ZoomInfo alternative, Lusha alternative, Forge Vertical, SaaS"
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        :root {
+            --bg:       #06080c;
+            --surface:  #0b0f14;
+            --surface2: #111620;
+            --border:   #1a2030;
+            --border2:  #232d3f;
+            --text:     #eef0f4;
+            --muted:    #3d4f6a;
+            --muted2:   #6a7d96;
+            --lime:     #84cc16;
+            --emerald:  #10b981;
+            --red:      #ef4444;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Outfit', sans-serif;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--muted); }
+
+        .g-text {
+            background: linear-gradient(100deg, var(--emerald) 0%, var(--lime) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: inline-block;
+        }
+
+        .s-eye {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 0.25em;
+            color: var(--muted2); margin-bottom: 18px;
+            display: flex; align-items: center; gap: 12px;
+        }
+        .s-eye::after {
+            content: ''; height: 1px; width: 60px; background: var(--border2);
+        }
+
+        .btn-p {
+            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+            background: linear-gradient(90deg, var(--emerald), var(--lime));
+            color: #06080c; padding: 13px 28px; border-radius: 10px; border: none; cursor: pointer;
+            font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 0.14em; text-decoration: none;
+            transition: opacity 0.18s; white-space: nowrap; width: 100%;
+        }
+        .btn-p:hover:not(:disabled) { opacity: 0.85; }
+        .btn-p:disabled { opacity: 0.5; cursor: not-allowed; }
+
+        .btn-g {
+            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+            background: transparent; border: 1px solid var(--border2); color: var(--muted2);
+            padding: 13px 24px; border-radius: 10px; cursor: pointer;
+            font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 0.14em; transition: all 0.18s;
+            white-space: nowrap; width: 100%;
+        }
+        .btn-g:hover:not(:disabled) { border-color: var(--muted2); color: var(--text); }
+        .btn-g:disabled { opacity: 0.5; cursor: not-allowed; }
+        
+        .btn-r { border-color: rgba(239, 68, 68, 0.3); color: var(--red); }
+        .btn-r:hover:not(:disabled) { border-color: var(--red); color: var(--red); background: rgba(239, 68, 68, 0.05); }
+
+        .fv-input {
+            width: 100%; padding: 12px 16px;
+            background: var(--surface2); border: 1px solid var(--border2);
+            color: var(--text); border-radius: 8px; font-family: 'Outfit', sans-serif;
+            font-size: 14px; outline: none; transition: border-color 0.2s;
+        }
+        .fv-input:focus { border-color: var(--lime); }
+        .fv-input::placeholder { color: var(--muted); }
+        .fv-label { 
+            font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700; 
+            color: var(--muted2); text-transform: uppercase; letter-spacing: 0.1em; 
+            display: block; margin-bottom: 8px; 
+        }
+
+        .app-container {
+            display: grid; grid-template-columns: 340px 1fr; gap: 32px;
+            padding: 40px 4vw; flex-grow: 1; max-width: 1600px; margin: 0 auto; width: 100%;
+        }
+        @media (max-width: 980px) {
+            .app-container { grid-template-columns: 1fr; padding: 24px 4vw; }
+        }
+
+        .sidebar { display: flex; flex-direction: column; gap: 32px; }
+        .panel { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 24px; }
+        .input-group { margin-bottom: 20px; }
+        .input-group:last-child { margin-bottom: 0; }
+
+        .tag { 
+            font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700; 
+            text-transform: uppercase; letter-spacing: 0.07em; padding: 10px 14px; 
+            border-radius: 6px; background: rgba(132,204,22,0.07); color: var(--lime); 
+            border: 1px solid rgba(132,204,22,0.14); text-decoration: none;
+            display: flex; align-items: center; justify-content: space-between;
+            transition: all 0.2s;
+        }
+        .tag:hover { background: rgba(132,204,22,0.15); }
+        .tag-row { display: flex; flex-direction: column; gap: 8px; }
+
+        .cmp-table { border: 1px solid var(--border); border-radius: 16px; overflow: hidden; background: var(--surface); height: fit-content; }
+        .cmp-head { 
+            display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr; 
+            background: var(--surface2); border-bottom: 1px solid var(--border); 
+        }
+        .cmp-hc { 
+            padding: 16px 20px; font-family: 'JetBrains Mono', monospace; font-size: 10px; 
+            font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; 
+            border-right: 1px solid var(--border); color: var(--muted2);
+        }
+        .cmp-hc:last-child { border-right: none; }
+        
+        .table-body { max-height: calc(100vh - 200px); overflow-y: auto; }
+        .cmp-row { 
+            display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr; 
+            border-bottom: 1px solid var(--border); transition: background 0.15s;
+        }
+        .cmp-row:hover { background: var(--surface2); }
+        .cmp-row:last-child { border-bottom: none; }
+        .cmp-c { 
+            padding: 16px 20px; font-size: 13px; display: flex; flex-direction: column; justify-content: center;
+            border-right: 1px solid var(--border); line-height: 1.6; word-break: break-word;
+        }
+        .cmp-c:last-child { border-right: none; }
+        
+        .empty-state { padding: 60px 20px; text-align: center; color: var(--muted2); font-size: 14px; }
+        .data-item { display: flex; align-items: center; gap: 8px; }
+        .data-icon { color: var(--muted); font-size: 11px; width: 14px; text-align: center; }
+
+        .modal-overlay {
+            position: fixed; inset: 0; background: rgba(6, 8, 12, 0.85); backdrop-filter: blur(4px);
+            display: flex; align-items: center; justify-content: center; z-index: 1000;
+            opacity: 0; pointer-events: none; transition: opacity 0.2s;
+        }
+        .modal-overlay.active { opacity: 1; pointer-events: all; }
+        .modal-content {
+            background: var(--surface); border: 1px solid var(--border2); border-radius: 16px;
+            padding: 32px; width: 100%; max-width: 400px; text-align: center;
+            transform: translateY(20px); transition: transform 0.2s;
+        }
+        .modal-overlay.active .modal-content { transform: translateY(0); }
+        .modal-title { font-size: 20px; font-weight: 700; margin-bottom: 12px; }
+        .modal-desc { font-size: 14px; color: var(--muted2); margin-bottom: 24px; line-height: 1.5; }
+        .modal-actions { display: flex; gap: 12px; }
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+        <aside class="sidebar">
+            <!-- Header Identity -->
+            <div>
+                <div class="s-eye">// Data Intelligence</div>
+                <h1 style="font-size: 32px; font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 8px;">
+                    Forge <span class="g-text">LeadGen</span>
+                </h1>
+                <p style="font-size: 14px; color: var(--muted2); line-height: 1.6;">Targeted global business extraction via OSM. Free forever.</p>
+            </div>
+
+            <!-- Search Panel -->
+            <div class="panel">
+                <div class="input-group">
+                    <label class="fv-label">Industry / Niche</label>
+                    <input type="text" id="industry" class="fv-input" placeholder="e.g. Plumber, Software, Real Estate">
+                </div>
+                <div class="input-group">
+                    <label class="fv-label">Location</label>
+                    <input type="text" id="location" class="fv-input" placeholder="e.g. Cape Town, London, Tokyo">
+                </div>
+                <div class="input-group">
+                    <label class="fv-label">Search Depth</label>
+                    <select id="searchDepth" class="fv-input" style="appearance: none; cursor: pointer;">
+                        <option value="20">20 Leads</option>
+                        <option value="40">40 Leads</option>
+                        <option value="60">60 Leads</option>
+                        <option value="80">80 Leads</option>
+                        <option value="100">100 Leads (Max)</option>
+                    </select>
+                </div>
+                <button id="btnGenerate" class="btn-p" style="margin-top: 12px;">Extract Leads →</button>
+            </div>
+
+            <!-- Actions Panel -->
+            <div class="panel" style="display: flex; flex-direction: column; gap: 12px;">
+                <div class="fv-label">Data Management</div>
+                <button id="btnExport" class="btn-g" disabled>
+                    <i class="fa-solid fa-download"></i> Export CSV
+                </button>
+                <button id="btnClear" class="btn-g btn-r" disabled>
+                    <i class="fa-solid fa-trash-can"></i> Clear Data
+                </button>
+            </div>
+
+            <!-- Affiliate Links Panel -->
+            <div class="panel">
+                <div class="fv-label" style="margin-bottom: 16px;">Recommended Tools</div>
+                <div class="tag-row">
+                    <a href="https://go.nordpass.io/aff_c?offer_id=488&aff_id=145959&url_id=9356" target="_blank" class="tag">
+                        <span><i class="fa-solid fa-key" style="margin-right: 8px;"></i>NordPass</span> <i class="fa-solid fa-arrow-right" style="font-size: 8px;"></i>
+                    </a>
+                    <a href="https://go.nordvpn.net/aff_c?offer_id=15&aff_id=145959&url_id=902" target="_blank" class="tag">
+                        <span><i class="fa-solid fa-shield-halved" style="margin-right: 8px;"></i>NordVPN</span> <i class="fa-solid fa-arrow-right" style="font-size: 8px;"></i>
+                    </a>
+                    <a href="https://get.surfshark.net/aff_c?offer_id=6&aff_id=4160" target="_blank" class="tag">
+                        <span><i class="fa-solid fa-water" style="margin-right: 8px;"></i>Surfshark</span> <i class="fa-solid fa-arrow-right" style="font-size: 8px;"></i>
+                    </a>
+                    <a href="https://portal.webway.host/aff.php?aff=353" target="_blank" class="tag">
+                        <span><i class="fa-solid fa-server" style="margin-right: 8px;"></i>Webway Host</span> <i class="fa-solid fa-arrow-right" style="font-size: 8px;"></i>
+                    </a>
+                </div>
+            </div>
+        </aside>
+
+        <main>
+            <div class="cmp-table">
+                <div class="cmp-head">
+                    <div class="cmp-hc">Business Name</div>
+                    <div class="cmp-hc">Phone Number</div>
+                    <div class="cmp-hc">Website</div>
+                    <div class="cmp-hc">Contact Name</div>
+                    <div class="cmp-hc">Email Address</div>
+                </div>
+                <div class="table-body" id="tableBody">
+                    <div class="empty-state">
+                        <i class="fa-solid fa-satellite-dish" style="font-size: 24px; color: var(--muted); margin-bottom: 12px; display: block;"></i>
+                        Awaiting parameters. Enter an industry and location to initialize real-time extraction via OSM.
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div class="modal-overlay" id="confirmModal">
+        <div class="modal-content">
+            <h3 class="modal-title text-white">Clear Extracted Data?</h3>
+            <p class="modal-desc">This will permanently delete all current leads from your local storage. This action cannot be undone.</p>
+            <div class="modal-actions">
+                <button class="btn-g" id="btnCancelClear">Cancel</button>
+                <button class="btn-p" style="background: var(--red); color: white;" id="btnConfirmClear">Yes, Clear Data</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // State Management
+        let currentLeads = [];
+        const STORAGE_KEY = 'forge_leadgen_real_data';
+
+        // DOM Elements
+        const elIndustry = document.getElementById('industry');
+        const elLocation = document.getElementById('location');
+        const elDepth = document.getElementById('searchDepth');
+        const btnGenerate = document.getElementById('btnGenerate');
+        const btnExport = document.getElementById('btnExport');
+        const btnClear = document.getElementById('btnClear');
+        const tableBody = document.getElementById('tableBody');
+        
+        // Modal Elements
+        const modal = document.getElementById('confirmModal');
+        const btnCancelClear = document.getElementById('btnCancelClear');
+        const btnConfirmClear = document.getElementById('btnConfirmClear');
+
+        async function fetchRealData(niche, location, maxLeads) {
+            try {
+                // Step 1: Geocode location using Nominatim API
+                const nomUrl = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(location)}&format=json&limit=1`;
+                const nomRes = await fetch(nomUrl);
+                const nomData = await nomRes.json();
+                
+                if (!nomData || nomData.length === 0) {
+                    throw new Error("Location not found. Try a different city or region.");
+                }
+
+                const lat = nomData[0].lat;
+                const lon = nomData[0].lon;
+                
+                // Format niche for Overpass regex (safe alphanumeric)
+                const safeNiche = niche.replace(/[^a-zA-Z0-9\s]/g, "").trim().replace(/\s+/g, "|");
+
+                // Step 2: Fetch POIs using Overpass API
+                // Bounding search around the coordinate (25km radius).
+                const query = `
+                    [out:json][timeout:25];
+                    (
+                      node(around:25000, ${lat}, ${lon})["name"~"${safeNiche}",i];
+                      way(around:25000, ${lat}, ${lon})["name"~"${safeNiche}",i];
+                      node(around:25000, ${lat}, ${lon})["shop"~"${safeNiche}",i];
+                      node(around:25000, ${lat}, ${lon})["office"~"${safeNiche}",i];
+                      node(around:25000, ${lat}, ${lon})["amenity"~"${safeNiche}",i];
+                    );
+                    out center ${maxLeads};
+                `;
+
+                const opUrl = 'https://overpass-api.de/api/interpreter';
+                const opRes = await fetch(opUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: `data=${encodeURIComponent(query)}`
+                });
+
+                if (!opRes.ok) throw new Error("API rate limit or connection issue.");
+                const opData = await opRes.json();
+
+                if (!opData.elements || opData.elements.length === 0) {
+                    return [];
+                }
+
+                // Step 3: Parse and format data
+                return opData.elements.map(el => {
+                    const tags = el.tags || {};
+                    let phone = tags.phone || tags['contact:phone'] || "N/A";
+                    let website = tags.website || tags['contact:website'] || "N/A";
+                    let name = tags.name || "Unknown Business";
+
+                    return {
+                        bizName: name,
+                        phone: phone,
+                        website: website,
+                        contactName: "Requires Backend Enrichment",
+                        email: "N/A (Add API)"
+                    };
+                }).filter(lead => lead.bizName !== "Unknown Business");
+
+            } catch (error) {
+                console.error(error);
+                throw error;
+            }
+        }
+
+        function renderTable(message = "") {
+            if (message) {
+                tableBody.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fa-solid fa-circle-info" style="font-size: 24px; color: var(--muted); margin-bottom: 12px; display: block;"></i>
+                        ${message}
+                    </div>
+                `;
+                return;
+            }
+
+            if (currentLeads.length === 0) {
+                tableBody.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fa-solid fa-satellite-dish" style="font-size: 24px; color: var(--muted); margin-bottom: 12px; display: block;"></i>
+                        No matching businesses found in this area. Try broadening your search.
+                    </div>
+                `;
+                btnExport.disabled = true;
+                btnClear.disabled = true;
+                return;
+            }
+
+            tableBody.innerHTML = '';
+            currentLeads.forEach(lead => {
+                const row = document.createElement('div');
+                row.className = 'cmp-row';
+                
+                const phoneHtml = lead.phone !== "N/A" 
+                    ? `<div class="data-item"><i class="fa-solid fa-phone data-icon"></i><span class="mono" style="color: var(--muted2);">${lead.phone}</span></div>`
+                    : `<span style="color: var(--muted);">N/A</span>`;
+                
+                const webHtml = lead.website !== "N/A"
+                    ? `<a href="${lead.website.startsWith('http') ? lead.website : 'http://'+lead.website}" target="_blank" style="color: var(--lime); text-decoration: none;"><div class="data-item"><i class="fa-solid fa-globe data-icon"></i>Visit Site</div></a>`
+                    : `<span style="color: var(--muted);">N/A</span>`;
+
+                row.innerHTML = `
+                    <div class="cmp-c" style="color: var(--text); font-weight: 500;">${lead.bizName}</div>
+                    <div class="cmp-c">${phoneHtml}</div>
+                    <div class="cmp-c">${webHtml}</div>
+                    <div class="cmp-c" style="color: var(--muted2); font-size: 11px;"><i class="fa-solid fa-lock data-icon"></i> ${lead.contactName}</div>
+                    <div class="cmp-c" style="color: var(--muted2); font-size: 11px;"><i class="fa-solid fa-lock data-icon"></i> ${lead.email}</div>
+                `;
+                tableBody.appendChild(row);
+            });
+
+            btnExport.disabled = false;
+            btnClear.disabled = false;
+        }
+
+        function loadData() {
+            const saved = localStorage.getItem(STORAGE_KEY);
+            if (saved) {
+                try {
+                    currentLeads = JSON.parse(saved);
+                    if (currentLeads.length > 0) renderTable();
+                } catch(e) { console.error("Error loading saved data"); }
+            }
+        }
+        function saveData() {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(currentLeads));
+        }
+
+        btnGenerate.addEventListener('click', async () => {
+            const ind = elIndustry.value;
+            const loc = elLocation.value;
+            
+            if (!ind || !loc) {
+                const originalText = btnGenerate.innerHTML;
+                btnGenerate.innerHTML = "Inputs Required";
+                btnGenerate.style.background = "var(--red)";
+                setTimeout(() => {
+                    btnGenerate.innerHTML = originalText;
+                    btnGenerate.style.background = "";
+                }, 1500);
+                return;
+            }
+
+            const count = parseInt(elDepth.value, 10) || 20;
+            
+            btnGenerate.innerHTML = "<i class='fa-solid fa-circle-notch fa-spin'></i> Extracting...";
+            btnGenerate.disabled = true;
+            renderTable("Querying mapping networks... This can take 5-10 seconds.");
+
+            try {
+                const newLeads = await fetchRealData(ind, loc, count);
+                currentLeads = newLeads;
+                saveData();
+                renderTable();
+            } catch (err) {
+                renderTable(err.message || "An error occurred during extraction.");
+            } finally {
+                btnGenerate.innerHTML = "Extract Leads →";
+                btnGenerate.disabled = false;
+            }
+        });
+
+        btnExport.addEventListener('click', () => {
+            if (currentLeads.length === 0) return;
+            
+            let csv = "Business Name,Phone Number,Website,Contact Name,Email Address\n";
+            currentLeads.forEach(lead => {
+                const escape = str => `"${String(str).replace(/"/g, '""')}"`;
+                csv += `${escape(lead.bizName)},${escape(lead.phone)},${escape(lead.website)},${escape(lead.contactName)},${escape(lead.email)}\n`;
+            });
+
+            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.setAttribute('href', url);
+            link.setAttribute('download', `Forge_Real_Leads_${Date.now()}.csv`);
+            link.style.display = 'none';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        });
+
+        btnClear.addEventListener('click', () => { modal.classList.add('active'); });
+        btnCancelClear.addEventListener('click', () => { modal.classList.remove('active'); });
+        btnConfirmClear.addEventListener('click', () => {
+            currentLeads = [];
+            saveData();
+            tableBody.innerHTML = `
+                <div class="empty-state">
+                    <i class="fa-solid fa-satellite-dish" style="font-size: 24px; color: var(--muted); margin-bottom: 12px; display: block;"></i>
+                    Data cleared. Enter parameters to extract anew.
+                </div>
+            `;
+            btnExport.disabled = true;
+            btnClear.disabled = true;
+            modal.classList.remove('active');
+        });
+
+        // Initialize App
+        loadData();
+    </script>
+</body>
+</html>
