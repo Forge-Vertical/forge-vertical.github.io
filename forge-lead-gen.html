@@ -152,24 +152,6 @@
             <input type="text" id="location" placeholder="e.g. Cape Town, or Austin TX" class="block w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 text-sm">
           </div>
           <div>
-            <div class="flex items-center justify-between mb-1">
-              <label for="googleApiKey" class="block text-sm font-medium text-slate-700">Google Places API key <span class="text-slate-400 font-normal text-xs">(optional)</span></label>
-              <button type="button" id="clearKeyBtn" class="text-[11px] text-slate-400 hover:text-red-500 font-medium">Forget key</button>
-            </div>
-            <input type="password" id="googleApiKey" autocomplete="off" placeholder="AIzaSy…  (blank = use Google search)" class="block w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 text-sm mono">
-            <p class="text-[11px] text-slate-500 mt-1 leading-relaxed">Add your own key to pull <b>real</b> businesses straight into the table (name, phone, website, rating, address). It's used only for your search, <b>never stored and never sent to us</b> — when it's done its job, hit <b>Forget key</b> and revoke it in Google Cloud. No key? Use <b>Google Business Search</b> below.</p>
-            <details class="mt-2 rounded-lg border border-slate-200 bg-slate-50">
-              <summary class="cursor-pointer px-3 py-2 text-xs font-semibold text-emerald-700 select-none"><i class="fa-solid fa-circle-info mr-1"></i> How to get a free Google key (~5 min)</summary>
-              <div class="px-3 pb-3 pt-1 text-[11px] text-slate-600 leading-relaxed space-y-1.5">
-                <p><b>1.</b> Open <span class="mono">console.cloud.google.com</span> and create a project (free).</p>
-                <p><b>2.</b> Under APIs &amp; Services, enable <b>“Places API (New)”</b>.</p>
-                <p><b>3.</b> Under Credentials, create an <b>API key</b> and restrict it to the Places API + your own site.</p>
-                <p><b>4.</b> Turn on billing (Google requires it). New accounts get <b>$300 free credit</b> plus a monthly free allowance — light use is typically $0.</p>
-                <p><b>5.</b> Paste the key above, search, then <b>Forget key</b> &amp; revoke it when done.</p>
-              </div>
-            </details>
-          </div>
-          <div>
             <label for="searchDepth" class="block text-sm font-medium text-slate-700 mb-1">Results</label>
             <select id="searchDepth" class="block w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-500 text-sm bg-white">
               <option value="20">20 (fast)</option>
@@ -177,6 +159,29 @@
               <option value="60">60 (max)</option>
             </select>
           </div>
+          <details class="rounded-lg border border-slate-200 bg-slate-50">
+            <summary class="cursor-pointer px-3 py-2 text-xs font-semibold text-slate-700 select-none"><i class="fa-solid fa-sliders mr-1" style="color:var(--emerald)"></i> Advanced targeting</summary>
+            <div class="px-3 pb-3 pt-1 space-y-3">
+              <div class="grid grid-cols-2 gap-2">
+                <div>
+                  <label class="block text-[11px] font-medium text-slate-600 mb-1">Min rating</label>
+                  <select id="advMinRating" class="w-full px-2 py-1.5 border border-slate-300 rounded-md text-xs bg-white">
+                    <option value="">Any</option><option value="3.5">3.5+</option><option value="4">4.0+</option><option value="4.5">4.5+</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-[11px] font-medium text-slate-600 mb-1">Country code</label>
+                  <input id="advRegion" maxlength="2" placeholder="ZA, US…" class="w-full px-2 py-1.5 border border-slate-300 rounded-md text-xs uppercase mono">
+                </div>
+              </div>
+              <div>
+                <label class="block text-[11px] font-medium text-slate-600 mb-1">Extra keywords</label>
+                <input id="advKeywords" placeholder="e.g. commercial, emergency, 24/7" class="w-full px-2 py-1.5 border border-slate-300 rounded-md text-xs">
+              </div>
+              <label class="flex items-center gap-2 text-[11px] text-slate-600"><input type="checkbox" id="advOpenNow" class="rounded"> Open now only</label>
+              <label class="flex items-center gap-2 text-[11px] text-slate-600"><input type="checkbox" id="advHasSite" class="rounded"> Only businesses with a website</label>
+            </div>
+          </details>
           <button id="searchBtn" class="w-full grad text-black font-bold py-2.5 px-4 rounded-lg transition hover:opacity-90 flex justify-center items-center gap-2 mono text-xs uppercase tracking-widest">
             <i class="fa-solid fa-bolt"></i> Search leads
           </button>
@@ -187,6 +192,53 @@
             </button>
             <p class="text-[11px] text-slate-400 mt-1 leading-relaxed">Opens a real Google Maps search for your niche + location in a new tab — genuine public listings you browse yourself. Nothing is invented, scraped or stored.</p>
           </div>
+        </div>
+      </div>
+
+      <!-- API keys -->
+      <div class="bg-white rounded-xl shadow-md border border-slate-200 overflow-hidden">
+        <div class="bg-slate-50 border-b border-slate-200 px-6 py-4">
+          <h2 class="text-lg font-semibold text-slate-700"><i class="fa-solid fa-key mr-2" style="color:var(--emerald)"></i> Your API keys</h2>
+        </div>
+        <div class="p-6 space-y-5">
+          <p class="text-xs text-slate-500 leading-relaxed">Add the keys you have — they're all used <b>together</b> in one search to fill each row. Entered manually, used only for your search, <b>never stored or sent to us</b>.</p>
+
+          <!-- Places -->
+          <div>
+            <div class="flex items-center justify-between mb-1">
+              <label for="googleApiKey" class="block text-sm font-semibold text-slate-700">Google Places <span class="text-slate-400 font-normal text-xs">· businesses</span></label>
+              <button type="button" id="clearKeyBtn" class="text-[11px] text-slate-400 hover:text-red-500 font-medium">Forget</button>
+            </div>
+            <input type="password" id="googleApiKey" autocomplete="off" placeholder="AIzaSy…" class="block w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-500 text-sm mono">
+            <div class="flex flex-wrap items-center gap-x-3 gap-y-1 mt-1">
+              <a href="https://developers.google.com/maps/documentation/places/web-service/get-api-key" target="_blank" rel="noopener" class="text-[11px] font-semibold text-emerald-600 hover:underline">Get key ↗</a>
+              <span class="text-[11px] text-slate-400">Name, phone, website, rating, address</span>
+            </div>
+            <details class="mt-2 rounded-lg border border-slate-200 bg-slate-50">
+              <summary class="cursor-pointer px-3 py-2 text-[11px] font-semibold text-emerald-700 select-none"><i class="fa-solid fa-circle-info mr-1"></i> How to get it (~5 min, usually free)</summary>
+              <div class="px-3 pb-3 pt-1 text-[11px] text-slate-600 leading-relaxed space-y-1.5">
+                <p><b>1.</b> Open <span class="mono">console.cloud.google.com</span>, create a project.</p>
+                <p><b>2.</b> Enable <b>“Places API (New)”</b> under APIs &amp; Services.</p>
+                <p><b>3.</b> Create an <b>API key</b> under Credentials; restrict it to the Places API + your site.</p>
+                <p><b>4.</b> Enable billing — new accounts get <b>$300 free</b> + a monthly free tier, so light use is ~$0.</p>
+              </div>
+            </details>
+          </div>
+
+          <!-- Hunter -->
+          <div class="pt-4 border-t border-slate-100">
+            <div class="flex items-center justify-between mb-1">
+              <label for="hunterKey" class="block text-sm font-semibold text-slate-700">Hunter.io <span class="text-slate-400 font-normal text-xs">· emails + names + titles</span></label>
+              <button type="button" id="clearHunterBtn" class="text-[11px] text-slate-400 hover:text-red-500 font-medium">Forget</button>
+            </div>
+            <input type="password" id="hunterKey" autocomplete="off" placeholder="Hunter API key" class="block w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-500 text-sm mono">
+            <div class="flex flex-wrap items-center gap-x-3 gap-y-1 mt-1">
+              <a href="https://hunter.io/api-keys" target="_blank" rel="noopener" class="text-[11px] font-semibold text-emerald-600 hover:underline">Get key ↗</a>
+              <span class="text-[11px] text-slate-400">Fills Email + Contact (Owner, CEO…). Free ≈ 25/mo</span>
+            </div>
+          </div>
+
+          <p class="text-[11px] text-slate-400 leading-relaxed pt-1">Want more sources (verification, phone, company data) in the same row? <a href="https://www.forgevertical.com/onboard.html" class="text-emerald-600 hover:underline">Tell us what you use</a> and we'll wire it in.</p>
         </div>
       </div>
 
@@ -235,6 +287,8 @@
             <thead class="bg-slate-50">
               <tr>
                 <th class="px-4 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">Business</th>
+                <th class="px-4 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">Contact</th>
+                <th class="px-4 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">Email</th>
                 <th class="px-4 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">Phone</th>
                 <th class="px-4 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">Website</th>
                 <th class="px-4 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">Rating</th>
@@ -242,7 +296,7 @@
               </tr>
             </thead>
             <tbody id="resultsTableBody" class="bg-white divide-y divide-slate-100">
-              <tr id="emptyStateRow"><td colspan="5" class="px-6 py-16 text-center text-slate-400"><i class="fa-solid fa-folder-open text-4xl mb-3 text-slate-300"></i><p class="text-sm">No leads yet. Enter an industry and location, then Search.</p></td></tr>
+              <tr id="emptyStateRow"><td colspan="7" class="px-6 py-16 text-center text-slate-400"><i class="fa-solid fa-folder-open text-4xl mb-3 text-slate-300"></i><p class="text-sm">No leads yet. Enter an industry and location, then Search.</p></td></tr>
             </tbody>
           </table>
         </div>
@@ -349,7 +403,8 @@ function setStatus(msg, ok){
 }
 
 // ---- Google Places API (New) — live, client-side ----
-async function fetchPlaces(query, apiKey, depth){
+async function fetchPlaces(query, apiKey, depth, opts){
+  opts = opts || {};
   const url = 'https://places.googleapis.com/v1/places:searchText';
   const fieldMask = [
     'places.displayName','places.formattedAddress','places.nationalPhoneNumber',
@@ -360,6 +415,9 @@ async function fetchPlaces(query, apiKey, depth){
   const pages = Math.min(Math.ceil(depth/20), 3);
   for(let i=0;i<pages;i++){
     const body = { textQuery: query, pageSize: 20 };
+    if(opts.minRating) body.minRating = parseFloat(opts.minRating);
+    if(opts.openNow) body.openNow = true;
+    if(opts.regionCode) body.regionCode = opts.regionCode.toLowerCase();
     if(pageToken) body.pageToken = pageToken;
     const res = await fetch(url, { method:'POST',
       headers:{ 'Content-Type':'application/json','X-Goog-Api-Key':apiKey,'X-Goog-FieldMask':fieldMask },
@@ -368,6 +426,7 @@ async function fetchPlaces(query, apiKey, depth){
     const data = await res.json();
     (data.places||[]).forEach(p => out.push({
       name: (p.displayName && p.displayName.text) || '—',
+      contact: '', title: '', email: '',
       phone: p.nationalPhoneNumber || p.internationalPhoneNumber || '',
       website: p.websiteUri || '',
       rating: p.rating ? (p.rating + ' (' + (p.userRatingCount||0) + ')') : '',
@@ -378,7 +437,32 @@ async function fetchPlaces(query, apiKey, depth){
     if(!pageToken) break;
     await new Promise(r=>setTimeout(r,1600)); // token needs a moment to activate
   }
-  return out.slice(0, depth);
+  let leads = out.slice(0, depth);
+  if(opts.hasSite) leads = leads.filter(l => l.website);
+  return leads;
+}
+
+// ---- Optional email enrichment via Hunter.io — real data only, never invented ----
+async function enrichWithHunter(leads, hunterKey, cap){
+  let found = 0;
+  const targets = leads.filter(l => l.website).slice(0, cap);
+  for(const l of targets){
+    try{
+      const domain = l.website.replace(/^https?:\/\//,'').replace(/\/.*$/,'').replace(/^www\./,'');
+      if(!domain) continue;
+      const res = await fetch('https://api.hunter.io/v2/domain-search?limit=1&domain='+encodeURIComponent(domain)+'&api_key='+encodeURIComponent(hunterKey));
+      if(!res.ok) continue;
+      const data = await res.json();
+      const e = data && data.data && data.data.emails && data.data.emails[0];
+      if(e && e.value){
+        l.email = e.value;
+        l.contact = [e.first_name, e.last_name].filter(Boolean).join(' ');
+        l.title = e.position || '';
+        found++;
+      }
+    }catch(err){ /* skip — never invent */ }
+  }
+  return found;
 }
 
 // ---- no fake data: results come only from the real Places API or Google search ----
@@ -388,7 +472,7 @@ function render(){
   tableBody.innerHTML='';
   demoTag.classList.toggle('hidden', !isDemo);
   if(!currentLeads.length){
-    tableBody.innerHTML = '<tr id="emptyStateRow"><td colspan="5" class="px-6 py-16 text-center text-slate-400"><i class="fa-solid fa-folder-open text-4xl mb-3 text-slate-300"></i><p class="text-sm">No leads yet. Enter an industry and location, then Search.</p></td></tr>';
+    tableBody.innerHTML = '<tr id="emptyStateRow"><td colspan="7" class="px-6 py-16 text-center text-slate-400"><i class="fa-solid fa-folder-open text-4xl mb-3 text-slate-300"></i><p class="text-sm">No leads yet. Enter an industry and location, then Search.</p></td></tr>';
     countEl.textContent='0'; [btnCsv,btnPdf,btnClear].forEach(b=>b.disabled=true); return;
   }
   countEl.textContent = currentLeads.length;
@@ -397,8 +481,12 @@ function render(){
     const tr=document.createElement('tr'); tr.className='hover:bg-slate-50';
     const web = l.website ? '<a href="'+l.website+'" target="_blank" rel="noopener" class="text-emerald-600 hover:underline break-all">'+l.website.replace(/^https?:\/\//,'')+'</a>' : '<span class="text-slate-300">—</span>';
     const addr = l.maps ? '<a href="'+l.maps+'" target="_blank" rel="noopener" class="hover:underline">'+(l.address||'View on Maps')+'</a>' : (l.address||'—');
+    const contact = l.contact ? ('<span class="text-slate-700">'+l.contact+'</span>' + (l.title ? '<br><span class="text-[11px] text-slate-400">'+l.title+'</span>' : '')) : '<span class="text-slate-300">—</span>';
+    const email = l.email ? '<a href="mailto:'+l.email+'" class="text-emerald-600 hover:underline break-all">'+l.email+'</a>' : '<span class="text-slate-300">—</span>';
     tr.innerHTML =
       '<td class="px-4 py-3 font-semibold text-slate-900">'+l.name+'</td>'+
+      '<td class="px-4 py-3 text-xs">'+contact+'</td>'+
+      '<td class="px-4 py-3 text-xs">'+email+'</td>'+
       '<td class="px-4 py-3 mono text-slate-600 whitespace-nowrap">'+(l.phone||'<span class="text-slate-300">—</span>')+'</td>'+
       '<td class="px-4 py-3">'+web+'</td>'+
       '<td class="px-4 py-3 text-slate-600 whitespace-nowrap">'+(l.rating||'—')+'</td>'+
@@ -417,12 +505,29 @@ btnSearch.addEventListener('click', async ()=>{
     setStatus('No API key yet — grab a free one using the guide above to pull real businesses into the table, or use “Google Business Search” below to browse real listings now. This tool never invents data.', false);
     return;
   }
+  const opts = {
+    minRating: $('advMinRating').value,
+    openNow: $('advOpenNow').checked,
+    regionCode: $('advRegion').value.trim(),
+    hasSite: $('advHasSite').checked
+  };
+  const kw = $('advKeywords').value.trim();
+  const hunterKey = $('hunterKey').value.trim();
+  let query = ind + ' in ' + loc; if(kw) query += ' ' + kw;
   isSearching=true; btnSearch.innerHTML='<div class="spinner mr-2"></div> Searching…'; setStatus('');
   try{
-    const leads = await fetchPlaces(ind + ' in ' + loc, key, depth);
+    const leads = await fetchPlaces(query, key, depth, opts);
     currentLeads = leads; isDemo=false;
-    setStatus(leads.length ? leads.length+' real businesses found.' : 'No results — try a broader search.');
     save(); render();
+    if(!leads.length){ setStatus('No results — try a broader search or fewer filters.'); }
+    else if(hunterKey){
+      setStatus('Found '+leads.length+' — finding real emails via Hunter…');
+      const n = await enrichWithHunter(leads, hunterKey, 10);
+      save(); render();
+      setStatus(leads.length+' businesses · '+n+' real email'+(n===1?'':'s')+' found (first 10 with a website). Blank = none found — never invented.');
+    } else {
+      setStatus(leads.length+' real businesses found. Add a Hunter.io key in Advanced targeting to pull emails.');
+    }
   }catch(err){
     setStatus('Live search failed. Check the key has Places API (New) + billing enabled and allows this site — or use “Google Business Search”. ('+err.message+')', false);
   }finally{
@@ -434,7 +539,8 @@ btnSearch.addEventListener('click', async ()=>{
 $('googleSearchBtn').addEventListener('click', ()=>{
   const ind=$('industry').value.trim(), loc=$('location').value.trim();
   if(!ind||!loc){ setStatus('Enter an industry and a location first.', false); return; }
-  const url = 'https://www.google.com/maps/search/' + encodeURIComponent(ind + ' in ' + loc);
+  const kw = $('advKeywords').value.trim();
+  const url = 'https://www.google.com/maps/search/' + encodeURIComponent(ind + ' in ' + loc + (kw ? ' ' + kw : ''));
   window.open(url, '_blank', 'noopener');
   setStatus('Opened a real Google Maps search in a new tab — browse genuine listings there.');
 });
@@ -445,8 +551,8 @@ btnClear.addEventListener('click', ()=>{ currentLeads=[]; isDemo=false; save(); 
 btnCsv.addEventListener('click', ()=>{
   if(!currentLeads.length) return;
   const esc=s=>'"'+String(s==null?'':s).replace(/"/g,'""')+'"';
-  const rows=[['Business','Phone','Website','Rating','Address','Maps'].join(',')];
-  currentLeads.forEach(l=>rows.push([l.name,l.phone,l.website,l.rating,l.address,l.maps].map(esc).join(',')));
+  const rows=[['Business','Contact','Title','Email','Phone','Website','Rating','Address','Maps'].join(',')];
+  currentLeads.forEach(l=>rows.push([l.name,l.contact,l.title,l.email,l.phone,l.website,l.rating,l.address,l.maps].map(esc).join(',')));
   const blob=new Blob([rows.join('\n')],{type:'text/csv;charset=utf-8;'});
   const a=document.createElement('a'); a.href=URL.createObjectURL(blob);
   a.download=(($('industry').value||'leads')+'_'+($('location').value||'list')).replace(/\s+/g,'_')+(isDemo?'_DEMO':'')+'.csv';
@@ -464,6 +570,7 @@ btnPdf.addEventListener('click', ()=>{
 });
 
 $('clearKeyBtn').addEventListener('click', ()=>{ $('googleApiKey').value=''; setStatus('Key cleared. Revoke it in Google Cloud if you\u2019re done with it.'); });
+$('clearHunterBtn').addEventListener('click', ()=>{ $('hunterKey').value=''; setStatus('Hunter key cleared.'); });
 
 load();
 </script>
