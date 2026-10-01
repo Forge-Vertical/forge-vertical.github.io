@@ -166,51 +166,6 @@
     </div>
 </div>
 
-<!-- Firebase SDK (compat) — loads once, available to auth-modal.js -->
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
-<script>
-  // Initialise Firebase (safe to call multiple times — checks if already done)
-  if (!window._fvFirebaseInit) {
-    window._fvFirebaseInit = true;
-    firebase.initializeApp({
-      apiKey:            "AIzaSyBTilhnShlJ5SyOeBOOrlLalDPjtNs2TJs",
-      authDomain:        "forge-vertical.firebaseapp.com",
-      projectId:         "forge-vertical",
-      storageBucket:     "forge-vertical.firebasestorage.app",
-      messagingSenderId: "868451682331",
-      appId:             "1:868451682331:web:28c7bda02648624b7cd0be",
-      measurementId:     "G-ZVXJ25BS8Z"
-    });
-  }
-</script>
-
-<!-- Auth modal logic -->
-<script src="/auth-modal.js"></script>
-
-<script>
-    (function() {
-        const btn = document.getElementById('scroll-top-btn');
-        if (!btn) return;
-        window.addEventListener('scroll', () => {
-            btn.classList.toggle('visible', window.scrollY > 400);
-        }, { passive: true });
-        btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-    })();
-
-    function toggleMobileMenu() {
-        const menu = document.getElementById('mobile-menu');
-        const bar1 = document.getElementById('bar-1');
-        const bar2 = document.getElementById('bar-2');
-        const bar3 = document.getElementById('bar-3');
-        menu.classList.toggle('translate-x-full');
-        const open = !menu.classList.contains('translate-x-full');
-        bar1.style.transform = open ? 'translateY(8px) rotate(45deg)' : 'none';
-        bar2.style.opacity   = open ? '0' : '1';
-        bar3.style.transform = open ? 'translateY(-8px) rotate(-45deg)' : 'none';
-    }
-</script>
-
 <!-- Scroll to top button -->
 <style>
     #scroll-top-btn {
