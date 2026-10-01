@@ -9,7 +9,6 @@
         border-bottom: 1px solid rgba(255,255,255,0.08);
     }
 
-    /* ── LINKS — always white/light, lime on hover ── */
     #nav-wrapper .nav-link {
         color: rgba(220, 228, 240, 0.85);
         transition: color 0.18s;
@@ -22,7 +21,6 @@
     }
     #nav-wrapper .nav-link:hover { color: #84cc16; }
 
-    /* ── CTA BUTTON ── */
     #nav-wrapper .nav-cta {
         background: linear-gradient(90deg, #10b981, #84cc16);
         color: #06080c;
@@ -39,13 +37,33 @@
     }
     #nav-wrapper .nav-cta:hover { opacity: 0.85; }
 
-    /* ── HAMBURGER BARS ── */
+    /* Login button */
+    #nav-wrapper .nav-login {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 10px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
+        color: rgba(220, 228, 240, 0.85);
+        background: none;
+        border: 1px solid rgba(132,204,22,0.3);
+        border-radius: 8px;
+        padding: 8px 18px;
+        cursor: pointer;
+        transition: all 0.18s;
+        white-space: nowrap;
+        text-decoration: none;
+    }
+    #nav-wrapper .nav-login:hover {
+        border-color: #84cc16;
+        color: #84cc16;
+    }
+
     #nav-wrapper .bar {
         background: rgba(220,228,240,0.85);
         transition: all 0.3s;
     }
 
-    /* ── BADGES ── */
     .nav-pulse {
         display: inline-block;
         width: 5px; height: 5px;
@@ -56,6 +74,28 @@
     @keyframes navPulse {
         0%, 100% { opacity: 1; transform: scale(1); }
         50% { opacity: 0.5; transform: scale(0.7); }
+    }
+
+    /* Hub badge */
+    .nav-hub-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        color: #84cc16;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 10px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
+        text-decoration: none;
+        transition: opacity 0.18s;
+    }
+    .nav-hub-badge:hover { opacity: 0.8; }
+    .nav-hub-badge .hub-dot {
+        width: 5px; height: 5px;
+        background: #84cc16;
+        border-radius: 50%;
+        animation: navPulse 1.5s ease-in-out infinite;
     }
 </style>
 
@@ -77,12 +117,15 @@
                 <a href="/index.html#services" class="nav-link">Services</a>
                 <a href="/portfolio.html" class="nav-link">Portfolio</a>
                 <a href="/articles.html" class="nav-link">Articles</a>
-                <a href="/security-intelligence.html" class="nav-link">Security</a>
+                <a href="/business-tech/articles.html" class="nav-hub-badge">
+                    <span class="hub-dot"></span>The Hub
+                </a>
                 <a href="/directory/directory.html" class="nav-link">Directory</a>
                 <a href="/tools/revenue-audit.html" class="nav-link flex items-center gap-2">
-                    Audit Tool<span class="nav-pulse"></span>
+                    Audit<span class="nav-pulse"></span>
                 </a>
-                <a href="/onboard.html" class="nav-cta ml-2">
+                <button id="fv-nav-login-btn" class="nav-login" onclick="fvOpenModal('login')">Login</button>
+                <a href="/free-quote.html" class="nav-cta ml-1">
                     Start a project
                 </a>
             </div>
@@ -102,11 +145,18 @@
                 <a href="/index.html#services" onclick="toggleMobileMenu()" class="text-xl font-bold uppercase tracking-widest text-zinc-200 hover:text-[#84cc16] transition-colors" style="font-family:'JetBrains Mono',monospace;">Services</a>
                 <a href="/portfolio.html" onclick="toggleMobileMenu()" class="text-xl font-bold uppercase tracking-widest text-zinc-200 hover:text-[#84cc16] transition-colors" style="font-family:'JetBrains Mono',monospace;">Portfolio</a>
                 <a href="/articles.html" onclick="toggleMobileMenu()" class="text-xl font-bold uppercase tracking-widest text-zinc-200 hover:text-[#84cc16] transition-colors" style="font-family:'JetBrains Mono',monospace;">Articles</a>
-                <a href="/security-intelligence.html" onclick="toggleMobileMenu()" class="text-xl font-bold uppercase tracking-widest text-zinc-200 hover:text-[#84cc16] transition-colors" style="font-family:'JetBrains Mono',monospace;">Security</a>
+                <a href="/business-tech/articles.html" onclick="toggleMobileMenu()" class="text-xl font-bold uppercase tracking-widest text-[#84cc16] flex items-center justify-center gap-3" style="font-family:'JetBrains Mono',monospace;">
+                    <span class="w-2 h-2 bg-[#84cc16] rounded-full animate-pulse"></span>The Hub
+                </a>
                 <a href="/directory/directory.html" onclick="toggleMobileMenu()" class="text-xl font-bold uppercase tracking-widest text-zinc-200 hover:text-[#84cc16] transition-colors" style="font-family:'JetBrains Mono',monospace;">Directory</a>
                 <a href="/tools/revenue-audit.html" onclick="toggleMobileMenu()" class="text-xl font-bold uppercase tracking-widest text-[#84cc16]" style="font-family:'JetBrains Mono',monospace;">Audit Tool</a>
-                <a href="/onboard.html" onclick="toggleMobileMenu()"
-                    class="mt-4 px-8 py-4 rounded-xl font-bold uppercase tracking-widest text-sm"
+                <button onclick="toggleMobileMenu(); setTimeout(()=>fvOpenModal('login'),300);"
+                    class="text-xl font-bold uppercase tracking-widest text-zinc-200 hover:text-[#84cc16] transition-colors border border-[rgba(132,204,22,0.3)] px-8 py-3 rounded-xl"
+                    style="font-family:'JetBrains Mono',monospace;background:none;cursor:pointer;">
+                    Login
+                </button>
+                <a href="/free-quote.html" onclick="toggleMobileMenu()"
+                    class="mt-2 px-8 py-4 rounded-xl font-bold uppercase tracking-widest text-sm"
                     style="background:linear-gradient(90deg,#10b981,#84cc16);color:#06080c;font-family:'JetBrains Mono',monospace;">
                     Start a project
                 </a>
@@ -116,10 +166,29 @@
     </div>
 </div>
 
+<!-- Firebase SDK (compat) — loads once, available to auth-modal.js -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
 <script>
-    // Nav is not sticky — no scroll listener needed
+  // Initialise Firebase (safe to call multiple times — checks if already done)
+  if (!window._fvFirebaseInit) {
+    window._fvFirebaseInit = true;
+    firebase.initializeApp({
+      apiKey:            "AIzaSyBTilhnShlJ5SyOeBOOrlLalDPjtNs2TJs",
+      authDomain:        "forge-vertical.firebaseapp.com",
+      projectId:         "forge-vertical",
+      storageBucket:     "forge-vertical.firebasestorage.app",
+      messagingSenderId: "868451682331",
+      appId:             "1:868451682331:web:28c7bda02648624b7cd0be",
+      measurementId:     "G-ZVXJ25BS8Z"
+    });
+  }
+</script>
 
-    // ── Scroll to top button ─────────────────────────────
+<!-- Auth modal logic -->
+<script src="/auth-modal.js"></script>
+
+<script>
     (function() {
         const btn = document.getElementById('scroll-top-btn');
         if (!btn) return;
@@ -169,13 +238,8 @@
         transform: translateY(0);
         pointer-events: auto;
     }
-    #scroll-top-btn:hover {
-        box-shadow: 0 6px 28px rgba(132,204,22,0.4);
-    }
-    #scroll-top-btn svg {
-        width: 18px;
-        height: 18px;
-    }
+    #scroll-top-btn:hover { box-shadow: 0 6px 28px rgba(132,204,22,0.4); }
+    #scroll-top-btn svg { width: 18px; height: 18px; }
 </style>
 
 <button id="scroll-top-btn" aria-label="Scroll to top">
