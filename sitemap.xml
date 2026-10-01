@@ -478,6 +478,25 @@
     <priority>1.0</priority>
   </url>
 
+  <url>
+    <loc>https://www.forgevertical.com/articles/business-that-almost-didnt-survive.html</loc>
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://www.forgevertical.com/articles/competitor-worse-but-busier.html</loc>
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://www.forgevertical.com/articles/fifty-k-vs-five-hundred-k-infrastructure-gap.html</loc>
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
   <!-- TripSpace Global -->
   <url>
     <loc>https://tripspaceglobal.com/</loc>
