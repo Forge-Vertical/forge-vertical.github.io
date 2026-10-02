@@ -313,6 +313,7 @@ function loadFirebaseAndAuth() {
   }
 
   // ── Open / close ───────────────────────────────────────────────────
+  window.injectModal = injectModal;
   window.fvOpenModal = function(view) {
     injectModal();
     fvShowView(view || 'login');
