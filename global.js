@@ -32,7 +32,7 @@ function showBuildModal() {
 // 3. Load Firebase SDK dynamically then initialise auth modal
 function loadFirebaseAndAuth() {
     if (window._fvFirebaseInit) {
-        initAuthModal();
+        injectModal();
         return;
     }
 
@@ -59,7 +59,7 @@ function loadFirebaseAndAuth() {
                     measurementId:     "G-ZVXJ25BS8Z"
                 });
             }
-            initAuthModal();
+            injectModal();
         });
     });
 }
@@ -351,6 +351,8 @@ function loadFirebaseAndAuth() {
         if (err) err.textContent = friendlyError(e.code);
       });
   }
+  // Expose to global scope so onclick attributes can reach it
+  window.handleGoogle = handleGoogle;
 
   function setLoading(btnId, loading) {
     const btn = document.getElementById(btnId);
@@ -494,5 +496,4 @@ async function injectGlobals() {
 }
 
 // Initialize on load
-window.addEventListener('DOMContentLoaded', injectGlobals);
-// v20261002090353
+window.addEventListener('DOMContentLoaded', injectGlobals);// 1790932176
