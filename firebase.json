@@ -8,13 +8,39 @@
     {
       "target": "main",
       "public": "dist",
-      "ignore": ["firebase.json", "**/.*"]
+      "ignore": ["firebase.json", "**/.*"],
+      "headers": [
+        {
+          "source": "**",
+          "headers": [
+            {
+              "key": "Cross-Origin-Opener-Policy",
+              "value": "same-origin-allow-popups"
+            },
+            {
+              "key": "Cross-Origin-Embedder-Policy",
+              "value": "unsafe-none"
+            }
+          ]
+        }
+      ]
     },
     {
       "target": "portal",
       "public": "portal-dist",
       "ignore": ["firebase.json", "**/.*"],
-      "rewrites": [{"source": "**", "destination": "/index.html"}]
+      "rewrites": [{"source": "**", "destination": "/index.html"}],
+      "headers": [
+        {
+          "source": "**",
+          "headers": [
+            {
+              "key": "Cross-Origin-Opener-Policy",
+              "value": "same-origin-allow-popups"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
