@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Local Lead Finder — Real Business Data | Forge Vertical</title>
+<meta name="description" content="A free local lead finder by Forge Vertical. Bring your own Google Places API key and pull real local businesses — name, phone, website, rating and address — then export to CSV or PDF. Free, browser-based, no signup.">
+<link rel="canonical" href="https://www.forgevertical.com/lead-finder.html">
+<meta name="robots" content="index,follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Free Local Lead Finder | Forge Vertical">
+<meta property="og:description" content="Pull real local businesses with your own Google Places API key. Free, browser-based, export to CSV/PDF.">
+<meta property="og:url" content="https://www.forgevertical.com/lead-finder.html">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@graph":[
+    {
+      "@type":"SoftwareApplication",
+      "@id":"https://www.forgevertical.com/lead-finder.html#app",
+      "name":"Forge Vertical Local Lead Finder",
+      "applicationCategory":"BusinessApplication",
+      "operatingSystem":"Web browser",
+      "url":"https://www.forgevertical.com/lead-finder.html",
+      "description":"A free, browser-based local lead finder. Uses the searcher's own Google Places API key to return real local businesses — name, phone, website, rating and address — with CSV and PDF export.",
+      "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},
+      "featureList":["Real local business search via Google Places API","Phone, website, rating and address per result","CSV export","PDF export","Runs entirely in the browser","No signup, no data stored on a server"],
+      "provider":{"@type":"Organization","name":"Forge Vertical","url":"https://www.forgevertical.com","sameAs":["https://www.linkedin.com/company/forge-vertical","https://github.com/Jotto1988"]}
+    },
+    {
+      "@type":"Service",
+      "@id":"https://www.forgevertical.com/lead-finder.html#done-for-you",
+      "name":"Done-for-you lead generation & custom lead script",
+      "serviceType":"Lead generation",
+      "description":"Forge Vertical runs a Google Places API search to your specification and builds a custom lead-generation script that you own and can re-run yourself — a one-off, pay-once alternative to monthly subscription lead tools like Apollo.",
+      "provider":{"@type":"Organization","name":"Forge Vertical","url":"https://www.forgevertical.com"},
+      "areaServed":"Worldwide",
+      "offers":{"@type":"Offer","description":"One-off fee, quoted to your specification"}
+    },
+    {
+      "@type":"FAQPage",
+      "mainEntity":[
+        {"@type":"Question","name":"Is the Forge Vertical Local Lead Finder free?","acceptedAnswer":{"@type":"Answer","text":"Yes. The tool is completely free and runs in your browser. You supply your own Google Places API key, so any usage cost is billed by Google to your account, not to Forge Vertical."}},
+        {"@type":"Question","name":"Do I need a Google Places API key?","acceptedAnswer":{"@type":"Answer","text":"To pull real businesses, yes — you enter your own Google Places API (New) key. Without a key the tool shows clearly-labelled demo data so you can see how it works. Use a key restricted to the Places API and to your own site, and monitor your Google billing."}},
+        {"@type":"Question","name":"Does the tool store my data or my leads?","acceptedAnswer":{"@type":"Answer","text":"No server storage. Results are held only in your own browser (local storage) so they survive a refresh, and you can clear them at any time. Nothing is sent to Forge Vertical."}},
+        {"@type":"Question","name":"What information does it return for each business?","acceptedAnswer":{"@type":"Answer","text":"Business name, phone number, website, star rating and review count, full address, business status, and a Google Maps link. The Google Places API does not return email addresses."}},
+        {"@type":"Question","name":"Is it legal to contact the businesses I find?","acceptedAnswer":{"@type":"Answer","text":"Finding public business listings is fine, but contacting them for marketing must comply with the law in your and their country — POPIA in South Africa, GDPR in the EU, CAN-SPAM in the US. Get consent where required and honour opt-outs."}},
+        {"@type":"Question","name":"Can Forge Vertical run the search and build the tool for me?","acceptedAnswer":{"@type":"Answer","text":"Yes. Instead of a monthly subscription, Forge Vertical offers a done-for-you option: we run the Google Places API search to your specification and build a custom lead script that you own and can re-run yourself, for a one-off fee. Get in touch for a quote."}}
+      ]
+    }
+  ]
+}
+</script>
+
+<style>
+  :root{ --bg:#06080c; --lime:#84cc16; --emerald:#10b981; }
+  body{ font-family:'Outfit',sans-serif; }
+  .mono{ font-family:'JetBrains Mono',monospace; }
+  .grad{ background-image:linear-gradient(90deg,var(--emerald),var(--lime)); }
+  .grad-text{ background:linear-gradient(100deg,var(--emerald),var(--lime)); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+  .spinner{ border:3px solid rgba(255,255,255,.3); border-radius:50%; border-top-color:#fff; animation:spin 1s linear infinite; width:16px; height:16px; display:inline-block; }
+  @keyframes spin{ to{ transform:rotate(360deg); } }
+  ::-webkit-scrollbar{ width:8px; height:8px; }
+  ::-webkit-scrollbar-thumb{ background:#cbd5e1; border-radius:10px; }
+</style>
+</head>
+<body class="bg-slate-100 text-slate-800 min-h-screen">
+
+<!-- Header -->
+<header class="text-white sticky top-0 z-50 shadow-lg" style="background:#06080c">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center gap-4">
+    <a href="https://www.forgevertical.com" class="flex items-center gap-3 no-underline text-white">
+      <span class="text-xl font-extrabold tracking-tight">Forge <span style="color:var(--lime)">Vertical_</span></span>
+      <span class="hidden sm:inline mono text-[10px] uppercase tracking-[0.2em] text-slate-400 border-l border-slate-700 pl-3">Local Lead Finder</span>
+    </a>
+    <div class="flex items-center gap-3">
+      <span class="mono text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full" style="background:rgba(132,204,22,.12);color:var(--lime);border:1px solid rgba(132,204,22,.25)">100% Free</span>
+      <a href="https://www.forgevertical.com" class="hidden sm:inline mono text-[10px] font-bold uppercase tracking-widest text-slate-300 hover:text-white">forgevertical.com →</a>
+    </div>
+  </div>
+</header>
+
+<!-- Hero / intro (crawlable content for SEO/AEO/GEO) -->
+<section class="text-white" style="background:#06080c">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 pt-4">
+    <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight leading-tight">Free local lead finder — <span class="grad-text">real business data.</span></h1>
+    <p class="mt-3 text-slate-400 font-light max-w-2xl leading-relaxed">Bring your own Google Places API key and pull real local businesses — name, phone, website, rating and address — then export to CSV or PDF. Runs entirely in your browser. No signup, nothing stored on our servers, free forever.</p>
+  </div>
+</section>
+
+<!-- Disclaimer -->
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-6 relative z-10">
+  <div class="rounded-xl border border-amber-300 bg-amber-50 text-amber-900 px-5 py-4 shadow-sm text-sm leading-relaxed">
+    <p class="font-semibold flex items-center gap-2"><i class="fa-solid fa-triangle-exclamation"></i> Use your Google Places API key at your own risk</p>
+    <p class="mt-1 text-amber-800">A key entered into any browser-based tool can be read from the page. Use a key <b>restricted to the Places API and to your own domain</b>, keep an eye on your Google billing, and revoke it if in doubt. The key is <b>optional and never stored</b> — use it for a search, then delete it and revoke it. For production use, a server-side proxy is the safer approach — a browser tool like this is <b>not recommended</b> for high-volume or shared use. Contacting the businesses you find must comply with POPIA / GDPR / CAN-SPAM.</p>
+  </div>
+</div>
+
+<!-- Prominent affiliate band -->
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
+  <div class="rounded-2xl bg-white border border-slate-200 shadow-sm p-5">
+    <div class="flex items-center justify-between flex-wrap gap-2 mb-4">
+      <p class="text-sm font-bold text-slate-800"><i class="fa-solid fa-gift mr-2" style="color:var(--lime)"></i> Free forever — powered by these partners</p>
+      <span class="text-[10px] text-slate-400 mono uppercase tracking-widest">Affiliate · no cost to you</span>
+    </div>
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-3">
+      <a href="https://go.nordvpn.net/aff_c?offer_id=15&aff_id=145959&url_id=902" target="_blank" rel="noopener sponsored" class="group flex items-center gap-3 rounded-xl border border-slate-200 p-4 hover:border-emerald-400 hover:shadow-sm transition no-underline">
+        <i class="fa-solid fa-shield-halved text-2xl w-7 text-center" style="color:var(--emerald)"></i>
+        <div><div class="font-bold text-slate-800 text-sm">NordVPN</div><div class="text-[11px] text-slate-500 group-hover:text-emerald-600">Secure your prospecting →</div></div>
+      </a>
+      <a href="https://get.surfshark.net/aff_c?offer_id=6&aff_id=4160" target="_blank" rel="noopener sponsored" class="group flex items-center gap-3 rounded-xl border border-slate-200 p-4 hover:border-emerald-400 hover:shadow-sm transition no-underline">
+        <i class="fa-solid fa-user-secret text-2xl w-7 text-center" style="color:var(--emerald)"></i>
+        <div><div class="font-bold text-slate-800 text-sm">Surfshark</div><div class="text-[11px] text-slate-500 group-hover:text-emerald-600">Unlimited devices →</div></div>
+      </a>
+      <a href="https://go.nordpass.io/aff_c?offer_id=488&aff_id=145959&url_id=9356" target="_blank" rel="noopener sponsored" class="group flex items-center gap-3 rounded-xl border border-slate-200 p-4 hover:border-emerald-400 hover:shadow-sm transition no-underline">
+        <i class="fa-solid fa-key text-2xl w-7 text-center" style="color:var(--emerald)"></i>
+        <div><div class="font-bold text-slate-800 text-sm">NordPass</div><div class="text-[11px] text-slate-500 group-hover:text-emerald-600">Vault your API keys →</div></div>
+      </a>
+      <a href="https://portal.webway.host/aff.php?aff=353" target="_blank" rel="noopener sponsored" class="group flex items-center gap-3 rounded-xl border border-slate-200 p-4 hover:border-emerald-400 hover:shadow-sm transition no-underline">
+        <i class="fa-solid fa-server text-2xl w-7 text-center" style="color:var(--emerald)"></i>
+        <div><div class="font-bold text-slate-800 text-sm">WebWay Hosting</div><div class="text-[11px] text-slate-500 group-hover:text-emerald-600">Fast, affordable hosting →</div></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Main -->
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+  <div class="flex flex-col lg:flex-row gap-8">
+
+    <!-- Sidebar -->
+    <aside class="w-full lg:w-1/3 flex flex-col gap-6">
+      <div class="bg-white rounded-xl shadow-md border border-slate-200 overflow-hidden">
+        <div class="bg-slate-50 border-b border-slate-200 px-6 py-4">
+          <h2 class="text-lg font-semibold text-slate-700"><i class="fa-solid fa-magnifying-glass mr-2" style="color:var(--emerald)"></i> Find leads</h2>
+        </div>
+        <div class="p-6 space-y-4">
+          <div>
+            <label for="industry" class="block text-sm font-medium text-slate-700 mb-1">Industry / niche</label>
+            <input type="text" id="industry" placeholder="e.g. Plumbers, Dentists, Roofers" class="block w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 text-sm">
+          </div>
+          <div>
+            <label for="location" class="block text-sm font-medium text-slate-700 mb-1">Location</label>
+            <input type="text" id="location" placeholder="e.g. Cape Town, or Austin TX" class="block w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 text-sm">
+          </div>
+          <div>
+            <label for="searchDepth" class="block text-sm font-medium text-slate-700 mb-1">Results</label>
+            <select id="searchDepth" class="block w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-500 text-sm bg-white">
+              <option value="20">20 (fast)</option>
+              <option value="40">40</option>
+              <option value="60">60 (max)</option>
+            </select>
+          </div>
+          <details class="rounded-lg border border-slate-200 bg-slate-50">
+            <summary class="cursor-pointer px-3 py-2 text-xs font-semibold text-slate-700 select-none"><i class="fa-solid fa-sliders mr-1" style="color:var(--emerald)"></i> Advanced targeting</summary>
+            <div class="px-3 pb-3 pt-1 space-y-3">
+              <div class="grid grid-cols-2 gap-2">
+                <div>
+                  <label class="block text-[11px] font-medium text-slate-600 mb-1">Min rating</label>
+                  <select id="advMinRating" class="w-full px-2 py-1.5 border border-slate-300 rounded-md text-xs bg-white">
+                    <option value="">Any</option><option value="3.5">3.5+</option><option value="4">4.0+</option><option value="4.5">4.5+</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-[11px] font-medium text-slate-600 mb-1">Country code</label>
+                  <input id="advRegion" maxlength="2" placeholder="ZA, US…" class="w-full px-2 py-1.5 border border-slate-300 rounded-md text-xs uppercase mono">
+                </div>
+              </div>
+              <div>
+                <label class="block text-[11px] font-medium text-slate-600 mb-1">Extra keywords</label>
+                <input id="advKeywords" placeholder="e.g. commercial, emergency, 24/7" class="w-full px-2 py-1.5 border border-slate-300 rounded-md text-xs">
+              </div>
+              <label class="flex items-center gap-2 text-[11px] text-slate-600"><input type="checkbox" id="advOpenNow" class="rounded"> Open now only</label>
+              <label class="flex items-center gap-2 text-[11px] text-slate-600"><input type="checkbox" id="advHasSite" class="rounded"> Only businesses with a website</label>
+            </div>
+          </details>
+          <button id="searchBtn" class="w-full grad text-black font-bold py-2.5 px-4 rounded-lg transition hover:opacity-90 flex justify-center items-center gap-2 mono text-xs uppercase tracking-widest">
+            <i class="fa-solid fa-bolt"></i> Search leads
+          </button>
+          <p id="statusMsg" class="text-xs text-slate-500 hidden"></p>
+          <div class="pt-3 border-t border-slate-100">
+            <button id="googleSearchBtn" class="w-full bg-white border border-slate-300 text-slate-700 font-semibold py-2 px-4 rounded-lg hover:border-emerald-400 hover:text-emerald-700 transition flex justify-center items-center gap-2 text-sm">
+              <i class="fa-brands fa-google"></i> Google Business Search <span class="text-[10px] text-slate-400 font-normal">no key</span>
+            </button>
+            <p class="text-[11px] text-slate-400 mt-1 leading-relaxed">Opens a real Google Maps search for your niche + location in a new tab — genuine public listings you browse yourself. Nothing is invented, scraped or stored.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- API keys -->
+      <div class="bg-white rounded-xl shadow-md border border-slate-200 overflow-hidden">
+        <div class="bg-slate-50 border-b border-slate-200 px-6 py-4">
+          <h2 class="text-lg font-semibold text-slate-700"><i class="fa-solid fa-key mr-2" style="color:var(--emerald)"></i> Your API keys</h2>
+        </div>
+        <div class="p-6 space-y-5">
+          <p class="text-xs text-slate-500 leading-relaxed">Leave blank to use OpenStreetMap (free, no key). Enter a Google key for richer data. <b>Never stored or sent to us</b>.</p>
+
+          <!-- Places -->
+          <div>
+            <div class="flex items-center justify-between mb-1">
+              <label for="googleApiKey" class="block text-sm font-semibold text-slate-700">Google Places <span class="text-slate-400 font-normal text-xs">· businesses</span></label>
+              <button type="button" id="clearKeyBtn" class="text-[11px] text-slate-400 hover:text-red-500 font-medium">Forget</button>
+            </div>
+            <input type="password" id="googleApiKey" autocomplete="off" placeholder="AIzaSy… (Optional)" class="block w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-500 text-sm mono">
+            <div class="flex flex-wrap items-center gap-x-3 gap-y-1 mt-1">
+              <a href="https://developers.google.com/maps/documentation/places/web-service/get-api-key" target="_blank" rel="noopener" class="text-[11px] font-semibold text-emerald-600 hover:underline">Get key ↗</a>
+              <span class="text-[11px] text-slate-400">Name, phone, website, rating, address</span>
+            </div>
+            <details class="mt-2 rounded-lg border border-slate-200 bg-slate-50">
+              <summary class="cursor-pointer px-3 py-2 text-[11px] font-semibold text-emerald-700 select-none"><i class="fa-solid fa-circle-info mr-1"></i> How to get it (~5 min, usually free)</summary>
+              <div class="px-3 pb-3 pt-1 text-[11px] text-slate-600 leading-relaxed space-y-1.5">
+                <p><b>1.</b> Open <span class="mono">console.cloud.google.com</span>, create a project.</p>
+                <p><b>2.</b> Enable <b>“Places API (New)”</b> under APIs &amp; Services.</p>
+                <p><b>3.</b> Create an <b>API key</b> under Credentials; restrict it to the Places API + your site.</p>
+                <p><b>4.</b> Enable billing — new accounts get <b>$300 free</b> + a monthly free tier, so light use is ~$0.</p>
+              </div>
+            </details>
+          </div>
+
+          <p class="text-[11px] text-slate-400 leading-relaxed pt-1">Want more sources (verification, phone, company data) in the same row? <a href="https://www.forgevertical.com/onboard.html" class="text-emerald-600 hover:underline">Tell us what you use</a> and we'll wire it in.</p>
+        </div>
+      </div>
+
+      <!-- Affiliate: keep tools like this free -->
+      <div class="bg-white rounded-xl shadow-md border border-slate-200 overflow-hidden">
+        <div class="bg-slate-50 border-b border-slate-200 px-6 py-4">
+          <h2 class="text-sm font-semibold text-slate-700"><i class="fa-solid fa-heart mr-2" style="color:var(--lime)"></i> Keep this tool free</h2>
+        </div>
+        <div class="p-6 space-y-3">
+          <p class="text-xs text-slate-500 leading-relaxed">This tool is free and always will be. If it saved you money, back it by grabbing a deal below — it costs you nothing extra and keeps the lights on.</p>
+          <a href="https://go.nordvpn.net/aff_c?offer_id=15&aff_id=145959&url_id=902" target="_blank" rel="noopener sponsored" class="flex items-center gap-3 border border-slate-200 rounded-xl p-3 hover:border-emerald-400 transition no-underline">
+            <i class="fa-solid fa-shield-halved text-xl w-6 text-center" style="color:var(--emerald)"></i>
+            <div><div class="text-sm font-bold text-slate-800">NordVPN</div><div class="text-[11px] text-slate-500">Protect your prospecting — get the deal →</div></div>
+          </a>
+          <a href="https://get.surfshark.net/aff_c?offer_id=6&aff_id=4160" target="_blank" rel="noopener sponsored" class="flex items-center gap-3 border border-slate-200 rounded-xl p-3 hover:border-emerald-400 transition no-underline">
+            <i class="fa-solid fa-user-secret text-xl w-6 text-center" style="color:var(--emerald)"></i>
+            <div><div class="text-sm font-bold text-slate-800">Surfshark</div><div class="text-[11px] text-slate-500">Unlimited devices, one plan — see offer →</div></div>
+          </a>
+          <a href="https://go.nordpass.io/aff_c?offer_id=488&aff_id=145959&url_id=9356" target="_blank" rel="noopener sponsored" class="flex items-center gap-3 border border-slate-200 rounded-xl p-3 hover:border-emerald-400 transition no-underline">
+            <i class="fa-solid fa-key text-xl w-6 text-center" style="color:var(--emerald)"></i>
+            <div><div class="text-sm font-bold text-slate-800">NordPass</div><div class="text-[11px] text-slate-500">Vault your logins & API keys →</div></div>
+          </a>
+          <a href="https://portal.webway.host/aff.php?aff=353" target="_blank" rel="noopener sponsored" class="flex items-center gap-3 border border-slate-200 rounded-xl p-3 hover:border-emerald-400 transition no-underline">
+            <i class="fa-solid fa-server text-xl w-6 text-center" style="color:var(--emerald)"></i>
+            <div><div class="text-sm font-bold text-slate-800">WebWay Hosting</div><div class="text-[11px] text-slate-500">Fast, affordable web hosting →</div></div>
+          </a>
+          <p class="text-[10px] text-slate-400 leading-relaxed pt-1">Affiliate links — Forge Vertical may earn a commission at no cost to you.</p>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Results -->
+    <section class="w-full lg:w-2/3 flex flex-col gap-4">
+      <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 flex flex-wrap justify-between items-center gap-4">
+        <div class="text-sm text-slate-600 font-medium">Found: <span id="leadCount" class="font-bold text-lg" style="color:var(--emerald)">0</span> leads <span id="sourceTag" class="hidden mono text-[10px] uppercase tracking-widest ml-2 px-2 py-0.5 rounded bg-blue-50 text-blue-700 border border-blue-200"></span></div>
+        <div class="flex gap-2">
+          <button id="exportCsvBtn" disabled class="disabled:opacity-40 disabled:cursor-not-allowed bg-slate-800 hover:bg-slate-900 text-white text-sm font-medium py-2 px-4 rounded-lg transition flex items-center gap-2"><i class="fa-solid fa-file-csv"></i> CSV</button>
+          <button id="exportBtn" disabled class="disabled:opacity-40 disabled:cursor-not-allowed grad text-black text-sm font-semibold py-2 px-4 rounded-lg transition hover:opacity-90 flex items-center gap-2"><i class="fa-solid fa-file-pdf"></i> PDF</button>
+          <button id="clearBtn" disabled class="disabled:opacity-40 disabled:cursor-not-allowed bg-slate-200 hover:bg-slate-300 text-slate-700 text-sm font-medium py-2 px-4 rounded-lg transition flex items-center gap-2"><i class="fa-solid fa-trash-can"></i></button>
+        </div>
+      </div>
+
+      <div id="pdfExportArea" class="bg-white rounded-xl shadow-md border border-slate-200 overflow-hidden">
+        <div class="overflow-x-auto">
+          <table class="min-w-full divide-y divide-slate-200 text-sm">
+            <thead class="bg-slate-50">
+              <tr>
+                <th class="px-4 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">Business</th>
+                <th class="px-4 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">Email</th>
+                <th class="px-4 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">Phone</th>
+                <th class="px-4 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">Website</th>
+                <th class="px-4 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">Rating</th>
+                <th class="px-4 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">Address</th>
+              </tr>
+            </thead>
+            <tbody id="resultsTableBody" class="bg-white divide-y divide-slate-100">
+              <tr id="emptyStateRow"><td colspan="6" class="px-6 py-16 text-center text-slate-400"><i class="fa-solid fa-folder-open text-4xl mb-3 text-slate-300"></i><p class="text-sm">No leads yet. Enter an industry and location, then Search.</p></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- How it works + cross-sell (SEO/AEO content) -->
+  <section class="mt-14 grid md:grid-cols-3 gap-5">
+    <div class="bg-white rounded-xl border border-slate-200 p-6">
+      <h3 class="font-bold text-slate-800 mb-2">1 · Enter your search</h3>
+      <p class="text-sm text-slate-500 leading-relaxed">Type an industry and a location. Add your own Google Places API key for live results, or leave it blank to pull free OpenStreetMap data.</p>
+    </div>
+    <div class="bg-white rounded-xl border border-slate-200 p-6">
+      <h3 class="font-bold text-slate-800 mb-2">2 · Get real businesses</h3>
+      <p class="text-sm text-slate-500 leading-relaxed">The tool queries the backend and returns real local businesses with phone, website, rating, emails and address — straight into your browser.</p>
+    </div>
+    <div class="bg-white rounded-xl border border-slate-200 p-6">
+      <h3 class="font-bold text-slate-800 mb-2">3 · Export &amp; reach out</h3>
+      <p class="text-sm text-slate-500 leading-relaxed">Export to CSV or PDF and start your outreach — compliantly. Nothing is stored on our servers; your list stays with you.</p>
+    </div>
+  </section>
+
+  <!-- Done-for-you offer -->
+  <section class="mt-8 rounded-2xl border-2 border-emerald-400 bg-white p-7 sm:p-9 shadow-sm">
+    <p class="mono text-[11px] font-bold uppercase tracking-[0.2em] text-emerald-600 mb-3">Done for you</p>
+    <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 leading-tight max-w-3xl">Skip the setup — we pull your leads <span class="grad-text">and build you a script you own.</span></h2>
+    <p class="mt-3 text-slate-600 leading-relaxed max-w-3xl">No API key, no Google Cloud, no monthly bill. Tell us your niche, your area and exactly how you want the data — we run the Places API search for you, hand you a clean list, and build a custom script tailored to your spec that you keep and re-run yourself. One payment, done.</p>
+
+    <div class="grid sm:grid-cols-2 gap-4 mt-6 max-w-3xl">
+      <div class="rounded-xl border border-slate-200 p-5">
+        <p class="mono text-[10px] uppercase tracking-widest text-slate-400 mb-2">Subscription tools (Apollo &amp; co.)</p>
+        <ul class="text-sm text-slate-500 space-y-1.5 list-none">
+          <li>Pay every month, forever</li>
+          <li>Stop paying, lose access</li>
+          <li>Their data, their limits, their credits</li>
+        </ul>
+      </div>
+      <div class="rounded-xl border-2 border-emerald-400 bg-emerald-50 p-5">
+        <p class="mono text-[10px] uppercase tracking-widest text-emerald-600 mb-2">Forge Vertical — once off</p>
+        <ul class="text-sm text-slate-700 space-y-1.5 font-medium list-none">
+          <li>Pay once — no subscription</li>
+          <li>Custom script built to your spec</li>
+          <li>You own it and re-run it yourself</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="flex flex-wrap gap-3 mt-7">
+      <a href="https://www.forgevertical.com/onboard.html" class="grad text-black font-bold py-3 px-6 rounded-lg mono text-xs uppercase tracking-widest hover:opacity-90 transition">Get a quote →</a>
+      <a href="https://wa.me/27657417593" target="_blank" rel="noopener" class="border border-slate-300 text-slate-700 font-semibold py-3 px-6 rounded-lg text-sm hover:border-emerald-400 hover:text-emerald-700 transition">WhatsApp Jarrit</a>
+    </div>
+    <p class="text-[11px] text-slate-400 mt-3">One-off fee, quoted to your spec. Why rent your leads when you can own the machine that finds them?</p>
+  </section>
+
+  <!-- Visible FAQ (mirrors schema for AEO) -->
+  <section class="mt-10 bg-white rounded-xl border border-slate-200 p-6 sm:p-8">
+    <h2 class="text-xl font-bold text-slate-800 mb-4">Questions, answered</h2>
+    <div class="space-y-4 text-sm">
+      <div><p class="font-semibold text-slate-800">Is this lead finder free?</p><p class="text-slate-500 mt-1">Yes — completely free, and it runs in your browser. You use your own Google Places API key, so any Google usage cost is billed to your account, not to Forge Vertical.</p></div>
+      <div><p class="font-semibold text-slate-800">Do I need a Google Places API key?</p><p class="text-slate-500 mt-1">For richer data, yes. Enter your own Places API (New) key. Without one, the tool falls back to free OpenStreetMap data. Use a key restricted to the Places API and your own domain, and watch your billing.</p></div>
+      <div><p class="font-semibold text-slate-800">Does it store my data?</p><p class="text-slate-500 mt-1">No server storage. Results live only in your browser so they survive a refresh; clear them anytime. Nothing is sent to Forge Vertical.</p></div>
+      <div><p class="font-semibold text-slate-800">What does each result include?</p><p class="text-slate-500 mt-1">Business name, phone, website, star rating, address, and an email address (scraped automatically by our backend script). Google Places natively does not return email addresses.</p></div>
+      <div><p class="font-semibold text-slate-800">Is it legal to contact these businesses?</p><p class="text-slate-500 mt-1">Finding public listings is fine; marketing to them must follow POPIA (SA), GDPR (EU) and CAN-SPAM (US). Get consent where required and honour opt-outs.</p></div>
+      <div><p class="font-semibold text-slate-800">Can you run the search and build the tool for me?</p><p class="text-slate-500 mt-1">Yes — a one-off, done-for-you option. We run the Places API search to your spec and build a custom lead script you own and re-run yourself. One payment, no subscription. <a href="https://www.forgevertical.com/onboard.html" class="text-emerald-600 hover:underline">Get a quote →</a></p></div>
+    </div>
+  </section>
+
+  <!-- Cross-sell to Forge Vertical -->
+  <section class="mt-8 rounded-xl p-8 text-white text-center" style="background:#06080c">
+    <h2 class="text-2xl font-extrabold">Want to be the business that gets <span class="grad-text">found first?</span></h2>
+    <p class="text-slate-400 mt-2 max-w-xl mx-auto font-light">Forge Vertical builds AI visibility, so when people ask ChatGPT, Perplexity or Google AI for your service, your name comes up. Finding leads is one side — being the answer is the other.</p>
+    <a href="https://www.forgevertical.com/ai-visibility-cape-town.html" class="inline-block mt-5 grad text-black font-bold py-3 px-6 rounded-lg mono text-xs uppercase tracking-widest hover:opacity-90 transition">See AI Visibility →</a>
+  </section>
+</main>
+
+<!-- Footer -->
+<footer class="text-slate-400 mt-8" style="background:#06080c">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-sm">
+    <div><span class="font-extrabold text-white">Forge <span style="color:var(--lime)">Vertical_</span></span> · Free tools for people who build</div>
+    <div class="mono text-[11px]">Affiliate links help keep this free · <a href="https://www.forgevertical.com" class="hover:text-white" style="color:var(--lime)">forgevertical.com</a></div>
+  </div>
+</footer>
+
+<script>
+let currentLeads = [];
+let currentSource = '';
+let isSearching = false;
+
+const $ = id => document.getElementById(id);
+const tableBody = $('resultsTableBody'), countEl = $('leadCount'), sourceTag =$('sourceTag');
+const btnSearch = $('searchBtn'), btnCsv =$('exportCsvBtn'), btnPdf = $('exportBtn'), btnClear =$('clearBtn');
+const statusMsg = $('statusMsg');
+
+// ---- persistence ----
+function save(){ try{ localStorage.setItem('fvLeads', JSON.stringify({leads:currentLeads, currentSource})); }catch(e){} }
+function load(){ try{ const s=JSON.parse(localStorage.getItem('fvLeads')||'null'); if(s){ currentLeads=s.leads||[]; currentSource=s.currentSource||''; render(); } }catch(e){} }
+
+function setStatus(msg, ok){
+  if(!msg){ statusMsg.classList.add('hidden'); return; }
+  statusMsg.textContent = msg;
+  statusMsg.className = 'text-xs mt-1 ' + (ok===false ? 'text-red-600' : 'text-slate-500');
+  statusMsg.classList.remove('hidden');
+}
+
+// ---- render ----
+function render(){
+  tableBody.innerHTML='';
+  if(!currentLeads.length){
+    tableBody.innerHTML = '<tr id="emptyStateRow"><td colspan="6" class="px-6 py-16 text-center text-slate-400"><i class="fa-solid fa-folder-open text-4xl mb-3 text-slate-300"></i><p class="text-sm">No leads yet. Enter an industry and location, then Search.</p></td></tr>';
+    countEl.textContent='0'; 
+    sourceTag.classList.add('hidden');
+    [btnCsv,btnPdf,btnClear].forEach(b=>b.disabled=true); return;
+  }
+  
+  countEl.textContent = currentLeads.length;
+  sourceTag.textContent = 'via ' + (currentSource === 'google' ? 'Google' : 'OpenStreetMap');
+  sourceTag.classList.remove('hidden');
+  [btnCsv,btnPdf,btnClear].forEach(b=>b.disabled=false);
+  
+  currentLeads.forEach(l=>{
+    const tr=document.createElement('tr'); tr.className='hover:bg-slate-50';
+    const web = l.website ? '<a href="'+l.website+'" target="_blank" rel="noopener" class="text-emerald-600 hover:underline break-all">'+l.website.replace(/^https?:\/\//,'')+'</a>' : '<span class="text-slate-300">—</span>';
+    const addr = l.maps ? '<a href="'+l.maps+'" target="_blank" rel="noopener" class="hover:underline">'+(l.address||'View on Maps')+'</a>' : (l.address||'—');
+    const email = l.emails ? '<a href="mailto:'+l.emails.split(';')[0]+'" class="text-emerald-600 hover:underline break-all">'+l.emails+'</a>' : '<span class="text-slate-300">—</span>';
+    
+    tr.innerHTML =
+      '<td class="px-4 py-3 font-semibold text-slate-900">'+(l.name||'—')+'</td>'+
+      '<td class="px-4 py-3 text-xs">'+email+'</td>'+
+      '<td class="px-4 py-3 mono text-slate-600 whitespace-nowrap">'+(l.phone||'<span class="text-slate-300">—</span>')+'</td>'+
+      '<td class="px-4 py-3">'+web+'</td>'+
+      '<td class="px-4 py-3 text-slate-600 whitespace-nowrap">'+(l.rating||'—')+'</td>'+
+      '<td class="px-4 py-3 text-slate-500 text-xs">'+addr+'</td>';
+    tableBody.appendChild(tr);
+  });
+}
+
+// ---- search via Cloud Function ----
+btnSearch.addEventListener('click', async ()=>{
+  if(isSearching) return;
+  const ind=$('industry').value.trim(), loc=$('location').value.trim();
+  const key=$('googleApiKey').value.trim(), depth=parseInt($('searchDepth').value,10)||20;
+  
+  if(!ind||!loc){ setStatus('Enter both an industry and a location.', false); return; }
+
+  const payload = {
+    niche: ind,
+    location: loc,
+    depth: depth,
+    key: key,
+    minRating: $('advMinRating').value,
+    openNow: $('advOpenNow').checked,
+    regionCode: $('advRegion').value.trim()
+  };
+  const kw = $('advKeywords').value.trim();
+  if(kw) payload.query = ind + ' in ' + loc + ' ' + kw;
+
+  isSearching=true; 
+  btnSearch.innerHTML='<div class="spinner mr-2"></div> Searching…'; 
+  setStatus('Searching '+ (key ? 'Google Places' : 'OpenStreetMap') +' and scraping sites for emails...');
+  
+  try{
+    const res = await fetch('https://europe-west1-forge-vertical.cloudfunctions.net/lead-finder', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    
+    if(!res.ok){
+      const errText = await res.text();
+      throw new Error(errText || `Server returned ${res.status}`);
+    }
+    
+    const data = await res.json();
+    currentLeads = data.leads || [];
+    currentSource = data.source || (key ? 'google' : 'osm');
+    
+    save(); 
+    render();
+    
+    if(!currentLeads.length){ 
+      setStatus('No results found. Try a broader search or fewer filters.'); 
+    } else {
+      setStatus(`Found ${currentLeads.length} leads via ${currentSource}. Scraped emails from ${data.scraped || 0} websites.`);
+    }
+  }catch(err){
+    setStatus('Search failed: ' + err.message, false);
+  }finally{
+    isSearching=false; 
+    btnSearch.innerHTML='<i class="fa-solid fa-bolt"></i> Search leads';
+  }
+});
+
+// Google Business Search — opens a real Google Maps search. No key, no scraping, no fake data.
+$('googleSearchBtn').addEventListener('click', ()=>{
+  const ind=$('industry').value.trim(), loc=$('location').value.trim();
+  if(!ind||!loc){ setStatus('Enter an industry and a location first.', false); return; }
+  const kw = $('advKeywords').value.trim();
+  const url = 'https://www.google.com/maps/search/' + encodeURIComponent(ind + ' in ' + loc + (kw ? ' ' + kw : ''));
+  window.open(url, '_blank', 'noopener');
+  setStatus('Opened a real Google Maps search in a new tab — browse genuine listings there.');
+});
+
+btnClear.addEventListener('click', ()=>{ currentLeads=[]; currentSource=''; save(); render(); setStatus(''); });
+
+// ---- CSV ----
+btnCsv.addEventListener('click', ()=>{
+  if(!currentLeads.length) return;
+  const esc=s=>'"'+String(s==null?'':s).replace(/"/g,'""')+'"';
+  const rows=[['Business','Email','Phone','Website','Rating','Address','Maps','Source'].join(',')];
+  currentLeads.forEach(l=>rows.push([l.name,l.emails,l.phone,l.website,l.rating,l.address,l.maps,l.source].map(esc).join(',')));
+  const blob=new Blob([rows.join('\n')],{type:'text/csv;charset=utf-8;'});
+  const a=document.createElement('a'); a.href=URL.createObjectURL(blob);
+  a.download=(($('industry').value||'leads')+'_'+($('location').value||'list')).replace(/\s+/g,'_')+'.csv';
+  document.body.appendChild(a); a.click(); a.remove();
+});
+
+// ---- PDF ----
+btnPdf.addEventListener('click', ()=>{
+  if(!currentLeads.length) return;
+  const orig=btnPdf.innerHTML; btnPdf.innerHTML='<div class="spinner mr-2"></div> Generating…';
+  const name=(($('industry').value||'leads')+'_'+($('location').value||'list')).replace(/\s+/g,'_')+'.pdf';
+  html2pdf().set({ margin:0.4, filename:name, image:{type:'jpeg',quality:0.98},
+    html2canvas:{scale:2,useCORS:true}, jsPDF:{unit:'in',format:'a4',orientation:'landscape'} })
+    .from($('pdfExportArea')).save().then(()=>{ btnPdf.innerHTML=orig; });
+});
+
+$('clearKeyBtn').addEventListener('click', ()=>{$('googleApiKey').value=''; setStatus('Key cleared.'); });
+
+load();
+</script>
+</body>
+</html>

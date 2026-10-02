@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AGIA Prompts — complete, copy-ready prompts for building real infrastructure with AI. SaaS platforms, client portals, security audits, GEO optimisation, and business automation. Each prompt introduces the AI as an AGIA and walks through architecture, infrastructure setup, and deployment.">
+    <title>AGIA Prompts — Build Real Infrastructure with AI | Forge Vertical</title>
+    <link rel="canonical" href="https://www.forgevertical.com/articles/agia-prompts-hub.html">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Article",
+          "@id": "https://www.forgevertical.com/articles/agia-prompts-hub.html",
+          "headline": "AGIA Prompts — Build Real Infrastructure with AI",
+          "description": "A complete library of AGIA prompts for building production-grade infrastructure with AI. Each prompt introduces the AI as an Artificial General Intelligence Architect and guides through architecture, GCP/Firebase setup, and deployment.",
+          "datePublished": "2026-09-20",
+          "author": {"@type": "Person", "name": "Jarrit Hosking", "sameAs": "https://www.wikidata.org/wiki/Q141506817"},
+          "publisher": {"@type": "Organization", "name": "Forge Vertical", "url": "https://www.forgevertical.com"},
+          "about": {"@type": "DefinedTerm", "name": "AGIA", "sameAs": "https://www.wikidata.org/wiki/Q141506694"},
+          "keywords": "AGIA prompts, AI architecture prompts, SaaS build prompt, client portal prompt, security audit AI, GEO audit prompt, business automation prompt, Firebase setup AI, GCP setup AI, AGIA artificial general intelligence architect"
+        },
+        {
+          "@type": "ItemList",
+          "name": "AGIA Prompt Library",
+          "numberOfItems": 5,
+          "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "SaaS Platform Architecture", "url": "https://www.forgevertical.com/prompts/saas-architecture.html"},
+            {"@type": "ListItem", "position": 2, "name": "Client Portal Architecture", "url": "https://www.forgevertical.com/prompts/client-portal.html"},
+            {"@type": "ListItem", "position": 3, "name": "Security Audit Prompt", "url": "https://www.forgevertical.com/prompts/security-audit.html"},
+            {"@type": "ListItem", "position": 4, "name": "GEO and AI Citation Audit", "url": "https://www.forgevertical.com/prompts/geo-audit.html"},
+            {"@type": "ListItem", "position": 5, "name": "Business Automation Prompt", "url": "https://www.forgevertical.com/prompts/business-automation.html"}
+          ]
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Forge Vertical", "item": "https://www.forgevertical.com"},
+            {"@type": "ListItem", "position": 2, "name": "Articles", "item": "https://www.forgevertical.com/articles.html"},
+            {"@type": "ListItem", "position": 3, "name": "AGIA Prompts", "item": "https://www.forgevertical.com/articles/agia-prompts-hub.html"}
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What is an AGIA prompt?",
+              "acceptedAnswer": {"@type": "Answer", "text": "An AGIA prompt is a structured framing tool sent to an AI model at the start of a build session. It introduces the AI as an Artificial General Intelligence Architect — establishing that architecture and security decisions come first, infrastructure is chosen deliberately, and the build is production-grade from the first commit. AGIA prompts are model-agnostic: they work on Claude, ChatGPT, Grok, and Gemini."}
+            },
+            {
+              "@type": "Question",
+              "name": "How is an AGIA prompt different from a regular prompt?",
+              "acceptedAnswer": {"@type": "Answer", "text": "A regular prompt asks the AI to do something. An AGIA prompt establishes a working relationship and a methodology before any task is given. The AI responds by asking structured intake questions, producing a threat model, proposing infrastructure with trade-off reasoning, and walking through CLI setup commands — instead of jumping straight to code. The difference in output quality is material."}
+            },
+            {
+              "@type": "Question",
+              "name": "Do AGIA prompts work on free tier AI models?",
+              "acceptedAnswer": {"@type": "Answer", "text": "Yes. ChatGPT free tier responded to the AGIA prompt with a complete architecture intake — threat model, system goal, requirements, API boundaries, deployment strategy, observability, and failure recovery — before writing any code. The frame changes the model behaviour regardless of tier."}
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+    <script src="/global.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/typography.css">
+    <style>
+        body{font-family:'Outfit',sans-serif;background:#fff;}
+        .mono{font-family:'JetBrains Mono',monospace;}
+        .g-text{background:linear-gradient(90deg,#10b981,#84cc16);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:inline-block;}
+        .prose{font-family:'Lora',serif;font-size:18px;line-height:1.85;color:#27272a;}
+        .prose p{margin-bottom:1.5em;}
+        .prose strong{font-family:'Outfit',sans-serif;font-weight:700;color:#09090b;font-size:16px;}
+        .prose a{color:#84cc16;text-decoration:underline;text-underline-offset:3px;}
+
+        /* Masthead */
+        .masthead{border-bottom:1px solid #e4e4e7;padding:0 6vw;}
+        .masthead-top{display:flex;align-items:center;justify-content:space-between;padding:14px 0;border-bottom:1px solid #e4e4e7;}
+        .masthead-brand{font-size:22px;font-weight:800;letter-spacing:-0.03em;color:#09090b;}
+        .masthead-brand span{color:#84cc16;}
+        .masthead-tag{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:#a1a1aa;margin-top:2px;}
+        .masthead-cta{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;background:#84cc16;color:#06080c;padding:6px 14px;border-radius:4px;text-decoration:none;}
+
+        /* Stats bar */
+        .stats-bar{background:#fafafa;border-bottom:1px solid #e4e4e7;padding:16px 6vw;display:flex;gap:32px;flex-wrap:wrap;align-items:center;}
+        .stat{display:flex;align-items:baseline;gap:6px;}
+        .stat-n{font-size:22px;font-weight:700;color:#84cc16;}
+        .stat-l{font-size:12px;color:#a1a1aa;text-transform:uppercase;letter-spacing:0.05em;}
+        .stat-rule{width:1px;height:20px;background:#e4e4e7;}
+
+        /* Hero */
+        .page-hero{max-width:1200px;margin:0 auto;padding:48px 6vw 16px;}
+        .page-hero-label{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.2em;color:#84cc16;margin-bottom:12px;display:block;}
+        .page-hero h1{font-size:clamp(32px,5vw,60px);font-weight:800;letter-spacing:-0.03em;line-height:1.05;margin-bottom:14px;color:#09090b;}
+        .page-hero-sub{font-size:16px;color:#71717a;font-weight:300;line-height:1.7;max-width:640px;margin-bottom:32px;}
+
+        /* What is section */
+        .what-is{max-width:1200px;margin:0 auto;padding:0 6vw 48px;}
+        .callout{background:#fafafa;border-left:3px solid #84cc16;border-radius:0 12px 12px 0;padding:20px 24px;margin:24px 0;font-size:15px;color:#3f3f46;line-height:1.7;}
+        .callout strong{font-family:'Outfit',sans-serif;font-weight:700;color:#09090b;}
+        .pull{font-family:'Lora',serif;font-size:21px;font-style:italic;color:#09090b;border-top:2px solid #84cc16;border-bottom:1px solid #e4e4e7;padding:20px 0;margin:28px 0;line-height:1.5;}
+
+        /* Section header */
+        .section-hdr{display:flex;align-items:center;gap:14px;max-width:1200px;margin:0 auto;padding:32px 6vw 20px;}
+        .section-hdr-label{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.2em;color:#84cc16;white-space:nowrap;}
+        .section-hdr-rule{flex:1;height:1px;background:#e4e4e7;}
+        .section-hdr-count{font-family:'JetBrains Mono',monospace;font-size:9px;color:#a1a1aa;white-space:nowrap;}
+
+        /* Prompt cards grid */
+        .prompts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:28px;max-width:1200px;margin:0 auto;padding:0 6vw 60px;}
+        @media(max-width:640px){.prompts-grid{grid-template-columns:1fr;padding:0 5vw 40px;}}
+
+        .pc{text-decoration:none;display:flex;flex-direction:column;border:1px solid #e4e4e7;border-radius:16px;overflow:hidden;transition:all 0.2s;position:relative;}
+        .pc:hover{border-color:#84cc16;transform:translateY(-3px);box-shadow:0 8px 32px rgba(132,204,22,0.08);}
+        .pc.soon{opacity:0.65;cursor:default;}
+        .pc.soon:hover{transform:none;box-shadow:none;border-color:#e4e4e7;}
+
+        /* Card image area */
+        .pc-img{height:180px;position:relative;overflow:hidden;background:#09090b;display:flex;align-items:center;justify-content:center;}
+        .pc-img-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 70% at 50% 50%,rgba(132,204,22,0.08) 0%,transparent 70%);}
+        .pc-img-icon{position:relative;z-index:1;text-align:center;}
+        .pc-img-icon svg{display:block;margin:0 auto 8px;}
+        .pc-img-label{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:#84cc16;}
+
+        /* Status badges */
+        .pc-status{position:absolute;top:14px;left:14px;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;padding:5px 10px;border-radius:4px;z-index:2;}
+        .pc-status.live{background:rgba(132,204,22,0.15);border:1px solid rgba(132,204,22,0.3);color:#84cc16;}
+        .pc-status.soon{background:rgba(113,113,122,0.15);border:1px solid rgba(113,113,122,0.2);color:#71717a;}
+
+        /* Card body */
+        .pc-body{padding:20px;display:flex;flex-direction:column;flex:1;}
+        .pc-tag{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#84cc16;margin-bottom:8px;}
+        .pc-title{font-size:20px;font-weight:700;color:#09090b;line-height:1.25;margin-bottom:8px;letter-spacing:-0.01em;}
+        .pc-desc{font-size:14px;color:#71717a;line-height:1.65;flex:1;margin-bottom:16px;}
+        .pc-covers{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px;}
+        .pc-cover{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;padding:4px 8px;background:#f4f4f5;border-radius:4px;color:#52525b;}
+        .pc-foot{display:flex;align-items:center;justify-content:space-between;padding-top:14px;border-top:1px solid #f4f4f5;}
+        .pc-cta{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#84cc16;}
+        .pc-cta.gray{color:#a1a1aa;}
+        .pc-model{font-family:'JetBrains Mono',monospace;font-size:9px;color:#a1a1aa;}
+
+        /* Comparison table */
+        .compare-section{max-width:1200px;margin:0 auto;padding:0 6vw 60px;}
+        .compare-table{width:100%;border-collapse:collapse;border:1px solid #e4e4e7;border-radius:12px;overflow:hidden;}
+        .compare-table th{background:#09090b;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#84cc16;padding:12px 16px;text-align:left;}
+        .compare-table td{padding:12px 16px;font-size:13px;color:#3f3f46;border-bottom:1px solid #f4f4f5;line-height:1.5;}
+        .compare-table tr:last-child td{border-bottom:none;}
+        .compare-table tr:hover td{background:#fafafa;}
+        .td-name{font-weight:700;color:#09090b;font-family:'Outfit',sans-serif;}
+        .td-status-live{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:#84cc16;background:rgba(132,204,22,0.08);border:1px solid rgba(132,204,22,0.2);padding:3px 8px;border-radius:4px;}
+        .td-status-soon{font-family:'JetBrains Mono',monospace;font-size:9px;color:#a1a1aa;background:#f4f4f5;border:1px solid #e4e4e7;padding:3px 8px;border-radius:4px;}
+
+        /* CTA strip */
+        .cta-strip{background:#09090b;padding:60px 6vw;}
+        .cta-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap;}
+        .cta-title{font-size:clamp(22px,3vw,34px);font-weight:800;letter-spacing:-0.02em;color:#eef0f4;line-height:1.2;}
+        .cta-title span{color:#84cc16;}
+        .cta-sub{font-size:14px;color:#5c7494;margin-top:8px;font-weight:300;}
+        .cta-actions{display:flex;gap:12px;flex-wrap:wrap;flex-shrink:0;}
+        .cta-btn{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:8px;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;text-decoration:none;transition:opacity 0.15s;}
+        .cta-btn:hover{opacity:0.85;}
+        .cta-btn-primary{background:linear-gradient(90deg,#10b981,#84cc16);color:#06080c;}
+        .cta-btn-ghost{border:1px solid #232d3f;color:#6a7d96;}
+        .cta-btn-ghost:hover{border-color:#84cc16;color:#84cc16;}
+    </style>
+</head>
+<body>
+<div id="global-nav"></div>
+
+<!-- Masthead -->
+<div class="masthead">
+    <div class="masthead-top">
+        <div>
+            <div class="masthead-brand">Forge <span>Vertical</span></div>
+            <div class="masthead-tag">AGIA Prompt Library · Build real infrastructure with AI</div>
+        </div>
+        <a href="/free-quote.html" class="masthead-cta">Get a free quote →</a>
+    </div>
+</div>
+
+<!-- Stats bar -->
+<div class="stats-bar">
+    <div class="stat"><div class="stat-n">5</div><div class="stat-l">Prompts total</div></div>
+    <div class="stat-rule"></div>
+    <div class="stat"><div class="stat-n">1</div><div class="stat-l">Live now</div></div>
+    <div class="stat-rule"></div>
+    <div class="stat"><div class="stat-n">4</div><div class="stat-l">Coming soon</div></div>
+    <div class="stat-rule"></div>
+    <div class="stat"><div class="stat-n">3</div><div class="stat-l">AI models supported</div></div>
+    <div class="stat-rule"></div>
+    <div class="stat"><div class="stat-n">0</div><div class="stat-l">Lines of code to start</div></div>
+</div>
+
+<!-- Hero -->
+<div class="page-hero">
+    <span class="page-hero-label">// AGIA Prompt Library · Artificial General Intelligence Architect</span>
+    <h1>Build real infrastructure<br>with AI — <span class="g-text">the right way.</span></h1>
+    <p class="page-hero-sub">Each prompt on this page introduces the AI as an AGIA — Artificial General Intelligence Architect. Architecture and security decisions first. Infrastructure chosen deliberately. GCP and Firebase setup walked through command by command. You execute at once or stage by stage. The AI is your co-architect throughout.</p>
+</div>
+
+<!-- What is AGIA prompts -->
+<div class="what-is">
+    <div class="prose">
+        <p>
+            There is a gap between "here is some code" and "here is a production system." Most AI sessions produce the former. AGIA prompts are designed to produce the latter — by establishing the right frame before a single line of code is discussed.
+        </p>
+        <p>
+            When you paste an AGIA prompt into Claude, ChatGPT, or Grok, the AI does not jump to code. It asks structured intake questions — your product, your users, your scale, your constraints, your budget. It produces a threat model. It recommends infrastructure with trade-off reasoning. It gives you exact CLI commands for GCP and Firebase setup. Then it builds, incrementally, with each piece reviewed before the next begins.
+        </p>
+    </div>
+
+    <div class="pull">
+        "We gave the AGIA SaaS prompt to ChatGPT free tier. Before writing a single line of code, it returned a threat model, API boundaries, deployment strategy, observability plan, and failure recovery framework."
+    </div>
+
+    <div class="callout">
+        <strong>A note on communicating with the AI:</strong> These prompts set the frame — but what you put into the conversation is what makes the build yours. Tell the AI about your users in real terms. Tell it about your budget honestly. Tell it what you are afraid might go wrong. Tell it about the problem that made you want to build this in the first place. The more personal detail you give, the more precisely the architecture fits your actual product — not a generic template with your name on it.
+    </div>
+</div>
+
+<!-- Prompts grid -->
+<div class="section-hdr">
+    <span class="section-hdr-label">// All AGIA prompts</span>
+    <div class="section-hdr-rule"></div>
+    <span class="section-hdr-count">5 prompts · 1 live · 4 coming soon</span>
+</div>
+
+<div class="prompts-grid">
+
+    <!-- SaaS Architecture — LIVE -->
+    <a href="/prompts/saas-architecture.html" class="pc">
+        <div class="pc-img">
+            <div class="pc-img-bg"></div>
+            <div class="pc-img-icon">
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><rect x="4" y="8" width="32" height="24" rx="3" stroke="#84cc16" stroke-width="1.5"/><path d="M4 14h32M14 14v18" stroke="#84cc16" stroke-width="1.5"/><circle cx="10" cy="11" r="1.5" fill="#84cc16"/><circle cx="15" cy="11" r="1.5" fill="#10b981"/><circle cx="20" cy="11" r="1.5" fill="#3a4d66"/></svg>
+                <div class="pc-img-label">SaaS Platform</div>
+            </div>
+            <span class="pc-status live">Live now</span>
+        </div>
+        <div class="pc-body">
+            <div class="pc-tag">// AGIA Prompt · Full architecture</div>
+            <div class="pc-title">SaaS Platform Architecture</div>
+            <div class="pc-desc">The complete AGIA prompt for building a SaaS platform from scratch. Intake questions, infrastructure decision (Firebase vs GCP), threat model, data schema, API boundaries, CLI setup commands, and staged build sequence.</div>
+            <div class="pc-covers">
+                <span class="pc-cover">Firebase</span>
+                <span class="pc-cover">GCP CLI</span>
+                <span class="pc-cover">Auth</span>
+                <span class="pc-cover">Threat model</span>
+                <span class="pc-cover">Payments</span>
+                <span class="pc-cover">Deployment</span>
+            </div>
+            <div class="pc-foot">
+                <span class="pc-cta">Use this prompt →</span>
+                <span class="pc-model">Claude · ChatGPT · Grok</span>
+            </div>
+        </div>
+    </a>
+
+    <!-- Client Portal — COMING SOON -->
+    <div class="pc soon">
+        <div class="pc-img">
+            <div class="pc-img-bg"></div>
+            <div class="pc-img-icon">
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><rect x="6" y="6" width="28" height="28" rx="3" stroke="#3a4d66" stroke-width="1.5"/><path d="M6 16h28M16 16v18" stroke="#3a4d66" stroke-width="1.5"/><circle cx="20" cy="11" r="3" stroke="#3a4d66" stroke-width="1.5"/><path d="M14 24h8M14 28h5" stroke="#3a4d66" stroke-width="1.5" stroke-linecap="round"/></svg>
+                <div class="pc-img-label" style="color:#3a4d66;">Client Portal</div>
+            </div>
+            <span class="pc-status soon">Coming soon</span>
+        </div>
+        <div class="pc-body">
+            <div class="pc-tag" style="color:#a1a1aa;">// AGIA Prompt · Multi-role portal</div>
+            <div class="pc-title" style="color:#52525b;">Client Portal Architecture</div>
+            <div class="pc-desc">Document management, client and staff portals with separate auth, role-based access control, file upload and versioning, notification system, and admin dashboard. Designed for professional services firms.</div>
+            <div class="pc-covers">
+                <span class="pc-cover">RBAC</span>
+                <span class="pc-cover">Document flow</span>
+                <span class="pc-cover">Firebase Storage</span>
+                <span class="pc-cover">Notifications</span>
+                <span class="pc-cover">Admin portal</span>
+            </div>
+            <div class="pc-foot">
+                <span class="pc-cta gray">Coming soon</span>
+                <span class="pc-model" style="color:#e4e4e7;">Notify me</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Security Audit — COMING SOON -->
+    <div class="pc soon">
+        <div class="pc-img">
+            <div class="pc-img-bg"></div>
+            <div class="pc-img-icon">
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><path d="M20 6L8 11v10c0 7 5.5 13.5 12 15 6.5-1.5 12-8 12-15V11L20 6z" stroke="#3a4d66" stroke-width="1.5" stroke-linejoin="round"/><path d="M14 20l4 4 8-8" stroke="#3a4d66" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <div class="pc-img-label" style="color:#3a4d66;">Security Audit</div>
+            </div>
+            <span class="pc-status soon">Coming soon</span>
+        </div>
+        <div class="pc-body">
+            <div class="pc-tag" style="color:#a1a1aa;">// AGIA Prompt · Security research</div>
+            <div class="pc-title" style="color:#52525b;">Security Audit Prompt</div>
+            <div class="pc-desc">WAF configuration review, DNS exposure check, credential leak detection, DMARC and email security, origin IP exposure, auth gap analysis, and OWASP Top 10 applied to your specific platform. Written by an active HackerOne researcher.</div>
+            <div class="pc-covers">
+                <span class="pc-cover">WAF</span>
+                <span class="pc-cover">DNS</span>
+                <span class="pc-cover">DMARC</span>
+                <span class="pc-cover">OWASP</span>
+                <span class="pc-cover">Credentials</span>
+            </div>
+            <div class="pc-foot">
+                <span class="pc-cta gray">Coming soon</span>
+                <span class="pc-model" style="color:#e4e4e7;">Notify me</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- GEO Audit — COMING SOON -->
+    <div class="pc soon">
+        <div class="pc-img">
+            <div class="pc-img-bg"></div>
+            <div class="pc-img-icon">
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="13" stroke="#3a4d66" stroke-width="1.5"/><path d="M20 7c0 0-6 5-6 13s6 13 6 13M20 7c0 0 6 5 6 13s-6 13-6 13M7 20h26" stroke="#3a4d66" stroke-width="1.5"/></svg>
+                <div class="pc-img-label" style="color:#3a4d66;">GEO Audit</div>
+            </div>
+            <span class="pc-status soon">Coming soon</span>
+        </div>
+        <div class="pc-body">
+            <div class="pc-tag" style="color:#a1a1aa;">// AGIA Prompt · AI citation strategy</div>
+            <div class="pc-title" style="color:#52525b;">GEO and AI Citation Audit</div>
+            <div class="pc-desc">Schema markup audit, entity disambiguation, robots.txt AI crawler configuration, llms.txt structure, FAQPage schema for AI Overviews, Wikidata entity creation, and structured citation strategy to get your business cited by Claude, ChatGPT, Perplexity, and Grok.</div>
+            <div class="pc-covers">
+                <span class="pc-cover">Schema</span>
+                <span class="pc-cover">Wikidata</span>
+                <span class="pc-cover">robots.txt</span>
+                <span class="pc-cover">llms.txt</span>
+                <span class="pc-cover">AI citation</span>
+            </div>
+            <div class="pc-foot">
+                <span class="pc-cta gray">Coming soon</span>
+                <span class="pc-model" style="color:#e4e4e7;">Notify me</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Business Automation — COMING SOON -->
+    <div class="pc soon">
+        <div class="pc-img">
+            <div class="pc-img-bg"></div>
+            <div class="pc-img-icon">
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><rect x="8" y="14" width="10" height="12" rx="2" stroke="#3a4d66" stroke-width="1.5"/><rect x="22" y="14" width="10" height="12" rx="2" stroke="#3a4d66" stroke-width="1.5"/><path d="M18 20h4M20 8v6M20 26v6" stroke="#3a4d66" stroke-width="1.5" stroke-linecap="round"/></svg>
+                <div class="pc-img-label" style="color:#3a4d66;">Automation</div>
+            </div>
+            <span class="pc-status soon">Coming soon</span>
+        </div>
+        <div class="pc-body">
+            <div class="pc-tag" style="color:#a1a1aa;">// AGIA Prompt · Cloud Functions</div>
+            <div class="pc-title" style="color:#52525b;">Business Automation Prompt</div>
+            <div class="pc-desc">Replace SaaS subscriptions with custom Cloud Functions you own permanently. Workflow triggers, document processing, client notifications, invoice generation, deadline management, and multi-system routing. Built on GCP — no Zapier dependency.</div>
+            <div class="pc-covers">
+                <span class="pc-cover">Cloud Functions</span>
+                <span class="pc-cover">Triggers</span>
+                <span class="pc-cover">Documents</span>
+                <span class="pc-cover">Notifications</span>
+                <span class="pc-cover">No Zapier</span>
+            </div>
+            <div class="pc-foot">
+                <span class="pc-cta gray">Coming soon</span>
+                <span class="pc-model" style="color:#e4e4e7;">Notify me</span>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Comparison table -->
+<div class="section-hdr">
+    <span class="section-hdr-label">// What each prompt covers</span>
+    <div class="section-hdr-rule"></div>
+</div>
+
+<div class="compare-section">
+    <table class="compare-table">
+        <thead>
+            <tr>
+                <th>Prompt</th>
+                <th>Infra decision</th>
+                <th>CLI setup</th>
+                <th>Threat model</th>
+                <th>Auth design</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><a href="/prompts/saas-architecture.html" style="color:#84cc16;text-decoration:none;font-weight:700;">SaaS Platform</a></td>
+                <td class="td-name">Firebase vs GCP vs Hybrid</td>
+                <td>Full gcloud + Firebase CLI</td>
+                <td>Yes — OWASP applied</td>
+                <td>RBAC + Firestore rules</td>
+                <td><span class="td-status-live">Live</span></td>
+            </tr>
+            <tr>
+                <td><span style="color:#52525b;font-weight:700;">Client Portal</span></td>
+                <td>Firebase-first</td>
+                <td>Full Firebase CLI</td>
+                <td>Yes — multi-role</td>
+                <td>Client + Staff + Admin</td>
+                <td><span class="td-status-soon">Soon</span></td>
+            </tr>
+            <tr>
+                <td><span style="color:#52525b;font-weight:700;">Security Audit</span></td>
+                <td>Existing infra review</td>
+                <td>DNS + WAF commands</td>
+                <td>Yes — full threat model</td>
+                <td>Auth gap analysis</td>
+                <td><span class="td-status-soon">Soon</span></td>
+            </tr>
+            <tr>
+                <td><span style="color:#52525b;font-weight:700;">GEO Audit</span></td>
+                <td>CDN + robots config</td>
+                <td>GSC + sitemap CLI</td>
+                <td>No</td>
+                <td>No</td>
+                <td><span class="td-status-soon">Soon</span></td>
+            </tr>
+            <tr>
+                <td><span style="color:#52525b;font-weight:700;">Business Automation</span></td>
+                <td>GCP Cloud Functions</td>
+                <td>Full gcloud CLI</td>
+                <td>Yes — data flow</td>
+                <td>Service accounts + IAM</td>
+                <td><span class="td-status-soon">Soon</span></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- CTA strip -->
+<div class="cta-strip">
+    <div class="cta-inner">
+        <div>
+            <div class="cta-title">Want it built<br><span>rather than prompted?</span></div>
+            <div class="cta-sub">Forge Vertical builds the infrastructure these prompts describe. You own the code permanently.</div>
+        </div>
+        <div class="cta-actions">
+            <a href="/free-quote.html" class="cta-btn cta-btn-primary">→ Free quote</a>
+            <a href="https://wa.me/27657417593" target="_blank" rel="noopener noreferrer" class="cta-btn cta-btn-ghost">WhatsApp Jarrit</a>
+            <a href="/agia.html" class="cta-btn cta-btn-ghost">What is AGIA? →</a>
+        </div>
+    </div>
+</div>
+
+<div id="global-footer"></div>
+<script src="https://cdn.tailwindcss.com"></script>
+</body>
+</html>

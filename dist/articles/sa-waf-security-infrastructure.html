@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="When a South African company says they have strong infrastructure, what does that actually mean? Did they battle test it or just put it on AWS and assume Amazon has them covered? The difference between a WAF that stops attacks and a checkbox that gets ticked — from someone who has tested LVMH, PayPal, Robinhood, and others.">
+    <title>"We Have Strong Infrastructure." Did You Battle Test It, or Just Put It on AWS? | Forge Vertical</title>
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"Article","headline":"We Have Strong Infrastructure. Did You Battle Test It, or Just Put It on AWS?","description":"LVMH across four platforms. PayPal on HackerOne. Robinhood. Chia. They all have something in common — hardened WAFs, DataDome, layered bot detection, false positives deliberately triggered to test depth. South African businesses that can afford DataDome probably don't have it. Features available for free are partially or not configured at all. Here is what strong infrastructure actually means when someone tests it.","author":{"@type":"Person","name":"Jarrit Hosking","url":"https://www.forgevertical.com"},"publisher":{"@type":"Organization","name":"Forge Vertical","url":"https://www.forgevertical.com"},"datePublished":"2026-09-09","keywords":"WAF South Africa, DataDome South Africa, Cloudflare WAF configuration, web application firewall testing, South Africa cybersecurity infrastructure, battle testing security, false positives WAF, HackerOne bug bounty South Africa, pen testing WAF bypass, strong infrastructure what does it mean, AWS security misconception"}
+    </script>
+    <script src="/global.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/typography.css">
+    <style>
+        body{font-family:'Outfit',sans-serif;background:#fff;}
+        .mono{font-family:'JetBrains Mono',monospace;}
+        .g-text{background:linear-gradient(90deg,#10b981,#84cc16);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:inline-block;}
+        .prose-body{font-family:'Lora',serif;font-size:19px;line-height:1.85;color:#27272a;}
+        .prose-body p{margin-bottom:1.6em;}
+        .prose-body h2{font-family:'Outfit',sans-serif;font-size:28px;font-weight:700;letter-spacing:-0.02em;color:#09090b;margin-top:2.5em;margin-bottom:0.6em;line-height:1.2;}
+        .prose-body strong{font-weight:700;color:#09090b;font-family:'Outfit',sans-serif;font-size:17px;}
+        .prose-body a{color:#84cc16;text-decoration:underline;text-underline-offset:3px;}
+        .prose-body code{font-family:'JetBrains Mono',monospace;font-size:14px;background:#f4f4f5;padding:2px 7px;border-radius:4px;color:#09090b;}
+        .callout{background:#f4f4f5;border-left:3px solid #84cc16;border-radius:0 12px 12px 0;padding:20px 24px;margin:2em 0;font-family:'Outfit',sans-serif;font-size:15px;color:#3f3f46;line-height:1.7;}
+        .callout.dark{background:#09090b;color:#a1a1aa;border-left-color:#84cc16;}
+        .callout.red{border-left-color:#ef4444;background:#fef2f2;color:#7f1d1d;}
+        .callout.amber{border-left-color:#f59e0b;background:#fffdf5;}
+        .pull-quote{font-family:'Lora',serif;font-size:22px;font-style:italic;color:#09090b;border-top:2px solid #84cc16;border-bottom:1px solid #e4e4e7;padding:24px 0;margin:2.5em 0;line-height:1.5;}
+        .chapter-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:#84cc16;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:6px;display:block;}
+        /* Layer stack visual */
+        .layer-stack{display:flex;flex-direction:column;gap:0;margin:2em 0;border-radius:14px;overflow:hidden;border:1px solid #e4e4e7;}
+        .layer{display:flex;align-items:center;gap:16px;padding:16px 20px;border-bottom:1px solid #e4e4e7;}
+        .layer:last-child{border-bottom:none;}
+        .layer.strong{background:#f0fdf4;}
+        .layer.medium{background:#fffdf0;}
+        .layer.weak{background:#fef2f2;}
+        .layer.missing{background:#f9fafb;}
+        .layer-num{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;width:28px;flex-shrink:0;text-align:center;}
+        .layer-num.strong{color:#059669;}
+        .layer-num.medium{color:#d97706;}
+        .layer-num.weak{color:#ef4444;}
+        .layer-num.missing{color:#a1a1aa;}
+        .layer-name{font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;flex:1;}
+        .layer-name.strong{color:#065f46;}
+        .layer-name.medium{color:#78350f;}
+        .layer-name.weak{color:#7f1d1d;}
+        .layer-name.missing{color:#6b7280;}
+        .layer-status{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;padding:3px 10px;border-radius:4px;}
+        .layer-status.strong{background:#dcfce7;color:#059669;}
+        .layer-status.medium{background:#fef3c7;color:#d97706;}
+        .layer-status.weak{background:#fee2e2;color:#dc2626;}
+        .layer-status.missing{background:#f3f4f6;color:#9ca3af;}
+        .layer-desc{font-size:12px;color:#6b7280;margin-top:3px;line-height:1.5;}
+        /* Comparison table */
+        .compare-table{width:100%;border-collapse:collapse;margin:2em 0;font-size:14px;}
+        .compare-table th{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;padding:12px 16px;text-align:left;background:#09090b;color:#84cc16;border:1px solid #1c2638;}
+        .compare-table td{padding:12px 16px;border:1px solid #e4e4e7;vertical-align:top;font-family:'Outfit',sans-serif;line-height:1.5;}
+        .compare-table tr:nth-child(even) td{background:#f9fafb;}
+        .tick{color:#059669;font-weight:700;}
+        .cross{color:#ef4444;font-weight:700;}
+        .partial{color:#d97706;font-weight:700;}
+        .stat-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;margin:2em 0;}
+        .stat-box{background:#09090b;border-radius:12px;padding:18px;text-align:center;}
+        .stat-val{font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:700;color:#84cc16;line-height:1;margin-bottom:6px;}
+        .stat-lbl{font-size:11px;color:#52525b;text-transform:uppercase;letter-spacing:0.08em;font-weight:600;}
+        .fv-cta{background:linear-gradient(135deg,rgba(16,185,129,0.08),rgba(132,204,22,0.08));border:1px solid rgba(132,204,22,0.3);border-radius:16px;padding:28px;margin:2em 0;}
+        .fv-cta-label{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.18em;color:#84cc16;margin-bottom:10px;display:block;}
+        .fv-cta-title{font-family:'Outfit',sans-serif;font-size:20px;font-weight:800;color:#09090b;margin-bottom:10px;letter-spacing:-0.01em;}
+        .fv-cta-body{font-size:14px;color:#52525b;line-height:1.7;margin-bottom:18px;}
+        .fv-cta-links{display:flex;gap:12px;flex-wrap:wrap;}
+        .fv-btn{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;padding:10px 18px;border-radius:8px;text-decoration:none;transition:opacity 0.15s;}
+        .fv-btn:hover{opacity:0.85;}
+        .fv-btn.primary{background:linear-gradient(90deg,#10b981,#84cc16);color:#06080c;}
+        .fv-btn.ghost{border:1px solid rgba(132,204,22,0.4);color:#84cc16;}
+        .aff-footer{background:#09090b;border-radius:16px;padding:28px;margin:3em 0;}
+        .aff-footer h3{font-family:'Outfit',sans-serif;font-size:15px;font-weight:700;color:#f4f4f5;margin-bottom:6px;}
+        .aff-footer p{font-size:13px;color:#6a7d96;margin-bottom:18px;line-height:1.6;}
+        .aff-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;}
+        .aff-tile{background:#111620;border:1px solid #1a2030;border-radius:10px;padding:14px;text-decoration:none;display:block;transition:border-color 0.18s;}
+        .aff-tile:hover{border-color:#84cc16;}
+        .aff-tile-name{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:#84cc16;margin-bottom:4px;}
+        .aff-tile-desc{font-size:11px;color:#6a7d96;line-height:1.5;margin-bottom:6px;}
+        .aff-tile-cta{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:#84cc16;}
+    </style>
+</head>
+<body class="antialiased">
+<div id="global-nav"></div>
+<article class="pt-20 pb-24">
+
+    <header class="max-w-3xl mx-auto px-6 mt-10 mb-12">
+        <div class="flex items-center gap-3 mb-6">
+            <a href="/articles.html" class="mono text-[10px] text-zinc-400 hover:text-zinc-600 uppercase tracking-widest">← Articles</a>
+            <span class="text-zinc-300">·</span>
+            <span class="mono text-[10px] font-bold text-[#84cc16] uppercase tracking-widest border border-[#84cc16]/30 px-3 py-1 rounded-full">Security · WAF · Infrastructure · SA</span>
+        </div>
+        <h1 class="text-4xl md:text-5xl font-bold tracking-tight leading-[1.05] mb-6 text-zinc-900" style="font-family:'Outfit',sans-serif;letter-spacing:-0.03em;">
+            "We have strong<br>infrastructure." Did you<br>
+            <span class="g-text">battle test it, or just put it on AWS?</span>
+        </h1>
+        <p class="text-xl text-zinc-500 font-light leading-relaxed mb-8 max-w-2xl" style="font-family:'Outfit',sans-serif;">
+            LVMH across four platforms. PayPal on HackerOne. Robinhood. Chia. They all share something — hardened WAFs, DataDome, layered bot detection that fires false positives deliberately to test depth. South African businesses that could easily afford DataDome probably don't have it. Features available for free are partially configured or not there at all. Here is what strong infrastructure actually means when someone actually tests it.
+        </p>
+        <div class="flex items-center gap-4 pb-8 border-b border-zinc-100">
+            <div>
+                <div class="font-bold text-sm text-zinc-900">Jarrit Hosking</div>
+                <div class="mono text-[10px] text-zinc-400 uppercase tracking-widest">Forge Vertical · Cape Town · September 9, 2026 · HackerOne · YesWeHack · Bugcrowd</div>
+            </div>
+            <div class="ml-auto mono text-[10px] text-zinc-400 uppercase tracking-widest">13 min read</div>
+        </div>
+    </header>
+
+    <div class="max-w-3xl mx-auto px-6 prose-body">
+
+        <span class="chapter-label">// What you learn hitting hardened targets</span>
+
+        <p>
+            When you test against a genuinely hardened target — a LVMH platform, a PayPal endpoint, a Robinhood API — you feel the difference immediately. Your first reconnaissance requests come back clean. Your second wave starts getting rate-limited before you have done anything that should trigger a rate limit. Your third attempt gets a CAPTCHA that you did not expect. By the fourth, you are getting blocked at the network edge before your request reaches the application layer at all.
+        </p>
+
+        <p>
+            That friction is deliberate. It is expensive to build and maintain. And it tells you everything about how seriously the organisation takes security — not from a policy document, not from a security certification, but from what happens when someone actually pushes against it.
+        </p>
+
+        <p>
+            <strong>Then you test a South African target and the contrast is jarring.</strong> Not because South African developers are less capable — they are not. But because the security investment decisions made by South African organisations consistently underweight the defensive layers that global enterprises treat as baseline. The tools exist. The pricing is accessible. The configuration knowledge is available. The implementation is simply not happening.
+        </p>
+
+        <h2>What "strong infrastructure" actually means — and what it does not</h2>
+        <span class="chapter-label">// Chapter 01 — The AWS misconception</span>
+
+        <p>
+            "We're on AWS" is the most common version of the "strong infrastructure" claim in South African business conversations. It is not wrong — AWS does provide a genuinely solid hosting foundation. But AWS provides infrastructure security, not application security. That distinction is the gap that attackers walk through.
+        </p>
+
+        <p>
+            AWS secures the physical data centres, the hypervisor layer, the network backbone, and the hardware. Everything above that — your application code, your authentication logic, your API endpoints, your database queries, your session management — is your responsibility. AWS calls this the Shared Responsibility Model. It is documented clearly. It is also widely misunderstood.
+        </p>
+
+        <p>
+            <strong>Putting your application on AWS does not make your application secure. It makes the server it runs on physically resilient.</strong> A SQL injection vulnerability in your application code is just as exploitable on AWS as it is on a shared hosting account. A misconfigured S3 bucket — one of the most common AWS security failures — leaks data regardless of how many security certifications AWS holds. The infrastructure is sound. The application is exposed.
+        </p>
+
+        <div class="callout red">
+            <strong>The S3 bucket problem is endemic in SA:</strong> Misconfigured AWS S3 buckets — storage containers left publicly accessible when they should be private — have exposed sensitive data from organisations globally including in South Africa. The configuration that makes a bucket public takes one checkbox. Discovering you made that mistake typically requires either an internal audit or a security researcher finding it for you. Many South African organisations have neither.
+        </div>
+
+        <div class="pull-quote">
+            AWS secures the server. You secure the application. Those are not the same thing. The shared responsibility model is documented clearly and misunderstood widely. Attackers know the difference even when the CISO does not.
+        </div>
+
+        <h2>What the hardened targets actually have — the full stack</h2>
+        <span class="chapter-label">// Chapter 02 — LVMH, PayPal, and what battle-tested looks like</span>
+
+        <p>
+            When you test against a target like LVMH — which runs multiple distinct platform environments, each with different codebases and security postures — you build a picture of what layered defence actually looks like in practice. Here is what the hardened version of these stacks typically includes, from the edge inward:
+        </p>
+
+    </div>
+
+    <!-- Layer stack -->
+    <div class="max-w-3xl mx-auto px-6 my-8">
+        <div class="layer-stack">
+            <div class="layer strong">
+                <div class="layer-num strong">L1</div>
+                <div style="flex:1;">
+                    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:3px;">
+                        <div class="layer-name strong">CDN + Edge Network (Cloudflare / Akamai / Fastly)</div>
+                        <span class="layer-status strong">Baseline</span>
+                    </div>
+                    <div class="layer-desc">Traffic hits the edge before it reaches the origin server. DDoS mitigation, geographic filtering, TLS termination, and initial request filtering all happen here. The origin server IP is hidden — direct-to-origin attacks are blocked. This is the first door.</div>
+                </div>
+            </div>
+            <div class="layer strong">
+                <div class="layer-num strong">L2</div>
+                <div style="flex:1;">
+                    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:3px;">
+                        <div class="layer-name strong">WAF — Web Application Firewall (Cloudflare WAF / AWS WAF / Imperva)</div>
+                        <span class="layer-status strong">Hardened</span>
+                    </div>
+                    <div class="layer-desc">Rules-based filtering of HTTP requests. Blocks known attack signatures — SQLi, XSS, path traversal, command injection, SSRF. Managed rule sets updated continuously. Custom rules layered on top for business-specific patterns. A properly tuned WAF blocks the vast majority of automated scanning before it reaches application code.</div>
+                </div>
+            </div>
+            <div class="layer strong">
+                <div class="layer-num strong">L3</div>
+                <div style="flex:1;">
+                    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:3px;">
+                        <div class="layer-name strong">Bot Management (DataDome / Cloudflare Bot Fight / PerimeterX)</div>
+                        <span class="layer-status strong">Enterprise</span>
+                    </div>
+                    <div class="layer-desc">This is where sophisticated targets separate from basic ones. DataDome and equivalents use behavioural analysis — mouse movement patterns, timing between requests, browser fingerprinting, JS challenge responses — to distinguish humans from bots. False positives are deliberate: the system is tuned to challenge anything that looks automated, even if it is a legitimate security researcher. You know you are hitting a hardened target when your own legitimate browsing session gets challenged.</div>
+                </div>
+            </div>
+            <div class="layer strong">
+                <div class="layer-num strong">L4</div>
+                <div style="flex:1;">
+                    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:3px;">
+                        <div class="layer-name strong">Rate Limiting — Layered and Contextual</div>
+                        <span class="layer-status strong">Tuned</span>
+                    </div>
+                    <div class="layer-desc">Not just "10 requests per second per IP." Contextual rate limiting that applies different thresholds to different endpoints — authentication endpoints get stricter limits than static content, payment endpoints get the strictest limits of all. IP-based limiting combined with session-based limiting combined with account-based limiting. Rotating IPs does not help when the session is rate-limited independently of the IP.</div>
+                </div>
+            </div>
+            <div class="layer medium">
+                <div class="layer-num medium">L5</div>
+                <div style="flex:1;">
+                    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:3px;">
+                        <div class="layer-name medium">API Gateway Security (authentication, schema validation, quota management)</div>
+                        <span class="layer-status medium">Variable</span>
+                    </div>
+                    <div class="layer-desc">Every API endpoint authenticated. Request schemas validated before the application layer sees them. Quota management per API key, per user, per endpoint. Unexpected fields stripped rather than passed through. This layer is where even enterprise targets sometimes have gaps — internal APIs exposed through the same gateway as public APIs with different (weaker) authentication.</div>
+                </div>
+            </div>
+            <div class="layer medium">
+                <div class="layer-num medium">L6</div>
+                <div style="flex:1;">
+                    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:3px;">
+                        <div class="layer-name medium">Application-Level Security (input validation, parameterised queries, CSRF, CSP)</div>
+                        <span class="layer-status medium">Application-dependent</span>
+                    </div>
+                    <div class="layer-desc">The code itself. Input validation. Parameterised queries preventing SQL injection at the database call level. CSRF tokens on state-changing requests. Content Security Policy headers preventing XSS payload execution even if injection is possible. This is where most vulnerabilities live — and where most security reviews stop when they should start.</div>
+                </div>
+            </div>
+            <div class="layer strong">
+                <div class="layer-num strong">L7</div>
+                <div style="flex:1;">
+                    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:3px;">
+                        <div class="layer-name strong">Logging, Monitoring, and Alerting (SIEM)</div>
+                        <span class="layer-status strong">Critical</span>
+                    </div>
+                    <div class="layer-desc">Every request logged. Anomaly detection that alerts on patterns — not just individual requests. An attacker who moves slowly enough to avoid rate limits is caught by pattern detection across the log stream. Mean time to detection matters as much as mean time to prevention. A breach caught in minutes costs less than a breach caught in months.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-3xl mx-auto px-6 prose-body">
+
+        <h2>DataDome — and why SA businesses that can afford it probably don't have it</h2>
+        <span class="chapter-label">// Chapter 03 — The bot management gap</span>
+
+        <p>
+            DataDome is a bot management platform used by companies like LVMH, Foot Locker, Rakuten, and Reddit. It sits in front of your application and analyses every request using real-time machine learning — browser fingerprinting, behavioural biometrics, device reputation scoring — to determine whether the request comes from a human or a bot.
+        </p>
+
+        <p>
+            When you hit a DataDome-protected target during security research, you experience something specific: false positives that are clearly deliberate. Your browser session — a legitimate human browsing session — gets challenged or blocked because something in your behaviour pattern matched a bot signature. The timing between your page loads. The way your browser rendered a JavaScript challenge. The absence of a specific browser API that bots commonly omit.
+        </p>
+
+        <p>
+            That friction is the product working as designed. A system tuned to never produce false positives is a system tuned to let sophisticated bots through. DataDome accepts that legitimate users will occasionally be challenged — because the alternative is letting automated attacks through without friction.
+        </p>
+
+        <p>
+            <strong>DataDome starts at approximately $3,000 per month for enterprise deployments.</strong> For a South African retail bank, a major insurer, or a large e-commerce platform — organisations that process millions of rands in transactions monthly — that is a rounding error in the IT budget. The ROI calculation against a single successful credential stuffing attack that compromises thousands of customer accounts is not close.
+        </p>
+
+        <p>
+            The reason South African organisations at that scale typically do not have DataDome or equivalent is not cost. It is awareness and prioritisation. The IT team knows what it is. The security team may have requested it. The budget conversation did not happen because the board did not understand why bot management is different from the WAF they already have — and nobody made the case compellingly enough.
+        </p>
+
+        <h2>What SA businesses get for free and are not using properly</h2>
+        <span class="chapter-label">// Chapter 04 — The Cloudflare gap</span>
+
+        <p>
+            Before DataDome, before enterprise WAF, before anything paid — Cloudflare's free and Pro tiers provide a security baseline that most South African SMEs and a surprising number of larger organisations are not fully utilising. These are features that cost nothing or close to nothing, that take an afternoon to configure properly, and that block the majority of opportunistic attacks.
+        </p>
+
+    </div>
+
+    <!-- Comparison table -->
+    <div class="max-w-3xl mx-auto px-6 my-8 overflow-x-auto">
+        <table class="compare-table">
+            <thead>
+                <tr>
+                    <th>Feature</th>
+                    <th>Available on Free?</th>
+                    <th>Typical SA SME</th>
+                    <th>What it stops</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>SSL/TLS Full Strict</strong></td>
+                    <td><span class="tick">✓ Free</span></td>
+                    <td><span class="partial">⚠ Often on Flexible (wrong)</span></td>
+                    <td>MITM attacks, SSL stripping, certificate spoofing</td>
+                </tr>
+                <tr>
+                    <td><strong>HSTS</strong></td>
+                    <td><span class="tick">✓ Free</span></td>
+                    <td><span class="cross">✗ Usually off</span></td>
+                    <td>Protocol downgrade attacks, forces HTTPS at browser level</td>
+                </tr>
+                <tr>
+                    <td><strong>Bot Fight Mode</strong></td>
+                    <td><span class="tick">✓ Free</span></td>
+                    <td><span class="cross">✗ Usually off</span></td>
+                    <td>Known malicious bots, scrapers, automated scanners</td>
+                </tr>
+                <tr>
+                    <td><strong>WAF Managed Rules</strong></td>
+                    <td><span class="partial">⚠ Pro ($20/mo)</span></td>
+                    <td><span class="cross">✗ Not subscribed</span></td>
+                    <td>SQLi, XSS, path traversal, OWASP Top 10</td>
+                </tr>
+                <tr>
+                    <td><strong>Rate Limiting</strong></td>
+                    <td><span class="partial">⚠ Pro (10k reqs free)</span></td>
+                    <td><span class="cross">✗ Not configured</span></td>
+                    <td>Brute force, credential stuffing, API abuse</td>
+                </tr>
+                <tr>
+                    <td><strong>Security Headers (CSP, X-Frame)</strong></td>
+                    <td><span class="tick">✓ Free (Transform Rules)</span></td>
+                    <td><span class="cross">✗ Usually missing</span></td>
+                    <td>XSS execution, clickjacking, MIME sniffing</td>
+                </tr>
+                <tr>
+                    <td><strong>Under Attack Mode</strong></td>
+                    <td><span class="tick">✓ Free</span></td>
+                    <td><span class="partial">⚠ Known but rarely pre-configured</span></td>
+                    <td>L7 DDoS, volumetric bot attacks</td>
+                </tr>
+                <tr>
+                    <td><strong>Origin IP hidden</strong></td>
+                    <td><span class="tick">✓ Free</span></td>
+                    <td><span class="partial">⚠ Often exposed via DNS records</span></td>
+                    <td>Direct-to-origin bypass of all Cloudflare protections</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="max-w-3xl mx-auto px-6 prose-body">
+
+        <p>
+            The last row in that table deserves its own paragraph. <strong>The single most common Cloudflare misconfiguration in South African organisations is exposing the origin server IP address through DNS records — usually a legacy A record for a subdomain like <code>mail.</code> or <code>ftp.</code> or <code>direct.</code> that was never proxied through Cloudflare.</strong>
+        </p>
+
+        <p>
+            Once an attacker has your origin IP, every protection Cloudflare provides can be bypassed by sending requests directly to that IP rather than through Cloudflare's edge. WAF — bypassed. Bot Fight Mode — bypassed. Rate limiting — bypassed. DDoS mitigation — bypassed. The entire defensive layer disappears because one DNS record was not proxied.
+        </p>
+
+        <p>
+            Finding your origin IP from your Cloudflare deployment takes about thirty seconds using historical DNS records, certificate transparency logs, or Shodan. Any competent attacker does this as the first step. Most South African organisations have not closed this gap.
+        </p>
+
+        <div class="callout amber">
+            <strong>Check this right now:</strong> Go to <a href="https://search.censys.io" target="_blank" rel="noopener noreferrer">censys.io</a> or <a href="https://www.shodan.io" target="_blank" rel="noopener noreferrer">shodan.io</a> and search for your domain. If you can see your origin server's IP address and the open ports it is running, so can anyone looking for a target. If your Cloudflare configuration is correct, censys and Shodan should see Cloudflare's IPs, not yours.
+        </div>
+
+        <h2>Battle testing — what it actually means to know your infrastructure is solid</h2>
+        <span class="chapter-label">// Chapter 05 — The difference between confidence and verified confidence</span>
+
+        <p>
+            There is a meaningful difference between believing your infrastructure is secure and having tested it. Most South African organisations operate on belief. The ones that have been through a HackerOne or YesWeHack bug bounty programme, or have engaged a competent penetration testing firm for a genuine test rather than a compliance checkbox exercise, operate on verified confidence.
+        </p>
+
+        <p>
+            Battle testing means: someone who knows what they are doing has deliberately tried to break your security and reported what they found. Not a vulnerability scanner running automated checks against a OWASP list. Not a penetration test that stayed within a tightly scoped safe zone that excluded the most interesting attack surfaces. An actual attempt — within safe harbour — to find ways in.
+        </p>
+
+        <p>
+            The false positives from a system like DataDome are themselves a form of battle testing. When your own security team's legitimate browser sessions are getting challenged, it means the system is sensitive enough to catch behaviour that deviates from the human baseline. A system that never produces false positives during internal testing is a system calibrated for legibility, not security.
+        </p>
+
+        <p>
+            <strong>The question every South African CIO, IT manager, and business owner should be asking is this: the last time someone said our security is strong, what did they base that on?</strong> Was it an audit that tested the documentation? Was it a penetration test that covered a defined subset of the application? Was it a bug bounty programme where external researchers with real skill actually attempted to get in? Or was it a vendor assurance that the hosting provider's infrastructure is certified?
+        </p>
+
+        <p>
+            Those are four very different answers to the same question. Only one of them — the bug bounty programme or equivalent external adversarial testing — tells you what you actually need to know.
+        </p>
+
+        <div class="callout dark">
+            <span class="text-[#84cc16] font-bold block mb-2 font-sans text-sm">// On the ethics of this article</span>
+            <span class="text-zinc-400 font-sans text-sm">Everything described in this article is public knowledge, documented in security research literature, and forms the basis of legitimate defensive security work. The techniques used to test LVMH, PayPal, Robinhood, and others were conducted within safe harbour agreements on platforms including HackerOne and YesWeHack — responsible disclosure, coordinated with the organisations, within scope. The purpose of describing what hardened targets look like is to raise the standard for South African targets — not to lower the barrier for attackers. Attackers already know this. Defenders often do not.</span>
+        </div>
+
+    </div>
+
+    <!-- Forge Vertical CTA -->
+    <div class="max-w-3xl mx-auto px-6 my-8">
+        <div class="fv-cta">
+            <span class="fv-cta-label">// Forge Vertical security services</span>
+            <div class="fv-cta-title">Know what your infrastructure actually looks like from the outside</div>
+            <div class="fv-cta-body">Forge Vertical conducts web application security reviews, Cloudflare configuration audits, origin IP exposure checks, and penetration testing for South African businesses within safe harbour agreements. We bring the same approach we use on HackerOne and YesWeHack — active researcher credentials, real adversarial testing — to your infrastructure, with a report that tells you what is exposed and exactly what to do about it. Active Anthropic CVP approval. Cape Town based.</div>
+            <div class="fv-cta-links">
+                <a href="https://www.forgevertical.com/onboard.html" class="fv-btn primary">Start a security review →</a>
+                <a href="mailto:jarrit@forgevertical.com?subject=Security audit enquiry" class="fv-btn ghost">Email Jarrit →</a>
+                <a href="https://wa.me/27657417593" target="_blank" rel="noopener noreferrer" class="fv-btn ghost">WhatsApp →</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-3xl mx-auto px-6">
+        <div class="aff-footer">
+            <div class="mono text-[10px] text-[#84cc16] uppercase tracking-widest mb-3">// Start with the layer you control today</div>
+            <h3>The defensive stack every SA business should have configured before anything else</h3>
+            <p>Cloudflare handles L1 through L4. These handle the rest. Affiliate links help keep Forge Vertical running and independent.</p>
+            <div class="aff-grid">
+                <a href="https://get.surfshark.net/aff_c?offer_id=6&aff_id=4160" target="_blank" rel="noopener noreferrer" class="aff-tile">
+                    <img src="/assets/images/surfshark-vpn-1-year-17236158874633226.webp" alt="Surfshark" style="height:18px;margin-bottom:8px;object-fit:contain;display:block;" onerror="this.style.display='none'">
+                    <div class="aff-tile-name">Surfshark VPN</div>
+                    <div class="aff-tile-desc">Mask your origin IP when testing your own infrastructure. Essential for internal security work.</div>
+                    <span class="aff-tile-cta">Try Surfshark →</span>
+                </a>
+                <a href="https://go.nordvpn.net/aff_c?offer_id=15&aff_id=145959&url_id=902" target="_blank" rel="noopener noreferrer" class="aff-tile">
+                    <img src="/assets/images/NordVPN-vertical.png" alt="NordVPN" style="height:18px;margin-bottom:8px;object-fit:contain;display:block;" onerror="this.style.display='none'">
+                    <div class="aff-tile-name">NordVPN</div>
+                    <div class="aff-tile-desc">Threat protection and Meshnet. Secure your admin access and remote team connections.</div>
+                    <span class="aff-tile-cta">Try NordVPN →</span>
+                </a>
+                <a href="https://nordpass.com" target="_blank" rel="noopener noreferrer" class="aff-tile">
+                    <img src="/assets/images/nord-security_password-management-tools_1739200695312.png" alt="NordPass" style="height:18px;margin-bottom:8px;object-fit:contain;display:block;" onerror="this.style.display='none'">
+                    <div class="aff-tile-name">NordPass Business</div>
+                    <div class="aff-tile-desc">Team credential management. Cloudflare API keys, AWS access keys, database passwords — secured centrally.</div>
+                    <span class="aff-tile-cta">Try NordPass →</span>
+                </a>
+                <a href="https://portal.webway.host/aff.php?aff=353" target="_blank" rel="noopener noreferrer" class="aff-tile">
+                    <img src="/assets/images/webwaylogo.png" alt="WebWay" style="height:18px;margin-bottom:8px;object-fit:contain;display:block;" onerror="this.style.display='none'">
+                    <div class="aff-tile-name">WebWay — SA Hosting</div>
+                    <div class="aff-tile-desc">South African hosting. Pair with Cloudflare proxied correctly and your origin stays hidden.</div>
+                    <span class="aff-tile-cta">WebWay.co.za →</span>
+                </a>
+            </div>
+        </div>
+        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mt-8">
+            <div>
+                <div class="mono text-[10px] text-zinc-400 uppercase tracking-widest mb-1">Written by</div>
+                <div class="font-bold text-zinc-900">Jarrit Hosking</div>
+                <div class="mono text-[10px] text-zinc-400">Forge Vertical · Cape Town · September 9, 2026 · Active HackerOne · YesWeHack · Bugcrowd researcher</div>
+            </div>
+            <div class="flex gap-3 flex-wrap">
+                <a href="/articles.html" class="mono text-[10px] font-bold uppercase tracking-widest border border-zinc-200 px-5 py-3 rounded-xl hover:border-zinc-400 transition-all text-zinc-600">← All articles</a>
+                <a href="/articles/sa-cybersecurity-skills-gap.html" class="mono text-[10px] font-bold uppercase tracking-widest border border-zinc-200 px-5 py-3 rounded-xl hover:border-zinc-400 transition-all text-zinc-600">SA cyber crisis →</a>
+                <a href="/articles/vibe-coder-deployment-rules.html" style="background:linear-gradient(90deg,#10b981,#84cc16);" class="mono text-[10px] font-bold uppercase tracking-widest px-5 py-3 rounded-xl text-white hover:opacity-90 transition-all">Deploy rules →</a>
+            </div>
+        </div>
+    </div>
+
+</article>
+<div id="global-footer"></div>
+</body>
+</html>

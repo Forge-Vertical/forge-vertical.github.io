@@ -3,5 +3,18 @@
     "source": "functions",
     "codebase": "default",
     "ignore": ["node_modules", ".git"]
-  }
+  },
+  "hosting": [
+    {
+      "target": "main",
+      "public": "dist",
+      "ignore": ["firebase.json", "**/.*"]
+    },
+    {
+      "target": "portal",
+      "public": "portal-dist",
+      "ignore": ["firebase.json", "**/.*"],
+      "rewrites": [{"source": "**", "destination": "/index.html"}]
+    }
+  ]
 }

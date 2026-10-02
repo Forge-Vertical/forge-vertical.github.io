@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Windows 12 is not coming in 2026. Microsoft confirmed Windows 11 26H2 as its major update for the year. But internally Project Hudson Valley is being built as the first AI-native OS. Here is what we know, what is real, and what the OS war looks like in September 2026.">
+    <title>Windows 12 in 2026: What Is Real, What Is Rumour, and Why the OS War Just Got Interesting | Forge Vertical</title>
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"Article","headline":"Windows 12 in 2026: What Is Real, What Is Rumour, and Why the OS War Just Got Interesting","author":{"@type":"Person","name":"Jarrit Hosking","url":"https://www.forgevertical.com"},"publisher":{"@type":"Organization","name":"Forge Vertical","url":"https://www.forgevertical.com"},"datePublished":"2026-09-07","keywords":"Windows 12 release date 2026, Windows 12 features AI, Project Hudson Valley, Windows 11 26H2, Microsoft AI OS, Windows 12 vs macOS, Windows 12 vs Linux, Copilot Plus Windows, NPU Windows 12, is Windows 12 coming 2026"}
+    </script>
+    <script src="/global.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/typography.css">
+    <style>
+        body{font-family:'Outfit',sans-serif;background:#fff;}
+        .mono{font-family:'JetBrains Mono',monospace;}
+        .g-text{background:linear-gradient(90deg,#10b981,#84cc16);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:inline-block;}
+        .prose-body{font-family:'Lora',serif;font-size:19px;line-height:1.85;color:#27272a;}
+        .prose-body p{margin-bottom:1.6em;}
+        .prose-body h2{font-family:'Outfit',sans-serif;font-size:28px;font-weight:700;letter-spacing:-0.02em;color:#09090b;margin-top:2.5em;margin-bottom:0.6em;line-height:1.2;}
+        .prose-body strong{font-weight:700;color:#09090b;font-family:'Outfit',sans-serif;font-size:17px;}
+        .prose-body a{color:#84cc16;text-decoration:underline;text-underline-offset:3px;}
+        .callout{background:#f4f4f5;border-left:3px solid #84cc16;border-radius:0 12px 12px 0;padding:20px 24px;margin:2em 0;font-family:'Outfit',sans-serif;font-size:15px;color:#3f3f46;line-height:1.7;}
+        .callout.dark{background:#09090b;color:#a1a1aa;border-left-color:#84cc16;}
+        .callout.red{border-left-color:#ef4444;background:#fef2f2;}
+        .callout.amber{border-left-color:#f59e0b;background:#fffdf5;}
+        .pull-quote{font-family:'Lora',serif;font-size:22px;font-style:italic;color:#09090b;border-top:2px solid #84cc16;border-bottom:1px solid #e4e4e7;padding:24px 0;margin:2.5em 0;line-height:1.5;}
+        .chapter-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:#84cc16;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:6px;display:block;}
+        .os-compare{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin:2em 0;}
+        .os-card{border-radius:14px;padding:18px;}
+        .os-card.win{background:#eff6ff;border:1px solid #bfdbfe;}
+        .os-card.mac{background:#f0fdf4;border:1px solid #a7f3d0;}
+        .os-card.lin{background:#fafafa;border:1px solid #e4e4e7;}
+        .os-name{font-family:'Outfit',sans-serif;font-size:15px;font-weight:700;margin-bottom:4px;}
+        .os-name.win{color:#1d4ed8;}
+        .os-name.mac{color:#059669;}
+        .os-name.lin{color:#09090b;}
+        .os-status{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;padding:2px 8px;border-radius:3px;display:inline-block;margin-bottom:10px;}
+        .os-status.shipping{background:#ecfdf5;color:#059669;border:1px solid #a7f3d0;}
+        .os-status.delayed{background:#fef2f2;color:#ef4444;border:1px solid #fecaca;}
+        .os-status.growing{background:#fafafa;color:#09090b;border:1px solid #e4e4e7;}
+        .os-body{font-size:13px;line-height:1.65;}
+        .os-body.win{color:#1e3a8a;}
+        .os-body.mac{color:#065f46;}
+        .os-body.lin{color:#52525b;}
+        .fact-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:2em 0;}
+        @media(max-width:600px){.fact-grid{grid-template-columns:1fr;}}
+        .fact-card{background:#f4f4f5;border-radius:10px;padding:14px;}
+        .fact-label{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#6a7d96;margin-bottom:4px;}
+        .fact-val{font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;color:#09090b;}
+        .fact-note{font-size:12px;color:#71717a;margin-top:3px;}
+        .aff-footer{background:#09090b;border-radius:16px;padding:28px;margin:3em 0;}
+        .aff-footer h3{font-family:'Outfit',sans-serif;font-size:15px;font-weight:700;color:#f4f4f5;margin-bottom:6px;}
+        .aff-footer p{font-size:13px;color:#6a7d96;margin-bottom:18px;line-height:1.6;}
+        .aff-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;}
+        .aff-tile{background:#111620;border:1px solid #1a2030;border-radius:10px;padding:14px;text-decoration:none;display:block;transition:border-color 0.18s;}
+        .aff-tile:hover{border-color:#84cc16;}
+        .aff-tile-name{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:#84cc16;margin-bottom:4px;}
+        .aff-tile-desc{font-size:11px;color:#6a7d96;line-height:1.5;margin-bottom:6px;}
+        .aff-tile-cta{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:#84cc16;}
+    </style>
+</head>
+<body class="antialiased">
+<div id="global-nav"></div>
+<article class="pt-20 pb-24">
+
+    <header class="max-w-3xl mx-auto px-6 mt-10 mb-12">
+        <div class="flex items-center gap-3 mb-6">
+            <a href="/articles.html" class="mono text-[10px] text-zinc-400 hover:text-zinc-600 uppercase tracking-widest">← Articles</a>
+            <span class="text-zinc-300">·</span>
+            <span class="mono text-[10px] font-bold text-[#84cc16] uppercase tracking-widest border border-[#84cc16]/30 px-3 py-1 rounded-full">Windows · Microsoft · OS War</span>
+        </div>
+        <h1 class="text-4xl md:text-5xl font-bold tracking-tight leading-[1.05] mb-6 text-zinc-900" style="font-family:'Outfit',sans-serif;letter-spacing:-0.03em;">
+            Windows 12 in 2026:<br>what is real, what is rumour,<br>
+            <span class="g-text">and why the OS war just got interesting.</span>
+        </h1>
+        <p class="text-xl text-zinc-500 font-light leading-relaxed mb-8 max-w-2xl" style="font-family:'Outfit',sans-serif;">
+            Windows 12 is not coming in 2026. Microsoft confirmed it. Windows 11 version 26H2 is the major update for this year. But internally — codenamed Project Hudson Valley — Microsoft is building what it believes will be the first truly AI-native operating system. Apple ships iOS 27 this week. Linux just surpassed macOS on Steam. The OS war in September 2026 is more interesting than it has been in a decade.
+        </p>
+        <div class="flex items-center gap-4 pb-8 border-b border-zinc-100">
+            <div>
+                <div class="font-bold text-sm text-zinc-900">Jarrit Hosking</div>
+                <div class="mono text-[10px] text-zinc-400 uppercase tracking-widest">Forge Vertical · Cape Town · September 7, 2026</div>
+            </div>
+            <div class="ml-auto mono text-[10px] text-zinc-400 uppercase tracking-widest">11 min read</div>
+        </div>
+    </header>
+
+    <div class="max-w-3xl mx-auto px-6 prose-body">
+
+        <span class="chapter-label">// First — what is confirmed</span>
+
+        <p>
+            <strong>Windows 12 has not been announced. There is no release date, no public beta, no Insider channel, no confirmed feature list.</strong> According to Zac Bowden of Windows Central — whose Microsoft sourcing is among the most reliable in the industry — Windows 12 is not planned for 2026. He does not expect a product carrying that name before 2027 at the earliest, and even that is not a prediction of a 2027 launch.
+        </p>
+
+        <p>
+            Microsoft's confirmed roadmap for 2026 is Windows 11 version 26H2 — a major feature update for the second half of the year. That is the official story. Everything else is internal project names, leaked roadmaps, and analyst speculation. Worth reading. Not worth treating as a launch date.
+        </p>
+
+        <div class="callout red">
+            <strong>The clickbait problem:</strong> "Windows 12 release date confirmed 2026" articles are everywhere. None of them are accurate. Microsoft has not confirmed a release date, a product name, hardware requirements, or a pricing model. Any article giving a specific 2026 date should be treated as speculation until Microsoft publishes an official announcement. This is not that article.
+        </div>
+
+        <h2>What Project Hudson Valley actually is</h2>
+        <span class="chapter-label">// Chapter 01 — The real internal story</span>
+
+        <p>
+            Microsoft has been quietly trickling Windows 12 components into Windows 11 updates — the 25H2 and upcoming 26H2 releases. This is deliberate. Rather than shipping a new OS with new bugs, Microsoft is pre-seeding the architectural changes that will define the next generation, so that when Windows 12 eventually ships, the ecosystem is stable and the hardware is ready.
+        </p>
+
+        <p>
+            The central bet is the NPU — the Neural Processing Unit. In Windows 11, Copilot and AI features are add-ons running on the GPU. <strong>In Windows 12, the AI is the engine.</strong> The NPU is a dedicated processor for AI inference tasks — running language models, image recognition, real-time translation, and generative tasks locally without sending data to the cloud. Microsoft calls devices with NPUs "Copilot+ PCs" and has been requiring NPU support in new device certifications since 2024.
+        </p>
+
+        <p>
+            The architecture shift is significant. An OS built around an NPU can run AI features at a fraction of the power cost of GPU-based inference. It can do this continuously, in the background, without draining the battery or requiring a cloud connection. That changes what an operating system can do — not just as a feature list, but as a platform.
+        </p>
+
+        <h2>The OS war in September 2026 — where everyone stands</h2>
+        <span class="chapter-label">// Chapter 02 — Apple, Microsoft, and Linux</span>
+
+    </div>
+
+    <!-- OS compare cards -->
+    <div class="max-w-3xl mx-auto px-6 my-8">
+        <div class="os-compare">
+            <div class="os-card mac">
+                <div class="os-name mac">Apple macOS Golden Gate</div>
+                <span class="os-status shipping">Shipping this week</span>
+                <div class="os-body mac">Announced September 9. Ships around September 14. Built on Apple Silicon — the M6 chip is on 2nm, the same node as the iPhone 18 Pro's A20. Apple's AI story runs entirely on-device. No NPU dependency — Apple's unified memory architecture handles AI inference natively. iOS 27 and macOS Golden Gate ship simultaneously.</div>
+            </div>
+            <div class="os-card win">
+                <div class="os-name win">Microsoft Windows 11 26H2</div>
+                <span class="os-status delayed">Windows 12 in 2027+</span>
+                <div class="os-body win">Windows 11 26H2 is the 2026 major update. Windows 12 (Project Hudson Valley) is being built but not shipping this year. Microsoft is trickling architectural changes into 11 updates to pre-seed the ecosystem. NPU-based Copilot+ features expanding. The AI-native OS is real — the timeline is not 2026.</div>
+            </div>
+            <div class="os-card lin">
+                <div class="os-name lin">Linux — quietly winning</div>
+                <span class="os-status growing">5.33% Steam share</span>
+                <div class="os-body lin">Linux surpassed macOS on Steam in March 2026 for the first time. Windows 10 end-of-life drove millions to evaluate alternatives. Steam Deck normalised Linux gaming. Mint, Ubuntu, Fedora, and Bazzite are the names people are actually using. No NPU dependency. No subscription. No ads in the OS.</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-3xl mx-auto px-6 prose-body">
+
+        <div class="pull-quote">
+            Apple ships a new OS this week. Microsoft is still on Windows 11. Linux just passed macOS on Steam. The question is not who has the best OS today — it is who has the right architectural bet for the next five years.
+        </div>
+
+        <h2>Why Windows 10's end of life matters more than Windows 12</h2>
+        <span class="chapter-label">// Chapter 03 — The migration story</span>
+
+        <p>
+            Windows 10 reached end of support in October 2025. Millions of machines running it perfectly well were declared unsupported by Microsoft — not because the hardware failed, but because Windows 11's TPM 2.0 and CPU requirements excluded them. Those users had three choices: buy new hardware, pay for extended security updates, or find something else.
+        </p>
+
+        <p>
+            The "find something else" cohort is larger than Microsoft would like. Linux Mint downloads spiked in October and November 2025. Zorin OS reported that over 78% of its downloads in Q1 2026 came from Windows users. The Steam Deck had already made Linux gaming feel normal to an audience that would never have considered it two years earlier.
+        </p>
+
+        <p>
+            Microsoft's response — Windows 11 26H2 with expanded Copilot+ features and a path toward the NPU-native architecture of Windows 12 — is the right strategic answer. The execution risk is the same one that has followed every major Windows version: hardware requirements that exclude existing devices and push users toward competitors instead of upgrades.
+        </p>
+
+        <h2>What Windows 12 will actually need to be</h2>
+        <span class="chapter-label">// Chapter 04 — The stakes</span>
+
+        <p>
+            For Windows 12 to succeed, it needs to do something Windows 11 failed to do: make the upgrade feel like a meaningful improvement rather than a compatibility barrier. Windows 11 added rounded corners, a centred taskbar, and Copilot. It excluded millions of perfectly capable PCs. The ratio of meaningful improvement to user friction was wrong.
+        </p>
+
+        <p>
+            Windows 12 has a genuine shot at getting this right — if the NPU integration delivers experiences that are clearly better than what Windows 11 can do. On-device AI that runs continuously, privately, at low power is a real differentiator. Real-time translation. Intelligent file organisation. Local summarisation without sending data to Microsoft's servers. These are things users actually want and that the NPU architecture can actually deliver.
+        </p>
+
+        <p>
+            The risk is the same as always: requiring hardware that most existing Windows users do not have, and calling that a feature rather than a migration. Microsoft has earned back some goodwill with the Windows 11 improvements in 24H2 and 25H2. Windows 12 needs to spend that goodwill wisely.
+        </p>
+
+        <div class="callout amber">
+            <strong>The upgrade question most people actually care about:</strong> Will Windows 12 be free for Windows 11 users? Microsoft has effectively adopted the Apple model for consumer devices — free OS upgrades for eligible hardware. If Windows 12 follows that pattern, the question becomes hardware eligibility, not price. Copilot+ certification is the most likely gate. If you have a Copilot+ certified PC, you will probably get Windows 12 for free. If you do not, you will face the same conversation Windows 10 users faced in 2025.
+        </div>
+
+    </div>
+
+    <!-- Fact grid -->
+    <div class="max-w-3xl mx-auto px-6 my-8">
+        <div class="fact-grid">
+            <div class="fact-card">
+                <div class="fact-label">Windows 12 confirmed release</div>
+                <div class="fact-val">Not announced</div>
+                <div class="fact-note">2027 earliest per Windows Central sourcing</div>
+            </div>
+            <div class="fact-card">
+                <div class="fact-label">2026 Microsoft OS update</div>
+                <div class="fact-val">Windows 11 26H2</div>
+                <div class="fact-note">Confirmed. Major feature update, second half 2026</div>
+            </div>
+            <div class="fact-card">
+                <div class="fact-label">Internal codename</div>
+                <div class="fact-val">Project Hudson Valley</div>
+                <div class="fact-note">AI-native architecture with NPU at centre</div>
+            </div>
+            <div class="fact-card">
+                <div class="fact-label">Key hardware requirement</div>
+                <div class="fact-val">NPU (Copilot+ PC)</div>
+                <div class="fact-note">Neural Processing Unit for on-device AI inference</div>
+            </div>
+            <div class="fact-card">
+                <div class="fact-label">Linux Steam share Sept 2026</div>
+                <div class="fact-val">5.33%</div>
+                <div class="fact-note">First time Linux surpassed macOS on Steam</div>
+            </div>
+            <div class="fact-card">
+                <div class="fact-label">Apple OS shipping this week</div>
+                <div class="fact-val">iOS 27 / macOS Golden Gate</div>
+                <div class="fact-note">Release candidate at Sept 9 event, ships ~Sept 14</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-3xl mx-auto px-6 prose-body">
+
+        <h2>Which OS should you be on in September 2026</h2>
+        <span class="chapter-label">// Chapter 05 — The honest recommendation</span>
+
+        <p>
+            <strong>If you are on a Mac with Apple Silicon</strong> — update to macOS Golden Gate when it ships around September 14. Apple's on-device AI story is the most coherent of any platform right now. The M-series chip's unified memory handles AI inference without a separate NPU. It just works.
+        </p>
+
+        <p>
+            <strong>If you are on Windows 11</strong> — stay there. Windows 12 is not coming this year and Windows 11 26H2 will bring meaningful improvements. If you are on a Copilot+ certified device, the NPU features being added in 26H2 are worth paying attention to. If you are not on Copilot+, manage expectations accordingly.
+        </p>
+
+        <p>
+            <strong>If you are on Windows 10</strong> — this is the moment. Extended support ended in October 2025. You are running an unsupported OS. Your options are: upgrade to Windows 11 if your hardware qualifies, consider whether Linux Mint offers a better outcome on your existing hardware, or budget for new hardware. Staying on Windows 10 is no longer a neutral choice.
+        </p>
+
+        <p>
+            <strong>If you are considering Linux</strong> — Linux Mint 22.3 on a fresh install is a genuinely good experience in 2026 for everyday computing. Gaming on Linux has improved dramatically thanks to Proton and the Steam Deck ecosystem. The terminal is not as scary as it was. If you wiped a laptop and installed Mint fresh, you would be productive within an hour. We covered this in detail in the <a href="/articles/linux-2026-why-the-world-is-switching.html">Linux 2026 article</a>.
+        </p>
+
+    </div>
+
+    <div class="max-w-3xl mx-auto px-6">
+        <div class="aff-footer">
+            <div class="mono text-[10px] text-[#84cc16] uppercase tracking-widest mb-3">// Whatever OS you run, secure it</div>
+            <h3>The security layer that works on Windows, Mac, and Linux</h3>
+            <p>A VPN and password manager are platform-agnostic. They work equally well on Windows 11, macOS Golden Gate, and Linux Mint. Affiliate links — helps keep Forge Vertical running.</p>
+            <div class="aff-grid">
+                <a href="https://get.surfshark.net/aff_c?offer_id=6&aff_id=4160" target="_blank" rel="noopener noreferrer" class="aff-tile">
+                    <img src="/assets/images/surfshark-vpn-1-year-17236158874633226.webp" alt="Surfshark" style="height:18px;margin-bottom:8px;object-fit:contain;display:block;" onerror="this.style.display='none'">
+                    <div class="aff-tile-name">Surfshark VPN</div>
+                    <div class="aff-tile-desc">Native clients for Windows, macOS, and Linux. Unlimited devices.</div>
+                    <span class="aff-tile-cta">Try Surfshark →</span>
+                </a>
+                <a href="https://go.nordvpn.net/aff_c?offer_id=15&aff_id=145959&url_id=902" target="_blank" rel="noopener noreferrer" class="aff-tile">
+                    <img src="/assets/images/NordVPN-vertical.png" alt="NordVPN" style="height:18px;margin-bottom:8px;object-fit:contain;display:block;" onerror="this.style.display='none'">
+                    <div class="aff-tile-name">NordVPN</div>
+                    <div class="aff-tile-desc">Windows, macOS, and Linux clients. Threat protection on every platform.</div>
+                    <span class="aff-tile-cta">Try NordVPN →</span>
+                </a>
+                <a href="https://nordpass.com" target="_blank" rel="noopener noreferrer" class="aff-tile">
+                    <img src="/assets/images/nord-security_password-management-tools_1739200695312.png" alt="NordPass" style="height:18px;margin-bottom:8px;object-fit:contain;display:block;" onerror="this.style.display='none'">
+                    <div class="aff-tile-name">NordPass</div>
+                    <div class="aff-tile-desc">Password manager for every OS. Browser extensions for Chrome, Firefox, Edge, and Brave.</div>
+                    <span class="aff-tile-cta">Try NordPass →</span>
+                </a>
+                <a href="https://portal.webway.host/aff.php?aff=353" target="_blank" rel="noopener noreferrer" class="aff-tile">
+                    <img src="/assets/images/webwaylogo.png" alt="WebWay" style="height:18px;margin-bottom:8px;object-fit:contain;display:block;" onerror="this.style.display='none'">
+                    <div class="aff-tile-name">WebWay — SA Hosting</div>
+                    <div class="aff-tile-desc">South African hosting for your business. Runs on Linux servers.</div>
+                    <span class="aff-tile-cta">WebWay.co.za →</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mt-8">
+            <div>
+                <div class="mono text-[10px] text-zinc-400 uppercase tracking-widest mb-1">Written by</div>
+                <div class="font-bold text-zinc-900">Jarrit Hosking</div>
+                <div class="mono text-[10px] text-zinc-400">Forge Vertical · Cape Town · September 7, 2026</div>
+            </div>
+            <div class="flex gap-3 flex-wrap">
+                <a href="/articles.html" class="mono text-[10px] font-bold uppercase tracking-widest border border-zinc-200 px-5 py-3 rounded-xl hover:border-zinc-400 transition-all text-zinc-600">← All articles</a>
+                <a href="/articles/apple-event-september-2026.html" class="mono text-[10px] font-bold uppercase tracking-widest border border-zinc-200 px-5 py-3 rounded-xl hover:border-zinc-400 transition-all text-zinc-600">Apple event →</a>
+                <a href="/articles/linux-2026-why-the-world-is-switching.html" style="background:linear-gradient(90deg,#10b981,#84cc16);" class="mono text-[10px] font-bold uppercase tracking-widest px-5 py-3 rounded-xl text-white hover:opacity-90 transition-all">Linux 2026 →</a>
+            </div>
+        </div>
+    </div>
+
+</article>
+<div id="global-footer"></div>
+</body>
+</html>

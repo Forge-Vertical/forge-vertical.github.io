@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Forge Vertical Business Tech — building scalable infrastructure and writing about the tech that makes SA businesses grow. Real costs, cloud platforms, AI tools, Cape Town.">
+    <title>Business Tech — South African Business Technology News | Forge Vertical</title>
+    <link rel="canonical" href="https://www.forgevertical.com/business-tech/articles.html">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "NewsMediaOrganization",
+          "@id": "https://www.forgevertical.com/business-tech/#newsorg",
+          "name": "Forge Vertical Business Tech",
+          "url": "https://www.forgevertical.com/business-tech/articles.html",
+          "description": "Building scalable infrastructure and writing about the tech that makes SA businesses grow.. Infrastructure decisions, AI tools, real pricing, cloud platforms, cybersecurity, and the tools that actually move the needle. No sponsored editorial.",
+          "parentOrganization": {"@id": "https://www.forgevertical.com/#org"},
+          "foundingLocation": {"@type": "Place", "name": "Cape Town, South Africa"},
+          "publishingPrinciples": "https://www.forgevertical.com/about.html",
+          "masthead": "https://www.forgevertical.com/about/jarrit-hosking.html",
+          "areaServed": "South Africa"
+        },
+        {
+          "@type": "CollectionPage",
+          "@id": "https://www.forgevertical.com/business-tech/articles.html",
+          "name": "Forge Vertical Business Tech — SA Business Technology",
+          "description": "Technology news and analysis for South African businesses — infrastructure, AI tools, pricing guides, cloud platforms, cybersecurity, and digital strategy.",
+          "url": "https://www.forgevertical.com/business-tech/articles.html",
+          "publisher": {"@id": "https://www.forgevertical.com/business-tech/#newsorg"},
+          "inLanguage": "en"
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Forge Vertical", "item": "https://www.forgevertical.com"},
+            {"@type": "ListItem", "position": 2, "name": "Business Tech", "item": "https://www.forgevertical.com/business-tech/articles.html"}
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What is Forge Vertical Business Tech?",
+              "acceptedAnswer": {"@type": "Answer", "text": "Forge Vertical Business Tech is an independent technology news hub for South African businesses. It covers infrastructure decisions, AI tools and pricing, cloud platforms, cybersecurity, and digital strategy — written by practitioners, not journalists paid by vendors. No sponsored editorial."}
+            },
+            {
+              "@type": "Question",
+              "name": "How is this different from BusinessTech South Africa?",
+              "acceptedAnswer": {"@type": "Answer", "text": "BusinessTech South Africa covers a broad range of business and tech news. Forge Vertical Business Tech focuses specifically on the technical decisions South African business owners face — what infrastructure actually costs, which AI tools are worth paying for, when to build versus buy, and how to evaluate technology claims critically. Written by someone who builds the systems described, not a journalist covering an industry from the outside."}
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+    <script src="/global.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/typography.css">
+    <style>
+        body{font-family:'Outfit',sans-serif;background:#fff;color:#09090b;}
+        .mono{font-family:'JetBrains Mono',monospace;}
+
+        /* Masthead */
+        .masthead{border-bottom:1px solid #e4e4e7;}
+        .masthead-top{max-width:1400px;margin:0 auto;padding:16px 6vw;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #e4e4e7;}
+        .mast-brand{display:flex;flex-direction:column;gap:3px;}
+        .mast-name{font-size:22px;font-weight:800;letter-spacing:-0.03em;color:#09090b;}
+        .mast-name span{color:#84cc16;}
+        .mast-sub{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.16em;color:#a1a1aa;}
+        .mast-cta{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;background:#84cc16;color:#06080c;padding:7px 16px;border-radius:4px;text-decoration:none;}
+
+        /* Nav tabs */
+        .mast-nav{max-width:1400px;margin:0 auto;padding:0 6vw;display:flex;gap:0;overflow-x:auto;scrollbar-width:none;}
+        .mast-nav::-webkit-scrollbar{display:none;}
+        .nav-tab{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;padding:12px 18px;color:#a1a1aa;border-bottom:2px solid transparent;cursor:pointer;white-space:nowrap;text-decoration:none;display:block;transition:all 0.15s;}
+        .nav-tab:hover,.nav-tab.active{color:#84cc16;border-bottom-color:#84cc16;}
+
+        /* Stats */
+        .stats-bar{background:#fafafa;border-bottom:1px solid #e4e4e7;}
+        .stats-inner{max-width:1400px;margin:0 auto;padding:18px 6vw;display:flex;gap:36px;align-items:center;flex-wrap:wrap;}
+        .stat{display:flex;align-items:baseline;gap:7px;}
+        .stat-n{font-size:22px;font-weight:700;color:#84cc16;}
+        .stat-l{font-size:12px;color:#a1a1aa;text-transform:uppercase;letter-spacing:0.04em;}
+        .stat-div{width:1px;height:20px;background:#e4e4e7;}
+
+        /* Hero */
+        .hero{max-width:1400px;margin:0 auto;padding:48px 6vw 36px;}
+        .hero-label{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.2em;color:#84cc16;margin-bottom:12px;display:block;}
+        .hero h1{font-size:clamp(30px,4vw,52px);font-weight:800;letter-spacing:-0.03em;line-height:1.05;margin-bottom:14px;color:#09090b;}
+        .hero h1 span{background:linear-gradient(90deg,#10b981,#84cc16);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+        .hero-sub{font-size:16px;color:#71717a;font-weight:300;line-height:1.7;max-width:600px;margin-bottom:32px;}
+
+        /* Lead story — BusinessTech style */
+        .lead-section{max-width:1400px;margin:0 auto;padding:0 6vw 48px;}
+        .lead-grid{display:grid;grid-template-columns:1fr 380px;gap:32px;align-items:start;}
+        @media(max-width:900px){.lead-grid{grid-template-columns:1fr;}}
+
+        /* Featured card */
+        .lead-main{text-decoration:none;display:block;}
+        .lead-main-img{height:300px;background:#09090b;border-radius:12px;overflow:hidden;position:relative;margin-bottom:18px;}
+        .lead-main-img-inner{width:100%;height:100%;background:linear-gradient(135deg,#111620,#1a2030);display:flex;align-items:center;justify-content:center;}
+        .lead-tag{position:absolute;top:14px;left:14px;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;background:#84cc16;color:#06080c;padding:5px 12px;border-radius:4px;}
+        .lead-tag.new{background:#ef4444;color:#fff;}
+        .lead-main-title{font-size:24px;font-weight:700;color:#09090b;line-height:1.25;letter-spacing:-0.02em;margin-bottom:8px;transition:color 0.15s;}
+        .lead-main:hover .lead-main-title{color:#84cc16;}
+        .lead-main-meta{font-family:'JetBrains Mono',monospace;font-size:10px;color:#a1a1aa;margin-bottom:10px;}
+        .lead-main-desc{font-size:15px;color:#52525b;line-height:1.65;}
+
+        /* Side stack */
+        .lead-side{display:flex;flex-direction:column;gap:0;}
+        .side-item{padding:16px 0;border-bottom:1px solid #f4f4f5;text-decoration:none;display:block;}
+        .side-item:last-child{border-bottom:none;}
+        .side-item:hover .side-title{color:#84cc16;}
+        .side-tag{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#84cc16;margin-bottom:6px;display:block;}
+        .side-title{font-size:15px;font-weight:700;color:#09090b;line-height:1.3;margin-bottom:4px;transition:color 0.15s;}
+        .side-meta{font-family:'JetBrains Mono',monospace;font-size:9px;color:#a1a1aa;}
+
+        /* Section divider */
+        .sec-div{max-width:1400px;margin:0 auto;padding:0 6vw 20px;display:flex;align-items:center;gap:14px;}
+        .sec-div-label{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.2em;color:#84cc16;white-space:nowrap;}
+        .sec-div-line{flex:1;height:1px;background:#e4e4e7;}
+
+        /* Article grid — same as articles.html */
+        .ac-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:48px 28px;max-width:1400px;margin:0 auto;padding:0 6vw 80px;}
+        @media(max-width:640px){.ac-grid{grid-template-columns:1fr;gap:36px;padding:0 5vw 60px;}}
+        .ac{text-decoration:none;display:flex;flex-direction:column;}
+        .ac:hover .ac-title{color:#84cc16;}
+        .ac-img{height:190px;background:#fafafa;border-radius:10px;overflow:hidden;position:relative;margin-bottom:16px;}
+        .ac-img img{width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease;}
+        .ac:hover .ac-img img{transform:scale(1.04);}
+        .ac-tag{position:absolute;top:10px;left:10px;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;background:rgba(9,9,11,0.75);backdrop-filter:blur(6px);color:#fff;padding:4px 10px;border-radius:4px;z-index:2;}
+        .ac-tag.new{background:#84cc16;color:#06080c;}
+        .ac-body{display:flex;flex-direction:column;flex:1;}
+        .ac-title{font-size:17px;font-weight:700;color:#09090b;line-height:1.3;margin-bottom:6px;transition:color 0.15s;letter-spacing:-0.01em;}
+        .ac-meta{font-family:'JetBrains Mono',monospace;font-size:9px;color:#a1a1aa;margin-bottom:8px;}
+        .ac-desc{font-size:14px;color:#52525b;line-height:1.65;flex:1;margin-bottom:12px;}
+        .ac-read{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;color:#84cc16;text-transform:uppercase;letter-spacing:0.08em;}
+
+        /* Write for us CTA */
+        .write-cta{background:#09090b;margin:0;padding:60px 6vw;}
+        .write-inner{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center;}
+        @media(max-width:720px){.write-inner{grid-template-columns:1fr;}}
+        .write-label{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.18em;color:#84cc16;margin-bottom:10px;display:block;}
+        .write-title{font-size:clamp(22px,3vw,34px);font-weight:800;letter-spacing:-0.02em;color:#eef0f4;line-height:1.2;}
+        .write-title span{color:#84cc16;}
+        .write-sub{font-size:14px;color:#5c7494;margin-top:8px;line-height:1.7;max-width:540px;}
+        .write-actions{display:flex;gap:12px;flex-shrink:0;flex-wrap:wrap;}
+        .write-btn{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:8px;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;text-decoration:none;transition:opacity 0.15s;white-space:nowrap;}
+        .write-btn:hover{opacity:0.85;}
+        .write-btn-primary{background:linear-gradient(90deg,#10b981,#84cc16);color:#06080c;}
+        .write-btn-ghost{border:1px solid #232d3f;color:#6a7d96;}
+        .write-btn-ghost:hover{border-color:#84cc16;color:#84cc16;}
+    </style>
+</head>
+<body>
+<div id="global-nav"></div>
+
+<!-- Masthead -->
+<div class="masthead">
+    <div class="masthead-top">
+        <div class="mast-brand">
+            <div class="mast-name">Forge Vertical <span>Business Tech</span></div>
+            <div class="mast-sub">Building scalable infrastructure and writing about the tech that makes SA businesses grow.</div>
+        </div>
+        <a href="/free-quote.html" class="mast-cta">Get a free quote →</a>
+    </div>
+    <div class="mast-nav">
+        <a href="/business-tech/articles.html" class="nav-tab active">All</a>
+        <a href="/business-tech/articles.html" class="nav-tab">Infrastructure</a>
+        <a href="/business-tech/articles.html" class="nav-tab">AI Tools</a>
+        <a href="/business-tech/articles.html" class="nav-tab">Cloud &amp; Hosting</a>
+        <a href="/business-tech/articles.html" class="nav-tab">Cybersecurity</a>
+        <a href="/business-tech/articles.html" class="nav-tab">Cape Town Tech</a>
+        <a href="/business-tech/articles.html" class="nav-tab">Pricing Guides</a>
+        <a href="/business-tech/articles.html" class="nav-tab">Automotive Tech</a>
+        <a href="/articles.html" class="nav-tab">← Main articles</a>
+    </div>
+</div>
+
+<!-- Stats -->
+<div class="stats-bar">
+    <div class="stats-inner">
+        <div class="stat"><div class="stat-n">19</div><div class="stat-l">Articles</div></div>
+        <div class="stat-div"></div>
+        <div class="stat"><div class="stat-n">8</div><div class="stat-l">Topics</div></div>
+        <div class="stat-div"></div>
+        <div class="stat"><div class="stat-n">0</div><div class="stat-l">Sponsored posts</div></div>
+        <div class="stat-div"></div>
+        <div class="stat"><div class="stat-n">Cape Town</div><div class="stat-l">Based</div></div>
+    </div>
+</div>
+
+<!-- Hero -->
+<div class="hero">
+    <span class="hero-label">// South African business technology · Independent · No sponsored editorial</span>
+    <h1>Technology news for<br>SA businesses that <span>actually builds.</span></h1>
+    <p class="hero-sub">Infrastructure decisions, AI tools, real pricing, cloud platforms, and digital strategy — written by someone who builds the systems described, not a journalist covering an industry from the outside. No press releases rephrased as news.</p>
+</div>
+
+<!-- Lead story -->
+<div class="lead-section">
+    <div class="lead-grid">
+        <a href="/business-tech/forge-vertical-for-your-business.html" class="lead-main">
+            <div class="lead-main-img">
+                <div class="lead-main-img-inner">
+                    <svg width="80" height="80" viewBox="0 0 80 80" fill="none" opacity="0.3"><rect x="10" y="20" width="60" height="40" rx="4" stroke="#84cc16" stroke-width="2"/><path d="M10 32h60M30 32v28" stroke="#84cc16" stroke-width="2"/><circle cx="62" cy="26" r="3" fill="#84cc16"/><circle cx="52" cy="26" r="3" fill="#10b981"/></svg>
+                </div>
+                <span class="lead-tag new">New · Start here</span>
+            </div>
+            <div class="lead-main-title">What Forge Vertical can build for your business — and why infrastructure matters more than you think</div>
+            <div class="lead-main-meta">Sep 28, 2026 · Forge Vertical · Cape Town</div>
+            <div class="lead-main-desc">A plain-English guide to what Forge Vertical actually builds — websites, SaaS platforms, client portals, AI integration, and business automation — why the infrastructure decisions behind them matter, and how to get a free quote in 24 hours. The first article in the Forge Vertical Business Tech hub.</div>
+        </a>
+
+        <div class="lead-side">
+            <a href="/business-tech/ips-whatsapp-quote-cape-town.html" class="side-item">
+                <span class="side-tag">Automotive · How-to · Cape Town</span>
+                <div class="side-title">How to get a free WhatsApp quote from International Panel Shop — same day, both branches</div>
+                <div class="side-meta">Sep 30, 2026</div>
+            </a>
+            <a href="/business-tech/bookkeepers-south-africa-century-city.html" class="side-item">
+                <span class="side-tag">Bookkeeping · Century City</span>
+                <div class="side-title">Bookkeepers South Africa — professional bookkeeping and tax services in Century City</div>
+                <div class="side-meta">Sep 28, 2026</div>
+            </a>
+            <a href="/business-tech/international-panel-shop-goodwood.html" class="side-item">
+                <span class="side-tag">Automotive · Cape Town</span>
+                <div class="side-title">International Panel Shop — 20+ years of Cape Town auto body repairs, now in Goodwood</div>
+                <div class="side-meta">Sep 28, 2026</div>
+            </a>
+            <a href="/articles/what-south-african-businesses-actually-pay-for.html" class="side-item">
+                <span class="side-tag">Pricing guide</span>
+                <div class="side-title">What South African businesses are actually paying for digital services right now</div>
+                <div class="side-meta">Sep 19, 2026</div>
+            </a>
+            <a href="/articles/business-cloud-infrastructure-guide.html" class="side-item">
+                <span class="side-tag">Infrastructure</span>
+                <div class="side-title">GCP vs AWS — what South African businesses actually need to know</div>
+                <div class="side-meta">Sep 14, 2026</div>
+            </a>
+            <a href="/articles/forget-low-code-ai-development-south-africa.html" class="side-item">
+                <span class="side-tag">Development</span>
+                <div class="side-title">Forget low-code — here is what SA businesses actually need</div>
+                <div class="side-meta">Sep 14, 2026</div>
+            </a>
+            <a href="/articles/century-city-cape-town-smart-city.html" class="side-item">
+                <span class="side-tag">Cape Town tech</span>
+                <div class="side-title">Century City: inside South Africa's first real smart city</div>
+                <div class="side-meta">Sep 14, 2026</div>
+            </a>
+            <a href="/articles/sa-airports-ai-tech.html" class="side-item">
+                <span class="side-tag">Infrastructure</span>
+                <div class="side-title">SA airports going smart — R825 million in AI and tech</div>
+                <div class="side-meta">Sep 9, 2026</div>
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- All articles -->
+<div class="sec-div">
+    <span class="sec-div-label">// All business tech articles</span>
+    <div class="sec-div-line"></div>
+</div>
+
+<div class="ac-grid">
+
+    <a href="/business-tech/ips-whatsapp-quote-cape-town.html" class="ac">
+        <div class="ac-img"><img src="https://images.pexels.com/photos/5240547/pexels-photo-5240547.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy"><span class="ac-tag new">New · How-to</span></div>
+        <div class="ac-body">
+            <div class="ac-title">How to get a free WhatsApp quote from International Panel Shop Cape Town</div>
+            <div class="ac-meta">Sep 30, 2026</div>
+            <div class="ac-desc">Send a photo, get a real quote back — same day, no call-out, no charge. Goodwood: 071 687 1308. Milnerton: 065 741 7593. Accident damage, scratches, dents, rust, insurance claims. PDF quote through Zoho. The complete guide.</div>
+            <span class="ac-read">Read More ▸</span>
+        </div>
+    </a>
+
+    <a href="/business-tech/bookkeepers-south-africa-century-city.html" class="ac">
+        <div class="ac-img"><img src="https://images.pexels.com/photos/53621/calculator-calculation-insurance-finance-53621.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy"><span class="ac-tag new">New</span></div>
+        <div class="ac-body">
+            <div class="ac-title">Bookkeepers South Africa — bookkeeping and tax services in Century City, Cape Town</div>
+            <div class="ac-meta">Sep 28, 2026</div>
+            <div class="ac-desc">Monthly bookkeeping, tax compliance, VAT, payroll, and business registration from Century City. 5.0 Google rating. The professional bookkeeping service SA small businesses actually need — without the big firm price tag.</div>
+            <span class="ac-read">Read More ▸</span>
+        </div>
+    </a>
+
+    <a href="/business-tech/international-panel-shop-goodwood.html" class="ac">
+        <div class="ac-img"><img src="https://images.pexels.com/photos/1409999/pexels-photo-1409999.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy"><span class="ac-tag new">New</span></div>
+        <div class="ac-body">
+            <div class="ac-title">International Panel Shop — 20+ years of Cape Town auto body repairs, now in Goodwood</div>
+            <div class="ac-meta">Sep 28, 2026</div>
+            <div class="ac-desc">Two branches, Right to Repair certified, Mobicred credit repairs, free vehicle collection above R10,000. A BMW saved from write-off. Over 20 years of auto body repair in Goodwood and Milnerton.</div>
+            <span class="ac-read">Read More ▸</span>
+        </div>
+    </a>
+
+    <a href="/articles/what-south-african-businesses-actually-pay-for.html" class="ac">
+        <div class="ac-img"><img src="https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy"><span class="ac-tag">Pricing guide</span></div>
+        <div class="ac-body">
+            <div class="ac-title">What SA businesses are actually paying for digital services right now</div>
+            <div class="ac-meta">Sep 19, 2026</div>
+            <div class="ac-desc">Real market rates for websites, SaaS, AI integration, GEO audits, and business automation in South Africa. What you get, what you pay, and when to build versus subscribe.</div>
+            <span class="ac-read">Read More ▸</span>
+        </div>
+    </a>
+
+    <a href="/articles/business-cloud-infrastructure-guide.html" class="ac">
+        <div class="ac-img"><img src="https://images.pexels.com/photos/1148820/pexels-photo-1148820.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy"><span class="ac-tag">Infrastructure</span></div>
+        <div class="ac-body">
+            <div class="ac-title">GCP vs AWS — what South African businesses actually need to know</div>
+            <div class="ac-meta">Sep 14, 2026</div>
+            <div class="ac-desc">A plain-English breakdown of Google Cloud versus AWS for South African businesses — pricing, latency, local support, and which makes sense for what.</div>
+            <span class="ac-read">Read More ▸</span>
+        </div>
+    </a>
+
+    <a href="/articles/forget-low-code-ai-development-south-africa.html" class="ac">
+        <div class="ac-img"><img src="https://images.pexels.com/photos/574071/pexels-photo-574071.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy"><span class="ac-tag">Development</span></div>
+        <div class="ac-body">
+            <div class="ac-title">Forget low-code — here is what SA businesses actually need</div>
+            <div class="ac-meta">Sep 14, 2026</div>
+            <div class="ac-desc">Low-code platforms promise simplicity and deliver technical debt. Here is the honest comparison between low-code tools and custom infrastructure for South African businesses.</div>
+            <span class="ac-read">Read More ▸</span>
+        </div>
+    </a>
+
+    <a href="/articles/century-city-cape-town-smart-city.html" class="ac">
+        <div class="ac-img"><img src="https://images.pexels.com/photos/1722183/pexels-photo-1722183.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy"><span class="ac-tag">Cape Town tech</span></div>
+        <div class="ac-body">
+            <div class="ac-title">Century City: inside South Africa's first real smart city</div>
+            <div class="ac-meta">Sep 14, 2026</div>
+            <div class="ac-desc">ANPR, cashless parking, 24/7 SOC, fibre saturation — Century City is not a concept. It is a live deployment that the rest of South Africa is watching.</div>
+            <span class="ac-read">Read More ▸</span>
+        </div>
+    </a>
+
+    <a href="/articles/sa-cybersecurity-skills-gap.html" class="ac">
+        <div class="ac-img"><img src="https://images.pexels.com/photos/60504/security-protection-anti-virus-software-60504.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy"><span class="ac-tag">Cybersecurity</span></div>
+        <div class="ac-body">
+            <div class="ac-title">South Africa's cybersecurity skills gap — and what businesses are doing wrong</div>
+            <div class="ac-meta">Sep 9, 2026</div>
+            <div class="ac-desc">The skills gap is real. But most SA businesses are not losing to sophisticated attacks — they are losing to basic security hygiene failures that cost nothing to fix.</div>
+            <span class="ac-read">Read More ▸</span>
+        </div>
+    </a>
+
+    <a href="/articles/sa-airports-ai-tech.html" class="ac">
+        <div class="ac-img"><img src="https://images.pexels.com/photos/1309644/pexels-photo-1309644.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy"><span class="ac-tag">Infrastructure</span></div>
+        <div class="ac-body">
+            <div class="ac-title">SA airports going smart — R825 million in AI, biometrics, and tech</div>
+            <div class="ac-meta">Sep 9, 2026</div>
+            <div class="ac-desc">ACSA's R825 million technology investment programme and what it means for the businesses and passengers passing through South Africa's airports.</div>
+            <span class="ac-read">Read More ▸</span>
+        </div>
+    </a>
+
+    <a href="/articles/south-africa-ev-infrastructure.html" class="ac">
+        <div class="ac-img"><img src="https://images.pexels.com/photos/110844/pexels-photo-110844.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy"><span class="ac-tag">Infrastructure</span></div>
+        <div class="ac-body">
+            <div class="ac-title">South Africa's EV infrastructure problem — and why it matters for business</div>
+            <div class="ac-meta">Aug 29, 2026</div>
+            <div class="ac-desc">The EV rollout in South Africa is happening faster than the infrastructure can support. What that means for fleet operators, logistics companies, and businesses with delivery vehicles.</div>
+            <span class="ac-read">Read More ▸</span>
+        </div>
+    </a>
+
+    <a href="/articles/webuycars-is-a-tech-company.html" class="ac">
+        <div class="ac-img"><img src="https://images.pexels.com/photos/1637859/pexels-photo-1637859.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy"><span class="ac-tag">SA tech</span></div>
+        <div class="ac-body">
+            <div class="ac-title">WeBuyCars is a tech company. Most people have not noticed yet.</div>
+            <div class="ac-meta">Aug 19, 2026</div>
+            <div class="ac-desc">WeBuyCars built proprietary pricing algorithms, real-time inventory systems, and a transaction platform that the traditional dealership model cannot replicate. The car business is the wrapper.</div>
+            <span class="ac-read">Read More ▸</span>
+        </div>
+    </a>
+
+    <a href="/articles/cape-town-ai-unemployment.html" class="ac">
+        <div class="ac-img"><img src="https://images.pexels.com/photos/3760069/pexels-photo-3760069.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy"><span class="ac-tag">Cape Town</span></div>
+        <div class="ac-body">
+            <div class="ac-title">Cape Town's AI unemployment problem — what nobody is saying out loud</div>
+            <div class="ac-meta">Sep 1, 2026</div>
+            <div class="ac-desc">Entry-level jobs in AI-exposed occupations are 19% below peers. The bottom rung of the ladder is being removed. Cape Town's employment picture in 2026.</div>
+            <span class="ac-read">Read More ▸</span>
+        </div>
+    </a>
+
+    <a href="/articles/forge-vertical-western-cape-ai.html" class="ac">
+        <div class="ac-img"><img src="https://images.pexels.com/photos/3184416/pexels-photo-3184416.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy"><span class="ac-tag">Western Cape</span></div>
+        <div class="ac-body">
+            <div class="ac-title">Forge Vertical and the Western Cape AI ecosystem — what is actually being built</div>
+            <div class="ac-meta">Sep 9, 2026</div>
+            <div class="ac-desc">A look at what Cape Town's independent developer community is building with AI — and why the most interesting infrastructure is not coming from the big agencies.</div>
+            <span class="ac-read">Read More ▸</span>
+        </div>
+    </a>
+
+    <a href="/articles/cape-town-tech.html" class="ac">
+        <div class="ac-img"><img src="https://images.pexels.com/photos/1266808/pexels-photo-1266808.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy"><span class="ac-tag">Cape Town</span></div>
+        <div class="ac-body">
+            <div class="ac-title">Cape Town tech in 2026 — what is working, what is not, and what comes next</div>
+            <div class="ac-meta">Aug 8, 2026</div>
+            <div class="ac-desc">The Cape Town tech scene from the inside — who is building, what they are building, and why the independent developer ecosystem is more interesting than the funded startup one.</div>
+            <span class="ac-read">Read More ▸</span>
+        </div>
+    </a>
+
+    <!-- Submit your story CTA card -->
+    <a href="mailto:jarrit@forgevertical.com?subject=Business%20Tech%20Article%20Submission" class="ac" style="border:1px dashed #e4e4e7;border-radius:12px;padding:24px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:200px;text-decoration:none;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:#84cc16;margin-bottom:10px;">// Your story here</div>
+        <div style="font-size:16px;font-weight:700;color:#09090b;margin-bottom:8px;">Publish your business tech story</div>
+        <div style="font-size:13px;color:#71717a;line-height:1.6;margin-bottom:14px;">Running a business in South Africa and solving a real problem with technology? This hub is for stories like yours. Articles start from R1,500.</div>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;color:#84cc16;text-transform:uppercase;letter-spacing:0.1em;">Submit a brief →</span>
+    </a>
+
+</div>
+
+<!-- Write for us -->
+<div class="write-cta">
+    <div class="write-inner">
+        <div>
+            <span class="write-label">// Publish your story</span>
+            <div class="write-title">Your business solved a real problem<br>with technology. <span>Tell us about it.</span></div>
+            <div class="write-sub">Forge Vertical Business Tech publishes stories from South African businesses and builders who solved real problems with real technology. Not press releases. Not vendor case studies. Actual stories about what worked, what did not, and what others can learn. Articles from R1,500. Published within 24 hours with full GEO and schema optimisation.</div>
+        </div>
+        <div class="write-actions">
+            <a href="mailto:jarrit@forgevertical.com?subject=Business%20Tech%20Article%20Submission" class="write-btn write-btn-primary">→ Submit a brief</a>
+            <a href="https://wa.me/27657417593?text=Hi%20Jarrit%2C%20I%20want%20to%20publish%20a%20business%20tech%20article" target="_blank" rel="noopener noreferrer" class="write-btn write-btn-ghost">WhatsApp Jarrit</a>
+        </div>
+    </div>
+</div>
+
+<div id="global-footer"></div>
+<script src="https://cdn.tailwindcss.com"></script>
+</body>
+</html>

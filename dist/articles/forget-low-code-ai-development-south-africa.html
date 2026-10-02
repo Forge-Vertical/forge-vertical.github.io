@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="BusinessTech ran a sponsored post saying forget low-code. Here is the independent version — when low-code still makes sense, when AI-augmented custom development is the right call, and what South African businesses are not being told about either.">
+    <title>Forget Low-Code? Here Is What South African Businesses Actually Need to Know | Forge Vertical</title>
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"Article","headline":"Forget Low-Code? Here Is What South African Businesses Actually Need to Know","description":"BusinessTech ran a sponsored post from Codehesion saying AI has made low-code obsolete. Here is the independent version — when low-code still makes sense, when AI-augmented development wins, and what the total cost of ownership actually looks like for each path.","author":{"@type":"Person","name":"Jarrit Hosking","url":"https://www.forgevertical.com"},"publisher":{"@type":"Organization","name":"Forge Vertical","url":"https://www.forgevertical.com"},"datePublished":"2026-09-14","keywords":"low code South Africa 2026, AI software development South Africa, low code vs custom development, Power Apps South Africa, Retool alternative, vibe coding vs low code, custom software Cape Town, AI augmented development South Africa, Codehesion BusinessTech"}
+    </script>
+    <script src="/global.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/typography.css">
+    <style>
+        body{font-family:'Outfit',sans-serif;background:#fff;}
+        .mono{font-family:'JetBrains Mono',monospace;}
+        .g-text{background:linear-gradient(90deg,#10b981,#84cc16);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:inline-block;}
+        .prose-body{font-family:'Lora',serif;font-size:19px;line-height:1.85;color:#27272a;}
+        .prose-body p{margin-bottom:1.6em;}
+        .prose-body h2{font-family:'Outfit',sans-serif;font-size:28px;font-weight:700;letter-spacing:-0.02em;color:#09090b;margin-top:2.5em;margin-bottom:0.6em;line-height:1.2;}
+        .prose-body strong{font-weight:700;color:#09090b;font-family:'Outfit',sans-serif;font-size:17px;}
+        .prose-body a{color:#84cc16;text-decoration:underline;text-underline-offset:3px;}
+        .prose-body code{font-family:'JetBrains Mono',monospace;font-size:13px;background:#f4f4f5;padding:2px 7px;border-radius:4px;color:#09090b;}
+        .callout{background:#f4f4f5;border-left:3px solid #84cc16;border-radius:0 12px 12px 0;padding:20px 24px;margin:2em 0;font-family:'Outfit',sans-serif;font-size:15px;color:#3f3f46;line-height:1.7;}
+        .callout.dark{background:#09090b;color:#a1a1aa;border-left-color:#84cc16;}
+        .callout.red{border-left-color:#ef4444;background:#fef2f2;color:#7f1d1d;}
+        .callout.amber{border-left-color:#f59e0b;background:#fffdf5;}
+        .pull-quote{font-family:'Lora',serif;font-size:22px;font-style:italic;color:#09090b;border-top:2px solid #84cc16;border-bottom:1px solid #e4e4e7;padding:24px 0;margin:2.5em 0;line-height:1.5;}
+        .chapter-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:#84cc16;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:6px;display:block;}
+
+        /* Decision matrix */
+        .matrix{width:100%;border-collapse:collapse;margin:2em 0;font-size:14px;}
+        .matrix th{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;padding:12px 16px;text-align:left;background:#09090b;color:#84cc16;border:1px solid #1c2638;}
+        .matrix td{padding:11px 16px;border:1px solid #e4e4e7;vertical-align:top;font-family:'Outfit',sans-serif;line-height:1.5;font-size:14px;}
+        .matrix tr:nth-child(even) td{background:#f9fafb;}
+        .tag-yes{color:#16a34a;font-weight:700;font-family:'JetBrains Mono',monospace;font-size:10px;}
+        .tag-no{color:#dc2626;font-weight:700;font-family:'JetBrains Mono',monospace;font-size:10px;}
+        .tag-maybe{color:#d97706;font-weight:700;font-family:'JetBrains Mono',monospace;font-size:10px;}
+
+        /* Cost comparison */
+        .cost-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin:2em 0;}
+        @media(max-width:600px){.cost-grid{grid-template-columns:1fr;}}
+        .cost-card{border:1px solid #e4e4e7;border-radius:14px;padding:20px;}
+        .cost-card.highlight{border-color:#84cc16;background:#f0fdf4;}
+        .cost-label{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:#84cc16;margin-bottom:8px;display:block;}
+        .cost-label.red{color:#ef4444;}
+        .cost-label.amber{color:#d97706;}
+        .cost-name{font-family:'Outfit',sans-serif;font-size:16px;font-weight:700;color:#09090b;margin-bottom:6px;}
+        .cost-price{font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:700;color:#09090b;margin-bottom:8px;}
+        .cost-price.red{color:#ef4444;}
+        .cost-period{font-family:'JetBrains Mono',monospace;font-size:10px;color:#71717a;}
+        .cost-list{font-size:13px;color:#52525b;line-height:1.8;margin-top:10px;}
+        .cost-list li{list-style:none;padding-left:14px;position:relative;}
+        .cost-list li::before{content:'·';position:absolute;left:0;color:#84cc16;}
+        .cost-list li.bad::before{color:#ef4444;}
+
+        /* CTA */
+        .build-cta{background:#09090b;border-radius:20px;padding:36px;margin:3em 0;position:relative;overflow:hidden;}
+        .build-cta::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#10b981,#84cc16);}
+        .build-label{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.2em;color:#84cc16;margin-bottom:10px;display:block;}
+        .build-title{font-family:'Outfit',sans-serif;font-size:22px;font-weight:800;color:#eef0f4;margin-bottom:10px;line-height:1.2;}
+        .build-body{font-size:14px;color:#5c7494;line-height:1.75;margin-bottom:22px;}
+        .build-btn{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(90deg,#10b981,#84cc16);color:#06080c;padding:14px 28px;border-radius:10px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;text-decoration:none;transition:opacity 0.15s;}
+        .build-btn:hover{opacity:0.88;}
+
+        .aff-footer{background:#09090b;border-radius:16px;padding:28px;margin:3em 0;}
+        .aff-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;}
+        .aff-tile{background:#111620;border:1px solid #1a2030;border-radius:10px;padding:14px;text-decoration:none;display:block;transition:border-color 0.18s;}
+        .aff-tile:hover{border-color:#84cc16;}
+        .aff-tile-name{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:#84cc16;margin-bottom:4px;}
+        .aff-tile-desc{font-size:11px;color:#6a7d96;line-height:1.5;margin-bottom:6px;}
+        .aff-tile-cta{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:#84cc16;}
+    </style>
+</head>
+<body class="antialiased">
+<div id="global-nav"></div>
+<article class="pt-20 pb-24">
+
+    <header class="max-w-3xl mx-auto px-6 mt-10 mb-12">
+        <div class="flex items-center gap-3 mb-6">
+            <a href="/articles.html" class="mono text-[10px] text-zinc-400 hover:text-zinc-600 uppercase tracking-widest">← Articles</a>
+            <span class="text-zinc-300">·</span>
+            <span class="mono text-[10px] font-bold text-[#84cc16] uppercase tracking-widest border border-[#84cc16]/30 px-3 py-1 rounded-full">Development · Opinion · SA Tech</span>
+        </div>
+        <h1 class="text-4xl md:text-5xl font-bold tracking-tight leading-[1.05] mb-6 text-zinc-900" style="font-family:'Outfit',sans-serif;letter-spacing:-0.03em;">
+            Forget low-code?<br>
+            <span class="g-text">Here is what South African businesses actually need to know.</span>
+        </h1>
+        <p class="text-xl text-zinc-500 font-light leading-relaxed mb-8 max-w-2xl" style="font-family:'Outfit',sans-serif;">
+            BusinessTech ran a sponsored post on September 11 saying AI has rendered low-code development "virtually obsolete." The sponsor was a development company selling custom software. Here is the independent version — without a sales pitch — covering when low-code still makes sense, when AI-augmented custom development is the right call, what each option actually costs, and what nobody is telling South African businesses about either.
+        </p>
+        <div class="flex items-center gap-4 pb-8 border-b border-zinc-100">
+            <div>
+                <div class="font-bold text-sm text-zinc-900">Jarrit Hosking</div>
+                <div class="mono text-[10px] text-zinc-400 uppercase tracking-widest">Forge Vertical · Cape Town · September 14, 2026 · No sponsor</div>
+            </div>
+            <div class="ml-auto mono text-[10px] text-zinc-400 uppercase tracking-widest">12 min read</div>
+        </div>
+    </header>
+
+    <div class="max-w-3xl mx-auto px-6 prose-body">
+
+        <span class="chapter-label">// Let's be clear about the context</span>
+
+        <p>
+            When a development company pays to publish an article saying "forget the cheaper alternative, hire us instead," that is not analysis — it is advertising. BusinessTech's partner content label is there, and to their credit it is visible. But the argument deserves an honest response because the underlying question — what should South African businesses actually use to build software in 2026 — is genuinely important and genuinely complicated.
+        </p>
+
+        <p>
+            <strong>The sponsored post got one thing right:</strong> AI has fundamentally changed the cost and speed of software development. A competent developer using Claude or Cursor today ships code significantly faster than they did two years ago. The gap between what a small development team can produce with AI assistance and what a large team produced without it has collapsed in ways that are still being absorbed by the industry.
+        </p>
+
+        <p>
+            <strong>What it got wrong — or rather, left out:</strong> Low-code is not a single thing competing against custom development. It is a spectrum of tools that solve different problems at different cost and complexity points. Collapsing all of them into "obsolete" to make the case for hiring a custom development firm is like saying "forget buses, hire a driver" — true in some situations, wildly inappropriate in others.
+        </p>
+
+        <div class="pull-quote">
+            The right question is not "low-code or custom?" It is "what are you building, for how many people, how often will it change, and what happens if the vendor shuts down?"
+        </div>
+
+        <h2>What low-code actually is — and what it is not</h2>
+        <span class="chapter-label">// Chapter 01 — Defining the landscape honestly</span>
+
+        <p>
+            <strong>Low-code</strong> platforms like Microsoft Power Apps, Retool, Bubble, and Zoho Creator let you build applications visually — dragging, dropping, connecting to data sources — with limited manual coding. They are fast to start, accessible to non-developers, and good for internal tools, simple workflows, and prototypes.
+        </p>
+
+        <p>
+            <strong>No-code</strong> platforms like Webflow, Zapier, and Glide let you build entirely without writing code. They are excellent for websites, automation workflows, and lightweight apps where the platform's constraints match your use case.
+        </p>
+
+        <p>
+            <strong>Vibe coding</strong> — directing an AI like Claude to write code for you — sits between low-code and custom development. You are producing real code, you own it, and you can do anything code can do. But the quality, security, and maintainability of that code depends entirely on how well you can direct the AI and review what it produces.
+        </p>
+
+        <p>
+            <strong>Custom AI-augmented development</strong> — what Codehesion is selling — is a professional development team using AI tools to work faster. The output is production-grade custom software. The cost is professional development rates, plus the AI tooling. This is appropriate for complex, high-stakes systems.
+        </p>
+
+        <p>
+            <cite index="13-1">Gartner projects that 75% of new enterprise applications will be built using low-code technologies by 2026.</cite> That is not a prediction that low-code is obsolete — it is a prediction that it is dominant. The claim that AI has rendered it obsolete appeared in an article published on the same platform three days after Gartner's figure was widely reported.
+        </p>
+
+        <h2>When low-code is genuinely the right answer</h2>
+        <span class="chapter-label">// Chapter 02 — The use cases that belong there</span>
+
+        <p>
+            Low-code wins when your primary constraint is time or internal capacity, not customisation. <cite index="11-1">The best-fit approach is to use no-code for front-end workflows and internal tools, and low-code for backend logic, scalability, and complex integrations.</cite> Specifically:
+        </p>
+
+    </div>
+
+    <!-- Decision matrix -->
+    <div class="max-w-3xl mx-auto px-6 my-8 overflow-x-auto">
+        <table class="matrix">
+            <thead>
+                <tr>
+                    <th>Use case</th>
+                    <th>Low-code / No-code</th>
+                    <th>Vibe coding</th>
+                    <th>Custom development</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Internal HR or ops form</strong></td>
+                    <td><span class="tag-yes">Best fit</span> — Power Apps or Zoho Creator. Fast, connected to existing Microsoft stack.</td>
+                    <td><span class="tag-maybe">Possible</span> — worth it if you want to own the result.</td>
+                    <td><span class="tag-no">Overkill</span> — cost exceeds value.</td>
+                </tr>
+                <tr>
+                    <td><strong>Marketing website</strong></td>
+                    <td><span class="tag-yes">Best fit</span> — Webflow or a well-built static site. Fast, maintainable by non-developers.</td>
+                    <td><span class="tag-yes">Good fit</span> — full ownership, no monthly platform fee.</td>
+                    <td><span class="tag-no">Overkill</span> unless brand requirements demand it.</td>
+                </tr>
+                <tr>
+                    <td><strong>Client portal with document access</strong></td>
+                    <td><span class="tag-maybe">Possible</span> — but security rules are limited, vendor lock-in is real, per-user costs escalate.</td>
+                    <td><span class="tag-yes">Good fit</span> — if you understand what you are directing the AI to build.</td>
+                    <td><span class="tag-yes">Best fit</span> — for complex access rules and sensitive data.</td>
+                </tr>
+                <tr>
+                    <td><strong>SaaS product you will sell</strong></td>
+                    <td><span class="tag-no">Risk</span> — vendor lock-in, limited white-labelling, platform dependency is a business risk.</td>
+                    <td><span class="tag-maybe">Possible for MVP</span> — validate before investing in full custom build.</td>
+                    <td><span class="tag-yes">Best fit</span> — once validated, you need full ownership.</td>
+                </tr>
+                <tr>
+                    <td><strong>Workflow automation</strong></td>
+                    <td><span class="tag-yes">Best fit</span> — Zapier, Make, or n8n. Purpose-built for this. Faster than any custom solution.</td>
+                    <td><span class="tag-maybe">Possible</span> — but why? The tools are better.</td>
+                    <td><span class="tag-no">Unnecessary</span> — unless deeply integrated with custom systems.</td>
+                </tr>
+                <tr>
+                    <td><strong>Payment processing system</strong></td>
+                    <td><span class="tag-no">Avoid</span> — security constraints, limited PCI compliance control.</td>
+                    <td><span class="tag-maybe">Possible</span> — with careful security review of every line.</td>
+                    <td><span class="tag-yes">Best fit</span> — financial liability requires professional oversight.</td>
+                </tr>
+                <tr>
+                    <td><strong>Compliance document system</strong></td>
+                    <td><span class="tag-no">Risky</span> — POPIA obligations require audit trails and deletion capabilities that most platforms handle poorly.</td>
+                    <td><span class="tag-maybe">Possible</span> — if the developer understands POPIA requirements.</td>
+                    <td><span class="tag-yes">Best fit</span> — compliance by architecture, not workaround.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="max-w-3xl mx-auto px-6 prose-body">
+
+        <h2>The total cost of ownership — what the sponsored post did not mention</h2>
+        <span class="chapter-label">// Chapter 03 — The numbers that matter</span>
+
+        <p>
+            The argument against low-code always sounds compelling until you price out the alternative. Here is an honest cost comparison for a mid-size South African business building a client portal for 200 clients with document management and automated workflows:
+        </p>
+
+    </div>
+
+    <!-- Cost comparison -->
+    <div class="max-w-3xl mx-auto px-6 my-8">
+        <div class="cost-grid">
+            <div class="cost-card">
+                <span class="cost-label amber">// Low-code (Retool)</span>
+                <div class="cost-name">Retool or Power Apps</div>
+                <div class="cost-price red">R9,600<span class="cost-period">/month</span></div>
+                <ul class="cost-list">
+                    <li>R1,200 per user per month</li>
+                    <li>8 staff users = R9,600/month</li>
+                    <li>R115,200/year ongoing</li>
+                    <li>No setup cost but no ownership</li>
+                    <li class="bad">Vendor price increases hit immediately</li>
+                    <li class="bad">Platform shuts down — you start over</li>
+                    <li class="bad">Limited security rule customisation</li>
+                    <li>Fast to start — days not months</li>
+                </ul>
+            </div>
+            <div class="cost-card highlight">
+                <span class="cost-label">// Custom on GCP (Forge Vertical)</span>
+                <div class="cost-name">Custom infrastructure</div>
+                <div class="cost-price">R55,000<span class="cost-period"> once</span></div>
+                <ul class="cost-list">
+                    <li>R45,000–R65,000 build cost</li>
+                    <li>R800–R2,500/month GCP hosting</li>
+                    <li>Pays back vs Retool in 6 months</li>
+                    <li>Full ownership — no vendor risk</li>
+                    <li>Security rules you control entirely</li>
+                    <li>POPIA compliance by architecture</li>
+                    <li>Unlimited users — no per-seat cost</li>
+                    <li>6–10 week build timeline</li>
+                </ul>
+            </div>
+            <div class="cost-card">
+                <span class="cost-label red">// Full custom dev agency</span>
+                <div class="cost-name">Traditional agency</div>
+                <div class="cost-price red">R250,000+<span class="cost-period"> once</span></div>
+                <ul class="cost-list">
+                    <li>R150,000–R400,000+ build cost</li>
+                    <li>R5,000–R15,000/month maintenance</li>
+                    <li>Full ownership</li>
+                    <li>Production-grade security</li>
+                    <li class="bad">Long build timelines — 3 to 6 months</li>
+                    <li class="bad">Expensive for most SA businesses</li>
+                    <li>Right for large enterprise or regulated industry</li>
+                    <li>AI-augmented teams now build faster</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-3xl mx-auto px-6 prose-body">
+
+        <p>
+            The custom build pays back against Retool in about six months and then runs at R2,000 per month versus R9,600 per month forever. Over three years, the custom build on GCP costs approximately R127,000. The same three years on Retool costs R345,600 — and you still do not own anything.
+        </p>
+
+        <p>
+            This is not an argument against Retool. For a team that needs something running this week, Retool is the right answer. The argument is against the framing that one approach is universally correct — which is what a sponsored post from a custom development company has every incentive to claim.
+        </p>
+
+        <div class="callout amber">
+            <strong>The vibe coding middle ground:</strong> For many South African SMEs, the most cost-effective path in 2026 is neither low-code nor a full custom agency. It is a technically literate founder or manager directing an AI to build a production system on GCP — with a security review from someone who knows what they are looking at. That is exactly the gap Forge Vertical fills: building real production infrastructure with AI as the development engine, at a fraction of traditional agency cost.
+        </div>
+
+        <h2>What AI-augmented development actually means in practice</h2>
+        <span class="chapter-label">// Chapter 04 — The honest version</span>
+
+        <p>
+            <cite index="15-1">By June 2026, the convergence of artificial intelligence with low-code platforms has fundamentally transformed how enterprises build, deploy, and maintain software applications.</cite> Forrester's Q2 2026 landscape report identifies AI-native development as the defining characteristic separating market leaders from legacy vendors.
+        </p>
+
+        <p>
+            What this means in practice: a developer using Claude or Cursor in 2026 produces roughly the same output in one day that took a week two years ago. That acceleration applies whether they are building on a low-code platform, writing custom code, or directing AI to write it. The tools made everyone faster. They did not make one category of tool obsolete.
+        </p>
+
+        <p>
+            <cite index="14-1">Every employee becomes a builder — AI will let business users create bespoke applications without writing code, while professional developers guide standards, security, and integration. The line between "developer" and "user" will blur as agentic systems become part of daily work.</cite> That is not a prediction that low-code is dead. It is a prediction that the distinction between low-code and custom development will blur — because AI is democratising custom development the same way low-code did, but further.
+        </p>
+
+        <p>
+            The South African market sits in a particularly interesting position here. <cite index="20-1">South African organisations are under intense pressure to digitise faster, cut costs, and improve customer experience — all while dealing with skills shortages and tight IT budgets. Low-code automation is making it easier than ever to turn automation ideas into production-ready systems.</cite> Telling those organisations to "forget low-code" is advice that serves agencies, not businesses.
+        </p>
+
+        <div class="callout dark">
+            <span class="text-[#84cc16] font-bold block mb-2 font-sans text-sm">// The actual question to ask</span>
+            <span class="text-zinc-400 font-sans text-sm leading-relaxed block">Before choosing any development approach, answer four questions: What specifically are you building? How many people will use it and in what roles? How often will the requirements change? What is the consequence if the vendor or the developer disappears? The answers to those four questions tell you more about the right approach than any sponsored post or vendor comparison.</span>
+        </div>
+
+        <h2>The Forge Vertical position — because transparency matters</h2>
+        <span class="chapter-label">// Chapter 05 — Where we sit in this</span>
+
+        <p>
+            Forge Vertical builds custom production infrastructure on GCP. That means we have a commercial interest in you choosing custom development over low-code for certain use cases. You should factor that in.
+        </p>
+
+        <p>
+            We also use Zapier for client workflow automation when it is the right tool. We recommend Webflow to clients who need a marketing site and have no technical team. We tell people to use Make rather than building a custom integration when Make does the job. The goal is that you build the right thing, not that you hire us specifically.
+        </p>
+
+        <p>
+            What we build well: client portals, document management systems, admin dashboards, automated business workflows, payment integrations, and anything that needs real security rules and POPIA compliance by architecture rather than workaround. If what you need is a form connected to a spreadsheet, use Google Forms. If what you need is a client-facing portal that handles sensitive documents, tracks job status, sends automated notifications, and gives your team a full audit trail — that is what we build.
+        </p>
+
+    </div>
+
+    <!-- CTA -->
+    <div class="max-w-3xl mx-auto px-6 my-10">
+        <div class="build-cta">
+            <span class="build-label">// Not sure which approach is right?</span>
+            <div class="build-title">Talk to someone who will tell you honestly — including when you do not need us</div>
+            <div class="build-body">We will tell you whether low-code, vibe coding, or custom infrastructure is the right answer for your specific situation. If the answer is Retool or Zapier, we will say so. If the answer is a custom GCP build, we will give you a realistic scope and cost. No sponsored content. No upselling.</div>
+            <a href="/onboard.html" class="build-btn">→ Start the conversation</a>
+            <div style="margin-top:12px;font-family:'JetBrains Mono',monospace;font-size:10px;color:#3a4d66;">jarrit@forgevertical.com · +27 65 741 7593 · Cape Town</div>
+        </div>
+    </div>
+
+    <div class="max-w-3xl mx-auto px-6">
+        <div class="aff-footer">
+            <div class="mono text-[10px] text-[#84cc16] uppercase tracking-widest mb-3">// Tools worth knowing about</div>
+            <div class="aff-grid">
+                <a href="https://get.surfshark.net/aff_c?offer_id=6&aff_id=4160" target="_blank" rel="noopener noreferrer" class="aff-tile">
+                    <div class="aff-tile-name">Surfshark VPN</div>
+                    <div class="aff-tile-desc">Secure your dev environment and remote access.</div>
+                    <span class="aff-tile-cta">Try Surfshark →</span>
+                </a>
+                <a href="https://go.nordvpn.net/aff_c?offer_id=15&aff_id=145959&url_id=902" target="_blank" rel="noopener noreferrer" class="aff-tile">
+                    <div class="aff-tile-name">NordVPN</div>
+                    <div class="aff-tile-desc">Team VPN for secure platform access.</div>
+                    <span class="aff-tile-cta">Try NordVPN →</span>
+                </a>
+                <a href="https://go.nordpass.io/aff_c?offer_id=488&aff_id=145959&url_id=9356" target="_blank" rel="noopener noreferrer" class="aff-tile">
+                    <div class="aff-tile-name">NordPass</div>
+                    <div class="aff-tile-desc">Manage team credentials across platforms.</div>
+                    <span class="aff-tile-cta">Try NordPass →</span>
+                </a>
+                <a href="https://portal.webway.host/aff.php?aff=353" target="_blank" rel="noopener noreferrer" class="aff-tile">
+                    <div class="aff-tile-name">WebWay — SA Hosting</div>
+                    <div class="aff-tile-desc">South African hosting for static sites and staging.</div>
+                    <span class="aff-tile-cta">WebWay.co.za →</span>
+                </a>
+            </div>
+        </div>
+        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mt-8">
+            <div>
+                <div class="mono text-[10px] text-zinc-400 uppercase tracking-widest mb-1">Written by</div>
+                <div class="font-bold text-zinc-900">Jarrit Hosking</div>
+                <div class="mono text-[10px] text-zinc-400">Forge Vertical · Cape Town · September 14, 2026 · No sponsor</div>
+            </div>
+            <div class="flex gap-3 flex-wrap">
+                <a href="/articles.html" class="mono text-[10px] font-bold uppercase tracking-widest border border-zinc-200 px-5 py-3 rounded-xl hover:border-zinc-400 transition-all text-zinc-600">← All articles</a>
+                <a href="/articles/business-cloud-infrastructure-guide.html" class="mono text-[10px] font-bold uppercase tracking-widest border border-zinc-200 px-5 py-3 rounded-xl hover:border-zinc-400 transition-all text-zinc-600">Infrastructure guide →</a>
+                <a href="/courses/vibe-coding/index.html" style="background:linear-gradient(90deg,#10b981,#84cc16);" class="mono text-[10px] font-bold uppercase tracking-widest px-5 py-3 rounded-xl text-white hover:opacity-90 transition-all">Vibe coding course →</a>
+            </div>
+        </div>
+    </div>
+
+</article>
+<div id="global-footer"></div>
+<script src="https://cdn.tailwindcss.com"></script>
+</body>
+</html>

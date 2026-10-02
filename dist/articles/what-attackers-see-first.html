@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Before an attacker touches your site, they spend 10 minutes learning everything about it. DNS records, exposed infrastructure, social handles, email patterns. Here is exactly what they find — and what you can do about it.">
+    <title>What an Attacker Learns About Your Business in the First 10 Minutes | Forge Vertical</title>
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"Article","headline":"What an Attacker Learns About Your Business in the First 10 Minutes","description":"Before an attacker touches your site, they spend 10 minutes in reconnaissance. DNS records, exposed mail servers, social handle correlation, email pattern guessing, and technology fingerprinting. Here is exactly what that looks like — and what you should fix before someone else finds it.","author":{"@type":"Person","name":"Jarrit Hosking","url":"https://www.forgevertical.com"},"publisher":{"@type":"Organization","name":"Forge Vertical","url":"https://www.forgevertical.com"},"datePublished":"2026-09-12","keywords":"OSINT attack reconnaissance, what attackers see before hacking, DNS reconnaissance, social footprinting, ethical hacking basics, website security audit, reduce digital footprint, OSINT for defenders, vibe coding security, web security South Africa"}
+    </script>
+    <script src="/global.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/typography.css">
+    <style>
+        body{font-family:'Outfit',sans-serif;background:#fff;}
+        .mono{font-family:'JetBrains Mono',monospace;}
+        .g-text{background:linear-gradient(90deg,#10b981,#84cc16);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:inline-block;}
+        .prose-body{font-family:'Lora',serif;font-size:19px;line-height:1.85;color:#27272a;}
+        .prose-body p{margin-bottom:1.6em;}
+        .prose-body h2{font-family:'Outfit',sans-serif;font-size:28px;font-weight:700;letter-spacing:-0.02em;color:#09090b;margin-top:2.5em;margin-bottom:0.6em;line-height:1.2;}
+        .prose-body strong{font-weight:700;color:#09090b;font-family:'Outfit',sans-serif;font-size:17px;}
+        .prose-body a{color:#84cc16;text-decoration:underline;text-underline-offset:3px;}
+        .prose-body code{font-family:'JetBrains Mono',monospace;font-size:13px;background:#f4f4f5;padding:2px 7px;border-radius:4px;color:#09090b;}
+        .callout{background:#f4f4f5;border-left:3px solid #84cc16;border-radius:0 12px 12px 0;padding:20px 24px;margin:2em 0;font-family:'Outfit',sans-serif;font-size:15px;color:#3f3f46;line-height:1.7;}
+        .callout.dark{background:#09090b;color:#a1a1aa;border-left-color:#84cc16;}
+        .callout.red{border-left-color:#ef4444;background:#fef2f2;color:#7f1d1d;}
+        .callout.amber{border-left-color:#f59e0b;background:#fffdf5;}
+        .pull-quote{font-family:'Lora',serif;font-size:22px;font-style:italic;color:#09090b;border-top:2px solid #84cc16;border-bottom:1px solid #e4e4e7;padding:24px 0;margin:2.5em 0;line-height:1.5;}
+        .chapter-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:#84cc16;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:6px;display:block;}
+
+        /* Terminal block */
+        .terminal{background:#09090b;border-radius:14px;overflow:hidden;margin:2em 0;border:1px solid #1c2638;}
+        .terminal-bar{background:#111820;padding:10px 16px;display:flex;align-items:center;gap:7px;border-bottom:1px solid #1c2638;}
+        .tdot{width:10px;height:10px;border-radius:50%;}
+        .terminal-body{padding:20px 24px;font-family:'JetBrains Mono',monospace;font-size:13px;line-height:1.9;}
+        .t-prompt{color:#3a4d66;}
+        .t-cmd{color:#eef0f4;}
+        .t-out{color:#5c7494;}
+        .t-found{color:#84cc16;}
+        .t-warn{color:#f59e0b;}
+        .t-comment{color:#1c2638;}
+
+        /* Recon timeline */
+        .recon-timeline{position:relative;padding-left:32px;margin:2em 0;}
+        .recon-timeline::before{content:'';position:absolute;left:10px;top:0;bottom:0;width:2px;background:#e4e4e7;}
+        .recon-item{position:relative;margin-bottom:28px;}
+        .recon-dot{position:absolute;left:-26px;top:4px;width:16px;height:16px;border-radius:50%;background:#84cc16;border:2px solid #fff;box-shadow:0 0 0 2px #84cc16;}
+        .recon-dot.red{background:#ef4444;box-shadow:0 0 0 2px #ef4444;}
+        .recon-dot.amber{background:#f59e0b;box-shadow:0 0 0 2px #f59e0b;}
+        .recon-time{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#84cc16;margin-bottom:4px;}
+        .recon-time.red{color:#ef4444;}
+        .recon-time.amber{color:#f59e0b;}
+        .recon-title{font-family:'Outfit',sans-serif;font-size:16px;font-weight:700;color:#09090b;margin-bottom:4px;}
+        .recon-desc{font-size:14px;color:#52525b;line-height:1.65;}
+
+        /* Fix table */
+        .fix-table{width:100%;border-collapse:collapse;margin:2em 0;font-size:14px;}
+        .fix-table th{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;padding:12px 16px;text-align:left;background:#09090b;color:#84cc16;border:1px solid #1c2638;}
+        .fix-table td{padding:11px 16px;border:1px solid #e4e4e7;vertical-align:top;font-family:'Outfit',sans-serif;line-height:1.5;}
+        .fix-table tr:nth-child(even) td{background:#f9fafb;}
+        .sev-high{color:#dc2626;font-weight:700;font-family:'JetBrains Mono',monospace;font-size:11px;}
+        .sev-med{color:#d97706;font-weight:700;font-family:'JetBrains Mono',monospace;font-size:11px;}
+        .sev-low{color:#16a34a;font-weight:700;font-family:'JetBrains Mono',monospace;font-size:11px;}
+
+        /* Course CTA */
+        .course-cta{background:#09090b;border-radius:20px;padding:36px;margin:3em 0;position:relative;overflow:hidden;}
+        .course-cta::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#10b981,#84cc16);}
+        .course-cta-label{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.2em;color:#84cc16;margin-bottom:10px;display:block;}
+        .course-cta-title{font-family:'Outfit',sans-serif;font-size:22px;font-weight:800;color:#eef0f4;margin-bottom:10px;letter-spacing:-0.01em;line-height:1.2;}
+        .course-cta-body{font-size:14px;color:#5c7494;line-height:1.75;margin-bottom:22px;}
+        .course-cta-modules{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:22px;}
+        @media(max-width:500px){.course-cta-modules{grid-template-columns:1fr;}}
+        .course-cta-module{font-family:'JetBrains Mono',monospace;font-size:10px;color:#3a4d66;padding:6px 0;border-bottom:1px solid #111820;display:flex;align-items:center;gap:8px;}
+        .course-cta-module::before{content:'→';color:#84cc16;font-weight:700;}
+        .course-btn{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(90deg,#10b981,#84cc16);color:#06080c;padding:14px 28px;border-radius:10px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;text-decoration:none;transition:opacity 0.15s;}
+        .course-btn:hover{opacity:0.88;}
+        .course-price{font-family:'JetBrains Mono',monospace;font-size:11px;color:#3a4d66;margin-top:12px;}
+
+        .aff-footer{background:#09090b;border-radius:16px;padding:28px;margin:3em 0;}
+        .aff-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;}
+        .aff-tile{background:#111620;border:1px solid #1a2030;border-radius:10px;padding:14px;text-decoration:none;display:block;transition:border-color 0.18s;}
+        .aff-tile:hover{border-color:#84cc16;}
+        .aff-tile-name{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:#84cc16;margin-bottom:4px;}
+        .aff-tile-desc{font-size:11px;color:#6a7d96;line-height:1.5;margin-bottom:6px;}
+        .aff-tile-cta{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:#84cc16;}
+    </style>
+</head>
+<body class="antialiased">
+<div id="global-nav"></div>
+<article class="pt-20 pb-24">
+
+    <header class="max-w-3xl mx-auto px-6 mt-10 mb-12">
+        <div class="flex items-center gap-3 mb-6">
+            <a href="/articles.html" class="mono text-[10px] text-zinc-400 hover:text-zinc-600 uppercase tracking-widest">← Articles</a>
+            <span class="text-zinc-300">·</span>
+            <span class="mono text-[10px] font-bold text-[#84cc16] uppercase tracking-widest border border-[#84cc16]/30 px-3 py-1 rounded-full">Security · OSINT · Recon</span>
+        </div>
+        <h1 class="text-4xl md:text-5xl font-bold tracking-tight leading-[1.05] mb-6 text-zinc-900" style="font-family:'Outfit',sans-serif;letter-spacing:-0.03em;">
+            What an attacker learns<br>about your business<br>
+            <span class="g-text">in the first 10 minutes.</span>
+        </h1>
+        <p class="text-xl text-zinc-500 font-light leading-relaxed mb-8 max-w-2xl" style="font-family:'Outfit',sans-serif;">
+            Before anyone touches your login page, sends a phishing email, or runs a single exploit — they spend time learning everything publicly available about you. Your DNS records. Your mail server. Your staff names and email patterns. Your technology stack. Your social handles. All of it, gathered passively, without triggering a single alert. Here is exactly what that looks like.
+        </p>
+        <div class="flex items-center gap-4 pb-8 border-b border-zinc-100">
+            <div>
+                <div class="font-bold text-sm text-zinc-900">Jarrit Hosking</div>
+                <div class="mono text-[10px] text-zinc-400 uppercase tracking-widest">Forge Vertical · Cape Town · September 12, 2026 · Active HackerOne researcher</div>
+            </div>
+            <div class="ml-auto mono text-[10px] text-zinc-400 uppercase tracking-widest">13 min read</div>
+        </div>
+    </header>
+
+    <div class="max-w-3xl mx-auto px-6 prose-body">
+
+        <span class="chapter-label">// The phase nobody talks about</span>
+
+        <p>
+            Most security conversations start at the attack — the phishing email, the ransomware, the breach. What rarely gets discussed is the hour before any of that happens. The reconnaissance phase. The part where an attacker builds a complete picture of your business using nothing but publicly available information — and you never know it is happening.
+        </p>
+
+        <p>
+            This phase has a name in the security community: OSINT — Open Source Intelligence. It is the systematic collection of information from public sources. No hacking. No exploits. No illegal access. Just a structured process of gathering what you have already made available, whether you intended to or not.
+        </p>
+
+        <p>
+            <strong>Every business with a website has an OSINT footprint.</strong> The question is not whether you have one — it is how much it tells an attacker and whether you have ever looked at it from their perspective.
+        </p>
+
+        <div class="pull-quote">
+            Before an attacker touches your login page, they already know your mail server, your DNS provider, your technology stack, your staff names, and three email address formats to try. That is not hacking. That is reading what you published.
+        </div>
+
+        <h2>The 10-minute reconnaissance timeline</h2>
+        <span class="chapter-label">// What actually happens, in order</span>
+
+    </div>
+
+    <!-- Recon timeline -->
+    <div class="max-w-3xl mx-auto px-6 my-8">
+        <div class="recon-timeline">
+            <div class="recon-item">
+                <div class="recon-dot"></div>
+                <div class="recon-time">Minute 0–1</div>
+                <div class="recon-title">DNS reconnaissance — the infrastructure map</div>
+                <div class="recon-desc">The first thing any attacker does is query your DNS records. This is completely passive — no connection to your server, no alert triggered. A records reveal your hosting IP. MX records reveal your email provider. NS records reveal your DNS provider. TXT records often contain SPF configurations that list every service permitted to send email on your behalf — which is effectively a list of every SaaS tool your business uses.</div>
+            </div>
+            <div class="recon-item">
+                <div class="recon-dot amber"></div>
+                <div class="recon-time amber">Minute 1–2</div>
+                <div class="recon-title">Technology fingerprinting — what is the site built on?</div>
+                <div class="recon-desc">Browser developer tools, Wappalyzer, or BuiltWith reveal your technology stack in seconds. WordPress 6.4.1 tells an attacker which known CVEs to check. Outdated jQuery tells them which XSS payloads to try. An Apache server header tells them the version and operating system. If you are running software with known vulnerabilities, this step identifies them before a single request is sent to your server.</div>
+            </div>
+            <div class="recon-item">
+                <div class="recon-dot amber"></div>
+                <div class="recon-time amber">Minute 2–4</div>
+                <div class="recon-title">Social footprinting — who works there and what do they share?</div>
+                <div class="recon-desc">Username enumeration across LinkedIn, GitHub, Twitter/X, Instagram, and Reddit builds a picture of your team. LinkedIn reveals job titles, tenure, and — critically — the email format your company uses (firstname.lastname@ vs first.last@ vs flastname@). GitHub profiles of your developers sometimes contain API keys, credentials, and internal tooling in commit history. Staff social profiles reveal travel patterns, office locations, and relationship networks useful for social engineering.</div>
+            </div>
+            <div class="recon-item">
+                <div class="recon-dot red"></div>
+                <div class="recon-time red">Minute 4–6</div>
+                <div class="recon-title">Email pattern guessing — finding valid addresses</div>
+                <div class="recon-desc">Once the email format is known from LinkedIn, an attacker generates a list of staff email addresses and verifies them using SMTP probing or tools like Hunter.io. A verified email address is the prerequisite for targeted phishing. At this point they have real names, real roles, and real email addresses — everything needed to write a convincing spear-phishing email that appears to come from a colleague or supplier.</div>
+            </div>
+            <div class="recon-item">
+                <div class="recon-dot red"></div>
+                <div class="recon-time red">Minute 6–8</div>
+                <div class="recon-title">Breach database check — has this email appeared before?</div>
+                <div class="recon-desc">Staff email addresses are checked against breach databases — Have I Been Pwned and its commercial equivalents. If a staff member's email address appears in a breach, their leaked password hash (or sometimes plaintext password) is available. People reuse passwords. A password from a 2019 LinkedIn breach is tried against your company VPN, email, and admin panel. This step costs nothing and succeeds more often than any technical attack.</div>
+            </div>
+            <div class="recon-item">
+                <div class="recon-dot red"></div>
+                <div class="recon-time red">Minute 8–10</div>
+                <div class="recon-title">Subdomain enumeration — finding what you forgot was public</div>
+                <div class="recon-desc">Tools like Sublist3r, Amass, or certificate transparency logs reveal subdomains you may have forgotten about. dev.yourcompany.com running an old version of your application. staging.yourcompany.com with test credentials still configured. api.yourcompany.com with rate limiting disabled because "it's internal." admin.yourcompany.com with a default login page. These are the entry points that never appear on your main site but are fully accessible to anyone who looks.</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-3xl mx-auto px-6 prose-body">
+
+        <h2>What a DNS record actually reveals</h2>
+        <span class="chapter-label">// Chapter 01 — Reading your own infrastructure map</span>
+
+        <p>
+            DNS records are designed to be public — they are how the internet knows where to send traffic for your domain. But the information they contain goes far beyond "this domain points to this IP address." A full DNS query on a typical business domain reveals the following:
+        </p>
+
+    </div>
+
+    <!-- Terminal demo -->
+    <div class="max-w-3xl mx-auto px-6 my-8">
+        <div class="terminal">
+            <div class="terminal-bar">
+                <div class="tdot" style="background:#ef4444"></div>
+                <div class="tdot" style="background:#f59e0b"></div>
+                <div class="tdot" style="background:#22c55e"></div>
+                <span class="mono ml-3 text-[11px]" style="color:#1c2638;">dns-recon · example-business.co.za</span>
+            </div>
+            <div class="terminal-body">
+                <div><span class="t-prompt">$ </span><span class="t-cmd">python footprint_domain.py</span></div>
+                <div><span class="t-prompt">Enter Target Domain: </span><span class="t-cmd">example-business.co.za</span></div>
+                <div>&nbsp;</div>
+                <div style="color:#5c7494;">[*] Analyzing Infrastructure: example-business.co.za</div>
+                <div>&nbsp;</div>
+                <div><span class="t-found">[+] A Records:</span></div>
+                <div style="color:#5c7494;">    - 104.21.48.1  <span style="color:#1c2638;">← Cloudflare edge (good)</span></div>
+                <div>&nbsp;</div>
+                <div><span class="t-found">[+] MX Records:</span></div>
+                <div style="color:#5c7494;">    - mail.example-business.co.za  <span style="color:#ef4444;">← self-hosted mail server (exposed)</span></div>
+                <div>&nbsp;</div>
+                <div><span class="t-found">[+] NS Records:</span></div>
+                <div style="color:#5c7494;">    - ns1.cloudflare.com</div>
+                <div style="color:#5c7494;">    - ns2.cloudflare.com</div>
+                <div>&nbsp;</div>
+                <div><span class="t-found">[+] TXT Records:</span></div>
+                <div style="color:#5c7494;">    - v=spf1 include:sendgrid.net include:mailchimp.com</div>
+                <div style="color:#5c7494;">      include:zohoemail.com include:freshdesk.com ~all</div>
+                <div style="color:#f59e0b;">      <span style="color:#1c2638;">↑</span> attacker now knows: SendGrid, Mailchimp, Zoho, Freshdesk</div>
+                <div>&nbsp;</div>
+                <div style="color:#ef4444;">[!] Self-hosted mail server on unprotected subdomain</div>
+                <div style="color:#ef4444;">[!] SPF record reveals full SaaS stack</div>
+                <div style="color:#ef4444;">[!] No DMARC record — domain can be spoofed for phishing</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-3xl mx-auto px-6 prose-body">
+
+        <p>
+            That output — from a completely passive DNS query — tells an attacker that this business uses SendGrid for transactional email, Mailchimp for marketing, Zoho for business email, and Freshdesk for customer support. It also tells them the mail server is self-hosted on a subdomain that bypasses Cloudflare. And it tells them there is no DMARC record — meaning they can send emails that appear to come from this domain with no technical barrier.
+        </p>
+
+        <p>
+            None of this required touching the website. No request was logged. No alert was triggered. This is public information that any DNS lookup tool can retrieve.
+        </p>
+
+        <div class="callout red">
+            <strong>The DMARC gap is critical:</strong> A missing DMARC record means anyone can send email that appears to come from your domain. Not spoofed in a way that looks suspicious — legitimate-looking email that passes basic spam filters because it does not claim to be from your mail server, just from your domain. This is how most business email compromise attacks begin.
+        </div>
+
+        <h2>What your social footprint reveals</h2>
+        <span class="chapter-label">// Chapter 02 — What you are giving away without knowing it</span>
+
+        <p>
+            The social footprinting phase is where reconnaissance becomes personal. DNS records tell an attacker about your infrastructure. Social footprinting tells them about your people — which is where most successful attacks actually land.
+        </p>
+
+    </div>
+
+    <!-- Terminal demo 2 -->
+    <div class="max-w-3xl mx-auto px-6 my-8">
+        <div class="terminal">
+            <div class="terminal-bar">
+                <div class="tdot" style="background:#ef4444"></div>
+                <div class="tdot" style="background:#f59e0b"></div>
+                <div class="tdot" style="background:#22c55e"></div>
+                <span class="mono ml-3 text-[11px]" style="color:#1c2638;">social-footprint · target username check</span>
+            </div>
+            <div class="terminal-body">
+                <div><span class="t-prompt">$ </span><span class="t-cmd">python footprint_social.py</span></div>
+                <div><span class="t-prompt">Enter Target Username: </span><span class="t-cmd">jsmith_dev</span></div>
+                <div>&nbsp;</div>
+                <div style="color:#5c7494;">[*] Initiating Social Footprint for: jsmith_dev</div>
+                <div>&nbsp;</div>
+                <div><span class="t-found">[+] FOUND:</span><span style="color:#5c7494;"> GitHub  - github.com/jsmith_dev</span></div>
+                <div style="color:#f59e0b;">     └─ 3 public repos · last commit 2 days ago</div>
+                <div style="color:#f59e0b;">     └─ Company: ExampleBusiness · Location: Cape Town</div>
+                <div style="color:#ef4444;">     └─ Found .env file in commit history (deleted but recoverable)</div>
+                <div>&nbsp;</div>
+                <div><span class="t-found">[+] FOUND:</span><span style="color:#5c7494;"> Twitter/X - twitter.com/jsmith_dev</span></div>
+                <div style="color:#f59e0b;">     └─ Bio mentions: "Backend dev @ExampleBusiness"</div>
+                <div style="color:#f59e0b;">     └─ Recent post: "Finally got the AWS prod deploy working"</div>
+                <div>&nbsp;</div>
+                <div><span class="t-found">[+] FOUND:</span><span style="color:#5c7494;"> LinkedIn  - found via name search</span></div>
+                <div style="color:#f59e0b;">     └─ Email format identified: j.smith@example-business.co.za</div>
+                <div style="color:#f59e0b;">     └─ Role: Senior Developer (since 2023)</div>
+                <div style="color:#f59e0b;">     └─ Skills listed: AWS, Firebase, Node.js, Stripe</div>
+                <div>&nbsp;</div>
+                <div><span class="t-found">[-] NOT FOUND:</span><span style="color:#5c7494;"> Instagram</span></div>
+                <div><span class="t-found">[-] NOT FOUND:</span><span style="color:#5c7494;"> Reddit</span></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-3xl mx-auto px-6 prose-body">
+
+        <p>
+            From that output, an attacker now knows: the developer's full name and email address, the exact technology stack the business runs on (AWS, Firebase, Node.js, Stripe), that there was a recent production deployment (potential instability window), and — most damaging — that a `.env` file was committed to GitHub at some point. Even if the file was deleted, it remains in the Git history and is fully recoverable.
+        </p>
+
+        <p>
+            That `.env` file almost certainly contained API keys, database credentials, or Stripe secret keys. Deleted from GitHub does not mean gone from GitHub.
+        </p>
+
+        <div class="callout amber">
+            <strong>The GitHub commit history problem:</strong> Every file ever committed to a Git repository exists permanently in its history, even if later deleted. Run <code>git log --all --full-history -- "**/.env"</code> on any public repository to find deleted environment files. This is one of the first things professional security researchers check — and it is one of the most commonly found vulnerabilities in vibe-coded projects pushed to public repositories.
+        </div>
+
+        <h2>What this looks like for a vibe-coded project specifically</h2>
+        <span class="chapter-label">// Chapter 03 — Why AI-built sites carry extra exposure</span>
+
+        <p>
+            Vibe-coded projects carry a specific set of reconnaissance vulnerabilities that traditionally-built projects do not, because of how they are typically developed and deployed.
+        </p>
+
+        <p>
+            <strong>Public GitHub repositories as the deployment pipeline.</strong> Many vibe coders push directly to a public GitHub repository that serves as their GitHub Pages host. That repository contains the full commit history, the build process, often the project structure, and sometimes credentials that were committed before a `.gitignore` was properly configured.
+        </p>
+
+        <p>
+            <strong>Technology stack visible in source.</strong> The Tailwind CDN script tag. The Firebase configuration object in the JavaScript. The Formspree form ID. The Google Analytics measurement ID. All of these are publicly visible in your page source and each one tells an attacker something about your infrastructure. The Firebase configuration object specifically contains your project ID and API keys — and while the API keys themselves are meant to be public, a misconfigured Firestore security rules file can allow anyone with those keys to read or write your entire database.
+        </p>
+
+        <p>
+            <strong>No security headers.</strong> As discussed in previous articles — missing `Content-Security-Policy`, `X-Frame-Options`, and `X-Content-Type-Options` headers are instantly visible to any scanner and tell an attacker that the site was deployed without a security review.
+        </p>
+
+        <div class="pull-quote">
+            A vibe-coded site is not inherently less secure than a traditionally-built one. But it carries the specific vulnerabilities of its development pattern — public repositories, visible configuration, and a deployment process that optimises for speed over security review.
+        </div>
+
+        <h2>What you should check right now</h2>
+        <span class="chapter-label">// Chapter 04 — Your own reconnaissance audit</span>
+
+        <p>
+            Run this on yourself before someone else does. All of these tools are free and publicly available — which is exactly why attackers use them.
+        </p>
+
+    </div>
+
+    <!-- Fix table -->
+    <div class="max-w-3xl mx-auto px-6 my-8 overflow-x-auto">
+        <table class="fix-table">
+            <thead>
+                <tr>
+                    <th>What to check</th>
+                    <th>Tool</th>
+                    <th>What you are looking for</th>
+                    <th>Risk</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>DNS records</strong></td>
+                    <td>mxtoolbox.com or dnschecker.org</td>
+                    <td>Self-hosted mail servers, missing DMARC, SPF exposing your full SaaS stack</td>
+                    <td><span class="sev-high">HIGH</span></td>
+                </tr>
+                <tr>
+                    <td><strong>DMARC policy</strong></td>
+                    <td>mxtoolbox.com/dmarc.aspx</td>
+                    <td>Missing or p=none DMARC — means your domain can be spoofed</td>
+                    <td><span class="sev-high">HIGH</span></td>
+                </tr>
+                <tr>
+                    <td><strong>GitHub commit history</strong></td>
+                    <td>GitHub search or git log</td>
+                    <td>Deleted .env files, API keys, database URLs in old commits</td>
+                    <td><span class="sev-high">HIGH</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Subdomain exposure</strong></td>
+                    <td>crt.sh (certificate transparency)</td>
+                    <td>Forgotten dev, staging, or admin subdomains</td>
+                    <td><span class="sev-high">HIGH</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Security headers</strong></td>
+                    <td>securityheaders.com</td>
+                    <td>Missing CSP, X-Frame-Options, HSTS, Referrer-Policy</td>
+                    <td><span class="sev-med">MEDIUM</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Technology stack</strong></td>
+                    <td>wappalyzer.com or page source</td>
+                    <td>Outdated frameworks, exposed version numbers, server headers</td>
+                    <td><span class="sev-med">MEDIUM</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Staff breach exposure</strong></td>
+                    <td>haveibeenpwned.com</td>
+                    <td>Staff email addresses appearing in known breach databases</td>
+                    <td><span class="sev-high">HIGH</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Origin IP exposure</strong></td>
+                    <td>censys.io or shodan.io</td>
+                    <td>Origin server IP visible — Cloudflare bypass possible</td>
+                    <td><span class="sev-med">MEDIUM</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Social footprint</strong></td>
+                    <td>LinkedIn + Google</td>
+                    <td>Email patterns, staff roles, technology mentions, travel patterns</td>
+                    <td><span class="sev-low">VARIES</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="max-w-3xl mx-auto px-6 prose-body">
+
+        <h2>The three fixes that matter most</h2>
+        <span class="chapter-label">// Chapter 05 — Start here</span>
+
+        <p>
+            <strong>Add a DMARC record.</strong> A missing DMARC record is the single most impactful gap for most South African small businesses. Add a TXT record to your DNS: <code>_dmarc.yourdomain.com</code> with value <code>v=DMARC1; p=quarantine; rua=mailto:dmarc@yourdomain.com</code>. Start with <code>p=quarantine</code> rather than <code>p=reject</code> until you have confirmed all legitimate email sources are in your SPF record.
+        </p>
+
+        <p>
+            <strong>Audit your GitHub commit history.</strong> If you have ever pushed a project to a public GitHub repository, run a search for credentials in the history. GitHub's secret scanning will flag some automatically — but not all. Search for patterns like <code>FIREBASE_</code>, <code>STRIPE_</code>, <code>DATABASE_URL</code>, <code>API_KEY</code> in your commit history. If you find any, rotate the credentials immediately — even if the commit is deleted.
+        </p>
+
+        <p>
+            <strong>Check crt.sh for your domain.</strong> Go to <a href="https://crt.sh" target="_blank" rel="noopener noreferrer">crt.sh</a>, search for your domain, and review every subdomain that has ever had a certificate issued. Each one is a potential entry point. If you find subdomains you did not know existed — or ones that should not be public — investigate immediately.
+        </p>
+
+        <div class="callout dark">
+            <span class="text-[#84cc16] font-bold block mb-2 font-sans text-sm">// The bigger picture</span>
+            <span class="text-zinc-400 font-sans text-sm leading-relaxed block">This article covers the passive reconnaissance phase — what an attacker learns before they do anything active. The next phase is active scanning: probing your endpoints, testing authentication, looking for injection points, and mapping your application logic. Understanding both phases — passive and active — is what separates a business that has genuinely thought about security from one that has simply bought a certificate and moved on.</span>
+        </div>
+
+    </div>
+
+    <!-- Course CTA -->
+    <div class="max-w-3xl mx-auto px-6 my-10">
+        <div class="course-cta">
+            <span class="course-cta-label">// Want the full picture?</span>
+            <div class="course-cta-title">Build With AI: The Complete<br>Vibe Coder's Playbook</div>
+            <div class="course-cta-body">
+                This article covers what attackers see before they attack. The full course covers everything that comes after — and how to make sure your site holds up when someone actually starts pushing against it. 9 written modules covering security from the first prompt, race conditions, Cloudflare configuration, payment handling, privacy law, and the pre-launch checklist that catches what this article introduces. Built for vibe coders who want to ship systems that actually survive contact with the real world.
+            </div>
+            <div class="course-cta-modules">
+                <div class="course-cta-module">Security from the first prompt</div>
+                <div class="course-cta-module">Race conditions explained</div>
+                <div class="course-cta-module">Cloudflare — 8 settings that matter</div>
+                <div class="course-cta-module">Payment handling and PCI-DSS</div>
+                <div class="course-cta-module">POPIA and GDPR compliance</div>
+                <div class="course-cta-module">Pre-launch security checklist</div>
+                <div class="course-cta-module">Royalty-free assets — the rules</div>
+                <div class="course-cta-module">The 2030 AI outlook</div>
+            </div>
+            <a href="/courses/vibe-coding/index.html" class="course-btn">
+                📘 &nbsp; View the course — R497
+            </a>
+            <div class="course-price">One-time payment · Lifetime PDF access · No subscription · Debit card accepted</div>
+        </div>
+    </div>
+
+    <div class="max-w-3xl mx-auto px-6 prose-body">
+        <p>
+            The reconnaissance phase described in this article is legal, passive, and completely undetectable. Every tool mentioned is publicly available. Every data source is public by design. The information is there whether you look at it or not — the only question is whether you see it before someone with different intentions does.
+        </p>
+        <p>
+            Run the audit on yourself this week. Fix what you find. Then think about what comes after the reconnaissance phase — because that conversation is longer and the stakes are higher.
+        </p>
+    </div>
+
+    <div class="max-w-3xl mx-auto px-6">
+        <div class="aff-footer">
+            <div class="mono text-[10px] text-[#84cc16] uppercase tracking-widest mb-3">// Tools that reduce your attack surface</div>
+            <div class="aff-grid">
+                <a href="https://get.surfshark.net/aff_c?offer_id=6&aff_id=4160" target="_blank" rel="noopener noreferrer" class="aff-tile">
+                    <img src="/assets/images/surfshark-vpn-1-year-17236158874633226.webp" alt="Surfshark" style="height:18px;margin-bottom:8px;object-fit:contain;display:block;" onerror="this.style.display='none'">
+                    <div class="aff-tile-name">Surfshark VPN</div>
+                    <div class="aff-tile-desc">Run your own reconnaissance from a clean IP. See what attackers see.</div>
+                    <span class="aff-tile-cta">Try Surfshark →</span>
+                </a>
+                <a href="https://go.nordvpn.net/aff_c?offer_id=15&aff_id=145959&url_id=902" target="_blank" rel="noopener noreferrer" class="aff-tile">
+                    <img src="/assets/images/NordVPN-vertical.png" alt="NordVPN" style="height:18px;margin-bottom:8px;object-fit:contain;display:block;" onerror="this.style.display='none'">
+                    <div class="aff-tile-name">NordVPN</div>
+                    <div class="aff-tile-desc">Threat protection on every device. Essential for remote team security.</div>
+                    <span class="aff-tile-cta">Try NordVPN →</span>
+                </a>
+                <a href="https://nordpass.com" target="_blank" rel="noopener noreferrer" class="aff-tile">
+                    <img src="/assets/images/nord-security_password-management-tools_1739200695312.png" alt="NordPass" style="height:18px;margin-bottom:8px;object-fit:contain;display:block;" onerror="this.style.display='none'">
+                    <div class="aff-tile-name">NordPass</div>
+                    <div class="aff-tile-desc">Stop staff reusing passwords. Credential stuffing starts with breach data.</div>
+                    <span class="aff-tile-cta">Try NordPass →</span>
+                </a>
+                <a href="https://portal.webway.host/aff.php?aff=353" target="_blank" rel="noopener noreferrer" class="aff-tile">
+                    <img src="/assets/images/webwaylogo.png" alt="WebWay" style="height:18px;margin-bottom:8px;object-fit:contain;display:block;" onerror="this.style.display='none'">
+                    <div class="aff-tile-name">WebWay — SA Hosting</div>
+                    <div class="aff-tile-desc">South African hosting. Local infrastructure, local support.</div>
+                    <span class="aff-tile-cta">WebWay.co.za →</span>
+                </a>
+            </div>
+        </div>
+        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mt-8">
+            <div>
+                <div class="mono text-[10px] text-zinc-400 uppercase tracking-widest mb-1">Written by</div>
+                <div class="font-bold text-zinc-900">Jarrit Hosking</div>
+                <div class="mono text-[10px] text-zinc-400">Forge Vertical · Cape Town · September 12, 2026 · Active HackerOne researcher</div>
+            </div>
+            <div class="flex gap-3 flex-wrap">
+                <a href="/articles.html" class="mono text-[10px] font-bold uppercase tracking-widest border border-zinc-200 px-5 py-3 rounded-xl hover:border-zinc-400 transition-all text-zinc-600">← All articles</a>
+                <a href="/articles/sa-cybersecurity-skills-gap.html" class="mono text-[10px] font-bold uppercase tracking-widest border border-zinc-200 px-5 py-3 rounded-xl hover:border-zinc-400 transition-all text-zinc-600">SA cyber crisis →</a>
+                <a href="/courses/vibe-coding/index.html" style="background:linear-gradient(90deg,#10b981,#84cc16);" class="mono text-[10px] font-bold uppercase tracking-widest px-5 py-3 rounded-xl text-white hover:opacity-90 transition-all">The course →</a>
+            </div>
+        </div>
+    </div>
+
+</article>
+<div id="global-footer"></div>
+<script src="https://cdn.tailwindcss.com"></script>
+</body>
+</html>

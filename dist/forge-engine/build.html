@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forge Your Node // Vertical Architecture</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;800&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #ffffff; color: #1e293b; }
+        .vibrant-gradient { background: linear-gradient(90deg, #10b981 0%, #84cc16 100%); }
+        .glass-panel { background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .shadow-industrial { box-shadow: 0 50px 100px -20px rgba(0,0,0,0.4); }
+        .terminal-scroll::-webkit-scrollbar { width: 4px; }
+        .terminal-scroll::-webkit-scrollbar-thumb { background: #3f3f46; border-radius: 10px; }
+    </style>
+</head>
+<body class="antialiased overflow-x-hidden">
+    <div id="global-nav"></div>
+
+    <main class="min-h-screen py-24 px-6 max-w-7xl mx-auto flex flex-col lg:flex-row gap-16 items-start">
+        
+        <div class="lg:w-5/12 space-y-10 lg:sticky lg:top-32">
+            <span class="bg-lime-100 text-lime-700 px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">Sovereign Deployment</span>
+            <h1 class="text-6xl font-extrabold tracking-tighter text-slate-900 leading-[0.9]">
+                Own your code.<br><span class="vibrant-gradient bg-clip-text text-transparent italic">Forge your future.</span>
+            </h1>
+            <p class="text-xl text-slate-500 font-light leading-relaxed">
+                Vertical Web Builder refactors architecture via AI and outputs a 100% portable node. No monthly rental fees. No platform lock-in.
+            </p>
+
+            <div class="p-8 bg-zinc-900 rounded-[2.5rem] border border-zinc-800 text-white">
+                <h4 class="text-[10px] font-black uppercase text-[#bef264] tracking-[0.3em] mb-4 italic">Infrastructure Setup</h4>
+                <p class="text-[11px] text-zinc-400 mb-6 leading-relaxed">
+                    Run this command in your local terminal to prevent <span class="text-white">Pathspec errors</span> and initialize the project directory.
+                </p>
+                <div class="bg-black rounded-xl p-4 font-mono text-[10px] text-zinc-300 border border-zinc-800 mb-6">
+                    mkdir -p vertical-projects && touch vertical-projects/.gitkeep && git add . && git commit -m "init forge" && git push
+                </div>
+                <button onclick="navigator.clipboard.writeText('mkdir -p vertical-projects && touch vertical-projects/.gitkeep && git add . && git commit -m \'init forge\' && git push')" class="w-full bg-zinc-800 hover:bg-[#bef264] hover:text-black py-3 rounded-xl font-black uppercase tracking-widest transition-all text-[9px]">
+                    Copy Setup Command
+                </button>
+            </div>
+
+            <div class="p-8 bg-slate-50 rounded-[2.5rem] border border-slate-100">
+                <p class="text-xs text-slate-400 font-black uppercase tracking-widest mb-3">License Protocol</p>
+                <p class="text-sm text-slate-600 leading-relaxed italic">
+                    "Each license allows 10 pushes. We recommend using them to iterate on your AI refactor until the architecture is perfect."
+                </p>
+            </div>
+        </div>
+
+        <div class="lg:w-7/12 w-full glass-panel p-10 lg:p-16 rounded-[4rem] shadow-industrial text-white relative">
+            
+            <div id="payment-gate" class="space-y-10">
+                <h3 class="text-3xl font-black italic mb-8 uppercase tracking-tighter text-lime-500">License Required</h3>
+                <div class="space-y-6">
+                    <div>
+                        <label class="text-[11px] font-black uppercase text-slate-400 tracking-[0.2em] mb-4 block">Select Pricing Region</label>
+                        <select id="pricing-tier" onchange="updatePrice()" class="w-full bg-slate-800/50 border-2 border-slate-700 p-5 rounded-2xl outline-none focus:border-lime-500 font-bold text-lg cursor-pointer">
+                            <option value="USD" data-p="50">United States ($50.00)</option>
+                            <option value="ZAR" data-p="950">South Africa (R950.00)</option>
+                            <option value="EUR" data-p="45">Europe (€45.00)</option>
+                            <option value="GBP" data-p="40">United Kingdom (£40.00)</option>
+                        </select>
+                    </div>
+                    <a href="https://www.paypal.com/ncp/payment/VFKNMJUBYQQG6" class="w-full vibrant-gradient text-slate-900 p-8 rounded-[2rem] font-black uppercase tracking-widest text-sm shadow-2xl hover:scale-[1.02] transition-all flex items-center justify-center gap-4">
+                        <span id="pay-btn-text">Unlock Engine ($50.00)</span> ↗
+                    </a>
+                </div>
+            </div>
+
+            <div id="forge-terminal" class="hidden space-y-8">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-3xl font-black italic uppercase tracking-tighter">Forge <span class="text-lime-500">Active</span></h3>
+                    <div class="text-[10px] font-black bg-lime-500/10 text-lime-400 px-3 py-1 rounded-full uppercase tracking-widest">Credits: 10/10</div>
+                </div>
+
+                <div class="space-y-6">
+                    <div class="relative group">
+                        <label class="text-[11px] font-black uppercase text-slate-400 tracking-[0.2em] mb-3 flex items-center gap-2">Target URL</label>
+                        <input type="url" id="targetUrl" placeholder="https://source-site.com" class="w-full bg-slate-800/50 border-2 border-slate-700 p-6 rounded-2xl outline-none focus:border-lime-500 font-bold text-white">
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="relative group">
+                            <label class="text-[10px] font-black text-slate-500 uppercase mb-2 block">Hosting (FTP)</label>
+                            <input type="text" id="host" placeholder="ftp.host.com" class="w-full bg-slate-800/50 border border-slate-700 p-4 rounded-xl text-xs outline-none focus:border-lime-500">
+                        </div>
+                        <div class="relative group">
+                            <label class="text-[10px] font-black text-slate-500 uppercase mb-2 block">Credentials</label>
+                            <input type="password" id="pass" placeholder="••••••••" class="w-full bg-slate-800/50 border border-slate-700 p-4 rounded-xl text-xs outline-none focus:border-lime-500">
+                        </div>
+                    </div>
+
+                    <div id="console" class="bg-black/50 border border-slate-800 rounded-3xl p-6 font-mono text-[11px] h-48 overflow-y-auto terminal-scroll text-slate-400 space-y-2">
+                        <p class="text-lime-500">> SYSTEM READY: Awaiting Signal...</p>
+                    </div>
+
+                    <button onclick="startForge()" class="w-full bg-white text-slate-900 p-8 rounded-[2rem] font-black uppercase tracking-widest text-sm shadow-2xl hover:bg-lime-500 hover:text-white transition-all">
+                        Commence Build & Push
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="global-footer"></div>
+
+    <script>
+        // 1. Check for Auth Redirect
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('auth') === 'success' || urlParams.get('auth') === 'VFKNMJUBYQQG6') {
+            document.getElementById('payment-gate').classList.add('hidden');
+            document.getElementById('forge-terminal').classList.remove('hidden');
+        }
+
+        // 2. Pricing Logic
+        function updatePrice() {
+            const select = document.getElementById('pricing-tier');
+            const price = select.options[select.selectedIndex].getAttribute('data-p');
+            const currency = select.value;
+            let symbol = currency === "ZAR" ? "R" : (currency === "GBP" ? "£" : (currency === "EUR" ? "€" : "$"));
+            document.getElementById('pay-btn-text').innerText = "Unlock Engine (" + symbol + price + ".00)";
+        }
+
+        // 3. Forge Signal Logic
+        async function startForge() {
+            const url = document.getElementById('targetUrl').value;
+            const consoleBox = document.getElementById('console');
+            if(!url) return alert("Please enter a target URL.");
+
+            const log = (msg, color = 'text-slate-500') => {
+                const p = document.createElement('p');
+                p.className = color;
+                p.innerHTML = `<span class="text-lime-500">></span> ${msg}`;
+                consoleBox.appendChild(p);
+                consoleBox.scrollTop = consoleBox.scrollHeight;
+            };
+
+            log("Initializing Playwright Ingestor...", "text-white");
+            try {
+                const response = await fetch('/api/forge', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ url })
+                });
+                
+                log("Dismantling DOM. Signal funneled to Gemini 2.5 Flash...", "text-lime-400");
+                const data = await response.json();
+                
+                if(data.status === 'Forged') {
+                    log("SUCCESS: Architecture Refactored.", "text-white font-bold");
+                    log("Pushing assets to Sovereign Engine...", "text-lime-500");
+                    // Redirect to the actual live editor
+                    window.location.href = data.downloadUrl;
+                }
+            } catch (e) {
+                log("ERROR: Connection Interrupted.", "text-red-500");
+            }
+        }
+
+        async function injectGlobals() {
+            const nav = await fetch('/nav.html');
+            if(nav.ok) document.getElementById('global-nav').innerHTML = await nav.text();
+            const foot = await fetch('/footer.html');
+            if(foot.ok) document.getElementById('global-footer').innerHTML = await foot.text();
+        }
+        injectGlobals();
+    </script>
+</body>
+</html>

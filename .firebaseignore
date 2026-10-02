@@ -1,0 +1,16 @@
+node_modules
+.git
+.firebase
+functions
+portal-dist
+**/*.ts
+package.json
+package-lock.json
+.nojekyll
+README.md
+SECURITY.md
+CNAME
+context-ai.txt
+llms.txt
+forge-lead-gen.html
+lead-finder.html

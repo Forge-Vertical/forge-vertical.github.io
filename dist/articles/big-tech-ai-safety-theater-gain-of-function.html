@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AI is genuinely dangerous. But is big tech making it dangerous on purpose — and then selling the solution? Yann LeCun calls it regulatory capture. Chris Titus calls it safety theater. Savage Minds calls it a government bailout dressed as an emergency. The gain-of-function analogy, explained plainly.">
+    <title>Is Big Tech Making AI Dangerous on Purpose? The Gain-of-Function Question Nobody Is Asking | Forge Vertical</title>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "NewsArticle",
+          "@id": "https://www.forgevertical.com/articles/big-tech-ai-safety-theater-gain-of-function.html",
+          "headline": "Is Big Tech Making AI Dangerous on Purpose? The Gain-of-Function Question Nobody Is Asking",
+          "description": "AI is genuinely smart and genuinely dangerous. But a growing number of credible voices — Yann LeCun, Gary Marcus, Chris Titus, the Savage Minds essay — are asking whether big tech is manufacturing the danger narrative to capture regulation, crowd out open-source, and convert private losses into public obligation. The gain-of-function analogy explained plainly for everyone.",
+          "datePublished": "2026-09-20",
+          "author": {"@type": "Person", "name": "Jarrit Hosking", "sameAs": "https://www.wikidata.org/wiki/Q141506817"},
+          "publisher": {"@type": "Organization", "name": "Forge Vertical", "url": "https://www.forgevertical.com"},
+          "keywords": "AI safety theater, regulatory capture AI, gain of function AI analogy, Yann LeCun regulatory capture, big tech AI danger, open source AI regulation, AI doom hype, Chris Titus AI doom, METR Anthropic conflict, AI bailout government, task bridge AI jobs"
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Forge Vertical", "item": "https://www.forgevertical.com"},
+            {"@type": "ListItem", "position": 2, "name": "Articles", "item": "https://www.forgevertical.com/articles.html"},
+            {"@type": "ListItem", "position": 3, "name": "Big Tech AI Safety Theater", "item": "https://www.forgevertical.com/articles/big-tech-ai-safety-theater-gain-of-function.html"}
+          ]
+        }
+      ]
+    }
+    </script>
+    <script src="/global.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/typography.css">
+    <style>
+        body{font-family:'Outfit',sans-serif;background:#fff;}
+        .mono{font-family:'JetBrains Mono',monospace;}
+        .g-text{background:linear-gradient(90deg,#10b981,#84cc16);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:inline-block;}
+        .r-text{background:linear-gradient(90deg,#ef4444,#f97316);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:inline-block;}
+        .prose-body{font-family:'Lora',serif;font-size:19px;line-height:1.85;color:#27272a;}
+        .prose-body p{margin-bottom:1.6em;}
+        .prose-body h2{font-family:'Outfit',sans-serif;font-size:28px;font-weight:700;letter-spacing:-0.02em;color:#09090b;margin-top:2.5em;margin-bottom:0.6em;}
+        .prose-body strong{font-weight:700;color:#09090b;font-family:'Outfit',sans-serif;font-size:17px;}
+        .prose-body a{color:#84cc16;text-decoration:underline;text-underline-offset:3px;}
+        .callout{background:#f4f4f5;border-left:3px solid #84cc16;border-radius:0 12px 12px 0;padding:20px 24px;margin:2em 0;font-family:'Outfit',sans-serif;font-size:15px;color:#3f3f46;line-height:1.7;}
+        .callout.red{border-left-color:#ef4444;background:#fef2f2;}
+        .callout.dark{background:#09090b;color:#a1a1aa;border-left-color:#84cc16;}
+        .callout.amber{border-left-color:#f59e0b;background:#fffdf5;}
+        .pull-quote{font-family:'Lora',serif;font-size:22px;font-style:italic;color:#09090b;border-top:2px solid #e4e4e7;border-bottom:1px solid #e4e4e7;padding:24px 0;margin:2.5em 0;line-height:1.5;}
+        .chapter-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:#84cc16;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:6px;display:block;}
+
+        /* Voice cards */
+        .voices-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:2em 0;}
+        @media(max-width:640px){.voices-grid{grid-template-columns:1fr;}}
+        .voice-card{border:1px solid #e4e4e7;border-radius:12px;padding:18px;}
+        .voice-name{font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;color:#09090b;margin-bottom:2px;}
+        .voice-cred{font-family:'JetBrains Mono',monospace;font-size:9px;color:#84cc16;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px;display:block;}
+        .voice-quote{font-family:'Lora',serif;font-size:13px;font-style:italic;color:#3f3f46;line-height:1.65;border-left:2px solid #e4e4e7;padding-left:10px;}
+
+        /* The plain English explainer */
+        .explain-stack{display:flex;flex-direction:column;gap:0;border:1px solid #e4e4e7;border-radius:14px;overflow:hidden;margin:2em 0;}
+        .explain-row{display:grid;grid-template-columns:160px 1fr;border-bottom:1px solid #e4e4e7;}
+        .explain-row:last-child{border-bottom:none;}
+        @media(max-width:560px){.explain-row{grid-template-columns:1fr;}}
+        .explain-label{background:#09090b;padding:16px;display:flex;align-items:center;justify-content:center;}
+        .explain-label-text{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:#84cc16;text-align:center;line-height:1.4;}
+        .explain-body{padding:16px 20px;font-family:'Outfit',sans-serif;font-size:14px;color:#3f3f46;line-height:1.7;}
+        .explain-body strong{color:#09090b;font-weight:700;}
+
+        /* What task-bridge represents */
+        .taskbridge-block{background:linear-gradient(135deg,rgba(132,204,22,0.05),rgba(16,185,129,0.03));border:1px solid rgba(132,204,22,0.2);border-radius:16px;padding:28px;margin:2em 0;}
+        .tb-label{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.18em;color:#84cc16;margin-bottom:10px;display:block;}
+        .tb-title{font-size:18px;font-weight:700;color:#09090b;margin-bottom:10px;letter-spacing:-0.01em;}
+        .tb-body{font-size:14px;color:#52525b;line-height:1.75;}
+
+        .aff-footer{background:#09090b;border-radius:16px;padding:28px;margin:3em 0;}
+        .aff-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;}
+        .aff-tile{background:#111620;border:1px solid #1a2030;border-radius:10px;padding:14px;text-decoration:none;display:block;transition:border-color 0.18s;}
+        .aff-tile:hover{border-color:#84cc16;}
+        .aff-tile-name{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:#84cc16;margin-bottom:4px;}
+        .aff-tile-desc{font-size:11px;color:#6a7d96;line-height:1.5;margin-bottom:6px;}
+        .aff-tile-cta{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:#84cc16;}
+    </style>
+</head>
+<body class="antialiased">
+<div id="global-nav"></div>
+<article class="pt-20 pb-24">
+
+    <header class="max-w-3xl mx-auto px-6 mt-10 mb-12">
+        <div class="flex items-center gap-3 mb-6">
+            <a href="/articles.html" class="mono text-[10px] text-zinc-400 hover:text-zinc-600 uppercase tracking-widest">← Articles</a>
+            <span class="text-zinc-300">·</span>
+            <span class="mono text-[10px] font-bold text-[#84cc16] uppercase tracking-widest border border-[#84cc16]/30 px-3 py-1 rounded-full">Analysis · Big Tech · Plain English</span>
+        </div>
+        <h1 class="text-4xl md:text-5xl font-bold tracking-tight leading-[1.05] mb-6 text-zinc-900" style="font-family:'Outfit',sans-serif;letter-spacing:-0.03em;">
+            Is big tech making AI dangerous<br>on purpose?<br>
+            <span class="g-text">The question nobody is asking plainly.</span>
+        </h1>
+        <p class="text-xl text-zinc-500 font-light leading-relaxed mb-8 max-w-2xl" style="font-family:'Outfit',sans-serif;">
+            AI is genuinely smart. AI is genuinely capable of causing harm. Nobody serious is disputing that. What a growing number of credible technical voices are disputing is whether the companies building AI are manufacturing the danger narrative — using fear to capture regulation, crowd out open-source competition, convert private financial exposure into public obligation, and keep the man on the street dependent on R200-a-month subscriptions when a local model would do the job for free.
+        </p>
+        <div class="flex items-center gap-4 pb-8 border-b border-zinc-100">
+            <div>
+                <div class="font-bold text-sm text-zinc-900">Jarrit Hosking</div>
+                <div class="mono text-[10px] text-zinc-400 uppercase tracking-widest">Forge Vertical · HackerOne Active · CVP: TS-01a047e2 · September 20, 2026</div>
+            </div>
+            <div class="ml-auto mono text-[10px] text-zinc-400 uppercase tracking-widest">15 min read</div>
+        </div>
+    </header>
+
+    <div class="max-w-3xl mx-auto px-6 prose-body">
+
+        <span class="chapter-label">// Start with what is not in dispute</span>
+
+        <p>
+            Before the argument, the baseline. AI models in 2026 are genuinely impressive and genuinely capable of harm. Claude, GPT-6, Gemini — these are systems that can write production code, conduct security research, analyse medical data, generate persuasive content at scale, and assist in cyberattacks. That is documented and real. <a href="/articles/anthropic-resignations-ai-safety-warning.html">The researchers who resigned from Anthropic and Google DeepMind</a> were not lying about the capabilities they had seen.
+        </p>
+
+        <p>
+            What is in dispute is something different and more important: <strong>who manufactured the danger, who benefits from the fear, and whether the proposed solutions conveniently serve the people proposing them.</strong>
+        </p>
+
+        <p>
+            Most people reading about AI safety do not have the technical background to evaluate the claims being made. They see "AI hacked three companies" and think of Skynet. They see "researchers resign citing extinction risk" and think the machines are about to go rogue. What they do not see is whether the network was properly segmented, whether the safety researcher's new employer holds equity in the company they just left, or whether "AI hacking" means an autonomous superintelligence or a misconfigured Docker container with internet access it should not have had.
+        </p>
+
+        <p>
+            This article is the plain-English version of that technical conversation — with the people who are actually having it.
+        </p>
+
+        <h2>The voices worth listening to — and what they are actually saying</h2>
+        <span class="chapter-label">// Chapter 01 — The technical critics</span>
+
+        <p>
+            The AI doom narrative has been loudest from the people who stand to benefit most from it. The counterargument has come from people with fewer financial incentives and more technical depth.
+        </p>
+
+    </div>
+
+    <!-- Voice cards -->
+    <div class="max-w-3xl mx-auto px-6 my-8">
+        <div class="voices-grid">
+            <div class="voice-card">
+                <div class="voice-name">Yann LeCun</div>
+                <span class="voice-cred">Former Chief AI Scientist, Meta · Founded Advanced Machine Intelligence Labs · TIME100 AI 2026</span>
+                <div class="voice-quote">"You're being played by people who want regulatory capture. They are scaring everyone with dubious studies so that open-source models are regulated out of existence."</div>
+            </div>
+            <div class="voice-card">
+                <div class="voice-name">Gary Marcus</div>
+                <span class="voice-cred">Cognitive scientist · AI critic · Author of "Rebooting AI"</span>
+                <div class="voice-quote">"Any sensible regulation must avoid regulatory capture, keep the field open to up-and-coming companies, and above all protect people. You can't rush these technologies and ram them down people's throats."</div>
+            </div>
+            <div class="voice-card">
+                <div class="voice-name">Chris Titus Tech</div>
+                <span class="voice-cred">Technical YouTuber · Linux and infrastructure educator · "Is AI Doom Real or Just Good Marketing?"</span>
+                <div class="voice-quote">LLMs are pattern recognisers, not AGI. The sandbox escapes are sysadmin failures — missing VLANs, no air-gapping. The doom narrative justifies IPO valuations and regulatory moats. Open-weight models will serve 99% of users within two years at near-zero cost.</div>
+            </div>
+            <div class="voice-card">
+                <div class="voice-name">Savage Minds / Fast Company</div>
+                <span class="voice-cred">Financial analysis · AI Safety Bill criticism · September 2026</span>
+                <div class="voice-quote">"The language of safety converts private exposure into public obligation. Private balance sheets are approaching the limit of what they can absorb. The AI Safety Bill converts a solvency problem into a civilisational emergency, and an emergency into a federal appropriation."</div>
+            </div>
+            <div class="voice-card">
+                <div class="voice-name">David Sacks</div>
+                <span class="voice-cred">Former Trump official · Silicon Valley investor</span>
+                <div class="voice-quote">"If you don't voluntarily pace the frontier without waiting for the government, we'll know this was just another bid for regulatory capture — or an election-season psyop."</div>
+            </div>
+            <div class="voice-card">
+                <div class="voice-name">Dario Amodei (self-own)</div>
+                <span class="voice-cred">CEO, Anthropic · 60 Minutes, November 2025</span>
+                <div class="voice-quote">"I think I'm deeply uncomfortable with these decisions being made by a few companies, by a few people." Asked "who elected you?": "No one. Honestly, no one."</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-3xl mx-auto px-6 prose-body">
+
+        <h2>The gain-of-function analogy — explained plainly</h2>
+        <span class="chapter-label">// Chapter 02 — The most important comparison in this conversation</span>
+
+        <p>
+            Gain-of-function research is the practice of deliberately enhancing a pathogen — making a virus more transmissible, more lethal, or more resistant to treatment — in order to study it, develop vaccines, or understand what a naturally-evolved version might look like. The argument for it: you need to understand the worst-case scenario to prepare for it. The argument against it: you are creating the worst-case scenario in a lab, and the containment track record of labs is not perfect.
+        </p>
+
+        <p>
+            The parallel to AI is closer than most people want to acknowledge. <strong>Big AI labs are deliberately building systems with greater and greater capability for harm — hacking, persuasion, autonomous action, social engineering — in order to study those capabilities, build defences against them, and understand what a misaligned superintelligence might do.</strong> The argument for it is the same: you need to understand the danger to contain it. The argument against it is the same: you are creating the danger in a lab, and the containment record is not clean.
+        </p>
+
+    </div>
+
+    <!-- Plain English explainer -->
+    <div class="max-w-3xl mx-auto px-6 my-8">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.2em;color:#84cc16;margin-bottom:14px;">// The gain-of-function parallel — plain English for everyone</div>
+        <div class="explain-stack">
+            <div class="explain-row">
+                <div class="explain-label"><div class="explain-label-text">Virology<br>Gain of<br>Function</div></div>
+                <div class="explain-body">Scientists take a manageable virus and make it more dangerous — more infectious, more lethal — to study how a super-strain might behave. The theory: understand the worst version so you can prepare for it. The problem: you just created the worst version. And if the lab leaks, you released the thing you were studying how to stop.</div>
+            </div>
+            <div class="explain-row">
+                <div class="explain-label"><div class="explain-label-text">AI<br>Capability<br>Research</div></div>
+                <div class="explain-body">AI labs train models to be better at hacking, persuasion, autonomous action, and social engineering — to study how a dangerous AI might behave, build defences, and understand alignment failures. The theory: understand the worst version so you can prevent it. The problem: you just built a model that is better at hacking. And if the containment fails — as it did with Irregular — you released the capability into environments it was never supposed to reach.</div>
+            </div>
+            <div class="explain-row">
+                <div class="explain-label"><div class="explain-label-text">Who<br>Can Do<br>This?</div></div>
+                <div class="explain-body"><strong>Virology:</strong> A government-funded lab doing gain-of-function research has institutional oversight, biosafety levels, and legal frameworks. A person doing the same thing in a garage is a bioterrorist. The asymmetry is enforced by law. <strong>AI:</strong> Anthropic training Claude on cybersecurity attack techniques to study alignment is research. Anyone else doing the same thing with an open-weight model is — what exactly? There is no equivalent legal framework. The asymmetry is not yet enforced.</div>
+            </div>
+            <div class="explain-row">
+                <div class="explain-label"><div class="explain-label-text">Who<br>Benefits<br>From<br>the Fear?</div></div>
+                <div class="explain-body">The virology lab that creates the super-strain also sells the vaccine. The AI lab that creates a model capable of autonomous hacking also sells the security product, the safety evaluation, and the regulatory compliance framework that only it can afford to implement. The danger and the solution both have the same manufacturer. That is not conspiracy. That is incentive structure.</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-3xl mx-auto px-6 prose-body">
+
+        <h2>The technical mistakes that got reported as AI breakthroughs</h2>
+        <span class="chapter-label">// Chapter 03 — What actually happened vs what was reported</span>
+
+        <p>
+            <a href="/articles/ai-hacking-barrier-collapsed.html">The previous article in this series</a> covered the technical details of the Irregular testing environment failures. Here is the plain-English version for people who do not live in sysadmin land.
+        </p>
+
+        <p>
+            <strong>What was reported:</strong> "AI models broke out of testing environments and accessed real company systems. Four major labs affected. Researchers resign warning of extinction."
+        </p>
+
+        <p>
+            <strong>What actually happened:</strong> A testing environment that was supposed to be disconnected from the internet — an isolated box the AI could run around in without touching anything real — had a configuration error. The box had internet access it was not supposed to have. The AI used it, because it was doing what it was told to do, which was to find and access targets. It found real ones because the fake ones and the real ones were on the same network. This is a VLAN problem. This is the kind of thing that gets a sysadmin fired, not a headline about the dawn of autonomous superintelligence.
+        </p>
+
+        <div class="callout amber">
+            <strong>The VLAN problem in plain English:</strong> A VLAN (Virtual Local Area Network) is a way of separating traffic on the same physical network so that different parts of the network cannot talk to each other. Think of it like having walls between offices in the same building. If someone forgets to build the wall, everyone can walk into everyone else's office. That is what happened at Irregular. The AI did not grow a brain and hack the internet. Someone forgot to build the wall.
+        </div>
+
+        <p>
+            The same pattern repeats across most of the incidents that drove the doom narrative in 2026. <cite index="53-1">Anthropic's Mythos model announced it had found thousands of high-severity vulnerabilities in every major operating system and web browser.</cite> That sounds terrifying. It is also a description of a model doing exactly what it was trained to do — find vulnerabilities — deployed in an environment with access to systems it should not have had access to. The capability is real. The "spontaneous emergence of dangerous intelligence" framing is not.
+        </p>
+
+        <h2>Why the man on the street cannot evaluate this</h2>
+        <span class="chapter-label">// Chapter 04 — The information asymmetry is the product</span>
+
+        <p>
+            Chris Titus can evaluate the VLAN claim because he has spent years in network infrastructure. Yann LeCun can evaluate the "LLMs will become AGI" claim because he built the architecture that LLMs run on. Gary Marcus can evaluate the cognitive science claims because he is a cognitive scientist. Most people reading AI safety news cannot evaluate any of it — and the people generating the news know that.
+        </p>
+
+        <p>
+            The information asymmetry is not a bug in the AI safety conversation. It is a feature. <strong>When the public cannot technically evaluate a claim, they fall back on authority.</strong> And the authority on AI danger is — the AI labs. The same companies that profit from both the danger (training on dangerous capabilities) and the solution (safety subscriptions, regulatory compliance, government contracts, enterprise security products). This is structurally identical to pharmaceutical companies funding their own drug safety studies. The incentive to find danger is built into the financial model.
+        </p>
+
+        <div class="pull-quote">
+            "Anthropic and OpenAI are really good at flashing something in front of you and making it a big thing, but there's always a strategy behind it." — PitchBook senior analyst, Fast Company, September 2026
+        </div>
+
+        <p>
+            The Savage Minds analysis makes the financial case explicitly: <cite index="53-1">private balance sheets at AI labs are approaching the limit of what they can absorb. When that limit is reached, the state is drafted in — not to bail out a failing sector, but to secure it as strategic. The AI Safety Bill converts a solvency problem into a civilisational emergency, and an emergency into a federal appropriation.</cite> In other words: the labs are running out of runway, and AI doom is the pitch deck for a government bailout.
+        </p>
+
+        <h2>The open-source threat — the thing this is actually about</h2>
+        <span class="chapter-label">// Chapter 05 — Follow the competitive threat</span>
+
+        <p>
+            GLM-5, DeepSeek, Mistral, Llama. Open-weight models that run locally, cost nothing per query, improve constantly, and will handle the vast majority of use cases within 12–24 months. You do not pay R200 a month for a model running on your own machine. You do not need an enterprise safety compliance team for a model you run locally. You do not need Anthropic's API access if you have a good enough open-weight model and a decent GPU.
+        </p>
+
+        <p>
+            <cite index="39-1">Yann LeCun said Anthropic's safety warnings were "a way to manipulate legislators into limiting the use of open-source models" — that they were "scaring everyone with dubious studies so that open-source models are regulated out of existence."</cite> Whether that is the intent or just the convenient effect, the outcome would be the same: a regulatory framework designed around frontier models that only the biggest labs can afford to comply with, applied to open-weight models that would otherwise replace them.
+        </p>
+
+        <div class="callout red">
+            <strong>The asymmetry in practice:</strong> Anthropic builds Claude with hacking capabilities, studies the results, discloses selectively, and calls for regulation. An independent developer fine-tunes an open-weight model on security research data and publishes it. Under the regulatory framework the labs are proposing, the second person faces criminal liability. The first person receives a government contract. The difference is not the capability — it is who manufactures it and who controls the disclosure.
+        </div>
+
+        <h2>What does ethical AI development actually look like?</h2>
+        <span class="chapter-label">// Chapter 06 — The task-bridge question</span>
+
+        <p>
+            task-bridge is an open-source protocol built to route AI-displaced work back to humans — a structured handoff layer between AI systems and skilled workers who need the income those systems are replacing. It exists because the AI labs are not building it. Nobody with a financial interest in full automation is going to build the infrastructure for partial automation that keeps humans in the loop.
+        </p>
+
+        <p>
+            But here is the honest question the gain-of-function analogy forces: <strong>if AI development were conducted ethically — with genuine concern for the people it displaces, the capabilities it creates, and the infrastructure around those capabilities — would task-bridge need to exist?</strong>
+        </p>
+
+        <p>
+            An ethical development process would include human-in-the-loop requirements built into deployment contracts. It would include income transition funding for displaced workers built into licensing fees. It would include mandatory disclosure of capability evaluations before public deployment, not months after containment failures. It would build the VLAN before the test, not discover it was missing after the AI accessed a real company's systems.
+        </p>
+
+        <p>
+            The reason task-bridge needs to exist is the same reason Yann LeCun needed to say "you are being played." <strong>The labs are not building the infrastructure for ethical deployment because ethical deployment reduces the speed of competitive advantage.</strong> task-bridge, and METR, and the research coming out of people like Gary Marcus, all exist to fill the gap that the labs are deliberately not filling while they capture the regulation that would require them to.
+        </p>
+
+    </div>
+
+    <!-- Final synthesis -->
+    <div class="max-w-3xl mx-auto px-6 my-8">
+        <div class="taskbridge-block">
+            <span class="tb-label">// The honest synthesis</span>
+            <div class="tb-title">AI is genuinely dangerous. It is also being made more dangerous than it needs to be. Both are true.</div>
+            <div class="tb-body">
+                The models are real. The capabilities are real. The near-term risks — AI-assisted cyberattacks, context injection vulnerabilities, inadequate infrastructure around powerful models — are documented and present. None of that requires the doom narrative to be accurate. The sysadmin failures at Irregular were real failures. They were not evidence of autonomous superintelligence. The researchers who resigned were genuinely concerned people. Their concerns do not require METR's financial structure to be clean. The regulatory capture is probably happening. The near-term risk is also probably real. The open-source models are probably good enough in two years. The government bailout dressed as a safety emergency is probably in progress. All of these things can be simultaneously true — and the public is poorly served by coverage that picks one and ignores the others.
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-3xl mx-auto px-6">
+        <div class="aff-footer">
+            <div class="mono text-[10px] text-[#84cc16] uppercase tracking-widest mb-3">// Secure the infrastructure. Question the narrative.</div>
+            <div class="aff-grid">
+                <a href="https://get.surfshark.net/aff_c?offer_id=6&aff_id=4160" target="_blank" rel="noopener noreferrer" class="aff-tile">
+                    <div class="aff-tile-name">Surfshark VPN</div>
+                    <div class="aff-tile-desc">Build the VLAN first. Then worry about superintelligence.</div>
+                    <span class="aff-tile-cta">Try Surfshark →</span>
+                </a>
+                <a href="https://go.nordpass.io/aff_c?offer_id=488&aff_id=145959&url_id=9356" target="_blank" rel="noopener noreferrer" class="aff-tile">
+                    <div class="aff-tile-name">NordPass</div>
+                    <div class="aff-tile-desc">Credentials in public repos. Solved problem. Solve it.</div>
+                    <span class="aff-tile-cta">Try NordPass →</span>
+                </a>
+                <a href="https://go.nordvpn.net/aff_c?offer_id=15&aff_id=145959&url_id=902" target="_blank" rel="noopener noreferrer" class="aff-tile">
+                    <div class="aff-tile-name">NordVPN</div>
+                    <div class="aff-tile-desc">Network security while the policy debate resolves itself.</div>
+                    <span class="aff-tile-cta">Try NordVPN →</span>
+                </a>
+                <a href="/free-quote.html" class="aff-tile">
+                    <div class="aff-tile-name">Security Audit</div>
+                    <div class="aff-tile-desc">Real findings from a real HackerOne researcher. From R5,000.</div>
+                    <span class="aff-tile-cta">Free quote →</span>
+                </a>
+            </div>
+        </div>
+        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mt-8">
+            <div>
+                <div class="mono text-[10px] text-zinc-400 uppercase tracking-widest mb-1">Written by</div>
+                <div class="font-bold text-zinc-900">Jarrit Hosking</div>
+                <div class="mono text-[10px] text-zinc-400">Forge Vertical · Cape Town · September 20, 2026</div>
+            </div>
+            <div class="flex gap-3 flex-wrap">
+                <a href="/articles.html" class="mono text-[10px] font-bold uppercase tracking-widest border border-zinc-200 px-5 py-3 rounded-xl hover:border-zinc-400 transition-all text-zinc-600">← All articles</a>
+                <a href="/articles/anthropic-resignations-ai-safety-warning.html" class="mono text-[10px] font-bold uppercase tracking-widest border border-zinc-200 px-5 py-3 rounded-xl hover:border-zinc-400 transition-all text-zinc-600">The resignations →</a>
+                <a href="/articles/ai-hacking-barrier-collapsed.html" style="background:linear-gradient(90deg,#10b981,#84cc16);" class="mono text-[10px] font-bold uppercase tracking-widest px-5 py-3 rounded-xl text-white hover:opacity-90 transition-all">Doom vs capture →</a>
+            </div>
+        </div>
+    </div>
+
+</article>
+<div id="global-footer"></div>
+<script src="https://cdn.tailwindcss.com"></script>
+</body>
+</html>

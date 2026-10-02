@@ -1,0 +1,8 @@
+{
+  "name": "forge-lead-finder",
+  "version": "1.0.0",
+  "description": "Forge Vertical Lead Finder — Places (caller key) or OpenStreetMap (keyless) + server-side email scrape",
+  "main": "index.js",
+  "engines": { "node": "22" },
+  "dependencies": { "@google-cloud/functions-framework": "^3.4.0" }
+}

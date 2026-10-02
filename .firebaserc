@@ -1,5 +1,13 @@
 {
   "projects": {
     "default": "forge-vertical"
+  },
+  "targets": {
+    "forge-vertical": {
+      "hosting": {
+        "main": ["forge-vertical"],
+        "portal": ["forge-vertical-portal"]
+      }
+    }
   }
 }

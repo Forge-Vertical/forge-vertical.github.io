@@ -1,0 +1,204 @@
+<style>
+    #nav-wrapper {
+        position: relative;
+        z-index: 100;
+    }
+
+    #nav-wrapper .nav-inner {
+        background: rgba(6, 8, 12, 0.96);
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    #nav-wrapper .nav-link {
+        color: rgba(220, 228, 240, 0.85);
+        transition: color 0.18s;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 10px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
+        text-decoration: none;
+    }
+    #nav-wrapper .nav-link:hover { color: #84cc16; }
+
+    #nav-wrapper .nav-cta {
+        background: linear-gradient(90deg, #10b981, #84cc16);
+        color: #06080c;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 10px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
+        text-decoration: none;
+        padding: 9px 20px;
+        border-radius: 8px;
+        transition: opacity 0.18s;
+        white-space: nowrap;
+    }
+    #nav-wrapper .nav-cta:hover { opacity: 0.85; }
+
+    /* Login button */
+    #nav-wrapper .nav-login {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 10px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
+        color: rgba(220, 228, 240, 0.85);
+        background: none;
+        border: 1px solid rgba(132,204,22,0.3);
+        border-radius: 8px;
+        padding: 8px 18px;
+        cursor: pointer;
+        transition: all 0.18s;
+        white-space: nowrap;
+        text-decoration: none;
+    }
+    #nav-wrapper .nav-login:hover {
+        border-color: #84cc16;
+        color: #84cc16;
+    }
+
+    #nav-wrapper .bar {
+        background: rgba(220,228,240,0.85);
+        transition: all 0.3s;
+    }
+
+    .nav-pulse {
+        display: inline-block;
+        width: 5px; height: 5px;
+        background: #84cc16;
+        border-radius: 50%;
+        animation: navPulse 1.5s ease-in-out infinite;
+    }
+    @keyframes navPulse {
+        0%, 100% { opacity: 1; transform: scale(1); }
+        50% { opacity: 0.5; transform: scale(0.7); }
+    }
+
+    /* Hub badge */
+    .nav-hub-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        color: #84cc16;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 10px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
+        text-decoration: none;
+        transition: opacity 0.18s;
+    }
+    .nav-hub-badge:hover { opacity: 0.8; }
+    .nav-hub-badge .hub-dot {
+        width: 5px; height: 5px;
+        background: #84cc16;
+        border-radius: 50%;
+        animation: navPulse 1.5s ease-in-out infinite;
+    }
+</style>
+
+<div id="nav-wrapper">
+    <div class="nav-inner">
+        <nav class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center relative">
+
+            <!-- Logo -->
+            <a href="/index.html" class="flex items-center z-50">
+                <svg width="240" height="34" viewBox="0 0 240 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <text x="0" y="26" font-family="'JetBrains Mono', monospace" font-weight="700" font-size="22" letter-spacing="-0.02em" fill="#f0f2f4">FORGE</text>
+                    <text x="90" y="26" font-family="'JetBrains Mono', monospace" font-weight="700" font-size="22" letter-spacing="-0.02em" fill="#84cc16">VERTICAL</text>
+                </svg>
+            </a>
+
+            <!-- Desktop nav -->
+            <div class="hidden md:flex gap-7 items-center">
+                <a href="/about.html" class="nav-link">About</a>
+                <a href="/index.html#services" class="nav-link">Services</a>
+                <a href="/portfolio.html" class="nav-link">Portfolio</a>
+                <a href="/articles.html" class="nav-link">Articles</a>
+                <a href="/business-tech/articles.html" class="nav-hub-badge">
+                    <span class="hub-dot"></span>The Hub
+                </a>
+                <a href="/directory/directory.html" class="nav-link">Directory</a>
+                <a href="/tools/revenue-audit.html" class="nav-link flex items-center gap-2">
+                    Audit<span class="nav-pulse"></span>
+                </a>
+                <button id="fv-nav-login-btn" class="nav-login" onclick="fvOpenModal('login')">Login</button>
+                <a href="/free-quote.html" class="nav-cta ml-1">
+                    Start a project
+                </a>
+            </div>
+
+            <!-- Hamburger -->
+            <button onclick="toggleMobileMenu()" id="menu-toggle"
+                class="md:hidden z-50 p-2 flex flex-col gap-1.5 items-end focus:outline-none">
+                <span id="bar-1" class="bar w-7 h-0.5 rounded-full"></span>
+                <span id="bar-2" class="bar w-5 h-0.5 rounded-full" style="background:#84cc16 !important;"></span>
+                <span id="bar-3" class="bar w-7 h-0.5 rounded-full"></span>
+            </button>
+
+            <!-- Mobile menu -->
+            <div id="mobile-menu"
+                class="fixed inset-0 bg-[#06080c] z-40 translate-x-full transition-transform duration-500 ease-in-out md:hidden flex flex-col items-center justify-center gap-7 text-center">
+                <a href="/about.html" onclick="toggleMobileMenu()" class="text-xl font-bold uppercase tracking-widest text-zinc-200 hover:text-[#84cc16] transition-colors" style="font-family:'JetBrains Mono',monospace;">About</a>
+                <a href="/index.html#services" onclick="toggleMobileMenu()" class="text-xl font-bold uppercase tracking-widest text-zinc-200 hover:text-[#84cc16] transition-colors" style="font-family:'JetBrains Mono',monospace;">Services</a>
+                <a href="/portfolio.html" onclick="toggleMobileMenu()" class="text-xl font-bold uppercase tracking-widest text-zinc-200 hover:text-[#84cc16] transition-colors" style="font-family:'JetBrains Mono',monospace;">Portfolio</a>
+                <a href="/articles.html" onclick="toggleMobileMenu()" class="text-xl font-bold uppercase tracking-widest text-zinc-200 hover:text-[#84cc16] transition-colors" style="font-family:'JetBrains Mono',monospace;">Articles</a>
+                <a href="/business-tech/articles.html" onclick="toggleMobileMenu()" class="text-xl font-bold uppercase tracking-widest text-[#84cc16] flex items-center justify-center gap-3" style="font-family:'JetBrains Mono',monospace;">
+                    <span class="w-2 h-2 bg-[#84cc16] rounded-full animate-pulse"></span>The Hub
+                </a>
+                <a href="/directory/directory.html" onclick="toggleMobileMenu()" class="text-xl font-bold uppercase tracking-widest text-zinc-200 hover:text-[#84cc16] transition-colors" style="font-family:'JetBrains Mono',monospace;">Directory</a>
+                <a href="/tools/revenue-audit.html" onclick="toggleMobileMenu()" class="text-xl font-bold uppercase tracking-widest text-[#84cc16]" style="font-family:'JetBrains Mono',monospace;">Audit Tool</a>
+                <button onclick="toggleMobileMenu(); setTimeout(()=>fvOpenModal('login'),300);"
+                    class="text-xl font-bold uppercase tracking-widest text-zinc-200 hover:text-[#84cc16] transition-colors border border-[rgba(132,204,22,0.3)] px-8 py-3 rounded-xl"
+                    style="font-family:'JetBrains Mono',monospace;background:none;cursor:pointer;">
+                    Login
+                </button>
+                <a href="/free-quote.html" onclick="toggleMobileMenu()"
+                    class="mt-2 px-8 py-4 rounded-xl font-bold uppercase tracking-widest text-sm"
+                    style="background:linear-gradient(90deg,#10b981,#84cc16);color:#06080c;font-family:'JetBrains Mono',monospace;">
+                    Start a project
+                </a>
+            </div>
+
+        </nav>
+    </div>
+</div>
+
+<!-- Scroll to top button -->
+<style>
+    #scroll-top-btn {
+        position: fixed;
+        bottom: 28px;
+        right: 28px;
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        background: linear-gradient(135deg, #10b981, #84cc16);
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 999;
+        opacity: 0;
+        transform: translateY(12px);
+        transition: opacity 0.25s ease, transform 0.25s ease;
+        pointer-events: none;
+        box-shadow: 0 4px 20px rgba(132,204,22,0.25);
+    }
+    #scroll-top-btn.visible {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+    }
+    #scroll-top-btn:hover { box-shadow: 0 6px 28px rgba(132,204,22,0.4); }
+    #scroll-top-btn svg { width: 18px; height: 18px; }
+</style>
+
+<button id="scroll-top-btn" aria-label="Scroll to top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="#06080c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 15l-6-6-6 6"/>
+    </svg>
+</button>
