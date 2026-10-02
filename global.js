@@ -494,4 +494,5 @@ async function injectGlobals() {
 }
 
 // Initialize on load
-window.addEventListener('DOMContentLoaded', injectGlobals);// cache-bust: 1790931533
+window.addEventListener('DOMContentLoaded', injectGlobals);
+// v20261002090353
