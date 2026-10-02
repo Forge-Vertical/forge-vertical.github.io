@@ -497,3 +497,4 @@ async function injectGlobals() {
 
 // Initialize on load
 window.addEventListener('DOMContentLoaded', injectGlobals);// 1790932176
+// fixed 1790932429
