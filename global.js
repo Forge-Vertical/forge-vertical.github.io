@@ -205,7 +205,7 @@ function loadFirebaseAndAuth() {
   <!-- LOGIN VIEW -->
   <div class="fv-view active" id="fv-view-login">
     <div id="fv-modal-title">Welcome back.</div>
-    <div class="fv-modal-sub">Log in to your client portal.</div>
+    <div class="fv-modal-sub">Log in to your portal.</div>
     <div class="fv-field">
       <label class="fv-label" for="fv-login-email">Email</label>
       <input class="fv-input" type="email" id="fv-login-email" placeholder="you@company.com" autocomplete="email">
@@ -413,6 +413,16 @@ function loadFirebaseAndAuth() {
     return new URLSearchParams(window.location.search).get('agency');
   }
 
+  // Decide where a signed-in user actually belongs — their own tenant's
+  // admin panel if they run an agency, otherwise the regular client portal.
+  function destinationForUser(uid) {
+    return firebase.firestore().collection('tenants')
+      .where('adminUids', 'array-contains', uid)
+      .limit(1).get()
+      .then(snap => snap.empty ? PORTAL_URL : AGENCY_PORTAL_URL)
+      .catch(() => PORTAL_URL); // never block a login over a lookup failure
+  }
+
   function handleGoogle() {
     const auth = getAuth();
     if (!auth) return;
@@ -422,7 +432,7 @@ function loadFirebaseAndAuth() {
       .then(cred => {
         const userRef = firebase.firestore().collection('portal-users').doc(cred.user.uid);
         return userRef.get().then(doc => {
-          if (doc.exists) return; // returning user — never overwrite their existing record
+          if (doc.exists) return cred.user.uid; // returning user — never overwrite their existing record
           const data = {
             approved: false,
             email: cred.user.email,
@@ -430,12 +440,13 @@ function loadFirebaseAndAuth() {
             createdAt: firebase.firestore.FieldValue.serverTimestamp()
           };
           if (agencyRef) data.tenantId = agencyRef;
-          return userRef.set(data);
+          return userRef.set(data).then(() => cred.user.uid);
         });
       })
-      .then(() => {
+      .then(uid => destinationForUser(uid))
+      .then(dest => {
         fvCloseModal();
-        window.location.href = PORTAL_URL;
+        window.location.href = dest;
       })
       .catch(e => {
         const err = document.querySelector('.fv-view.active .fv-error');
@@ -464,9 +475,10 @@ function loadFirebaseAndAuth() {
 
     setLoading('fv-login-btn', true);
     auth.signInWithEmailAndPassword(email, pass)
-      .then(() => {
+      .then(cred => destinationForUser(cred.user.uid))
+      .then(dest => {
         fvCloseModal();
-        window.location.href = PORTAL_URL;
+        window.location.href = dest;
       })
       .catch(e => {
         err.textContent = friendlyError(e.code);
@@ -598,6 +610,7 @@ function loadFirebaseAndAuth() {
 
   // ── Auto-check auth state on load ─────────────────────────────────
   // If already logged in, update the nav login button to show name
+  // and route it to the right place (agency panel vs client portal).
   document.addEventListener('DOMContentLoaded', function() {
     const auth = getAuth();
     if (!auth) return;
@@ -607,7 +620,10 @@ function loadFirebaseAndAuth() {
       if (user) {
         const name = user.displayName ? user.displayName.split(' ')[0] : 'Portal';
         loginBtn.textContent = name + ' →';
-        loginBtn.onclick = () => window.location.href = PORTAL_URL;
+        loginBtn.onclick = () => window.location.href = PORTAL_URL; // safe default while the real check resolves
+        destinationForUser(user.uid).then(dest => {
+          loginBtn.onclick = () => window.location.href = dest;
+        });
       } else {
         loginBtn.textContent = 'Login';
         loginBtn.onclick = () => fvOpenModal('login');
