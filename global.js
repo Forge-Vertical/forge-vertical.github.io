@@ -8,11 +8,8 @@ function toggleMobileMenu() {
     const bar1 = document.getElementById('bar-1');
     const bar2 = document.getElementById('bar-2');
     const bar3 = document.getElementById('bar-3');
-
     if (!menu) return;
-
     menu.classList.toggle('translate-x-full');
-
     if (!menu.classList.contains('translate-x-full')) {
         bar1.style.transform = 'translateY(10px) rotate(45deg)';
         bar2.style.opacity = '0';
@@ -31,65 +28,41 @@ function showBuildModal() {
 
 // 3. Load Firebase SDK dynamically then initialise auth modal
 function loadFirebaseAndAuth() {
-    if (window._fvFirebaseInit) {
-        injectModal();
-        return;
-    }
-
+    if (window._fvFirebaseInit) { injectModal(); return; }
     const sdkBase = 'https://www.gstatic.com/firebasejs/9.23.0/';
-
     function loadScript(src, cb) {
         const s = document.createElement('script');
-        s.src = src;
-        s.onload = cb;
+        s.src = src; s.onload = cb;
         document.head.appendChild(s);
     }
-
     loadScript(sdkBase + 'firebase-app-compat.js', function() {
         loadScript(sdkBase + 'firebase-auth-compat.js', function() {
             if (!window._fvFirebaseInit) {
                 window._fvFirebaseInit = true;
                 firebase.initializeApp({
-                    apiKey:            "AIzaSyBTilhnShlJ5SyOeBOOrlLalDPjtNs2TJs",
-                    authDomain:        "forge-vertical.firebaseapp.com",
-                    projectId:         "forge-vertical",
-                    storageBucket:     "forge-vertical.firebasestorage.app",
+                    apiKey: "AIzaSyBTilhnShlJ5SyOeBOOrlLalDPjtNs2TJs",
+                    authDomain: "forge-vertical.firebaseapp.com",
+                    projectId: "forge-vertical",
+                    storageBucket: "forge-vertical.firebasestorage.app",
                     messagingSenderId: "868451682331",
-                    appId:             "1:868451682331:web:28c7bda02648624b7cd0be",
-                    measurementId:     "G-ZVXJ25BS8Z"
+                    appId: "1:868451682331:web:28c7bda02648624b7cd0be",
+                    measurementId: "G-ZVXJ25BS8Z"
                 });
             }
-            loadScript(sdkBase + 'firebase-firestore-compat.js', function() {
-                injectModal();
-            });
+            loadScript(sdkBase + 'firebase-firestore-compat.js', function() { injectModal(); });
         });
     });
 }
 
-// 4. Auth Modal — inline so it is always available
-/**
- * FORGE VERTICAL — AUTH MODAL
- * Drop-in Firebase Auth modal for the static marketing site.
- * Works on any page that loads global.js.
- * 
- * Requires Firebase SDK loaded before this script.
- * Handles: Login · Create Account (Business/Agency) · Forgot Password
- */
-
+// 4. Auth Modal
 (function() {
-
-  // ── Firebase config (already initialised in global.js or inline) ──
-  // This module assumes firebase/auth is already available.
-  // If not yet initialised, it will self-init using the project config.
 
   const PORTAL_URL = 'https://portal.forgevertical.com';
   const AGENCY_PORTAL_URL = 'https://portal.forgevertical.com/agency-admin.html';
   const CREATE_TENANT_URL = 'https://us-central1-forge-vertical.cloudfunctions.net/createTenant';
 
-  // ── Inject modal HTML ──────────────────────────────────────────────
   function injectModal() {
     if (document.getElementById('fv-auth-modal')) return;
-
     const modal = document.createElement('div');
     modal.id = 'fv-auth-modal';
     modal.setAttribute('role', 'dialog');
@@ -97,102 +70,35 @@ function loadFirebaseAndAuth() {
     modal.setAttribute('aria-labelledby', 'fv-modal-title');
     modal.innerHTML = `
 <style>
-#fv-auth-modal{
-  position:fixed;inset:0;z-index:9999;
-  display:flex;align-items:center;justify-content:center;
-  background:rgba(6,8,12,0.85);backdrop-filter:blur(4px);
-  opacity:0;pointer-events:none;transition:opacity 0.2s;
-}
+#fv-auth-modal{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;background:rgba(6,8,12,0.85);backdrop-filter:blur(4px);opacity:0;pointer-events:none;transition:opacity 0.2s;}
 #fv-auth-modal.open{opacity:1;pointer-events:all;}
-#fv-auth-box{
-  background:#0b0f14;border:1px solid #1c2638;border-radius:20px;
-  padding:40px 36px;width:100%;max-width:420px;margin:16px;
-  position:relative;
-  box-shadow:0 24px 64px rgba(0,0,0,0.6);
-}
-#fv-auth-close{
-  position:absolute;top:16px;right:16px;
-  background:none;border:none;color:#3a4d66;cursor:pointer;
-  font-size:20px;line-height:1;padding:4px 8px;border-radius:6px;
-  transition:color 0.15s;
-}
+#fv-auth-box{background:#0b0f14;border:1px solid #1c2638;border-radius:20px;padding:40px 36px;width:100%;max-width:420px;margin:16px;position:relative;box-shadow:0 24px 64px rgba(0,0,0,0.6);}
+#fv-auth-close{position:absolute;top:16px;right:16px;background:none;border:none;color:#3a4d66;cursor:pointer;font-size:20px;line-height:1;padding:4px 8px;border-radius:6px;transition:color 0.15s;}
 #fv-auth-close:hover{color:#eef0f4;}
-.fv-auth-logo{
-  font-family:'JetBrains Mono',monospace;
-  font-size:13px;font-weight:700;color:#84cc16;
-  letter-spacing:0.1em;margin-bottom:24px;display:block;
-}
-#fv-modal-title{
-  font-family:'Outfit',sans-serif;
-  font-size:22px;font-weight:800;color:#eef0f4;
-  letter-spacing:-0.02em;margin-bottom:6px;
-}
-.fv-modal-sub{
-  font-size:14px;color:#5c7494;margin-bottom:28px;line-height:1.6;
-}
+.fv-auth-logo{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;color:#84cc16;letter-spacing:0.1em;margin-bottom:24px;display:block;}
+#fv-modal-title{font-family:'Outfit',sans-serif;font-size:22px;font-weight:800;color:#eef0f4;letter-spacing:-0.02em;margin-bottom:6px;}
+.fv-modal-sub{font-size:14px;color:#5c7494;margin-bottom:28px;line-height:1.6;}
 .fv-field{margin-bottom:16px;}
-.fv-label{
-  font-family:'JetBrains Mono',monospace;
-  font-size:10px;font-weight:700;text-transform:uppercase;
-  letter-spacing:0.12em;color:#3a4d66;
-  display:block;margin-bottom:8px;
-}
-.fv-input{
-  width:100%;background:rgba(255,255,255,0.03);
-  border:1px solid #1c2638;border-radius:8px;
-  padding:12px 16px;color:#eef0f4;
-  font-family:'Outfit',sans-serif;font-size:14px;
-  outline:none;transition:border-color 0.2s;box-sizing:border-box;
-}
+.fv-label{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:#3a4d66;display:block;margin-bottom:8px;}
+.fv-input{width:100%;background:rgba(255,255,255,0.03);border:1px solid #1c2638;border-radius:8px;padding:12px 16px;color:#eef0f4;font-family:'Outfit',sans-serif;font-size:14px;outline:none;transition:border-color 0.2s;box-sizing:border-box;}
 .fv-input:focus{border-color:#84cc16;}
 .fv-input::placeholder{color:#3a4d66;}
-.fv-btn-primary{
-  width:100%;background:linear-gradient(90deg,#10b981,#84cc16);
-  color:#06080c;padding:14px;border-radius:10px;
-  font-family:'JetBrains Mono',monospace;font-size:11px;
-  font-weight:700;text-transform:uppercase;letter-spacing:0.14em;
-  border:none;cursor:pointer;transition:opacity 0.15s;margin-top:4px;
-}
+select.fv-input{cursor:pointer;}
+select.fv-input option{background:#0b0f14;}
+.fv-btn-primary{width:100%;background:linear-gradient(90deg,#10b981,#84cc16);color:#06080c;padding:14px;border-radius:10px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;border:none;cursor:pointer;transition:opacity 0.15s;margin-top:4px;}
 .fv-btn-primary:hover{opacity:0.88;}
 .fv-btn-primary:disabled{opacity:0.5;cursor:not-allowed;}
-.fv-btn-outline{
-  width:100%;background:none;border:1px solid #1c2638;color:#eef0f4;
-  padding:14px;border-radius:10px;
-  font-family:'JetBrains Mono',monospace;font-size:11px;
-  font-weight:700;text-transform:uppercase;letter-spacing:0.14em;
-  cursor:pointer;transition:border-color 0.15s;margin-top:4px;
-}
+.fv-btn-outline{width:100%;background:none;border:1px solid #1c2638;color:#eef0f4;padding:14px;border-radius:10px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;cursor:pointer;transition:border-color 0.15s;margin-top:4px;}
 .fv-btn-outline:hover{border-color:#84cc16;color:#84cc16;}
-.fv-error{
-  font-size:12px;color:#ef4444;margin-top:8px;
-  min-height:18px;line-height:1.5;
-}
-.fv-success{
-  font-size:12px;color:#84cc16;margin-top:8px;
-  min-height:18px;line-height:1.5;
-}
-.fv-switch{
-  text-align:center;margin-top:20px;
-  font-size:13px;color:#5c7494;
-}
-.fv-switch a{
-  color:#84cc16;text-decoration:none;cursor:pointer;font-weight:600;
-}
+.fv-error{font-size:12px;color:#ef4444;margin-top:8px;min-height:18px;line-height:1.5;}
+.fv-success{font-size:12px;color:#84cc16;margin-top:8px;min-height:18px;line-height:1.5;}
+.fv-switch{text-align:center;margin-top:20px;font-size:13px;color:#5c7494;}
+.fv-switch a{color:#84cc16;text-decoration:none;cursor:pointer;font-weight:600;}
 .fv-switch a:hover{text-decoration:underline;}
-.fv-divider{
-  display:flex;align-items:center;gap:12px;margin:20px 0;
-}
+.fv-divider{display:flex;align-items:center;gap:12px;margin:20px 0;}
 .fv-divider span{font-size:12px;color:#3a4d66;white-space:nowrap;}
-.fv-divider::before,.fv-divider::after{
-  content:'';flex:1;height:1px;background:#1c2638;
-}
-.fv-btn-google{
-  width:100%;display:flex;align-items:center;justify-content:center;gap:10px;
-  background:#fff;color:#3c4043;border:1px solid #dadce0;
-  padding:11px 16px;border-radius:10px;cursor:pointer;
-  font-family:'Outfit',sans-serif;font-size:14px;font-weight:600;
-  transition:box-shadow 0.15s;margin-top:0;
-}
+.fv-divider::before,.fv-divider::after{content:'';flex:1;height:1px;background:#1c2638;}
+.fv-btn-google{width:100%;display:flex;align-items:center;justify-content:center;gap:10px;background:#fff;color:#3c4043;border:1px solid #dadce0;padding:11px 16px;border-radius:10px;cursor:pointer;font-family:'Outfit',sans-serif;font-size:14px;font-weight:600;transition:box-shadow 0.15s;margin-top:0;}
 .fv-btn-google:hover{box-shadow:0 1px 6px rgba(0,0,0,0.2);}
 .fv-view{display:none;}
 .fv-view.active{display:block;}
@@ -202,174 +108,93 @@ function loadFirebaseAndAuth() {
   <button id="fv-auth-close" aria-label="Close">&times;</button>
   <span class="fv-auth-logo">// Forge Vertical</span>
 
-  <!-- LOGIN VIEW -->
   <div class="fv-view active" id="fv-view-login">
     <div id="fv-modal-title">Welcome back.</div>
     <div class="fv-modal-sub">Log in to your portal.</div>
-    <div class="fv-field">
-      <label class="fv-label" for="fv-login-email">Email</label>
-      <input class="fv-input" type="email" id="fv-login-email" placeholder="you@company.com" autocomplete="email">
-    </div>
-    <div class="fv-field">
-      <label class="fv-label" for="fv-login-pass">Password</label>
-      <input class="fv-input" type="password" id="fv-login-pass" placeholder="••••••••" autocomplete="current-password">
-    </div>
+    <div class="fv-field"><label class="fv-label" for="fv-login-email">Email</label><input class="fv-input" type="email" id="fv-login-email" placeholder="you@company.com" autocomplete="email"></div>
+    <div class="fv-field"><label class="fv-label" for="fv-login-pass">Password</label><input class="fv-input" type="password" id="fv-login-pass" placeholder="••••••••" autocomplete="current-password"></div>
     <div class="fv-error" id="fv-login-error"></div>
     <button class="fv-btn-primary" id="fv-login-btn">Log in →</button>
-    <div class="fv-switch">
-      <a onclick="fvShowView('forgot')">Forgot password?</a>
-      &nbsp;·&nbsp;
-      No account? <a onclick="fvShowView('choice')">Create one</a>
-    </div>
+    <div class="fv-switch"><a onclick="fvShowView('forgot')">Forgot password?</a>&nbsp;·&nbsp;No account? <a onclick="fvShowView('choice')">Create one</a></div>
     <div class="fv-divider"><span>or</span></div>
-    <button class="fv-btn-google" onclick="handleGoogle()">
-      <svg width="16" height="16" viewBox="0 0 48 48" style="flex-shrink:0"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.31-8.16 2.31-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
-      Continue with Google
-    </button>
+    <button class="fv-btn-google" onclick="handleGoogle()"><svg width="16" height="16" viewBox="0 0 48 48" style="flex-shrink:0"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.31-8.16 2.31-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>Continue with Google</button>
   </div>
 
-  <!-- CHOICE VIEW -->
   <div class="fv-view" id="fv-view-choice">
     <div id="fv-modal-title">How will you be using this?</div>
     <div class="fv-modal-sub">This decides what your portal looks like.</div>
     <button class="fv-btn-primary" onclick="fvShowView('signup')" style="margin-bottom:12px;">I'm a Business →</button>
     <button class="fv-btn-outline" onclick="fvShowView('signup-agency')">I'm a Marketing Agency →</button>
-    <div class="fv-switch">
-      Already have an account? <a onclick="fvShowView('login')">Log in</a>
-    </div>
+    <div class="fv-switch">Already have an account? <a onclick="fvShowView('login')">Log in</a></div>
   </div>
 
-  <!-- SIGNUP VIEW (Business) -->
   <div class="fv-view" id="fv-view-signup">
     <div id="fv-modal-title">Create account.</div>
     <div class="fv-modal-sub">Access your Forge Vertical client portal.</div>
-    <div class="fv-field">
-      <label class="fv-label" for="fv-signup-name">Full name</label>
-      <input class="fv-input" type="text" id="fv-signup-name" placeholder="Jane Smith" autocomplete="name">
-    </div>
-    <div class="fv-field">
-      <label class="fv-label" for="fv-signup-email">Email</label>
-      <input class="fv-input" type="email" id="fv-signup-email" placeholder="you@company.com" autocomplete="email">
-    </div>
-    <div class="fv-field">
-      <label class="fv-label" for="fv-signup-pass">Password</label>
-      <input class="fv-input" type="password" id="fv-signup-pass" placeholder="Min 8 characters" autocomplete="new-password">
-    </div>
+    <div class="fv-field"><label class="fv-label" for="fv-signup-name">Full name</label><input class="fv-input" type="text" id="fv-signup-name" placeholder="Jane Smith" autocomplete="name"></div>
+    <div class="fv-field"><label class="fv-label" for="fv-signup-email">Email</label><input class="fv-input" type="email" id="fv-signup-email" placeholder="you@company.com" autocomplete="email"></div>
+    <div class="fv-field"><label class="fv-label" for="fv-signup-pass">Password</label><input class="fv-input" type="password" id="fv-signup-pass" placeholder="Min 8 characters" autocomplete="new-password"></div>
     <div class="fv-error" id="fv-signup-error"></div>
     <button class="fv-btn-primary" id="fv-signup-btn">Create account →</button>
-    <div class="fv-switch">
-      <a onclick="fvShowView('choice')">← Back</a>
-      &nbsp;·&nbsp;
-      Already have an account? <a onclick="fvShowView('login')">Log in</a>
-    </div>
+    <div class="fv-switch"><a onclick="fvShowView('choice')">← Back</a>&nbsp;·&nbsp;Already have an account? <a onclick="fvShowView('login')">Log in</a></div>
     <div class="fv-divider"><span>or</span></div>
-    <button class="fv-btn-google" onclick="handleGoogle()">
-      <svg width="16" height="16" viewBox="0 0 48 48" style="flex-shrink:0"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.31-8.16 2.31-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
-      Continue with Google
-    </button>
+    <button class="fv-btn-google" onclick="handleGoogle()"><svg width="16" height="16" viewBox="0 0 48 48" style="flex-shrink:0"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.31-8.16 2.31-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>Continue with Google</button>
   </div>
 
-  <!-- SIGNUP VIEW (Agency) -->
   <div class="fv-view" id="fv-view-signup-agency">
     <div id="fv-modal-title">Set up your agency.</div>
     <div class="fv-modal-sub">30-day free trial — manage your own clients, with your own admin panel and a unique invite link just for you.</div>
+    <div class="fv-field"><label class="fv-label" for="fv-agency-company">Agency name</label><input class="fv-input" type="text" id="fv-agency-company" placeholder="Acme Marketing" autocomplete="organization"></div>
     <div class="fv-field">
-      <label class="fv-label" for="fv-agency-company">Agency name</label>
-      <input class="fv-input" type="text" id="fv-agency-company" placeholder="Acme Marketing" autocomplete="organization">
+      <label class="fv-label" for="fv-agency-tier">Plan</label>
+      <select class="fv-input" id="fv-agency-tier">
+        <option value="starter">Starter — 1–10 clients — R1,500/mo</option>
+        <option value="growth">Growth — 10–30 clients — R3,500/mo</option>
+        <option value="scale">Scale — 30–60 clients — R6,500/mo</option>
+        <option value="enterprise">Enterprise — 60–100 clients — R10,000/mo</option>
+      </select>
     </div>
-    <div class="fv-field">
-      <label class="fv-label" for="fv-agency-contact-name">Your name</label>
-      <input class="fv-input" type="text" id="fv-agency-contact-name" placeholder="Jane Smith" autocomplete="name">
-    </div>
-    <div class="fv-field">
-      <label class="fv-label" for="fv-agency-email">Email</label>
-      <input class="fv-input" type="email" id="fv-agency-email" placeholder="you@agency.com" autocomplete="email">
-    </div>
-    <div class="fv-field">
-      <label class="fv-label" for="fv-agency-pass">Password</label>
-      <input class="fv-input" type="password" id="fv-agency-pass" placeholder="Min 8 characters" autocomplete="new-password">
-    </div>
+    <div class="fv-field"><label class="fv-label" for="fv-agency-contact-name">Your name</label><input class="fv-input" type="text" id="fv-agency-contact-name" placeholder="Jane Smith" autocomplete="name"></div>
+    <div class="fv-field"><label class="fv-label" for="fv-agency-email">Email</label><input class="fv-input" type="email" id="fv-agency-email" placeholder="you@agency.com" autocomplete="email"></div>
+    <div class="fv-field"><label class="fv-label" for="fv-agency-pass">Password</label><input class="fv-input" type="password" id="fv-agency-pass" placeholder="Min 8 characters" autocomplete="new-password"></div>
     <div class="fv-error" id="fv-agency-error"></div>
     <button class="fv-btn-primary" id="fv-agency-btn">Start free trial →</button>
-    <div class="fv-switch">
-      <a onclick="fvShowView('choice')">← Back</a>
-      &nbsp;·&nbsp;
-      Already have an account? <a onclick="fvShowView('login')">Log in</a>
-    </div>
+    <div class="fv-switch"><a onclick="fvShowView('choice')">← Back</a>&nbsp;·&nbsp;Already have an account? <a onclick="fvShowView('login')">Log in</a></div>
   </div>
 
-  <!-- AGENCY SUCCESS VIEW -->
   <div class="fv-view" id="fv-view-agency-success">
     <div id="fv-modal-title">You're in.</div>
     <div class="fv-modal-sub">Your 30-day trial has started. Share this link with your clients to bring them onto your agency automatically — no manual setup on your end.</div>
-    <div class="fv-field">
-      <label class="fv-label">Your invite link</label>
-      <input class="fv-input" type="text" id="fv-agency-invite-link" readonly onclick="this.select()">
-    </div>
+    <div class="fv-field"><label class="fv-label">Your invite link</label><input class="fv-input" type="text" id="fv-agency-invite-link" readonly onclick="this.select()"></div>
     <button class="fv-btn-primary" id="fv-agency-go-btn">Go to my dashboard →</button>
   </div>
 
-  <!-- FORGOT PASSWORD VIEW -->
   <div class="fv-view" id="fv-view-forgot">
     <div id="fv-modal-title">Reset password.</div>
     <div class="fv-modal-sub">Enter your email and we will send a reset link.</div>
-    <div class="fv-field">
-      <label class="fv-label" for="fv-forgot-email">Email</label>
-      <input class="fv-input" type="email" id="fv-forgot-email" placeholder="you@company.com" autocomplete="email">
-    </div>
+    <div class="fv-field"><label class="fv-label" for="fv-forgot-email">Email</label><input class="fv-input" type="email" id="fv-forgot-email" placeholder="you@company.com" autocomplete="email"></div>
     <div class="fv-error" id="fv-forgot-error"></div>
     <div class="fv-success" id="fv-forgot-success"></div>
     <button class="fv-btn-primary" id="fv-forgot-btn">Send reset link →</button>
-    <div class="fv-switch">
-      <a onclick="fvShowView('login')">← Back to login</a>
-    </div>
+    <div class="fv-switch"><a onclick="fvShowView('login')">← Back to login</a></div>
   </div>
 
 </div>`;
 
     document.body.appendChild(modal);
-
-    // Close on backdrop click
-    modal.addEventListener('click', function(e) {
-      if (e.target === modal) fvCloseModal();
-    });
-
-    // Close button
+    modal.addEventListener('click', function(e) { if (e.target === modal) fvCloseModal(); });
     document.getElementById('fv-auth-close').addEventListener('click', fvCloseModal);
-
-    // Close on Escape
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') fvCloseModal();
-    });
-
-    // Wire up buttons
+    document.addEventListener('keydown', function(e) { if (e.key === 'Escape') fvCloseModal(); });
     document.getElementById('fv-login-btn').addEventListener('click', handleLogin);
     document.getElementById('fv-signup-btn').addEventListener('click', handleSignup);
     document.getElementById('fv-forgot-btn').addEventListener('click', handleForgot);
     document.getElementById('fv-agency-btn').addEventListener('click', handleAgencySignup);
-
-    // Enter key support
-    ['fv-login-email','fv-login-pass'].forEach(id => {
-      document.getElementById(id).addEventListener('keydown', e => {
-        if (e.key === 'Enter') handleLogin();
-      });
-    });
-    ['fv-signup-name','fv-signup-email','fv-signup-pass'].forEach(id => {
-      document.getElementById(id).addEventListener('keydown', e => {
-        if (e.key === 'Enter') handleSignup();
-      });
-    });
-    ['fv-agency-company','fv-agency-contact-name','fv-agency-email','fv-agency-pass'].forEach(id => {
-      document.getElementById(id).addEventListener('keydown', e => {
-        if (e.key === 'Enter') handleAgencySignup();
-      });
-    });
-    document.getElementById('fv-forgot-email').addEventListener('keydown', e => {
-      if (e.key === 'Enter') handleForgot();
-    });
+    ['fv-login-email','fv-login-pass'].forEach(id => document.getElementById(id).addEventListener('keydown', e => { if (e.key === 'Enter') handleLogin(); }));
+    ['fv-signup-name','fv-signup-email','fv-signup-pass'].forEach(id => document.getElementById(id).addEventListener('keydown', e => { if (e.key === 'Enter') handleSignup(); }));
+    ['fv-agency-company','fv-agency-contact-name','fv-agency-email','fv-agency-pass'].forEach(id => document.getElementById(id).addEventListener('keydown', e => { if (e.key === 'Enter') handleAgencySignup(); }));
+    document.getElementById('fv-forgot-email').addEventListener('keydown', e => { if (e.key === 'Enter') handleForgot(); });
   }
 
-  // ── View switching ─────────────────────────────────────────────────
   window.fvShowView = function(view) {
     document.querySelectorAll('.fv-view').forEach(v => v.classList.remove('active'));
     document.getElementById('fv-view-' + view).classList.add('active');
@@ -383,7 +208,6 @@ function loadFirebaseAndAuth() {
     });
   }
 
-  // ── Open / close ───────────────────────────────────────────────────
   window.injectModal = injectModal;
   window.fvOpenModal = function(view) {
     injectModal();
@@ -403,24 +227,22 @@ function loadFirebaseAndAuth() {
     document.body.style.overflow = '';
   }
 
-  // ── Firebase Auth handlers ─────────────────────────────────────────
-  function getAuth() {
-    if (window.firebase && window.firebase.auth) return window.firebase.auth();
-    return null;
-  }
+  function getAuth() { return (window.firebase && window.firebase.auth) ? window.firebase.auth() : null; }
+  function getAgencyRefFromUrl() { return new URLSearchParams(window.location.search).get('agency'); }
 
-  function getAgencyRefFromUrl() {
-    return new URLSearchParams(window.location.search).get('agency');
-  }
-
-  // Decide where a signed-in user actually belongs — their own tenant's
-  // admin panel if they run an agency, otherwise the regular client portal.
   function destinationForUser(uid) {
     return firebase.firestore().collection('tenants')
-      .where('adminUids', 'array-contains', uid)
-      .limit(1).get()
+      .where('adminUids', 'array-contains', uid).limit(1).get()
       .then(snap => snap.empty ? PORTAL_URL : AGENCY_PORTAL_URL)
-      .catch(() => PORTAL_URL); // never block a login over a lookup failure
+      .catch(() => PORTAL_URL);
+  }
+
+  function notifyAdminOfSignup(uid, email, tenantId, label) {
+    return firebase.firestore().collection('portal-support-queue').add({
+      userId: uid, userEmail: email,
+      preview: label, tenantId: tenantId || null, read: false,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    }).catch(() => {});
   }
 
   function handleGoogle() {
@@ -432,28 +254,21 @@ function loadFirebaseAndAuth() {
       .then(cred => {
         const userRef = firebase.firestore().collection('portal-users').doc(cred.user.uid);
         return userRef.get().then(doc => {
-          if (doc.exists) return cred.user.uid; // returning user — never overwrite their existing record
-          const data = {
-            approved: false,
-            email: cred.user.email,
-            name: cred.user.displayName || '',
-            createdAt: firebase.firestore.FieldValue.serverTimestamp()
-          };
+          if (doc.exists) return cred.user.uid;
+          const data = { approved: false, email: cred.user.email, name: cred.user.displayName || '', createdAt: firebase.firestore.FieldValue.serverTimestamp() };
           if (agencyRef) data.tenantId = agencyRef;
-          return userRef.set(data).then(() => cred.user.uid);
+          return userRef.set(data)
+            .then(() => notifyAdminOfSignup(cred.user.uid, cred.user.email, agencyRef, 'New signup — say hi!'))
+            .then(() => cred.user.uid);
         });
       })
       .then(uid => destinationForUser(uid))
-      .then(dest => {
-        fvCloseModal();
-        window.location.href = dest;
-      })
+      .then(dest => { fvCloseModal(); window.location.href = dest; })
       .catch(e => {
         const err = document.querySelector('.fv-view.active .fv-error');
         if (err) err.textContent = friendlyError(e.code);
       });
   }
-  // Expose to global scope so onclick attributes can reach it
   window.handleGoogle = handleGoogle;
 
   function setLoading(btnId, loading) {
@@ -467,23 +282,14 @@ function loadFirebaseAndAuth() {
     const email = document.getElementById('fv-login-email').value.trim();
     const pass  = document.getElementById('fv-login-pass').value;
     const err   = document.getElementById('fv-login-error');
-
     if (!email || !pass) { err.textContent = 'Please enter your email and password.'; return; }
-
     const auth = getAuth();
     if (!auth) { err.textContent = 'Auth not ready — please try again.'; return; }
-
     setLoading('fv-login-btn', true);
     auth.signInWithEmailAndPassword(email, pass)
       .then(cred => destinationForUser(cred.user.uid))
-      .then(dest => {
-        fvCloseModal();
-        window.location.href = dest;
-      })
-      .catch(e => {
-        err.textContent = friendlyError(e.code);
-        setLoading('fv-login-btn', false);
-      });
+      .then(dest => { fvCloseModal(); window.location.href = dest; })
+      .catch(e => { err.textContent = friendlyError(e.code); setLoading('fv-login-btn', false); });
   }
 
   function handleSignup() {
@@ -491,27 +297,20 @@ function loadFirebaseAndAuth() {
     const email = document.getElementById('fv-signup-email').value.trim();
     const pass  = document.getElementById('fv-signup-pass').value;
     const err   = document.getElementById('fv-signup-error');
-
     if (!name)            { err.textContent = 'Please enter your full name.'; return; }
     if (!email)           { err.textContent = 'Please enter your email.'; return; }
     if (pass.length < 8)  { err.textContent = 'Password must be at least 8 characters.'; return; }
-
     const auth = getAuth();
     if (!auth) { err.textContent = 'Auth not ready — please try again.'; return; }
-
     setLoading('fv-signup-btn', true);
     const agencyRef = getAgencyRefFromUrl();
     auth.createUserWithEmailAndPassword(email, pass)
       .then(cred => cred.user.updateProfile({ displayName: name }).then(() => cred.user))
       .then(user => {
-        const data = {
-          approved: false,
-          email: email,
-          name: name,
-          createdAt: firebase.firestore.FieldValue.serverTimestamp()
-        };
+        const data = { approved: false, email: email, name: name, createdAt: firebase.firestore.FieldValue.serverTimestamp() };
         if (agencyRef) data.tenantId = agencyRef;
-        return firebase.firestore().collection('portal-users').doc(user.uid).set(data);
+        return firebase.firestore().collection('portal-users').doc(user.uid).set(data)
+          .then(() => notifyAdminOfSignup(user.uid, email, agencyRef, 'New signup — say hi!'));
       })
       .then(() => {
         fvShowView('login');
@@ -520,97 +319,68 @@ function loadFirebaseAndAuth() {
           ? 'Account created. Your agency will activate your access shortly.'
           : 'Account created. Jarrit will activate your portal access within 24 hours.';
       })
-      .catch(e => {
-        err.textContent = friendlyError(e.code);
-        setLoading('fv-signup-btn', false);
-      });
+      .catch(e => { err.textContent = friendlyError(e.code); setLoading('fv-signup-btn', false); });
   }
 
   function handleAgencySignup() {
     const company = document.getElementById('fv-agency-company').value.trim();
+    const tier    = document.getElementById('fv-agency-tier').value;
     const contact = document.getElementById('fv-agency-contact-name').value.trim();
     const email   = document.getElementById('fv-agency-email').value.trim();
     const pass    = document.getElementById('fv-agency-pass').value;
     const err     = document.getElementById('fv-agency-error');
-
     if (!company)         { err.textContent = 'Please enter your agency name.'; return; }
     if (!contact)         { err.textContent = 'Please enter your name.'; return; }
     if (!email)           { err.textContent = 'Please enter your email.'; return; }
     if (pass.length < 8)  { err.textContent = 'Password must be at least 8 characters.'; return; }
-
     const auth = getAuth();
     if (!auth) { err.textContent = 'Auth not ready — please try again.'; return; }
-
     setLoading('fv-agency-btn', true);
     auth.createUserWithEmailAndPassword(email, pass)
       .then(cred => cred.user.updateProfile({ displayName: contact }).then(() => cred.user))
       .then(user => fetch(CREATE_TENANT_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          uid: user.uid,
-          name: company,
-          companyName: company,
-          contactEmail: email,
-          contactName: contact
-        })
-      }))
-      .then(res => res.json())
-      .then(data => {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ uid: user.uid, name: company, companyName: company, contactEmail: email, contactName: contact, tier: tier })
+      }).then(res => res.json()).then(data => ({ user, data })))
+      .then(({ user, data }) => {
         if (data.error) throw new Error(data.error);
+        return notifyAdminOfSignup(user.uid, email, null, 'New agency signup — say hi!').then(() => data);
+      })
+      .then(data => {
         fvShowView('agency-success');
         document.getElementById('fv-agency-invite-link').value = data.inviteLink || '';
-        document.getElementById('fv-agency-go-btn').onclick = function() {
-          window.location.href = AGENCY_PORTAL_URL;
-        };
+        document.getElementById('fv-agency-go-btn').onclick = function() { window.location.href = AGENCY_PORTAL_URL; };
       })
-      .catch(e => {
-        err.textContent = e.message || 'Something went wrong. Please try again.';
-        setLoading('fv-agency-btn', false);
-      });
+      .catch(e => { err.textContent = e.message || 'Something went wrong. Please try again.'; setLoading('fv-agency-btn', false); });
   }
 
   function handleForgot() {
     const email   = document.getElementById('fv-forgot-email').value.trim();
     const err     = document.getElementById('fv-forgot-error');
     const success = document.getElementById('fv-forgot-success');
-
     if (!email) { err.textContent = 'Please enter your email address.'; return; }
-
     const auth = getAuth();
     if (!auth) { err.textContent = 'Auth not ready — please try again.'; return; }
-
     setLoading('fv-forgot-btn', true);
     auth.sendPasswordResetEmail(email)
-      .then(() => {
-        success.textContent = 'Reset link sent. Check your inbox.';
-        err.textContent = '';
-        setLoading('fv-forgot-btn', false);
-      })
-      .catch(e => {
-        err.textContent = friendlyError(e.code);
-        setLoading('fv-forgot-btn', false);
-      });
+      .then(() => { success.textContent = 'Reset link sent. Check your inbox.'; err.textContent = ''; setLoading('fv-forgot-btn', false); })
+      .catch(e => { err.textContent = friendlyError(e.code); setLoading('fv-forgot-btn', false); });
   }
 
-  // ── Friendly error messages ────────────────────────────────────────
   function friendlyError(code) {
     const map = {
-      'auth/user-not-found':       'No account found with that email.',
-      'auth/wrong-password':       'Incorrect password. Try again.',
+      'auth/user-not-found': 'No account found with that email.',
+      'auth/wrong-password': 'Incorrect password. Try again.',
       'auth/email-already-in-use': 'That email is already registered. Log in instead.',
-      'auth/weak-password':        'Password must be at least 8 characters.',
-      'auth/invalid-email':        'Please enter a valid email address.',
-      'auth/too-many-requests':    'Too many attempts. Try again in a few minutes.',
+      'auth/weak-password': 'Password must be at least 8 characters.',
+      'auth/invalid-email': 'Please enter a valid email address.',
+      'auth/too-many-requests': 'Too many attempts. Try again in a few minutes.',
       'auth/network-request-failed': 'Network error. Check your connection.',
-      'auth/invalid-credential':   'Incorrect email or password.',
+      'auth/invalid-credential': 'Incorrect email or password.',
     };
     return map[code] || 'Something went wrong. Please try again.';
   }
 
-  // ── Auto-check auth state on load ─────────────────────────────────
-  // If already logged in, update the nav login button to show name
-  // and route it to the right place (agency panel vs client portal).
   document.addEventListener('DOMContentLoaded', function() {
     const auth = getAuth();
     if (!auth) return;
@@ -620,10 +390,8 @@ function loadFirebaseAndAuth() {
       if (user) {
         const name = user.displayName ? user.displayName.split(' ')[0] : 'Portal';
         loginBtn.textContent = name + ' →';
-        loginBtn.onclick = () => window.location.href = PORTAL_URL; // safe default while the real check resolves
-        destinationForUser(user.uid).then(dest => {
-          loginBtn.onclick = () => window.location.href = dest;
-        });
+        loginBtn.onclick = () => window.location.href = PORTAL_URL;
+        destinationForUser(user.uid).then(dest => { loginBtn.onclick = () => window.location.href = dest; });
       } else {
         loginBtn.textContent = 'Login';
         loginBtn.onclick = () => fvOpenModal('login');
@@ -633,28 +401,14 @@ function loadFirebaseAndAuth() {
 
 })();
 
-
 // 5. Component Injection Logic
 async function injectGlobals() {
     try {
         const navPlaceholder = document.getElementById('global-nav');
         const footerPlaceholder = document.getElementById('global-footer');
-
-        if (navPlaceholder) {
-            const nav = await fetch('/nav.html');
-            if (nav.ok) navPlaceholder.innerHTML = await nav.text();
-        }
-
-        if (footerPlaceholder) {
-            const footer = await fetch('/footer.html');
-            if (footer.ok) footerPlaceholder.innerHTML = await footer.text();
-        }
-    } catch (e) {
-        console.error("Global Component Injection Failed:", e);
-    }
-    // Load Firebase + auth modal AFTER nav is injected
+        if (navPlaceholder) { const nav = await fetch('/nav.html'); if (nav.ok) navPlaceholder.innerHTML = await nav.text(); }
+        if (footerPlaceholder) { const footer = await fetch('/footer.html'); if (footer.ok) footerPlaceholder.innerHTML = await footer.text(); }
+    } catch (e) { console.error("Global Component Injection Failed:", e); }
     loadFirebaseAndAuth();
 }
-
-// Initialize on load
 window.addEventListener('DOMContentLoaded', injectGlobals);
