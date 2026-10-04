@@ -59,7 +59,9 @@ function loadFirebaseAndAuth() {
                     measurementId:     "G-ZVXJ25BS8Z"
                 });
             }
-            injectModal();
+            loadScript(sdkBase + 'firebase-firestore-compat.js', function() {
+                injectModal();
+            });
         });
     });
 }
@@ -71,7 +73,7 @@ function loadFirebaseAndAuth() {
  * Works on any page that loads global.js.
  * 
  * Requires Firebase SDK loaded before this script.
- * Handles: Login · Create Account · Forgot Password
+ * Handles: Login · Create Account (Business/Agency) · Forgot Password
  */
 
 (function() {
@@ -81,6 +83,8 @@ function loadFirebaseAndAuth() {
   // If not yet initialised, it will self-init using the project config.
 
   const PORTAL_URL = 'https://portal.forgevertical.com';
+  const AGENCY_PORTAL_URL = 'https://portal.forgevertical.com/agency-admin.html';
+  const CREATE_TENANT_URL = 'https://us-central1-forge-vertical.cloudfunctions.net/createTenant';
 
   // ── Inject modal HTML ──────────────────────────────────────────────
   function injectModal() {
@@ -151,6 +155,14 @@ function loadFirebaseAndAuth() {
 }
 .fv-btn-primary:hover{opacity:0.88;}
 .fv-btn-primary:disabled{opacity:0.5;cursor:not-allowed;}
+.fv-btn-outline{
+  width:100%;background:none;border:1px solid #1c2638;color:#eef0f4;
+  padding:14px;border-radius:10px;
+  font-family:'JetBrains Mono',monospace;font-size:11px;
+  font-weight:700;text-transform:uppercase;letter-spacing:0.14em;
+  cursor:pointer;transition:border-color 0.15s;margin-top:4px;
+}
+.fv-btn-outline:hover{border-color:#84cc16;color:#84cc16;}
 .fv-error{
   font-size:12px;color:#ef4444;margin-top:8px;
   min-height:18px;line-height:1.5;
@@ -207,7 +219,7 @@ function loadFirebaseAndAuth() {
     <div class="fv-switch">
       <a onclick="fvShowView('forgot')">Forgot password?</a>
       &nbsp;·&nbsp;
-      No account? <a onclick="fvShowView('signup')">Create one</a>
+      No account? <a onclick="fvShowView('choice')">Create one</a>
     </div>
     <div class="fv-divider"><span>or</span></div>
     <button class="fv-btn-google" onclick="handleGoogle()">
@@ -216,7 +228,18 @@ function loadFirebaseAndAuth() {
     </button>
   </div>
 
-  <!-- SIGNUP VIEW -->
+  <!-- CHOICE VIEW -->
+  <div class="fv-view" id="fv-view-choice">
+    <div id="fv-modal-title">How will you be using this?</div>
+    <div class="fv-modal-sub">This decides what your portal looks like.</div>
+    <button class="fv-btn-primary" onclick="fvShowView('signup')" style="margin-bottom:12px;">I'm a Business →</button>
+    <button class="fv-btn-outline" onclick="fvShowView('signup-agency')">I'm a Marketing Agency →</button>
+    <div class="fv-switch">
+      Already have an account? <a onclick="fvShowView('login')">Log in</a>
+    </div>
+  </div>
+
+  <!-- SIGNUP VIEW (Business) -->
   <div class="fv-view" id="fv-view-signup">
     <div id="fv-modal-title">Create account.</div>
     <div class="fv-modal-sub">Access your Forge Vertical client portal.</div>
@@ -235,6 +258,8 @@ function loadFirebaseAndAuth() {
     <div class="fv-error" id="fv-signup-error"></div>
     <button class="fv-btn-primary" id="fv-signup-btn">Create account →</button>
     <div class="fv-switch">
+      <a onclick="fvShowView('choice')">← Back</a>
+      &nbsp;·&nbsp;
       Already have an account? <a onclick="fvShowView('login')">Log in</a>
     </div>
     <div class="fv-divider"><span>or</span></div>
@@ -242,6 +267,46 @@ function loadFirebaseAndAuth() {
       <svg width="16" height="16" viewBox="0 0 48 48" style="flex-shrink:0"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.31-8.16 2.31-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
       Continue with Google
     </button>
+  </div>
+
+  <!-- SIGNUP VIEW (Agency) -->
+  <div class="fv-view" id="fv-view-signup-agency">
+    <div id="fv-modal-title">Set up your agency.</div>
+    <div class="fv-modal-sub">30-day free trial — manage your own clients, with your own admin panel and a unique invite link just for you.</div>
+    <div class="fv-field">
+      <label class="fv-label" for="fv-agency-company">Agency name</label>
+      <input class="fv-input" type="text" id="fv-agency-company" placeholder="Acme Marketing" autocomplete="organization">
+    </div>
+    <div class="fv-field">
+      <label class="fv-label" for="fv-agency-contact-name">Your name</label>
+      <input class="fv-input" type="text" id="fv-agency-contact-name" placeholder="Jane Smith" autocomplete="name">
+    </div>
+    <div class="fv-field">
+      <label class="fv-label" for="fv-agency-email">Email</label>
+      <input class="fv-input" type="email" id="fv-agency-email" placeholder="you@agency.com" autocomplete="email">
+    </div>
+    <div class="fv-field">
+      <label class="fv-label" for="fv-agency-pass">Password</label>
+      <input class="fv-input" type="password" id="fv-agency-pass" placeholder="Min 8 characters" autocomplete="new-password">
+    </div>
+    <div class="fv-error" id="fv-agency-error"></div>
+    <button class="fv-btn-primary" id="fv-agency-btn">Start free trial →</button>
+    <div class="fv-switch">
+      <a onclick="fvShowView('choice')">← Back</a>
+      &nbsp;·&nbsp;
+      Already have an account? <a onclick="fvShowView('login')">Log in</a>
+    </div>
+  </div>
+
+  <!-- AGENCY SUCCESS VIEW -->
+  <div class="fv-view" id="fv-view-agency-success">
+    <div id="fv-modal-title">You're in.</div>
+    <div class="fv-modal-sub">Your 30-day trial has started. Share this link with your clients to bring them onto your agency automatically — no manual setup on your end.</div>
+    <div class="fv-field">
+      <label class="fv-label">Your invite link</label>
+      <input class="fv-input" type="text" id="fv-agency-invite-link" readonly onclick="this.select()">
+    </div>
+    <button class="fv-btn-primary" id="fv-agency-go-btn">Go to my dashboard →</button>
   </div>
 
   <!-- FORGOT PASSWORD VIEW -->
@@ -281,6 +346,7 @@ function loadFirebaseAndAuth() {
     document.getElementById('fv-login-btn').addEventListener('click', handleLogin);
     document.getElementById('fv-signup-btn').addEventListener('click', handleSignup);
     document.getElementById('fv-forgot-btn').addEventListener('click', handleForgot);
+    document.getElementById('fv-agency-btn').addEventListener('click', handleAgencySignup);
 
     // Enter key support
     ['fv-login-email','fv-login-pass'].forEach(id => {
@@ -291,6 +357,11 @@ function loadFirebaseAndAuth() {
     ['fv-signup-name','fv-signup-email','fv-signup-pass'].forEach(id => {
       document.getElementById(id).addEventListener('keydown', e => {
         if (e.key === 'Enter') handleSignup();
+      });
+    });
+    ['fv-agency-company','fv-agency-contact-name','fv-agency-email','fv-agency-pass'].forEach(id => {
+      document.getElementById(id).addEventListener('keydown', e => {
+        if (e.key === 'Enter') handleAgencySignup();
       });
     });
     document.getElementById('fv-forgot-email').addEventListener('keydown', e => {
@@ -306,7 +377,7 @@ function loadFirebaseAndAuth() {
   };
 
   function clearErrors() {
-    ['fv-login-error','fv-signup-error','fv-forgot-error','fv-forgot-success'].forEach(id => {
+    ['fv-login-error','fv-signup-error','fv-agency-error','fv-forgot-error','fv-forgot-success'].forEach(id => {
       const el = document.getElementById(id);
       if (el) el.textContent = '';
     });
@@ -338,11 +409,30 @@ function loadFirebaseAndAuth() {
     return null;
   }
 
+  function getAgencyRefFromUrl() {
+    return new URLSearchParams(window.location.search).get('agency');
+  }
+
   function handleGoogle() {
     const auth = getAuth();
     if (!auth) return;
     const provider = new firebase.auth.GoogleAuthProvider();
+    const agencyRef = getAgencyRefFromUrl();
     auth.signInWithPopup(provider)
+      .then(cred => {
+        const userRef = firebase.firestore().collection('portal-users').doc(cred.user.uid);
+        return userRef.get().then(doc => {
+          if (doc.exists) return; // returning user — never overwrite their existing record
+          const data = {
+            approved: false,
+            email: cred.user.email,
+            name: cred.user.displayName || '',
+            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+          };
+          if (agencyRef) data.tenantId = agencyRef;
+          return userRef.set(data);
+        });
+      })
       .then(() => {
         fvCloseModal();
         window.location.href = PORTAL_URL;
@@ -398,19 +488,73 @@ function loadFirebaseAndAuth() {
     if (!auth) { err.textContent = 'Auth not ready — please try again.'; return; }
 
     setLoading('fv-signup-btn', true);
+    const agencyRef = getAgencyRefFromUrl();
     auth.createUserWithEmailAndPassword(email, pass)
-      .then(cred => cred.user.updateProfile({ displayName: name }))
+      .then(cred => cred.user.updateProfile({ displayName: name }).then(() => cred.user))
+      .then(user => {
+        const data = {
+          approved: false,
+          email: email,
+          name: name,
+          createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        };
+        if (agencyRef) data.tenantId = agencyRef;
+        return firebase.firestore().collection('portal-users').doc(user.uid).set(data);
+      })
       .then(() => {
-        // New accounts need admin approval before portal access
-        // Show a pending message instead of redirecting
         fvShowView('login');
         document.getElementById('fv-login-error').style.color = '#84cc16';
-        document.getElementById('fv-login-error').textContent =
-          'Account created. Jarrit will activate your portal access within 24 hours.';
+        document.getElementById('fv-login-error').textContent = agencyRef
+          ? 'Account created. Your agency will activate your access shortly.'
+          : 'Account created. Jarrit will activate your portal access within 24 hours.';
       })
       .catch(e => {
         err.textContent = friendlyError(e.code);
         setLoading('fv-signup-btn', false);
+      });
+  }
+
+  function handleAgencySignup() {
+    const company = document.getElementById('fv-agency-company').value.trim();
+    const contact = document.getElementById('fv-agency-contact-name').value.trim();
+    const email   = document.getElementById('fv-agency-email').value.trim();
+    const pass    = document.getElementById('fv-agency-pass').value;
+    const err     = document.getElementById('fv-agency-error');
+
+    if (!company)         { err.textContent = 'Please enter your agency name.'; return; }
+    if (!contact)         { err.textContent = 'Please enter your name.'; return; }
+    if (!email)           { err.textContent = 'Please enter your email.'; return; }
+    if (pass.length < 8)  { err.textContent = 'Password must be at least 8 characters.'; return; }
+
+    const auth = getAuth();
+    if (!auth) { err.textContent = 'Auth not ready — please try again.'; return; }
+
+    setLoading('fv-agency-btn', true);
+    auth.createUserWithEmailAndPassword(email, pass)
+      .then(cred => cred.user.updateProfile({ displayName: contact }).then(() => cred.user))
+      .then(user => fetch(CREATE_TENANT_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          uid: user.uid,
+          name: company,
+          companyName: company,
+          contactEmail: email,
+          contactName: contact
+        })
+      }))
+      .then(res => res.json())
+      .then(data => {
+        if (data.error) throw new Error(data.error);
+        fvShowView('agency-success');
+        document.getElementById('fv-agency-invite-link').value = data.inviteLink || '';
+        document.getElementById('fv-agency-go-btn').onclick = function() {
+          window.location.href = AGENCY_PORTAL_URL;
+        };
+      })
+      .catch(e => {
+        err.textContent = e.message || 'Something went wrong. Please try again.';
+        setLoading('fv-agency-btn', false);
       });
   }
 
