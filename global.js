@@ -313,11 +313,14 @@ select.fv-input option{background:#0b0f14;}
           .then(() => notifyAdminOfSignup(user.uid, email, agencyRef, 'New signup — say hi!'));
       })
       .then(() => {
-        fvShowView('login');
-        document.getElementById('fv-login-error').style.color = '#84cc16';
-        document.getElementById('fv-login-error').textContent = agencyRef
-          ? 'Account created. Your agency will activate your access shortly.'
-          : 'Account created. Jarrit will activate your portal access within 24 hours.';
+        if (agencyRef) {
+          fvShowView('login');
+          document.getElementById('fv-login-error').style.color = '#84cc16';
+          document.getElementById('fv-login-error').textContent = 'Account created. Your agency will activate your access shortly.';
+          return;
+        }
+        fvCloseModal();
+        window.location.href = PORTAL_URL;
       })
       .catch(e => { err.textContent = friendlyError(e.code); setLoading('fv-signup-btn', false); });
   }
