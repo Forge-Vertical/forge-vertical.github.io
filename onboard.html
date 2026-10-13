@@ -685,8 +685,6 @@
 </div>
 
 <script>
-// ── Config ────────────────────────────────────────────────────────
-const FUNCTION_URL = 'https://submitlead-ozgkkal66a-uc.a.run.app';
 
 // ── Animate checklist in ──────────────────────────────────────────
 window.addEventListener('DOMContentLoaded', () => {
@@ -729,23 +727,26 @@ document.getElementById('onboard-form').addEventListener('submit', async (e) => 
         source:  'forgevertical.com/onboard',
     };
 
-    // Try Cloud Function first, fall back to Formspree if it fails
-    const FALLBACK_URL = 'https://formspree.io/f/xpwzgvbj';
+       // Formspree only
+    const FORMSPREE_URL = 'https://formspree.io/f/xpwzgvbj';
 
     const trySubmit = async () => {
-        // Attempt 1 — Cloud Function
         try {
-            const res = await fetch(FUNCTION_URL, {
-                method:  'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body:    JSON.stringify(payload),
+            const fd = new FormData();
+            Object.entries(payload).forEach(([k, v]) => fd.append(k, v));
+            fd.append('_subject', 'New brief: ' + (service || 'Website') + ' - ' + name);
+            const res = await fetch(FORMSPREE_URL, {
+                method: 'POST',
+                body: fd,
+                headers: { 'Accept': 'application/json' },
             });
-            if (res.ok) {
-                const data = await res.json();
-                if (data.success) return true;
-            }
-        } catch (_) {}
-
+            if (res.ok) return true;
+            console.error('Formspree rejected the submission', res.status, await res.text());
+        } catch (e) {
+            console.error('Formspree request failed', e);
+        }
+        return false;
+    };
         // Attempt 2 — Formspree fallback
         try {
             const fd = new FormData();
