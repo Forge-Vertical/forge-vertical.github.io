@@ -378,22 +378,24 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="/typography.css">
 <style>
 :root{--bg:#06080c;--panel:#0d1117;--panel2:#111827;--line:#1f2937;--text:#e5e7eb;--mute:#9ca3af;--lime:#84cc16;--emerald:#10b981}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--text);font-family:'Outfit',system-ui,sans-serif;margin:0;-webkit-font-smoothing:antialiased}
-a{color:inherit}
+main a{color:inherit}
 .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
 .eyebrow{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--lime);margin:0}
-h1{font-size:clamp(2.1rem,5.4vw,3.8rem);font-weight:800;line-height:1.05;margin:.7rem 0 1rem;letter-spacing:-.02em}
-h2{font-size:clamp(1.5rem,3.4vw,2.2rem);font-weight:800;margin:0 0 .6rem;letter-spacing:-.01em}
-h3{margin:0 0 6px;font-size:1.1rem}
+main h1{font-size:clamp(2.1rem,5.4vw,3.8rem);font-weight:800;line-height:1.05;margin:.7rem 0 1rem;letter-spacing:-.02em}
+main h2{font-size:clamp(1.5rem,3.4vw,2.2rem);font-weight:800;margin:0 0 .6rem;letter-spacing:-.01em}
+main h3{margin:0 0 6px;font-size:1.1rem}
 .grad{background:linear-gradient(90deg,var(--lime),var(--emerald));-webkit-background-clip:text;background-clip:text;color:transparent}
 .lede{color:var(--mute);font-size:1.1rem;line-height:1.7;max-width:640px;margin:0}
 .sub{color:var(--mute);line-height:1.7;max-width:700px;margin:0 0 28px}
-section{padding:72px 0;border-top:1px solid var(--line);position:relative}
-.hero{padding:112px 0 64px;border:0;overflow:hidden;position:relative}
+main section{padding:72px 0;border-top:1px solid var(--line);position:relative}
+main .hero{padding:112px 0 64px;border:0;overflow:hidden;position:relative}
 .hero:before{content:"";position:absolute;inset:-20% -10% auto auto;width:640px;height:640px;background:radial-gradient(circle,rgba(132,204,22,.14),transparent 65%);pointer-events:none}
 .hero-grid{display:grid;gap:40px;grid-template-columns:1.05fr .95fr;align-items:center}
 @media(max-width:860px){.hero-grid{grid-template-columns:1fr}.hero{padding-top:96px}}
