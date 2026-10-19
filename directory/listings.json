@@ -1,6 +1,6 @@
 {
   "meta": {
-    "total_listings": 25,
+    "total_listings": 27,
     "sources": [
       "forge-vertical",
       "sitebuild-studio"
@@ -529,6 +529,46 @@
         "Handyman & Renovations"
       ],
       "logo_initial": "AL"
+    },
+    {
+      "id": "absolute-painting-blouberg",
+      "name": "Absolute Painting \u2014 Blouberg",
+      "category": "painting par",
+      "location": "Blouberg, Cape Town",
+      "address": "37 Blaauwberg Road, Blouberg",
+      "phone": "064 900 9954",
+      "whatsapp": "064 900 9954",
+      "description": "A colourful canvas, ceramic, and slime painting studio hosting kids' parties, sip & paint evenings, and corporate painting events \u2014 open Wed-Sun, 10am-6pm.",
+      "logo": "https://www.sitebuildstudio.co.za/directory/images/logo-mark_absolute_paints.jpg",
+      "website": "https://absolute-painting.co.za/",
+      "_source": "sitebuild",
+      "tagline": "Painting Parties & Studio",
+      "verified": true,
+      "featured": false,
+      "tags": [
+        "Painting Parties & Studio"
+      ],
+      "logo_initial": "AB"
+    },
+    {
+      "id": "absolute-painting-burgundy-estate",
+      "name": "Absolute Painting \u2014 Burgundy Estate",
+      "category": "painting par",
+      "location": "Burgundy Estate, Cape Town",
+      "address": "22 Viridian Street, Burgundy Estate",
+      "phone": "064 900 9954",
+      "whatsapp": "064 900 9954",
+      "description": "The Burgundy Estate branch of Absolute Painting \u2014 canvas, ceramic, and slime painting parties, sip & paint evenings, and corporate painting events, open Wed-Sun, 10am-6pm.",
+      "logo": "https://www.sitebuildstudio.co.za/directory/images/logo-mark_absolute_paints.jpg",
+      "website": "https://absolute-painting.co.za/",
+      "_source": "sitebuild",
+      "tagline": "Painting Parties & Studio",
+      "verified": true,
+      "featured": false,
+      "tags": [
+        "Painting Parties & Studio"
+      ],
+      "logo_initial": "AB"
     },
     {
       "id": "investorlist",
