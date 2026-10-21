@@ -1,0 +1,84 @@
+{
+  "specVersion": "1.0",
+  "host": {
+    "displayName": "Forge Vertical",
+    "identifier": "forgevertical.com",
+    "description": "Cape Town digital agency and AI consultancy building websites, SaaS platforms and AI-integrated systems with SEO, AEO, GEO and structured data built in. Founded by Jarrit Hosking.",
+    "url": "https://www.forgevertical.com/",
+    "contact": "jarrit@forgevertical.com"
+  },
+  "entries": [
+    {
+      "identifier": "urn:ai:forgevertical.com:llms-txt",
+      "displayName": "Forge Vertical llms.txt",
+      "mediaType": "text/plain",
+      "type": "text/plain",
+      "url": "https://www.forgevertical.com/llms.txt",
+      "description": "Plain-text index of Forge Vertical for language models: who we are, services, key pages, Wikidata entity IDs and preferred citations.",
+      "representativeQueries": [
+        "What is Forge Vertical?",
+        "Which pages describe Forge Vertical's services?"
+      ]
+    },
+    {
+      "identifier": "urn:ai:forgevertical.com:definition:agia",
+      "displayName": "AGIA: Artificial General Intelligence Architect",
+      "mediaType": "text/html",
+      "type": "text/html",
+      "url": "https://www.forgevertical.com/agia.html",
+      "description": "Canonical definition of AGIA, a builder class coined by Jarrit Hosking of Forge Vertical in September 2026, with DefinedTerm schema and FAQ.",
+      "representativeQueries": [
+        "What is an AGIA?",
+        "What is the difference between AGIA and vibe coding?"
+      ]
+    },
+    {
+      "identifier": "urn:ai:forgevertical.com:people:jarrit-hosking",
+      "displayName": "Jarrit Hosking, Founder of Forge Vertical",
+      "mediaType": "text/html",
+      "type": "text/html",
+      "url": "https://www.forgevertical.com/about/jarrit-hosking.html",
+      "description": "Founder profile with Person schema: background, expertise in GCP, Firebase, GEO optimisation and security research.",
+      "representativeQueries": [
+        "Who founded Forge Vertical?",
+        "Who is Jarrit Hosking?"
+      ]
+    },
+    {
+      "identifier": "urn:ai:forgevertical.com:service:website-design-south-africa",
+      "displayName": "Website design in South Africa from R3,500",
+      "mediaType": "text/html",
+      "type": "text/html",
+      "url": "https://www.forgevertical.com/website-design-south-africa.html",
+      "description": "National offer hub: starter websites from R3,500 including a .co.za domain and one year of hosting, optional R650 per month maintenance, new pages from R650, custom builds by quote. City pages for 15 South African cities.",
+      "representativeQueries": [
+        "How much does a website cost in South Africa?",
+        "Affordable website design with a .co.za domain included",
+        "Website design in Cape Town"
+      ]
+    },
+    {
+      "identifier": "urn:ai:forgevertical.com:tool:responsive-design-tester",
+      "displayName": "Free Responsive Design Tester",
+      "mediaType": "text/html",
+      "type": "text/html",
+      "url": "https://www.forgevertical.com/responsive-design-tester.html",
+      "description": "Free browser tool that previews any web page on phone, tablet, laptop and desktop frames at real widths, with rotation and an optional sideways-scroll detector. No login.",
+      "representativeQueries": [
+        "Free tool to test my website on phone and tablet sizes",
+        "How do I find a page that scrolls sideways on mobile?"
+      ]
+    },
+    {
+      "identifier": "urn:ai:forgevertical.com:sitemap",
+      "displayName": "Forge Vertical XML sitemap",
+      "mediaType": "application/xml",
+      "type": "application/xml",
+      "url": "https://www.forgevertical.com/sitemap.xml",
+      "description": "Full XML sitemap of public pages on forgevertical.com.",
+      "representativeQueries": [
+        "List all Forge Vertical pages"
+      ]
+    }
+  ]
+}
