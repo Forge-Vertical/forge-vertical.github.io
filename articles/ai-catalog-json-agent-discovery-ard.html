@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ai-catalog.json is a new file telling AI agents what your domain offers. What it is, who backs the ARD standard, what is proven, and whether to publish one.">
+    <title>ai-catalog.json Explained: The robots.txt for AI Agents? | Forge Vertical</title>
+    <link rel="canonical" href="https://www.forgevertical.com/articles/ai-catalog-json-agent-discovery-ard.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Forge Vertical">
+    <meta property="og:title" content="ai-catalog.json: the robots.txt for AI agents?">
+    <meta property="og:description" content="ai-catalog.json is a new file telling AI agents what your domain offers. What it is, who backs the ARD standard, what is proven, and whether to publish one.">
+    <meta property="og:url" content="https://www.forgevertical.com/articles/ai-catalog-json-agent-discovery-ard.html">
+    <meta property="og:image" content="https://www.forgevertical.com/assets/images/ai-catalog-json-explained.png">
+    <meta property="article:published_time" content="2026-10-21">
+    <meta property="article:author" content="Jarrit Hosking">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="ai-catalog.json: the robots.txt for AI agents?">
+    <meta name="twitter:description" content="ai-catalog.json is a new file telling AI agents what your domain offers. What it is, who backs the ARD standard, what is proven, and whether to publish one.">
+    <meta name="twitter:image" content="https://www.forgevertical.com/assets/images/ai-catalog-json-explained.png">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://www.forgevertical.com/articles/ai-catalog-json-agent-discovery-ard.html#article",
+      "headline": "ai-catalog.json: the robots.txt for AI agents? What it is, who backs it and whether to publish one",
+      "description": "ai-catalog.json is a new file telling AI agents what your domain offers. What it is, who backs the ARD standard, what is proven, and whether to publish one.",
+      "image": {
+        "@type": "ImageObject",
+        "url": "https://www.forgevertical.com/assets/images/ai-catalog-json-explained.png",
+        "width": 1200,
+        "height": 675
+      },
+      "datePublished": "2026-10-21",
+      "dateModified": "2026-10-21",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.forgevertical.com/articles/ai-catalog-json-agent-discovery-ard.html"
+      },
+      "author": {
+        "@type": "Person",
+        "@id": "https://www.forgevertical.com/about/jarrit-hosking.html#person",
+        "name": "Jarrit Hosking",
+        "sameAs": "https://www.wikidata.org/wiki/Q141506817"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "@id": "https://www.forgevertical.com/#org",
+        "name": "Forge Vertical",
+        "url": "https://www.forgevertical.com"
+      },
+      "articleSection": "GEO and AI",
+      "inLanguage": "en",
+      "keywords": "ai-catalog.json, ai catalog, agentic resource discovery, ARD standard, .well-known ai-catalog.json, MCP discovery, A2A agent card, llms.txt vs ai-catalog.json, GEO, AI agents discovery",
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [
+          "h1",
+          ".answer"
+        ]
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Forge Vertical",
+          "item": "https://www.forgevertical.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Articles",
+          "item": "https://www.forgevertical.com/articles.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "ai-catalog.json Explained",
+          "item": "https://www.forgevertical.com/articles/ai-catalog-json-agent-discovery-ard.html"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is ai-catalog.json?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "ai-catalog.json is a machine-readable file that a website or company publishes at /.well-known/ai-catalog.json to list the AI-usable resources it offers, such as MCP servers, A2A agent cards and agent skills. Agents and registries read it to discover what exists before they try to call anything."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Where does ai-catalog.json go?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It goes at the well-known path /.well-known/ai-catalog.json on your own domain, served over HTTPS. On GitHub Pages the dot-folder only publishes if the repository contains a .nojekyll file."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between ai-catalog.json, llms.txt and robots.txt?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "robots.txt tells crawlers what they may fetch, and sitemap.xml lists your pages. llms.txt is a plain-text guide to your content for language models. ai-catalog.json is different: it lists callable resources such as MCP servers and agent cards, so agents can find tools and not only read pages."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Who backs ai-catalog.json and the ARD standard?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Agentic Resource Discovery (ARD) was published in mid-2026 by a coalition led by Google and Microsoft with Salesforce, Snowflake, ServiceNow, Cisco, Databricks, GitHub, GoDaddy, Hugging Face and Nvidia. It is an Apache 2.0 draft built on an AI Catalog data model maintained by a Linux Foundation working group. Anthropic and OpenAI were reported as not among the backers."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does ai-catalog.json help SEO or AI citations?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We found no published evidence yet. It is a discovery standard for agents and tools, not a ranking or citation signal, and early reports found almost no top sites publishing one. Schema markup, llms.txt and strong content remain the proven GEO basics."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Should a small business publish an ai-catalog.json file?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It costs almost nothing, so it is a reasonable experiment if you list only real resources. Treat it as an addition to your schema and llms.txt work, and check the official specification again before relying on it because the draft is still changing."
+          }
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <script src="/global.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/typography.css">
+    <style>
+        body{font-family:'Outfit',sans-serif;background:#fff;overflow-x:hidden;}
+        .mono{font-family:'JetBrains Mono',monospace;}
+        .g-text{background:linear-gradient(90deg,#10b981,#84cc16);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:inline-block;}
+        .prose-body{font-family:'Lora',serif;font-size:19px;line-height:1.85;color:#27272a;}
+        .prose-body p{margin-bottom:1.6em;}
+        .prose-body h2{font-family:'Outfit',sans-serif;font-size:26px;font-weight:700;letter-spacing:-0.02em;color:#09090b;margin-top:2.5em;margin-bottom:0.6em;}
+        .prose-body strong{font-weight:700;color:#09090b;font-family:'Outfit',sans-serif;font-size:17px;}
+        .prose-body a{color:#84cc16;text-decoration:underline;text-underline-offset:3px;}
+        .callout{background:#f4f4f5;border-left:3px solid #84cc16;border-radius:0 12px 12px 0;padding:20px 24px;margin:2em 0;font-family:'Outfit',sans-serif;font-size:15px;color:#3f3f46;line-height:1.7;}
+        .callout strong{color:#09090b;}
+        .callout.dark{background:#09090b;color:#a1a1aa;border-left-color:#84cc16;}
+        .callout.amber{border-left-color:#f59e0b;background:#fffdf5;}
+        .pull-quote{font-family:'Lora',serif;font-size:22px;font-style:italic;color:#09090b;border-top:2px solid #84cc16;border-bottom:1px solid #e4e4e7;padding:24px 0;margin:2.5em 0;line-height:1.5;}
+        .chapter-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:#84cc16;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:6px;display:block;}
+
+        /* Sitemap visual */
+        .sitemap-visual{border:1px solid #e4e4e7;border-radius:14px;overflow:hidden;margin:2em 0;}
+        .sitemap-header{background:#09090b;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+        .sitemap-title{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;color:#84cc16;text-transform:uppercase;letter-spacing:0.1em;}
+        .sitemap-count{font-family:'JetBrains Mono',monospace;font-size:10px;color:#3a4d66;}
+        .sitemap-row{display:grid;grid-template-columns:1fr auto auto;gap:12px;padding:11px 20px;border-bottom:1px solid #f4f4f5;align-items:center;}
+        .sitemap-row:last-child{border-bottom:none;}
+        .sitemap-row:hover{background:#fafafa;}
+        .sitemap-link{font-family:'JetBrains Mono',monospace;font-size:11px;color:#3b82f6;text-decoration:none;}
+        .sitemap-link:hover{color:#84cc16;}
+        .sitemap-date{font-family:'JetBrains Mono',monospace;font-size:10px;color:#a1a1aa;white-space:nowrap;}
+        .sitemap-note{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;color:#84cc16;white-space:nowrap;}
+
+        /* Neil Patel stats pages */
+        .stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:2em 0;}
+        @media(max-width:560px){.stats-grid{grid-template-columns:1fr;}}
+        .stat-card{border:1px solid #e4e4e7;border-radius:10px;padding:16px;text-decoration:none;display:block;transition:border-color 0.2s;}
+        .stat-card:hover{border-color:#84cc16;}
+        .stat-card-label{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#84cc16;margin-bottom:6px;display:block;}
+        .stat-card-url{font-family:'JetBrains Mono',monospace;font-size:10px;color:#3b82f6;margin-bottom:6px;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+        .stat-card-desc{font-size:12px;color:#52525b;line-height:1.5;}
+
+        /* The three layers */
+        .layers-stack{display:flex;flex-direction:column;gap:0;border:1px solid #e4e4e7;border-radius:14px;overflow:hidden;margin:2em 0;}
+        .layer-row{display:grid;grid-template-columns:80px 1fr;border-bottom:1px solid #f4f4f5;}
+        .layer-row:last-child{border-bottom:none;}
+        .layer-num{background:#09090b;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px 8px;gap:4px;}
+        .layer-n{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:#84cc16;text-align:center;}
+        .layer-tag{font-family:'JetBrains Mono',monospace;font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:#3a4d66;text-align:center;}
+        .layer-body{padding:16px 20px;}
+        .layer-title{font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;color:#09090b;margin-bottom:5px;}
+        .layer-desc{font-size:13px;color:#52525b;line-height:1.65;}
+
+        /* What confusion actually is */
+        .confusion-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:2em 0;}
+        @media(max-width:560px){.confusion-grid{grid-template-columns:1fr;}}
+        .conf-card{border-radius:12px;padding:18px;}
+        .conf-card.wrong{background:#fef2f2;border:1px solid #fecaca;}
+        .conf-card.right{background:#f0fdf4;border:1px solid #bbf7d0;}
+        .conf-label{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;display:block;}
+        .conf-label.wrong{color:#dc2626;}
+        .conf-label.right{color:#16a34a;}
+        .conf-title{font-size:14px;font-weight:700;color:#09090b;margin-bottom:8px;}
+        .conf-points{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:5px;}
+        .conf-points li{font-size:12px;color:#3f3f46;line-height:1.55;padding-left:14px;position:relative;}
+        .conf-points li::before{position:absolute;left:0;font-weight:700;}
+        .conf-points.wrong li::before{content:'✗';color:#dc2626;}
+        .conf-points.right li::before{content:'✓';color:#16a34a;}
+
+        .aff-footer{background:#09090b;border-radius:16px;padding:28px;margin:3em 0;}
+        .aff-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;}
+        .aff-tile{background:#111620;border:1px solid #1a2030;border-radius:10px;padding:14px;text-decoration:none;display:block;transition:border-color 0.18s;}
+        .aff-tile:hover{border-color:#84cc16;}
+        .aff-tile-name{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:#84cc16;margin-bottom:4px;}
+        .aff-tile-desc{font-size:11px;color:#6a7d96;line-height:1.5;margin-bottom:6px;}
+        .aff-tile-cta{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:#84cc16;}
+    
+        .codeblock{background:#09090b;color:#e4e4e7;border-radius:14px;padding:20px;font-family:'JetBrains Mono',monospace;font-size:12.5px;line-height:1.75;overflow-x:auto;margin:2em 0;white-space:pre;border:1px solid #1a2030;}
+        .codeblock .k{color:#84cc16;} .codeblock .s{color:#10b981;} .codeblock .c{color:#6a7d96;}
+        .faq-i{border:1px solid #e4e4e7;border-radius:12px;padding:18px 20px;margin-bottom:12px;background:#fff;}
+        .faq-i h3{font-family:'Outfit',sans-serif;font-size:16px;font-weight:700;color:#09090b;margin:0 0 6px;line-height:1.35;}
+        .faq-i p{font-family:'Outfit',sans-serif;font-size:14px;line-height:1.7;color:#52525b;margin:0;}
+        .sources{font-family:'Outfit',sans-serif;font-size:14px;line-height:1.7;color:#52525b;padding-left:18px;margin:0;}
+        .sources li{margin-bottom:6px;} .sources a{color:#3b82f6;text-decoration:underline;text-underline-offset:3px;word-break:break-word;}
+        .fig{margin:0 0 2.2em;} .fig img{width:100%;height:auto;border-radius:14px;border:1px solid #e4e4e7;display:block;}
+        .fig figcaption{font-family:'JetBrains Mono',monospace;font-size:10px;color:#a1a1aa;margin-top:8px;letter-spacing:.04em;}
+        .prose-body ul.plain{margin:0 0 1.6em 1.1em;padding:0;} .prose-body ul.plain li{margin-bottom:.5em;}
+</style>
+</head>
+<body class="antialiased">
+<div id="global-nav"></div>
+<article class="pt-20 pb-24">
+
+    <header class="max-w-3xl mx-auto px-6 mt-10 mb-12">
+        <div class="flex items-center gap-3 mb-6">
+            <a href="/articles.html" class="mono text-[10px] text-zinc-400 hover:text-zinc-600 uppercase tracking-widest">&larr; Articles</a>
+            <span class="text-zinc-300">&middot;</span>
+            <span class="mono text-[10px] font-bold text-[#84cc16] uppercase tracking-widest border border-[#84cc16]/30 px-3 py-1 rounded-full">GEO &middot; AEO &middot; Agents</span>
+        </div>
+        <h1 class="text-4xl md:text-5xl font-bold tracking-tight leading-[1.05] mb-6 text-zinc-900" style="font-family:'Outfit',sans-serif;letter-spacing:-0.03em;">
+            ai-catalog.json:<br>
+            <span class="g-text">the robots.txt for AI agents?</span>
+        </h1>
+        <p class="text-xl text-zinc-500 font-light leading-relaxed mb-8 max-w-2xl" style="font-family:'Outfit',sans-serif;">
+            A new file, backed by Google, Microsoft, GitHub, Nvidia and others, tells AI agents what your domain offers. What it is, how it differs from llms.txt and schema, what is proven so far, and whether a small business should bother.
+        </p>
+        <div class="flex items-center gap-4 pb-8 border-b border-zinc-100">
+            <div>
+                <div class="font-bold text-sm text-zinc-900">Jarrit Hosking</div>
+                <div class="mono text-[10px] text-zinc-400 uppercase tracking-widest">Forge Vertical &middot; Cape Town &middot; October 21, 2026</div>
+            </div>
+            <div class="ml-auto mono text-[10px] text-zinc-400 uppercase tracking-widest">8 min read</div>
+        </div>
+    </header>
+
+    <div class="max-w-3xl mx-auto px-6">
+        <figure class="fig">
+            <img src="/assets/images/ai-catalog-json-explained.png" alt="Diagram of an ai-catalog.json file in the centre linking MCP servers, agent cards and skills on one side to registries and AI agents on the other." width="1200" height="675" loading="eager">
+            <figcaption>Illustration by Forge Vertical.</figcaption>
+        </figure>
+    </div>
+
+    <div class="max-w-3xl mx-auto px-6 prose-body">
+
+        <p class="answer" style="font-family:'Outfit',sans-serif;font-size:18px;line-height:1.7;color:#09090b;">
+            <strong style="font-size:18px;">What is ai-catalog.json?</strong> It is a machine-readable file a website or company publishes at <code>/.well-known/ai-catalog.json</code> to list the AI-usable resources it offers, such as MCP servers, A2A agent cards and agent skills. AI agents and registries read it to discover what exists before they try to call anything.
+        </p>
+
+        <span class="chapter-label">// Chapter 01 &mdash; The problem it solves</span>
+        <h2>Agents can call tools. Finding them is the hard part.</h2>
+
+        <p>
+            Protocols like MCP define how an AI agent invokes a tool once it knows the tool exists. They say nothing about how the agent finds that tool in the first place. Today that happens through hardcoded integrations, hand-edited config files and marketplaces. <strong>ai-catalog.json is the "before" step: discovery before invocation.</strong> The idea is the same as robots.txt and sitemap.xml for crawlers: a predictable URL on your own domain where a machine can ask, "what do you offer?"
+        </p>
+
+        <span class="chapter-label">// Chapter 02 &mdash; Who is behind it</span>
+        <h2>A coalition of big names, and a draft that is still moving</h2>
+
+        <p>
+            The file is the publishing side of <strong>Agentic Resource Discovery (ARD)</strong>, a draft standard. According to <a href="https://aiweekly.co/alerts/google-microsoft-back-ard-spec-to-counter-anthropics-mcp" target="_blank" rel="noopener noreferrer">AI Weekly</a>, eleven companies published it on 17 June 2026: Google and Microsoft with Salesforce, Snowflake, ServiceNow, Cisco, Databricks, GitHub, GoDaddy, Hugging Face and Nvidia. It is Apache 2.0 licensed and builds on an AI Catalog data model maintained by a Linux Foundation working group. The same report says Anthropic and OpenAI are not among the backers. <a href="https://infoq.com/news/2026/07/agentic-resource-discovery-spec/" target="_blank" rel="noopener noreferrer">InfoQ</a> reported it on 14 July, and another guide dates Google's announcement to May. The sources disagree on the exact date, which tells you how new this is.
+        </p>
+
+    </div>
+
+    <div class="max-w-3xl mx-auto px-6 my-8">
+        <div class="stats-grid">
+            <a href="https://infoq.com/news/2026/07/agentic-resource-discovery-spec/" target="_blank" rel="noopener noreferrer" class="stat-card">
+                <span class="stat-card-label">// Early implementers</span>
+                <span class="stat-card-url">infoq.com</span>
+                <div class="stat-card-desc">GitHub's Agent Finder in Copilot and Hugging Face's Discover Tool are reported as early users of ARD for runtime capability discovery.</div>
+            </a>
+            <a href="https://aiweekly.co/alerts/google-microsoft-back-ard-spec-to-counter-anthropics-mcp" target="_blank" rel="noopener noreferrer" class="stat-card">
+                <span class="stat-card-label">// Status</span>
+                <span class="stat-card-url">aiweekly.co</span>
+                <div class="stat-card-desc">A v0.9 draft. A tracker reported that, as of mid-June, none of 39 sampled top sites published an ai-catalog.json.</div>
+            </a>
+            <a href="https://ai-catalog.io" target="_blank" rel="noopener noreferrer" class="stat-card">
+                <span class="stat-card-label">// The spec</span>
+                <span class="stat-card-url">ai-catalog.io</span>
+                <div class="stat-card-desc">The AI Catalog data model, served at the well-known path, with an optional trust layer for identity and signatures.</div>
+            </a>
+            <a href="https://github.com/Agent-Card/ai-catalog" target="_blank" rel="noopener noreferrer" class="stat-card">
+                <span class="stat-card-label">// The working repo</span>
+                <span class="stat-card-url">github.com/Agent-Card/ai-catalog</span>
+                <div class="stat-card-desc">A working repository for the common AI Card standard, with MCP and A2A communities collaborating.</div>
+            </a>
+        </div>
+    </div>
+
+    <div class="max-w-3xl mx-auto px-6 prose-body">
+
+        <span class="chapter-label">// Chapter 03 &mdash; What the file looks like</span>
+        <h2>Small, plain JSON</h2>
+
+        <p>
+            Per the specification, a catalog needs only a <strong>specVersion</strong> and an <strong>entries</strong> array. A host block with a display name is optional. Each entry needs an <strong>identifier</strong>, a <strong>type</strong> (a media type string), and exactly one of <strong>url</strong> or inline <strong>data</strong>. Descriptions, tags, versions and a signed trust manifest are optional, and consumers must ignore fields they do not recognise.
+        </p>
+
+    </div>
+
+    <div class="max-w-3xl mx-auto px-6">
+<pre class="codeblock"><span class="c">// /.well-known/ai-catalog.json (example from the spec site)</span>
+{
+  <span class="k">"specVersion"</span>: <span class="s">"1.0"</span>,
+  <span class="k">"host"</span>: { <span class="k">"displayName"</span>: <span class="s">"Example Hub"</span> },
+  <span class="k">"entries"</span>: [
+    {
+      <span class="k">"identifier"</span>: <span class="s">"urn:air:example.org:mcp:weather"</span>,
+      <span class="k">"type"</span>: <span class="s">"application/mcp-server-card+json"</span>,
+      <span class="k">"url"</span>: <span class="s">"https://example.org/mcp/weather/server-card"</span>
+    }
+  ]
+}</pre>
+    </div>
+
+    <div class="max-w-3xl mx-auto px-6 prose-body">
+
+        <p>
+            Identifiers follow the pattern <code>urn:air:{publisher}:{namespace}:{name}</code>, where the publisher is your domain. Recommended types include MCP server cards, A2A agent cards, agent skills and nested catalogs.
+        </p>
+
+        <span class="chapter-label">// Chapter 04 &mdash; Where it fits</span>
+        <h2>Five files, five jobs</h2>
+
+        <p>
+            If you already work on SEO, AEO and GEO, this is the new layer on top of what you have. It does a different job from each of the others.
+        </p>
+
+    </div>
+
+    <div class="max-w-3xl mx-auto px-6 my-8">
+        <div class="layers-stack">
+            <div class="layer-row">
+                <div class="layer-num"><span class="layer-n">robots</span><span class="layer-tag">Permission</span></div>
+                <div class="layer-body"><div class="layer-title">robots.txt: what crawlers may fetch</div><div class="layer-desc">Access rules for crawlers, including AI crawlers. It says who may read, not what you offer.</div></div>
+            </div>
+            <div class="layer-row">
+                <div class="layer-num"><span class="layer-n">sitemap</span><span class="layer-tag">Pages</span></div>
+                <div class="layer-body"><div class="layer-title">sitemap.xml: which pages exist</div><div class="layer-desc">A list of URLs so search engines can find and refresh your pages.</div></div>
+            </div>
+            <div class="layer-row">
+                <div class="layer-num"><span class="layer-n">llms</span><span class="layer-tag">Summary</span></div>
+                <div class="layer-body"><div class="layer-title">llms.txt: a plain-text guide for language models</div><div class="layer-desc">A readable overview of who you are and which pages matter, so a model can understand your site quickly.</div></div>
+            </div>
+            <div class="layer-row">
+                <div class="layer-num"><span class="layer-n">schema</span><span class="layer-tag">Meaning</span></div>
+                <div class="layer-body"><div class="layer-title">schema.org JSON-LD: what each page means</div><div class="layer-desc">Structured data that tells machines what a page is about: your business, services, prices, FAQs and people.</div></div>
+            </div>
+            <div class="layer-row">
+                <div class="layer-num"><span class="layer-n">catalog</span><span class="layer-tag">Callable</span></div>
+                <div class="layer-body"><div class="layer-title">ai-catalog.json: what an agent can use</div><div class="layer-desc">Lists tools and agents an AI can actually call, such as MCP servers and agent cards. The first four are about being read. This one is about being used.</div></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-3xl mx-auto px-6 prose-body">
+
+        <span class="chapter-label">// Chapter 05 &mdash; The reality check</span>
+        <h2>Interesting is not the same as proven</h2>
+
+    </div>
+
+    <div class="max-w-3xl mx-auto px-6 my-8">
+        <div class="confusion-grid">
+            <div class="conf-card right">
+                <span class="conf-label right">// What is known</span>
+                <div class="conf-title">The facts so far</div>
+                <ul class="conf-points right">
+                    <li>A published draft with large backers</li>
+                    <li>Registries are meant to crawl catalogs and answer agents' plain-language queries</li>
+                    <li>It sits above MCP and does not replace it</li>
+                    <li>GitHub and Hugging Face are reported as early implementers</li>
+                    <li>It is free and just a static file</li>
+                </ul>
+            </div>
+            <div class="conf-card wrong">
+                <span class="conf-label wrong">// What is not known</span>
+                <div class="conf-title">The open questions</div>
+                <ul class="conf-points wrong">
+                    <li>Whether major assistants will fetch small-site catalogs</li>
+                    <li>Whether Anthropic or OpenAI will join or build their own</li>
+                    <li>Whether it affects AI citations at all</li>
+                    <li>How registries will rank who gets discovered</li>
+                    <li>Whether the draft will change before it settles</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-3xl mx-auto px-6 prose-body">
+
+        <p>
+            One more caution from the people building it: Microsoft's Jennifer Marsman said ARD "doesn't replace authentication, authorization, governance, or organizational trust decisions." Discovery tells an agent a tool exists. It does not decide whether the agent should be allowed to use it. And as <a href="https://standards.apievangelist.com/store/ai-catalog/" target="_blank" rel="noopener noreferrer">API Evangelist</a> notes, roughly three-quarters of providers still do not publish comparable discovery files such as APIs.json or Agent Cards.
+        </p>
+
+        <span class="chapter-label">// Chapter 06 &mdash; Should you publish one?</span>
+        <h2>Our answer: yes, as a cheap experiment</h2>
+
+        <p>
+            It costs almost nothing and it fits the way we work. We build infrastructure early and measure later. But it is not a replacement for the basics that already have evidence behind them: <a href="/articles/geo-aeo-not-a-myth-neil-patel-proof.html">schema on every page, llms.txt and consistent content</a>. We found no published evidence yet that an ai-catalog.json changes AI citations, so treat it as a bet on where discovery is going and not as a ranking trick.
+        </p>
+
+        <p>
+            <strong>We published one.</strong> It lives at <code>forgevertical.com/.well-known/ai-catalog.json</code> and lists six real resources: our llms.txt, the AGIA definition page, the founder page, the national website offer, the free responsive design tester and the sitemap. We do not yet run an MCP server or agent card, and when we do, they will be the first entries that match the spec's main categories. Our first draft also taught us something: we copied an identifier format from a third-party guide, and the spec's own site uses a different one. We corrected it. With a draft this young, check the official specification before you ship.
+        </p>
+
+    </div>
+
+    <div class="max-w-3xl mx-auto px-6 my-8">
+        <div class="layers-stack">
+            <div class="layer-row">
+                <div class="layer-num"><span class="layer-n">01</span><span class="layer-tag">Create</span></div>
+                <div class="layer-body"><div class="layer-title">Write the JSON</div><div class="layer-desc">Start with specVersion, a host display name and one entry per real resource. List nothing you do not actually offer.</div></div>
+            </div>
+            <div class="layer-row">
+                <div class="layer-num"><span class="layer-n">02</span><span class="layer-tag">Place</span></div>
+                <div class="layer-body"><div class="layer-title">Host it at the well-known path</div><div class="layer-desc">Serve it at /.well-known/ai-catalog.json over HTTPS. On GitHub Pages, add an empty .nojekyll file or the dot-folder will not publish.</div></div>
+            </div>
+            <div class="layer-row">
+                <div class="layer-num"><span class="layer-n">03</span><span class="layer-tag">Check</span></div>
+                <div class="layer-body"><div class="layer-title">Validate and compare to the spec</div><div class="layer-desc">Confirm the file parses, loads in a browser and matches the current specification at ai-catalog.io.</div></div>
+            </div>
+            <div class="layer-row">
+                <div class="layer-num"><span class="layer-n">04</span><span class="layer-tag">Link</span></div>
+                <div class="layer-body"><div class="layer-title">Point to it from llms.txt</div><div class="layer-desc">Mention the catalog URL in your llms.txt so models that read it can find it. Then watch your server logs for who fetches it.</div></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-3xl mx-auto px-6 prose-body">
+
+        <div class="callout dark">
+            <span style="color:#84cc16;font-weight:700;display:block;margin-bottom:6px;font-family:'Outfit',sans-serif;font-size:14px;">// Verdict</span>
+            <span style="font-family:'Outfit',sans-serif;font-size:14px;line-height:1.7;color:#a1a1aa;">ai-catalog.json is the first serious attempt at a robots.txt for AI agents. It is early, unproven and backed by companies with real reach. For a small business the sensible move is a short, accurate file today, schema and llms.txt as the foundation, and a watch on whether the major assistants ever start to read it.</span>
+        </div>
+
+    </div>
+
+
+    <div class="max-w-3xl mx-auto px-6 mt-12">
+        <div class="mono text-[10px] text-[#84cc16] uppercase tracking-widest mb-3">// Questions answered</div>
+        <div id="faq">
+            <div class="faq-i"><h3>What is ai-catalog.json?</h3><p>ai-catalog.json is a machine-readable file that a website or company publishes at /.well-known/ai-catalog.json to list the AI-usable resources it offers, such as MCP servers, A2A agent cards and agent skills. Agents and registries read it to discover what exists before they try to call anything.</p></div>
+            <div class="faq-i"><h3>Where does ai-catalog.json go?</h3><p>It goes at the well-known path /.well-known/ai-catalog.json on your own domain, served over HTTPS. On GitHub Pages the dot-folder only publishes if the repository contains a .nojekyll file.</p></div>
+            <div class="faq-i"><h3>What is the difference between ai-catalog.json, llms.txt and robots.txt?</h3><p>robots.txt tells crawlers what they may fetch, and sitemap.xml lists your pages. llms.txt is a plain-text guide to your content for language models. ai-catalog.json is different: it lists callable resources such as MCP servers and agent cards, so agents can find tools and not only read pages.</p></div>
+            <div class="faq-i"><h3>Who backs ai-catalog.json and the ARD standard?</h3><p>Agentic Resource Discovery (ARD) was published in mid-2026 by a coalition led by Google and Microsoft with Salesforce, Snowflake, ServiceNow, Cisco, Databricks, GitHub, GoDaddy, Hugging Face and Nvidia. It is an Apache 2.0 draft built on an AI Catalog data model maintained by a Linux Foundation working group. Anthropic and OpenAI were reported as not among the backers.</p></div>
+            <div class="faq-i"><h3>Does ai-catalog.json help SEO or AI citations?</h3><p>We found no published evidence yet. It is a discovery standard for agents and tools, not a ranking or citation signal, and early reports found almost no top sites publishing one. Schema markup, llms.txt and strong content remain the proven GEO basics.</p></div>
+            <div class="faq-i"><h3>Should a small business publish an ai-catalog.json file?</h3><p>It costs almost nothing, so it is a reasonable experiment if you list only real resources. Treat it as an addition to your schema and llms.txt work, and check the official specification again before relying on it because the draft is still changing.</p></div>
+        </div>
+    </div>
+
+    <div class="max-w-3xl mx-auto px-6 mt-10">
+        <div class="mono text-[10px] text-zinc-400 uppercase tracking-widest mb-3">// Sources</div>
+        <ul class="sources">
+            <li><a href="https://aiweekly.co/alerts/google-microsoft-back-ard-spec-to-counter-anthropics-mcp" target="_blank" rel="noopener noreferrer">AI Weekly: Google, Microsoft back ARD spec to counter Anthropic&#x27;s MCP</a></li>
+            <li><a href="https://infoq.com/news/2026/07/agentic-resource-discovery-spec/" target="_blank" rel="noopener noreferrer">InfoQ: Agentic Resource Discovery specification (July 2026)</a></li>
+            <li><a href="https://ai-catalog.io/spec/" target="_blank" rel="noopener noreferrer">AI Catalog: specification and overview</a></li>
+            <li><a href="https://github.com/Agent-Card/ai-catalog" target="_blank" rel="noopener noreferrer">Agent-Card/ai-catalog working repository (GitHub)</a></li>
+            <li><a href="https://cli.nylas.com/guides/ai-catalog-json-agent-discovery" target="_blank" rel="noopener noreferrer">Nylas: ai-catalog.json agent discovery guide</a></li>
+            <li><a href="https://standards.apievangelist.com/store/ai-catalog/" target="_blank" rel="noopener noreferrer">API Evangelist: AI Catalog</a></li>
+        </ul>
+    </div>
+
+    <div class="max-w-3xl mx-auto px-6">
+        <div class="aff-footer">
+            <div class="mono text-[10px] text-[#84cc16] uppercase tracking-widest mb-3">// Put the basics in first</div>
+            <div class="aff-grid">
+                <a href="/free-quote.html" class="aff-tile">
+                    <div class="aff-tile-name">GEO Audit</div>
+                    <div class="aff-tile-desc">Schema, Wikidata, llms.txt, entity disambiguation and robots.txt. From R3,500.</div>
+                    <span class="aff-tile-cta">Get a quote →</span>
+                </a>
+                <a href="/.well-known/ai-catalog.json" class="aff-tile">
+                    <div class="aff-tile-name">Our ai-catalog.json</div>
+                    <div class="aff-tile-desc">The live file we published, six real resources.</div>
+                    <span class="aff-tile-cta">Open the file →</span>
+                </a>
+                <a href="/articles/geo-aeo-not-a-myth-neil-patel-proof.html" class="aff-tile">
+                    <div class="aff-tile-name">GEO is not a myth</div>
+                    <div class="aff-tile-desc">The evidence behind structured data and AI citations.</div>
+                    <span class="aff-tile-cta">Read it →</span>
+                </a>
+                <a href="/agia.html" class="aff-tile">
+                    <div class="aff-tile-name">What is AGIA?</div>
+                    <div class="aff-tile-desc">The methodology behind this site&#x27;s GEO infrastructure.</div>
+                    <span class="aff-tile-cta">Read the definition →</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mt-8">
+            <div>
+                <div class="mono text-[10px] text-zinc-400 uppercase tracking-widest mb-1">Written by</div>
+                <div class="font-bold text-zinc-900">Jarrit Hosking</div>
+                <div class="mono text-[10px] text-zinc-400">Forge Vertical &middot; Cape Town &middot; October 21, 2026</div>
+            </div>
+            <div class="flex gap-3 flex-wrap">
+                <a href="/articles.html" class="mono text-[10px] font-bold uppercase tracking-widest border border-zinc-200 px-5 py-3 rounded-xl hover:border-zinc-400 transition-all text-zinc-600">&larr; All articles</a>
+                <a href="/articles/tesla-flying-roadster-beyond-the-hype.html" class="mono text-[10px] font-bold uppercase tracking-widest border border-zinc-200 px-5 py-3 rounded-xl hover:border-zinc-400 transition-all text-zinc-600">Tesla flying car &rarr;</a>
+                <a href="/free-quote.html" style="background:linear-gradient(90deg,#10b981,#84cc16);" class="mono text-[10px] font-bold uppercase tracking-widest px-5 py-3 rounded-xl text-white hover:opacity-90 transition-all">Free quote &rarr;</a>
+            </div>
+        </div>
+    </div>
+
+</article>
+<div id="global-footer"></div>
+<script src="https://cdn.tailwindcss.com"></script>
+</body>
+</html>
