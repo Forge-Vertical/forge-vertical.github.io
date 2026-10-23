@@ -147,6 +147,12 @@
         .principle-lede b { color: var(--accent); font-weight: 700; }
         .principle-note { font-size: 15px; color: var(--muted2); font-weight: 300; line-height: 1.75; max-width: 680px; }
 
+        .principle-img {
+            margin-top: 44px; border: 1px solid var(--border); border-radius: 14px;
+            overflow: hidden;
+        }
+        .principle-img img { width: 100%; display: block; }
+
         /* DIAGRAM — Fortra-style three-column breakdown with icons */
         .diagram-head { text-align: center; max-width: 640px; margin: 0 auto 56px; }
         .diagram-head .sh, .diagram-head .ss { margin-left: auto; margin-right: auto; }
@@ -282,6 +288,10 @@
     <div class="wrap">
         <p class="principle-lede reveal">The idea is simple, even if the engineering behind it isn't: <b>each person only ever sees what belongs to them</b> — and everything that happens is written down, automatically, so nobody has to take your word for it.</p>
         <p class="principle-note reveal">Most systems get this half right with a login screen. A login tells you who someone is. It doesn't stop them from stumbling onto data that was never meant for them — another branch's customer list, another client's invoices, another partner's numbers. That gap is where trust usually breaks down, and it's the part most off-the-shelf software never actually solves.</p>
+
+        <div class="principle-img reveal">
+            <img src="assets/images/isolated-data-audit-trail.png" alt="Diagram comparing a typical system, where a login verifies identity but still leaves data shared and exposed to other branches, clients and partners, against Forge Vertical's approach, where each user — host, traveller, partner, affiliate — only ever reaches their own data, with every login, access, change and action written to an automatic audit trail." loading="lazy" width="1536" height="646">
+        </div>
     </div>
 </section>
 
