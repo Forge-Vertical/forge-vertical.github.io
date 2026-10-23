@@ -499,5 +499,8 @@ const obs = new IntersectionObserver(entries => {
 }, { threshold: 0.08 });
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 </script>
+
+<!-- Tailwind — nav.html and global.js rely on these utility classes -->
+<script src="https://cdn.tailwindcss.com"></script>
 </body>
 </html>
