@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="South Africa&#x27;s Presidency took its website offline after critical PHP flaws were disclosed. What happened, what is confirmed and what to check on your own site.">
+    <title>SA Presidency Website Offline: What the PHP Flaw Means for You | Forge Vertical</title>
+    <link rel="canonical" href="https://www.forgevertical.com/business-tech/presidency-website-offline-php-flaw.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Forge Vertical">
+    <meta property="og:title" content="SA Presidency website offline: what the PHP flaw means for your business">
+    <meta property="og:description" content="South Africa&#x27;s Presidency took its website offline after critical PHP flaws were disclosed. What happened, what is confirmed and what to check on your own site.">
+    <meta property="og:url" content="https://www.forgevertical.com/business-tech/presidency-website-offline-php-flaw.html">
+    <meta property="og:image" content="https://www.forgevertical.com/assets/images/presidency-website-offline-php-flaw.png">
+    <meta property="article:published_time" content="2026-10-24">
+    <meta property="article:author" content="Jarrit Hosking">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="SA Presidency website offline: what the PHP flaw means for your business">
+    <meta name="twitter:description" content="South Africa&#x27;s Presidency took its website offline after critical PHP flaws were disclosed. What happened, what is confirmed and what to check on your own site.">
+    <meta name="twitter:image" content="https://www.forgevertical.com/assets/images/presidency-website-offline-php-flaw.png">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://www.forgevertical.com/business-tech/presidency-website-offline-php-flaw.html#article",
+      "headline": "SA Presidency website offline: what the PHP flaw means for your business",
+      "description": "South Africa's Presidency took its website offline after critical PHP flaws were disclosed. What happened, what is confirmed and what to check on your own site.",
+      "image": {
+        "@type": "ImageObject",
+        "url": "https://www.forgevertical.com/assets/images/presidency-website-offline-php-flaw.png",
+        "width": 1200,
+        "height": 675
+      },
+      "datePublished": "2026-10-24",
+      "dateModified": "2026-10-24",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.forgevertical.com/business-tech/presidency-website-offline-php-flaw.html"
+      },
+      "author": {
+        "@type": "Person",
+        "@id": "https://www.forgevertical.com/about/jarrit-hosking.html#person",
+        "name": "Jarrit Hosking",
+        "sameAs": "https://www.wikidata.org/wiki/Q141506817"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "@id": "https://www.forgevertical.com/#org",
+        "name": "Forge Vertical",
+        "url": "https://www.forgevertical.com"
+      },
+      "articleSection": "Cybersecurity",
+      "inLanguage": "en",
+      "keywords": "Presidency website offline, PHP vulnerability South Africa, CVE-2026-109618, CVE-2026-109619, PHP2Shell, WordPress PHP update, South Africa cybersecurity, website security Cape Town",
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [
+          "h1",
+          ".answer"
+        ]
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Forge Vertical",
+          "item": "https://www.forgevertical.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Business Tech",
+          "item": "https://www.forgevertical.com/business-tech/articles.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Presidency Website Offline",
+          "item": "https://www.forgevertical.com/business-tech/presidency-website-offline-php-flaw.html"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Was the South African Presidency's website hacked?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Not confirmed. The Presidency said its website was taken offline as a precaution in response to a global cybersecurity event. It has not said it was breached. Daily Maverick links the outage to critical PHP flaws, but the Presidency has not confirmed that link."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are the PHP flaws?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "They are two critical vulnerabilities, CVE-2026-109618 and CVE-2026-109619, that can let an attacker run commands on a server without a username or password. Fixed versions are PHP 8.5.12, 8.4.27, 8.3.36 and 8.2.35, released on 21 October 2026."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is my website affected?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It may be if it runs on PHP, which includes WordPress sites. Ask your hosting provider or developer which PHP version your site uses and whether it has been updated to a fixed release. Versions 8.1 and older have no official fix."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I find out my PHP version?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ask your hosting provider or developer. On many hosting control panels, a tool such as the PHP version manager shows it. If you are not sure, send us your website address and we will tell you what we can see."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need to take my website offline?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "If you cannot update straight away, the FBI and the UK's NCSC advise limiting access or taking the affected system offline until it is patched. The best step is to ask your host to update PHP as soon as possible."
+          }
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <script src="/global.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/typography.css">
+    <style>
+        body{font-family:'Outfit',sans-serif;background:#fff;overflow-x:hidden;}
+        .mono{font-family:'JetBrains Mono',monospace;}
+        .g-text{background:linear-gradient(90deg,#10b981,#84cc16);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:inline-block;}
+        .prose-body{font-family:'Lora',serif;font-size:19px;line-height:1.85;color:#27272a;}
+        .prose-body p{margin-bottom:1.6em;}
+        .prose-body h2{font-family:'Outfit',sans-serif;font-size:26px;font-weight:700;letter-spacing:-0.02em;color:#09090b;margin-top:2.5em;margin-bottom:0.6em;}
+        .prose-body strong{font-weight:700;color:#09090b;font-family:'Outfit',sans-serif;font-size:17px;}
+        .prose-body a{color:#84cc16;text-decoration:underline;text-underline-offset:3px;}
+        .callout{background:#f4f4f5;border-left:3px solid #84cc16;border-radius:0 12px 12px 0;padding:20px 24px;margin:2em 0;font-family:'Outfit',sans-serif;font-size:15px;color:#3f3f46;line-height:1.7;}
+        .callout strong{color:#09090b;}
+        .callout.dark{background:#09090b;color:#a1a1aa;border-left-color:#84cc16;}
+        .callout.amber{border-left-color:#f59e0b;background:#fffdf5;}
+        .pull-quote{font-family:'Lora',serif;font-size:22px;font-style:italic;color:#09090b;border-top:2px solid #84cc16;border-bottom:1px solid #e4e4e7;padding:24px 0;margin:2.5em 0;line-height:1.5;}
+        .chapter-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:#84cc16;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:6px;display:block;}
+
+        /* Sitemap visual */
+        .sitemap-visual{border:1px solid #e4e4e7;border-radius:14px;overflow:hidden;margin:2em 0;}
+        .sitemap-header{background:#09090b;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+        .sitemap-title{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;color:#84cc16;text-transform:uppercase;letter-spacing:0.1em;}
+        .sitemap-count{font-family:'JetBrains Mono',monospace;font-size:10px;color:#3a4d66;}
+        .sitemap-row{display:grid;grid-template-columns:1fr auto auto;gap:12px;padding:11px 20px;border-bottom:1px solid #f4f4f5;align-items:center;}
+        .sitemap-row:last-child{border-bottom:none;}
+        .sitemap-row:hover{background:#fafafa;}
+        .sitemap-link{font-family:'JetBrains Mono',monospace;font-size:11px;color:#3b82f6;text-decoration:none;}
+        .sitemap-link:hover{color:#84cc16;}
+        .sitemap-date{font-family:'JetBrains Mono',monospace;font-size:10px;color:#a1a1aa;white-space:nowrap;}
+        .sitemap-note{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;color:#84cc16;white-space:nowrap;}
+
+        /* Neil Patel stats pages */
+        .stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:2em 0;}
+        @media(max-width:560px){.stats-grid{grid-template-columns:1fr;}}
+        .stat-card{border:1px solid #e4e4e7;border-radius:10px;padding:16px;text-decoration:none;display:block;transition:border-color 0.2s;}
+        .stat-card:hover{border-color:#84cc16;}
+        .stat-card-label{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#84cc16;margin-bottom:6px;display:block;}
+        .stat-card-url{font-family:'JetBrains Mono',monospace;font-size:10px;color:#3b82f6;margin-bottom:6px;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+        .stat-card-desc{font-size:12px;color:#52525b;line-height:1.5;}
+
+        /* The three layers */
+        .layers-stack{display:flex;flex-direction:column;gap:0;border:1px solid #e4e4e7;border-radius:14px;overflow:hidden;margin:2em 0;}
+        .layer-row{display:grid;grid-template-columns:80px 1fr;border-bottom:1px solid #f4f4f5;}
+        .layer-row:last-child{border-bottom:none;}
+        .layer-num{background:#09090b;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px 8px;gap:4px;}
+        .layer-n{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:#84cc16;text-align:center;}
+        .layer-tag{font-family:'JetBrains Mono',monospace;font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:#3a4d66;text-align:center;}
+        .layer-body{padding:16px 20px;}
+        .layer-title{font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;color:#09090b;margin-bottom:5px;}
+        .layer-desc{font-size:13px;color:#52525b;line-height:1.65;}
+
+        /* What confusion actually is */
+        .confusion-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:2em 0;}
+        @media(max-width:560px){.confusion-grid{grid-template-columns:1fr;}}
+        .conf-card{border-radius:12px;padding:18px;}
+        .conf-card.wrong{background:#fef2f2;border:1px solid #fecaca;}
+        .conf-card.right{background:#f0fdf4;border:1px solid #bbf7d0;}
+        .conf-label{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;display:block;}
+        .conf-label.wrong{color:#dc2626;}
+        .conf-label.right{color:#16a34a;}
+        .conf-title{font-size:14px;font-weight:700;color:#09090b;margin-bottom:8px;}
+        .conf-points{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:5px;}
+        .conf-points li{font-size:12px;color:#3f3f46;line-height:1.55;padding-left:14px;position:relative;}
+        .conf-points li::before{position:absolute;left:0;font-weight:700;}
+        .conf-points.wrong li::before{content:'✗';color:#dc2626;}
+        .conf-points.right li::before{content:'✓';color:#16a34a;}
+
+        .aff-footer{background:#09090b;border-radius:16px;padding:28px;margin:3em 0;}
+        .aff-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;}
+        .aff-tile{background:#111620;border:1px solid #1a2030;border-radius:10px;padding:14px;text-decoration:none;display:block;transition:border-color 0.18s;}
+        .aff-tile:hover{border-color:#84cc16;}
+        .aff-tile-name{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:#84cc16;margin-bottom:4px;}
+        .aff-tile-desc{font-size:11px;color:#6a7d96;line-height:1.5;margin-bottom:6px;}
+        .aff-tile-cta{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:#84cc16;}
+    
+        .codeblock{background:#09090b;color:#e4e4e7;border-radius:14px;padding:20px;font-family:'JetBrains Mono',monospace;font-size:12.5px;line-height:1.75;overflow-x:auto;margin:2em 0;white-space:pre;border:1px solid #1a2030;}
+        .codeblock .k{color:#84cc16;} .codeblock .s{color:#10b981;} .codeblock .c{color:#6a7d96;}
+        .faq-i{border:1px solid #e4e4e7;border-radius:12px;padding:18px 20px;margin-bottom:12px;background:#fff;}
+        .faq-i h3{font-family:'Outfit',sans-serif;font-size:16px;font-weight:700;color:#09090b;margin:0 0 6px;line-height:1.35;}
+        .faq-i p{font-family:'Outfit',sans-serif;font-size:14px;line-height:1.7;color:#52525b;margin:0;}
+        .sources{font-family:'Outfit',sans-serif;font-size:14px;line-height:1.7;color:#52525b;padding-left:18px;margin:0;}
+        .sources li{margin-bottom:6px;} .sources a{color:#3b82f6;text-decoration:underline;text-underline-offset:3px;word-break:break-word;}
+        .fig{margin:0 0 2.2em;} .fig img{width:100%;height:auto;border-radius:14px;border:1px solid #e4e4e7;display:block;}
+        .fig figcaption{font-family:'JetBrains Mono',monospace;font-size:10px;color:#a1a1aa;margin-top:8px;letter-spacing:.04em;}
+        .prose-body ul.plain{margin:0 0 1.6em 1.1em;padding:0;} .prose-body ul.plain li{margin-bottom:.5em;}
+</style>
+</head>
+<body class="antialiased">
+<div id="global-nav"></div>
+<article class="pt-20 pb-24">
+
+    <header class="max-w-3xl mx-auto px-6 mt-10 mb-12">
+        <div class="flex items-center gap-3 mb-6">
+            <a href="/business-tech/articles.html" class="mono text-[10px] text-zinc-400 hover:text-zinc-600 uppercase tracking-widest">&larr; Business Tech</a>
+            <span class="text-zinc-300">&middot;</span>
+            <span class="mono text-[10px] font-bold text-[#84cc16] uppercase tracking-widest border border-[#84cc16]/30 px-3 py-1 rounded-full">Cybersecurity &middot; Breaking</span>
+        </div>
+        <h1 class="text-4xl md:text-5xl font-bold tracking-tight leading-[1.05] mb-6 text-zinc-900" style="font-family:'Outfit',sans-serif;letter-spacing:-0.03em;">
+            The Presidency's website is offline.<br>
+            <span class="g-text">Here is what we know.</span>
+        </h1>
+        <p class="text-xl text-zinc-500 font-light leading-relaxed mb-8 max-w-2xl" style="font-family:'Outfit',sans-serif;">
+            A global flaw in PHP has already been used in attacks. South Africa's Presidency took its site offline as a precaution. A breach has not been confirmed, but your own website may need an update today.
+        </p>
+        <div class="flex items-center gap-4 pb-8 border-b border-zinc-100">
+            <div>
+                <div class="font-bold text-sm text-zinc-900">Jarrit Hosking</div>
+                <div class="mono text-[10px] text-zinc-400 uppercase tracking-widest">Forge Vertical &middot; Cape Town &middot; October 24, 2026</div>
+            </div>
+            <div class="ml-auto mono text-[10px] text-zinc-400 uppercase tracking-widest">6 min read</div>
+        </div>
+    </header>
+
+    <div class="max-w-3xl mx-auto px-6">
+        <figure class="fig">
+            <img src="/assets/images/presidency-website-offline-php-flaw.png" alt="Illustration of a server with a warning triangle and a tick for an update, with the words Update first." width="1200" height="675" loading="eager">
+            <figcaption>Illustration by Forge Vertical.</figcaption>
+        </figure>
+    </div>
+
+    <div class="max-w-3xl mx-auto px-6 prose-body">
+
+        <p class="answer" style="font-family:'Outfit',sans-serif;font-size:18px;line-height:1.7;color:#09090b;">
+            <strong style="font-size:18px;">Was South Africa's Presidency website hacked?</strong> That has not been confirmed. On 23 October 2026 the Presidency said its website was "temporarily unavailable as a precautionary measure in response to a global cybersecurity event." It did not say it had been breached. The event is a pair of critical flaws in PHP, the software that runs a large share of the world's websites, and attackers are already using them.
+        </p>
+
+        <span class="chapter-label">// Chapter 01 &mdash; What happened</span>
+        <h2>A site taken offline as a precaution</h2>
+
+        <p>
+            On Friday 23 October the Presidency posted on X that its website was down while it responded to a global cybersecurity event. A few hours later, <a href="https://www.dailymaverick.co.za/article/2026-10-23-sas-presidency-website-taken-down-as-cybersecurity-flaw-sparks-warnings-across-the-world/" target="_blank" rel="noopener noreferrer">Daily Maverick</a> reported that the site was still unreachable. The Presidency did not say how long the outage would last. Daily Maverick links the outage to the PHP flaws, but the Presidency has not confirmed that link.
+        </p>
+
+        <p>
+            It is worth being clear about what we do and do not know. Taking a site offline before it is patched is a sensible choice, and it is the kind of step the FBI and the UK's National Cyber Security Centre have advised when an update is not yet possible. It is not proof of a breach.
+        </p>
+
+        <span class="chapter-label">// Chapter 02 &mdash; The flaw</span>
+        <h2>Two critical holes in PHP</h2>
+
+        <p>
+            PHP is the programming language behind a huge part of the web. It is also what WordPress runs on, and WordPress powers around four in ten websites. Two flaws, tracked as CVE-2026-109618 and CVE-2026-109619, were disclosed this week. Researchers have nicknamed them PHP2Shell.
+        </p>
+
+        <p>
+            In plain English: an attacker who can reach the server may be able to run their own commands on it, without a username or password. That can mean stolen data, defaced pages or a base for further attacks. Both flaws are rated 9.2 out of 10 for severity.
+        </p>
+
+        <div class="pull-quote">
+            No setting change fully closes this one. Updating PHP is the only permanent fix.
+        </div>
+
+        <span class="chapter-label">// Chapter 03 &mdash; Is it being used?</span>
+        <h2>Yes. Attacks have already been seen</h2>
+
+        <p>
+            Security firm watchTowr reported seeing attackers use both flaws on 21 October, the day patches were released. New Zealand's cyber security centre says it is aware of reports of active exploitation. <a href="https://www.bleepingcomputer.com/news/security/php-ships-emergency-patches-for-critical-php2shell-flaws/" target="_blank" rel="noopener noreferrer">BleepingComputer</a> reports that Cloudflare's CTO said the company saw early attacks even before the patches shipped. VirusTotal estimates more than five million PHP hosts are exposed online.
+        </p>
+
+        <p>
+            None of that means your website has been attacked. It does mean that if your site runs on an unpatched version of PHP, you are in a race.
+        </p>
+
+        <span class="chapter-label">// Chapter 04 &mdash; What to do today</span>
+        <h2>Check your PHP version, then update</h2>
+
+        <p>
+            If your website is built on WordPress, or any other PHP system, the PHP version is controlled by your hosting provider or your developer. Ask them today which version your site runs and whether it has been updated. These are the fixed versions:
+        </p>
+    </div>
+    <div class="max-w-3xl mx-auto px-6 my-8">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <span class="stat-card-label">// PHP 8.5</span>
+                <span class="stat-card-url">Update to 8.5.12 or newer</span>
+                <div class="stat-card-desc">Fixed in the emergency release of 21 October.</div>
+            </div>
+            <div class="stat-card">
+                <span class="stat-card-label">// PHP 8.4</span>
+                <span class="stat-card-url">Update to 8.4.27 or newer</span>
+                <div class="stat-card-desc">Fixed in the emergency release of 21 October.</div>
+            </div>
+            <div class="stat-card">
+                <span class="stat-card-label">// PHP 8.3</span>
+                <span class="stat-card-url">Update to 8.3.36 or newer</span>
+                <div class="stat-card-desc">Fixed in the emergency release of 21 October.</div>
+            </div>
+            <div class="stat-card">
+                <span class="stat-card-label">// PHP 8.2</span>
+                <span class="stat-card-url">Update to 8.2.35 or newer</span>
+                <div class="stat-card-desc">Fixed in the emergency release of 21 October.</div>
+            </div>
+        </div>
+    </div>
+    <div class="max-w-3xl mx-auto px-6 prose-body">
+
+        <div class="callout amber">
+            <strong>Running PHP 8.1 or older?</strong> Those versions no longer get official updates, so there is no standard fix. Ask your host for a patched package from your provider, or move to a supported version. Many older small-business sites sit on old PHP without anyone realising.
+        </div>
+
+        <p>
+            After the update, the workers that run PHP need to be restarted, so ask your host to confirm that has happened. If you cannot update straight away, the FBI and NCSC advice is to limit access to the site, or take it offline until it is patched. If you think your site may already have been touched, keep your logs and do not delete anything before someone has looked at it.
+        </p>
+
+        <span class="chapter-label">// Chapter 05 &mdash; The wider lesson</span>
+        <h2>Assume one day a server will be taken over</h2>
+
+        <p>
+            Patches protect you against a flaw that has a name. The next flaw may not have one yet. So the useful question is not only "are we updated?" but "if someone did get in, what could they reach?"
+        </p>
+
+        <p>
+            That is where <a href="/business-tech/who-can-see-what-business-data-access-south-africa.html">controlling who can see what</a> matters. When customer information is separated, each part of the system only reaches what it needs, and every access is recorded, a break-in has less to find and is far easier to spot. It does not stop an attack like this one. It limits the damage and helps you answer the questions afterwards.
+        </p>
+
+        <div class="callout dark">
+            <strong style="color:#84cc16;">Not sure what your website runs on?</strong> Send us the address on <a href="https://wa.me/27661180036" target="_blank" rel="noopener noreferrer">WhatsApp (066 118 0036)</a> or <a href="mailto:jarrit@forgevertical.com">email</a>, and we will tell you what we can see. If your business needs a site or system that is built to limit the damage, <a href="/free-quote.html">request a free quote</a>.
+        </div>
+    </div>
+
+
+    <div class="max-w-3xl mx-auto px-6 mt-12">
+        <div class="mono text-[10px] text-[#84cc16] uppercase tracking-widest mb-3">// Questions answered</div>
+        <div id="faq">
+            <div class="faq-i"><h3>Was the South African Presidency&#x27;s website hacked?</h3><p>Not confirmed. The Presidency said its website was taken offline as a precaution in response to a global cybersecurity event. It has not said it was breached. Daily Maverick links the outage to critical PHP flaws, but the Presidency has not confirmed that link.</p></div>
+            <div class="faq-i"><h3>What are the PHP flaws?</h3><p>They are two critical vulnerabilities, CVE-2026-109618 and CVE-2026-109619, that can let an attacker run commands on a server without a username or password. Fixed versions are PHP 8.5.12, 8.4.27, 8.3.36 and 8.2.35, released on 21 October 2026.</p></div>
+            <div class="faq-i"><h3>Is my website affected?</h3><p>It may be if it runs on PHP, which includes WordPress sites. Ask your hosting provider or developer which PHP version your site uses and whether it has been updated to a fixed release. Versions 8.1 and older have no official fix.</p></div>
+            <div class="faq-i"><h3>How do I find out my PHP version?</h3><p>Ask your hosting provider or developer. On many hosting control panels, a tool such as the PHP version manager shows it. If you are not sure, send us your website address and we will tell you what we can see.</p></div>
+            <div class="faq-i"><h3>Do I need to take my website offline?</h3><p>If you cannot update straight away, the FBI and the UK&#x27;s NCSC advise limiting access or taking the affected system offline until it is patched. The best step is to ask your host to update PHP as soon as possible.</p></div>
+        </div>
+    </div>
+
+    <div class="max-w-3xl mx-auto px-6 mt-10">
+        <div class="mono text-[10px] text-zinc-400 uppercase tracking-widest mb-3">// Sources</div>
+        <ul class="sources">
+            <li><a href="https://www.dailymaverick.co.za/article/2026-10-23-sas-presidency-website-taken-down-as-cybersecurity-flaw-sparks-warnings-across-the-world/" target="_blank" rel="noopener noreferrer">Daily Maverick: SA&#x27;s Presidency website taken down as cybersecurity flaw sparks warnings across the world</a></li>
+            <li><a href="https://www.bleepingcomputer.com/news/security/php-ships-emergency-patches-for-critical-php2shell-flaws/" target="_blank" rel="noopener noreferrer">BleepingComputer: PHP ships emergency patches for critical PHP2Shell flaws</a></li>
+            <li><a href="https://watchtowr.com/intelligence/php-remote-code-execution-php2shell/" target="_blank" rel="noopener noreferrer">watchTowr: PHP2Shell (CVE-2026-109618 and CVE-2026-109619)</a></li>
+            <li><a href="https://www.ncsc.govt.nz/alerts/cve-2026-109618-and-cve-2026-109619-affecting-php/" target="_blank" rel="noopener noreferrer">NCSC New Zealand: CVE-2026-109618 and CVE-2026-109619 affecting PHP</a></li>
+            <li><a href="https://x.com/FBICyberDiv/status/2112921648252719420" target="_blank" rel="noopener noreferrer">FBI Cyber Division on X: warning about the two PHP vulnerabilities</a></li>
+        </ul>
+    </div>
+
+    <div class="max-w-3xl mx-auto px-6">
+        <div class="aff-footer">
+            <div class="mono text-[10px] text-[#84cc16] uppercase tracking-widest mb-3">// Next steps</div>
+            <div class="aff-grid">
+                <a href="/free-quote.html" class="aff-tile">
+                    <div class="aff-tile-name">Free quote</div>
+                    <div class="aff-tile-desc">A site or system built to limit the damage if something goes wrong.</div>
+                    <span class="aff-tile-cta">Get a quote →</span>
+                </a>
+                <a href="https://wa.me/27661180036" class="aff-tile" target="_blank" rel="noopener noreferrer">
+                    <div class="aff-tile-name">Check my website</div>
+                    <div class="aff-tile-desc">Send us your address on WhatsApp and we will tell you what we can see.</div>
+                    <span class="aff-tile-cta">Message now →</span>
+                </a>
+                <a href="/business-tech/who-can-see-what-business-data-access-south-africa.html" class="aff-tile">
+                    <div class="aff-tile-name">Who can see what</div>
+                    <div class="aff-tile-desc">How to limit what an attacker can reach.</div>
+                    <span class="aff-tile-cta">Read the guide →</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mt-8">
+            <div>
+                <div class="mono text-[10px] text-zinc-400 uppercase tracking-widest mb-1">Written by</div>
+                <div class="font-bold text-zinc-900">Jarrit Hosking</div>
+                <div class="mono text-[10px] text-zinc-400">Forge Vertical &middot; Cape Town &middot; October 24, 2026</div>
+            </div>
+            <div class="flex gap-3 flex-wrap">
+                <a href="/business-tech/articles.html" class="mono text-[10px] font-bold uppercase tracking-widest border border-zinc-200 px-5 py-3 rounded-xl hover:border-zinc-400 transition-all text-zinc-600">&larr; All Business Tech</a>
+                <a href="/business-tech/who-can-see-what-business-data-access-south-africa.html" class="mono text-[10px] font-bold uppercase tracking-widest border border-zinc-200 px-5 py-3 rounded-xl hover:border-zinc-400 transition-all text-zinc-600">Who can see what &rarr;</a>
+                <a href="/free-quote.html" style="background:linear-gradient(90deg,#10b981,#84cc16);" class="mono text-[10px] font-bold uppercase tracking-widest px-5 py-3 rounded-xl text-white hover:opacity-90 transition-all">Free quote &rarr;</a>
+            </div>
+        </div>
+    </div>
+
+</article>
+<div id="global-footer"></div>
+<script src="https://cdn.tailwindcss.com"></script>
+</body>
+</html>
