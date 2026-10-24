@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Forge Vertical builds systems where people only ever see what they're meant to see — franchise networks, financial data, marketplaces, and company data, with every change logged. Cape Town, South Africa.">
+    <meta name="description" content="Systems where people only ever see what they're meant to see, for franchises, medical practices, financial and law firms. Every change recorded. Cape Town, South Africa.">
     <link rel="canonical" href="https://www.forgevertical.com/data-access-control.html" />
-    <title>Who Can See What? | Forge Vertical</title>
+    <title>Who Can See What? Data Access Control for Franchises &amp; Practices | Forge Vertical</title>
 
     <script type="application/ld+json">
     {
@@ -15,9 +15,14 @@
           "@type": "Service",
           "@id": "https://www.forgevertical.com/data-access-control.html#service",
           "name": "Access-Controlled Data Systems",
-          "provider": { "@id": "https://www.forgevertical.com/#org" },
-          "description": "Cloud systems built so each person only ever sees the data meant for them, with every access and change recorded. Built for franchise networks, financial and bookkeeping practices, and marketplaces handling sensitive data under POPIA.",
-          "areaServed": ["ZA", "Worldwide"],
+          "provider": {
+            "@id": "https://www.forgevertical.com/#org"
+          },
+          "description": "Cloud systems built so each person only ever sees the data meant for them, with every access and change recorded. Built for franchise networks, medical practices, financial firms, law firms and other businesses holding sensitive data, with South Africa's POPIA in mind.",
+          "areaServed": [
+            "ZA",
+            "Worldwide"
+          ],
           "url": "https://www.forgevertical.com/data-access-control.html"
         },
         {
@@ -25,26 +30,42 @@
           "mainEntity": [
             {
               "@type": "Question",
-              "name": "What does 'access matches need' actually mean?",
+              "name": "What does 'only sees what they're meant to see' actually mean?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "It means each person who logs into a system can only see the data that belongs to them or that they've been specifically given permission to see — nothing more. A franchisee can't see another franchisee's numbers. A bookkeeper's client can't see another client's documents. It's enforced in the system itself, not left to a setting someone could get wrong."
+                "text": "Each person who logs in sees only their own information, or what they have been specifically given permission to see. A franchisee can't see another franchisee's numbers. A client can't see another client's documents. The rules are built into the system itself, not left to a setting someone could get wrong."
               }
             },
             {
               "@type": "Question",
-              "name": "Is this different from a normal login system?",
+              "name": "Is this different from a normal login?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Yes. A normal login just checks who you are. This checks who you are and then only ever shows you your own slice of the data — enforced at the data layer itself, so even a bug in the screen someone sees can't accidentally leak someone else's information."
+                "text": "Yes. A normal login only checks who you are. This also controls what you can see once you are in, and writes down everything that happens, so a slip on one screen shouldn't expose someone else's information."
               }
             },
             {
               "@type": "Question",
-              "name": "Does Forge Vertical have a live example of this?",
+              "name": "Is this right for a medical practice or a law firm?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Yes. TripSpace Global, Forge Vertical's own accommodation marketplace, runs on exactly this model today — partners are individually approved, each sees only their own dashboard, and payment data is held in a locked, access-controlled vault rather than a plain file."
+                "text": "Yes. Any practice that holds sensitive records about patients or clients needs each person to see only what their job requires. We talk through how your practice works and show you what the access should look like. We also confirm with you any rules your professional body sets."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Do you have a live example?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. TripSpace Global, Forge Vertical's own accommodation marketplace, runs on this model today. Partners are individually approved, each sees only their own dashboard, and payment details are kept in a locked, separate vault rather than a plain file."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What happens when I get in touch?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "We talk, in person or on WhatsApp, whichever you prefer. You tell us how your business runs and who needs to see what. We then show you, in plain language, what the access should look like and what it would take to build. You decide once you have seen it."
               }
             }
           ]
@@ -244,6 +265,8 @@
         .who-card { background: var(--surface); padding: 30px 26px; }
         .who-t { font-size: 17px; font-weight: 700; margin-bottom: 10px; }
         .who-d { font-size: 14px; color: var(--muted2); line-height: 1.7; font-weight: 300; }
+        .who-grid.sep { background: none; border: none; gap: 16px; overflow: visible; }
+        .who-grid.sep .who-card { border: 1px solid var(--border); border-radius: 12px; }
 
         /* COMPLIANCE */
         .comp-box {
@@ -260,6 +283,15 @@
         }
         .comp-h { font-size: clamp(20px, 2.4vw, 26px); font-weight: 700; margin-bottom: 12px; letter-spacing: -0.015em; }
         .comp-d { font-size: 14px; color: var(--muted2); font-weight: 300; line-height: 1.75; }
+
+        /* FAQ */
+        .faq-list { max-width: 760px; margin: 44px auto 0; display: flex; flex-direction: column; gap: 10px; }
+        .faq-q { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; }
+        .faq-q summary { cursor: pointer; list-style: none; padding: 18px 22px; font-size: 16px; font-weight: 600; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+        .faq-q summary::-webkit-details-marker { display: none; }
+        .faq-q summary::after { content: '+'; color: var(--accent); font-weight: 700; font-size: 22px; line-height: 1; flex-shrink: 0; }
+        .faq-q[open] summary::after { content: '\2013'; }
+        .faq-q p { padding: 0 22px 20px; font-size: 14.5px; color: var(--muted2); line-height: 1.75; font-weight: 300; }
 
         /* CTA */
         #cta { padding: 100px 0; text-align: center; background: var(--surface); border-top: 1px solid var(--border); }
@@ -279,9 +311,9 @@
     <div class="wrap">
         <div class="eyebrow reveal">Forge Vertical · Access &amp; Data Control</div>
         <h1 class="hdr-h1 reveal">Not everyone who logs in<br>should see everything.</h1>
-        <p class="hdr-sub reveal">Franchise owners, bookkeepers, and anyone running a system with more than one type of user all end up facing the same question eventually: who can actually see what — and can you prove it? We build the system so the answer is always exactly what it should be.</p>
+        <p class="hdr-sub reveal">Franchise owners, medical practices, financial and law firms, and anyone whose system has more than one type of user all face the same question sooner or later: who can actually see what, and can you prove it? We build it so the answer is always clear.</p>
         <div class="hero-btns reveal">
-            <a href="/free-quote.html" class="btn-p">Talk through your system →</a>
+            <a href="/free-quote.html" class="btn-p">Talk it through →</a>
             <a href="https://wa.me/27661180036" target="_blank" rel="noopener noreferrer" class="btn-g">WhatsApp Jarrit</a>
         </div>
     </div>
@@ -290,7 +322,7 @@
 <section>
     <div class="wrap">
         <p class="principle-lede reveal">The idea is simple, even if the engineering behind it isn't: <b>each person only ever sees what belongs to them</b> — and everything that happens is written down, automatically, so nobody has to take your word for it.</p>
-        <p class="principle-note reveal">Most systems get this half right with a login screen. A login tells you who someone is. It doesn't stop them from stumbling onto data that was never meant for them — another branch's customer list, another client's invoices, another partner's numbers. That gap is where trust usually breaks down, and it's the part most off-the-shelf software never actually solves.</p>
+        <p class="principle-note reveal">Most systems get this half right with a login screen. A login tells you who someone is. It doesn't stop them from stumbling onto data that was never meant for them — another branch's customer list, another client's invoices, another patient's file, another partner's numbers. That gap is where trust usually breaks down, and it's the part most off-the-shelf software never actually solves.</p>
 
         <div class="principle-img reveal">
             <img src="assets/images/Isolated-Data-Automatic-Audit-Trail.png" alt="Diagram comparing a typical system, where a login verifies identity but still leaves data shared and exposed to other branches, clients and partners, against Forge Vertical's approach, where each user — host, traveller, partner, affiliate — only ever reaches their own data, with every login, access, change and action written to an automatic audit trail." loading="lazy" width="1536" height="646">
@@ -301,7 +333,7 @@
 <section class="alt">
     <div class="wrap">
         <div class="diagram-head reveal">
-            <div class="eyebrow" style="justify-content:center;">Where it applies</div>
+            <div class="eyebrow" style="justify-content:center;">In practice</div>
             <h2 class="sh">Sensitive data is hiding in every business.</h2>
             <p class="ss">The exact shape changes depending on who you are. The underlying problem doesn't.</p>
         </div>
@@ -380,7 +412,7 @@
 <section>
     <div class="wrap">
         <div class="diagram-head reveal">
-            <div class="eyebrow" style="justify-content:center;">Built-in, not bolted on</div>
+            <div class="eyebrow" style="justify-content:center;">What changes</div>
             <h2 class="sh">What you actually get</h2>
             <p class="ss">No jargon. Just what changes once this is built properly, from day one.</p>
         </div>
@@ -410,9 +442,9 @@
             <div class="bcard">
                 <div class="bcard-head">
                     <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 7.5-8 10-4.5-2.5-8-5-8-10V6l8-4z"/></svg>
-                    <div class="bt">Meets POPIA</div>
+                    <div class="bt">Built for POPIA</div>
                 </div>
-                <div class="bcard-body"><p>Built around South African data protection law from the start, not patched in after the fact once it's a problem.</p></div>
+                <div class="bcard-body"><p>Access rules, activity records and one-click removal that help you meet your POPIA duties around who can see personal information.</p></div>
             </div>
             <div class="bcard">
                 <div class="bcard-head">
@@ -426,7 +458,7 @@
                     <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
                     <div class="bt">Built In, Not Bolted On</div>
                 </div>
-                <div class="bcard-body"><p>Enforced in how the data itself is stored — not a setting someone could forget to tick.</p></div>
+                <div class="bcard-body"><p>Privacy is part of how the system is built from day one, not a switch someone has to remember to turn on.</p></div>
             </div>
         </div>
     </div>
@@ -447,11 +479,11 @@
                 <span class="proof-tag">Commission-free bookings</span>
             </div>
             <ul class="proof-points">
-                <li><b>The full admin dashboard — bookings, revenue, every business on the platform — is reachable by one person.</b> Nobody else can get to it, no matter how they try.</li>
+                <li><b>The full admin dashboard — bookings, revenue, every business on the platform — is reachable by one person.</b> Everyone else is shut out, and every attempt to get in is recorded.</li>
                 <li><b>Partners don't get access automatically.</b> Someone has to be individually approved, and has to agree to the platform's terms, before they're ever let in.</li>
                 <li><b>Once approved, a partner sees their own dashboard — and nothing else.</b> They can't see another partner's numbers, bookings, or customers, even though they're all using the same platform.</li>
                 <li><b>Access can be switched off the same way it was switched on</b> — one click revokes a partner's access entirely, immediately, no waiting on a developer to go dig through a database.</li>
-                <li><b>Payment details aren't sitting in a spreadsheet or a plain file anywhere.</b> They're held in a dedicated, locked vault built for exactly that purpose — the kind of system banks and payment processors use, not a folder someone could stumble into.</li>
+                <li><b>Payment details aren't sitting in a spreadsheet or a plain file anywhere.</b> They're held in a dedicated, locked vault built for exactly that purpose, kept apart from everything else and not in a folder someone could stumble into.</li>
                 <li><b>Information moving between a host and a traveller is encrypted in transit</b> — scrambled so that even if it were intercepted somewhere in between, it couldn't be read.</li>
             </ul>
         </div>
@@ -465,14 +497,22 @@
             <h2 class="sh">If more than one type of person logs in, this is for you.</h2>
             <p class="ss">The exact shape changes depending on the business. The underlying principle doesn't.</p>
         </div>
-        <div class="who-grid reveal">
+        <div class="who-grid sep reveal">
             <div class="who-card">
                 <div class="who-t">Franchise &amp; multi-branch businesses</div>
                 <div class="who-d">Head office needs to see everything. Each branch or franchisee needs to see their own — and nothing belonging to anyone else, even though they're all on the same system.</div>
             </div>
             <div class="who-card">
-                <div class="who-t">Bookkeepers &amp; financial practices</div>
+                <div class="who-t">Financial firms &amp; bookkeepers</div>
                 <div class="who-d">Every client uploads and receives their own documents through their own private space — never a shared folder, a group inbox, or a login where one client could stumble onto another's financials.</div>
+            </div>
+            <div class="who-card">
+                <div class="who-t">Medical practices</div>
+                <div class="who-d">Patient records are among the most sensitive information there is. Reception, practitioners, billing and management each see what their job needs and nothing more, with a record of who opened what.</div>
+            </div>
+            <div class="who-card">
+                <div class="who-t">Law firms</div>
+                <div class="who-d">Client files are confidential by nature. Each matter is visible only to the people working on it, and the partners keep the full picture, with every access recorded.</div>
             </div>
             <div class="who-card">
                 <div class="who-t">Any business holding other people's data</div>
@@ -497,10 +537,50 @@
     </div>
 </section>
 
+<section>
+    <div class="wrap">
+        <div class="diagram-head reveal">
+            <div class="eyebrow" style="justify-content:center;">Simple next step</div>
+            <h2 class="sh">Deciding is easy.</h2>
+            <p class="ss">No technical homework. This is all that happens.</p>
+        </div>
+        <div class="who-grid sep reveal" style="margin-top:0;">
+            <div class="who-card">
+                <div class="who-t">1. Tell us how your business runs</div>
+                <div class="who-d">Branches, practitioners, staff, clients: who needs to see what. A short chat in person or on WhatsApp is enough.</div>
+            </div>
+            <div class="who-card">
+                <div class="who-t">2. We show you the picture</div>
+                <div class="who-d">A simple diagram of who sees what, in plain language, and what it would take to build.</div>
+            </div>
+            <div class="who-card">
+                <div class="who-t">3. You decide</div>
+                <div class="who-d">No jargon and no pressure. If it is right for you, we start. If not, you still know what good looks like.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="alt">
+    <div class="wrap">
+        <div class="diagram-head reveal">
+            <div class="eyebrow" style="justify-content:center;">Common questions</div>
+            <h2 class="sh">Quick answers.</h2>
+        </div>
+        <div class="faq-list reveal">
+                <details class="faq-q"><summary>What does &#x27;only sees what they&#x27;re meant to see&#x27; actually mean?</summary><p>Each person who logs in sees only their own information, or what they have been specifically given permission to see. A franchisee can&#x27;t see another franchisee&#x27;s numbers. A client can&#x27;t see another client&#x27;s documents. The rules are built into the system itself, not left to a setting someone could get wrong.</p></details>
+                <details class="faq-q"><summary>Is this different from a normal login?</summary><p>Yes. A normal login only checks who you are. This also controls what you can see once you are in, and writes down everything that happens, so a slip on one screen shouldn&#x27;t expose someone else&#x27;s information.</p></details>
+                <details class="faq-q"><summary>Is this right for a medical practice or a law firm?</summary><p>Yes. Any practice that holds sensitive records about patients or clients needs each person to see only what their job requires. We talk through how your practice works and show you what the access should look like. We also confirm with you any rules your professional body sets.</p></details>
+                <details class="faq-q"><summary>Do you have a live example?</summary><p>Yes. TripSpace Global, Forge Vertical&#x27;s own accommodation marketplace, runs on this model today. Partners are individually approved, each sees only their own dashboard, and payment details are kept in a locked, separate vault rather than a plain file.</p></details>
+                <details class="faq-q"><summary>What happens when I get in touch?</summary><p>We talk, in person or on WhatsApp, whichever you prefer. You tell us how your business runs and who needs to see what. We then show you, in plain language, what the access should look like and what it would take to build. You decide once you have seen it.</p></details>
+        </div>
+    </div>
+</section>
+
 <section id="cta">
     <div class="wrap">
         <div class="cta-h reveal">Know exactly who can see what.</div>
-        <p class="cta-s reveal">Tell us how your business is structured — branches, clients, staff, partners — and we'll show you what the access map should actually look like.</p>
+        <p class="cta-s reveal">Tell us how your business runs — branches, practitioners, clients, staff — and we'll show you, in plain language, who should see what.</p>
         <div class="cta-btns reveal">
             <a href="/free-quote.html" class="btn-p">Start the conversation →</a>
             <a href="https://wa.me/27661180036" target="_blank" rel="noopener noreferrer" class="btn-g">WhatsApp Jarrit</a>
