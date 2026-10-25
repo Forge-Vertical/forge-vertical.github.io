@@ -1,14 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TY2J3RGWH2"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-TY2J3RGWH2');
-    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Custom web design for Cape Town businesses. Mobile-friendly, built to be found on Google and AI search, and you own everything. Get a free quote.">
@@ -386,6 +378,35 @@
         .work-card a:hover { text-decoration: underline; }
         .areas { max-width: 760px; margin: 28px auto 0; text-align: center; font-size: 14px; color: var(--muted2); line-height: 1.8; font-weight: 300; }
     </style>
+    <!-- Forge Vertical pixel guard: tracking fires for verified humans only -->
+    <script src="https://track.forgevertical.com/fv-guard.js"></script>
+    <script>
+      // gtag() is defined up front so events queue safely; Google's script itself only loads for humans.
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+
+      FV.onHuman(function() {
+        var g = document.createElement('script');
+        g.async = true;
+        g.src = 'https://www.googletagmanager.com/gtag/js?id=G-TY2J3RGWH2';
+        document.head.appendChild(g);
+        gtag('js', new Date());
+        gtag('config', 'G-TY2J3RGWH2');
+      });
+
+      FV.onHuman(function() {
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '1617088256559290');
+        fbq('track', 'PageView');
+      });
+    </script>
 </head>
 <body>
 <div id="global-nav"></div>
@@ -562,6 +583,23 @@ const obs = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('up'); });
 }, { threshold: 0.08 });
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+
+<script>
+// Conversion events for the ad: WhatsApp, call, email and quote-form clicks.
+document.addEventListener('click', function (e) {
+    var a = e.target.closest ? e.target.closest('a[href]') : null;
+    if (!a) return;
+    var h = a.getAttribute('href') || '';
+    var name = null;
+    if (h.indexOf('wa.me/') !== -1) name = 'whatsapp_click';
+    else if (h.indexOf('tel:') === 0) name = 'phone_click';
+    else if (h.indexOf('mailto:') === 0) name = 'email_click';
+    else if (h.indexOf('/free-quote.html') !== -1) name = 'quote_click';
+    if (!name) return;
+    try { gtag('event', name, { link_url: h, page_path: location.pathname }); } catch (err) {}
+    try { if (window.fbq) fbq('track', 'Contact'); } catch (err) {}
+});
 </script>
 
 <!-- Tailwind — nav.html and global.js rely on these utility classes -->
