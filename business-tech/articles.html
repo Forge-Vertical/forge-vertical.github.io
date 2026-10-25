@@ -156,6 +156,34 @@
         .write-btn-ghost{border:1px solid #232d3f;color:#6a7d96;}
         .write-btn-ghost:hover{border-color:#84cc16;color:#84cc16;}
     </style>
+    <!-- Forge Vertical pixel guard: tracking fires for verified humans only -->
+    <script src="https://track.forgevertical.com/fv-guard.js"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+
+      FV.onHuman(function() {
+        var g = document.createElement('script');
+        g.async = true;
+        g.src = 'https://www.googletagmanager.com/gtag/js?id=G-TY2J3RGWH2';
+        document.head.appendChild(g);
+        gtag('js', new Date());
+        gtag('config', 'G-TY2J3RGWH2');
+      });
+
+      FV.onHuman(function() {
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '1617088256559290');
+        fbq('track', 'PageView');
+      });
+    </script>
 </head>
 <body>
 <div id="global-nav"></div>
