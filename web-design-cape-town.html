@@ -64,7 +64,45 @@
             "name": "Cape Town"
           },
           "description": "Custom-built, mobile-friendly websites for Cape Town businesses, with SEO built in and full ownership handed to the client.",
-          "url": "https://www.forgevertical.com/web-design-cape-town.html"
+          "url": "https://www.forgevertical.com/web-design-cape-town.html",
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Web design packages",
+            "itemListElement": [
+              {
+                "@type": "Offer",
+                "name": "Starter website",
+                "description": "A professional mobile-friendly website with a .co.za domain and one year of hosting included.",
+                "price": "3500",
+                "priceCurrency": "ZAR"
+              },
+              {
+                "@type": "Offer",
+                "name": "Business website",
+                "description": "A multi-page website with Google setup and business email. From R4,500, fixed quote in writing.",
+                "price": "4500",
+                "priceCurrency": "ZAR"
+              },
+              {
+                "@type": "Offer",
+                "name": "Care plan",
+                "description": "Monthly updates, small changes and monitoring, with live results in the client portal.",
+                "priceSpecification": {
+                  "@type": "UnitPriceSpecification",
+                  "price": "650",
+                  "priceCurrency": "ZAR",
+                  "unitCode": "MON"
+                }
+              },
+              {
+                "@type": "Offer",
+                "name": "Business Tech hub article",
+                "description": "An article published on the Forge Vertical Business Tech hub within 24 hours.",
+                "price": "1500",
+                "priceCurrency": "ZAR"
+              }
+            ]
+          }
         },
         {
           "@type": "BreadcrumbList",
@@ -132,6 +170,22 @@
               "acceptedAnswer": {
                 "@type": "Answer",
                 "text": "You receive a handover with everything you need. If you want changes later, we quote them or handle them under a support plan, so you always know the cost before we start."
+              }
+            }
+            ,{
+              "@type": "Question",
+              "name": "What do your packages include?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The Starter website is R3,500 once-off and includes a .co.za domain and one year of hosting. The Business website starts from R4,500 and adds more pages, Google setup and business email. The Care plan is an optional R650 a month and covers updates, small changes and monitoring. Every website includes free access to your reporting portal."
+              }
+            }
+            ,{
+              "@type": "Question",
+              "name": "Why publish an article on the Business Tech hub?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "An article gives your business another page that can be found when people search, shows your expertise before anyone calls, and is written clearly so Google and AI tools can read it. No one can promise a position on Google, but we set each article up properly. Articles start from R1,500 and are published within 24 hours."
               }
             }
           ]
@@ -375,6 +429,41 @@
         .work-card a { color: var(--accent2); font-weight: 600; font-size: 14px; text-decoration: none; }
         .work-card a:hover { text-decoration: underline; }
         .areas { max-width: 760px; margin: 28px auto 0; text-align: center; font-size: 14px; color: var(--muted2); line-height: 1.8; font-weight: 300; }
+
+        /* HERO SPLIT + ILLUSTRATIONS */
+        .hero-split { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 48px; align-items: center; }
+        @media (max-width: 900px) { .hero-split { grid-template-columns: 1fr; gap: 32px; } }
+        .hero-art svg, .split-art svg { width: 100%; height: auto; display: block; }
+        .split { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+        @media (max-width: 900px) { .split { grid-template-columns: 1fr; gap: 32px; } .split.flip .split-art { order: -1; } }
+        .split .sh { margin-bottom: 14px; }
+        .tick-list { list-style: none; margin: 22px 0 28px; display: flex; flex-direction: column; gap: 12px; }
+        .tick-list li { position: relative; padding-left: 28px; font-size: 15px; color: var(--muted2); line-height: 1.65; font-weight: 300; }
+        .tick-list li b { color: var(--text); font-weight: 600; }
+        .tick-list li::before { content: ''; position: absolute; left: 0; top: 5px; width: 16px; height: 16px; border-radius: 50%; background: var(--accent-bg); border: 1px solid var(--accent); }
+        .tick-list li::after { content: ''; position: absolute; left: 5px; top: 9px; width: 6px; height: 3px; border-left: 2px solid var(--accent); border-bottom: 2px solid var(--accent); transform: rotate(-45deg); }
+
+        /* PACKAGES */
+        .pkg-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 48px; align-items: stretch; }
+        @media (max-width: 960px) { .pkg-grid { grid-template-columns: 1fr; max-width: 520px; margin-left: auto; margin-right: auto; } }
+        .pkg { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px 26px; display: flex; flex-direction: column; position: relative; }
+        .pkg.pop { border: 2px solid var(--accent); box-shadow: 0 10px 30px rgba(15,148,104,0.12); }
+        .pkg-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; }
+        .pkg-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.16em; color: var(--muted2); }
+        .pkg-flag { font-family: 'JetBrains Mono', monospace; font-size: 9.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; color: #fff; background: var(--accent); padding: 4px 10px; border-radius: 20px; }
+        .pkg-icon { width: 44px; height: 44px; border-radius: 12px; background: var(--accent-bg); display: flex; align-items: center; justify-content: center; margin-bottom: 14px; }
+        .pkg-icon svg { width: 24px; height: 24px; }
+        .pkg-price { font-size: 38px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.1; }
+        .pkg-price small { font-size: 15px; font-weight: 400; color: var(--muted2); letter-spacing: 0; }
+        .pkg-per { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); margin: 6px 0 20px; }
+        .pkg-sum { font-size: 14px; color: var(--muted2); line-height: 1.65; font-weight: 300; margin-bottom: 18px; }
+        .pkg .tick-list { margin: 0 0 24px; gap: 10px; flex: 1; }
+        .pkg .tick-list li { font-size: 14px; }
+        .pkg .btn-p, .pkg .btn-g { justify-content: center; width: 100%; }
+        .pkg-foot { text-align: center; font-size: 13.5px; color: var(--muted2); font-weight: 300; line-height: 1.7; max-width: 680px; margin: 30px auto 0; }
+        .pkg-foot a, .art-links a.txt { color: var(--accent2); font-weight: 600; text-decoration: none; }
+        .art-links { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+        .art-note { font-size: 13px; color: var(--muted); margin-top: 16px; line-height: 1.6; }
     </style>
     <!-- Forge Vertical pixel guard: tracking fires for verified humans only -->
     <script src="https://track.forgevertical.com/fv-guard.js"></script>
@@ -411,12 +500,63 @@
 
 <section id="header">
     <div class="wrap">
+        <div class="hero-split">
+        <div class="hero-text">
         <div class="eyebrow reveal">Web Design · Cape Town</div>
         <h1 class="hdr-h1 reveal">Web design in Cape Town that you own, and that gets found.</h1>
         <p class="hdr-sub reveal">Custom websites for Cape Town businesses. Built for phones, built to be found on Google and AI search, and handed over to you with nothing locked away. You deal directly with the person who builds it.</p>
         <div class="hero-btns reveal">
             <a href="/free-quote.html" class="btn-p">Get a free quote →</a>
             <a href="https://wa.me/27661180036" target="_blank" rel="noopener noreferrer" class="btn-g">WhatsApp Jarrit</a>
+        </div>
+        </div>
+        <div class="hero-art reveal" aria-hidden="true">
+            <svg viewBox="0 0 520 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustration of a website shown on a laptop and a phone">
+                <defs>
+                    <linearGradient id="hg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0f9468"/><stop offset="1" stop-color="#84cc16"/></linearGradient>
+                    <linearGradient id="hbg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#eafaf3"/><stop offset="1" stop-color="#f7f8fa"/></linearGradient>
+                </defs>
+                <rect x="10" y="20" width="500" height="360" rx="28" fill="url(#hbg)"/>
+                <circle cx="470" cy="60" r="34" fill="#0f9468" opacity="0.10"/>
+                <circle cx="60" cy="340" r="44" fill="#84cc16" opacity="0.12"/>
+                <!-- laptop -->
+                <rect x="70" y="78" width="320" height="206" rx="14" fill="#0c1017"/>
+                <rect x="80" y="88" width="300" height="186" rx="8" fill="#ffffff"/>
+                <rect x="80" y="88" width="300" height="22" rx="8" fill="#eef1f5"/>
+                <circle cx="94" cy="99" r="3.5" fill="#e2e5eb"/><circle cx="106" cy="99" r="3.5" fill="#e2e5eb"/><circle cx="118" cy="99" r="3.5" fill="#e2e5eb"/>
+                <rect x="140" y="94" width="160" height="10" rx="5" fill="#ffffff"/>
+                <rect x="96" y="124" width="150" height="14" rx="4" fill="#0c1017"/>
+                <rect x="96" y="144" width="110" height="14" rx="4" fill="#0c1017"/>
+                <rect x="96" y="170" width="130" height="6" rx="3" fill="#cfd4de"/>
+                <rect x="96" y="182" width="116" height="6" rx="3" fill="#cfd4de"/>
+                <rect x="96" y="204" width="70" height="22" rx="6" fill="url(#hg)"/>
+                <rect x="262" y="122" width="104" height="82" rx="10" fill="url(#hg)" opacity="0.92"/>
+                <path d="M278 188l22-26 16 16 22-30 18 22" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                <rect x="96" y="238" width="62" height="26" rx="6" fill="#eafaf3"/><rect x="168" y="238" width="62" height="26" rx="6" fill="#eafaf3"/><rect x="240" y="238" width="62" height="26" rx="6" fill="#eafaf3"/><rect x="312" y="238" width="54" height="26" rx="6" fill="#eafaf3"/>
+                <path d="M46 284h368l-14 22H60z" fill="#cfd4de"/>
+                <rect x="190" y="284" width="80" height="6" rx="3" fill="#9aa4b5"/>
+                <!-- phone -->
+                <rect x="352" y="140" width="116" height="214" rx="20" fill="#0c1017"/>
+                <rect x="360" y="152" width="100" height="190" rx="13" fill="#ffffff"/>
+                <rect x="396" y="146" width="28" height="5" rx="2.5" fill="#2b3342"/>
+                <rect x="368" y="162" width="84" height="56" rx="8" fill="url(#hg)"/>
+                <rect x="368" y="228" width="60" height="9" rx="4" fill="#0c1017"/>
+                <rect x="368" y="244" width="84" height="5" rx="2.5" fill="#cfd4de"/>
+                <rect x="368" y="255" width="72" height="5" rx="2.5" fill="#cfd4de"/>
+                <rect x="368" y="274" width="84" height="22" rx="6" fill="#eafaf3"/>
+                <rect x="368" y="304" width="84" height="22" rx="6" fill="#0f9468"/>
+                <!-- search chip -->
+                <g>
+                    <rect x="40" y="48" width="170" height="38" rx="19" fill="#ffffff" stroke="#cfd4de"/>
+                    <circle cx="64" cy="67" r="8" fill="none" stroke="#0f9468" stroke-width="3"/>
+                    <path d="M70 73l7 7" stroke="#0f9468" stroke-width="3" stroke-linecap="round"/>
+                    <rect x="88" y="62" width="90" height="9" rx="4.5" fill="#cfd4de"/>
+                </g>
+                <!-- badge -->
+                <circle cx="446" cy="120" r="26" fill="#ffffff" stroke="#0f9468" stroke-width="3"/>
+                <path d="M435 120l8 8 14-16" fill="none" stroke="#0f9468" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </div>
         </div>
     </div>
 </section>
@@ -470,6 +610,100 @@
                     <div class="bt">A Real Person</div>
                 </div>
                 <div class="bcard-body"><p>You deal with the person who builds your site. Message on WhatsApp, meet in Cape Town, and get a straight answer.</p></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="alt" id="packages">
+    <div class="wrap">
+        <div class="diagram-head reveal">
+            <div class="eyebrow" style="justify-content:center;">Packages</div>
+            <h2 class="sh">Clear prices. Pick what fits.</h2>
+            <p class="ss">Start small or go bigger. Every package comes with free access to your own reporting portal.</p>
+        </div>
+        <div class="pkg-grid reveal">
+            <div class="pkg">
+                <div class="pkg-top"><span class="pkg-label">Starter website</span></div>
+                <div class="pkg-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#0f9468" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></div>
+                <div class="pkg-price">R3,500</div>
+                <div class="pkg-per">once-off</div>
+                <p class="pkg-sum">A clean, professional website that gets your business online, with the domain and hosting sorted for the first year.</p>
+                <ul class="tick-list">
+                    <li>Your own <b>.co.za domain</b> and <b>one year of hosting</b></li>
+                    <li>Looks great on phones</li>
+                    <li>Enquiry form that lands in your inbox</li>
+                    <li>Set up so Google can find you</li>
+                    <li>Free access to your reporting portal</li>
+                </ul>
+                <a href="/free-quote.html" class="btn-g">Get started →</a>
+            </div>
+            <div class="pkg pop">
+                <div class="pkg-top"><span class="pkg-label">Business website</span><span class="pkg-flag">Popular</span></div>
+                <div class="pkg-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#0f9468" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 13l9 5 9-5"/><path d="M3 17.5l9 5 9-5" opacity=".5"/></svg></div>
+                <div class="pkg-price"><small>from </small>R4,500</div>
+                <div class="pkg-per">once-off, fixed quote in writing</div>
+                <p class="pkg-sum">For businesses that need more pages, more than one location, or a fuller online presence.</p>
+                <ul class="tick-list">
+                    <li><b>Everything in Starter</b></li>
+                    <li>More pages, such as services or a second branch</li>
+                    <li>Google Business Profile, Analytics and Search Console set up</li>
+                    <li>Business email on your own domain</li>
+                    <li>Domain and hosting at provider cost, no mark-up</li>
+                </ul>
+                <a href="/free-quote.html" class="btn-p">Get a free quote →</a>
+            </div>
+            <div class="pkg">
+                <div class="pkg-top"><span class="pkg-label">Care plan</span></div>
+                <div class="pkg-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#0f9468" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 4.5-3.2 7.8-8 9-4.8-1.2-8-4.5-8-9V6l8-3z"/><path d="M9 12l2 2 4-4"/></svg></div>
+                <div class="pkg-price">R650 <small>a month</small></div>
+                <div class="pkg-per">optional, add to any website</div>
+                <p class="pkg-sum">We keep your website healthy and up to date, so you can get on with running your business.</p>
+                <ul class="tick-list">
+                    <li>Updates and small changes included</li>
+                    <li>Your site is watched for problems</li>
+                    <li><b>Live results in your portal</b>, so there is no monthly report to wait for</li>
+                    <li>A real person to message when something needs fixing</li>
+                </ul>
+                <a href="https://wa.me/27661180036?text=Hi%20Jarrit%2C%20I%27d%20like%20to%20ask%20about%20the%20Care%20plan" target="_blank" rel="noopener noreferrer" class="btn-g">Ask about Care →</a>
+            </div>
+        </div>
+        <p class="pkg-foot reveal">Extra pages from R650 each. Bigger builds, online shops and custom systems are quoted individually. Prices are before any extras you choose, and you always get the final price in writing before work starts.</p>
+    </div>
+</section>
+
+<section id="portal">
+    <div class="wrap">
+        <div class="split">
+            <div class="split-copy reveal">
+                <div class="eyebrow">Your own portal</div>
+                <h2 class="sh">See how your website is doing, any time.</h2>
+                <p class="ss">Every website we build comes with free access to your own reporting portal. Nothing to install, and no report arriving at the end of the month.</p>
+                <ul class="tick-list">
+                    <li><b>Visitors:</b> see how many people visit and where they come from</li>
+                    <li><b>Google:</b> see what people searched for before they found you</li>
+                    <li><b>Site health:</b> know straight away if something is wrong</li>
+                    <li><b>Requests:</b> ask for extra help, like a new article or a search check, whenever you want it</li>
+                </ul>
+                <a href="/free-quote.html" class="btn-p">Get a free quote →</a>
+            </div>
+            <div class="split-art reveal" aria-hidden="true">
+                <svg viewBox="0 0 520 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustration of a reporting dashboard with a chart and three tiles">
+                    <defs><linearGradient id="pg" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#0f9468"/><stop offset="1" stop-color="#84cc16"/></linearGradient>
+                    <linearGradient id="pa" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0f9468" stop-opacity=".22"/><stop offset="1" stop-color="#0f9468" stop-opacity="0"/></linearGradient></defs>
+                    <rect x="8" y="8" width="504" height="364" rx="22" fill="#ffffff" stroke="#e2e5eb"/>
+                    <rect x="8" y="8" width="504" height="44" rx="22" fill="#eef1f5"/><rect x="8" y="30" width="504" height="22" fill="#eef1f5"/>
+                    <circle cx="34" cy="30" r="5" fill="#cfd4de"/><circle cx="52" cy="30" r="5" fill="#cfd4de"/><circle cx="70" cy="30" r="5" fill="#cfd4de"/>
+                    <rect x="28" y="72" width="140" height="64" rx="12" fill="#eafaf3"/><rect x="42" y="86" width="50" height="7" rx="3.5" fill="#9aa4b5"/><rect x="42" y="102" width="76" height="18" rx="5" fill="#0c1017"/>
+                    <rect x="190" y="72" width="140" height="64" rx="12" fill="#f7f8fa" stroke="#e2e5eb"/><rect x="204" y="86" width="50" height="7" rx="3.5" fill="#9aa4b5"/><rect x="204" y="102" width="62" height="18" rx="5" fill="#0c1017"/>
+                    <rect x="352" y="72" width="140" height="64" rx="12" fill="#f7f8fa" stroke="#e2e5eb"/><rect x="366" y="86" width="50" height="7" rx="3.5" fill="#9aa4b5"/><rect x="366" y="102" width="88" height="18" rx="5" fill="#0c1017"/>
+                    <rect x="28" y="156" width="464" height="196" rx="14" fill="#f7f8fa" stroke="#e2e5eb"/>
+                    <g stroke="#e2e5eb"><path d="M52 200H468M52 245H468M52 290H468"/></g>
+                    <path d="M52 310 C 110 300, 140 270, 190 262 S 270 270, 320 225 S 410 190, 468 176 L468 330 L52 330 Z" fill="url(#pa)"/>
+                    <path d="M52 310 C 110 300, 140 270, 190 262 S 270 270, 320 225 S 410 190, 468 176" fill="none" stroke="url(#pg)" stroke-width="4" stroke-linecap="round"/>
+                    <circle cx="468" cy="176" r="7" fill="#fff" stroke="#0f9468" stroke-width="3"/>
+                    <rect x="52" y="168" width="90" height="8" rx="4" fill="#cfd4de"/>
+                </svg>
             </div>
         </div>
     </div>
@@ -546,7 +780,56 @@
     </div>
 </section>
 
-<section class="alt">
+<section class="alt" id="articles">
+    <div class="wrap">
+        <div class="split flip">
+            <div class="split-art reveal" aria-hidden="true">
+                <svg viewBox="0 0 520 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustration of an article being found through a search box">
+                    <defs><linearGradient id="ag" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0f9468"/><stop offset="1" stop-color="#84cc16"/></linearGradient></defs>
+                    <rect x="8" y="8" width="504" height="364" rx="22" fill="#eafaf3"/>
+                    <rect x="60" y="34" width="330" height="40" rx="20" fill="#fff" stroke="#cfd4de"/>
+                    <circle cx="86" cy="54" r="8" fill="none" stroke="#0f9468" stroke-width="3"/><path d="M92 60l7 7" stroke="#0f9468" stroke-width="3" stroke-linecap="round"/>
+                    <rect x="112" y="49" width="150" height="10" rx="5" fill="#cfd4de"/>
+                    <!-- back cards -->
+                    <rect x="84" y="112" width="340" height="212" rx="16" fill="#fff" stroke="#e2e5eb" transform="rotate(-4 254 218)"/>
+                    <rect x="96" y="106" width="340" height="212" rx="16" fill="#fff" stroke="#e2e5eb" transform="rotate(2 266 212)"/>
+                    <!-- front article -->
+                    <rect x="92" y="100" width="340" height="224" rx="16" fill="#fff" stroke="#cfd4de"/>
+                    <rect x="108" y="116" width="308" height="86" rx="10" fill="url(#ag)"/>
+                    <path d="M130 186l40-34 28 22 46-44 52 36 40-20" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/>
+                    <circle cx="372" cy="146" r="14" fill="#fff" opacity=".9"/>
+                    <rect x="108" y="218" width="200" height="14" rx="5" fill="#0c1017"/>
+                    <rect x="108" y="242" width="296" height="7" rx="3.5" fill="#cfd4de"/>
+                    <rect x="108" y="256" width="270" height="7" rx="3.5" fill="#cfd4de"/>
+                    <rect x="108" y="270" width="284" height="7" rx="3.5" fill="#cfd4de"/>
+                    <rect x="108" y="292" width="92" height="22" rx="6" fill="#eafaf3"/>
+                    <!-- AI bubble -->
+                    <path d="M400 232h88a14 14 0 0114 14v52a14 14 0 01-14 14h-52l-22 20v-20h-14a14 14 0 01-14-14v-52a14 14 0 0114-14z" fill="#0c1017" transform="translate(-6 -16)"/>
+                    <rect x="412" y="244" width="64" height="7" rx="3.5" fill="#84cc16"/><rect x="412" y="258" width="76" height="7" rx="3.5" fill="#9aa4b5"/><rect x="412" y="272" width="52" height="7" rx="3.5" fill="#9aa4b5"/>
+                </svg>
+            </div>
+            <div class="split-copy reveal">
+                <div class="eyebrow">Business Tech hub</div>
+                <h2 class="sh">Get your story published, and found.</h2>
+                <p class="ss">A website tells people who you are. An article shows them what you know. We publish stories from South African businesses on our Business Tech hub, written clearly and set up so search engines and AI tools can understand them.</p>
+                <ul class="tick-list">
+                    <li><b>More to find.</b> Every article is another page that can show up when someone searches for what you do.</li>
+                    <li><b>Trust before the call.</b> Customers who read how you solve a problem are more ready to get in touch.</li>
+                    <li><b>Answers AI can use.</b> Clear, well-structured articles are easier for Google and AI tools to read and mention. We can't promise a position, but we set it up properly.</li>
+                    <li><b>It keeps working.</b> An article stays online and can bring in visitors long after it is published.</li>
+                </ul>
+                <div class="art-links">
+                    <a href="mailto:jarrit@forgevertical.com?subject=Business%20Tech%20Article%20Submission" class="btn-p">Submit a brief →</a>
+                    <a href="https://wa.me/27661180036?text=Hi%20Jarrit%2C%20I%20want%20to%20publish%20a%20business%20tech%20article" target="_blank" rel="noopener noreferrer" class="btn-g">WhatsApp Jarrit</a>
+                    <a href="/business-tech/articles.html" class="txt" style="color:var(--accent2);font-weight:600;text-decoration:none;font-size:14px;">See the hub →</a>
+                </div>
+                <p class="art-note">Articles from R1,500, published within 24 hours.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
     <div class="wrap">
         <div class="diagram-head reveal">
             <div class="eyebrow" style="justify-content:center;">Common questions</div>
@@ -559,6 +842,8 @@
                 <details class="faq-q"><summary>How long does it take?</summary><p>It depends mostly on how quickly your photos, text and details reach us. We agree the dates in the quote, and a site can go live while you are still finding extra photos. They can be added afterwards.</p></details>
                 <details class="faq-q"><summary>Do you only work in Cape Town?</summary><p>We are based in Cape Town and work with local businesses in person or on WhatsApp. We also work with clients elsewhere in South Africa and abroad.</p></details>
                 <details class="faq-q"><summary>What happens after the site is live?</summary><p>You receive a handover with everything you need. If you want changes later, we quote them or handle them under a support plan, so you always know the cost before we start.</p></details>
+                <details class="faq-q"><summary>What do your packages include?</summary><p>The Starter website is R3,500 once-off and includes a .co.za domain and one year of hosting. The Business website starts from R4,500 and adds more pages, Google setup and business email. The Care plan is an optional R650 a month and covers updates, small changes and monitoring. Every website includes free access to your reporting portal.</p></details>
+                <details class="faq-q"><summary>Why publish an article on the Business Tech hub?</summary><p>An article gives your business another page that can be found when people search, shows your expertise before anyone calls, and is written clearly so Google and AI tools can read it. No one can promise a position on Google, but we set each article up properly. Articles start from R1,500 and are published within 24 hours.</p></details>
         </div>
     </div>
 </section>
