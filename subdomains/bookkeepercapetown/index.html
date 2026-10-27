@@ -159,48 +159,52 @@
         <p>Speak to our Cape Town or Johannesburg team, Monday to Friday, 8:00–16:00.</p>
       </div>
     </div>
-    <div class="offices-layout">
-      <div class="map-locator">
-        <div class="map-locator-topbar">
-          <label for="officeLocatorFilter" class="sr-only">Filter locations</label>
-          <select id="officeLocatorFilter">
-            <option value="all">All locations</option>
-            <option value="cape-town">Cape Town — Head office</option>
-            <option value="johannesburg">Johannesburg — Sandown office</option>
-          </select>
-        </div>
-        <div class="map-locator-body">
-          <div id="officesMap" class="map-locator-map" role="img" aria-label="Map of South Africa showing the Cape Town and Johannesburg offices"></div>
+    <div class="map-locator">
+      <div class="map-locator-topbar">
+        <label for="officeLocatorFilter" class="sr-only">Filter locations</label>
+        <select id="officeLocatorFilter">
+          <option value="all">All locations</option>
+          <option value="cape-town">Cape Town — Head office</option>
+          <option value="johannesburg">Johannesburg — Sandown office</option>
+        </select>
+      </div>
+      <div class="map-locator-body">
+        <div id="officesMap" class="map-locator-map" role="img" aria-label="Map of South Africa showing the Cape Town and Johannesburg offices"></div>
+        <div class="map-locator-sidebar">
           <div class="map-locator-list" id="officeLocatorList">
-            <button type="button" class="map-locator-item is-active" data-id="cape-town" data-lat="-33.8886" data-lng="18.5107">
+            <button type="button" class="map-locator-item is-active" data-id="cape-town" data-lat="-33.8886" data-lng="18.5107" data-number="1">
               <img src="assets/css/images/book-keepers-cape-town.jpg" alt="">
               <span><strong>Bookkeepers South Africa</strong><small>CAPE TOWN — HEAD OFFICE</small></span>
             </button>
-            <button type="button" class="map-locator-item" data-id="johannesburg" data-lat="-26.1076" data-lng="28.0567">
+            <button type="button" class="map-locator-item" data-id="johannesburg" data-lat="-26.1076" data-lng="28.0567" data-number="2">
               <img src="assets/css/images/consultation-office.jpg" alt="">
               <span><strong>Bookkeepers South Africa</strong><small>JOHANNESBURG — SANDOWN OFFICE</small></span>
             </button>
           </div>
+          <div class="map-locator-search">
+            <input type="text" id="officeLocatorSearch" placeholder="Find your local office">
+          </div>
         </div>
       </div>
-      <div class="office-cards">
-        <div class="office">
-          <h3>Cape Town</h3>
-          <p>Unit 129, Millennium Business Park</p>
-          <p>Century City, Cape Town, 7441</p>
-          <div class="office-links">
-            <a href="tel:+27215259787">Call: +27 21 525 9787</a>
-            <a href="https://www.google.com/maps/search/?api=1&query=Unit+129+Millennium+Business+Park+Century+City+Cape+Town" target="_blank" rel="noopener">Get directions</a>
-          </div>
+    </div>
+
+    <div class="office-cards">
+      <div class="office">
+        <h3>Cape Town</h3>
+        <p>Unit 129, Millennium Business Park</p>
+        <p>Century City, Cape Town, 7441</p>
+        <div class="office-links">
+          <a href="tel:+27215259787">Call: +27 21 525 9787</a>
+          <a href="https://www.google.com/maps/search/?api=1&query=Unit+129+Millennium+Business+Park+Century+City+Cape+Town" target="_blank" rel="noopener">Get directions</a>
         </div>
-        <div class="office">
-          <h3>Johannesburg</h3>
-          <p>West Tower, 2nd Floor, Nelson Mandela Square</p>
-          <p>Maude Street, Sandown, 2146</p>
-          <div class="office-links">
-            <a href="tel:+27101406056">Call: +27 10 140 6056</a>
-            <a href="https://www.google.com/maps/search/?api=1&query=West+Tower+Nelson+Mandela+Square+Sandown+Johannesburg" target="_blank" rel="noopener">Get directions</a>
-          </div>
+      </div>
+      <div class="office">
+        <h3>Johannesburg</h3>
+        <p>West Tower, 2nd Floor, Nelson Mandela Square</p>
+        <p>Maude Street, Sandown, 2146</p>
+        <div class="office-links">
+          <a href="tel:+27101406056">Call: +27 10 140 6056</a>
+          <a href="https://www.google.com/maps/search/?api=1&query=West+Tower+Nelson+Mandela+Square+Sandown+Johannesburg" target="_blank" rel="noopener">Get directions</a>
         </div>
       </div>
     </div>
@@ -475,10 +479,10 @@
     'johannesburg':{ name: 'Johannesburg — Sandown office', lat: -26.1076, lng: 28.0567 }
   };
 
-  function brandIcon(variant){
+  function brandIcon(number, variant){
     return L.divIcon({
       className: 'office-map-pin' + (variant === 'jhb' ? ' jhb' : ''),
-      html: '<span></span>',
+      html: '<span>' + number + '</span>',
       iconSize: [26, 26],
       iconAnchor: [13, 13],
       popupAnchor: [0, -14]
@@ -493,9 +497,9 @@
   }).addTo(map);
 
   var markers = {};
-  var ctMarker = L.marker([locations['cape-town'].lat, locations['cape-town'].lng], { icon: brandIcon() }).addTo(map)
+  var ctMarker = L.marker([locations['cape-town'].lat, locations['cape-town'].lng], { icon: brandIcon(1) }).addTo(map)
     .bindPopup('<strong>Bookkeepers South Africa</strong><br>Cape Town — Head office');
-  var jhbMarker = L.marker([locations['johannesburg'].lat, locations['johannesburg'].lng], { icon: brandIcon('jhb') }).addTo(map)
+  var jhbMarker = L.marker([locations['johannesburg'].lat, locations['johannesburg'].lng], { icon: brandIcon(2, 'jhb') }).addTo(map)
     .bindPopup('<strong>Bookkeepers South Africa</strong><br>Johannesburg — Sandown office');
   markers['cape-town'] = ctMarker;
   markers['johannesburg'] = jhbMarker;
@@ -527,6 +531,17 @@
 
   ctMarker.on('click', function(){ setActiveItem('cape-town'); });
   jhbMarker.on('click', function(){ setActiveItem('johannesburg'); });
+
+  var search = document.getElementById('officeLocatorSearch');
+  if(search){
+    search.addEventListener('input', function(){
+      var q = search.value.trim().toLowerCase();
+      document.querySelectorAll('.map-locator-item').forEach(function(btn){
+        var text = btn.textContent.toLowerCase();
+        btn.style.display = text.indexOf(q) === -1 ? 'none' : '';
+      });
+    });
+  }
 
   var filter = document.getElementById('officeLocatorFilter');
   if(filter){
