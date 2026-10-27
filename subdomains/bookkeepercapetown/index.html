@@ -531,6 +531,110 @@
     pinEls[id] = g;
   });
 
+  // ---- Pan & zoom engine -------------------------------------------------
+  // Real map libraries (Leaflet, Mapbox, Google Maps, your Command Center
+  // map) all do this the same way: shrink/grow and slide the visible
+  // "viewBox" window over a fixed coordinate space, rather than CSS-scaling
+  // the whole element. That's what makes wheel-zoom feel like it's zooming
+  // *toward the cursor* instead of just scaling the whole box, and it's
+  // what makes drag-to-pan possible at all. No library needed for this —
+  // SVG's native viewBox attribute already *is* that window.
+  var FULL = (function(){
+    var b = svg.viewBox.baseVal;
+    return { x: b.x, y: b.y, w: b.width, h: b.height };
+  })();
+  var view = { x: FULL.x, y: FULL.y, w: FULL.w, h: FULL.h };
+  var MIN_W = FULL.w / 3.4; // most zoomed in — beyond this there's no extra detail to show
+  var aspect = FULL.h / FULL.w;
+
+  function applyView(){
+    svg.setAttribute('viewBox', view.x + ' ' + view.y + ' ' + view.w + ' ' + view.h);
+  }
+
+  function clampView(x, y, w, h){
+    w = Math.max(MIN_W, Math.min(FULL.w, w));
+    h = w * aspect;
+    if(w >= FULL.w){ x = FULL.x; y = FULL.y; }
+    else {
+      x = Math.max(FULL.x, Math.min(FULL.x + FULL.w - w, x));
+      y = Math.max(FULL.y, Math.min(FULL.y + FULL.h - h, y));
+    }
+    return { x: x, y: y, w: w, h: h };
+  }
+
+  function setView(x, y, w, h){
+    view = clampView(x, y, w, h);
+    applyView();
+  }
+
+  // Convert a mouse/pointer event's screen position into this SVG's user
+  // (viewBox) coordinate space — accounts for the container's actual
+  // rendered size, letterboxing, everything.
+  function svgPointFromClient(clientX, clientY, ctm){
+    var pt = svg.createSVGPoint();
+    pt.x = clientX; pt.y = clientY;
+    return pt.matrixTransform(ctm || svg.getScreenCTM().inverse());
+  }
+
+  function svgUserToContainerPx(ux, uy){
+    var pt = svg.createSVGPoint();
+    pt.x = ux; pt.y = uy;
+    var screenPt = pt.matrixTransform(svg.getScreenCTM());
+    var rect = mapEl.getBoundingClientRect();
+    return { x: screenPt.x - rect.left, y: screenPt.y - rect.top };
+  }
+
+  // Smooth eased fly-to, used for clicks (not for live wheel/drag, which
+  // should track the input directly with zero lag).
+  var tweenId = null;
+  function animateTo(target, duration, onDone){
+    if(tweenId) cancelAnimationFrame(tweenId);
+    var from = { x: view.x, y: view.y, w: view.w, h: view.h };
+    var to = clampView(target.x, target.y, target.w, target.h);
+    var start = performance.now();
+    duration = duration || 900;
+    function ease(t){ return 1 - Math.pow(1 - t, 3); } // ease-out cubic
+    function step(now){
+      var t = Math.min(1, (now - start) / duration);
+      var e = ease(t);
+      setView(
+        from.x + (to.x - from.x) * e,
+        from.y + (to.y - from.y) * e,
+        from.w + (to.w - from.w) * e,
+        from.h + (to.h - from.h) * e
+      );
+      if(t < 1){ tweenId = requestAnimationFrame(step); }
+      else { tweenId = null; if(onDone) onDone(); }
+    }
+    tweenId = requestAnimationFrame(step);
+  }
+
+  function boxForLocation(id, width){
+    var loc = locations[id];
+    if(!loc) return null;
+    var pos = project(loc.lat, loc.lng);
+    var w = width || FULL.w / 3.2;
+    var h = w * aspect;
+    return { x: pos.x - w / 2, y: pos.y - h / 2, w: w, h: h };
+  }
+
+  function boxForAllLocations(){
+    var ids = Object.keys(locations);
+    if(ids.length === 0) return FULL;
+    var minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
+    ids.forEach(function(id){
+      var pos = project(locations[id].lat, locations[id].lng);
+      minX = Math.min(minX, pos.x); maxX = Math.max(maxX, pos.x);
+      minY = Math.min(minY, pos.y); maxY = Math.max(maxY, pos.y);
+    });
+    var spanX = maxX - minX;
+    var padX = Math.max(90, spanX * 0.25);
+    var w = Math.min(FULL.w, spanX + padX * 2);
+    var h = w * aspect;
+    return { x: (minX + maxX) / 2 - w / 2, y: (minY + maxY) / 2 - h / 2, w: w, h: h };
+  }
+
+  // ---- Tooltip -------------------------------------------------------
   var tooltip = document.getElementById('saMapTooltip');
   function showTooltip(id){
     var loc = locations[id];
@@ -538,11 +642,9 @@
     if(!loc || !pinEl || !tooltip) return;
     tooltip.innerHTML = '<strong>Bookkeepers South Africa</strong><br>' + loc.sub;
     var pos = project(loc.lat, loc.lng);
-    var box = svg.viewBox.baseVal;
-    var pxRatio = mapEl.clientWidth / box.width;
-    var pyRatio = mapEl.clientHeight / box.height;
-    tooltip.style.left = (pos.x * pxRatio) + 'px';
-    tooltip.style.top = (pos.y * pyRatio) + 'px';
+    var px = svgUserToContainerPx(pos.x, pos.y);
+    tooltip.style.left = px.x + 'px';
+    tooltip.style.top = px.y + 'px';
     tooltip.classList.add('is-visible');
   }
   function hideTooltip(){
@@ -554,46 +656,17 @@
     Object.keys(pinEls).forEach(function(key){ pinEls[key].classList.toggle('is-active', key === id); });
   }
 
-  // Zoom/pan is simulated with a CSS transform on the SVG, focused on a
-  // point expressed as a percentage of the viewBox — this keeps the "zoom
-  // toward the pin" feel without needing real map tiles to pan across.
-  var currentScale = 1;
-  var MIN_SCALE = 1, MAX_SCALE = 5;
-  function focusOn(xPct, yPct, scale){
-    currentScale = Math.max(MIN_SCALE, Math.min(MAX_SCALE, scale));
-    svg.style.transformOrigin = xPct + '% ' + yPct + '%';
-    svg.style.transform = 'scale(' + currentScale + ')';
-  }
-  function focusOnLocation(id, scale){
-    var loc = locations[id];
-    if(!loc) return;
-    var pos = project(loc.lat, loc.lng);
-    var box = svg.viewBox.baseVal;
-    focusOn((pos.x / box.width) * 100, (pos.y / box.height) * 100, scale || 2.6);
-  }
-  function resetFocus(){
-    focusOn(50, 50, 1);
-  }
-
   function goToLocation(id){
-    focusOnLocation(id);
-    showTooltip(id);
+    hideTooltip();
     setActiveItem(id);
+    var box = boxForLocation(id);
+    animateTo(box, 900, function(){ showTooltip(id); });
   }
 
-  // Start wide on the whole country, then ease in to the offices — the
-  // same "zooms in as it loads" effect used elsewhere on the site.
+  // Start wide on the whole country, then ease in to the offices.
   setTimeout(function(){
-    var ids = Object.keys(locations);
-    if(ids.length === 0) return;
-    var sumX = 0, sumY = 0;
-    ids.forEach(function(id){
-      var pos = project(locations[id].lat, locations[id].lng);
-      sumX += pos.x; sumY += pos.y;
-    });
-    var box = svg.viewBox.baseVal;
-    focusOn((sumX / ids.length / box.width) * 100, (sumY / ids.length / box.height) * 100, 1.18);
-  }, 500);
+    animateTo(boxForAllLocations(), 1300);
+  }, 400);
 
   itemButtons.forEach(function(btn){
     btn.addEventListener('click', function(){ goToLocation(btn.dataset.id); });
@@ -605,13 +678,57 @@
     pinEls[id].addEventListener('mouseleave', function(){ if(!pinEls[id].classList.contains('is-active')) hideTooltip(); });
   });
 
+  // ---- Wheel-to-zoom, centred on the cursor ---------------------------
+  mapEl.addEventListener('wheel', function(evt){
+    evt.preventDefault();
+    if(tweenId){ cancelAnimationFrame(tweenId); tweenId = null; }
+    var ctm = svg.getScreenCTM().inverse();
+    var cursor = svgPointFromClient(evt.clientX, evt.clientY, ctm);
+    var factor = Math.pow(1.0018, evt.deltaY); // >1 zooms out, <1 zooms in
+    var newW = view.w * factor;
+    var newH = newW * aspect;
+    var newX = cursor.x - (cursor.x - view.x) * (newW / view.w);
+    var newY = cursor.y - (cursor.y - view.y) * (newH / view.h);
+    setView(newX, newY, newW, newH);
+    hideTooltip();
+  }, { passive: false });
+
+  // ---- Drag-to-pan ------------------------------------------------------
+  var dragging = false, dragStartClient = null, dragStartView = null, dragCTM = null;
+  mapEl.addEventListener('pointerdown', function(evt){
+    if(evt.button !== undefined && evt.button !== 0) return;
+    dragging = true;
+    mapEl.classList.add('is-dragging');
+    dragStartClient = { x: evt.clientX, y: evt.clientY };
+    dragStartView = { x: view.x, y: view.y, w: view.w, h: view.h };
+    dragCTM = svg.getScreenCTM().inverse();
+    if(svg.setPointerCapture) svg.setPointerCapture(evt.pointerId);
+  });
+  mapEl.addEventListener('pointermove', function(evt){
+    if(!dragging) return;
+    var p0 = svgPointFromClient(dragStartClient.x, dragStartClient.y, dragCTM);
+    var p1 = svgPointFromClient(evt.clientX, evt.clientY, dragCTM);
+    var dx = p0.x - p1.x, dy = p0.y - p1.y;
+    if(Math.abs(evt.clientX - dragStartClient.x) + Math.abs(evt.clientY - dragStartClient.y) > 3){
+      hideTooltip();
+    }
+    setView(dragStartView.x + dx, dragStartView.y + dy, dragStartView.w, dragStartView.h);
+  });
+  function endDrag(){ dragging = false; mapEl.classList.remove('is-dragging'); }
+  mapEl.addEventListener('pointerup', endDrag);
+  mapEl.addEventListener('pointerleave', endDrag);
+  mapEl.addEventListener('pointercancel', endDrag);
+
+  // ---- Zoom buttons — continue from wherever the view currently is ------
   var zoomIn = document.getElementById('saZoomIn');
   var zoomOut = document.getElementById('saZoomOut');
-  if(zoomIn) zoomIn.addEventListener('click', function(){ focusOn(50, 50, currentScale + 0.8); });
-  if(zoomOut) zoomOut.addEventListener('click', function(){
-    if(currentScale <= MIN_SCALE + 0.01){ return; }
-    focusOn(50, 50, currentScale - 0.8);
-  });
+  function stepZoom(factor){
+    var cx = view.x + view.w / 2, cy = view.y + view.h / 2;
+    var newW = view.w * factor, newH = newW * aspect;
+    animateTo({ x: cx - newW / 2, y: cy - newH / 2, w: newW, h: newH }, 350);
+  }
+  if(zoomIn) zoomIn.addEventListener('click', function(){ stepZoom(0.6); });
+  if(zoomOut) zoomOut.addEventListener('click', function(){ stepZoom(1 / 0.6); });
 
   var search = document.getElementById('officeLocatorSearch');
   if(search){
@@ -633,7 +750,7 @@
         itemButtons.forEach(function(btn){ btn.classList.remove('is-active'); });
         Object.keys(pinEls).forEach(function(key){ pinEls[key].classList.remove('is-active'); });
         hideTooltip();
-        resetFocus();
+        animateTo(boxForAllLocations(), 700);
       } else {
         itemButtons.forEach(function(btn){
           btn.style.display = (btn.dataset.id === val) ? '' : 'none';
