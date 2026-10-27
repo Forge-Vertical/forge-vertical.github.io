@@ -74,22 +74,22 @@
       <div class="career-card">
         <h3>Bookkeeper</h3>
         <p>Process transactions, reconcile accounts and prepare management reports for a portfolio of clients across industries.</p>
-        <a class="btn ghost sm" style="margin-top:16px;" href="mailto:info@bookkeepersincapetown.co.za?subject=Application%20—%20Bookkeeper">Apply</a>
+        <button type="button" class="btn ghost sm career-apply-btn" style="margin-top:16px;" data-position="Bookkeeper">Apply</button>
       </div>
       <div class="career-card">
         <h3>Payroll administrator</h3>
         <p>Run monthly payroll cycles, statutory filings and employee administration for our growing client base.</p>
-        <a class="btn ghost sm" style="margin-top:16px;" href="mailto:info@bookkeepersincapetown.co.za?subject=Application%20—%20Payroll%20administrator">Apply</a>
+        <button type="button" class="btn ghost sm career-apply-btn" style="margin-top:16px;" data-position="Payroll administrator">Apply</button>
       </div>
       <div class="career-card">
         <h3>Tax consultant</h3>
         <p>Handle provisional and annual tax returns, VAT submissions and SARS correspondence for individual and company clients.</p>
-        <a class="btn ghost sm" style="margin-top:16px;" href="mailto:info@bookkeepersincapetown.co.za?subject=Application%20—%20Tax%20consultant">Apply</a>
+        <button type="button" class="btn ghost sm career-apply-btn" style="margin-top:16px;" data-position="Tax consultant">Apply</button>
       </div>
       <div class="career-card">
         <h3>Client relationship manager</h3>
         <p>Be the main point of contact for a portfolio of clients, coordinating bookkeeping, payroll and tax work on their behalf.</p>
-        <a class="btn ghost sm" style="margin-top:16px;" href="mailto:info@bookkeepersincapetown.co.za?subject=Application%20—%20Client%20relationship%20manager">Apply</a>
+        <button type="button" class="btn ghost sm career-apply-btn" style="margin-top:16px;" data-position="Client relationship manager">Apply</button>
       </div>
     </div>
     <p style="margin-top:28px; font-size:14.5px; color:var(--grey);">Don't see a role that fits? Send us your CV anyway — we're growing and like to hear from good people early.</p>
@@ -272,6 +272,66 @@
   </div>
 </footer>
 
+<div class="apply-modal-overlay" id="applyModalOverlay">
+  <div class="apply-modal" role="dialog" aria-modal="true" aria-labelledby="applyModalTitle">
+    <button type="button" class="apply-modal-close" id="applyModalClose" aria-label="Close">&times;</button>
+    <h3 id="applyModalTitle">Apply — <span id="applyModalPosition">Role</span></h3>
+    <p class="apply-modal-sub">Tell us a bit about yourself and we'll be in touch.</p>
+
+    <div class="apply-modal-success" id="applyModalSuccess">
+      <h3>Application received</h3>
+      <p>Thanks for applying — Lindsay's team will be in touch if it's a fit.</p>
+    </div>
+
+    <!-- TODO: once this site is on cPanel, set this form's action to the Formspree
+         endpoint (method stays POST, enctype stays multipart/form-data so the CV
+         attachment comes through) and remove/relax the JS preventDefault below. -->
+    <form class="contact-form" id="applyForm" action="#" method="POST" enctype="multipart/form-data">
+      <input type="hidden" name="position" id="apply-position" value="">
+      <div class="form-row">
+        <div class="form-field">
+          <label for="apply-firstname">First name</label>
+          <input id="apply-firstname" name="firstname" type="text" placeholder="First name" required>
+        </div>
+        <div class="form-field">
+          <label for="apply-surname">Surname</label>
+          <input id="apply-surname" name="surname" type="text" placeholder="Surname" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-field">
+          <label for="apply-email">Email</label>
+          <input id="apply-email" name="email" type="email" placeholder="you@email.co.za" required>
+        </div>
+        <div class="form-field">
+          <label for="apply-phone">Phone number</label>
+          <input id="apply-phone" name="phone" type="tel" placeholder="082 000 0000" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-field">
+          <label for="apply-linkedin">LinkedIn profile</label>
+          <input id="apply-linkedin" name="linkedin" type="url" placeholder="https://linkedin.com/in/yourname">
+        </div>
+        <div class="form-field">
+          <label for="apply-loom">Loom video introduction</label>
+          <input id="apply-loom" name="loom" type="url" placeholder="https://loom.com/share/...">
+        </div>
+      </div>
+      <div class="form-field">
+        <label for="apply-summary">Short summary</label>
+        <textarea id="apply-summary" name="summary" rows="4" placeholder="A couple of lines on your background and why this role" required></textarea>
+      </div>
+      <div class="form-field">
+        <label for="apply-cv">CV attachment</label>
+        <input id="apply-cv" name="cv" type="file" accept=".pdf,.doc,.docx">
+        <span class="apply-modal-hint">PDF or Word, max 5MB</span>
+      </div>
+      <button type="submit" class="btn" style="justify-self:flex-start; border:none; cursor:pointer;">Submit application</button>
+    </form>
+  </div>
+</div>
+
 <a class="whatsapp-float" href="https://wa.me/27727791046" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
   <span class="wa-icon">
     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -340,6 +400,52 @@
       document.getElementById('of-message').value
     );
     window.location.href = 'mailto:info@bookkeepersincapetown.co.za?subject=' + subject + '&body=' + body;
+  });
+})();
+
+(function(){
+  var overlay = document.getElementById('applyModalOverlay');
+  var closeBtn = document.getElementById('applyModalClose');
+  var positionTitle = document.getElementById('applyModalPosition');
+  var positionField = document.getElementById('apply-position');
+  var form = document.getElementById('applyForm');
+  var success = document.getElementById('applyModalSuccess');
+  if(!overlay || !form) return;
+
+  function openModal(position){
+    positionTitle.textContent = position;
+    positionField.value = position;
+    form.reset();
+    positionField.value = position;
+    form.style.display = '';
+    success.classList.remove('show');
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    var firstField = document.getElementById('apply-firstname');
+    if(firstField){ setTimeout(function(){ firstField.focus(); }, 50); }
+  }
+
+  function closeModal(){
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll('.career-apply-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){ openModal(btn.dataset.position); });
+  });
+
+  closeBtn.addEventListener('click', closeModal);
+  overlay.addEventListener('click', function(e){ if(e.target === overlay){ closeModal(); } });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && overlay.classList.contains('open')){ closeModal(); } });
+
+  // Not wired to a real backend yet — see TODO on the <form> above.
+  // Once the Formspree endpoint is set, remove this preventDefault so the
+  // browser does a normal POST, or swap to a fetch()-based submit if an
+  // inline success state (as below) is still wanted without a page reload.
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    form.style.display = 'none';
+    success.classList.add('show');
   });
 })();
 </script>
