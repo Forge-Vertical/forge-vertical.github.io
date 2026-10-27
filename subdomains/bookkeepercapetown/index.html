@@ -13,17 +13,34 @@
 <body>
 
 <header class="site-header">
-  <div class="wrap">
+  <div class="header-top">
+    <div class="wrap">
+      <a href="tel:+27215259787">Cape Town: +27 21 525 9787</a>
+      <a href="tel:+27101406056">Johannesburg: +27 10 140 6056</a>
+      <a href="mailto:info@bookkeepersincapetown.co.za">info@bookkeepersincapetown.co.za</a>
+    </div>
+  </div>
+  <div class="wrap main">
     <a class="brand" href="#top">
-      <img class="logo-mark" src="assets/images/logo.png" alt="Bookkeepers South Africa">
+      <img class="logo-mark" src="assets/css/images/bookkeepers-logo-large-scaled.png" alt="Bookkeepers South Africa">
     </a>
-    <nav>
+    <nav class="primary-nav">
+      <a class="has-drop" href="#services">Services
+        <div class="drop">
+          <a href="#services">Bookkeeping</a>
+          <a href="#services">Payroll</a>
+          <a href="#services">Tax compliance</a>
+          <a href="#services">Business registrations</a>
+        </div>
+      </a>
       <a href="#about">About</a>
-      <a href="#services">Services</a>
       <a href="#offices">Offices</a>
       <a href="#testimonials">Clients</a>
     </nav>
-    <a class="btn" href="#contact">Book a consultation</a>
+    <div class="header-cta">
+      <a class="btn ghost sm" href="mailto:info@bookkeepersincapetown.co.za">Email us</a>
+      <a class="btn" href="#contact">Book a consultation</a>
+    </div>
   </div>
 </header>
 
@@ -39,7 +56,7 @@
       </div>
     </div>
     <div class="hero-photo">
-      <img src="assets/images/consultation-office.jpg" alt="Bookkeepers South Africa consultation room">
+      <img src="assets/css/images/consultation-office.jpg" alt="Bookkeepers South Africa consultation room">
     </div>
   </div>
 </section>
@@ -54,7 +71,7 @@
       </div>
     </div>
     <div class="intro-photo">
-      <img src="assets/images/part-of-the-team.jpg" alt="Member of the Bookkeepers South Africa team at work">
+      <img src="assets/css/images/part-of-the-team.jpg" alt="Member of the Bookkeepers South Africa team at work">
     </div>
     <div class="stats">
       <div class="stat"><b>54</b><span>Clients serviced in the last 2 years</span></div>
@@ -67,8 +84,10 @@
 <section class="services" id="services">
   <div class="wrap">
     <div class="section-head">
-      <h2>What we handle for you</h2>
-      <p>Four core services, built to work together so nothing falls between your bookkeeper, your payroll and your tax submissions.</p>
+      <div>
+        <h2>What we handle for you</h2>
+        <p>Four core services, built to work together so nothing falls between your bookkeeper, your payroll and your tax submissions.</p>
+      </div>
     </div>
     <div class="service-list">
       <div class="service"><span class="dot"></span><div><h3>Bookkeeping</h3><p>Accurate, up-to-date financial records so you always know where your business stands.</p></div></div>
@@ -83,10 +102,10 @@
   <div class="wrap">
     <span class="accred-label">Accredited &amp; certified</span>
     <div class="accred-logos">
-      <img src="assets/images/ciba-logo.png" alt="CIBA — Chartered Institute for Business Accountants">
-      <img src="assets/images/sait-logo.png" alt="SAIT — South African Institute of Tax Professionals">
-      <img src="assets/images/xero-logo.png" alt="Xero Advisor Certified">
-      <img src="assets/images/sage-logo.png" alt="Sage">
+      <img src="assets/css/images/ciba-logo.png" alt="CIBA — Chartered Institute for Business Accountants">
+      <img src="assets/css/images/sait-logo-1024x401.png" alt="SAIT — South African Institute of Tax Professionals">
+      <img src="assets/css/images/xero-get-certified-logo-1024x358.png" alt="Xero Advisor Certified">
+      <img src="assets/css/images/sage-seo_image.png" alt="Sage">
     </div>
   </div>
 </section>
@@ -94,12 +113,14 @@
 <section class="process">
   <div class="wrap">
     <div class="section-head">
-      <h2>How an engagement starts</h2>
-      <p>Three steps, from first conversation to ongoing support.</p>
+      <div>
+        <h2>How an engagement starts</h2>
+        <p>Three steps, from first conversation to ongoing support.</p>
+      </div>
     </div>
     <div class="process-list">
       <div class="process-step">
-        <div class="process-photo"><img src="assets/images/consult-step.jpg" alt="Booking a consultation"></div>
+        <div class="process-photo"><img src="assets/css/images/book-keepers-cape-town.jpg" alt="Booking a consultation"></div>
         <div class="process-body">
           <div class="process-num">01</div>
           <h3>Book a consultation</h3>
@@ -107,7 +128,7 @@
         </div>
       </div>
       <div class="process-step">
-        <div class="process-photo"><img src="assets/images/tailored-strategy.jpg" alt="Developing a tailored strategy"></div>
+        <div class="process-photo"><img src="assets/css/images/tailored-strategy.jpg" alt="Developing a tailored strategy"></div>
         <div class="process-body">
           <div class="process-num">02</div>
           <h3>Get a tailored plan</h3>
@@ -115,7 +136,7 @@
         </div>
       </div>
       <div class="process-step">
-        <div class="process-photo"><img src="assets/images/ongoing-support.jpg" alt="Ongoing support"></div>
+        <div class="process-photo"><img src="assets/css/images/ongoing-support.png" alt="Ongoing support"></div>
         <div class="process-body">
           <div class="process-num">03</div>
           <h3>Ongoing support</h3>
@@ -129,26 +150,52 @@
 <section class="offices" id="offices">
   <div class="wrap">
     <div class="section-head">
-      <h2>Two offices, one standard of work</h2>
-      <p>Speak to our Cape Town or Johannesburg team, Monday to Friday, 8:00–16:00.</p>
-    </div>
-    <div class="office-grid">
-      <div class="office">
-        <h3>Cape Town</h3>
-        <p>Unit 129, Millennium Business Park</p>
-        <p>Century City, Cape Town, 7441</p>
-        <div class="office-links">
-          <a href="tel:+27215259787">Call: +27 21 525 9787</a>
-          <a href="https://www.google.com/maps/search/?api=1&query=Unit+129+Millennium+Business+Park+Century+City+Cape+Town" target="_blank" rel="noopener">Get directions</a>
-        </div>
+      <div>
+        <h2>Two offices, one standard of work</h2>
+        <p>Speak to our Cape Town or Johannesburg team, Monday to Friday, 8:00–16:00.</p>
       </div>
-      <div class="office">
-        <h3>Johannesburg</h3>
-        <p>West Tower, 2nd Floor, Nelson Mandela Square</p>
-        <p>Maude Street, Sandown, 2146</p>
-        <div class="office-links">
-          <a href="tel:+27101406056">Call: +27 10 140 6056</a>
-          <a href="https://www.google.com/maps/search/?api=1&query=West+Tower+Nelson+Mandela+Square+Sandown+Johannesburg" target="_blank" rel="noopener">Get directions</a>
+    </div>
+    <div class="offices-layout">
+      <div class="route-card">
+        <svg class="route-svg" viewBox="0 0 480 300" role="img" aria-label="Cape Town and Johannesburg offices">
+          <g class="grid-dot">
+            <circle cx="30" cy="30" r="2.5"/><circle cx="70" cy="30" r="2.5"/><circle cx="110" cy="30" r="2.5"/><circle cx="150" cy="30" r="2.5"/><circle cx="190" cy="30" r="2.5"/><circle cx="230" cy="30" r="2.5"/><circle cx="270" cy="30" r="2.5"/><circle cx="310" cy="30" r="2.5"/><circle cx="350" cy="30" r="2.5"/><circle cx="390" cy="30" r="2.5"/><circle cx="430" cy="30" r="2.5"/>
+            <circle cx="30" cy="70" r="2.5"/><circle cx="70" cy="70" r="2.5"/><circle cx="110" cy="70" r="2.5"/><circle cx="150" cy="70" r="2.5"/><circle cx="190" cy="70" r="2.5"/><circle cx="230" cy="70" r="2.5"/><circle cx="270" cy="70" r="2.5"/><circle cx="310" cy="70" r="2.5"/><circle cx="350" cy="70" r="2.5"/><circle cx="390" cy="70" r="2.5"/><circle cx="430" cy="70" r="2.5"/>
+            <circle cx="30" cy="110" r="2.5"/><circle cx="70" cy="110" r="2.5"/><circle cx="110" cy="110" r="2.5"/><circle cx="150" cy="110" r="2.5"/><circle cx="190" cy="110" r="2.5"/><circle cx="230" cy="110" r="2.5"/><circle cx="270" cy="110" r="2.5"/><circle cx="310" cy="110" r="2.5"/><circle cx="350" cy="110" r="2.5"/><circle cx="390" cy="110" r="2.5"/><circle cx="430" cy="110" r="2.5"/>
+            <circle cx="30" cy="150" r="2.5"/><circle cx="70" cy="150" r="2.5"/><circle cx="110" cy="150" r="2.5"/><circle cx="150" cy="150" r="2.5"/><circle cx="190" cy="150" r="2.5"/><circle cx="230" cy="150" r="2.5"/><circle cx="270" cy="150" r="2.5"/><circle cx="310" cy="150" r="2.5"/><circle cx="350" cy="150" r="2.5"/><circle cx="390" cy="150" r="2.5"/><circle cx="430" cy="150" r="2.5"/>
+            <circle cx="30" cy="190" r="2.5"/><circle cx="70" cy="190" r="2.5"/><circle cx="110" cy="190" r="2.5"/><circle cx="150" cy="190" r="2.5"/><circle cx="190" cy="190" r="2.5"/><circle cx="230" cy="190" r="2.5"/><circle cx="270" cy="190" r="2.5"/><circle cx="310" cy="190" r="2.5"/><circle cx="350" cy="190" r="2.5"/><circle cx="390" cy="190" r="2.5"/><circle cx="430" cy="190" r="2.5"/>
+            <circle cx="30" cy="230" r="2.5"/><circle cx="70" cy="230" r="2.5"/><circle cx="110" cy="230" r="2.5"/><circle cx="150" cy="230" r="2.5"/><circle cx="190" cy="230" r="2.5"/><circle cx="230" cy="230" r="2.5"/><circle cx="270" cy="230" r="2.5"/><circle cx="310" cy="230" r="2.5"/><circle cx="350" cy="230" r="2.5"/><circle cx="390" cy="230" r="2.5"/><circle cx="430" cy="230" r="2.5"/>
+            <circle cx="30" cy="270" r="2.5"/><circle cx="70" cy="270" r="2.5"/><circle cx="110" cy="270" r="2.5"/><circle cx="150" cy="270" r="2.5"/><circle cx="190" cy="270" r="2.5"/><circle cx="230" cy="270" r="2.5"/><circle cx="270" cy="270" r="2.5"/><circle cx="310" cy="270" r="2.5"/><circle cx="350" cy="270" r="2.5"/><circle cx="390" cy="270" r="2.5"/><circle cx="430" cy="270" r="2.5"/>
+          </g>
+          <path class="path" d="M100,230 C180,230 220,120 360,90"/>
+          <circle class="pin" cx="100" cy="230" r="9"/>
+          <circle class="pin" cx="100" cy="230" r="15" fill="none" stroke="#00A858" stroke-width="1.5" opacity=".5"/>
+          <text x="100" y="262" text-anchor="middle">Cape Town</text>
+          <text class="sub" x="100" y="278" text-anchor="middle">Head office</text>
+          <circle class="pin jhb" cx="360" cy="90" r="9"/>
+          <circle class="pin jhb" cx="360" cy="90" r="15" fill="none" stroke="#A8CF45" stroke-width="1.5" opacity=".5"/>
+          <text x="360" y="68" text-anchor="middle">Johannesburg</text>
+          <text class="sub" x="360" y="122" text-anchor="middle">Sandown office</text>
+        </svg>
+      </div>
+      <div class="office-cards">
+        <div class="office">
+          <h3>Cape Town</h3>
+          <p>Unit 129, Millennium Business Park</p>
+          <p>Century City, Cape Town, 7441</p>
+          <div class="office-links">
+            <a href="tel:+27215259787">Call: +27 21 525 9787</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=Unit+129+Millennium+Business+Park+Century+City+Cape+Town" target="_blank" rel="noopener">Get directions</a>
+          </div>
+        </div>
+        <div class="office">
+          <h3>Johannesburg</h3>
+          <p>West Tower, 2nd Floor, Nelson Mandela Square</p>
+          <p>Maude Street, Sandown, 2146</p>
+          <div class="office-links">
+            <a href="tel:+27101406056">Call: +27 10 140 6056</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=West+Tower+Nelson+Mandela+Square+Sandown+Johannesburg" target="_blank" rel="noopener">Get directions</a>
+          </div>
         </div>
       </div>
     </div>
@@ -157,7 +204,7 @@
 
 <section class="testimonials" id="testimonials">
   <div class="wrap">
-    <div class="section-head"><h2>What clients say</h2></div>
+    <div class="section-head"><div><h2>What clients say</h2></div></div>
     <div class="t-grid">
       <div class="t-card"><p>Our financial records stay accurate and well organised, with insightful, proactive advice that's helped us make better decisions.</p><div class="t-who">Owner</div><div class="t-industry">Motor industry</div></div>
       <div class="t-card"><p>Responsive, thorough and professional — our financial health has stayed strong thanks to consistent, proactive guidance.</p><div class="t-who">Owner</div><div class="t-industry">Catering industry</div></div>
@@ -176,7 +223,7 @@
 <footer>
   <div class="wrap">
     <div class="footer-top">
-      <img class="logo-mark footer" src="assets/images/logo.png" alt="Bookkeepers South Africa">
+      <img class="logo-mark footer" src="assets/css/images/bookkeepers-logo-large-scaled.png" alt="Bookkeepers South Africa">
     </div>
     <div class="footer-grid">
       <div>
@@ -210,7 +257,6 @@
 <a class="mobile-cta" href="#contact">Book a consultation →</a>
 
 <script>
-// One orchestrated reveal on scroll — sections fade/rise once, no per-element scatter
 (function(){
   var targets = document.querySelectorAll('.intro, .services, .accreditations, .process, .offices, .testimonials, .cta-band');
   targets.forEach(function(el){ el.classList.add('reveal'); });
