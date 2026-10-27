@@ -37,9 +37,17 @@
   .lead-section{ padding-bottom:56px; }
   .lead-grid{ display:grid; grid-template-columns:1fr 360px; gap:34px; align-items:start; }
   .lead-main{ display:block; }
-  .lead-main-img{ height:280px; border-radius:6px; overflow:hidden; position:relative; margin-bottom:18px; background:var(--charcoal); }
+  .lead-main-img{ height:320px; border-radius:8px; overflow:hidden; position:relative; margin-bottom:18px; background:var(--charcoal); box-shadow:0 20px 40px rgba(34,35,31,.16); }
   .lead-main-img svg{ width:100%; height:100%; display:block; }
-  .lead-tag{ position:absolute; top:14px; left:14px; font-size:10.5px; font-weight:700; text-transform:uppercase; letter-spacing:.08em; background:var(--green); color:var(--white); padding:5px 12px; border-radius:3px; }
+  .lead-main-img img{ transition:transform .5s ease; filter:saturate(1.08) contrast(1.03); }
+  .lead-main:hover .lead-main-img img{ transform:scale(1.035); }
+  .lead-main-img::after{
+    content:""; position:absolute; inset:0;
+    background:linear-gradient(185deg, rgba(0,112,59,0) 48%, rgba(10,30,18,.55) 100%),
+               linear-gradient(100deg, rgba(0,168,88,.16), rgba(168,207,69,0) 42%);
+    pointer-events:none;
+  }
+  .lead-tag{ position:absolute; top:14px; left:14px; font-size:10.5px; font-weight:700; text-transform:uppercase; letter-spacing:.08em; background:var(--green); color:var(--white); padding:5px 12px; border-radius:3px; z-index:2; box-shadow:0 4px 10px rgba(0,0,0,.2); }
   .lead-main-title{ font-size:23px; font-family:var(--font-head); font-weight:800; color:var(--charcoal); line-height:1.25; margin-bottom:8px; transition:color .15s; }
   .lead-main:hover .lead-main-title{ color:var(--green); }
   .lead-main-meta{ font-size:11px; color:var(--grey); margin-bottom:10px; }
@@ -174,26 +182,7 @@
   <div class="lead-grid">
     <a href="#" class="lead-main">
       <div class="lead-main-img">
-        <svg viewBox="0 0 700 280" preserveAspectRatio="xMidYMid slice" role="img" aria-label="A calendar with tax filing dates highlighted">
-          <defs>
-            <linearGradient id="lg1" x1="0" y1="0" x2="700" y2="0" gradientUnits="userSpaceOnUse">
-              <stop offset="0" stop-color="#00A858"/><stop offset="1" stop-color="#A8CF45"/>
-            </linearGradient>
-            <radialGradient id="glow1" cx="50%" cy="46%" r="55%">
-              <stop offset="0" stop-color="#A8CF45" stop-opacity=".22"/><stop offset="1" stop-color="#A8CF45" stop-opacity="0"/>
-            </radialGradient>
-          </defs>
-          <rect width="700" height="280" fill="#4D4D4D"/>
-          <rect width="700" height="280" fill="url(#glow1)"/>
-          <g stroke="#ffffff" stroke-opacity=".06"><path d="M0 46H700M0 92H700M0 138H700M0 184H700M0 230H700M58 0V280M116 0V280M174 0V280M232 0V280M290 0V280M348 0V280M406 0V280M464 0V280M522 0V280M580 0V280M638 0V280"/></g>
-          <rect x="210" y="56" width="280" height="168" rx="10" fill="#3a3b35" stroke="url(#lg1)" stroke-width="2.5"/>
-          <rect x="210" y="56" width="280" height="38" rx="10" fill="url(#lg1)"/>
-          <g fill="#ffffff" fill-opacity=".9">
-            <circle cx="246" cy="128" r="12"/><circle cx="296" cy="128" r="12"/><circle cx="346" cy="128" r="12" fill="#A8CF45"/><circle cx="396" cy="128" r="12"/><circle cx="446" cy="128" r="12"/>
-            <circle cx="246" cy="168" r="12"/><circle cx="296" cy="168" r="12"/><circle cx="346" cy="168" r="12"/><circle cx="396" cy="168" r="12" fill="#A8CF45"/><circle cx="446" cy="168" r="12"/>
-          </g>
-          <text x="350" y="252" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="11" fill="#D7D6D2" letter-spacing="2">PROVISIONAL TAX PERIODS</text>
-        </svg>
+        <img src="assets/css/images/news-featured-table-mountain.png" alt="Bookkeepers South Africa — Cape Town harbour and Table Mountain at sunset" style="width:100%; height:100%; object-fit:cover; object-position:center 42%; display:block;">
         <span class="lead-tag">Start here</span>
       </div>
       <div class="lead-main-title">Provisional tax deadlines every business owner should have on their calendar</div>
