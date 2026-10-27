@@ -412,13 +412,61 @@ footer{ background:#2E2F2B; color:#C8C7C2; padding:56px 0 var(--mobile-cta-h); }
 .map-embed iframe{ width:100%; height:100%; border:0; display:block; }
 
 /* ---------- careers page ---------- */
+.career-intro{ padding:64px 0; background:#F2F6EF; border-bottom:1px solid var(--line); }
+.career-intro .wrap{ display:grid; grid-template-columns:.8fr 1.2fr; gap:48px; align-items:center; }
+.career-intro h2{ font-size:27px; max-width:14ch; }
+.career-intro p{ font-size:16px; color:var(--charcoal); margin:0; line-height:1.7; }
+
 .career-grid{ display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--line); border:1px solid var(--line); margin-top:8px; }
 .career-card{ background:var(--white); padding:38px 36px; }
 .career-card h3{ font-size:21px; }
 .career-card p{ font-size:15.5px; color:var(--charcoal); }
 .franchise-steps{ list-style:none; margin:20px 0 0; padding:0; display:grid; gap:12px; counter-reset:step; }
-.franchise-steps li{ display:flex; gap:14px; font-size:15px; color:var(--charcoal); }
+.franchise-steps li{ display:flex; gap:14px; font-size:15px; color:#D7D6D2; }
 .franchise-steps li::before{ counter-increment:step; content:counter(step); flex:none; width:26px; height:26px; border-radius:50%; background:var(--lime); color:var(--charcoal); font-family:var(--font-head); font-weight:800; font-size:12.5px; display:flex; align-items:center; justify-content:center; }
+
+/* ---------- office-opening city slider ---------- */
+.office-slider-wrap{ position:relative; margin-top:36px; }
+.office-slider{
+  display:flex; gap:20px; overflow-x:auto; scroll-snap-type:x mandatory; scroll-behavior:smooth;
+  padding-bottom:10px; -webkit-overflow-scrolling:touch; scrollbar-width:none;
+}
+.office-slider::-webkit-scrollbar{ display:none; }
+.office-slide{
+  flex:0 0 240px; scroll-snap-align:start; background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.14); border-radius:8px; overflow:hidden;
+  display:flex; flex-direction:column; transition:border-color .2s, transform .2s;
+}
+.office-slide:hover{ border-color:var(--lime); transform:translateY(-3px); }
+.office-skyline{ height:120px; display:block; }
+.office-slide-body{ padding:20px 22px 24px; }
+.office-slide h3{ color:var(--white); font-size:18px; margin-bottom:6px; }
+.office-slide p{ color:#C8C7C2; font-size:13.5px; margin:0 0 14px; }
+.office-slide-cta{
+  font-size:12.5px; font-weight:700; font-family:var(--font-head); color:var(--lime);
+  text-transform:uppercase; letter-spacing:.05em; background:none; border:none; cursor:pointer; padding:0;
+}
+.office-slide-cta:hover{ text-decoration:underline; }
+.slider-arrows{ display:flex; gap:10px; justify-content:flex-end; margin-top:14px; }
+.slider-arrow{
+  width:38px; height:38px; border-radius:50%; border:1px solid rgba(255,255,255,.28);
+  background:transparent; color:var(--white); display:flex; align-items:center; justify-content:center;
+  cursor:pointer; transition:border-color .2s, background .2s;
+}
+.slider-arrow:hover{ border-color:var(--lime); background:rgba(255,255,255,.06); }
+.slider-arrow svg{ width:16px; height:16px; }
+
+/* ---------- office enquiry form ---------- */
+.office-enquiry{ padding:80px 0; background:#FAFBF8; border-bottom:1px solid var(--line); }
+.office-enquiry-inner{ display:grid; grid-template-columns:.8fr 1.2fr; gap:52px; align-items:start; }
+.office-enquiry h2{ font-size:27px; max-width:16ch; }
+.office-enquiry p{ font-size:15.5px; color:var(--charcoal); }
+
+@media (max-width:860px){
+  .career-intro .wrap{ grid-template-columns:1fr; gap:20px; }
+  .office-enquiry-inner{ grid-template-columns:1fr; gap:28px; }
+  .office-slide{ flex-basis:210px; }
+}
 
 /* ---------- accreditations page ---------- */
 .accred-detail-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:1px; background:var(--line); border:1px solid var(--line); margin-top:8px; }
