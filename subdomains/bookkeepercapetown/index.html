@@ -37,6 +37,7 @@
       <a href="#about">About</a>
       <a href="#offices">Offices</a>
       <a href="news.html">News hub</a>
+      <a href="reviews.html">Reviews</a>
       <a href="careers.html">Careers</a>
     </nav>
     <div class="header-cta">
@@ -232,12 +233,73 @@
 
 <section class="testimonials" id="testimonials">
   <div class="wrap">
-    <div class="section-head"><div><h2>What clients say</h2></div></div>
-    <div class="t-grid">
-      <div class="t-card"><p>Our financial records stay accurate and well organised, with insightful, proactive advice that's helped us make better decisions.</p><div class="t-who">Owner</div><div class="t-industry">Motor industry</div></div>
-      <div class="t-card"><p>Responsive, thorough and professional — our financial health has stayed strong thanks to consistent, proactive guidance.</p><div class="t-who">Owner</div><div class="t-industry">Catering industry</div></div>
-      <div class="t-card"><p>Tax season stopped being stressful once they took it over. Friendly, thorough, and always a step ahead.</p><div class="t-who">Kim Counsell</div><div class="t-industry">Personal tax client</div></div>
+    <div class="rev-head">
+      <div>
+        <h2>What clients say</h2>
+        <p>Real reviews from our Google Business profile.</p>
+      </div>
+      <div class="rev-google">
+        <div class="rev-google-score">5.0</div>
+        <div class="rev-google-meta">
+          <span class="rev-stars">★★★★★</span>
+          <span class="rev-google-sub">Google reviews</span>
+        </div>
+      </div>
     </div>
+
+    <div class="rev-carousel" id="revCarousel">
+      <div class="rev-slide active">
+        <span class="rev-stars">★★★★★</span>
+        <blockquote>&ldquo;Awesome experience, Lindsay was there every step of the way. Took a little while for everything to be completed (not their fault) but communication was always had when any new information became available. Thank you Lindsay and her team.&rdquo;</blockquote>
+        <div class="rev-author">
+          <div class="rev-avatar">M</div>
+          <div class="rev-who"><div class="rev-name">Marlon Lawrence</div><div class="rev-date">Google review · 6 months ago</div></div>
+        </div>
+      </div>
+      <div class="rev-slide">
+        <span class="rev-stars">★★★★★</span>
+        <blockquote>&ldquo;I received excellent service thanks Vanessa! Bookkeepers has done my personal tax for years and are now doing my business tax and consulting as well. It is the perfect solution for small businesses looking for professional skilled support.&rdquo;</blockquote>
+        <div class="rev-author">
+          <div class="rev-avatar">B</div>
+          <div class="rev-who"><div class="rev-name">Bronwin Titus</div><div class="rev-date">Google review · Recent</div></div>
+        </div>
+      </div>
+      <div class="rev-slide">
+        <span class="rev-stars">★★★★★</span>
+        <blockquote>&ldquo;Lindsay and team has the utmost professional work ethic and helped me tremendously with my tax submissions. Nothing ever too big or too small. They are fantastic.&rdquo;</blockquote>
+        <div class="rev-author">
+          <div class="rev-avatar">P</div>
+          <div class="rev-who"><div class="rev-name">Petro de Jager</div><div class="rev-date">Google review · 2 days ago</div></div>
+        </div>
+      </div>
+      <div class="rev-slide">
+        <span class="rev-stars">★★★★★</span>
+        <blockquote>&ldquo;The team at Bookkeepers South Africa always give me exceptional service for my tax returns. They go above and beyond to ensure returns are done efficiently and effectively. I would highly recommend their services.&rdquo;</blockquote>
+        <div class="rev-author">
+          <div class="rev-avatar">K</div>
+          <div class="rev-who"><div class="rev-name">Kim Roberts</div><div class="rev-date">Google review · 4 days ago</div></div>
+        </div>
+      </div>
+      <div class="rev-slide">
+        <span class="rev-stars">★★★★★</span>
+        <blockquote>&ldquo;Bookkeepers South Africa has been nothing short of amazing. I'd been with my previous service provider for the better part of 30 years. They were good too and I had no issues — I'm a creature of habit, so not easy to change. But I'm glad I did.&rdquo;</blockquote>
+        <div class="rev-author">
+          <div class="rev-avatar">C</div>
+          <div class="rev-who"><div class="rev-name">Craig Windvogel</div><div class="rev-date">Google review · 5 days ago</div></div>
+        </div>
+      </div>
+      <div class="rev-slide">
+        <span class="rev-stars">★★★★★</span>
+        <blockquote>&ldquo;I have been using Bookkeepers South Africa for 8 years now, and the results have consistently been exceptional. Their team provides top-notch, seamless financial assistance and ensures complete peace of mind. Highly recommended.&rdquo;</blockquote>
+        <div class="rev-author">
+          <div class="rev-avatar">T</div>
+          <div class="rev-who"><div class="rev-name">Tarek Davids</div><div class="rev-date">Google review · 8 years a client</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="rev-dots" id="revDots"></div>
+    <div class="rev-cta"><a class="btn ghost sm" href="reviews.html">Read all reviews</a></div>
   </div>
 </section>
 
@@ -296,6 +358,7 @@
         <ul>
           <li><a href="services.html">Services</a></li>
           <li><a href="news.html">News hub</a></li>
+          <li><a href="reviews.html">Reviews</a></li>
           <li><a href="careers.html">Careers</a></li>
           <li><a href="accreditations.html">Accreditations</a></li>
           <li><a href="contact.html">Contact</a></li>
@@ -350,6 +413,41 @@
     targets.forEach(function(el){ io.observe(el); });
   } else {
     targets.forEach(function(el){ el.classList.add('in'); });
+  }
+})();
+
+(function(){
+  var carousel = document.getElementById('revCarousel');
+  if(!carousel) return;
+  var slides = carousel.querySelectorAll('.rev-slide');
+  var dotsWrap = document.getElementById('revDots');
+  var current = 0, timer;
+
+  slides.forEach(function(_, i){
+    var dot = document.createElement('button');
+    dot.className = 'rev-dot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('aria-label', 'Show review ' + (i + 1));
+    dot.addEventListener('click', function(){ show(i); restart(); });
+    dotsWrap.appendChild(dot);
+  });
+  var dots = dotsWrap.querySelectorAll('.rev-dot');
+
+  function show(i){
+    slides[current].classList.remove('active');
+    dots[current].classList.remove('active');
+    current = i;
+    slides[current].classList.add('active');
+    dots[current].classList.add('active');
+  }
+  function next(){ show((current + 1) % slides.length); }
+  function restart(){
+    clearInterval(timer);
+    timer = setInterval(next, 6000);
+  }
+  if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    restart();
+    carousel.addEventListener('mouseenter', function(){ clearInterval(timer); });
+    carousel.addEventListener('mouseleave', restart);
   }
 })();
 </script>
