@@ -3,12 +3,103 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>News Hub — Bookkeepers South Africa</title>
-<meta name="description" content="Articles and updates on bookkeeping, payroll and SARS tax compliance from the Bookkeepers South Africa team.">
+<title>News Hub — Bookkeeping, Payroll &amp; SARS Guidance | Bookkeepers South Africa</title>
+<meta name="description" content="Practical bookkeeping, payroll and SARS tax compliance guidance for South African business owners, from the Bookkeepers South Africa team.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
+<style>
+  .mono{ font-family:'JetBrains Mono', monospace; }
+
+  /* ---------- hub masthead strip ---------- */
+  .hub-strip{ border-bottom:1px solid var(--line); background:#FAFBF8; }
+  .hub-tabs{ display:flex; gap:0; overflow-x:auto; scrollbar-width:none; max-width:var(--wrap); margin:0 auto; padding:0 var(--gutter); }
+  .hub-tabs::-webkit-scrollbar{ display:none; }
+  .hub-tab{ font-size:11.5px; font-weight:700; text-transform:uppercase; letter-spacing:.1em; padding:14px 18px; color:var(--grey); border-bottom:2px solid transparent; white-space:nowrap; }
+  .hub-tab:hover, .hub-tab.active{ color:var(--green); border-bottom-color:var(--green); }
+
+  .hub-stats{ border-bottom:1px solid var(--line); }
+  .hub-stats-inner{ max-width:var(--wrap); margin:0 auto; padding:16px var(--gutter); display:flex; gap:34px; align-items:center; flex-wrap:wrap; }
+  .hub-stat{ display:flex; align-items:baseline; gap:7px; }
+  .hub-stat b{ font-size:20px; font-weight:800; color:var(--green); font-family:var(--font-head); }
+  .hub-stat span{ font-size:11.5px; color:var(--grey); text-transform:uppercase; letter-spacing:.04em; }
+  .hub-stat-div{ width:1px; height:18px; background:var(--line); }
+
+  /* ---------- hub hero ---------- */
+  .hub-hero{ padding:56px 0 40px; }
+  .hub-hero-eyebrow{ font-size:11.5px; font-weight:700; text-transform:uppercase; letter-spacing:.14em; color:var(--green); display:block; margin-bottom:14px; }
+  .hub-hero h1{ font-size:clamp(28px,3.6vw,44px); line-height:1.08; max-width:18ch; }
+  .hub-hero h1 .grad{ background:linear-gradient(90deg, var(--green), var(--lime)); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+  .hub-hero p{ font-size:15.5px; color:var(--charcoal); max-width:60ch; margin-top:14px; line-height:1.7; }
+
+  /* ---------- lead grid ---------- */
+  .lead-section{ padding-bottom:56px; }
+  .lead-grid{ display:grid; grid-template-columns:1fr 360px; gap:34px; align-items:start; }
+  .lead-main{ display:block; }
+  .lead-main-img{ height:280px; border-radius:6px; overflow:hidden; position:relative; margin-bottom:18px; background:var(--charcoal); }
+  .lead-main-img svg{ width:100%; height:100%; display:block; }
+  .lead-tag{ position:absolute; top:14px; left:14px; font-size:10.5px; font-weight:700; text-transform:uppercase; letter-spacing:.08em; background:var(--green); color:var(--white); padding:5px 12px; border-radius:3px; }
+  .lead-main-title{ font-size:23px; font-family:var(--font-head); font-weight:800; color:var(--charcoal); line-height:1.25; margin-bottom:8px; transition:color .15s; }
+  .lead-main:hover .lead-main-title{ color:var(--green); }
+  .lead-main-meta{ font-size:11px; color:var(--grey); margin-bottom:10px; }
+  .lead-main-desc{ font-size:15px; color:var(--charcoal); line-height:1.65; }
+
+  .lead-side{ display:flex; flex-direction:column; }
+  .side-item{ padding:15px 0; border-bottom:1px solid var(--line); display:block; }
+  .side-item:last-child{ border-bottom:none; }
+  .side-item:hover .side-title{ color:var(--green); }
+  .side-tag{ font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:var(--green); display:block; margin-bottom:5px; }
+  .side-title{ font-size:14.5px; font-weight:700; font-family:var(--font-head); color:var(--charcoal); line-height:1.32; margin-bottom:4px; transition:color .15s; }
+  .side-meta{ font-size:10.5px; color:var(--grey); }
+
+  /* ---------- section divider ---------- */
+  .sec-div{ display:flex; align-items:center; gap:14px; padding-bottom:22px; }
+  .sec-div-label{ font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.14em; color:var(--green); white-space:nowrap; }
+  .sec-div-line{ flex:1; height:1px; background:var(--line); }
+
+  /* ---------- article cards ---------- */
+  .hub-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:30px 26px; padding-bottom:72px; }
+  .hub-card{ display:flex; flex-direction:column; }
+  .hub-card-img{ height:168px; border-radius:5px; overflow:hidden; position:relative; margin-bottom:14px; background:#EEF3EA; }
+  .hub-card-img img{ width:100%; height:100%; object-fit:cover; display:block; transition:transform .45s; }
+  .hub-card:hover .hub-card-img img{ transform:scale(1.05); }
+  .hub-tag-ov{ position:absolute; top:10px; left:10px; font-size:9.5px; font-weight:700; text-transform:uppercase; letter-spacing:.07em; background:rgba(77,77,77,.82); color:var(--white); padding:4px 10px; border-radius:3px; z-index:2; }
+  .hub-tag-ov.new{ background:var(--green); }
+  .hub-card-title{ font-size:16.5px; font-family:var(--font-head); font-weight:800; color:var(--charcoal); line-height:1.3; margin-bottom:6px; transition:color .15s; }
+  .hub-card:hover .hub-card-title{ color:var(--green); }
+  .hub-card-meta{ font-size:10.5px; color:var(--grey); margin-bottom:8px; }
+  .hub-card-desc{ font-size:13.5px; color:var(--charcoal); line-height:1.6; flex:1; margin-bottom:10px; }
+  .hub-card-read{ font-size:11px; font-weight:700; color:var(--green); text-transform:uppercase; letter-spacing:.06em; }
+
+  .hub-submit{ border:1.5px dashed var(--line); border-radius:5px; padding:24px; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; min-height:200px; }
+  .hub-submit .lbl{ font-size:10.5px; font-weight:700; text-transform:uppercase; letter-spacing:.1em; color:var(--green); margin-bottom:10px; }
+  .hub-submit .ttl{ font-size:16px; font-family:var(--font-head); font-weight:800; color:var(--charcoal); margin-bottom:8px; }
+  .hub-submit .sub{ font-size:12.5px; color:var(--grey); line-height:1.6; margin-bottom:14px; }
+  .hub-submit .cta{ font-size:11px; font-weight:700; color:var(--green); text-transform:uppercase; letter-spacing:.06em; }
+
+  /* ---------- ask-us dark band ---------- */
+  .hub-ask{ background:var(--charcoal); padding:56px 0; }
+  .hub-ask-inner{ display:grid; grid-template-columns:1fr auto; gap:40px; align-items:center; }
+  .hub-ask-lbl{ font-size:10.5px; font-weight:700; text-transform:uppercase; letter-spacing:.14em; color:var(--lime); display:block; margin-bottom:10px; }
+  .hub-ask-title{ font-size:clamp(21px,2.6vw,30px); font-family:var(--font-head); font-weight:800; color:var(--white); line-height:1.22; }
+  .hub-ask-title .grad{ background:linear-gradient(90deg, var(--green), var(--lime)); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+  .hub-ask-sub{ font-size:14px; color:#B9B8B2; margin-top:8px; line-height:1.65; max-width:520px; }
+  .hub-ask-actions{ display:flex; gap:12px; flex-wrap:wrap; }
+  .hub-ask-btn{ display:inline-flex; align-items:center; gap:8px; padding:12px 22px; border-radius:5px; font-size:12.5px; font-weight:700; text-transform:uppercase; letter-spacing:.06em; font-family:var(--font-head); transition:opacity .15s; white-space:nowrap; }
+  .hub-ask-btn-primary{ background:linear-gradient(90deg, var(--green), var(--lime)); color:#133a1f; }
+  .hub-ask-btn-primary:hover{ opacity:.88; }
+  .hub-ask-btn-ghost{ border:1px solid rgba(255,255,255,.26); color:#D7D6D2; }
+  .hub-ask-btn-ghost:hover{ border-color:var(--lime); color:var(--lime); }
+
+  @media (max-width:900px){
+    .lead-grid{ grid-template-columns:1fr; }
+    .hub-ask-inner{ grid-template-columns:1fr; }
+  }
+  @media (max-width:640px){
+    .hub-grid{ grid-template-columns:1fr; gap:28px; }
+  }
+</style>
 </head>
 <body>
 
@@ -46,99 +137,172 @@
   </div>
 </header>
 
-<section class="page-hero">
-  <div class="wrap">
-    <span class="crumb">News hub</span>
-    <h1>Bookkeeping, payroll and SARS updates, in plain language</h1>
-    <p>Practical guidance for South African business owners — tax deadlines, payroll changes and bookkeeping habits that actually move the needle.</p>
-  </div>
-</section>
+<!-- Hub topic tabs -->
+<div class="hub-strip">
+  <nav class="hub-tabs">
+    <a href="news.html" class="hub-tab mono active">All</a>
+    <a href="news.html" class="hub-tab mono">Bookkeeping</a>
+    <a href="news.html" class="hub-tab mono">Payroll</a>
+    <a href="news.html" class="hub-tab mono">Tax &amp; SARS</a>
+    <a href="news.html" class="hub-tab mono">Business registrations</a>
+    <a href="news.html" class="hub-tab mono">Compliance updates</a>
+  </nav>
+</div>
 
-<section class="article-featured">
-  <div class="wrap" style="display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center;">
-    <div class="article-thumb"><span>Featured</span></div>
+<!-- Stats -->
+<div class="hub-stats">
+  <div class="hub-stats-inner">
+    <div class="hub-stat"><b class="mono">12</b><span>Articles</span></div>
+    <div class="hub-stat-div"></div>
+    <div class="hub-stat"><b class="mono">5</b><span>Topics</span></div>
+    <div class="hub-stat-div"></div>
+    <div class="hub-stat"><b class="mono">~6 min</b><span>Average read</span></div>
+    <div class="hub-stat-div"></div>
+    <div class="hub-stat"><b class="mono">2</b><span>Offices — Cape Town &amp; Joburg</span></div>
+  </div>
+</div>
+
+<!-- Hero -->
+<div class="wrap hub-hero">
+  <span class="hub-hero-eyebrow mono">// Bookkeeping, payroll &amp; SARS guidance — practical, no jargon</span>
+  <h1>Finance guidance for SA businesses that <span class="grad">actually keeps you compliant.</span></h1>
+  <p>Tax deadlines, payroll changes and bookkeeping habits explained the way we'd explain them to a client — written by the team that files the submissions, not a newsroom covering accounting from the outside.</p>
+</div>
+
+<!-- Lead story -->
+<div class="wrap lead-section">
+  <div class="lead-grid">
+    <a href="#" class="lead-main">
+      <div class="lead-main-img">
+        <svg viewBox="0 0 700 280" preserveAspectRatio="xMidYMid slice" role="img" aria-label="A calendar with tax filing dates highlighted">
+          <defs>
+            <linearGradient id="lg1" x1="0" y1="0" x2="700" y2="0" gradientUnits="userSpaceOnUse">
+              <stop offset="0" stop-color="#00A858"/><stop offset="1" stop-color="#A8CF45"/>
+            </linearGradient>
+            <radialGradient id="glow1" cx="50%" cy="46%" r="55%">
+              <stop offset="0" stop-color="#A8CF45" stop-opacity=".22"/><stop offset="1" stop-color="#A8CF45" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+          <rect width="700" height="280" fill="#4D4D4D"/>
+          <rect width="700" height="280" fill="url(#glow1)"/>
+          <g stroke="#ffffff" stroke-opacity=".06"><path d="M0 46H700M0 92H700M0 138H700M0 184H700M0 230H700M58 0V280M116 0V280M174 0V280M232 0V280M290 0V280M348 0V280M406 0V280M464 0V280M522 0V280M580 0V280M638 0V280"/></g>
+          <rect x="210" y="56" width="280" height="168" rx="10" fill="#3a3b35" stroke="url(#lg1)" stroke-width="2.5"/>
+          <rect x="210" y="56" width="280" height="38" rx="10" fill="url(#lg1)"/>
+          <g fill="#ffffff" fill-opacity=".9">
+            <circle cx="246" cy="128" r="12"/><circle cx="296" cy="128" r="12"/><circle cx="346" cy="128" r="12" fill="#A8CF45"/><circle cx="396" cy="128" r="12"/><circle cx="446" cy="128" r="12"/>
+            <circle cx="246" cy="168" r="12"/><circle cx="296" cy="168" r="12"/><circle cx="346" cy="168" r="12"/><circle cx="396" cy="168" r="12" fill="#A8CF45"/><circle cx="446" cy="168" r="12"/>
+          </g>
+          <text x="350" y="252" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="11" fill="#D7D6D2" letter-spacing="2">PROVISIONAL TAX PERIODS</text>
+        </svg>
+        <span class="lead-tag">Start here</span>
+      </div>
+      <div class="lead-main-title">Provisional tax deadlines every business owner should have on their calendar</div>
+      <div class="lead-main-meta mono">Oct 2026 · Tax compliance · 8 min read</div>
+      <div class="lead-main-desc">A plain-language walkthrough of South Africa's provisional tax periods, what SARS expects at each one, and how to avoid the penalties that catch growing businesses out.</div>
+    </a>
+
+    <div class="lead-side">
+      <a href="#" class="side-item">
+        <span class="side-tag mono">Payroll</span>
+        <div class="side-title">What changes to UIF contribution thresholds mean for your payroll</div>
+        <div class="side-meta mono">4 min read</div>
+      </a>
+      <a href="#" class="side-item">
+        <span class="side-tag mono">Bookkeeping</span>
+        <div class="side-title">Five bookkeeping habits that make year-end painless</div>
+        <div class="side-meta mono">5 min read</div>
+      </a>
+      <a href="#" class="side-item">
+        <span class="side-tag mono">Tax compliance</span>
+        <div class="side-title">VAT registration: when it's compulsory, and when it's worth doing early</div>
+        <div class="side-meta mono">6 min read</div>
+      </a>
+      <a href="#" class="side-item">
+        <span class="side-tag mono">Business registrations</span>
+        <div class="side-title">Pty Ltd vs sole proprietor: what actually changes for your taxes</div>
+        <div class="side-meta mono">7 min read</div>
+      </a>
+      <a href="#" class="side-item">
+        <span class="side-tag mono">Tax compliance</span>
+        <div class="side-title">Received a SARS verification letter? Here's what to do first</div>
+        <div class="side-meta mono">5 min read</div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- All articles -->
+<div class="wrap sec-div">
+  <span class="sec-div-label mono">// All articles</span>
+  <div class="sec-div-line"></div>
+</div>
+
+<div class="wrap hub-grid">
+  <a href="#" class="hub-card">
+    <div class="hub-card-img"><img src="assets/css/images/book-keepers-cape-town.jpg" alt="Consultation at Bookkeepers South Africa"><span class="hub-tag-ov new">Payroll</span></div>
+    <div class="hub-card-title">What changes to UIF contribution thresholds mean for your payroll</div>
+    <div class="hub-card-meta mono">Oct 2026 · 4 min read</div>
+    <div class="hub-card-desc">A quick breakdown of the latest threshold update and what it means for your monthly payroll run.</div>
+    <span class="hub-card-read">Read more ▸</span>
+  </a>
+  <a href="#" class="hub-card">
+    <div class="hub-card-img"><img src="assets/css/images/tailored-strategy.jpg" alt="Planning a bookkeeping strategy"><span class="hub-tag-ov">Bookkeeping</span></div>
+    <div class="hub-card-title">Five bookkeeping habits that make year-end painless</div>
+    <div class="hub-card-meta mono">Oct 2026 · 5 min read</div>
+    <div class="hub-card-desc">Simple monthly habits that keep your books audit-ready without extra admin on your side.</div>
+    <span class="hub-card-read">Read more ▸</span>
+  </a>
+  <a href="#" class="hub-card">
+    <div class="hub-card-img"><img src="assets/css/images/ongoing-support.png" alt="Ongoing SARS compliance support"><span class="hub-tag-ov">Tax &amp; SARS</span></div>
+    <div class="hub-card-title">VAT registration: when it's compulsory, and when it's worth doing early</div>
+    <div class="hub-card-meta mono">Sep 2026 · 6 min read</div>
+    <div class="hub-card-desc">The R1 million threshold explained, plus why some smaller businesses register voluntarily.</div>
+    <span class="hub-card-read">Read more ▸</span>
+  </a>
+  <a href="#" class="hub-card">
+    <div class="hub-card-img"><img src="assets/css/images/part-of-the-team.jpg" alt="Bookkeepers South Africa team"><span class="hub-tag-ov">Business</span></div>
+    <div class="hub-card-title">Pty Ltd vs sole proprietor: what actually changes for your taxes</div>
+    <div class="hub-card-meta mono">Sep 2026 · 7 min read</div>
+    <div class="hub-card-desc">How your tax, liability and admin obligations shift when you move from sole proprietor to a registered company.</div>
+    <span class="hub-card-read">Read more ▸</span>
+  </a>
+  <a href="#" class="hub-card">
+    <div class="hub-card-img"><img src="assets/css/images/consultation-office.jpg" alt="Bookkeepers South Africa office"><span class="hub-tag-ov">Tax &amp; SARS</span></div>
+    <div class="hub-card-title">Received a SARS verification letter? Here's what to do first</div>
+    <div class="hub-card-meta mono">Sep 2026 · 5 min read</div>
+    <div class="hub-card-desc">Why these letters aren't automatically a problem, and the documents you should have ready.</div>
+    <span class="hub-card-read">Read more ▸</span>
+  </a>
+  <a href="#" class="hub-card">
+    <div class="hub-card-img"><img src="assets/css/images/book-keepers-cape-town.jpg" alt="Hiring and payroll compliance"><span class="hub-tag-ov">Payroll</span></div>
+    <div class="hub-card-title">Hiring your first employee: the compliance checklist</div>
+    <div class="hub-card-meta mono">Aug 2026 · 6 min read</div>
+    <div class="hub-card-desc">Everything that needs to be registered and in place before your first payslip goes out.</div>
+    <span class="hub-card-read">Read more ▸</span>
+  </a>
+
+  <a href="contact.html" class="hub-submit">
+    <span class="lbl mono">// Got a question?</span>
+    <div class="ttl">Suggest a topic</div>
+    <div class="sub">Running into a bookkeeping, payroll or SARS question you'd like covered here? Tell us and we'll write about it.</div>
+    <span class="cta mono">Send a suggestion →</span>
+  </a>
+</div>
+
+<!-- Ask us -->
+<div class="hub-ask">
+  <div class="wrap hub-ask-inner">
     <div>
-      <span class="article-tag">Tax compliance</span>
-      <h2>Provisional tax deadlines every business owner should have on their calendar</h2>
-      <p>A plain-language walkthrough of South Africa's provisional tax periods, what SARS expects at each one, and how to avoid the penalties that catch growing businesses out.</p>
-      <div class="article-meta">8 min read · Bookkeepers South Africa team</div>
+      <span class="hub-ask-lbl mono">// Have a question?</span>
+      <div class="hub-ask-title">Didn't find what you were<br>looking for? <span class="grad">Just ask us directly.</span></div>
+      <div class="hub-ask-sub">Every article here comes from a real question a client asked us. If yours isn't covered yet, send it through — we'll answer it personally, and often turn it into the next article.</div>
+    </div>
+    <div class="hub-ask-actions">
+      <a href="contact.html" class="hub-ask-btn hub-ask-btn-primary mono">→ Ask a question</a>
+      <a href="https://wa.me/27727791046" target="_blank" rel="noopener" class="hub-ask-btn hub-ask-btn-ghost mono">WhatsApp us</a>
     </div>
   </div>
-</section>
-
-<section class="services" style="border-bottom:1px solid var(--line);">
-  <div class="wrap">
-    <div class="section-head">
-      <div>
-        <h2>Latest articles</h2>
-        <p>Short, practical reads on the topics our clients ask about most.</p>
-      </div>
-    </div>
-    <div class="article-grid">
-      <div class="article-card">
-        <div class="article-thumb"><span>Payroll</span></div>
-        <div class="article-body">
-          <span class="article-tag">Payroll</span>
-          <h3>What changes to UIF contribution thresholds mean for your payroll</h3>
-          <p>A quick breakdown of the latest threshold update and what it means for your monthly payroll run.</p>
-          <div class="article-meta">4 min read</div>
-        </div>
-      </div>
-      <div class="article-card">
-        <div class="article-thumb"><span>Bookkeeping</span></div>
-        <div class="article-body">
-          <span class="article-tag">Bookkeeping</span>
-          <h3>Five bookkeeping habits that make year-end painless</h3>
-          <p>Simple monthly habits that keep your books audit-ready without extra admin on your side.</p>
-          <div class="article-meta">5 min read</div>
-        </div>
-      </div>
-      <div class="article-card">
-        <div class="article-thumb"><span>VAT</span></div>
-        <div class="article-body">
-          <span class="article-tag">Tax compliance</span>
-          <h3>VAT registration: when it's compulsory, and when it's worth doing early</h3>
-          <p>The R1 million threshold explained, plus why some smaller businesses register voluntarily.</p>
-          <div class="article-meta">6 min read</div>
-        </div>
-      </div>
-      <div class="article-card">
-        <div class="article-thumb"><span>Business</span></div>
-        <div class="article-body">
-          <span class="article-tag">Business registrations</span>
-          <h3>Pty Ltd vs sole proprietor: what actually changes for your taxes</h3>
-          <p>How your tax, liability and admin obligations shift when you move from sole proprietor to a registered company.</p>
-          <div class="article-meta">7 min read</div>
-        </div>
-      </div>
-      <div class="article-card">
-        <div class="article-thumb"><span>SARS</span></div>
-        <div class="article-body">
-          <span class="article-tag">Tax compliance</span>
-          <h3>Received a SARS verification letter? Here's what to do first</h3>
-          <p>Why these letters aren't automatically a problem, and the documents you should have ready.</p>
-          <div class="article-meta">5 min read</div>
-        </div>
-      </div>
-      <div class="article-card">
-        <div class="article-thumb"><span>Payroll</span></div>
-        <div class="article-body">
-          <span class="article-tag">Payroll</span>
-          <h3>Hiring your first employee: the compliance checklist</h3>
-          <p>Everything that needs to be registered and in place before your first payslip goes out.</p>
-          <div class="article-meta">6 min read</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="cta-band">
-  <div class="wrap">
-    <h2>Have a question that isn't answered here?</h2>
-    <a class="btn on-dark" href="contact.html">Get in touch</a>
-  </div>
-</section>
+</div>
 
 <footer>
   <div class="wrap">
@@ -198,14 +362,14 @@
 
 <script>
 (function(){
-  var targets = document.querySelectorAll('.article-featured, .services, .cta-band');
+  var targets = document.querySelectorAll('.lead-section, .hub-grid, .hub-ask');
   targets.forEach(function(el){ el.classList.add('reveal'); });
   if('IntersectionObserver' in window){
     var io = new IntersectionObserver(function(entries){
       entries.forEach(function(entry){
         if(entry.isIntersecting){ entry.target.classList.add('in'); io.unobserve(entry.target); }
       });
-    }, { threshold: 0.12 });
+    }, { threshold: 0.1 });
     targets.forEach(function(el){ io.observe(el); });
   } else {
     targets.forEach(function(el){ el.classList.add('in'); });
