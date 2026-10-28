@@ -184,6 +184,30 @@
       botSay(body, "I'll get Lindsay to help with that directly. What's your name?");
     }
 
+    // Crude sanity checks so a sentence typed into a "what's your name?" /
+    // "what's your number?" prompt gets re-asked instead of being parroted
+    // back verbatim (e.g. "my taxes are behind" -> "Thanks, my."). Real
+    // validation can get smarter once the LLM backend is wired up.
+    var NAME_STOPWORDS = ['my','your','their','his','her','is','are','am','was','the','a','an',
+      'to','for','and','or','but','not','please','need','want','help','behind','ahead','taxes',
+      'tax','return','returns','invoice','invoices','payroll','vat','sars','late','overdue',
+      'books','bookkeeping','question','hi','hello','hey','yes','no','ok','okay','thanks','thank'];
+    function looksLikeName(val){
+      if(!val || val.length > 40) return false;
+      if(/\d/.test(val)) return false;
+      var words = val.trim().split(/\s+/);
+      if(words.length > 3) return false;
+      if(!/^[a-zA-ZÀ-ɏ' .-]+$/.test(val)) return false;
+      for(var i = 0; i < words.length; i++){
+        if(NAME_STOPWORDS.indexOf(words[i].toLowerCase()) !== -1) return false;
+      }
+      return true;
+    }
+    function looksLikePhone(val){
+      var digits = (val.match(/\d/g) || []).length;
+      return digits >= 7 && digits <= 15 && /^[\d +().-]+$/.test(val);
+    }
+
     form.addEventListener('submit', function(evt){
       evt.preventDefault();
       var val = input.value.trim();
@@ -197,10 +221,18 @@
         // once that backend exists), fall through to lead capture below.
         startLeadCapture();
       } else if(leadStep === 'name'){
+        if(!looksLikeName(val)){
+          botSay(body, "Sorry, just need your name so Lindsay knows who's asking — what should I call you?");
+          return;
+        }
         lead.name = val;
         leadStep = 'phone';
         botSay(body, 'Thanks, ' + val.split(' ')[0] + '. And a phone number so she can reach you?');
       } else if(leadStep === 'phone'){
+        if(!looksLikePhone(val)){
+          botSay(body, "That doesn't quite look like a number — mind typing your phone number so Lindsay can call or WhatsApp you?");
+          return;
+        }
         lead.phone = val;
         leadStep = 'email';
         botSay(body, "Got it. Email address too, if you'd like a reply there as well? (You can type \"skip\")");
