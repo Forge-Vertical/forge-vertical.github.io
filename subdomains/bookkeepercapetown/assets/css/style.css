@@ -91,6 +91,23 @@ nav.primary-nav > a:focus-within .drop{ opacity:1; visibility:visible; transform
 .drop a:hover{ background:#F2F6EF; color:var(--green); }
 
 .header-cta{ display:flex; align-items:center; gap:10px; }
+.nav-contact-link{ display:none; } /* mobile-only nav entry, shown under 980px once Contact leaves the header-cta */
+
+/* hamburger toggle — hidden on desktop, shown once the nav collapses */
+.nav-toggle{
+  display:none; flex:none; width:40px; height:40px; border:none; background:transparent;
+  padding:0; position:relative; cursor:pointer;
+}
+.nav-toggle span{
+  position:absolute; left:8px; right:8px; height:2px; background:var(--charcoal); border-radius:2px;
+  transition:transform .25s ease, opacity .2s ease;
+}
+.nav-toggle span:nth-child(1){ top:13px; }
+.nav-toggle span:nth-child(2){ top:19px; }
+.nav-toggle span:nth-child(3){ top:25px; }
+.nav-toggle[aria-expanded="true"] span:nth-child(1){ transform:translateY(6px) rotate(45deg); }
+.nav-toggle[aria-expanded="true"] span:nth-child(2){ opacity:0; }
+.nav-toggle[aria-expanded="true"] span:nth-child(3){ transform:translateY(-6px) rotate(-45deg); }
 
 .btn{
   display:inline-block; font-family:var(--font-head); font-weight:800; font-size:14px;
@@ -320,7 +337,35 @@ footer{ background:#2E2F2B; color:#C8C7C2; padding:56px 0 var(--mobile-cta-h); }
 /* ---------- sticky mobile CTA bar ---------- */
 .mobile-cta{ display:none; }
 @media (max-width:980px){
-  nav.primary-nav{ display:none; }
+  .nav-toggle{ display:block; }
+
+  nav.primary-nav{
+    display:flex; flex-direction:column; align-items:stretch; gap:0;
+    position:absolute; top:100%; left:0; right:0;
+    background:var(--white); border-top:1px solid var(--line);
+    box-shadow:0 18px 32px rgba(0,0,0,.12);
+    max-height:0; opacity:0; visibility:hidden; overflow:hidden;
+    transition:max-height .3s ease, opacity .22s ease, visibility .3s;
+  }
+  .site-header.nav-open nav.primary-nav{
+    max-height:80vh; overflow-y:auto; opacity:1; visibility:visible;
+    padding:6px 0 18px;
+  }
+  nav.primary-nav > a{ padding:15px var(--gutter); border-bottom:1px solid var(--line); border-radius:0; }
+  nav.primary-nav > a:hover{ background:transparent; color:var(--charcoal); }
+
+  /* the Services submenu renders inline (no hover) once the mobile panel is open */
+  .drop{
+    position:static; opacity:1; visibility:visible; transform:none;
+    border:none; box-shadow:none; min-width:0;
+    padding:0 var(--gutter) 10px calc(var(--gutter) + 14px);
+    background:#FAFBF8;
+  }
+  .drop a{ padding:10px 6px; font-size:13.5px; }
+
+  /* keep "Book a consultation" as the one header CTA on mobile; Contact moves into the menu instead */
+  .header-cta .btn.ghost{ display:none; }
+  .nav-contact-link{ display:block !important; }
 }
 @media (max-width:860px){
   :root{ --gutter:20px; }
