@@ -482,10 +482,11 @@
   function brandIcon(number, variant){
     return L.divIcon({
       className: 'office-map-pin' + (variant === 'jhb' ? ' jhb' : ''),
-      html: '<span>' + number + '</span>',
-      iconSize: [26, 26],
-      iconAnchor: [13, 13],
-      popupAnchor: [0, -14]
+      html: '<span class="pin-badge"><img src="assets/css/images/map-pin-icon.png" alt="">' +
+            '<em>' + number + '</em></span>',
+      iconSize: [36, 36],
+      iconAnchor: [18, 18],
+      popupAnchor: [0, -20]
     });
   }
 
