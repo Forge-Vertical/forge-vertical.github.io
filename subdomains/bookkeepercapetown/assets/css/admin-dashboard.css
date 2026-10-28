@@ -26,8 +26,8 @@
   flex-direction:column;
   padding:24px 0;
 }
-.admin-brand{ padding:0 24px 28px; }
-.admin-brand img{ height:30px; width:auto; filter:brightness(0) invert(1); opacity:.95; }
+.admin-brand{ padding:0 24px 30px; }
+.admin-brand img{ height:40px; width:auto; }
 
 .admin-nav{ display:flex; flex-direction:column; gap:2px; padding:0 14px; flex:1 1 auto; }
 .admin-nav-item{
@@ -85,12 +85,22 @@
 /* ---------- lead cards ---------- */
 .admin-leads{ display:flex; flex-direction:column; gap:12px; }
 .lead-card{
+  position:relative;
   background:var(--white); border:1px solid var(--line); border-radius:10px;
-  padding:18px 20px; display:flex; align-items:center; justify-content:space-between; gap:20px;
-  transition:border-color .15s, box-shadow .15s;
+  padding:18px 44px 18px 20px; display:flex; align-items:center; justify-content:space-between; gap:20px;
+  transition:border-color .15s, box-shadow .15s, opacity .2s, transform .2s;
 }
 .lead-card:hover{ border-color:rgba(0,168,88,.3); box-shadow:0 6px 18px rgba(0,0,0,.05); }
 .lead-card.is-new{ border-left:3px solid var(--green); }
+.lead-card.is-removing{ opacity:0; transform:translateX(12px); }
+
+.lead-delete{
+  position:absolute; top:14px; right:14px; width:26px; height:26px; border-radius:50%;
+  border:none; background:none; color:var(--grey); cursor:pointer;
+  display:flex; align-items:center; justify-content:center; transition:background .15s, color .15s;
+}
+.lead-delete svg{ width:15px; height:15px; }
+.lead-delete:hover{ background:#EFEFED; color:var(--ink); }
 
 .lead-card-main{ flex:1 1 auto; min-width:0; }
 .lead-who{ display:flex; align-items:center; gap:10px; margin-bottom:7px; }
@@ -117,6 +127,21 @@
 }
 .lead-action:hover:not(:disabled){ border-color:var(--green); color:var(--green); }
 .lead-action:disabled{ opacity:.5; cursor:default; }
+
+/* Lead temperature — Cold / Warm / Hot, separate from status/stage */
+.lead-temp{
+  display:flex; border:1px solid var(--line); border-radius:14px; overflow:hidden;
+}
+.lead-temp button{
+  font-family:var(--font-head); font-weight:700; font-size:9.5px; letter-spacing:.03em;
+  color:var(--grey); background:var(--white); border:none; padding:5px 9px; cursor:pointer;
+  border-right:1px solid var(--line); transition:background .15s, color .15s;
+}
+.lead-temp button:last-child{ border-right:none; }
+.lead-temp button:hover{ background:#F4F4F2; }
+.lead-temp button.is-active[data-temp="cold"]{ background:var(--grey); color:var(--white); }
+.lead-temp button.is-active[data-temp="warm"]{ background:var(--lime); color:var(--ink); }
+.lead-temp button.is-active[data-temp="hot"]{ background:var(--green); color:var(--white); }
 
 /* ---------- Lily pane, baked into the layout ---------- */
 .admin-lily{
