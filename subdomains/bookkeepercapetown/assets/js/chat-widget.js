@@ -22,12 +22,14 @@
  *     notes on why: WhatsApp Business API now charges per message as of
  *     Oct 2026, and unofficial automation risks her number being banned).
  *
- * Swap the avatar: replace the .chat-avatar / .launcher-avatar spans below
- * with an <img> once Lindsay has picked Lily's look and name.
+ * Avatar: Lily's portrait lives at assets/css/images/lily-avatar.png —
+ * swap that file (keep the name) to change her look later. Name/look are
+ * still placeholders for Lindsay to confirm.
  */
 (function(){
   var WHATSAPP_URL = 'https://wa.me/27727791046';
   var BOT_NAME = 'Lily';
+  var BOT_AVATAR_SRC = 'assets/css/images/lily-avatar.png';
 
   // Same 14 Q&As as the homepage FAQ — kept here so every page (not just
   // the homepage) can offer instant, correct answers without a backend.
@@ -68,7 +70,7 @@
     btn.setAttribute('aria-expanded', 'false');
     btn.setAttribute('aria-label', 'Chat with ' + BOT_NAME + ' or WhatsApp us');
     btn.innerHTML =
-      '<span class="launcher-avatar">' + BOT_NAME.charAt(0) + '</span>' +
+      '<span class="launcher-avatar"><img src="' + BOT_AVATAR_SRC + '" alt="">' + '</span>' +
       '<span class="launcher-label">Chat with ' + BOT_NAME + '</span>';
     wrap.appendChild(btn);
 
@@ -77,7 +79,7 @@
     panel.hidden = true;
     panel.innerHTML =
       '<div class="chat-panel-header">' +
-        '<span class="chat-avatar">' + BOT_NAME.charAt(0) + '</span>' +
+        '<span class="chat-avatar"><img src="' + BOT_AVATAR_SRC + '" alt="">' + '</span>' +
         '<div class="chat-header-text"><strong>' + BOT_NAME + '</strong><small>Bookkeepers South Africa</small></div>' +
         '<a class="chat-wa-btn" href="' + WHATSAPP_URL + '" target="_blank" rel="noopener" aria-label="Chat on WhatsApp instead">' + WA_SVG + '</a>' +
         '<button type="button" class="chat-close-btn" id="chatCloseBtn" aria-label="Close chat">&times;</button>' +
