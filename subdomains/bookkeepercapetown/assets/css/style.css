@@ -369,7 +369,7 @@ footer{ background:#2E2F2B; color:#C8C7C2; padding:56px 0 var(--mobile-cta-h); }
 }
 @media (max-width:860px){
   :root{ --gutter:20px; }
-  .header-top .wrap{ justify-content:center; }
+  .header-top{ display:none; } /* phone numbers/email move to the footer + nav menu; frees up header space */
   .site-header .wrap.main{ height:76px; }
   .hero .wrap{ grid-template-columns:1fr; }
   .hero-photo{ order:-1; min-height:260px; }
