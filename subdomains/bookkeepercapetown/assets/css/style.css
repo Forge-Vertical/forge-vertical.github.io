@@ -162,7 +162,7 @@ nav.primary-nav > a:focus-within .drop{ opacity:1; visibility:visible; transform
 .process-step h3{ font-size:18px; }
 .process-step p{ font-size:15px; color:var(--charcoal); margin:0; }
 
-/* ---------- offices + map graphic (original artwork, not a map embed) ---------- */
+/* ---------- offices + interactive map (Leaflet + Mapbox tiles) ---------- */
 .offices{ padding:92px 0; background:var(--charcoal); color:var(--white); }
 .offices h2{ color:var(--white); font-size:32px; }
 .offices .section-head p{ color:#D7D6D2; }
@@ -182,53 +182,19 @@ nav.primary-nav > a:focus-within .drop{ opacity:1; visibility:visible; transform
 }
 .map-locator-topbar select:focus{ outline:none; border-color:var(--green); box-shadow:0 0 0 3px rgba(0,168,88,.14); }
 .map-locator-body{ display:flex; height:560px; }
-.map-locator-map{
-  flex:1 1 auto; height:100%; background:var(--white);
-  position:relative; overflow:hidden;
+.map-locator-map{ flex:1 1 auto; height:100%; background:#eceae4; }
+
+/* custom Leaflet marker — numbered circle, matches the sidebar badges */
+.office-map-pin span{
+  display:flex; align-items:center; justify-content:center;
+  width:26px; height:26px; border-radius:50%;
+  background:var(--green); color:var(--white); border:2px solid var(--white);
+  font-family:var(--font-head); font-weight:800; font-size:11px;
+  box-shadow:0 4px 10px rgba(0,0,0,.3);
 }
-.map-locator-map svg{
-  width:100%; height:100%; display:block;
-  cursor:grab; touch-action:none; user-select:none;
-}
-.map-locator-map.is-dragging svg{ cursor:grabbing; }
-.sa-outline{ fill:#EAF4E3; stroke:var(--green); stroke-width:2; stroke-linejoin:round; }
-.sa-pin{ cursor:pointer; }
-.sa-pin circle{
-  fill:var(--green); stroke:var(--white); stroke-width:2; r:10;
-  transition:r .2s, fill .2s;
-  filter:drop-shadow(0 3px 6px rgba(0,0,0,.3));
-}
-.sa-pin text{
-  font-family:var(--font-head); font-weight:800; font-size:10px;
-  fill:var(--white); text-anchor:middle; dominant-baseline:middle; pointer-events:none;
-}
-.sa-pin.jhb circle{ fill:var(--lime); }
-.sa-pin.jhb text{ fill:var(--ink); }
-.sa-pin:hover circle, .sa-pin.is-active circle{ r:13; }
-.sa-map-zoom{
-  position:absolute; right:14px; bottom:14px; z-index:2;
-  display:flex; flex-direction:column; border:1px solid var(--line); border-radius:4px;
-  overflow:hidden; box-shadow:0 4px 10px rgba(0,0,0,.12); background:var(--white);
-}
-.sa-map-zoom button{
-  width:30px; height:30px; border:none; background:var(--white); color:var(--ink);
-  font-size:16px; font-weight:700; cursor:pointer; line-height:1;
-}
-.sa-map-zoom button:first-child{ border-bottom:1px solid var(--line); }
-.sa-map-zoom button:hover{ background:#F2F6EF; }
-.sa-map-tooltip{
-  position:absolute; left:0; top:0; z-index:3; pointer-events:none;
-  transform:translate(-50%, calc(-100% - 18px));
-  background:var(--ink); color:var(--white); font-family:var(--font-body); font-size:12.5px;
-  padding:8px 12px; border-radius:6px; white-space:nowrap;
-  opacity:0; transition:opacity .15s;
-}
-.sa-map-tooltip strong{ font-family:var(--font-head); display:block; font-size:12px; margin-bottom:1px; }
-.sa-map-tooltip.is-visible{ opacity:1; }
-.sa-map-tooltip::after{
-  content:''; position:absolute; left:50%; top:100%; transform:translateX(-50%);
-  border:6px solid transparent; border-top-color:var(--ink);
-}
+.office-map-pin.jhb span{ background:var(--lime); color:var(--ink); }
+.leaflet-popup-content{ font-family:var(--font-body); font-size:13px; }
+.leaflet-popup-content strong{ font-family:var(--font-head); }
 .map-locator-sidebar{
   flex:0 0 290px; height:100%; display:flex; flex-direction:column;
   border-left:1px solid var(--line); background:var(--white);
