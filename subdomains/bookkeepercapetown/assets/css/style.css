@@ -184,15 +184,22 @@ nav.primary-nav > a:focus-within .drop{ opacity:1; visibility:visible; transform
 .map-locator-body{ display:flex; height:560px; }
 .map-locator-map{ flex:1 1 auto; height:100%; background:#eceae4; }
 
-/* custom Leaflet marker — numbered circle, matches the sidebar badges */
-.office-map-pin span{
-  display:flex; align-items:center; justify-content:center;
-  width:26px; height:26px; border-radius:50%;
-  background:var(--green); color:var(--white); border:2px solid var(--white);
-  font-family:var(--font-head); font-weight:800; font-size:11px;
+/* custom Leaflet marker — brand dot-grid mark in a white badge, numbered to match the sidebar */
+.office-map-pin{ background:none; border:none; }
+.office-map-pin .pin-badge{
+  position:relative; display:flex; align-items:center; justify-content:center;
+  width:36px; height:36px; border-radius:10px;
+  background:var(--white); border:2px solid var(--white);
   box-shadow:0 4px 10px rgba(0,0,0,.3);
 }
-.office-map-pin.jhb span{ background:var(--lime); color:var(--ink); }
+.office-map-pin .pin-badge img{ width:20px; height:auto; display:block; }
+.office-map-pin .pin-badge em{
+  position:absolute; right:-6px; bottom:-6px; width:16px; height:16px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  background:var(--green); color:var(--white); border:2px solid var(--white);
+  font-style:normal; font-family:var(--font-head); font-weight:800; font-size:9px;
+}
+.office-map-pin.jhb .pin-badge em{ background:var(--lime); color:var(--ink); }
 .leaflet-popup-content{ font-family:var(--font-body); font-size:13px; }
 .leaflet-popup-content strong{ font-family:var(--font-head); }
 .map-locator-sidebar{
