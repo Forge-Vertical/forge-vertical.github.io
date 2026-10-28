@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 </head>
 <body>
 
@@ -168,17 +169,7 @@
         </select>
       </div>
       <div class="map-locator-body">
-        <div id="officesMap" class="map-locator-map" role="img" aria-label="Map of South Africa showing the Cape Town and Johannesburg offices">
-          <svg id="saMapSvg" viewBox="0 0 760 593" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-            <path class="sa-outline" d="M586.925,20.141L587.559,20.064L600.086,18L610.71,19.682L623.395,24.423L635.287,26.105L646.228,24.729L655.266,24.423L662.243,25.111L667.634,26.793L671.598,29.316L671.915,31.61L672.232,32.681L674.293,38.798L677.465,47.897L679.526,56.384L682.38,67.93L682.38,74.353L683.014,76.876L685.551,80.011L688.723,85.363L689.833,88.345L690.943,90.639L694.272,94.921L696.809,101.42L699.029,110.06L700.932,114.189L701.566,116.254L702.359,120L702.359,127.8L702.359,136.822L702.359,146.992L702.518,155.326L702.201,159.531L702.359,171.536L699.505,177.806L699.822,182.699L700.774,185.911L699.664,186.37L697.444,186.981L687.137,181.935L677.306,176.582L675.879,176.43L673.818,176.965L668.11,180.864L662.877,186.905L660.498,192.104L656.534,197.38L650.35,205.944L649.716,207.855L649.558,214.814L649.875,221.466L650.509,222.383L653.839,222.689L656.217,228.118L661.767,236.758L671.122,242.34L679.685,244.863L691.735,245.475L701.249,245.322L700.615,239.434L701.566,230.106L702.835,223.76L704.103,223.53L706.64,224.065L708.067,224.754L711.873,224.448L718.533,225.748L724.082,225.595L728.998,225.442L737.243,225.212L742,225.212L740.414,235.382L734.072,251.286L732.011,258.55L726.619,284.623L719.643,297.775L715.678,303.204L704.262,312.838L701.091,314.75L698.237,316.049L693.321,317.12L673.818,336.541L666.524,345.946L660.023,359.556L653.68,367.05L644.166,383.107L635.763,395.417L627.676,406.657L613.722,422.179L607.538,426.69L603.257,428.678L592.158,437.701L576.46,452.152L564.568,464.998L546.65,479.525L536.343,485.948L520.646,498.488L516.364,500.323L498.764,511.945L486.237,519.056L465.783,527.238L457.696,529.532L438.351,527.391L430.265,528.538L423.446,533.508L422.812,540.619L419.958,541.689L415.677,541.383L402.199,538.401L394.905,538.937L390.624,542.76L387.135,547.577L376.987,547.806L358.753,542.836L337.346,539.778L332.431,539.472L322.124,543.142L318.477,543.677L303.414,542.913L295.01,540.542L286.923,540.542L280.898,542.53L273.445,543.142L253.308,556.523L242.843,556.523L233.963,558.128L229.523,558.052L221.12,556.217L218.107,556.293L213.35,557.134L208.593,559.505L197.811,560.499L193.688,562.563L175.453,574.721L171.331,574.262L167.842,573.421L158.487,573.344L147.705,566.769L143.582,567.227L144.692,565.239L145.009,561.799L142.789,559.352L141.204,558.281L137.081,558.511L134.861,555.529L128.36,555.299L126.14,555.988L122.969,556.14L122.81,553.158L122.969,551.323L122.81,548.418L122.018,544.901L119.481,543.754L117.578,543.295L113.138,543.524L109.967,543.907L108.381,544.977L106.795,547.5L106.795,555.376L104.417,553.158L101.88,548.418L101.087,543.371L102.039,537.407L106.954,535.19L106.478,531.137L105.527,527.697L99.977,518.75L97.916,514.622L93.318,511.869L89.671,505.217L86.024,502.77L84.597,498.106L81.108,494.359L79.84,488.471L81.742,485.107L84.914,483.272L88.085,486.178L91.89,485.031L97.44,480.749L100.77,474.25L100.929,463.927L100.136,457.428L95.696,440.683L93.635,436.86L83.645,424.855L72.229,408.798L57.641,383.565L50.664,368.349L40.199,337.688L30.844,320.331L19.427,304.121L18,303.051L19.744,301.063L25.928,297.316L28.624,296.322L30.209,296.781L31.636,295.787L33.064,293.264L33.381,290.893L34.015,287.529L35.442,285.465L36.869,281.489L39.406,278.889L44.797,277.207L48.92,279.5L50.664,281.718L51.457,284.623L53.201,286L56.055,285.923L58.117,287.758L59.385,291.429L59.068,294.105L57.482,295.787L57.641,297.928L59.861,300.604L60.654,303.204L62.081,306.645L69.533,308.556L73.18,309.703L79.364,310.085L85.389,311.615L90.939,314.214L100.136,314.902L112.821,313.526L123.286,314.138L131.531,316.738L137.557,317.196L141.362,315.591L142.948,313.22L142.472,310.085L144.216,308.174L148.339,307.333L151.669,304.962L154.206,301.139L160.073,298.081L169.111,295.634L173.709,295.71L173.709,289.517L173.709,269.943L173.709,250.368L173.709,230.718L173.709,211.143L173.709,191.569L173.709,171.995L173.709,152.42L173.709,133.917L175.77,135.216L189.724,145.004L193.53,150.203L195.274,153.491L201.299,165.343L205.739,176.047L209.386,184.076L209.703,187.746L210.179,191.34L210.813,193.098L210.337,195.01L207.8,199.368L205.263,202.733L202.092,207.32L201.775,213.361L202.726,220.472L204.629,223.989L207.166,225.136L212.874,223.377L216.521,223.913L221.595,225.289L238.562,224.448L240.623,224.907L246.965,225.365L249.185,224.83L251.088,223.301L253.308,219.019L255.211,217.643L258.858,216.954L263.139,215.808L266.627,213.284L272.177,204.873L283.276,197.38L286.765,195.622L288.985,193.634L290.729,190.881L294.693,181.476L297.706,173.6L298.657,169.93L301.353,163.89L304.524,160.067L307.537,158.002L309.122,157.467L313.245,156.473L318.319,155.479L323.71,156.549L329.577,158.92L336.237,162.819L342.896,167.713L346.067,170.16L349.397,171.307L355.264,171.689L359.228,171.612L365.254,176.43L368.266,176.735L375.243,178.188L383.647,179.717L389.038,179.564L394.746,176.965L398.869,176.812L404.102,177.041L409.968,176.277L414.25,175.206L417.58,172.912L420.434,170.389L423.763,162.972L425.666,157.008L428.679,150.203L432.326,140.875L433.594,134.375L434.863,132.617L440.095,130.629L444.535,129.252L456.269,126.729L458.647,125.353L460.867,122.294L465.941,117.095L472.284,112.737L475.614,110.29L481.481,89.263L482.273,86.663L486.555,81.081L489.25,78.711L490.994,78.711L493.373,77.182L496.544,74.353L500.35,72.517L504.789,71.829L507.643,69.918L508.912,66.783L511.132,65.254L514.462,65.33L516.206,64.336L516.682,62.195L518.584,60.36L522.073,58.907L523.817,57.149L523.975,55.084L528.098,50.038L536.185,42.162L543.637,37.727L550.773,36.81L557.432,35.204L563.775,32.757L568.532,29.011L571.544,23.888L576.618,20.982ZM559.335,368.426L566.47,365.673L569.8,363.915L572.179,362.538L575.191,360.397L576.301,355.198L577.094,350.763L579.473,348.622L581.851,347.169L583.912,344.876L586.291,339.37L587.876,334.018L588.194,331.801L587.242,329.507L585.657,327.136L584.23,323.849L582.327,323.39L578.68,321.555L573.447,317.884L568.849,314.673L564.568,310.009L562.823,309.321L558.701,306.109L556.798,304.351L555.53,302.21L554.42,301.445L552.517,302.057L547.601,302.974L537.136,306.721L530.635,310.238L525.085,314.291L519.377,315.896L515.254,317.273L511.925,321.937L508.753,326.372L506.058,330.271L504.472,332.106L503.045,333.253L501.459,335.777L498.605,339.982L495.751,342.811L491.946,344.34L487.03,346.328L485.286,347.475L485.127,349.157L486.872,353.134L488.616,356.88L491.311,361.391L493.373,364.603L496.544,368.579L498.447,370.949L498.288,374.849L498.922,376.225L499.874,377.831L500.825,378.29L501.777,378.825L504.472,379.972L505.106,380.736L507.009,382.036L508.753,384.483L512.242,387.847L516.047,390.371L522.548,391.441L527.622,392.206L529.367,391.747L531.111,389.682L532.538,387.083L533.014,383.795L534.599,382.036L540.783,373.549L544.113,370.414L546.174,370.261L548.87,369.649L552.2,369.343L554.737,369.649L555.371,369.496Z"></path>
-            <g id="saMapPins"></g>
-          </svg>
-          <div class="sa-map-zoom">
-            <button type="button" id="saZoomIn" aria-label="Zoom in">+</button>
-            <button type="button" id="saZoomOut" aria-label="Zoom out">&minus;</button>
-          </div>
-          <div class="sa-map-tooltip" id="saMapTooltip"></div>
-        </div>
+        <div id="officesMap" class="map-locator-map" role="img" aria-label="Map of South Africa showing the Cape Town and Johannesburg offices"></div>
         <div class="map-locator-sidebar">
           <div class="map-locator-list" id="officeLocatorList">
             <button type="button" class="map-locator-item is-active" data-id="cape-town" data-lat="-33.8886" data-lng="18.5107" data-number="1">
@@ -469,34 +460,43 @@
 })();
 </script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script>
-// Self-contained South Africa office locator — no map tiles, no API key.
-// The country outline is real coastline data (Natural Earth, public domain),
-// drawn once as a static SVG path. Pins are placed by converting each
-// location's lat/lng into the exact same coordinate space the outline was
-// drawn in, so adding a future office is just a data-lat/data-lng on a new
-// .map-locator-item button — no pixel-position guessing required.
+// South Africa office locator — real Leaflet + Mapbox tiles.
+// The Mapbox access token below belongs to Lindsay's own Mapbox account
+// ("bookkeeping"), not Forge Vertical's — by design, so the site never
+// depends on an account Jarrit controls. It's a public (pk.) token, which
+// is meant to be used client-side like this; Lindsay has it domain-
+// restricted in her Mapbox dashboard so it can't be reused elsewhere.
 (function(){
   var mapEl = document.getElementById('officesMap');
-  var svg = document.getElementById('saMapSvg');
-  var pinsLayer = document.getElementById('saMapPins');
-  if(!mapEl || !svg || !pinsLayer) return;
+  if(!mapEl || typeof L === 'undefined') return;
 
-  var SVG_NS = 'http://www.w3.org/2000/svg';
-
-  // Must match the projection used to generate the outline path (plate-carrée,
-  // fitted to mainland South Africa's bounding box, 18px padding).
-  var PROJ = { pad: 18, k: 44.04491896627242, lngMin: 16.44676446764467, latMax: -22.14556900537754 };
-  function project(lat, lng){
-    return {
-      x: PROJ.pad + (lng - PROJ.lngMin) * PROJ.k,
-      y: PROJ.pad + (PROJ.latMax - lat) * PROJ.k
-    };
-  }
+  var MAPBOX_TOKEN = 'pk.eyJ1IjoiYm9va2tlZXBpbmciLCJhIjoiY212cm5hZ2Z0MGVyMjJ4czRuMjF5OXM4NyJ9.8zROgOoMvZIWQtDqAjhXbA';
+  var MAPBOX_STYLE = 'streets-v12'; // swap to 'light-v11' for a cleaner, less busy basemap
 
   var itemButtons = Array.prototype.slice.call(document.querySelectorAll('.map-locator-item'));
-  var pinEls = {};
   var locations = {};
+  var markers = {};
+
+  function brandIcon(number, variant){
+    return L.divIcon({
+      className: 'office-map-pin' + (variant === 'jhb' ? ' jhb' : ''),
+      html: '<span>' + number + '</span>',
+      iconSize: [26, 26],
+      iconAnchor: [13, 13],
+      popupAnchor: [0, -14]
+    });
+  }
+
+  var map = L.map(mapEl, { scrollWheelZoom: true, zoomControl: true }).setView([-28.5, 24.5], 4.4);
+
+  L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/' + MAPBOX_STYLE + '/tiles/{z}/{x}/{y}?access_token=' + MAPBOX_TOKEN, {
+    attribution: '&copy; <a href="https://www.mapbox.com/about/maps/">Mapbox</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+    tileSize: 512,
+    zoomOffset: -1,
+    maxZoom: 19
+  }).addTo(map);
 
   itemButtons.forEach(function(btn){
     var id = btn.dataset.id;
@@ -512,215 +512,38 @@
       sub: subEl ? subEl.textContent : ''
     };
 
-    var pos = project(lat, lng);
     var isJhb = id === 'johannesburg';
-    var g = document.createElementNS(SVG_NS, 'g');
-    g.setAttribute('class', 'sa-pin' + (isJhb ? ' jhb' : '') + (btn.classList.contains('is-active') ? ' is-active' : ''));
-    g.setAttribute('data-id', id);
-    g.setAttribute('transform', 'translate(' + pos.x.toFixed(2) + ',' + pos.y.toFixed(2) + ')');
-    g.innerHTML = '<circle r="11"></circle><text y="4">' + (btn.dataset.number || '') + '</text>';
-    pinsLayer.appendChild(g);
-    pinEls[id] = g;
+    var marker = L.marker([lat, lng], { icon: brandIcon(btn.dataset.number || '', isJhb ? 'jhb' : null) }).addTo(map)
+      .bindPopup('<strong>Bookkeepers South Africa</strong><br>' + (subEl ? subEl.textContent : ''));
+    markers[id] = marker;
   });
 
-  // ---- Pan & zoom engine -------------------------------------------------
-  // Real map libraries (Leaflet, Mapbox, Google Maps, your Command Center
-  // map) all do this the same way: shrink/grow and slide the visible
-  // "viewBox" window over a fixed coordinate space, rather than CSS-scaling
-  // the whole element. That's what makes wheel-zoom feel like it's zooming
-  // *toward the cursor* instead of just scaling the whole box, and it's
-  // what makes drag-to-pan possible at all. No library needed for this —
-  // SVG's native viewBox attribute already *is* that window.
-  var FULL = (function(){
-    var b = svg.viewBox.baseVal;
-    return { x: b.x, y: b.y, w: b.width, h: b.height };
-  })();
-  var view = { x: FULL.x, y: FULL.y, w: FULL.w, h: FULL.h };
-  var MIN_W = FULL.w / 3.4; // most zoomed in — beyond this there's no extra detail to show
-  var aspect = FULL.h / FULL.w;
+  var group = L.featureGroup(Object.keys(markers).map(function(id){ return markers[id]; }));
 
-  function applyView(){
-    svg.setAttribute('viewBox', view.x + ' ' + view.y + ' ' + view.w + ' ' + view.h);
-  }
-
-  function clampView(x, y, w, h){
-    w = Math.max(MIN_W, Math.min(FULL.w, w));
-    h = w * aspect;
-    if(w >= FULL.w){ x = FULL.x; y = FULL.y; }
-    else {
-      x = Math.max(FULL.x, Math.min(FULL.x + FULL.w - w, x));
-      y = Math.max(FULL.y, Math.min(FULL.y + FULL.h - h, y));
-    }
-    return { x: x, y: y, w: w, h: h };
-  }
-
-  function setView(x, y, w, h){
-    view = clampView(x, y, w, h);
-    applyView();
-  }
-
-  // Convert a mouse/pointer event's screen position into this SVG's user
-  // (viewBox) coordinate space — accounts for the container's actual
-  // rendered size, letterboxing, everything.
-  function svgPointFromClient(clientX, clientY, ctm){
-    var pt = svg.createSVGPoint();
-    pt.x = clientX; pt.y = clientY;
-    return pt.matrixTransform(ctm || svg.getScreenCTM().inverse());
-  }
-
-  function svgUserToContainerPx(ux, uy){
-    var pt = svg.createSVGPoint();
-    pt.x = ux; pt.y = uy;
-    var screenPt = pt.matrixTransform(svg.getScreenCTM());
-    var rect = mapEl.getBoundingClientRect();
-    return { x: screenPt.x - rect.left, y: screenPt.y - rect.top };
-  }
-
-  // Smooth eased fly-to, used for clicks (not for live wheel/drag, which
-  // should track the input directly with zero lag).
-  var tweenId = null;
-  function animateTo(target, duration, onDone){
-    if(tweenId) cancelAnimationFrame(tweenId);
-    var from = { x: view.x, y: view.y, w: view.w, h: view.h };
-    var to = clampView(target.x, target.y, target.w, target.h);
-    var start = performance.now();
-    duration = duration || 900;
-    function ease(t){ return 1 - Math.pow(1 - t, 3); } // ease-out cubic
-    function step(now){
-      var t = Math.min(1, (now - start) / duration);
-      var e = ease(t);
-      setView(
-        from.x + (to.x - from.x) * e,
-        from.y + (to.y - from.y) * e,
-        from.w + (to.w - from.w) * e,
-        from.h + (to.h - from.h) * e
-      );
-      if(t < 1){ tweenId = requestAnimationFrame(step); }
-      else { tweenId = null; if(onDone) onDone(); }
-    }
-    tweenId = requestAnimationFrame(step);
-  }
-
-  function boxForLocation(id, width){
-    var loc = locations[id];
-    if(!loc) return null;
-    var pos = project(loc.lat, loc.lng);
-    var w = width || FULL.w / 3.2;
-    var h = w * aspect;
-    return { x: pos.x - w / 2, y: pos.y - h / 2, w: w, h: h };
-  }
-
-  function boxForAllLocations(){
-    var ids = Object.keys(locations);
-    if(ids.length === 0) return FULL;
-    var minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
-    ids.forEach(function(id){
-      var pos = project(locations[id].lat, locations[id].lng);
-      minX = Math.min(minX, pos.x); maxX = Math.max(maxX, pos.x);
-      minY = Math.min(minY, pos.y); maxY = Math.max(maxY, pos.y);
-    });
-    var spanX = maxX - minX;
-    var padX = Math.max(90, spanX * 0.25);
-    var w = Math.min(FULL.w, spanX + padX * 2);
-    var h = w * aspect;
-    return { x: (minX + maxX) / 2 - w / 2, y: (minY + maxY) / 2 - h / 2, w: w, h: h };
-  }
-
-  // ---- Tooltip -------------------------------------------------------
-  var tooltip = document.getElementById('saMapTooltip');
-  function showTooltip(id){
-    var loc = locations[id];
-    var pinEl = pinEls[id];
-    if(!loc || !pinEl || !tooltip) return;
-    tooltip.innerHTML = '<strong>Bookkeepers South Africa</strong><br>' + loc.sub;
-    var pos = project(loc.lat, loc.lng);
-    var px = svgUserToContainerPx(pos.x, pos.y);
-    tooltip.style.left = px.x + 'px';
-    tooltip.style.top = px.y + 'px';
-    tooltip.classList.add('is-visible');
-  }
-  function hideTooltip(){
-    if(tooltip) tooltip.classList.remove('is-visible');
-  }
+  // Zoom-in-on-load effect: start wide on the whole country, then animate in to the offices.
+  setTimeout(function(){
+    if(group.getLayers().length) map.flyToBounds(group.getBounds(), { padding: [70, 70], duration: 1.3 });
+  }, 500);
 
   function setActiveItem(id){
     itemButtons.forEach(function(btn){ btn.classList.toggle('is-active', btn.dataset.id === id); });
-    Object.keys(pinEls).forEach(function(key){ pinEls[key].classList.toggle('is-active', key === id); });
   }
 
   function goToLocation(id){
-    hideTooltip();
+    var loc = locations[id];
+    if(!loc || !markers[id]) return;
+    map.flyTo([loc.lat, loc.lng], 13, { duration: 1 });
+    markers[id].openPopup();
     setActiveItem(id);
-    var box = boxForLocation(id);
-    animateTo(box, 900, function(){ showTooltip(id); });
   }
-
-  // Start wide on the whole country, then ease in to the offices.
-  setTimeout(function(){
-    animateTo(boxForAllLocations(), 1300);
-  }, 400);
 
   itemButtons.forEach(function(btn){
     btn.addEventListener('click', function(){ goToLocation(btn.dataset.id); });
   });
 
-  Object.keys(pinEls).forEach(function(id){
-    pinEls[id].addEventListener('click', function(){ goToLocation(id); });
-    pinEls[id].addEventListener('mouseenter', function(){ showTooltip(id); });
-    pinEls[id].addEventListener('mouseleave', function(){ if(!pinEls[id].classList.contains('is-active')) hideTooltip(); });
+  Object.keys(markers).forEach(function(id){
+    markers[id].on('click', function(){ setActiveItem(id); });
   });
-
-  // ---- Wheel-to-zoom, centred on the cursor ---------------------------
-  mapEl.addEventListener('wheel', function(evt){
-    evt.preventDefault();
-    if(tweenId){ cancelAnimationFrame(tweenId); tweenId = null; }
-    var ctm = svg.getScreenCTM().inverse();
-    var cursor = svgPointFromClient(evt.clientX, evt.clientY, ctm);
-    var factor = Math.pow(1.0018, evt.deltaY); // >1 zooms out, <1 zooms in
-    var newW = view.w * factor;
-    var newH = newW * aspect;
-    var newX = cursor.x - (cursor.x - view.x) * (newW / view.w);
-    var newY = cursor.y - (cursor.y - view.y) * (newH / view.h);
-    setView(newX, newY, newW, newH);
-    hideTooltip();
-  }, { passive: false });
-
-  // ---- Drag-to-pan ------------------------------------------------------
-  var dragging = false, dragStartClient = null, dragStartView = null, dragCTM = null;
-  mapEl.addEventListener('pointerdown', function(evt){
-    if(evt.button !== undefined && evt.button !== 0) return;
-    dragging = true;
-    mapEl.classList.add('is-dragging');
-    dragStartClient = { x: evt.clientX, y: evt.clientY };
-    dragStartView = { x: view.x, y: view.y, w: view.w, h: view.h };
-    dragCTM = svg.getScreenCTM().inverse();
-    if(svg.setPointerCapture) svg.setPointerCapture(evt.pointerId);
-  });
-  mapEl.addEventListener('pointermove', function(evt){
-    if(!dragging) return;
-    var p0 = svgPointFromClient(dragStartClient.x, dragStartClient.y, dragCTM);
-    var p1 = svgPointFromClient(evt.clientX, evt.clientY, dragCTM);
-    var dx = p0.x - p1.x, dy = p0.y - p1.y;
-    if(Math.abs(evt.clientX - dragStartClient.x) + Math.abs(evt.clientY - dragStartClient.y) > 3){
-      hideTooltip();
-    }
-    setView(dragStartView.x + dx, dragStartView.y + dy, dragStartView.w, dragStartView.h);
-  });
-  function endDrag(){ dragging = false; mapEl.classList.remove('is-dragging'); }
-  mapEl.addEventListener('pointerup', endDrag);
-  mapEl.addEventListener('pointerleave', endDrag);
-  mapEl.addEventListener('pointercancel', endDrag);
-
-  // ---- Zoom buttons — continue from wherever the view currently is ------
-  var zoomIn = document.getElementById('saZoomIn');
-  var zoomOut = document.getElementById('saZoomOut');
-  function stepZoom(factor){
-    var cx = view.x + view.w / 2, cy = view.y + view.h / 2;
-    var newW = view.w * factor, newH = newW * aspect;
-    animateTo({ x: cx - newW / 2, y: cy - newH / 2, w: newW, h: newH }, 350);
-  }
-  if(zoomIn) zoomIn.addEventListener('click', function(){ stepZoom(0.6); });
-  if(zoomOut) zoomOut.addEventListener('click', function(){ stepZoom(1 / 0.6); });
 
   var search = document.getElementById('officeLocatorSearch');
   if(search){
@@ -738,11 +561,8 @@
     filter.addEventListener('change', function(){
       var val = filter.value;
       if(val === 'all'){
-        itemButtons.forEach(function(btn){ btn.style.display = ''; });
-        itemButtons.forEach(function(btn){ btn.classList.remove('is-active'); });
-        Object.keys(pinEls).forEach(function(key){ pinEls[key].classList.remove('is-active'); });
-        hideTooltip();
-        animateTo(boxForAllLocations(), 700);
+        itemButtons.forEach(function(btn){ btn.style.display = ''; btn.classList.remove('is-active'); });
+        if(group.getLayers().length) map.flyToBounds(group.getBounds(), { padding: [70, 70], duration: 1 });
       } else {
         itemButtons.forEach(function(btn){
           btn.style.display = (btn.dataset.id === val) ? '' : 'none';
