@@ -86,6 +86,7 @@
     <div class="admin-leads" id="adminLeads">
 
       <article class="lead-card is-new">
+        <button class="lead-delete" type="button" aria-label="Delete lead"><svg viewBox="0 0 24 24" fill="none"><path d="M5 7h14M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2m-9 0 1 13a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1l1-13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
         <div class="lead-card-main">
           <div class="lead-who">
             <span class="lead-avatar">BF</span>
@@ -103,11 +104,17 @@
         </div>
         <div class="lead-card-side">
           <span class="lead-status new">New</span>
+          <div class="lead-temp" role="group" aria-label="Lead temperature">
+            <button type="button" data-temp="cold">Cold</button>
+            <button type="button" data-temp="warm">Warm</button>
+            <button type="button" class="is-active" data-temp="hot">Hot</button>
+          </div>
           <button class="lead-action" type="button">Mark contacted</button>
         </div>
       </article>
 
       <article class="lead-card">
+        <button class="lead-delete" type="button" aria-label="Delete lead"><svg viewBox="0 0 24 24" fill="none"><path d="M5 7h14M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2m-9 0 1 13a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1l1-13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
         <div class="lead-card-main">
           <div class="lead-who">
             <span class="lead-avatar">NK</span>
@@ -125,11 +132,17 @@
         </div>
         <div class="lead-card-side">
           <span class="lead-status contacted">Contacted</span>
+          <div class="lead-temp" role="group" aria-label="Lead temperature">
+            <button type="button" data-temp="cold">Cold</button>
+            <button type="button" class="is-active" data-temp="warm">Warm</button>
+            <button type="button" data-temp="hot">Hot</button>
+          </div>
           <button class="lead-action" type="button">Mark closed</button>
         </div>
       </article>
 
       <article class="lead-card">
+        <button class="lead-delete" type="button" aria-label="Delete lead"><svg viewBox="0 0 24 24" fill="none"><path d="M5 7h14M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2m-9 0 1 13a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1l1-13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
         <div class="lead-card-main">
           <div class="lead-who">
             <span class="lead-avatar">RP</span>
@@ -147,11 +160,17 @@
         </div>
         <div class="lead-card-side">
           <span class="lead-status new">New</span>
+          <div class="lead-temp" role="group" aria-label="Lead temperature">
+            <button type="button" data-temp="cold">Cold</button>
+            <button type="button" class="is-active" data-temp="warm">Warm</button>
+            <button type="button" data-temp="hot">Hot</button>
+          </div>
           <button class="lead-action" type="button">Mark contacted</button>
         </div>
       </article>
 
       <article class="lead-card">
+        <button class="lead-delete" type="button" aria-label="Delete lead"><svg viewBox="0 0 24 24" fill="none"><path d="M5 7h14M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2m-9 0 1 13a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1l1-13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
         <div class="lead-card-main">
           <div class="lead-who">
             <span class="lead-avatar">TM</span>
@@ -169,6 +188,11 @@
         </div>
         <div class="lead-card-side">
           <span class="lead-status closed">Closed</span>
+          <div class="lead-temp" role="group" aria-label="Lead temperature">
+            <button type="button" class="is-active" data-temp="cold">Cold</button>
+            <button type="button" data-temp="warm">Warm</button>
+            <button type="button" data-temp="hot">Hot</button>
+          </div>
           <button class="lead-action" type="button" disabled>Handled</button>
         </div>
       </article>
