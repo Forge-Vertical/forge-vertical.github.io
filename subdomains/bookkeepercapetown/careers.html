@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=3">
+<link rel="stylesheet" href="assets/css/style.css?v=4">
 </head>
 <body>
 
@@ -188,6 +188,10 @@
       <p>Tell us which area you're interested in and a bit about your background — Lindsay will personally get back to you to talk through what opening a Bookkeepers South Africa office actually involves.</p>
     </div>
     <form class="contact-form" id="officeForm">
+      <div class="hp-field" aria-hidden="true">
+        <label for="hp-website-office">Leave this field blank</label>
+        <input type="text" id="hp-website-office" name="website" tabindex="-1" autocomplete="off">
+      </div>
       <div class="form-row">
         <div class="form-field">
           <label for="of-name">Full name</label>
@@ -292,6 +296,13 @@
          attachment comes through) and remove/relax the JS preventDefault below. -->
     <form class="contact-form" id="applyForm" action="#" method="POST" enctype="multipart/form-data">
       <input type="hidden" name="position" id="apply-position" value="">
+      <!-- Honeypot — named _gotcha so Formspree's own spam filter also
+           recognises it automatically once the real endpoint above is set,
+           no extra config needed on Formspree's side. -->
+      <div class="hp-field" aria-hidden="true">
+        <label for="hp-website-apply">Leave this field blank</label>
+        <input type="text" id="hp-website-apply" name="_gotcha" tabindex="-1" autocomplete="off">
+      </div>
       <div class="form-row">
         <div class="form-field">
           <label for="apply-firstname">First name</label>
@@ -388,6 +399,7 @@
   if(!form) return;
   form.addEventListener('submit', function(e){
     e.preventDefault();
+    if(document.getElementById('hp-website-office').value) return; // honeypot tripped — silently drop
     var name = document.getElementById('of-name').value || 'there';
     var subject = encodeURIComponent('Office enquiry — ' + document.getElementById('of-city').value + ' — from ' + name);
     var body = encodeURIComponent(
@@ -442,6 +454,7 @@
   // inline success state (as below) is still wanted without a page reload.
   form.addEventListener('submit', function(e){
     e.preventDefault();
+    if(document.getElementById('hp-website-apply').value) return; // honeypot tripped — silently drop
     form.style.display = 'none';
     success.classList.add('show');
   });
