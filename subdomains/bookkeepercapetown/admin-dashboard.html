@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard — Bookkeepers South Africa</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css?v=4">
+<link rel="stylesheet" href="assets/css/admin-dashboard.css?v=1">
+</head>
+<body class="admin-body">
+
+<div class="admin-shell">
+
+  <!-- ---------- sidebar ---------- -->
+  <aside class="admin-sidebar">
+    <div class="admin-brand">
+      <img src="assets/css/images/bookkeepers-logo-large-scaled.png" alt="Bookkeepers South Africa">
+    </div>
+    <nav class="admin-nav">
+      <a class="admin-nav-item is-active" href="#">
+        <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="7" height="9" rx="1.5" stroke="currentColor" stroke-width="1.6"/><rect x="14" y="3" width="7" height="5" rx="1.5" stroke="currentColor" stroke-width="1.6"/><rect x="14" y="12" width="7" height="9" rx="1.5" stroke="currentColor" stroke-width="1.6"/><rect x="3" y="16" width="7" height="5" rx="1.5" stroke="currentColor" stroke-width="1.6"/></svg>
+        <span>Leads &amp; enquiries</span>
+      </a>
+      <a class="admin-nav-item" href="#">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M4 19V5a1 1 0 0 1 1-1h11l4 4v11a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M8 13h8M8 17h5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <span>Reports</span>
+        <em class="admin-nav-soon">Soon</em>
+      </a>
+      <a class="admin-nav-item" href="#">
+        <svg viewBox="0 0 24 24" fill="none"><circle cx="9" cy="8" r="3.2" stroke="currentColor" stroke-width="1.6"/><path d="M3.5 20c.6-3.4 3-5.4 5.5-5.4s4.9 2 5.5 5.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="17.5" cy="9" r="2.4" stroke="currentColor" stroke-width="1.6"/><path d="M15.5 14.3c2 .2 3.6 1.9 4 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <span>Staff</span>
+        <em class="admin-nav-soon">Soon</em>
+      </a>
+      <a class="admin-nav-item" href="#">
+        <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.6"/><path d="M19.4 13.5a7.6 7.6 0 0 0 0-3l2-1.5-2-3.4-2.3.9a7.5 7.5 0 0 0-2.6-1.5L14 2.5h-4l-.5 2.5a7.5 7.5 0 0 0-2.6 1.5l-2.3-.9-2 3.4 2 1.5a7.6 7.6 0 0 0 0 3l-2 1.5 2 3.4 2.3-.9a7.5 7.5 0 0 0 2.6 1.5l.5 2.6h4l.5-2.6a7.5 7.5 0 0 0 2.6-1.5l2.3.9 2-3.4-2-1.5Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+        <span>Settings</span>
+        <em class="admin-nav-soon">Soon</em>
+      </a>
+    </nav>
+    <div class="admin-sidebar-foot">
+      <div class="admin-user">
+        <span class="admin-user-avatar">LV</span>
+        <span class="admin-user-text"><strong>Lindsay Vermeulen</strong><small>Owner</small></span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ---------- main ---------- -->
+  <main class="admin-main">
+    <header class="admin-topbar">
+      <div>
+        <h1>Leads &amp; enquiries</h1>
+        <p>Everything Lily's picked up from the site, in one place.</p>
+      </div>
+      <div class="admin-topbar-actions">
+        <label class="admin-search">
+          <svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.8"/><path d="m20 20-3.5-3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          <input type="text" placeholder="Search leads...">
+        </label>
+        <button class="btn sm admin-lily-toggle" id="adminLilyToggle" type="button">
+          <img src="assets/css/images/lily-avatar.png" alt="">
+          Ask Lily
+        </button>
+      </div>
+    </header>
+
+    <div class="admin-stats">
+      <div class="admin-stat">
+        <span class="admin-stat-num">4</span>
+        <span class="admin-stat-label">New this week</span>
+      </div>
+      <div class="admin-stat">
+        <span class="admin-stat-num">2</span>
+        <span class="admin-stat-label">Awaiting reply</span>
+      </div>
+      <div class="admin-stat admin-stat-accent">
+        <span class="admin-stat-num">11</span>
+        <span class="admin-stat-label">Handled this month</span>
+      </div>
+    </div>
+
+    <div class="admin-leads" id="adminLeads">
+
+      <article class="lead-card is-new">
+        <div class="lead-card-main">
+          <div class="lead-who">
+            <span class="lead-avatar">BF</span>
+            <div>
+              <strong>Billy Fowler</strong>
+              <span class="lead-sub">Fowler Construction &amp; Civils</span>
+            </div>
+          </div>
+          <p class="lead-summary">Wants a quote for monthly bookkeeping and payroll for a 14-person construction crew — currently doing it himself on a spreadsheet and falling behind on SARS submissions.</p>
+          <div class="lead-meta">
+            <span>📞 082 441 0983</span>
+            <span>✉️ billy@fowlerconstruction.co.za</span>
+            <span>🕐 Today, 10:42</span>
+          </div>
+        </div>
+        <div class="lead-card-side">
+          <span class="lead-status new">New</span>
+          <button class="lead-action" type="button">Mark contacted</button>
+        </div>
+      </article>
+
+      <article class="lead-card">
+        <div class="lead-card-main">
+          <div class="lead-who">
+            <span class="lead-avatar">NK</span>
+            <div>
+              <strong>Naledi Khumalo</strong>
+              <span class="lead-sub">Khumalo Hair Studio</span>
+            </div>
+          </div>
+          <p class="lead-summary">Asked whether Bookkeepers SA handles business registration — she's about to formalise her salon and wants bookkeeping set up from day one.</p>
+          <div class="lead-meta">
+            <span>📞 071 220 5518</span>
+            <span>✉️ naledi.khumalo@gmail.com</span>
+            <span>🕐 Yesterday, 16:05</span>
+          </div>
+        </div>
+        <div class="lead-card-side">
+          <span class="lead-status contacted">Contacted</span>
+          <button class="lead-action" type="button">Mark closed</button>
+        </div>
+      </article>
+
+      <article class="lead-card">
+        <div class="lead-card-main">
+          <div class="lead-who">
+            <span class="lead-avatar">RP</span>
+            <div>
+              <strong>Riaan Pretorius</strong>
+              <span class="lead-sub">Pretorius Logistics</span>
+            </div>
+          </div>
+          <p class="lead-summary">Johannesburg-based, wants a second opinion on his current accountant's monthly fees and a call back about switching before year-end.</p>
+          <div class="lead-meta">
+            <span>📞 083 765 2290</span>
+            <span>✉️ riaan@pretoriuslogistics.co.za</span>
+            <span>🕐 Mon, 09:14</span>
+          </div>
+        </div>
+        <div class="lead-card-side">
+          <span class="lead-status new">New</span>
+          <button class="lead-action" type="button">Mark contacted</button>
+        </div>
+      </article>
+
+      <article class="lead-card">
+        <div class="lead-card-main">
+          <div class="lead-who">
+            <span class="lead-avatar">TM</span>
+            <div>
+              <strong>Thandeka Mahlangu</strong>
+              <span class="lead-sub">Sole proprietor — online boutique</span>
+            </div>
+          </div>
+          <p class="lead-summary">Needs help catching up two years of back-dated tax returns, asked if that's something Bookkeepers SA takes on.</p>
+          <div class="lead-meta">
+            <span>📞 076 918 4471</span>
+            <span>✉️ thandeka.m.boutique@outlook.com</span>
+            <span>🕐 Last week</span>
+          </div>
+        </div>
+        <div class="lead-card-side">
+          <span class="lead-status closed">Closed</span>
+          <button class="lead-action" type="button" disabled>Handled</button>
+        </div>
+      </article>
+
+    </div>
+  </main>
+
+  <!-- ---------- Lily, baked in, not an overlay ---------- -->
+  <aside class="admin-lily" id="adminLily">
+    <div class="admin-lily-head">
+      <span class="admin-lily-avatar"><img src="assets/css/images/lily-avatar.png" alt=""></span>
+      <div class="admin-lily-headtext">
+        <strong>Lily</strong>
+        <small>Your assistant — always on this screen</small>
+      </div>
+      <button class="admin-lily-collapse" id="adminLilyCollapse" type="button" aria-label="Collapse Lily">›</button>
+    </div>
+    <div class="admin-lily-body" id="adminLilyBody">
+      <div class="lily-row bot">
+        <div class="lily-bubble">Morning Lindsay 👋 4 new enquiries came in since yesterday — Billy Fowler's construction one looks like a solid fit for the payroll package. Want a quick summary of this week's site traffic too?</div>
+      </div>
+      <div class="lily-row user">
+        <div class="lily-bubble">yes please</div>
+      </div>
+      <div class="lily-row bot">
+        <div class="lily-bubble">This week: 312 visits, up 18% on last week. "bookkeeper cape town" and "payroll company johannesburg" are your top two search terms right now. Nothing urgent on the site itself — everything's loading fine.</div>
+      </div>
+      <div class="lily-row bot">
+        <div class="lily-bubble-note">Once this is wired up, Lily reads this straight from GSC/GA for portal.forgevertical.com — the chat above is a preview of how it'll read.</div>
+      </div>
+    </div>
+    <form class="admin-lily-input" id="adminLilyForm">
+      <input type="text" id="adminLilyInput" placeholder="Ask Lily anything..." autocomplete="off">
+      <button type="submit" aria-label="Send">
+        <svg viewBox="0 0 24 24" fill="none"><path d="m4 12 16-7-6 16-2.5-6.5L4 12Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+      </button>
+    </form>
+  </aside>
+
+</div>
+
+<script src="assets/js/admin-dashboard.js?v=1" defer></script>
+</body>
+</html>
