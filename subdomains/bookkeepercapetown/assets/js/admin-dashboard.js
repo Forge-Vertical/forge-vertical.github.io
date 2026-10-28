@@ -86,4 +86,24 @@
       }
     });
   });
+
+  // Lead temperature (Cold / Warm / Hot) — separate from status/stage,
+  // just marks where the lead is at so Lindsay can prioritise follow-up.
+  document.querySelectorAll('.lead-temp').forEach(function(group){
+    group.querySelectorAll('button').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        group.querySelectorAll('button').forEach(function(b){ b.classList.remove('is-active'); });
+        btn.classList.add('is-active');
+      });
+    });
+  });
+
+  // Delete lead — visual only for now (no backend to delete from yet).
+  document.querySelectorAll('.lead-delete').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var card = btn.closest('.lead-card');
+      card.classList.add('is-removing');
+      setTimeout(function(){ card.remove(); }, 200);
+    });
+  });
 })();
