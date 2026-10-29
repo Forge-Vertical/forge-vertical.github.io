@@ -188,6 +188,19 @@
 .admin-lily-input button:hover{ filter:brightness(.92); }
 .admin-lily-input button svg{ width:16px; height:16px; }
 
+/* ---------- support request modal (shell from style.css .popia-modal) ---------- */
+.support-form{ display:flex; flex-direction:column; gap:14px; margin-top:4px; }
+.support-form textarea{
+  font-family:var(--font-body); font-size:13.5px; color:var(--ink); resize:vertical;
+  background:var(--paper); border:1px solid var(--line); border-radius:10px; padding:12px 14px; outline:none;
+}
+.support-form textarea:focus{ border-color:var(--green); box-shadow:0 0 0 3px rgba(0,168,88,.14); }
+.support-form .btn{ align-self:flex-start; }
+.support-success{ display:none; text-align:center; padding:6px 0 2px; }
+.support-success.show{ display:block; }
+.support-success.show ~ #supportForm{ display:none; }
+.support-success p{ font-size:13.5px; color:var(--charcoal); line-height:1.6; margin:0 0 16px; text-align:left; }
+
 /* ---------- responsive: collapse Lily to a toggled drawer ---------- */
 @media (max-width:1180px){
   .admin-shell{ grid-template-columns:200px 1fr; }
