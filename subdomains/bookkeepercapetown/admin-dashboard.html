@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css?v=4">
-<link rel="stylesheet" href="assets/css/admin-dashboard.css?v=1">
+<link rel="stylesheet" href="assets/css/admin-dashboard.css?v=2">
 </head>
 <body class="admin-body">
 
@@ -24,6 +24,10 @@
       <a class="admin-nav-item is-active" href="#">
         <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="7" height="9" rx="1.5" stroke="currentColor" stroke-width="1.6"/><rect x="14" y="3" width="7" height="5" rx="1.5" stroke="currentColor" stroke-width="1.6"/><rect x="14" y="12" width="7" height="9" rx="1.5" stroke="currentColor" stroke-width="1.6"/><rect x="3" y="16" width="7" height="5" rx="1.5" stroke="currentColor" stroke-width="1.6"/></svg>
         <span>Leads &amp; enquiries</span>
+      </a>
+      <a class="admin-nav-item" href="#" id="supportNavLink">
+        <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="3.4" stroke="currentColor" stroke-width="1.6"/><path d="M6.2 6.2l2.6 2.6M17.8 6.2l-2.6 2.6M6.2 17.8l2.6-2.6M17.8 17.8l-2.6-2.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <span>Request support</span>
       </a>
       <a class="admin-nav-item" href="#">
         <svg viewBox="0 0 24 24" fill="none"><path d="M4 19V5a1 1 0 0 1 1-1h11l4 4v11a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M8 13h8M8 17h5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
@@ -234,6 +238,23 @@
 
 </div>
 
-<script src="assets/js/admin-dashboard.js?v=1" defer></script>
+<!-- ---------- support request modal (reuses the POPIA modal shell from style.css) ---------- -->
+<div class="popia-modal-overlay" id="supportModalOverlay">
+  <div class="popia-modal" role="dialog" aria-modal="true" aria-label="Request support">
+    <button type="button" class="popia-modal-close" id="supportModalClose" aria-label="Close">&times;</button>
+    <h3>Need something done?</h3>
+    <p class="popia-modal-sub">Let us know what you need and we'll send a quote within 24 hours. If you need it done sooner, WhatsApp us on <a href="https://wa.me/27661180036" target="_blank" rel="noopener">066 118 0036</a>.</p>
+    <form id="supportForm" class="support-form">
+      <textarea id="supportMessage" rows="5" placeholder="e.g. Can we add our new Stellenbosch office to the map, and fix the broken image on the Reviews page?" required></textarea>
+      <button type="submit" class="btn">Send request</button>
+    </form>
+    <div class="support-success" id="supportSuccess">
+      <p>Opening your email app to send this to Jarrit at Forge Vertical. If nothing opens, email <a href="mailto:jarrit@forgevertical.com">jarrit@forgevertical.com</a> directly, or WhatsApp <a href="https://wa.me/27661180036" target="_blank" rel="noopener">066 118 0036</a>.</p>
+      <button type="button" class="btn sm" id="supportSuccessClose">Done</button>
+    </div>
+  </div>
+</div>
+
+<script src="assets/js/admin-dashboard.js?v=2" defer></script>
 </body>
 </html>
