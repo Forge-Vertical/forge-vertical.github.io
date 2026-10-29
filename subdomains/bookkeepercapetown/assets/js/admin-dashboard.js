@@ -106,4 +106,54 @@
       setTimeout(function(){ card.remove(); }, 200);
     });
   });
+
+  // Support request modal — "Request support" in the sidebar. No backend
+  // yet, so this opens a pre-filled email straight to Jarrit. Once the
+  // real "shop" catalogue exists this can post to a proper request
+  // tracker instead of mailto.
+  var supportLink = document.getElementById('supportNavLink');
+  var supportOverlay = document.getElementById('supportModalOverlay');
+  var supportClose = document.getElementById('supportModalClose');
+  var supportForm = document.getElementById('supportForm');
+  var supportMessage = document.getElementById('supportMessage');
+  var supportSuccess = document.getElementById('supportSuccess');
+  var supportSuccessClose = document.getElementById('supportSuccessClose');
+
+  function openSupport(){
+    if(supportOverlay) supportOverlay.classList.add('open');
+  }
+  function closeSupport(){
+    if(!supportOverlay) return;
+    supportOverlay.classList.remove('open');
+    if(supportSuccess) supportSuccess.classList.remove('show');
+    if(supportForm) supportForm.reset();
+  }
+
+  if(supportLink){
+    supportLink.addEventListener('click', function(e){
+      e.preventDefault();
+      openSupport();
+    });
+  }
+  if(supportClose) supportClose.addEventListener('click', closeSupport);
+  if(supportSuccessClose) supportSuccessClose.addEventListener('click', closeSupport);
+  if(supportOverlay){
+    supportOverlay.addEventListener('click', function(e){
+      if(e.target === supportOverlay) closeSupport();
+    });
+  }
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape' && supportOverlay && supportOverlay.classList.contains('open')) closeSupport();
+  });
+  if(supportForm){
+    supportForm.addEventListener('submit', function(evt){
+      evt.preventDefault();
+      var msg = supportMessage.value.trim();
+      if(!msg) return;
+      var subject = encodeURIComponent('Dashboard request — Bookkeepers SA');
+      var body = encodeURIComponent(msg + '\n\n— Sent from Lindsay\'s dashboard');
+      window.location.href = 'mailto:jarrit@forgevertical.com?subject=' + subject + '&body=' + body;
+      if(supportSuccess) supportSuccess.classList.add('show');
+    });
+  }
 })();
