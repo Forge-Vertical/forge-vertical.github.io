@@ -311,26 +311,6 @@
         }
         body { transition: background 0.2s ease, color 0.2s ease; }
 
-        .theme-toggle {
-            position: fixed;
-            top: 18px; right: 18px;
-            z-index: 200;
-            width: 38px; height: 38px;
-            border-radius: 10px;
-            border: 1px solid var(--border2);
-            background: var(--surface);
-            color: var(--text);
-            display: flex; align-items: center; justify-content: center;
-            cursor: pointer;
-            transition: background 0.18s, border-color 0.18s;
-        }
-        .theme-toggle:hover { border-color: var(--muted2); }
-        .theme-toggle svg { width: 17px; height: 17px; }
-        .theme-toggle .ico-sun { display: none; }
-        .theme-toggle .ico-moon { display: block; }
-        [data-theme="dark"] .theme-toggle .ico-sun { display: block; }
-        [data-theme="dark"] .theme-toggle .ico-moon { display: none; }
-
         * { box-sizing: border-box; margin: 0; padding: 0; }
         html { scroll-behavior: smooth; }
         body {
@@ -795,12 +775,6 @@
 </head>
 <body>
 <div id="global-nav"></div>
-
-<button class="theme-toggle" id="fv-theme-toggle" type="button" aria-label="Toggle dark mode">
-    <svg class="ico-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg>
-    <svg class="ico-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path></svg>
-</button>
-
 <section id="hero">
     <div class="marble-bg"></div>
     <div id="hero-left">
@@ -1250,16 +1224,6 @@ const obs = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('up'); });
 }, { threshold: 0.08 });
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
-
-const fvThemeToggle = document.getElementById('fv-theme-toggle');
-if (fvThemeToggle) {
-    fvThemeToggle.addEventListener('click', () => {
-        const root = document.documentElement;
-        const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-        root.setAttribute('data-theme', next);
-        try { localStorage.setItem('fv-theme', next); } catch(e) {}
-    });
-}
 </script>
 
 <!-- FIX 2: Tailwind at bottom of body — no longer render-blocking -->
