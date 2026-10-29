@@ -76,6 +76,26 @@
         50% { opacity: 0.5; transform: scale(0.7); }
     }
 
+    /* Theme toggle (lives in the bar, so it can never overlap the page) */
+    #nav-wrapper .nav-theme {
+        width: 34px; height: 34px;
+        display: inline-flex; align-items: center; justify-content: center;
+        flex-shrink: 0;
+        background: none;
+        border: 1px solid rgba(220,228,240,0.22);
+        border-radius: 8px;
+        color: rgba(220,228,240,0.85);
+        cursor: pointer;
+        transition: all 0.18s;
+        padding: 0;
+    }
+    #nav-wrapper .nav-theme:hover { border-color: #84cc16; color: #84cc16; }
+    #nav-wrapper .nav-theme svg { width: 16px; height: 16px; }
+    #nav-wrapper .nav-theme .ico-sun { display: none; }
+    #nav-wrapper .nav-theme .ico-moon { display: block; }
+    [data-theme="dark"] #nav-wrapper .nav-theme .ico-sun { display: block; }
+    [data-theme="dark"] #nav-wrapper .nav-theme .ico-moon { display: none; }
+
     /* Hub badge */
     .nav-hub-badge {
         display: inline-flex;
@@ -101,21 +121,22 @@
 
 <div id="nav-wrapper">
     <div class="nav-inner">
-        <nav class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center relative">
+        <nav class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center relative">
 
             <!-- Logo -->
             <a href="/index.html" class="flex items-center z-50">
-                <svg width="240" height="34" viewBox="0 0 240 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg width="196" height="34" viewBox="0 0 196 34" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <text x="0" y="26" font-family="'JetBrains Mono', monospace" font-weight="700" font-size="22" letter-spacing="-0.02em" fill="#f0f2f4">FORGE</text>
                     <text x="90" y="26" font-family="'JetBrains Mono', monospace" font-weight="700" font-size="22" letter-spacing="-0.02em" fill="#84cc16">VERTICAL</text>
                 </svg>
             </a>
 
             <!-- Desktop nav -->
-            <div class="hidden md:flex gap-7 items-center">
+            <div class="hidden xl:flex gap-5 items-center">
                 <a href="/about.html" class="nav-link">About</a>
                 <a href="/index.html#services" class="nav-link">Services</a>
                 <a href="/portfolio.html" class="nav-link">Portfolio</a>
+                <a href="/pricing.html" class="nav-link">Pricing</a>
                 <a href="/articles.html" class="nav-link">Articles</a>
                 <a href="/business-tech/articles.html" class="nav-hub-badge">
                     <span class="hub-dot"></span>The Hub
@@ -125,25 +146,30 @@
                     Audit<span class="nav-pulse"></span>
                 </a>
                 <button id="fv-nav-login-btn" class="nav-login" onclick="fvOpenModal('login')">Login</button>
-                <a href="/free-quote.html" class="nav-cta ml-1">
+                <a href="/free-quote.html" class="nav-cta">
                     Start a project
                 </a>
+                <button type="button" class="nav-theme" aria-label="Switch between light and dark mode" title="Light / dark" onclick="var r=document.documentElement,n=r.getAttribute('data-theme')==='dark'?'light':'dark';r.setAttribute('data-theme',n);try{localStorage.setItem('fv-theme',n)}catch(e){}"><svg class="ico-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="ico-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path></svg></button>
             </div>
 
-            <!-- Hamburger -->
+            <!-- Theme toggle + hamburger (tablet and phone) -->
+            <div class="xl:hidden z-50 flex items-center gap-3 relative">
+            <button type="button" class="nav-theme" aria-label="Switch between light and dark mode" title="Light / dark" onclick="var r=document.documentElement,n=r.getAttribute('data-theme')==='dark'?'light':'dark';r.setAttribute('data-theme',n);try{localStorage.setItem('fv-theme',n)}catch(e){}"><svg class="ico-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="ico-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path></svg></button>
             <button onclick="toggleMobileMenu()" id="menu-toggle"
-                class="md:hidden z-50 p-2 flex flex-col gap-1.5 items-end focus:outline-none">
+                class="p-2 flex flex-col gap-1.5 items-end focus:outline-none" aria-label="Menu">
                 <span id="bar-1" class="bar w-7 h-0.5 rounded-full"></span>
                 <span id="bar-2" class="bar w-5 h-0.5 rounded-full" style="background:#84cc16 !important;"></span>
                 <span id="bar-3" class="bar w-7 h-0.5 rounded-full"></span>
             </button>
+            </div>
 
             <!-- Mobile menu -->
             <div id="mobile-menu"
-                class="fixed inset-0 bg-[#06080c] z-40 translate-x-full transition-transform duration-500 ease-in-out md:hidden flex flex-col items-center justify-center gap-7 text-center">
+                class="fixed inset-0 bg-[#06080c] z-40 translate-x-full transition-transform duration-500 ease-in-out xl:hidden flex flex-col items-center justify-center gap-7 text-center">
                 <a href="/about.html" onclick="toggleMobileMenu()" class="text-xl font-bold uppercase tracking-widest text-zinc-200 hover:text-[#84cc16] transition-colors" style="font-family:'JetBrains Mono',monospace;">About</a>
                 <a href="/index.html#services" onclick="toggleMobileMenu()" class="text-xl font-bold uppercase tracking-widest text-zinc-200 hover:text-[#84cc16] transition-colors" style="font-family:'JetBrains Mono',monospace;">Services</a>
                 <a href="/portfolio.html" onclick="toggleMobileMenu()" class="text-xl font-bold uppercase tracking-widest text-zinc-200 hover:text-[#84cc16] transition-colors" style="font-family:'JetBrains Mono',monospace;">Portfolio</a>
+                <a href="/pricing.html" onclick="toggleMobileMenu()" class="text-xl font-bold uppercase tracking-widest text-zinc-200 hover:text-[#84cc16] transition-colors" style="font-family:'JetBrains Mono',monospace;">Pricing</a>
                 <a href="/articles.html" onclick="toggleMobileMenu()" class="text-xl font-bold uppercase tracking-widest text-zinc-200 hover:text-[#84cc16] transition-colors" style="font-family:'JetBrains Mono',monospace;">Articles</a>
                 <a href="/business-tech/articles.html" onclick="toggleMobileMenu()" class="text-xl font-bold uppercase tracking-widest text-[#84cc16] flex items-center justify-center gap-3" style="font-family:'JetBrains Mono',monospace;">
                     <span class="w-2 h-2 bg-[#84cc16] rounded-full animate-pulse"></span>The Hub
