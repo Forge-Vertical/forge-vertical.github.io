@@ -558,16 +558,16 @@ footer{ background:#2E2F2B; color:#C8C7C2; padding:56px 0 var(--mobile-cta-h); }
 .page-hero h1{ font-size:clamp(30px,3.6vw,46px); max-width:20ch; }
 .page-hero p{ font-size:16.5px; color:var(--charcoal); max-width:60ch; margin-top:12px; }
 
-.page-hero.has-media .wrap{ display:grid; grid-template-columns:1.15fr .85fr; gap:40px; align-items:center; max-width:var(--wrap); }
+.page-hero.has-media .wrap{ display:grid; grid-template-columns:1fr .8fr; gap:40px; align-items:center; max-width:var(--wrap); }
 .page-hero-video{
-  border-radius:12px; overflow:hidden; background:var(--white); border:1px solid var(--line);
-  aspect-ratio:1/1; max-width:280px; justify-self:end;
+  border-radius:14px; overflow:hidden; background:var(--white); border:1px solid var(--line);
+  aspect-ratio:1/1; width:100%; max-width:460px; justify-self:end;
   box-shadow:0 20px 44px rgba(34,35,31,.07);
 }
 .page-hero-video video{ width:100%; height:100%; object-fit:cover; display:block; }
 @media (max-width:860px){
   .page-hero.has-media .wrap{ grid-template-columns:1fr; }
-  .page-hero-video{ order:-1; justify-self:start; max-width:200px; }
+  .page-hero-video{ order:-1; justify-self:start; max-width:260px; }
 }
 
 /* ---------- services detail page ---------- */
