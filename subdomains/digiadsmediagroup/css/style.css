@@ -69,6 +69,23 @@ p { margin-bottom: var(--spacing-md); color: var(--text-muted); }
 .section-head { max-width: 680px; margin: 0 auto 3rem auto; text-align: center; }
 .section-head p { margin-bottom: 0; }
 
+/* ---------- Icons ----------
+   Plain inline SVGs throughout the site (top bar, footer, alert
+   badge, WhatsApp button) use these two classes instead of emoji.
+   .icon-link / .icon-line just align an <svg class="icon"> with
+   the text next to it; the icon itself inherits color from its
+   parent via stroke="currentColor" set in the SVG markup. */
+.icon { width: 18px; height: 18px; flex-shrink: 0; }
+.icon-sm { width: 15px; height: 15px; }
+.icon-link,
+.icon-line {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.alert-badge { display: inline-flex; align-items: center; gap: 0.5rem; }
+.btn.icon-link { gap: 0.6rem; }
+
 /* ---------- Top bar ---------- */
 .top-bar {
   background-color: var(--text-dark);
@@ -129,7 +146,6 @@ p { margin-bottom: var(--spacing-md); color: var(--text-muted); }
 .hero { text-align: center; padding: 5rem 0; background-color: var(--bg-white); }
 
 .alert-badge {
-  display: inline-block;
   background-color: #f1f5f9;
   color: var(--primary-purple);
   padding: 0.5rem 1rem;
