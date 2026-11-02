@@ -47,11 +47,21 @@ section { padding: var(--spacing-xl) 0; }
 
 h1, h2, h3, h4 { line-height: 1.2; margin-bottom: var(--spacing-md); color: var(--text-dark); }
 
+/* Known gradient-text gotcha: background-clip: text draws the
+   gradient into the glyphs' line box, and a tight line-height on
+   an inline-block often doesn't leave room below the baseline —
+   so descenders (g, y, p, q) get sliced off at the bottom. The
+   fix is giving this span its own slightly taller line-height and
+   a little bottom padding, so the fill area has room for the full
+   letterform rather than just the cap-height-to-baseline part. */
 .text-gradient {
   background: var(--gradient);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   display: inline-block;
+  line-height: 1.35;
+  padding-bottom: 0.08em;
 }
 
 p { margin-bottom: var(--spacing-md); color: var(--text-muted); }
@@ -163,28 +173,26 @@ p { margin-bottom: var(--spacing-md); color: var(--text-muted); }
     radial-gradient(ellipse 480px 480px at 92% 100%, rgba(139, 0, 255, 0.10), transparent 60%);
 }
 
-/* Looping purple/blue wave video behind the hero content.
-   mix-blend-mode: screen drops out the video's black background —
-   screen keeps the lighter pixels and discards black entirely —
-   so only the glowing wave shows against the white .hero behind
-   it, with no visible video "frame" or rectangle edge.
-   Positioned to cover the section; .hero .container below is on
-   z-index: 1 so text/buttons always sit above it. */
+/* Looping purple/blue wave behind the hero content. It's an
+   animated WebP with a real alpha channel (black keyed out to
+   transparent at the file level — see index.html's comment), so
+   it just sits on top of the white hero correctly with no blend
+   tricks needed. Positioned to cover the section; .hero .container
+   below is on z-index: 1 so text/buttons always sit above it. */
 .hero-bg-video {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  mix-blend-mode: screen;
-  opacity: 0.65;
+  opacity: 0.8;
   z-index: 0;
   pointer-events: none;
 }
 .hero .container { position: relative; z-index: 1; }
 
 /* Anyone with reduced-motion set gets the static gradient above
-   only — no video, no motion at all. */
+   only — no motion at all. */
 @media (prefers-reduced-motion: reduce) {
   .hero-bg-video { display: none; }
 }
