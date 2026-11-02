@@ -5,12 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Digi Ads Media Group | Digital Marketing, Web & Media — Cape Town</title>
   <meta name="description" content="Digi Ads Media Group is a Bellville, Cape Town digital agency offering website development, digital marketing and media production, plus our own LHR Biker Magazine and TORQUE SA publications.">
-  <link rel="stylesheet" href="css/style.css?v=6">
-  <!-- The ?v=6 above and on global.js below is a cache-buster.
+  <link rel="stylesheet" href="css/style.css?v=7">
+  <!-- The ?v=7 above and on global.js below is a cache-buster.
        Browsers and CDNs cache a CSS/JS file by its exact URL — so if
        you edit style.css but the URL doesn't change, some visitors
        (and some proxies/CDNs) keep serving the old cached copy.
-       Bump this number (v=6, v=7...) any time you edit style.css or
+       Bump this number (v=8, v=9...) any time you edit style.css or
        global.js and the change isn't showing up live. -->
 </head>
 <body>
@@ -18,27 +18,25 @@
   <div data-include="partials/nav.html"></div>
 
   <!-- ============ HERO ============ -->
-  <section class="hero">
-    <!-- Background wave loop. Source was an 11MB/241-frame GIF with
-         a solid black background. Converted to an animated WebP
-         with a genuine alpha channel (black keyed out to fully
-         transparent, so only the bright purple/blue glow is
-         opaque) — this is what actually makes it sit cleanly on
-         the white hero with no black box and no CSS trickery
-         needed. (An earlier version of this tried to fake
-         transparency with mix-blend-mode instead of a real alpha
-         channel — that doesn't work against a white background,
-         which is why it looked invisible. Real transparency in the
-         asset itself is the only thing that works everywhere.)
-         onerror hides the element if a browser can't decode it, so
-         the static gradient in .hero's own background shows
-         through instead of a broken-image icon. -->
-    <img
+  <!-- Dark hero: full-bleed looping particle video, a gradient
+       overlay on top for text contrast and a touch of the brand
+       purple (the source clip is blue-only), and all text swapped
+       to light colors — see the "Dark hero" block in style.css.
+       Source was a 76MB/5m20s YouTube clip, trimmed to a clean
+       12s loop and compressed to ~2.1MB (mp4) / ~2.8MB (webm). -->
+  <section class="hero hero-dark">
+    <video
       class="hero-bg-video"
-      src="assets/video/hero-wave.webp"
-      alt=""
-      aria-hidden="true"
-      onerror="this.style.display='none'">
+      autoplay
+      muted
+      loop
+      playsinline
+      poster="assets/images/hero-particles-poster.jpg"
+      aria-hidden="true">
+      <source src="assets/video/hero-particles.webm" type="video/webm">
+      <source src="assets/video/hero-particles.mp4" type="video/mp4">
+    </video>
+    <div class="hero-overlay"></div>
 
     <div class="container">
       <div class="alert-badge">
@@ -186,6 +184,6 @@
 
   <div data-include="partials/footer.html"></div>
 
-  <script src="js/global.js?v=6"></script>
+  <script src="js/global.js?v=7"></script>
 </body>
 </html>
