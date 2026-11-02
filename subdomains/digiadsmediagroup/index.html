@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Digi Ads Media Group | Digital Marketing, Web & Media — Cape Town</title>
   <meta name="description" content="Digi Ads Media Group is a Bellville, Cape Town digital agency offering website development, digital marketing and media production, plus our own LHR Biker Magazine and TORQUE SA publications.">
-  <link rel="stylesheet" href="css/style.css?v=3">
-  <!-- The ?v=3 above and on global.js below is a cache-buster.
+  <link rel="stylesheet" href="css/style.css?v=4">
+  <!-- The ?v=4 above and on global.js below is a cache-buster.
        Browsers and CDNs cache a CSS/JS file by its exact URL — so if
        you edit style.css but the URL doesn't change, some visitors
        (and some proxies/CDNs) keep serving the old cached copy.
@@ -19,6 +19,26 @@
 
   <!-- ============ HERO ============ -->
   <section class="hero">
+    <!-- Background wave loop. Source was an 11MB/241-frame GIF —
+         converted to a ~120KB MP4 (works everywhere) with a ~400KB
+         WebM as the higher-quality option for browsers that prefer
+         it. mix-blend-mode: screen in style.css makes the video's
+         black background vanish against the white hero, leaving
+         only the purple glow visible — so no separate transparent
+         asset was needed. Hidden entirely for anyone with
+         prefers-reduced-motion set (see style.css). -->
+    <video
+      class="hero-bg-video"
+      autoplay
+      muted
+      loop
+      playsinline
+      poster="assets/images/hero-wave-poster.jpg"
+      aria-hidden="true">
+      <source src="assets/video/hero-wave.webm" type="video/webm">
+      <source src="assets/video/hero-wave.mp4" type="video/mp4">
+    </video>
+
     <div class="container">
       <div class="alert-badge">
         <svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8Z"/></svg>
@@ -165,6 +185,6 @@
 
   <div data-include="partials/footer.html"></div>
 
-  <script src="js/global.js?v=3"></script>
+  <script src="js/global.js?v=4"></script>
 </body>
 </html>
