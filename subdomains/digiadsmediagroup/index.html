@@ -5,7 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Digi Ads Media Group | Digital Marketing, Web & Media — Cape Town</title>
   <meta name="description" content="Digi Ads Media Group is a Bellville, Cape Town digital agency offering website development, digital marketing and media production, plus our own LHR Biker Magazine and TORQUE SA publications.">
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css?v=3">
+  <!-- The ?v=3 above and on global.js below is a cache-buster.
+       Browsers and CDNs cache a CSS/JS file by its exact URL — so if
+       you edit style.css but the URL doesn't change, some visitors
+       (and some proxies/CDNs) keep serving the old cached copy.
+       Bump this number (v=4, v=5...) any time you edit style.css or
+       global.js and the change isn't showing up live. -->
 </head>
 <body>
 
@@ -159,6 +165,6 @@
 
   <div data-include="partials/footer.html"></div>
 
-  <script src="js/global.js"></script>
+  <script src="js/global.js?v=3"></script>
 </body>
 </html>
