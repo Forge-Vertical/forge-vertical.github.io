@@ -1,0 +1,36 @@
+<!-- ============================================================
+     PARTIAL: nav.html
+     Top utility bar + main navigation.
+     Loaded into every page via <div data-include="partials/nav.html"></div>
+     Edit ONCE here and every page updates. Do not duplicate this
+     markup inside index.html / about.html / etc.
+     ============================================================ -->
+
+<div class="top-bar">
+  <div class="container">
+    <a href="tel:0652090475">📞 065 209 0475</a>
+    <a href="mailto:digiadsct@gmail.com">✉️ digiadsct@gmail.com</a>
+  </div>
+</div>
+
+<nav class="main-nav">
+  <div class="container">
+    <a href="index.html" class="logo-container">
+      <div class="logo-main"><span class="logo-blue">DIGI</span> <span class="logo-purple">ADS</span></div>
+      <div class="logo-sub">Media Group</div>
+    </a>
+
+    <!-- Mobile toggle -->
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+
+    <div class="nav-links">
+      <a href="index.html#services">Services</a>
+      <a href="index.html#magazines">Magazines</a>
+      <a href="index.html#about">About</a>
+      <a href="index.html#contact">Contact</a>
+      <a href="index.html#contact" class="btn btn-primary">Get a Quote</a>
+    </div>
+  </div>
+</nav>
