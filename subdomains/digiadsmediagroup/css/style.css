@@ -154,47 +154,39 @@ p { margin-bottom: var(--spacing-md); color: var(--text-muted); }
   text-align: center;
   padding: 5rem 0;
   background-color: var(--bg-white);
+  /* Static fallback glow — always present at low opacity, so the
+     hero never looks flat if the video is still loading, fails,
+     or is hidden for reduced-motion users below. The video (when
+     playing) sits on top of this and does the animated version. */
+  background-image:
+    radial-gradient(ellipse 480px 480px at 8% 0%, rgba(0, 86, 255, 0.10), transparent 60%),
+    radial-gradient(ellipse 480px 480px at 92% 100%, rgba(139, 0, 255, 0.10), transparent 60%);
 }
 
-/* Subtle blue + purple glow drifting behind the hero content.
-   Two big, heavily-blurred circles (not visible shapes, just soft
-   color) slowly move and breathe. Everything in .hero .container
-   sits on z-index: 1 so it stays above the glow. Motion is tiny —
-   this is a "glow," not a cartoon flame — and it's turned off
-   entirely for anyone with reduced-motion set in their OS. */
-.hero::before,
-.hero::after {
-  content: "";
+/* Looping purple/blue wave video behind the hero content.
+   mix-blend-mode: screen drops out the video's black background —
+   screen keeps the lighter pixels and discards black entirely —
+   so only the glowing wave shows against the white .hero behind
+   it, with no visible video "frame" or rectangle edge.
+   Positioned to cover the section; .hero .container below is on
+   z-index: 1 so text/buttons always sit above it. */
+.hero-bg-video {
   position: absolute;
-  width: 480px;
-  height: 480px;
-  border-radius: 50%;
-  filter: blur(90px);
-  opacity: 0.22;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  mix-blend-mode: screen;
+  opacity: 0.65;
   z-index: 0;
   pointer-events: none;
 }
-.hero::before {
-  background: var(--primary-blue);
-  top: -160px;
-  left: -120px;
-  animation: heroGlowDrift 14s ease-in-out infinite alternate;
-}
-.hero::after {
-  background: var(--primary-purple);
-  bottom: -180px;
-  right: -140px;
-  animation: heroGlowDrift 14s ease-in-out infinite alternate-reverse;
-}
 .hero .container { position: relative; z-index: 1; }
 
-@keyframes heroGlowDrift {
-  0%   { transform: translate(0, 0) scale(1); }
-  100% { transform: translate(40px, 30px) scale(1.15); }
-}
-
+/* Anyone with reduced-motion set gets the static gradient above
+   only — no video, no motion at all. */
 @media (prefers-reduced-motion: reduce) {
-  .hero::before, .hero::after { animation: none; }
+  .hero-bg-video { display: none; }
 }
 
 .alert-badge {
