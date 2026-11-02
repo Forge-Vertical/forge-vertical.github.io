@@ -178,14 +178,22 @@ p { margin-bottom: var(--spacing-md); color: var(--text-muted); }
    transparent at the file level — see index.html's comment), so
    it just sits on top of the white hero correctly with no blend
    tricks needed. Positioned to cover the section; .hero .container
-   below is on z-index: 1 so text/buttons always sit above it. */
+   below is on z-index: 1 so text/buttons always sit above it.
+
+   The source clip itself has hard, painterly brush-stroke edges —
+   fine for a standalone visual, but at full strength directly
+   behind body text it reads as a solid shape competing with the
+   words rather than an ambient glow. blur() softens those edges
+   into something closer to a diffuse glow, and the low opacity
+   keeps it from fighting the text for contrast. */
 .hero-bg-video {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0.8;
+  opacity: 0.28;
+  filter: blur(50px) saturate(1.15);
   z-index: 0;
   pointer-events: none;
 }
