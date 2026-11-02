@@ -157,64 +157,74 @@ p { margin-bottom: var(--spacing-md); color: var(--text-muted); }
 .btn-primary { background: var(--gradient); color: white; }
 .btn-outline { background: transparent; border: 2px solid var(--primary-blue); color: var(--primary-blue); }
 
-/* ---------- Hero ---------- */
+/* ---------- Hero (dark) ----------
+   Full-bleed looping particle video behind the hero content, with
+   a dark gradient overlay on top for two jobs at once: (1) text
+   contrast against the busiest parts of the footage, and (2) a
+   wash of the brand blue/purple, since the source clip itself is
+   blue-only. Text colors throughout this section are light —
+   .hero-dark below handles that so nothing here depends on the
+   light-hero rules the rest of the site still uses elsewhere. */
 .hero {
   position: relative;
   overflow: hidden;
   text-align: center;
   padding: 5rem 0;
-  background-color: var(--bg-white);
-  /* Static fallback glow — always present at low opacity, so the
-     hero never looks flat if the video is still loading, fails,
-     or is hidden for reduced-motion users below. The video (when
-     playing) sits on top of this and does the animated version. */
+}
+.hero-dark {
+  /* Dark fallback shown instantly, before the video has loaded a
+     frame, and permanently for anyone with reduced-motion set
+     (the video is hidden for them below) — so the hero never
+     flashes white or looks broken either way. */
+  background-color: #060a16;
   background-image:
-    radial-gradient(ellipse 480px 480px at 8% 0%, rgba(0, 86, 255, 0.10), transparent 60%),
-    radial-gradient(ellipse 480px 480px at 92% 100%, rgba(139, 0, 255, 0.10), transparent 60%);
+    radial-gradient(ellipse 600px 600px at 15% 10%, rgba(0, 86, 255, 0.25), transparent 65%),
+    radial-gradient(ellipse 600px 600px at 85% 90%, rgba(139, 0, 255, 0.22), transparent 65%);
 }
 
-/* Looping purple/blue wave behind the hero content. It's an
-   animated WebP with a real alpha channel (black keyed out to
-   transparent at the file level — see index.html's comment), so
-   it just sits on top of the white hero correctly with no blend
-   tricks needed. Positioned to cover the section; .hero .container
-   below is on z-index: 1 so text/buttons always sit above it.
-
-   The source clip itself has hard, painterly brush-stroke edges —
-   fine for a standalone visual, but at full strength directly
-   behind body text it reads as a solid shape competing with the
-   words rather than an ambient glow. blur() softens those edges
-   into something closer to a diffuse glow, and the low opacity
-   keeps it from fighting the text for contrast. */
 .hero-bg-video {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0.28;
-  filter: blur(50px) saturate(1.15);
   z-index: 0;
   pointer-events: none;
 }
+
+/* Sits between the video and the text. Darkens the busy middle of
+   the frame so body copy stays readable, and blends in a touch of
+   purple at the edges to tie the blue-only footage back to the
+   brand gradient used in the logo and buttons. */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(6, 10, 22, 0.55) 0%, rgba(6, 10, 22, 0.75) 55%, rgba(6, 10, 22, 0.55) 100%),
+    linear-gradient(135deg, rgba(0, 86, 255, 0.28), rgba(139, 0, 255, 0.32));
+}
+
 .hero .container { position: relative; z-index: 1; }
 
-/* Anyone with reduced-motion set gets the static gradient above
-   only — no motion at all. */
+/* Anyone with reduced-motion set gets the static dark gradient
+   from .hero-dark above only — no video, no motion at all. */
 @media (prefers-reduced-motion: reduce) {
   .hero-bg-video { display: none; }
 }
 
-.alert-badge {
-  background-color: #f1f5f9;
-  color: var(--primary-purple);
-  padding: 0.5rem 1rem;
-  border-radius: 50px;
-  font-size: 0.85rem;
-  font-weight: 600;
-  margin-bottom: 2rem;
-  border: 1px solid var(--border);
+.hero-dark .alert-badge {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #d8c6ff;
+  border-color: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(6px);
 }
+
+.hero-dark .eyebrow { color: #9db4ff; }
+
+.hero-dark h1,
+.hero-dark h1 > :not(.text-gradient) { color: #ffffff; }
 
 .hero h1 { font-size: 3.25rem; margin: 1rem 0; }
 
@@ -224,8 +234,11 @@ p { margin-bottom: var(--spacing-md); color: var(--text-muted); }
   max-width: 680px;
   margin: 0 auto 2.5rem auto;
 }
+.hero-dark .hero-subtitle { color: #c7cde0; }
 
 .hero-ctas { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+.hero-dark .btn-outline { border-color: #ffffff; color: #ffffff; }
 
 .hero-stats {
   display: flex;
@@ -236,8 +249,11 @@ p { margin-bottom: var(--spacing-md); color: var(--text-muted); }
   border-top: 1px solid var(--border);
   padding-top: 2.5rem;
 }
+.hero-dark .hero-stats { border-top-color: rgba(255, 255, 255, 0.15); }
 .stat-item h4 { font-size: 1.75rem; margin-bottom: 0.2rem; color: var(--primary-blue); }
+.hero-dark .stat-item h4 { color: #9db4ff; }
 .stat-item p { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0; }
+.hero-dark .stat-item p { color: #9aa3bf; }
 
 /* ---------- Grids ---------- */
 .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 3rem; align-items: center; }
