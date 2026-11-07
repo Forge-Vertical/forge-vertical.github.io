@@ -135,6 +135,10 @@
             <strong>The honest version of "AI detection" in this extension:</strong> it does not run its own AI model, image analysis, or OCR. It reads the labels the platforms themselves already attach to AI-generated or AI-edited content, and hides the post. That's it. It's a filter on top of work Meta, Google, and LinkedIn are already doing — not a replacement for it.
         </div>
 
+        <div class="callout amber">
+            <strong>Don't want to wait for the Chrome Web Store review?</strong> The full source is public on GitHub right now, and you can load it manually in any Chromium-based browser (Chrome, Edge, Brave, Opera) in under a minute — see the install steps and the link lower down in this article.
+        </div>
+
         <h2>What it actually catches</h2>
         <span class="chapter-label">// Platform coverage, version 1</span>
 
@@ -193,6 +197,25 @@
             The extension carries a small "Built by Forge Vertical" credit in its popup, with a link back here for anyone who wants something similar built for them. There's also an optional support link for anyone who wants to buy me a coffee for the time it took. Neither is required, neither is removable for a fee, and there are no ads anywhere in it. If it ever grows into a paid tier, that will be a genuinely better product — OCR, image classification, broader coverage — not the free version held hostage.
         </p>
 
+        <h2>Install it now, before the Chrome Web Store listing goes live</h2>
+        <span class="chapter-label">// Manual install, works today</span>
+
+        <p>
+            The extension is awaiting review on the Chrome Web Store. If you don't want to wait, the source is public on <a href="https://github.com/Jotto1988/ai-content-filter" target="_blank" rel="noopener noreferrer">GitHub</a>, and you can load it manually in any Chromium-based browser — that covers Chrome, Microsoft Edge, Brave, and Opera. It will not work in Firefox or Safari, which use a different extension system.
+        </p>
+
+        <ul>
+            <li><strong>Download it.</strong> Go to <a href="https://github.com/Jotto1988/ai-content-filter" target="_blank" rel="noopener noreferrer">github.com/Jotto1988/ai-content-filter</a>, click the green <strong>Code</strong> button, then <strong>Download ZIP</strong>. Unzip it anywhere on your computer.</li>
+            <li><strong>Open your browser's extensions page.</strong> Chrome: <code>chrome://extensions</code>. Edge: <code>edge://extensions</code>. Brave: <code>brave://extensions</code>. Opera: <code>opera://extensions</code>.</li>
+            <li><strong>Turn on Developer mode.</strong> There's a toggle for it, usually in the top-right corner of that page.</li>
+            <li><strong>Click "Load unpacked"</strong> and select the unzipped folder (the one containing <code>manifest.json</code>).</li>
+            <li><strong>Done.</strong> The extension's icon will appear in your toolbar, and it'll start hiding AI-labelled posts as you browse.</li>
+        </ul>
+
+        <p>
+            Browsers will show a small "Developer mode extensions" warning for anything installed this way — that's normal for any unpacked extension, not a sign something's wrong. Once the Chrome Web Store listing is live, you can switch to the store version and remove the manual one if you'd rather not see that notice.
+        </p>
+
     </div>
 
     <div class="max-w-3xl mx-auto px-6">
@@ -203,6 +226,11 @@
                     <div class="aff-tile-name">Get the extension</div>
                     <div class="aff-tile-desc">Free, no account needed. Install from the Chrome Web Store.</div>
                     <span class="aff-tile-cta">Install now →</span>
+                </a>
+                <a href="https://github.com/Jotto1988/ai-content-filter" target="_blank" rel="noopener noreferrer" class="aff-tile">
+                    <div class="aff-tile-name">Source on GitHub</div>
+                    <div class="aff-tile-desc">Can't wait for review? Load it manually — see install steps above.</div>
+                    <span class="aff-tile-cta">View repo →</span>
                 </a>
                 <a href="https://buymeacoffee.com/Prinymity" target="_blank" rel="noopener noreferrer" class="aff-tile">
                     <div class="aff-tile-name">Support the project</div>
