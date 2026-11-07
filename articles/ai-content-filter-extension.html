@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A free Chrome extension that hides AI-generated content on Facebook, Instagram, Google Search, and LinkedIn — using the labels those platforms already apply. Built by Forge Vertical, no ads, no tracking.">
+    <title>AI Content Filter — A Free Extension That Hides AI-Labelled Posts | Forge Vertical</title>
+    <link rel="canonical" href="https://www.forgevertical.com/articles/ai-content-filter-extension.html">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "NewsArticle",
+          "@id": "https://www.forgevertical.com/articles/ai-content-filter-extension.html",
+          "headline": "AI Content Filter — A Free Extension That Hides AI-Labelled Posts",
+          "description": "Forge Vertical built a free Chrome extension that hides AI-generated and AI-edited posts on Facebook, Instagram, Google Search, and LinkedIn, using the AI-content labels those platforms already apply.",
+          "datePublished": "2026-11-07",
+          "author": {"@type": "Person", "name": "Jarrit Hosking", "sameAs": "https://www.wikidata.org/wiki/Q141506817"},
+          "publisher": {"@type": "Organization", "name": "Forge Vertical", "url": "https://www.forgevertical.com"},
+          "about": [
+            {"@type": "SoftwareApplication", "name": "AI Content Filter", "applicationCategory": "BrowserExtension", "operatingSystem": "Chrome"}
+          ],
+          "keywords": "AI content filter extension, hide AI generated posts, Facebook AI label, Instagram AI info, LinkedIn AI content, Google AI generated images, block AI content browser extension, Forge Vertical"
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Forge Vertical", "item": "https://www.forgevertical.com"},
+            {"@type": "ListItem", "position": 2, "name": "Articles", "item": "https://www.forgevertical.com/articles.html"},
+            {"@type": "ListItem", "position": 3, "name": "AI Content Filter", "item": "https://www.forgevertical.com/articles/ai-content-filter-extension.html"}
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What does the AI Content Filter extension do?",
+              "acceptedAnswer": {"@type": "Answer", "text": "AI Content Filter is a free Chrome extension that hides social media posts and search results already labelled as AI-generated or AI-edited by the platform itself. It currently supports Facebook, Instagram, Google Search and Images, and LinkedIn."}
+            },
+            {
+              "@type": "Question",
+              "name": "Does AI Content Filter use its own AI detection?",
+              "acceptedAnswer": {"@type": "Answer", "text": "No. Version 1 does not run its own AI or image-detection model. It relies entirely on the AI-content labels that Facebook, Instagram, Google, and LinkedIn already attach to content they have identified as AI-generated or AI-edited, and hides posts carrying those labels."}
+            },
+            {
+              "@type": "Question",
+              "name": "Is AI Content Filter free?",
+              "acceptedAnswer": {"@type": "Answer", "text": "Yes. AI Content Filter is free, has no ads, and does not sell or track user data. It carries a small Forge Vertical attribution in the popup and an optional link for users who want to support further development."}
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+    <script src="/global.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/typography.css">
+    <style>
+        body{font-family:'Outfit',sans-serif;background:#fff;}
+        .mono{font-family:'JetBrains Mono',monospace;}
+        .g-text{background:linear-gradient(90deg,#10b981,#84cc16);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:inline-block;}
+        .prose-body{font-family:'Lora',serif;font-size:19px;line-height:1.85;color:#27272a;}
+        .prose-body p{margin-bottom:1.6em;}
+        .prose-body ul{margin:0 0 1.6em 1.3em;padding:0;}
+        .prose-body li{margin-bottom:0.6em;}
+        .prose-body h2{font-family:'Outfit',sans-serif;font-size:26px;font-weight:700;letter-spacing:-0.02em;color:#09090b;margin-top:2.5em;margin-bottom:0.6em;}
+        .prose-body strong{font-weight:700;color:#09090b;font-family:'Outfit',sans-serif;font-size:17px;}
+        .prose-body a{color:#84cc16;text-decoration:underline;text-underline-offset:3px;}
+        .callout{background:#f4f4f5;border-left:3px solid #84cc16;border-radius:0 12px 12px 0;padding:20px 24px;margin:2em 0;font-family:'Outfit',sans-serif;font-size:15px;color:#3f3f46;line-height:1.7;}
+        .callout strong{color:#09090b;}
+        .callout.amber{border-left-color:#f59e0b;background:#fffdf5;}
+        .pull-quote{font-family:'Lora',serif;font-size:22px;font-style:italic;color:#09090b;border-top:2px solid #84cc16;border-bottom:1px solid #e4e4e7;padding:24px 0;margin:2.5em 0;line-height:1.5;}
+        .chapter-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:#84cc16;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:6px;display:block;}
+
+        /* Platform coverage grid */
+        .plat-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:2em 0;}
+        @media(max-width:560px){.plat-grid{grid-template-columns:1fr;}}
+        .plat-card{border-radius:14px;padding:20px;border:1px solid #e4e4e7;display:flex;flex-direction:column;gap:6px;}
+        .plat-name{font-size:15px;font-weight:700;color:#09090b;}
+        .plat-label{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#84cc16;margin-bottom:2px;}
+        .plat-desc{font-size:13px;color:#52525b;line-height:1.6;}
+
+        .aff-footer{background:#09090b;border-radius:16px;padding:28px;margin:3em 0;}
+        .aff-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;}
+        .aff-tile{background:#111620;border:1px solid #1a2030;border-radius:10px;padding:14px;text-decoration:none;display:block;transition:border-color 0.18s;}
+        .aff-tile:hover{border-color:#84cc16;}
+        .aff-tile-name{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:#84cc16;margin-bottom:4px;}
+        .aff-tile-desc{font-size:11px;color:#6a7d96;line-height:1.5;margin-bottom:6px;}
+        .aff-tile-cta{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:#84cc16;}
+    </style>
+</head>
+<body class="antialiased">
+<div id="global-nav"></div>
+<article class="pt-20 pb-24">
+
+    <header class="max-w-3xl mx-auto px-6 mt-10 mb-12">
+        <div class="flex items-center gap-3 mb-6">
+            <a href="/articles.html" class="mono text-[10px] text-zinc-400 hover:text-zinc-600 uppercase tracking-widest">← Articles</a>
+            <span class="text-zinc-300">·</span>
+            <span class="mono text-[10px] font-bold text-[#84cc16] uppercase tracking-widest border border-[#84cc16]/30 px-3 py-1 rounded-full">Side project · Free tool</span>
+        </div>
+        <h1 class="text-4xl md:text-5xl font-bold tracking-tight leading-[1.05] mb-6 text-zinc-900" style="font-family:'Outfit',sans-serif;letter-spacing:-0.03em;">
+            I built a free extension that<br>
+            <span class="g-text">hides AI-labelled posts.</span>
+        </h1>
+        <p class="text-xl text-zinc-500 font-light leading-relaxed mb-8 max-w-2xl" style="font-family:'Outfit',sans-serif;">
+            A number of people said they'd pay for something that clears AI-generated content out of their feed. So I built the simplest version that could actually work — one that uses the AI-content labels Facebook, Instagram, Google, and LinkedIn already apply, and just hides what they've already flagged.
+        </p>
+        <div class="flex items-center gap-4 pb-8 border-b border-zinc-100">
+            <div>
+                <div class="font-bold text-sm text-zinc-900">Jarrit Hosking</div>
+                <div class="mono text-[10px] text-zinc-400 uppercase tracking-widest">Forge Vertical · Cape Town · November 7, 2026</div>
+            </div>
+            <div class="ml-auto mono text-[10px] text-zinc-400 uppercase tracking-widest">6 min read</div>
+        </div>
+    </header>
+
+    <div class="max-w-3xl mx-auto px-6 prose-body">
+
+        <span class="chapter-label">// Where this came from</span>
+
+        <p>
+            I kept seeing the same comment on Facebook — people saying they'd genuinely pay for a tool that cleared AI-generated images, video, and text out of their feed. Not because they're against AI, but because they can't always tell the difference anymore, and that uncertainty bothers them more than the content itself.
+        </p>
+
+        <p>
+            I didn't want to build this as a business. It costs me time, not money, and if someone wants to send a few rand my way for the effort, that's a bonus, not the point. So the brief I set myself was: <strong>build the simplest version that actually works, ship it, and see if there's real demand before building anything more complicated.</strong>
+        </p>
+
+        <div class="callout">
+            <strong>The honest version of "AI detection" in this extension:</strong> it does not run its own AI model, image analysis, or OCR. It reads the labels the platforms themselves already attach to AI-generated or AI-edited content, and hides the post. That's it. It's a filter on top of work Meta, Google, and LinkedIn are already doing — not a replacement for it.
+        </div>
+
+        <h2>What it actually catches</h2>
+        <span class="chapter-label">// Platform coverage, version 1</span>
+
+        <p>
+            Each platform signals AI content differently, and none of them documents it publicly, so this came from directly testing each one and combing through what worked on one to check against the next.
+        </p>
+
+    </div>
+
+    <div class="max-w-3xl mx-auto px-6 my-8">
+        <div class="plat-grid">
+            <div class="plat-card">
+                <span class="plat-label">// Facebook &amp; Instagram</span>
+                <div class="plat-name">Meta's "AI info" label</div>
+                <div class="plat-desc">Catches posts Meta has tagged with its own AI-generated or AI-edited label. Works well on obvious cases; Meta sometimes buries the label in a post's menu rather than showing it inline, which the extension can't see yet.</div>
+            </div>
+            <div class="plat-card">
+                <span class="plat-label">// Google Search &amp; Images</span>
+                <div class="plat-name">"AI Generated" tag</div>
+                <div class="plat-desc">Hides results and images Google itself has marked as AI-generated in search and image search.</div>
+            </div>
+            <div class="plat-card">
+                <span class="plat-label">// LinkedIn</span>
+                <div class="plat-name">AI content icon</div>
+                <div class="plat-desc">Detects LinkedIn's own AI-content indicator on posts and images in the feed.</div>
+            </div>
+            <div class="plat-card">
+                <span class="plat-label">// Not yet covered</span>
+                <div class="plat-name">Unlabelled content, Reddit</div>
+                <div class="plat-desc">Anything a platform hasn't labelled itself won't be caught in version 1 — including Reddit, which was deliberately left out for now. No platform catches everything.</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-3xl mx-auto px-6 prose-body">
+
+        <h2>Why I didn't build a custom AI detector</h2>
+        <span class="chapter-label">// The actual trade-off</span>
+
+        <p>
+            A proper AI-image classifier, OCR pass, and text-pattern model is a real piece of engineering — and a real ongoing cost to run. Before spending that time, I wanted to know whether people would actually use a free version long enough to tell me what they want from a better one.
+        </p>
+
+        <p>
+            That's what the feedback box in the extension's popup is for. It asks, in effect: is this useful as it is, what's missing, and would you pay for a version that catches more? Every submission goes straight into a database I can review — anonymously, no account or identity attached. If enough people say yes, a paid version with real detection is the obvious next step. If they don't, I've learned that for the cost of a weekend, not a quarter.
+        </p>
+
+        <div class="pull-quote">
+            It's not catching everything. It's catching enough that a good number of people will be happy to have the worst of it gone — and that's a fair place to start.
+        </div>
+
+        <h2>No ads, no pay-to-remove-ads</h2>
+        <span class="chapter-label">// How it's funded</span>
+
+        <p>
+            The extension carries a small "Built by Forge Vertical" credit in its popup, with a link back here for anyone who wants something similar built for them. There's also an optional support link for anyone who wants to buy me a coffee for the time it took. Neither is required, neither is removable for a fee, and there are no ads anywhere in it. If it ever grows into a paid tier, that will be a genuinely better product — OCR, image classification, broader coverage — not the free version held hostage.
+        </p>
+
+    </div>
+
+    <div class="max-w-3xl mx-auto px-6">
+        <div class="aff-footer">
+            <div class="mono text-[10px] text-[#84cc16] uppercase tracking-widest mb-3">// Try it or build something like it</div>
+            <div class="aff-grid">
+                <a href="https://chromewebstore.google.com/" target="_blank" rel="noopener noreferrer" class="aff-tile">
+                    <div class="aff-tile-name">Get the extension</div>
+                    <div class="aff-tile-desc">Free, no account needed. Install from the Chrome Web Store.</div>
+                    <span class="aff-tile-cta">Install now →</span>
+                </a>
+                <a href="https://buymeacoffee.com/Prinymity" target="_blank" rel="noopener noreferrer" class="aff-tile">
+                    <div class="aff-tile-name">Support the project</div>
+                    <div class="aff-tile-desc">Entirely optional — buy me a coffee if it's useful to you.</div>
+                    <span class="aff-tile-cta">Buy Me a Coffee →</span>
+                </a>
+                <a href="/free-quote.html" class="aff-tile">
+                    <div class="aff-tile-name">Want something built?</div>
+                    <div class="aff-tile-desc">This is what a small, well-scoped Forge Vertical build looks like.</div>
+                    <span class="aff-tile-cta">Get a quote →</span>
+                </a>
+                <a href="/privacy-policy/privacy-policy-ai-content.html" class="aff-tile">
+                    <div class="aff-tile-name">Privacy Policy</div>
+                    <div class="aff-tile-desc">What the extension does and doesn't collect.</div>
+                    <span class="aff-tile-cta">Read it →</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mt-8">
+            <div>
+                <div class="mono text-[10px] text-zinc-400 uppercase tracking-widest mb-1">Written by</div>
+                <div class="font-bold text-zinc-900">Jarrit Hosking</div>
+                <div class="mono text-[10px] text-zinc-400">Forge Vertical · Cape Town · November 7, 2026</div>
+            </div>
+            <div class="flex gap-3 flex-wrap">
+                <a href="/articles.html" class="mono text-[10px] font-bold uppercase tracking-widest border border-zinc-200 px-5 py-3 rounded-xl hover:border-zinc-400 transition-all text-zinc-600">← All articles</a>
+                <a href="https://chromewebstore.google.com/" target="_blank" rel="noopener noreferrer" style="background:linear-gradient(90deg,#10b981,#84cc16);" class="mono text-[10px] font-bold uppercase tracking-widest px-5 py-3 rounded-xl text-white hover:opacity-90 transition-all">Install the extension →</a>
+            </div>
+        </div>
+    </div>
+
+</article>
+<div id="global-footer"></div>
+<script src="https://cdn.tailwindcss.com"></script>
+</body>
+</html>
