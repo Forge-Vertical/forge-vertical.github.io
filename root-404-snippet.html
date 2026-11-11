@@ -1,0 +1,45 @@
+<!--
+  WHERE THIS GOES: the ROOT of your forgevertical.com GitHub Pages repo (the file
+  must be named "404.html" and sit next to your site's main index.html — NOT
+  inside the marks-auto-care-management-system folder). GitHub Pages only ever
+  reads the one 404.html at the site root, which is why this can't live inside
+  the demo's own subfolder.
+
+  IF YOU DON'T HAVE A 404.html AT YOUR REPO ROOT YET:
+  Just upload this whole file as 404.html at the root.
+
+  IF YOU ALREADY HAVE A 404.html AT YOUR REPO ROOT:
+  Don't overwrite it — instead copy ONLY the <script> block below into the
+  <head> of your existing 404.html (as early as possible, before anything else
+  runs). It only acts on paths under the Marks Autocare demo folder; every
+  other 404 on your site falls through to your existing page untouched.
+-->
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <script>
+      // Standard "spa-github-pages" redirect trick, scoped so it only fires
+      // for the Marks Autocare demo — everything else on forgevertical.com
+      // is left alone and falls through to the 404 content below.
+      (function () {
+        var l = window.location;
+        var prefix = '/subdomains/marks-auto-care-management-system/';
+        if (l.pathname.indexOf(prefix) === 0) {
+          var rest = l.pathname.slice(prefix.length); // e.g. "customers" or "portal"
+          var search = l.search ? l.search.slice(1) : '';
+          var redirectUrl =
+            l.protocol + '//' + l.host + prefix +
+            '?p=' + encodeURIComponent(rest) +
+            '&q=' + encodeURIComponent(search) +
+            l.hash;
+          l.replace(redirectUrl);
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <!-- Replace this with your site's real 404 page content. -->
+    <p>Page not found.</p>
+  </body>
+</html>
