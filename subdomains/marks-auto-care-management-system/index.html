@@ -15,9 +15,26 @@
         var newPath = location.pathname.slice(0, -'index.html'.length);
         history.replaceState(null, '', newPath + location.search + location.hash);
       }
+
+      // Decodes a path that the site's root 404.html redirected here as a
+      // "?p=...&q=..." query string (the standard spa-github-pages trick) —
+      // this is what makes a hard refresh or a bookmarked/shared deep link
+      // (e.g. .../marks-auto-care-management-system/portal) work correctly
+      // on static GitHub Pages hosting, instead of showing the 404 page.
+      // Requires a matching snippet in the 404.html at the root of the
+      // GitHub Pages site (see README) — this half alone does nothing.
+      (function () {
+        var params = new URLSearchParams(location.search);
+        if (params.has('p')) {
+          var rest = decodeURIComponent(params.get('p') || '');
+          var query = params.get('q') ? decodeURIComponent(params.get('q')) : '';
+          var base = '/subdomains/marks-auto-care-management-system/';
+          history.replaceState(null, '', base + rest + (query ? '?' + query : '') + location.hash);
+        }
+      })();
     </script>
-    <script type="module" crossorigin src="/subdomains/marks-auto-care-management-system/assets/index-DrK5-5bO.js"></script>
-    <link rel="stylesheet" crossorigin href="/subdomains/marks-auto-care-management-system/assets/index-C4gJfPx7.css">
+    <script type="module" crossorigin src="/subdomains/marks-auto-care-management-system/assets/index-BuumHFKa.js"></script>
+    <link rel="stylesheet" crossorigin href="/subdomains/marks-auto-care-management-system/assets/index-C4Z3IZhf.css">
   </head>
   <body class="bg-brand-ink text-white">
     <div id="root"></div>
