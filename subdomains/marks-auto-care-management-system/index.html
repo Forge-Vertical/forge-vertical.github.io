@@ -7,6 +7,15 @@
     <meta name="robots" content="noindex, nofollow, noarchive" />
     <title>Marks Autocare — Franchise Platform (Demo)</title>
     <meta name="description" content="Internal demo — not for public access." />
+    <script>
+      // Normalises an explicit "/index.html" in the URL back to "/" before
+      // React Router reads the path — otherwise visiting the file directly
+      // (instead of the folder) leaves the router with nothing to match.
+      if (location.pathname.endsWith('/index.html')) {
+        var newPath = location.pathname.slice(0, -'index.html'.length);
+        history.replaceState(null, '', newPath + location.search + location.hash);
+      }
+    </script>
   </head>
   <body class="bg-brand-ink text-white">
     <div id="root"></div>
