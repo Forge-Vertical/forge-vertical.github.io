@@ -30,6 +30,14 @@ button,input,select,textarea{font:inherit;color:inherit}
 .i.lg{width:28px;height:28px}
 
 /* shell */
+.mbar,.drawer-scrim,.dclose,.dwho{display:none}
+.mbar{align-items:center;gap:12px;background:var(--navy);color:#fff;padding:8px 12px;position:sticky;top:0;z-index:30}
+.mbtn{display:grid;place-items:center;width:42px;height:42px;border:0;border-radius:10px;background:rgba(255,255,255,.1);color:#fff;cursor:pointer}
+.mbtn:hover{background:rgba(255,255,255,.18)}
+.mlogo{display:flex;align-items:center;gap:8px}
+.mlogo svg{width:26px;height:26px}
+.mlogo b{font-size:12.5px;letter-spacing:1.4px}
+.mcur{margin-left:auto;font-size:13px;color:#b9c8e6;max-width:38%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .app{display:grid;grid-template-columns:240px 1fr;grid-template-rows:auto 1fr auto;min-height:100vh}
 .side{grid-row:1/4;background:var(--navy);color:#dfe7f5;display:flex;flex-direction:column;padding:20px 14px;position:sticky;top:0;height:100vh}
 .brand{display:flex;gap:10px;align-items:center;padding:4px 8px 18px}
@@ -144,11 +152,17 @@ textarea{min-height:90px;resize:vertical}
 .phone .dial .btn{flex:1;justify-content:center;padding:8px}
 
 @media (max-width:980px){
-  .app{grid-template-columns:1fr}
-  .side{grid-row:auto;position:static;height:auto;flex-direction:column;padding:12px}
-  .nav{flex-direction:row;overflow-x:auto}
-  .nav a{white-space:nowrap}
-  .side .foot{display:none}
+  .app{display:block}
+  .mbar{display:flex}
+  .side{position:fixed;left:0;top:0;bottom:0;height:auto;width:min(300px,84vw);z-index:70;transform:translateX(-102%);visibility:hidden;transition:transform .22s ease,visibility 0s linear .22s;overflow-y:auto;padding:16px 12px;box-shadow:6px 0 28px rgba(8,16,34,.35)}
+  .app.menu-open .side{transform:none;visibility:visible;transition-delay:0s}
+  .drawer-scrim{display:block;position:fixed;inset:0;background:rgba(8,16,34,.5);z-index:65;opacity:0;pointer-events:none;transition:opacity .2s}
+  .app.menu-open .drawer-scrim{opacity:1;pointer-events:auto}
+  .dclose{display:grid;place-items:center;margin-left:auto;border:0;background:rgba(255,255,255,.08);color:#fff;width:36px;height:36px;border-radius:9px;cursor:pointer}
+  .dwho{display:block;margin:2px 8px 10px;padding:9px 12px;background:rgba(255,255,255,.07);border-radius:9px;font-size:12.5px;color:#9fb3d6}
+  .dwho b{color:#fff}
+  .nav a{padding:13px 12px;font-size:15px}
+  .nav a .sl{display:none}
   .footer{grid-column:1}
   .g4{grid-template-columns:repeat(2,1fr)}
   .g3{grid-template-columns:1fr}
@@ -165,3 +179,60 @@ textarea{min-height:90px;resize:vertical}
   .modal{animation:pop .16s ease-out}
   @keyframes pop{from{transform:translateY(8px);opacity:0}to{transform:none;opacity:1}}
 }
+
+.nav a .sl{display:none}
+.mb th:first-child,.mb td:first-child{position:sticky;left:0;background:#fff;z-index:1;min-width:130px;box-shadow:1px 0 0 var(--line)}
+
+/* ---------- phone layout ---------- */
+@media (max-width:720px){
+  body{font-size:14.5px}
+  .app{display:block;min-height:100vh}
+  .mbar{padding:8px 12px}
+  .top{padding:10px 14px;gap:10px}
+  .top{flex-wrap:wrap;align-items:center}
+  .top>div:last-child{display:contents!important}
+  .who{flex:1;min-width:0}
+  .pill{order:2;font-size:11px;padding:3px 8px}
+  .seg{order:3}
+  .who .av{width:32px;height:32px}
+  .seg{display:grid;grid-template-columns:repeat(5,1fr);gap:2px;width:100%}
+  .seg button{padding:8px 2px;font-size:12px;text-align:center}
+  main{padding:16px 14px 24px}
+  h1{font-size:20px}
+  .lead{font-size:14px;margin-bottom:14px}
+  .grid{gap:12px}
+  .g4{grid-template-columns:1fr 1fr}
+  .card{padding:14px}
+  .stat .n{font-size:24px}
+  .stat .ic{width:32px;height:32px;margin-bottom:8px}
+  .head{flex-wrap:wrap}
+  .btn{padding:10px 14px}
+  .how{padding:6px 4px}
+  .footer{padding:14px;font-size:12px}
+  .bars{gap:6px}
+
+  /* tables become stacked cards */
+  table.stack thead{display:none}
+  table.stack,table.stack tbody,table.stack tr,table.stack td{display:block;width:100%}
+  table.stack tr{border:1px solid var(--line);border-radius:10px;padding:6px 12px;margin-bottom:10px;background:#fff}
+  table.stack td{display:flex;justify-content:space-between;gap:14px;border-bottom:1px solid var(--line);padding:8px 0;text-align:right}
+  table.stack td:last-child{border-bottom:0}
+  table.stack td::before{content:attr(data-label);color:var(--muted);font-size:12px;font-weight:600;text-align:left;flex:0 0 auto}
+  .card.tw:has(table.stack){padding:10px;overflow:visible;background:transparent;border:0;box-shadow:none}
+  .mb th:first-child,.mb td:first-child{min-width:112px}
+  .markin{width:62px}
+
+  /* modals as bottom sheets */
+  .scrim{place-items:end center;padding:0}
+  .modal{max-width:none;border-radius:18px 18px 0 0;max-height:88vh}
+  .modal .mf{border-radius:0;flex-wrap:wrap}
+  .modal .mf .btn{flex:1;justify-content:center}
+
+  /* phone simulator */
+  .phone{width:100%;max-width:300px}
+}
+@media (max-width:380px){
+  .g4{grid-template-columns:1fr}
+  .seg button{font-size:11px}
+}
+.brand .dclose svg{width:20px;height:20px}

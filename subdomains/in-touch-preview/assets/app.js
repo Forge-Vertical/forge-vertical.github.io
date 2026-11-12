@@ -29,6 +29,7 @@
     info: '<circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/>',
     grid: '<rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/>',
     edit: '<path d="M4 20h4L19 9l-4-4L4 16zM13 7l4 4"/>',
+    menu: '<path d="M4 7h16M4 12h16M4 17h16"/>',
     list: '<path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01"/>'
   };
   function icon(n, c) { return '<svg class="i ' + (c || '') + '" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-' + n + '"/></svg>'; }
@@ -88,6 +89,7 @@
     ]
   };
   var AUD = { school: { l: 'Whole school', n: 398 }, '6A': { l: 'Grade 6A parents', n: 31 }, '3B': { l: 'Grade 3B parents', n: 29 }, staff: { l: 'Staff only', n: 26 } };
+  var SHORT = { 'SA-SAMS connector': 'Connector', 'Pilot impact': 'Impact', 'Audit trail': 'Audit', 'Marks and term lock': 'Marks', 'Announcements': 'Notices', 'People and roles': 'People', 'Who can see what': 'Privacy', 'Phone simulator': 'Phone', 'Mark book': 'Marks' };
   var KIDS = [{ n: 'Amara Dlamini', g: 'Grade 6A', cls: '6A' }, { n: 'Noah Dlamini', g: 'Grade 3B', cls: '3B' }];
 
   var ROLES = {
@@ -274,7 +276,7 @@
     }).join('');
     return '<div class="head" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px"><div><h1>Mark book, Grade 6A</h1><p class="lead" style="margin:0">Term 2. Averages calculate as you type.</p></div>' + how('marks', 'How marks are protected') + '</div>' +
       (S.locked ? '<div class="note amber" style="margin-top:14px">' + icon('lock', 'sm') + ' <b>Term 2 is locked by the principal.</b> Changes now need a reason and the principal’s approval.</div>' : '<div class="note" style="margin-top:14px">Term 2 is open. Every change you make is recorded (who, when, old value, new value).</div>') +
-      '<div class="tabs">' + tabs + '</div><div class="card tw"><table><thead><tr><th>Learner</th>' + head + '<th>Term average</th></tr></thead><tbody>' + rows + '</tbody></table></div>';
+      '<div class="tabs">' + tabs + '</div><div class="card tw" data-keep="1"><table class="mb"><thead><tr><th>Learner</th>' + head + '<th>Term average</th></tr></thead><tbody>' + rows + '</tbody></table></div>';
   }
   V.teacher = {
     overview: function () {
@@ -369,21 +371,38 @@
   function render() {
     var R = ROLES[S.role];
     var seg = Object.keys(ROLES).map(function (k) { return '<button data-role="' + k + '" class="' + (k === S.role ? 'on' : '') + '">' + ROLES[k].label + '</button>'; }).join('');
-    var nav = R.nav.map(function (n) { return '<a href="#/' + S.role + '/' + n[0] + '" class="' + (n[0] === S.view ? 'on' : '') + '"' + (n[0] === S.view ? ' aria-current="page"' : '') + '>' + icon(n[2]) + n[1] + '</a>'; }).join('');
+    var nav = R.nav.map(function (n) { return '<a href="#/' + S.role + '/' + n[0] + '" class="' + (n[0] === S.view ? 'on' : '') + '"' + (n[0] === S.view ? ' aria-current="page"' : '') + '>' + icon(n[2]) + '<span class="lbl">' + n[1] + '</span><span class="sl">' + (SHORT[n[1]] || n[1]) + '</span></a>'; }).join('');
+    var curLabel = (R.nav.filter(function (n) { return n[0] === S.view; })[0] || R.nav[0])[1];
     var body = (V[S.role][S.view] || V[S.role][R.nav[0][0]])();
     document.getElementById('app').innerHTML =
-      '<aside class="side"><div class="brand">' + icon('logo', 'lg') + '<div><b>IN-TOUCH SCHOOLS</b><span>Connect. Learn. Manage.</span></div></div><nav class="nav" aria-label="Sections">' + nav + '</nav>' +
+      '<div class="mbar"><button class="mbtn" data-act="menu" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">' + icon('menu') + '</button><div class="mlogo">' + icon('logo') + '<b>IN-TOUCH SCHOOLS</b></div><span class="mcur">' + esc(curLabel) + '</span></div>' +
+      '<div class="drawer-scrim" data-act="menu"></div>' +
+      '<aside class="side" id="drawer"><div class="brand">' + icon('logo', 'lg') + '<div><b>IN-TOUCH SCHOOLS</b><span>Connect. Learn. Manage.</span></div><button class="dclose" data-act="menu" aria-label="Close menu">' + icon('close') + '</button></div><div class="dwho">Viewing as <b>' + esc(R.label) + '</b></div><nav class="nav" aria-label="Sections">' + nav + '</nav>' +
       '<div class="foot">Preview with sample data only. No real learners, parents or schools appear here.</div></aside>' +
       '<header class="top"><div class="who"><div class="av">' + esc(R.who.charAt(0)) + '</div><div><b>' + esc(R.who) + '</b><small>' + esc(R.sub) + '</small></div></div>' +
       '<div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap"><span class="pill">' + icon('eye', 'sm') + 'Preview, sample data</span><div class="seg" role="group" aria-label="View as">' + seg + '</div></div></header>' +
       '<main id="main" tabindex="-1">' + body + '</main>' +
       '<footer class="footer">Interactive preview prepared by Forge Vertical for Limitless Minds. This is not the live system. Nothing you enter here is saved or sent.</footer>';
+    enhanceTables();
+  }
+  function enhanceTables() {
+    var ts = document.querySelectorAll('main table');
+    Array.prototype.forEach.call(ts, function (t) {
+      if (t.closest('[data-keep]')) return;
+      var heads = Array.prototype.map.call(t.querySelectorAll('thead th'), function (h) { return h.textContent.replace(/\s+/g, ' ').trim(); });
+      if (!heads.length) return;
+      t.classList.add('stack');
+      Array.prototype.forEach.call(t.querySelectorAll('tbody tr'), function (tr) {
+        Array.prototype.forEach.call(tr.children, function (td, i) { td.setAttribute('data-label', heads[i] || ''); });
+      });
+    });
   }
   function route() {
     var h = (location.hash || '').replace(/^#\/?/, '').split('/');
     var role = ROLES[h[0]] ? h[0] : 'owner';
     var views = ROLES[role].nav.map(function (n) { return n[0]; });
     S.role = role; S.view = views.indexOf(h[1]) > -1 ? h[1] : views[0];
+    document.getElementById('app').classList.remove('menu-open'); document.body.style.overflow = '';
     render(); window.scrollTo(0, 0);
   }
   window.addEventListener('hashchange', route);
@@ -399,6 +418,7 @@
       render(); return;
     }
     var a = t.dataset.act;
+    if (a === 'menu') { toggleMenu(); return; }
     if (a === 'dial') { U.state = 'main'; U.child = 0; U.input = ''; U.screen = ussdMain(); render(); }
     else if (a === 'subj') { S.subject = t.dataset.s; render(); }
     else if (a === 'child') { S.child = parseInt(t.dataset.i, 10); render(); }
@@ -419,6 +439,16 @@
   });
   document.addEventListener('keydown', function (e) { if (e.key === 'Enter' && e.target.id === 'uin') { U.input = e.target.value; ussdSend(); render(); var n = document.getElementById('uin'); if (n) n.focus(); } });
 
+  function toggleMenu(force) {
+    var app = document.getElementById('app'), btn = document.getElementById('menuBtn');
+    var open = typeof force === 'boolean' ? force : !app.classList.contains('menu-open');
+    app.classList.toggle('menu-open', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+    if (btn) { btn.setAttribute('aria-expanded', open ? 'true' : 'false'); btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu'); }
+    if (open) { var f = document.querySelector('#drawer .nav a'); if (f) f.focus(); } else if (btn) btn.focus();
+  }
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && document.getElementById('app').classList.contains('menu-open')) toggleMenu(false); });
+  window.addEventListener('resize', function () { if (window.innerWidth > 980 && document.getElementById('app').classList.contains('menu-open')) toggleMenu(false); });
   function compose(auds) {
     openModal({ ic: 'megaphone', title: 'New announcement',
       body: '<label class="f" for="at">Title</label><input type="text" id="at"><label class="f" for="aa">Send to</label><select id="aa">' + auds.map(function (k) { return '<option value="' + k + '">' + AUD[k].l + ' (' + AUD[k].n + ')</option>'; }).join('') + '</select><label class="f" for="ab">Message</label><textarea id="ab"></textarea>',
