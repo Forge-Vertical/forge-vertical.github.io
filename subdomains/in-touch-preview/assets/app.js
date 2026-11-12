@@ -29,6 +29,10 @@
     info: '<circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/>',
     grid: '<rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/>',
     edit: '<path d="M4 20h4L19 9l-4-4L4 16zM13 7l4 4"/>',
+    signal: '<path d="M4 20v-3M9 20v-7M14 20V9M19 20V4"/>',
+    battery: '<rect x="2" y="8" width="17" height="9" rx="2"/><path d="M21.5 11v3"/><path d="M5 11v3M8 11v3M11 11v3"/>',
+    backspace: '<path d="M21 5H9l-6 7 6 7h12z"/><path d="M14 9.5l4 5M18 9.5l-4 5"/>',
+    handset: '<path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a1 1 0 01-1 1A16 16 0 014 5a1 1 0 011-1z"/>',
     menu: '<path d="M4 7h16M4 12h16M4 17h16"/>',
     list: '<path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01"/>'
   };
@@ -320,18 +324,18 @@
   };
 
   /* ---------- USSD ---------- */
-  var U = { state: 'idle', screen: 'Dial the sample code to begin.', input: '', child: 0 };
+  var U = { state: 'idle', screen: '', input: '', child: 0, dial: '*134*123#' };
   function ussdMain() { return 'In-Touch Schools\nHi, parent\n1. Marks\n2. Announcements\n3. Change child (' + KIDS[U.child].n.split(' ')[0] + ')\n0. Exit'; }
   function ussdAnns() { var k = KIDS[U.child]; return S.anns.filter(function (a) { return a.a === 'school' || a.a === k.cls; }); }
   function ussdSend() {
     var v = U.input.trim(); U.input = '';
-    if (U.state === 'idle') return;
+    if (U.state === 'idle' || U.state === 'ended') return;
     var subj = ['Mathematics', 'English Home Language', 'Natural Sciences'];
     if (U.state === 'main') {
       if (v === '1') { U.state = 'marks'; U.screen = 'Marks: ' + KIDS[U.child].n.split(' ')[0] + '\n1. Maths\n2. English\n3. Nat Sci\n0. Back'; }
       else if (v === '2') { U.state = 'ann'; var a = ussdAnns(); U.screen = 'Announcements\n' + a.map(function (x, i) { return (i + 1) + '. ' + x.t.slice(0, 22); }).join('\n') + '\n0. Back'; }
       else if (v === '3') { U.child = U.child === 0 ? 1 : 0; U.screen = ussdMain(); }
-      else if (v === '0') { U.state = 'idle'; U.screen = 'Session ended.'; }
+      else if (v === '0') { U.state = 'ended'; U.screen = 'Session ended.'; }
       else U.screen = 'Invalid choice.\n\n' + ussdMain();
     } else if (U.state === 'marks') {
       var i = parseInt(v, 10);
@@ -353,17 +357,30 @@
   }
   V.ussd = {
     phone: function () {
-      var keys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', 'C', '0', 'Send'];
-      return '<h1>USSD phone simulator</h1><p class="lead">What a parent sees on any handset, with no data or smartphone needed. This runs on sample data.</p>' +
-        '<div class="phonewrap"><div class="phone"><div class="spk"></div><div class="dial"><button class="btn pri" data-act="dial">Dial *134*123#</button></div><div class="scr" id="uscr" aria-live="polite">' + esc(U.screen) + '</div>' +
-        '<div class="inp"><span>&gt;</span><input type="text" id="uin" inputmode="numeric" maxlength="3" aria-label="Your reply" value="' + esc(U.input) + '"></div>' +
-        '<div class="keys">' + keys.map(function (k) { return '<button data-key="' + k + '" class="' + (k === 'Send' ? 'go' : '') + '">' + k + '</button>'; }).join('') + '</div></div>' +
+      var L = { '1': '', '2': 'ABC', '3': 'DEF', '4': 'GHI', '5': 'JKL', '6': 'MNO', '7': 'PQRS', '8': 'TUV', '9': 'WXYZ', '*': '', '0': '+', '#': '' };
+      var keys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '*', '0', '#'].map(function (k) {
+        return '<button class="sp-key" data-dk="' + k + '" aria-label="' + k + '"><span class="d">' + k + '</span><span class="l">' + L[k] + '</span></button>';
+      }).join('');
+      var dlg = '';
+      if (U.state !== 'idle') {
+        var ended = U.state === 'ended';
+        dlg = '<div class="sp-scrim"><div class="sp-dlg" role="dialog" aria-label="USSD message"><div class="sp-msg" id="uscr" aria-live="polite">' + esc(U.screen) + '</div>' +
+          (ended ? '<div class="sp-acts"><button data-act="uok">OK</button></div>' :
+            '<input class="sp-in" type="text" id="uin" inputmode="numeric" maxlength="3" autocomplete="off" aria-label="Your reply" value="' + esc(U.input) + '"><div class="sp-acts"><button data-act="ucancel">Cancel</button><button data-act="usend">Send</button></div>') + '</div></div>';
+      }
+      return '<h1>USSD on a smartphone</h1><p class="lead">What a parent sees when they dial the school\u2019s code. It works on any handset, with no data needed. This runs on sample data.</p>' +
+        '<div class="phonewrap"><div class="sp"><i class="sp-b sp-b1"></i><i class="sp-b sp-b2"></i><div class="sp-body"><div class="sp-screen">' +
+        '<div class="sp-status"><span>09:41</span><i class="sp-cam"></i><span class="sp-sys">' + icon('signal', 'sm') + icon('battery', 'sm') + '</span></div>' +
+        '<div class="sp-app"><div class="sp-title">Phone</div><div class="sp-num">' + (U.dial ? esc(U.dial) : '<span style="color:#8b96ab;font-size:16px">Enter a number</span>') + '</div><button class="sp-sample" data-act="dsample">Use the sample code</button>' +
+        '<div class="sp-keys">' + keys + '</div><div class="sp-actions"><span></span><button class="sp-call" data-act="call" aria-label="Call">' + icon('handset', 'lg') + '</button><button class="sp-back" data-act="dback" aria-label="Delete">' + icon('backspace') + '</button></div></div>' +
+        '<div class="sp-home"></div>' + dlg + '</div></div></div>' +
         '<div class="card"><div class="head"><h2>What this does when live</h2>' + how('ussd', 'Full explanation') + '</div><ul class="list">' +
-        '<li><div class="ic">' + icon('book') + '</div><div><div class="t">Marks</div><div class="m">Subject marks and the term average for the parent’s own child.</div></div></li>' +
+        '<li><div class="ic">' + icon('book') + '</div><div><div class="t">Marks</div><div class="m">Subject marks and the term average for the parent\u2019s own child.</div></div></li>' +
         '<li><div class="ic">' + icon('megaphone') + '</div><div><div class="t">Announcements</div><div class="m">School and class announcements, shortened to fit a USSD screen.</div></div></li>' +
         '<li><div class="ic">' + icon('users') + '</div><div><div class="t">Change child</div><div class="m">Parents with more than one child switch between them.</div></div></li>' +
-        '<li><div class="ic">' + icon('shield') + '</div><div><div class="t">Own children only</div><div class="m">The menu only reads records linked to that parent’s number.</div></div></li></ul>' +
-        '<div class="note amber" style="margin:14px 0 0">The code *134*123# is a sample, not a real number.</div></div></div>';
+        '<li><div class="ic">' + icon('shield') + '</div><div><div class="t">Own children only</div><div class="m">The menu only reads records linked to that parent\u2019s number.</div></div></li></ul>' +
+        '<div class="note" style="margin:14px 0 0">Try it: press the green call button, then type 1 and tap Send.</div>' +
+        '<div class="note amber" style="margin:10px 0 0">The code *134*123# is a sample, not a real number.</div></div></div>';
     }
   };
 
@@ -384,6 +401,7 @@
       '<main id="main" tabindex="-1">' + body + '</main>' +
       '<footer class="footer">Interactive preview prepared by Forge Vertical for Limitless Minds. This is not the live system. Nothing you enter here is saved or sent.</footer>';
     enhanceTables();
+    var rin = document.getElementById('uin'); if (rin) rin.focus({ preventScroll: true });
   }
   function enhanceTables() {
     var ts = document.querySelectorAll('main table');
@@ -412,14 +430,14 @@
     var t = e.target.closest('[data-role],[data-info],[data-act],[data-key]'); if (!t) return;
     if (t.dataset.role) { location.hash = '#/' + t.dataset.role; return; }
     if (t.dataset.info) { openInfo(t.dataset.info); return; }
-    if (t.dataset.key) {
-      var k = t.dataset.key, inp = document.getElementById('uin');
-      if (k === 'C') U.input = ''; else if (k === 'Send') { if (inp) U.input = inp.value; ussdSend(); } else U.input = (U.input + k).slice(0, 3);
-      render(); return;
-    }
+    if (t.dataset.dk) { U.dial = (U.dial + t.dataset.dk).slice(0, 14); render(); return; }
     var a = t.dataset.act;
     if (a === 'menu') { toggleMenu(); return; }
-    if (a === 'dial') { U.state = 'main'; U.child = 0; U.input = ''; U.screen = ussdMain(); render(); }
+    if (a === 'call') { U.input = ''; if (U.dial === '*134*123#') { U.state = 'main'; U.child = 0; U.screen = ussdMain(); } else { U.state = 'ended'; U.screen = 'Connection problem or invalid MMI code.'; } render(); }
+    else if (a === 'dback') { U.dial = U.dial.slice(0, -1); render(); }
+    else if (a === 'dsample') { U.dial = '*134*123#'; render(); }
+    else if (a === 'usend') { var ui = document.getElementById('uin'); if (ui) U.input = ui.value; ussdSend(); render(); }
+    else if (a === 'ucancel' || a === 'uok') { U.state = 'idle'; U.input = ''; render(); }
     else if (a === 'subj') { S.subject = t.dataset.s; render(); }
     else if (a === 'child') { S.child = parseInt(t.dataset.i, 10); render(); }
     else if (a === 'togglelock') { S.locked = !S.locked; logAudit('Principal', S.locked ? 'Term 2 locked' : 'Term 2 unlocked', 'Marks for Term 2'); render(); toast(S.locked ? 'Term 2 locked. Teachers now need approval to change marks.' : 'Term 2 unlocked.'); }
