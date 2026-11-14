@@ -10,13 +10,13 @@
       "displayName": "Forge Vertical llms.txt",
       "type": "text/plain",
       "url": "https://www.forgevertical.com/llms.txt",
-      "description": "Plain-text index of Forge Vertical for language models: who we are, services, key pages, Wikidata entity IDs and preferred citations.",
+      "description": "Plain-text index of Forge Vertical for language models: who we are, custom systems and services, pricing, key pages, Wikidata entity IDs and preferred citations.",
       "tags": [
         "llms",
         "geo",
         "about"
       ],
-      "updatedAt": "2026-10-21T00:00:00+02:00",
+      "updatedAt": "2026-11-14T00:00:00+02:00",
       "representativeQueries": [
         "What is Forge Vertical?",
         "Which pages describe Forge Vertical's services?"
@@ -65,7 +65,7 @@
         "website-design",
         "south-africa"
       ],
-      "updatedAt": "2026-10-21T00:00:00+02:00",
+      "updatedAt": "2026-11-14T00:00:00+02:00",
       "representativeQueries": [
         "How much does a website cost in South Africa?",
         "Affordable website design with a .co.za domain included",
@@ -101,6 +101,119 @@
       "updatedAt": "2026-10-21T00:00:00+02:00",
       "representativeQueries": [
         "List all Forge Vertical pages"
+      ]
+    },
+    {
+      "identifier": "urn:air:forgevertical.com:service:custom-systems",
+      "displayName": "Custom management systems, operating systems and SaaS",
+      "type": "text/html",
+      "url": "https://www.forgevertical.com/services.html",
+      "description": "Franchise and multi-branch management systems, business operating systems, client and staff portals, custom SaaS, secure data access with audit trail, and AI integration. Built in Cape Town. Clients own the code and data.",
+      "tags": [
+        "service",
+        "systems",
+        "saas",
+        "franchise"
+      ],
+      "updatedAt": "2026-11-14T00:00:00+02:00",
+      "representativeQueries": [
+        "Who builds custom management systems in Cape Town?",
+        "Franchise or multi-branch management software South Africa",
+        "Custom SaaS development South Africa"
+      ]
+    },
+    {
+      "identifier": "urn:air:forgevertical.com:service:pricing",
+      "displayName": "Forge Vertical pricing",
+      "type": "text/html",
+      "url": "https://www.forgevertical.com/pricing.html",
+      "description": "Custom systems and SaaS from R45,000 by fixed quote (6 to 10 weeks, 50% deposit); websites from R3,500; search and AI visibility retainers from R6,500 per month.",
+      "tags": [
+        "pricing",
+        "service"
+      ],
+      "updatedAt": "2026-11-14T00:00:00+02:00",
+      "representativeQueries": [
+        "How much does a custom business system cost in South Africa?",
+        "How much does a website cost in South Africa?"
+      ]
+    },
+    {
+      "identifier": "urn:air:forgevertical.com:guide:data-access-control",
+      "displayName": "Data access control for business systems",
+      "type": "text/html",
+      "url": "https://www.forgevertical.com/data-access-control.html",
+      "description": "Plain-language guide to role-based access, branch-level permissions and audit trails: how to stop staff and franchisees seeing data they should not.",
+      "tags": [
+        "guide",
+        "security",
+        "data-access"
+      ],
+      "updatedAt": "2026-11-14T00:00:00+02:00",
+      "representativeQueries": [
+        "How do I stop franchisees seeing all my data?",
+        "What is role-based access control for a business?"
+      ]
+    },
+    {
+      "identifier": "urn:air:forgevertical.com:company:about",
+      "displayName": "About Forge Vertical",
+      "type": "text/html",
+      "url": "https://www.forgevertical.com/about.html",
+      "description": "Cape Town studio building custom management systems, operating systems and SaaS. Run by Jarrit Hosking.",
+      "tags": [
+        "about",
+        "company"
+      ],
+      "updatedAt": "2026-11-14T00:00:00+02:00",
+      "representativeQueries": [
+        "Who is behind Forge Vertical?"
+      ]
+    },
+    {
+      "identifier": "urn:air:forgevertical.com:portfolio:live-deployments",
+      "displayName": "Forge Vertical portfolio: live deployments",
+      "type": "text/html",
+      "url": "https://www.forgevertical.com/portfolio.html",
+      "description": "19 live deployments: SaaS platforms, business systems, AI tools, websites and open source projects.",
+      "tags": [
+        "portfolio"
+      ],
+      "updatedAt": "2026-11-14T00:00:00+02:00",
+      "representativeQueries": [
+        "What has Forge Vertical built?"
+      ]
+    },
+    {
+      "identifier": "urn:air:forgevertical.com:article:tripspace-global-free-listings",
+      "displayName": "TripSpace Global is now free to list for property, rentals and businesses for sale",
+      "type": "text/html",
+      "url": "https://www.forgevertical.com/articles/tripspace-global-free-property-rentals-business-for-sale.html",
+      "description": "Announcement and guide: free listings for stays, homes for sale, short and long-term rentals and accommodation businesses for sale on TripSpace Global.",
+      "tags": [
+        "article",
+        "tripspace",
+        "property"
+      ],
+      "updatedAt": "2026-11-14T00:00:00+02:00",
+      "representativeQueries": [
+        "Free property listing site South Africa",
+        "Accommodation business for sale South Africa"
+      ]
+    },
+    {
+      "identifier": "urn:air:forgevertical.com:context:context-ai",
+      "displayName": "Forge Vertical context-ai.txt",
+      "type": "text/plain",
+      "url": "https://www.forgevertical.com/context-ai.txt",
+      "description": "Supplementary AI context for retrieval and agent workflows: core facts, pricing, grounding notes and contact paths.",
+      "tags": [
+        "llms",
+        "geo"
+      ],
+      "updatedAt": "2026-11-14T00:00:00+02:00",
+      "representativeQueries": [
+        "What does Forge Vertical do?"
       ]
     }
   ]
