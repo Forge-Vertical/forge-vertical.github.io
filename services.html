@@ -948,6 +948,88 @@
 
 <div class="band reveal" style="margin-top:20px;"><div><h3>Websites too</h3><p>Fast, secure websites you own, from R3,500 once-off with a .co.za domain and a year of hosting.</p></div><div style="display:flex;gap:12px;flex-wrap:wrap;"><a href="/web-design-cape-town.html" class="btn-p">Website design →</a></div></div>
 </div></section>
+<style>
+.vz-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:8px;}
+@media(max-width:900px){.vz-grid{grid-template-columns:1fr;}}
+.vz{background:var(--surface);border:1px solid var(--border2);border-radius:18px;padding:26px;display:flex;flex-direction:column;min-width:0;}
+.vz.wide{grid-column:1/-1;}
+.vz-k{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--lime);margin-bottom:8px;}
+.vz h3{font-family:'Outfit',sans-serif;font-size:20px;font-weight:700;letter-spacing:-.01em;margin-bottom:6px;}
+.vz p.c{font-size:13.5px;color:var(--muted2);line-height:1.65;margin-bottom:18px;}
+.vz svg{width:100%;height:auto;display:block;}
+.vz-foot{margin-top:auto;padding-top:14px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted2);letter-spacing:.06em;}
+.vz .t{font-family:'JetBrains Mono',monospace;font-size:11px;fill:var(--muted2);}
+.vz .tb{font-family:'Outfit',sans-serif;font-size:13px;font-weight:600;fill:var(--text);}
+.vz .node{fill:var(--bg);stroke:var(--border2);stroke-width:1.5;}
+.vz .node-hi{fill:var(--lime);stroke:none;}
+.vz .ln{stroke:var(--border2);stroke-width:1.5;fill:none;}
+.vz .ln-d{stroke:var(--muted);stroke-width:1.5;fill:none;stroke-dasharray:4 4;}
+.vz .chip{fill:var(--surface2,var(--bg));stroke:var(--border2);}
+.vz .bar{fill:var(--emerald);}
+.vz .bar2{fill:var(--lime);opacity:.45;}
+.vz .bar-bad{fill:#ef4444;}
+.vz .axis{stroke:var(--border2);stroke-width:1;}
+.mx{width:100%;border-collapse:separate;border-spacing:0;font-size:13px;}
+.mx th{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted2);text-align:center;padding:8px 6px;border-bottom:1px solid var(--border2);}
+.mx th:first-child,.mx td:first-child{text-align:left;}
+.mx td{padding:11px 6px;text-align:center;border-bottom:1px solid var(--border);color:var(--text);}
+.mx td:first-child{color:var(--muted2);}
+.mx .y{color:var(--lime);font-weight:700;}
+.mx .n{color:var(--muted);}
+.mx .o{display:inline-block;padding:2px 9px;border-radius:99px;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.06em;background:rgba(132,204,22,.14);color:var(--lime);}
+.aud{list-style:none;position:relative;margin-left:6px;}
+.aud li{position:relative;padding:0 0 18px 26px;border-left:2px solid var(--border2);}
+.aud li:last-child{padding-bottom:0;border-left-color:transparent;}
+.aud li::before{content:'';position:absolute;left:-7px;top:2px;width:12px;height:12px;border-radius:50%;background:var(--surface);border:2px solid var(--border2);}
+.aud li.ok::before{background:var(--lime);border-color:var(--lime);}
+.aud li.warn::before{background:#f59e0b;border-color:#f59e0b;}
+.aud .w{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted2);letter-spacing:.06em;}
+.aud .a{font-size:14px;font-weight:600;margin:2px 0;}
+.aud .d{font-size:13px;color:var(--muted2);}
+.aud s{color:var(--muted);}
+.aud b.new{color:var(--text);}
+</style><section class="sec" id="visuals" style="background:var(--surface);">
+<div class="wrap">
+    <div class="reveal" style="margin-bottom:36px;">
+        <div class="s-eye">// What it looks like</div>
+        <h2 class="sh">Made visible.<br><span class="g-text">See who can see what.</span></h2>
+        <p class="ss">Every system we build comes with views like these. The figures below are illustrative examples, not client data.</p>
+    </div>
+    <div class="vz-grid reveal">
+        <div class="vz"><div class="vz-k">Access map</div><h3>One chain of command, built in</h3><p class="c">Head Office at the top, branches beneath, staff at the edge. Permissions flow down, never sideways.</p><svg viewBox="0 0 520 300" role="img" aria-label="Access tree: Head Office sees all branches, each branch sees only itself, staff see only their own jobs">
+  <path class="ln" d="M260 58 C260 90 90 80 90 118"/><path class="ln" d="M260 58 L260 118"/><path class="ln" d="M260 58 C260 90 430 80 430 118"/>
+  <path class="ln-d" d="M90 160 L50 218"/><path class="ln-d" d="M90 160 L130 218"/><path class="ln-d" d="M260 160 L220 218"/><path class="ln-d" d="M260 160 L300 218"/><path class="ln-d" d="M430 160 L390 218"/><path class="ln-d" d="M430 160 L470 218"/>
+  <rect class="node-hi" x="185" y="14" width="150" height="44" rx="12"/><text x="260" y="41" text-anchor="middle" style="font-family:Outfit,sans-serif;font-size:14px;font-weight:700;fill:#06080c">Head Office</text>
+  <g><rect class="node" x="30" y="118" width="120" height="42" rx="10"/><text class="tb" x="90" y="144" text-anchor="middle">Branch A</text></g>
+  <g><rect class="node" x="200" y="118" width="120" height="42" rx="10"/><text class="tb" x="260" y="144" text-anchor="middle">Branch B</text></g>
+  <g><rect class="node" x="370" y="118" width="120" height="42" rx="10"/><text class="tb" x="430" y="144" text-anchor="middle">Branch C</text></g>
+  <g class="stf">
+   <rect class="node" x="22" y="218" width="56" height="30" rx="8"/><text class="t" x="50" y="237" text-anchor="middle">Staff</text>
+   <rect class="node" x="102" y="218" width="56" height="30" rx="8"/><text class="t" x="130" y="237" text-anchor="middle">Staff</text>
+   <rect class="node" x="192" y="218" width="56" height="30" rx="8"/><text class="t" x="220" y="237" text-anchor="middle">Staff</text>
+   <rect class="node" x="272" y="218" width="56" height="30" rx="8"/><text class="t" x="300" y="237" text-anchor="middle">Staff</text>
+   <rect class="node" x="362" y="218" width="56" height="30" rx="8"/><text class="t" x="390" y="237" text-anchor="middle">Staff</text>
+   <rect class="node" x="442" y="218" width="56" height="30" rx="8"/><text class="t" x="470" y="237" text-anchor="middle">Staff</text>
+  </g>
+  <text class="t" x="345" y="38">sees every branch</text>
+  <text class="t" x="260" y="278" text-anchor="middle">branch sees only itself · staff see only their own jobs</text>
+</svg><div class="vz-foot">Illustrative example</div></div>
+        <div class="vz"><div class="vz-k">Permission matrix</div><h3>Who can open what</h3><p class="c">Set per role and per branch, before any screen is built, and changeable without a rebuild.</p><table class="mx"><thead><tr><th>What they can open</th><th>Head Office</th><th>Branch</th><th>Staff</th></tr></thead><tbody><tr><td>Revenue and profit</td><td class="y">&#10003;</td><td><span class="o">Own only</span></td><td class="n">&mdash;</td></tr><tr><td>All customer records</td><td class="y">&#10003;</td><td><span class="o">Own only</span></td><td class="n">&mdash;</td></tr><tr><td>Change a price</td><td class="y">&#10003;</td><td><span class="o">Approval</span></td><td class="n">&mdash;</td></tr><tr><td>Other branches</td><td class="y">&#10003;</td><td class="n">&mdash;</td><td class="n">&mdash;</td></tr><tr><td>Own job cards</td><td class="y">&#10003;</td><td class="y">&#10003;</td><td><span class="o">Own only</span></td></tr><tr><td>Audit log</td><td class="y">&#10003;</td><td class="n">&mdash;</td><td class="n">&mdash;</td></tr></tbody></table><div class="vz-foot">Illustrative example</div></div>
+        <div class="vz"><div class="vz-k">Audit trail</div><h3>Every change has an author</h3><p class="c">A price changes, a record moves. You can see who did it, when, and what it was before.</p><ul class="aud">
+ <li class="warn"><div class="w">TUE 14:02 · BRANCH MANAGER · BRANCH B</div><div class="a">Quote #1042 price changed</div><div class="d"><s>R8,500</s> &rarr; <b class="new">R6,000</b> &middot; sent for approval</div></li>
+ <li class="ok"><div class="w">TUE 14:09 · HEAD OFFICE</div><div class="a">Change reviewed and approved</div><div class="d">Reason noted: repeat customer. Recorded with the original value.</div></li>
+ <li class="ok"><div class="w">TUE 14:09 · SYSTEM</div><div class="a">Invoice updated, customer notified</div><div class="d">Every step above stays on record: who, when, before and after.</div></li>
+</ul><div class="vz-foot">Illustrative example</div></div>
+        <div class="vz"><div class="vz-k">Owner view</div><h3>Every branch, one screen</h3><p class="c">Revenue and jobs in progress side by side, so you know how the day went without phoning anyone.</p><svg viewBox="0 0 480 220" role="img" aria-label="Example owner dashboard: revenue today by branch"><line class="axis" x1="80" y1="6" x2="80" y2="214"/><text class="t" x="0" y="31">Branch A</text><rect class="bar" x="80" y="14" width="300" height="24" rx="5"/><text class="tb" x="390" y="31">R42k</text><text class="t" x="470" y="31" text-anchor="end">9 jobs</text><text class="t" x="0" y="71">Branch B</text><rect class="bar" x="80" y="54" width="221" height="24" rx="5"/><text class="tb" x="311" y="71">R31k</text><text class="t" x="470" y="71" text-anchor="end">7 jobs</text><text class="t" x="0" y="111">Branch C</text><rect class="bar" x="80" y="94" width="192" height="24" rx="5"/><text class="tb" x="282" y="111">R27k</text><text class="t" x="470" y="111" text-anchor="end">6 jobs</text><text class="t" x="0" y="151">Branch D</text><rect class="bar" x="80" y="134" width="128" height="24" rx="5"/><text class="tb" x="218" y="151">R18k</text><text class="t" x="470" y="151" text-anchor="end">4 jobs</text><text class="t" x="0" y="191">Branch E</text><rect class="bar" x="80" y="174" width="85" height="24" rx="5"/><text class="tb" x="175" y="191">R12k</text><text class="t" x="470" y="191" text-anchor="end">3 jobs</text></svg><div class="vz-foot">Illustrative example · revenue today</div></div>
+        <div class="vz wide"><div class="vz-k">Exposure</div><h3>From everyone sees everything to everyone sees their part</h3><p class="c">The same company data, before and after role-based access.</p><div style="max-width:640px;"><svg viewBox="0 0 480 150" role="img" aria-label="Share of company records visible to a single branch user, before and after role-based access">
+  <text class="t" x="0" y="22">Shared login</text><rect x="110" y="6" width="300" height="24" rx="5" style="fill:var(--surface2,var(--bg));stroke:var(--border2)"/><rect class="bar-bad" x="110" y="6" width="300" height="24" rx="5"/><text class="tb" x="418" y="23">100%</text>
+  <text class="t" x="0" y="72">Role-based</text><rect x="110" y="56" width="300" height="24" rx="5" style="fill:var(--surface2,var(--bg));stroke:var(--border2)"/><rect class="bar" x="110" y="56" width="60" height="24" rx="5"/><text class="tb" x="418" y="73">20%</text>
+  <text class="t" x="110" y="118">Share of company records one branch user can open</text>
+  <text class="t" x="110" y="136">(example: 5 branches)</text>
+</svg></div><div class="vz-foot">Illustrative example</div></div>
+    </div>
+</div>
+</section>
 <section class="sec" style="background:var(--bg);"><div class="wrap" style="max-width:1000px;">
     <div class="reveal" style="margin-bottom:30px;"><div class="s-eye">// Questions</div><h2 class="sh" style="font-size:clamp(26px,3vw,42px);">Questions people ask</h2></div>
     <div class="reveal"><div class="faq-i"><h3>What does Forge Vertical build?</h3><p>Forge Vertical builds custom management systems, business operating systems, client and staff portals, SaaS platforms, role-based data access with audit trails, and AI integrations. We also build websites. Everything is built around how your business works, and you own it.</p></div>
