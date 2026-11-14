@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Forge Vertical live deployments — 19 websites, SaaS platforms, AI tools, and open source projects built in Cape Town. Security, GEO indexing, and AI citation built in from day one.">
-    <title>Portfolio — Live Deployments | Forge Vertical</title>
+    <meta name="description" content="Live custom systems, SaaS platforms, AI tools and websites built by Forge Vertical in Cape Town. 19 deployments, each shipped to production with secure access, SEO and AI indexing built in.">
+    <title>Portfolio: Custom Systems, SaaS and Websites Live | Forge Vertical</title>
     <link rel="canonical" href="https://www.forgevertical.com/portfolio.html">
+    <script>(function(){try{var t=localStorage.getItem("fv-theme");document.documentElement.setAttribute("data-theme",t==="dark"?"dark":"light")}catch(e){document.documentElement.setAttribute("data-theme","light")}})();</script>
 
     <script type="application/ld+json">
     {
@@ -15,7 +16,7 @@
           "@type": "CollectionPage",
           "@id": "https://www.forgevertical.com/portfolio.html",
           "name": "Forge Vertical Portfolio — Live Deployments",
-          "description": "19 live deployments built by Forge Vertical — websites, SaaS platforms, AI tools, and open source projects for clients across Cape Town and South Africa.",
+          "description": "19 live deployments built by Forge Vertical: custom business systems, SaaS platforms, AI tools, websites and open source projects for clients across Cape Town and South Africa.","dateModified": "2026-11-14",
           "url": "https://www.forgevertical.com/portfolio.html",
           "publisher": {"@id": "https://www.forgevertical.com/#org"},
           "author": {"@id": "https://www.forgevertical.com/about/jarrit-hosking.html#person"}
@@ -417,6 +418,16 @@
         .cta-actions{display:flex;gap:12px;flex-wrap:wrap;flex-shrink:0;}
 
         @media(max-width:700px){.masthead-top{flex-direction:column;align-items:flex-start;gap:12px;}.stats-inner,.page-hero,.section-header,#portfolio-grid,.cta-strip{padding-left:5vw;padding-right:5vw;}}
+    
+        /* ── Light mode (default). Dark mode uses the :root values above ── */
+        html[data-theme="light"]{--bg:#f8f9fb;--surface:#ffffff;--surface2:#f1f3f6;--border:#e3e7ee;--border2:#d3d9e3;--text:#0f1722;--muted:#8a97ab;--muted2:#586579;--lime:#4d7c0f;--emerald:#0f9468;}
+        html[data-theme="light"] .proj{border-color:var(--border2);box-shadow:0 1px 2px rgba(15,23,34,.04);}
+        html[data-theme="light"] .proj-desc{color:var(--muted2);}
+        html[data-theme="light"] .proj-tag{background:rgba(255,255,255,.88);border-color:var(--border2);}
+        html[data-theme="light"] .proj-visit{background:rgba(255,255,255,.92);border-color:rgba(77,124,15,.35);}
+        html[data-theme="light"] .stack-tag{background:var(--surface2);}
+        html[data-theme="light"] .hero-btn-primary,html[data-theme="light"] .masthead-cta{color:#fff;}
+        html[data-theme="light"] .proj-cf,html[data-theme="light"] .proj-gh,html[data-theme="light"] .proj-lock,html[data-theme="light"] .proj-soon{background:var(--surface2);}
     </style>
 </head>
 <body>
@@ -463,8 +474,8 @@
 <!-- Hero -->
 <div class="page-hero">
     <span class="page-hero-label">// Portfolio · 19 live deployments</span>
-    <h1 class="page-hero-h1">Built. Deployed.<br><span class="g-text">Actually live.</span></h1>
-    <p class="page-hero-sub">Websites, SaaS platforms, AI tools, and open source projects — each one shipped to production with security, SEO, and GEO indexing built in from the first commit. No templates. No lock-in.</p>
+    <h1 class="page-hero-h1">Systems, platforms and sites.<br><span class="g-text">Actually live.</span></h1>
+    <p class="page-hero-sub">SaaS platforms, business systems, AI tools, websites and open source projects. Each one is shipped to production with secure access, SEO and AI indexing built in from the first commit. No templates. No lock-in.</p>
     <div class="hero-actions">
         <a href="/free-quote.html" class="hero-btn hero-btn-primary">→ Start a project</a>
         <a href="https://wa.me/27657417593?text=Hi%20Jarrit%2C%20I%20saw%20your%20portfolio%20and%20want%20to%20discuss%20a%20project" target="_blank" rel="noopener noreferrer" class="hero-btn hero-btn-ghost">WhatsApp Jarrit</a>
