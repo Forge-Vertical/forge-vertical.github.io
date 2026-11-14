@@ -1080,18 +1080,103 @@
         </div>
     </div>
     <div id="hero-right">
-        <div class="terminal">
-            <div class="t-bar">
-                <div class="tdot" style="background:#ef4444"></div>
-                <div class="tdot" style="background:#f59e0b"></div>
-                <div class="tdot" style="background:#22c55e"></div>
-                <span class="mono ml-3" style="font-size:11px;color:#6a7d96;">forge-build · your-system</span>
-            </div>
-            <div class="t-body" id="t-out">
-                <div><span class="td">// Setting up your system...</span></div>
-                <div>&nbsp;</div>
-            </div>
-        </div>
+        <style>
+.app{width:100%;max-width:560px;border-radius:14px;overflow:hidden;position:relative;background:var(--surface);border:1px solid var(--border2);box-shadow:0 30px 70px -20px rgba(6,8,12,.35),0 0 0 1px rgba(255,255,255,.02);font-family:'Outfit',sans-serif;color:var(--text);}
+[data-theme="dark"] .app{box-shadow:0 30px 80px -20px rgba(0,0,0,.7),0 0 60px -30px rgba(132,204,22,.25);}
+.app-bar{display:flex;align-items:center;gap:7px;padding:11px 14px;background:#0f141c;border-bottom:1px solid rgba(255,255,255,.08);}
+.app-bar i{width:10px;height:10px;border-radius:50%;display:block;}
+.app-bar span{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:#7d8da6;margin-left:8px;letter-spacing:.04em;}
+.app-body{position:relative;overflow:hidden;display:grid;grid-template-columns:132px 1fr;height:372px;}
+.app-side{background:var(--bg);border-right:1px solid var(--border);padding:14px 10px;display:flex;flex-direction:column;gap:3px;}
+.app-logo{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:12px;letter-spacing:-.02em;padding:2px 8px 12px;}
+.app-logo b{color:var(--lime);font-weight:700;}
+.nv{font-size:12.5px;font-weight:500;color:var(--muted2);padding:8px 10px;border-radius:8px;display:flex;align-items:center;gap:8px;cursor:default;transition:background .2s,color .2s;}
+.nv::before{content:'';width:6px;height:6px;border-radius:2px;background:var(--border2);transition:background .2s;}
+.nv.on{background:var(--surface);color:var(--text);box-shadow:0 0 0 1px var(--border2);}
+.nv.on::before{background:var(--lime);}
+.nv.press{transform:scale(.96);}
+.app-main{position:relative;padding:14px 16px;overflow:hidden;background:var(--surface);}
+.app-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;}
+.app-title{font-size:15px;font-weight:700;letter-spacing:-.01em;}
+.app-role{display:flex;align-items:center;gap:7px;font-size:11.5px;font-weight:600;padding:6px 10px;border-radius:99px;border:1px solid var(--border2);background:var(--bg);cursor:default;transition:transform .15s;}
+.app-role.press{transform:scale(.95);}
+.app-role .rd{width:7px;height:7px;border-radius:50%;background:var(--lime);transition:background .3s;}
+.app-role.branch .rd{background:#60a5fa;}
+.app-menu{position:absolute;right:16px;top:50px;z-index:6;background:var(--surface);border:1px solid var(--border2);border-radius:10px;padding:5px;min-width:136px;box-shadow:0 14px 30px -10px rgba(0,0,0,.35);opacity:0;transform:translateY(-4px);pointer-events:none;transition:all .18s;}
+.app-menu.open{opacity:1;transform:none;}
+.app-menu div{font-size:12px;padding:7px 10px;border-radius:6px;color:var(--muted2);}
+.app-menu div.hl{background:rgba(132,204,22,.14);color:var(--text);}
+.vw{position:absolute;left:16px;right:16px;top:58px;bottom:12px;opacity:0;transform:translateY(6px);pointer-events:none;transition:opacity .3s,transform .3s;}
+.vw.show{opacity:1;transform:none;}
+.kp{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px;}
+.kp div{border:1px solid var(--border);border-radius:10px;padding:9px 10px;background:var(--bg);}
+.kp small{display:block;font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted2);margin-bottom:3px;}
+.kp b{font-size:18px;font-weight:700;letter-spacing:-.02em;}
+.rw{display:grid;grid-template-columns:70px 1fr 62px;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid var(--border);font-size:12px;}
+.rw:last-child{border-bottom:none;}
+.rw .bk{height:9px;border-radius:5px;background:var(--emerald);transition:width .6s;}
+.rw .v{font-weight:700;text-align:right;}
+.rw.lock{color:var(--muted);}
+.rw.lock .bk{background:repeating-linear-gradient(135deg,var(--border2) 0 4px,transparent 4px 8px);}
+.rw.lock .v{font-family:'JetBrains Mono',monospace;font-size:9.5px;font-weight:700;letter-spacing:.08em;color:var(--muted);}
+.banner{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.04em;padding:7px 10px;border-radius:8px;background:rgba(96,165,250,.12);color:#3b82f6;margin-bottom:8px;opacity:0;max-height:0;overflow:hidden;transition:all .3s;}
+[data-theme="dark"] .banner{color:#93c5fd;}
+.banner.show{opacity:1;max-height:40px;}
+.au{border:1px solid var(--border);border-radius:10px;padding:10px 12px;margin-bottom:8px;background:var(--bg);font-size:12px;}
+.au .m{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.06em;color:var(--muted2);margin-bottom:3px;}
+.au s{color:var(--muted);}
+.au .row{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:7px;}
+.pill2{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:.08em;padding:3px 8px;border-radius:99px;background:rgba(245,158,11,.16);color:#b45309;text-transform:uppercase;transition:all .3s;}
+[data-theme="dark"] .pill2{color:#fbbf24;}
+.pill2.ok{background:rgba(132,204,22,.18);color:var(--lime);}
+.btn2{font-size:11px;font-weight:700;padding:5px 11px;border-radius:7px;background:linear-gradient(90deg,var(--emerald),var(--lime));color:#fff;transition:transform .15s,opacity .3s;}
+[data-theme="dark"] .btn2{color:#06080c;}
+.btn2.press{transform:scale(.92);}
+.btn2.gone{opacity:0;pointer-events:none;}
+.cur{position:absolute;left:0;top:0;z-index:20;width:22px;height:22px;pointer-events:none;transform:translate(220px,310px);transition:transform .9s cubic-bezier(.5,.1,.2,1);filter:drop-shadow(0 2px 3px rgba(0,0,0,.4));}
+.cur svg{width:100%;height:100%;display:block;}
+.cur::after{content:'';position:absolute;left:-9px;top:-9px;width:18px;height:18px;border-radius:50%;border:2px solid var(--lime);opacity:0;transform:scale(.3);}
+.cur.click::after{animation:rip .5s ease-out;}
+@keyframes rip{0%{opacity:.9;transform:scale(.3)}100%{opacity:0;transform:scale(1.7)}}
+@media(max-width:1100px){.app-body{grid-template-columns:1fr;}.app-side{display:none;}}
+</style>
+        <div class="app" id="app" aria-label="Animated preview of a Forge Vertical custom management system" role="img">
+  <div class="app-bar"><i style="background:#ef4444"></i><i style="background:#f59e0b"></i><i style="background:#22c55e"></i><span>your-business.system</span></div>
+  <div class="app-body">
+    <aside class="app-side">
+      <div class="app-logo">YOUR<b>_OS</b></div>
+      <div class="nv on" data-nav="overview">Overview</div>
+      <div class="nv" data-nav="branches">Branches</div>
+      <div class="nv" data-nav="audit">Audit log</div>
+      <div class="nv" style="opacity:.55">Jobs</div>
+      <div class="nv" style="opacity:.55">Invoices</div>
+    </aside>
+    <div class="app-main">
+      <div class="app-top"><div class="app-title" id="a-title">Overview</div><div class="app-role" id="a-role"><span class="rd"></span><span id="a-rt">Head Office</span><span style="opacity:.5">&#9662;</span></div></div>
+      <div class="app-menu" id="a-menu"><div data-r="ho">Head Office</div><div data-r="br">Branch B</div></div>
+      <div class="vw show" data-v="overview">
+        <div class="kp"><div><small>Revenue today</small><b>R130k</b></div><div><small>Jobs live</small><b>29</b></div><div><small>Staff in</small><b>18</b></div></div>
+        <div class="rw"><span>Branch A</span><i class="bk" style="width:100%"></i><span class="v">R42k</span></div>
+        <div class="rw"><span>Branch B</span><i class="bk" style="width:74%"></i><span class="v">R31k</span></div>
+        <div class="rw"><span>Branch C</span><i class="bk" style="width:64%"></i><span class="v">R27k</span></div>
+      </div>
+      <div class="vw" data-v="branches">
+        <div class="banner" id="a-ban">You can only see Branch B</div>
+        <div class="rw" data-b="A"><span>Branch A</span><i class="bk" style="width:100%"></i><span class="v">R42k</span></div>
+        <div class="rw" data-b="B"><span>Branch B</span><i class="bk" style="width:74%"></i><span class="v">R31k</span></div>
+        <div class="rw" data-b="C"><span>Branch C</span><i class="bk" style="width:64%"></i><span class="v">R27k</span></div>
+        <div class="rw" data-b="D"><span>Branch D</span><i class="bk" style="width:43%"></i><span class="v">R18k</span></div>
+        <div class="rw" data-b="E"><span>Branch E</span><i class="bk" style="width:29%"></i><span class="v">R12k</span></div>
+      </div>
+      <div class="vw" data-v="audit">
+        <div class="au"><div class="m">TUE 14:02 &middot; BRANCH B &middot; QUOTE #1042</div>Price changed <s>R8,500</s> &rarr; <b>R6,000</b>
+          <div class="row"><span class="pill2" id="a-pill">Needs approval</span><span class="btn2" id="a-appr">Approve</span></div></div>
+        <div class="au"><div class="m">TUE 11:40 &middot; BRANCH A &middot; INVOICE #388</div>Invoice sent to customer<div class="row"><span class="pill2 ok">Logged</span></div></div>
+      </div>
+    </div>
+    <div class="cur" id="a-cur"><svg viewBox="0 0 24 24"><path d="M3 2l7.5 19 2.7-7.8L21 10.5z" fill="#fff" stroke="#0b0f14" stroke-width="1.6" stroke-linejoin="round"/></svg></div>
+  </div>
+</div>
     </div>
 </section>
 
@@ -1453,38 +1538,6 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 </script>
 
 <script>
-const lines = [
-    { t:'✓ Roles set: Head Office · Branch · Staff', c:'tg', d:500  },
-    { t:'✓ Branch data kept separate',               c:'tg', d:1050 },
-    { t:'✓ Audit log on: who, when, before → after', c:'te', d:1600 },
-    { t:'✓ Quote → job card → invoice flow built',   c:'te', d:2150 },
-    { t:'✓ Photos and documents stored on the job',  c:'te', d:2700 },
-    { t:'✓ Client and staff portals connected',      c:'tw', d:3250 },
-    { t:'✓ AI assistant and automations wired in',   c:'tw', d:3800 },
-    { t:'✓ Backups and data export enabled',         c:'tw', d:4350 },
-    { t:'',                                          c:'',   d:4900 },
-    { t:'→ Deploying to production...',              c:'te', d:5200 },
-    { t:'✓ Live · yours to keep',                    c:'tg', d:5900 },
-];
-const colMap = { tg:'var(--lime)', te:'var(--emerald)', tw:'#c4c9d4', td:'#6a7d96' };
-const out = document.getElementById('t-out');
-let cur = document.createElement('span');
-cur.className = 'cursor';
-lines.forEach(({ t, c, d }) => {
-    setTimeout(() => {
-        if (cur.parentNode) cur.parentNode.removeChild(cur);
-        const div = document.createElement('div');
-        if (t) {
-            const span = document.createElement('span');
-            span.style.color = colMap[c] || '#fff';
-            span.textContent = t;
-            div.appendChild(span);
-            div.appendChild(cur);
-        } else { div.innerHTML = '&nbsp;'; }
-        out.appendChild(div);
-        out.scrollTop = out.scrollHeight;
-    }, d);
-});
 const rows = [
     ['Who sees what',          '~ Broad roles, shared screens', '✓ Locked by role and branch'],
     ['Who changed what',       '~ Often not tracked',          '✓ Every change logged'],
@@ -1504,6 +1557,37 @@ rows.forEach(([feat, them, us]) => {
     body.appendChild(el);
 });
 </script>
-<script src="https://cdn.tailwindcss.com"></script>
+<script>
+(function(){
+  var app=document.getElementById('app'); if(!app) return;
+  var $=function(s,r){return (r||app).querySelector(s)}, $$=function(s,r){return Array.prototype.slice.call((r||app).querySelectorAll(s))};
+  var cur=$('#a-cur'), role=$('#a-role'), rt=$('#a-rt'), menu=$('#a-menu'), title=$('#a-title'), ban=$('#a-ban'), pill=$('#a-pill'), appr=$('#a-appr');
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var sleep=function(ms){return new Promise(function(r){setTimeout(r,ms)})};
+  var titles={overview:'Overview',branches:'Branches',audit:'Audit log'};
+  function view(n){ $$('.vw').forEach(function(v){v.classList.toggle('show',v.getAttribute('data-v')===n)}); $$('.nv[data-nav]').forEach(function(x){x.classList.toggle('on',x.getAttribute('data-nav')===n)}); title.textContent=titles[n]; }
+  function setRole(r){
+    var br=r==='br'; rt.textContent=br?'Branch B':'Head Office'; role.classList.toggle('branch',br); ban.classList.toggle('show',br);
+    $$('[data-b]').forEach(function(row){ var lock=br&&row.getAttribute('data-b')!=='B'; row.classList.toggle('lock',lock); var v=row.querySelector('.v'); if(!v.dataset.t) v.dataset.t=v.textContent; v.textContent=lock?'HIDDEN':v.dataset.t; });
+  }
+  function reset(){ setRole('ho'); view('overview'); pill.textContent='Needs approval'; pill.classList.remove('ok'); appr.classList.remove('gone'); menu.classList.remove('open'); }
+  function pos(el){ var a=cur.offsetParent.getBoundingClientRect(), b=el.getBoundingClientRect(); return {x:b.left-a.left+Math.min(b.width*0.5,40), y:b.top-a.top+b.height*0.55}; }
+  function go(el){ var p=pos(el); cur.style.transform='translate('+p.x+'px,'+p.y+'px)'; return sleep(950); }
+  async function click(el){ await go(el); cur.classList.remove('click'); void cur.offsetWidth; cur.classList.add('click'); el.classList.add('press'); await sleep(170); el.classList.remove('press'); }
+  async function chooseRole(r){ await click(role); menu.classList.add('open'); var item=$('[data-r="'+r+'"]'); item.classList.add('hl'); await go(item); await click(item); setRole(r); menu.classList.remove('open'); item.classList.remove('hl'); await sleep(700); }
+  async function loop(){
+    while(true){
+      reset(); cur.style.transform='translate(220px,310px)'; await sleep(1500);
+      await click($('[data-nav="branches"]')); view('branches'); await sleep(1700);
+      await chooseRole('br'); await sleep(1800);
+      await chooseRole('ho'); await sleep(500);
+      await click($('[data-nav="audit"]')); view('audit'); await sleep(1300);
+      await click(appr); pill.textContent='Approved'; pill.classList.add('ok'); appr.classList.add('gone'); await sleep(2400);
+      await click($('[data-nav="overview"]')); view('overview'); await sleep(2200);
+    }
+  }
+  if(reduce){ reset(); view('branches'); setRole('br'); cur.style.display='none'; } else { loop(); }
+})();
+</script><script src="https://cdn.tailwindcss.com"></script>
 </body>
 </html>
