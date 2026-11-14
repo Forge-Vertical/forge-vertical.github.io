@@ -897,6 +897,9 @@
         .co>div{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:24px;}
         .co h3{font-family:'Outfit',sans-serif;font-size:17px;font-weight:700;margin-bottom:6px;}
         .co p{font-size:13.5px;color:var(--muted2);line-height:1.7;}
+        /* keep descenders (g, y, p) from being clipped by the gradient text box */
+        .g-text{padding-bottom:.16em;margin-bottom:-.16em;}
+        .ph h1{line-height:1.1;}
         .sec{padding:100px 0;border-top:1px solid var(--border);}
         @media(max-width:768px){.sec{padding:64px 0;}.ph{padding:64px 6vw 48px;}}
 
