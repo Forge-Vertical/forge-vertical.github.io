@@ -11,7 +11,7 @@
   </url>
   <url>
     <loc>https://www.forgevertical.com/articles.html</loc>
-    <lastmod>2026-11-13</lastmod>
+    <lastmod>2026-11-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -49,6 +49,12 @@
   </url>
 
   <!-- Articles — newest first -->
+  <url>
+    <loc>https://www.forgevertical.com/articles/microsoft-365-outage-november-2026-keep-your-business-running.html</loc>
+    <lastmod>2026-11-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
   <url>
     <loc>https://www.forgevertical.com/articles/tesla-flying-roadster-beyond-the-hype.html</loc>
     <lastmod>2026-10-21</lastmod>
