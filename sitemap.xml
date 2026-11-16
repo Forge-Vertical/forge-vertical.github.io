@@ -50,6 +50,12 @@
 
   <!-- Articles — newest first -->
   <url>
+    <loc>https://www.forgevertical.com/articles/ai-content-filter-extension.html</loc>
+    <lastmod>2026-11-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://www.forgevertical.com/articles/microsoft-365-outage-november-2026-keep-your-business-running.html</loc>
     <lastmod>2026-11-15</lastmod>
     <changefreq>monthly</changefreq>
@@ -451,7 +457,7 @@
 
   <url>
     <loc>https://www.forgevertical.com/business-tech/articles.html</loc>
-    <lastmod>2026-11-13</lastmod>
+    <lastmod>2026-11-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
